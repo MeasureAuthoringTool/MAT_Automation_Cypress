@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-01-28T13:58:41.568Z",
+    "end": "2020-01-28T13:59:07.295Z",
+    "duration": 25727,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "3832c054-0f02-48c2-9820-306633ac7ce5",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6fd72190-efe0-4439-a795-8b4cb9ddadf1",
+          "title": "CQL Composer: CQL Library Workspace: Definition",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Enabled/Disabled QDM CQL Library Owner",
+              "fullTitle": "CQL Composer: CQL Library Workspace: Definition Enabled/Disabled QDM CQL Library Owner",
+              "timedOut": null,
+              "duration": 17804,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(cqlLibrary.newLibraryBtn).click();\nvar cqlLibraryName = 'CQLLibraryTest' + Date.now();\ncy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, {\n  delay: 50\n});\ncy.get(createNewCqlLibrary.modelQDMRadio).click();\ncy.get(createNewCqlLibrary.saveAndContinueBtn).click();\ncy.get(cqlComposer.confirmationContinueBtn).click();\nhelper.visibleWithTimeout(matheader.progressbar);\nhelper.notVisibleWithTimeout(matheader.progressbar);\ncy.get(cqlComposer.definition).click();\nhelper.enabled(cqlComposer.definitionAddNewBtn);\nhelper.enabled(cqlComposer.definitionInformationBtn);\nhelper.enabled(cqlComposer.definitionInsertBtn);\nhelper.enabled(cqlComposer.definitionExpressionBuilderBtn);\nhelper.enabled(cqlComposer.definitionSaveBtn);\nhelper.enabled(cqlComposer.definitionEraseBtn);\nhelper.disabled(cqlComposer.definitionDeleteBtn);\ncy.get(measurelibrary.cqlLibraryTab).click();\nhelper.visibleWithTimeout(matheader.progressbar);\nhelper.notVisibleWithTimeout(matheader.progressbar);",
+              "err": {},
+              "uuid": "3a0fe1bb-b599-4527-b6d8-d933915a66dd",
+              "parentUUID": "6fd72190-efe0-4439-a795-8b4cb9ddadf1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Enabled/Disabled FHIR CQL Library Owner",
+              "fullTitle": "CQL Composer: CQL Library Workspace: Definition Enabled/Disabled FHIR CQL Library Owner",
+              "timedOut": null,
+              "duration": 6138,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(cqlLibrary.newLibraryBtn).click();\nvar cqlLibraryName = 'CQLLibraryTest' + Date.now();\ncy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, {\n  delay: 50\n});\ncy.get(createNewCqlLibrary.modelFHIRRadio).click();\ncy.get(createNewCqlLibrary.saveAndContinueBtn).click();\ncy.get(cqlComposer.confirmationContinueBtn).click();\nhelper.visibleWithTimeout(matheader.progressbar);\nhelper.notVisibleWithTimeout(matheader.progressbar);\ncy.get(cqlComposer.definition).click();\nhelper.enabled(cqlComposer.definitionAddNewBtn);\nhelper.enabled(cqlComposer.definitionInformationBtn);\nhelper.enabled(cqlComposer.definitionInsertBtn);\nhelper.disabled(cqlComposer.definitionExpressionBuilderBtn);\nhelper.enabled(cqlComposer.definitionSaveBtn);\nhelper.enabled(cqlComposer.definitionEraseBtn);\nhelper.disabled(cqlComposer.definitionDeleteBtn);\ncy.get(measurelibrary.measureLibraryTab).click();\nhelper.visibleWithTimeout(matheader.progressbar);\nhelper.notVisibleWithTimeout(matheader.progressbar);",
+              "err": {},
+              "uuid": "bc639727-bf5b-4ac3-b6e6-3f906d9fd02a",
+              "parentUUID": "6fd72190-efe0-4439-a795-8b4cb9ddadf1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3a0fe1bb-b599-4527-b6d8-d933915a66dd",
+            "bc639727-bf5b-4ac3-b6e6-3f906d9fd02a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 23942,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "5.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "timestamp": "mmddyyyy_HHMMss",
+        "json": true
+      },
+      "version": "4.1.0"
+    }
+  }
+}

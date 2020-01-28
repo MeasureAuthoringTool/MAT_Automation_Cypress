@@ -1,0 +1,89 @@
+{
+    "name": "MAT-Automation-cypress",
+    "version": "1.0.0",
+    "description": "cypress automation starter template",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "cypress:open": "cypress open",
+        "cypress:open:debug": "DEBUG=cypress:* cypress open",
+        "cypress:open:windows": "node_modules\\.bin\\cypress open",
+        "cypress:open:qa": "cypress open --env configFile=qa",
+        "cypress:open:dev": "cypress open --env configFile=dev",
+        "cypress:open:imp": "cypress open --env configFile=impl",
+        "lint:cypress": "./node_modules/.bin/eslint ./cypress/integration/**/*spec.js",
+        "lint:standard": "./node_modules/.bin/standard './cypress/integration/**/*spec.js' './cypress/support/**/*.js' --verbose | ./node_modules/.bin/snazzy",
+        "lint:standard:fix": "./node_modules/.bin/standard './cypress/integration/**/*spec.js' './cypress/support/**/*.js' --fix --verbose | ./node_modules/.bin/snazzy",
+        "lint:all": "npm run lint:cypress; npm run lint:standard; npm run lint:tslint",
+        "ui:smoke": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/Services/mat-fhir-services/OrchestrationMeasure.spec.js' --browser chrome;",
+        "ui:base": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=qa --spec 'cypress/integration/**/visual*.spec.js' --browser chrome;",
+        "ui:actual": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=qa --spec 'cypress/integration/**/visual*.spec.js' --browser chrome;",
+        "ui:smoke:ts": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=qa --spec 'cypress/integration/**/*.spec.ts' --browser chrome;",
+        "compile:utils": "tsc -p ./utils/tsconfig.json;",
+        "lint:tslint": "tslint -c tslint.json './cypress/integration/**/*spec.ts' 'utils/**/*.ts'",
+        "all:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/**/*.spec.js' --browser chrome;",
+        "all:ui:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/**/*.spec.js' --browser chrome;",
+        "combine:reports": "npx mochawesome-merge 'cypress/results/*.json' > mochawesome.json",
+        "generateOne:report": "npx marge mochawesome.json",
+        "all:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run all:tests; npm run combine:reports; npm run generateOne:report",
+        "all:ui:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run all:ui:tests; npm run combine:reports; npm run generateOne:report",
+        "delete:mochawesome": "rm mochawesome.json",
+        "delete:reports": "rm cypress/results/*.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/semanticbits/bits-cypress-template.git"
+    },
+    "keywords": [],
+    "author": "Dan Reale",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/semanticbits/bits-cypress-template/issues"
+    },
+    "homepage": "https://github.com/semanticbits/bits-cypress-template#readme",
+    "devDependencies": {
+        "@cypress/browserify-preprocessor": "^2.1.1",
+        "axe-core": "^3.4.0",
+        "cypress": "^3.6.1",
+        "cypress-axe": "^0.5.1",
+        "data-driven": "^1.4.0",
+        "eslint-plugin-chai-friendly": "^0.5.0",
+        "eslint-plugin-cypress": "^2.7.0",
+        "husky": "^3.1.0",
+        "standard": "^14.3.1",
+        "tslint": "^5.20.1",
+        "tslint-no-unused-expression-chai": "^0.1.4",
+        "typescript": "^3.7.2"
+    },
+    "dependencies": {
+        "@cypress/webpack-preprocessor": "^4.1.1",
+        "@types/node": "^12.12.14",
+        "cypress-visual-regression": "^1.0.5",
+        "mocha": "5.2.0",
+        "mochawesome": "^4.1.0",
+        "mochawesome-merge": "^4.0.0",
+        "snazzy": "^8.0.0",
+        "ts-loader": "^6.2.1",
+        "tsify": "^4.0.1",
+        "webpack": "^4.41.2"
+    },
+    "standard": {
+        "env": [
+            "mocha"
+        ],
+        "globals": [
+            "expect",
+            "assert",
+            "Cypress",
+            "cy"
+        ],
+        "ignore": [
+            "./cypress/support/**/index.js"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint:cypress && npm run lint:standard && npm run lint:tslint"
+        }
+    }
+}

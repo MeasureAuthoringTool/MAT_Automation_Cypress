@@ -1,0 +1,152 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 1,
+    "pending": 0,
+    "failures": 2,
+    "start": "2020-01-28T13:54:46.360Z",
+    "end": "2020-01-28T13:54:47.881Z",
+    "duration": 1521,
+    "testsRegistered": 3,
+    "passPercent": 33.33333333333333,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b2626350-bac4-4cc2-92fc-28ae97439801",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4cac2b6a-a88d-48bd-ab03-e7cdb7e0959b",
+          "title": "OrchestrationMeasure",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validation Success",
+              "fullTitle": "OrchestrationMeasure Validation Success",
+              "timedOut": null,
+              "duration": 657,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  url: '/mat-fhir-services/orchestration/measure',\n  method: 'PUT',\n  qs: {\n    id: '2ca880a16f7ca554016f86d356400768',\n    conversionType: 'VALIDATION',\n    xmlSource: 'MEASURE'\n  }\n}).then(function (response) {\n  expect(response.status).to.eql(200);\n});",
+              "err": {},
+              "uuid": "5e8faeae-a65d-4aef-86a2-20efb8584287",
+              "parentUUID": "4cac2b6a-a88d-48bd-ab03-e7cdb7e0959b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validation Not Found",
+              "fullTitle": "OrchestrationMeasure Validation Not Found",
+              "timedOut": null,
+              "duration": 447,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  url: '/mat-fhir-services/orchestration/measure',\n  method: 'PUT',\n  failOnStatusCode: false,\n  qs: {\n    id: '111',\n    conversionType: 'VALIDATION',\n    xmlSource: 'MEASURE'\n  }\n}).then(function (response) {\n  expect(response.status).to.eql(404);\n  expect(response.body.error).to.eql('Not Found');\n  expect(response.body.message).to.contains('Cannot find MAT Measure with measureId');\n});",
+              "err": {
+                "message": "AssertionError: expected 200 to deeply equal 404",
+                "estack": "AssertionError: expected 200 to deeply equal 404\n    at getRet (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:88941:16)\n    at tryCatcher (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:139045:23)\n    at Function.Promise.attempt.Promise.try (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:136320:29)\n    at Context.thenFn (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:88955:23)\n    at Context.then (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:89275:21)\n    at Context.<anonymous> (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:100624:21)\n    at https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:100145:33\n    at tryCatcher (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:139045:23)\n    at Promise._settlePromiseFromHandler (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:136981:31)\n    at Promise._settlePromise (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:137038:18)\n    at Promise._settlePromiseCtx (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:137075:10)\n    at Async../node_modules/bluebird/js/release/async.js.Async._drainQueue (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:133775:12)\n    at Async../node_modules/bluebird/js/release/async.js.Async._drainQueues (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:133780:10)\n    at Async.drainQueues (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:133654:14)",
+                "diff": "- 200\n+ 404\n"
+              },
+              "uuid": "b5e435b1-9806-4147-8d51-a4ba7edda2a6",
+              "parentUUID": "4cac2b6a-a88d-48bd-ab03-e7cdb7e0959b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validation Not Found NULL ID",
+              "fullTitle": "OrchestrationMeasure Validation Not Found NULL ID",
+              "timedOut": null,
+              "duration": 395,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  url: '/mat-fhir-services/orchestration/measure',\n  method: 'PUT',\n  failOnStatusCode: false,\n  qs: {\n    id: null,\n    conversionType: 'VALIDATION',\n    xmlSource: 'MEASURE'\n  }\n}).then(function (response) {\n  expect(response.status).to.eql(404);\n});",
+              "err": {
+                "message": "AssertionError: expected 200 to deeply equal 404",
+                "estack": "AssertionError: expected 200 to deeply equal 404\n    at getRet (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:88941:16)\n    at tryCatcher (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:139045:23)\n    at Function.Promise.attempt.Promise.try (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:136320:29)\n    at Context.thenFn (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:88955:23)\n    at Context.then (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:89275:21)\n    at Context.<anonymous> (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:100624:21)\n    at https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:100145:33\n    at tryCatcher (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:139045:23)\n    at Promise._settlePromiseFromHandler (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:136981:31)\n    at Promise._settlePromise (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:137038:18)\n    at Promise._settlePromiseCtx (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:137075:10)\n    at Async../node_modules/bluebird/js/release/async.js.Async._drainQueue (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:133775:12)\n    at Async../node_modules/bluebird/js/release/async.js.Async._drainQueues (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:133780:10)\n    at Async.drainQueues (https://matdev.semanticbits.com/__cypress/runner/cypress_runner.js:133654:14)",
+                "diff": "- 200\n+ 404\n"
+              },
+              "uuid": "2c4061ee-bd8e-45ae-8d1f-b708d69af2f1",
+              "parentUUID": "4cac2b6a-a88d-48bd-ab03-e7cdb7e0959b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5e8faeae-a65d-4aef-86a2-20efb8584287"
+          ],
+          "failures": [
+            "b5e435b1-9806-4147-8d51-a4ba7edda2a6",
+            "2c4061ee-bd8e-45ae-8d1f-b708d69af2f1"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 1499,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "5.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "timestamp": "mmddyyyy_HHMMss",
+        "json": true
+      },
+      "version": "4.1.0"
+    }
+  }
+}

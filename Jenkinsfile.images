@@ -1,0 +1,30 @@
+node {
+  stage('Delete Old Images') {
+    sh 'docker stop qpp_ui || true'
+    sh 'docker rm qpp_ui || true'
+    sh 'docker rmi qppui || true'
+    sh 'docker rmi qppuicypress || true'
+    sh 'docker rmi cypress/base:10 || true'
+  }
+  stage('Clone Repos') {
+    slackSend(color: "#cccccc", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - Build Started")
+    cleanWs()
+    git(
+    url: 'https://github.cms.gov/CMMI/AMS-tests.git',
+    credentialsId: 'snju-access-token-secret',
+    branch: 'develop'
+    )
+    }
+  stage('Create Images') {
+     try {
+      sh 'docker build -f Dockerfile.ui.cypress -t qppuicypress .'
+      sh 'docker build -f Dockerfile.ui -t qppui .'
+      slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - Build Passed")
+    }
+    catch (Exception e) {
+      sh 'echo Build Failed!;'
+      slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - Build Failed")
+      throw e;
+    }
+  }
+}

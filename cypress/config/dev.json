@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://matdev.semanticbits.com",
+  "screenshotsFolder": "cypress/snapshots/base",
+  "env": {
+    "environment": "dev",
+    "type": "base"
+  }
+}

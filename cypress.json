@@ -1,0 +1,22 @@
+{
+  "chromeWebSecurity": false,
+  "pageLoadTimeout": 90000,
+  "defaultCommandTimeout": 10000,
+  "video": false,
+  "trashAssetsBeforeRuns": true,
+  "videoUploadOnPasses": false,
+  "viewportWidth": 1300,
+  "viewportHeight": 800,
+  "watchForFileChanges": false,
+  "numTestsKeptInMemory": 10,
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "cypress/results",
+    "overwrite": false,
+    "html": false,
+    "timestamp": "mmddyyyy_HHMMss",
+    "json": true
+  }
+
+}
+
