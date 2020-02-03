@@ -1,6 +1,6 @@
 {
   "baseUrl": "https://matdev.semanticbits.com",
-  "screenshotsFolder": "cypress/snapshots/base",
+  "screenshotsFolder": "mochawesome-report/assets",
   "env": {
     "environment": "dev",
     "type": "base"

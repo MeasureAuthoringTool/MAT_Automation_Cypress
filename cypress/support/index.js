@@ -33,3 +33,10 @@ Cypress.Server.defaults({
   }
 });
 
+const addContext = require('mochawesome/addContext');
+
+Cypress.on('test:after:run', (test, runnable) => {
+  if (test.state === 'failed') {
+    addContext({test}, { title: "Screenshot", value:`assets/${Cypress.spec.name}/${runnable.parent.title} -- ${test.title} (failed).png` })
+  }
+})

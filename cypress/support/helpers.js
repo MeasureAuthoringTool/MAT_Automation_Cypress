@@ -736,3 +736,13 @@ export const loginSilent = () => {
     })
   sleep(1000)
 }
+
+Date.prototype.getMonthFormatted = function() {
+  var month = this.getMonth() + 1;
+  return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
+}
+
+Date.prototype.getDayFormatted = function() {
+  var day = this.getDate();
+  return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
+}

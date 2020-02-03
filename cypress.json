@@ -15,8 +15,10 @@
     "overwrite": false,
     "html": false,
     "timestamp": "mmddyyyy_HHMMss",
-    "json": true
-  }
+    "json": true,
+    "inline": true
+  },
+  "screenshotsFolder": "mochawesome-report/assets"
 
 }
 
