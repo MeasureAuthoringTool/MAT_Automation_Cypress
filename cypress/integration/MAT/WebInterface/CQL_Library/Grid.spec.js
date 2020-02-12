@@ -336,6 +336,9 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.returnToCqlLibrary).click()
 
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
     })
 
     it('Recent Activity Button Bar View', () => {

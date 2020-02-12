@@ -52,6 +52,7 @@ export const measureStewardListBox = '#stewardListBox'
 
 //References
 
+export const referenceTypeListBox = '.gwt-ListBox'
 export const referenceDescriptionRow = '.GB-MJYKBBD > div > span'
 
 

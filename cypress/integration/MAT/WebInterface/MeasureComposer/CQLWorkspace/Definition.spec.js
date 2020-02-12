@@ -4,6 +4,7 @@ import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure";
 import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 
+
 let measureName = ''
 
 describe('Measure Composer: CQL Workspace: Definition', () => {
@@ -43,7 +44,9 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
 
         cy.get(measureComposer.definition).click()
 
-        helper.enabled(measureComposer.definitionAddNewBtn)
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        helper.enabled(measureComposer.addNewBtn)
         helper.enabled(measureComposer.definitionInformationBtn)
         helper.enabled(measureComposer.definitionInsertBtn)
         helper.enabled(measureComposer.definitionExpressionBuilderBtn)
@@ -84,7 +87,9 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
 
         cy.get(measureComposer.definition).click()
 
-        helper.enabled(measureComposer.definitionAddNewBtn)
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        helper.enabled(measureComposer.addNewBtn)
         helper.enabled(measureComposer.definitionInformationBtn)
         helper.enabled(measureComposer.definitionInsertBtn)
         helper.disabled(measureComposer.definitionExpressionBuilderBtn)

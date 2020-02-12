@@ -137,6 +137,10 @@ describe('Measure Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+
+        cy.wait(2000)
+
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
         helper.visibleWithTimeout(matheader.progressbar)
@@ -146,6 +150,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
+
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -175,6 +180,10 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
+
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+
+        cy.wait(2000)
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
@@ -251,6 +260,8 @@ describe('Measure Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
+        cy.wait(2000)
+
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
@@ -269,6 +280,8 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.wait(2000)
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
@@ -367,6 +380,9 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.title).contains("My Measures > Draft Measure")
 
         cy.get(createNewMeasure.cancelBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
 
     })
     it('Recent Activity Button bar History', () => {

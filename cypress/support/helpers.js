@@ -3,6 +3,7 @@ import * as matlogin from '../pom/MAT/WI/login'
 import * as matheader from '../pom/MAT/WI/MATheader'
 import * as measurelibrary from "../pom/MAT/WI/MeasureLibrary";
 import * as createNewMeasure from "../pom/MAT/WI/CreateNewMeasure";
+import * as measureComposer from "../pom/MAT/WI/MeasureComposer";
 const os = Cypress.platform // values are aix, darwin, freebsd, linux, openbsd, sunos, win32, android
 const env = Cypress.env('environment')
 
@@ -57,8 +58,9 @@ export const loginGeneric = () => {
       login(un,pw)
       loginUMLS()
       break
-    case 'impl':
-      loginImpl()
+    case 'test':
+      login(un,pw)
+      loginUMLS()
       break
     case 'prod':
       // loginProd(prodNum, org)
@@ -195,6 +197,10 @@ export const createMajorVersionMeasure = (measure) => {
   visibleWithTimeout(matheader.progressbar)
   notVisibleWithTimeout(matheader.progressbar)
 
+  visibleWithTimeout(measurelibrary.row1MeasureSearch)
+
+  cy.wait(2000)
+
   cy.get(measurelibrary.row1MeasureSearch).click()
 
   cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
@@ -209,6 +215,43 @@ export const createMajorVersionMeasure = (measure) => {
   cy.get(measurelibrary.searchInputBox).clear()
 
   return name
+}
+
+export const addValueSet = (OID) => {
+  cy.get(measureComposer.valueSets).click()
+
+  waitToContainText(measureComposer.cqlWorkspaceTitleGlobal,'Value Sets')
+
+  cy.get(measureComposer.OIDInput).type(OID, { delay: 50 })
+  cy.get(measureComposer.retrieveOIDBtn).click()
+  cy.get(measureComposer.applyBtn).click()
+
+  visibleWithTimeout(measureComposer.warningMessage)
+}
+
+export const addCode = (codeUrl) => {
+  cy.get(measureComposer.codes).click()
+
+  waitToContainText(measureComposer.cqlWorkspaceTitleGlobal,'Codes')
+
+  cy.get(measureComposer.codeUrlInput).type(codeUrl, { delay: 50 })
+  cy.get(measureComposer.retrieveBtn).click()
+  cy.get(measureComposer.applyBtn).click()
+
+  visibleWithTimeout(measureComposer.warningMessage)
+}
+
+export const addDefinition = (definitionName, CQL) => {
+  cy.get(measureComposer.definition).click()
+
+  waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+  cy.get(measureComposer.addNewBtn).click()
+  cy.get(measureComposer.definitionNameInput).type(definitionName, { delay: 50 })
+  cy.get(measureComposer.definitionCQLExpressionEditorInput).type(CQL, { delay: 50 })
+  cy.get(measureComposer.definitionSaveBtn).click()
+
+  visibleWithTimeout(measureComposer.warningMessage)
 }
 
 // general

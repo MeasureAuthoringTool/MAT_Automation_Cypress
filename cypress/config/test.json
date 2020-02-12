@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://test-emeasuretool.hcqis.org/",
+  "screenshotsFolder": "mochawesome-report/assets",
+  "env": {
+    "environment": "test",
+    "type": "base"
+  }
+}

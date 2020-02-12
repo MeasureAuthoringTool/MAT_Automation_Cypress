@@ -8,7 +8,7 @@
         "cypress:open": "cypress open",
         "cypress:open:debug": "DEBUG=cypress:* cypress open",
         "cypress:open:windows": "node_modules\\.bin\\cypress open",
-        "cypress:open:qa": "cypress open --env configFile=qa",
+        "cypress:open:test": "cypress open --env configFile=test",
         "cypress:open:dev": "cypress open --env configFile=dev",
         "cypress:open:imp": "cypress open --env configFile=impl",
         "lint:cypress": "./node_modules/.bin/eslint ./cypress/integration/**/*spec.js",

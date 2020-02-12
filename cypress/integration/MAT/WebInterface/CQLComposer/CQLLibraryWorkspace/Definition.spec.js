@@ -4,6 +4,7 @@ import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as createNewCqlLibrary from "../../../../../pom/MAT/WI/CreateNewCQLLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
+import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 
 describe('CQL Composer: CQL Library Workspace: Definition', () => {
     before('Login', () => {
@@ -39,7 +40,9 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
 
         cy.get(cqlComposer.definition).click()
 
-        helper.enabled(cqlComposer.definitionAddNewBtn)
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        helper.enabled(cqlComposer.addNewBtn)
         helper.enabled(cqlComposer.definitionInformationBtn)
         helper.enabled(cqlComposer.definitionInsertBtn)
         helper.enabled(cqlComposer.definitionExpressionBuilderBtn)
@@ -73,7 +76,9 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
 
         cy.get(cqlComposer.definition).click()
 
-        helper.enabled(cqlComposer.definitionAddNewBtn)
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        helper.enabled(cqlComposer.addNewBtn)
         helper.enabled(cqlComposer.definitionInformationBtn)
         helper.enabled(cqlComposer.definitionInsertBtn)
         helper.disabled(cqlComposer.definitionExpressionBuilderBtn)
