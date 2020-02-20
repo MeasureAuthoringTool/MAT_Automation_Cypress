@@ -7,7 +7,7 @@ import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
 import * as createNewCqlLibrary from "../../../../pom/MAT/WI/CreateNewCQLLibrary";
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer";
 
-describe('Create Continuous Variable Measure', () => {
+describe('Create CQL Library', () => {
     before('Login', () => {
         helper.loginGeneric()
 
@@ -149,6 +149,12 @@ describe('Create Continuous Variable Measure', () => {
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
         helper.visibleWithTimeout(measureComposer.warningMessage)
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
 
     })
 })

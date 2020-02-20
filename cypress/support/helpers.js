@@ -4,6 +4,9 @@ import * as matheader from '../pom/MAT/WI/MATheader'
 import * as measurelibrary from "../pom/MAT/WI/MeasureLibrary";
 import * as createNewMeasure from "../pom/MAT/WI/CreateNewMeasure";
 import * as measureComposer from "../pom/MAT/WI/MeasureComposer";
+import * as cqlLibrary from "../pom/MAT/WI/CqlLibrary";
+import * as createNewCqlLibrary from "../pom/MAT/WI/CreateNewCQLLibrary";
+import * as cqlComposer from "../pom/MAT/WI/CQLComposer";
 const os = Cypress.platform // values are aix, darwin, freebsd, linux, openbsd, sunos, win32, android
 const env = Cypress.env('environment')
 
@@ -144,7 +147,7 @@ export const logout = () => {
 
 //Create Draft Measure
 
-export const createDraftMeasure = (measure) => {
+export const createDraftMeasure = (measure, model) => {
 
   let name = ''
 
@@ -159,7 +162,14 @@ export const createDraftMeasure = (measure) => {
   cy.get(measurelibrary.newMeasureButton).click()
 
   cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
-  cy.get(createNewMeasure.modelradioQDM).click()
+
+  if (model == 'QDM' || model == undefined) {
+    cy.get(createNewMeasure.modelradioQDM).click()
+  }
+  else {
+    cy.get(createNewMeasure.modelradioFHIR).click()
+  }
+
   cy.get(createNewMeasure.cqlLibraryName).type(name, { delay: 50 })
   cy.get(createNewMeasure.shortName).type(name, { delay: 50 })
 
@@ -173,6 +183,43 @@ export const createDraftMeasure = (measure) => {
   notVisibleWithTimeout(matheader.progressbar)
 
   cy.get(measurelibrary.measureLibraryTab).click()
+
+  visibleWithTimeout(matheader.progressbar)
+  notVisibleWithTimeout(matheader.progressbar)
+
+  return name
+}
+
+export const createDraftCqlLibrary = (library, model) => {
+
+  let name = ''
+
+  if (library === undefined) {
+    name = draftCqllibrary + Date.now()
+  }
+  else {
+    name = library + Date.now()
+  }
+
+  cy.get(cqlLibrary.newLibraryBtn).click()
+
+  cy.get(createNewCqlLibrary.cqlLibraryName).type(name, { delay: 50 })
+
+  if (model === 'QDM' || model === undefined) {
+    cy.get(createNewCqlLibrary.modelQDMRadio).click()
+  }
+  else {
+    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+  }
+
+  cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+
+  cy.get(cqlComposer.confirmationContinueBtn).click()
+
+  visibleWithTimeout(matheader.progressbar)
+  notVisibleWithTimeout(matheader.progressbar)
+
+  cy.get(measurelibrary.cqlLibraryTab).click()
 
   visibleWithTimeout(matheader.progressbar)
   notVisibleWithTimeout(matheader.progressbar)

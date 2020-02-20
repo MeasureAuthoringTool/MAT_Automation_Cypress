@@ -1,15 +1,18 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure";
 import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 
-
-let measureName = ''
+let fhirMeasure = ''
+let qdmMeasure = ''
 
 describe('Measure Composer: CQL Workspace: Definition', () => {
     before('Login', () => {
         helper.loginGeneric()
+
+        qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure','QDM')
+        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure','FHIR')
+
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -19,20 +22,13 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
     })
     it('Enabled/Disabled QDM Measure Owner', () => {
 
-        cy.get(measurelibrary.newMeasureButton).click()
+        helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
+        cy.get(measurelibrary.searchBtn).click()
 
-        measureName = 'createProportionMeasure' + Date.now()
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.modelradioQDM).click()
-        cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
-
-        cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
-        cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
-
-        cy.get(createNewMeasure.saveAndContinueBtn).click()
-        cy.get(createNewMeasure.confirmationContinueBtn).click()
+        cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
@@ -62,20 +58,13 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
     })
     it('Enabled/Disabled FHIR Measure Owner', () => {
 
-        cy.get(measurelibrary.newMeasureButton).click()
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click()
 
-        measureName = 'createProportionMeasure' + Date.now()
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.modelradioFHIR).click()
-        cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
-
-        cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
-        cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
-
-        cy.get(createNewMeasure.saveAndContinueBtn).click()
-        cy.get(createNewMeasure.confirmationContinueBtn).click()
+        cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
@@ -96,6 +85,80 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
         helper.enabled(measureComposer.definitionSaveBtn)
         helper.enabled(measureComposer.definitionEraseBtn)
         helper.disabled(measureComposer.definitionDeleteBtn)
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+    })
+    it('QDM Insert Attribute Data population', () => {
+
+        helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.cqlWorkspace).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.definition).click()
+
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        cy.get(measureComposer.definitionInsertBtn).click()
+        cy.get(measureComposer.itemTypeListBox).select('Attributes')
+
+        //verifying a unique datatype and attribute based on model type QDM, this ensures the correct data has been populated
+        cy.get(measureComposer.attributesListBox).select('activeDatetime').should('have.value', 'activeDatetime')
+        cy.get(measureComposer.attributesDataTypeListBox).select('Assessment, Not Ordered').should('have.value', 'Assessment, Not Ordered')
+
+        cy.get(measureComposer.cancelBtn).click()
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+    })
+    it('FHIR Insert Attribute Data population', () => {
+
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.cqlWorkspace).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.definition).click()
+
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        cy.get(measureComposer.definitionInsertBtn).click()
+        cy.get(measureComposer.itemTypeListBox).select('Attributes')
+
+        //verifying a unique datatype and attribute based on model type FHIR, this ensures the correct data has been populated
+        cy.get(measureComposer.attributesListBox).select('addresses').should('have.value', 'addresses')
+        cy.get(measureComposer.attributesDataTypeListBox).select('Condition').should('have.value', 'Condition')
+
+        cy.get(measureComposer.cancelBtn).click()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 

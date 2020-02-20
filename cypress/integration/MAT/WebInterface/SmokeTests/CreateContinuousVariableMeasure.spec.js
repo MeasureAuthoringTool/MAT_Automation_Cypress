@@ -16,13 +16,12 @@ describe('Create Continuous Variable Measure', () => {
     })
     it('Create Continuous Variable QDM', () => {
 
-
         cy.get(measurelibrary.newMeasureButton).click()
 
         let measureName = 'createContVariableMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.modelradioQDM).click()
+        cy.get(createNewMeasure.modelradioFHIR).click()
         cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
 
@@ -152,6 +151,12 @@ describe('Create Continuous Variable Measure', () => {
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
         helper.visibleWithTimeout(measureComposer.warningMessage)
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
 
     })
 })

@@ -7,6 +7,7 @@ export const title = '.contentWithHeadingHeader > h1'
 export const filterByMyLibrariesChkBox = '.searchWidgetCheckBox .customCheckBox'
 export const searchBtn = '#SearchWidgetButton_forCqlLibrary'
 export const searchInputBox = '#SearchFilterWidget_SearchInputHPanel_forCqlLibrary > tbody > tr > td > input'
+export const modelTypeListBox = '#modelType'
 
 //Recent Activity Table
 export const row1RecentActivity = '#searchPanel_VerticalPanel [__gwt_row="0"]'
@@ -21,6 +22,10 @@ export const row1CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="0"]'
 export const row2CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="1"]'
 export const row1CqlLibrarySearchCheckbox = '#CQLLibrarySearchCellTable [__gwt_row="0"] input'
 export const row2CqlLibrarySearchCheckbox = '#CQLLibrarySearchCellTable [__gwt_row="1"] input'
+export const row1CqlLibraryName = '#CQLLibrarySearchCellTable [__gwt_row="0"] #div2'
+export const row2CqlLibraryName = '#CQLLibrarySearchCellTable [__gwt_row="1"] #div2'
+export const row1Models = '#CQLLibrarySearchCellTable [__gwt_row="0"] > :nth-child(4)'
+export const row2Models = '#CQLLibrarySearchCellTable [__gwt_row="1"] > :nth-child(4)'
 
 //Recent Activity Button Bar
 export const recentActivityButtonBar = '#recentActivitySummary_gridToolbar > [type="button"]'
@@ -33,21 +38,6 @@ export const shareRecentActivityBtn = '#recentActivitySummary_gridToolbar > [tit
 export const deleteRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to delete library"]'
 export const createVersionRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to create version"]'
 export const createDraftRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to create draft"]'
-
-
-
-
-//export const createVersionRecentActivityBtn = recentActivityButtonBar.
-//export const createVersionRecentActivityBtn = '#recentActivitySummary_gridToolbar .btn-group > .fa-star'
-
-// export const createVersionDraftRecentActivityBtn = () => {
-//     var value = cy.get(recentActivityButtonBar).children("button")
-//     return value[0] }
-// export const historyRecentActivityBtn = () => { return cy.get(recentActivityButtonBar).eq(1) }
-// export const editRecentActivityBtn = () => { return cy.get(recentActivityButtonBar).eq(2) }
-// export const shareRecentActivityBtn = () => { return cy.get(recentActivityButtonBar).eq(3) }
-// export const deleteRecentActivityBtn = () => { return cy.get(recentActivityButtonBar).eq(4) }
-
 
 
 //All CQL Libraries Button Bar
