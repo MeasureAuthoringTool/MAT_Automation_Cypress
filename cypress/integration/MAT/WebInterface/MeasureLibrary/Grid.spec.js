@@ -11,7 +11,7 @@ let draftMeasure = ''
 let versionMeasureNotOwner = ''
 let versionMeasure = ''
 
-describe('Measure Library Grid Selection', () => {
+describe('Measure Library', () => {
     before('Login', () => {
         helper.loginGeneric()
 
@@ -72,28 +72,52 @@ describe('Measure Library Grid Selection', () => {
 
     })
 
-    it('Measure Search Table', () => {
+    it('Measure Search Table: Row Selection', () => {
+
+        helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
+        helper.notVisible(measurelibrary.clearSelectedBtn)
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
+        helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
+        helper.visible(measurelibrary.clearSelectedBtn)
 
         cy.get(measurelibrary.row2MeasureSearch).click()
 
         helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
         helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
+        helper.haveText(measurelibrary.itemSelectedLabel, '2 Items Selected')
 
         cy.wait(1000)
 
         cy.get(measurelibrary.row2MeasureSearch).click()
 
         helper.isNotChecked(measurelibrary.row2MeasureSearchCheckbox)
+        helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.isNotChecked(measurelibrary.row1MeasureSearchCheckbox)
+        helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
+        helper.notVisible(measurelibrary.clearSelectedBtn)
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+        cy.get(measurelibrary.row2MeasureSearch).click()
+
+        helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
+        helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
+        helper.haveText(measurelibrary.itemSelectedLabel, '2 Items Selected')
+
+        cy.get(measurelibrary.clearSelectedBtn).click()
+
+        helper.isNotChecked(measurelibrary.row1MeasureSearchCheckbox)
+        helper.isNotChecked(measurelibrary.row2MeasureSearchCheckbox)
+        helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
+        helper.notVisible(measurelibrary.clearSelectedBtn)
 
     })
+
     it('Needed for afterall if test before fails', () => {
 
         //designed to pass to make sure afterall click action works

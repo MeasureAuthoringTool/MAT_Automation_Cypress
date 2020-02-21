@@ -23,6 +23,9 @@ export const row1MeasureSearch = '#MeasureSearchCellTable [__gwt_row="0"]'
 export const row2MeasureSearch = '#MeasureSearchCellTable [__gwt_row="1"]'
 export const row1MeasureSearchCheckbox = '#MeasureSearchCellTable [__gwt_row="0"] input'
 export const row2MeasureSearchCheckbox = '#MeasureSearchCellTable [__gwt_row="1"] input'
+export const itemSelectedLabel = '.gwt-Label'
+export const clearSelectedBtn = ':nth-child(2) > [style="vertical-align: top;"] > :nth-child(1) > [href="javascript:;"]'
+
 
 
 //Recent Activity Button Bar
