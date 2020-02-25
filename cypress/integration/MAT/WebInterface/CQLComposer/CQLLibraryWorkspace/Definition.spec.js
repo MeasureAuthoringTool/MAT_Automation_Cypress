@@ -11,11 +11,6 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
     before('Login', () => {
         helper.loginGeneric()
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
-
         qdmCqlLibrary = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
         fhirCqlLibrary = helper.createDraftCqlLibrary('fhirCqlLibrary', 'FHIR')
     })

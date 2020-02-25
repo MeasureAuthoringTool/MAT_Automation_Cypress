@@ -75,6 +75,7 @@ export const loginGeneric = () => {
 }
 // login
 export const login = (username, password) => {
+
   cy.clearCookies()
 
   cy.clearLocalStorage()
@@ -103,6 +104,18 @@ export const loginCreateVersionedMeasureNotOwnerLogout = () => {
   login(altUser,pw)
 
   let name = createMajorVersionMeasure()
+
+  logout()
+
+  return name
+
+}
+
+export const loginCreateDraftCqlLibraryNotOwnerLogout = () => {
+
+  login(altUser,pw)
+
+  let name = createDraftCqlLibrary()
 
   logout()
 
@@ -195,11 +208,22 @@ export const createDraftCqlLibrary = (library, model) => {
   let name = ''
 
   if (library === undefined) {
-    name = draftCqllibrary + Date.now()
+    name = 'draftCqllibrary' + Date.now()
   }
   else {
     name = library + Date.now()
   }
+
+  cy.get(measurelibrary.cqlLibraryTab).then(tab => {
+    let value = tab.attr('class')
+
+    if (value.toString() === 'gwt-TabBarItem'){
+      cy.get(measurelibrary.cqlLibraryTab).click()
+      visibleWithTimeout(matheader.progressbar)
+      notVisibleWithTimeout(matheader.progressbar)
+    }
+
+  })
 
   cy.get(cqlLibrary.newLibraryBtn).click()
 
@@ -299,6 +323,14 @@ export const addDefinition = (definitionName, CQL) => {
   cy.get(measureComposer.definitionSaveBtn).click()
 
   visibleWithTimeout(measureComposer.warningMessage)
+}
+
+
+export const getClassAttr = () => {
+  return cy.get(measurelibrary.cqlLibraryTab).then(tab => {
+    let rect = tab.attr('class')
+    return rect
+  })
 }
 
 // general

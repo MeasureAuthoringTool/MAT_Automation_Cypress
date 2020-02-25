@@ -5,6 +5,8 @@ import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer"
 
+let draftCqlLibraryNotowner = ''
+
 
 describe('CQL Library Grid Selection', () => {
     before('Login', () => {
@@ -90,10 +92,18 @@ describe('CQL Library Grid Selection', () => {
         helper.isNotChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
 
     })
+    it('Needed for afterall if test before fails', () => {
+
+        //designed to pass to make sure afterall click action works
+
+    })
 })
 
 describe('CQL Library Grid Button Bar', () => {
     before('Login', () => {
+
+        draftCqlLibraryNotowner = helper.loginCreateDraftCqlLibraryNotOwnerLogout()
+
         helper.loginGeneric()
         cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -116,6 +126,12 @@ describe('CQL Library Grid Button Bar', () => {
     it('Enabled/Disabled Recent Activity Not The Owner', () => {
 
         //populating recent activity grid
+        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryNotowner)
+        cy.get(cqlLibrary.searchBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
         helper.visibleWithTimeout(matheader.progressbar)

@@ -21,7 +21,7 @@ describe('Create Continuous Variable Measure', () => {
         let measureName = 'createContVariableMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.modelradioFHIR).click()
+        cy.get(createNewMeasure.modelradioQDM).click()
         cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
 

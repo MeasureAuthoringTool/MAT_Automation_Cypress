@@ -3,7 +3,6 @@ export const signout = '.dropdown-menu > :nth-child(5) > a'
 export const progressbar = '.progress-bar'
 export const loadingPanel = '#LoadingPanel'
 
-
 //UMLS
 export const UMLS = ':nth-child(1) > .loginSpacer > :nth-child(1) > .btn > span'
 export const UMLSUserName = '#inputUserId'

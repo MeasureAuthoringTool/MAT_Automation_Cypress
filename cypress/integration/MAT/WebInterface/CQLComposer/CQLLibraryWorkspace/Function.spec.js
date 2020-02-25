@@ -7,7 +7,7 @@ import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 let fhirLibrary = ''
 let qdmLibrary = ''
 
-describe('CQL Composer: CQL Workspace: Function', () => {
+describe('CQL Composer: CQL Library Workspace: Function', () => {
     before('Login', () => {
         helper.loginGeneric()
 
