@@ -92,6 +92,8 @@ export const login = (username, password) => {
 
   cy.get(matlogin.signInButton).click()
 
+  cy.get(matlogin.securityButtons).eq(0).click()
+
   visibleWithTimeout(matheader.progressbar)
   notVisibleWithTimeout(matheader.progressbar)
 

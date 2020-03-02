@@ -19,7 +19,9 @@ export const addNewBtn = '#Add_New_ID'
 export const cancelBtn = '#Cancel_button'
 export const availableDatatypesListBox = '#listDataType'
 export const yesBtn = '#Clear_Yes_Button'
-
+export const editorError = '.ace_error'
+export const editorErrorToolTip = '.ace_tooltip'
+export const editorLeftPanel = '#parameter_CQLEditor > .ace_gutter > .ace_layer'
 
 //Measure Details > General Measure Information
 export const measureNameInputBox = '#measureNameInput'
@@ -45,6 +47,9 @@ export const retrieveBtn = ':nth-child(2) > td > .input-group > .input-group-btn
 export const parameterNameInput = '#parameterNameField'
 export const parameterCQLExpressionEditorInput = '#parameter_CQLEditor'
 export const parameterSaveBtn = '#saveButton_parameter'
+export const parameterEraseBtn = '#eraseButton_parameter'
+export const parameterListbox = '#paramNameListBox_ListBox'
+export const parameterListboxOption = '#collapseParameter > .panel-body #paramNameListBox_ListBox > option'
 
 //Definition
 export const definitionNameInput = '#defineNameField'

@@ -92,11 +92,6 @@ describe('CQL Library Grid Selection', () => {
         helper.isNotChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
 
     })
-    it('Needed for afterall if test before fails', () => {
-
-        //designed to pass to make sure afterall click action works
-
-    })
 })
 
 describe('CQL Library Grid Button Bar', () => {
@@ -547,10 +542,6 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
-        cy.wait(1000)
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
 
         cy.get(cqlLibrary.title).contains("My CQL Library > Create CQL Library Version of Draft")
@@ -592,10 +583,6 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
-        cy.wait(1000)
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
 
         cy.get(cqlLibrary.majorVersionTypeRadio).click()
@@ -604,10 +591,6 @@ describe('CQL Library Grid Button Bar', () => {
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
-        cy.wait(1000)
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
@@ -624,10 +607,6 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
-        cy.wait(1000)
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
         cy.get(cqlLibrary.historyCqllibrariesBtn).click()
 
         cy.get(cqlLibrary.title).contains("My CQL Library > History")
@@ -640,10 +619,6 @@ describe('CQL Library Grid Button Bar', () => {
     })
 
     it('CQL Libraries Button Bar View', () => {
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
-        cy.wait(1000)
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
@@ -693,10 +668,6 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
-        cy.wait(1000)
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
         cy.get(cqlLibrary.editCqllibrariesEnabledBtn).click()
 
         helper.visibleWithTimeout(matheader.progressbar)
@@ -740,10 +711,6 @@ describe('CQL Library Grid Button Bar', () => {
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
-        cy.wait(1000)
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
@@ -793,19 +760,11 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
-        cy.wait(1000)
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
         cy.get(cqlLibrary.deleteCqllibrariesBtn).click()
 
         helper.visible(cqlLibrary.modal)
 
         cy.get(cqlLibrary.modalCloseBtn).click()
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-
-        cy.wait(1000)
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
     })
