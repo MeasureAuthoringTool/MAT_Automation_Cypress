@@ -8,6 +8,7 @@
         "cypress:open": "cypress open",
         "cypress:open:debug": "DEBUG=cypress:* cypress open",
         "cypress:open:windows": "node_modules\\.bin\\cypress open",
+        "cypress:open:sandbox": "cypress open --env configFile=sandbox",
         "cypress:open:test": "cypress open --env configFile=test",
         "cypress:open:dev": "cypress open --env configFile=dev",
         "cypress:open:imp": "cypress open --env configFile=impl",

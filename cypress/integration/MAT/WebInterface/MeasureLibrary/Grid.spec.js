@@ -28,7 +28,7 @@ describe('Measure Library', () => {
     after('Log Out', () => {
         helper.logout()
     })
-    it('Recent Activity', () => {
+    it('Recent Activity: Row Selection', () => {
 
         //populating recent activity grid
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
@@ -117,6 +117,13 @@ describe('Measure Library', () => {
         helper.notVisible(measurelibrary.clearSelectedBtn)
 
     })
+
+    it('Prevent issue from Afterall', () => {
+
+        //this is in place to prevent an issue with not being able to click in afterall section after a test fails
+
+    })
+
 })
 
 describe('Measure Library Grid Button Bar', () => {

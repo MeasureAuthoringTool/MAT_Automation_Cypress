@@ -53,6 +53,8 @@ describe('CQL Library Grid Selection', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
+        helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
+
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
 
         cy.wait(1000)
@@ -136,6 +138,8 @@ describe('CQL Library Grid Button Bar', () => {
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
+
+        helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
 
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
 

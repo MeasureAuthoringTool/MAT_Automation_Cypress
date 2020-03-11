@@ -28,7 +28,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
     })
     it('QDM: Verify errors are coming from correct source', () => {
 
-        helper.enterText(cqlLibrary.searchInputBox, 'qdmDraftMeasure1583163665948')
+        helper.enterText(cqlLibrary.searchInputBox, qdmcqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
         helper.visibleWithTimeout(matheader.progressbar)

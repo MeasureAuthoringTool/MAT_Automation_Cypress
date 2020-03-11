@@ -65,8 +65,9 @@ export const loginGeneric = () => {
       login(un,pw)
       loginUMLS()
       break
-    case 'prod':
-      // loginProd(prodNum, org)
+    case 'sandbox':
+      login(un,pw)
+      loginUMLS()
       break
     default:
       login()
@@ -85,6 +86,9 @@ export const login = (username, password) => {
   })
 
   cy.visit('/MeasureAuthoringTool/Login.html')
+
+  visibleWithTimeout(matheader.progressbar)
+  notVisibleWithTimeout(matheader.progressbar)
 
   cy.get(matlogin.username).type(username, { delay: 50 }).should('have.value', username)
   cy.get(matlogin.password).type(password, { delay: 50 })
@@ -178,7 +182,7 @@ export const createDraftMeasure = (measure, model) => {
 
   cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-  if (model == 'QDM' || model == undefined) {
+  if (model === 'QDM' || model === undefined) {
     cy.get(createNewMeasure.modelradioQDM).click()
   }
   else {
@@ -420,7 +424,7 @@ export const visibleWithTimeout = (element, timeout) => {
 export const notVisibleWithTimeout = (element, timeout) => {
   let time
   if (timeout === undefined) {
-    time = 90000
+    time = 200000
   } else {
     time = timeout
   }

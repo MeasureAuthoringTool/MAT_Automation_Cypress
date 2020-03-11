@@ -7,7 +7,7 @@ export const title = '.contentWithHeadingHeader > h1'
 export const filterByMyLibrariesChkBox = '.searchWidgetCheckBox .customCheckBox'
 export const searchBtn = '#SearchWidgetButton_forCqlLibrary'
 export const searchInputBox = '#SearchFilterWidget_SearchInputHPanel_forCqlLibrary > tbody > tr > td > input'
-export const modelTypeListBox = '#modelType'
+export const modelTypeListBox = '#SearchFilterWidget_verticalPanel_forCqlLibrary #modelType'
 
 //Recent Activity Table
 export const row1RecentActivity = '#searchPanel_VerticalPanel [__gwt_row="0"]'

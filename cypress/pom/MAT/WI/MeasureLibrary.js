@@ -10,6 +10,7 @@ export const newMeasureButton = '#newMeasure_button'
 export const searchBtn = '#SearchWidgetButton_forMeasure'
 export const filterByMyMeasureChkBox = '.customCheckBox'
 export const searchInputBox = '#SearchFilterWidget_SearchInputHPanel_forMeasure > tbody > tr > td > input'
+export const modelTypeListBox = '#modelType'
 
 //Recent Activity Table
 export const row1RecentActivity = '#MostRecentActivityCellTable [__gwt_row="0"]'
@@ -25,6 +26,10 @@ export const row1MeasureSearchCheckbox = '#MeasureSearchCellTable [__gwt_row="0"
 export const row2MeasureSearchCheckbox = '#MeasureSearchCellTable [__gwt_row="1"] input'
 export const itemSelectedLabel = '.gwt-Label'
 export const clearSelectedBtn = ':nth-child(2) > [style="vertical-align: top;"] > :nth-child(1) > [href="javascript:;"]'
+export const row1MeasureSearchName = '#MeasureSearchCellTable [__gwt_row="0"] .pull-left'
+export const row2MeasureSearchName = '#MeasureSearchCellTable [__gwt_row="1"] .pull-left'
+export const row1Models = '#MeasureSearchCellTable [__gwt_row="0"] > :nth-child(4)'
+export const row2Models = '#MeasureSearchCellTable [__gwt_row="1"] > :nth-child(4)'
 
 
 
