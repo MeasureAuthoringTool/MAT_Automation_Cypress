@@ -19,7 +19,7 @@ describe('Filter', () => {
 
         name = '_' + Date.now()
 
-        fhirCqlLibrary = helper.createDraftCqlLibrary(name+'fhir','fhir')
+        fhirCqlLibrary = helper.createDraftCqlLibrary(name+'fhir','fhir');
         qdmCqlLibrary = helper.createDraftCqlLibrary(name+'QDM','QDM')
 
     })
