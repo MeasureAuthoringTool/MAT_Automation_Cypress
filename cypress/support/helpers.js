@@ -424,7 +424,7 @@ export const visibleWithTimeout = (element, timeout) => {
 export const notVisibleWithTimeout = (element, timeout) => {
   let time
   if (timeout === undefined) {
-    time = 200000
+    time = 400000
   } else {
     time = timeout
   }

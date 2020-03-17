@@ -10,6 +10,7 @@ let measureName = ''
 let draftMeasure = ''
 let versionMeasureNotOwner = ''
 let versionMeasure = ''
+let fhirMeasure = ''
 
 describe('Measure Library', () => {
     before('Login', () => {
@@ -146,6 +147,8 @@ describe('Measure Library Grid Button Bar', () => {
         //creating new versioned measure
         versionMeasure = helper.createMajorVersionMeasure()
 
+        fhirMeasure = helper.createDraftMeasure('fhirDraft','FHIR')
+
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -250,6 +253,39 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+
+        cy.wait(2000)
+
+        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measurelibrary.row1RecentActivity).click()
+
+        helper.enabled(measurelibrary.createVersionRecentActivityBtn)
+        helper.enabled(measurelibrary.historyRecentActivityBtn)
+        helper.enabled(measurelibrary.editRecentActivityBtn)
+        helper.enabled(measurelibrary.shareRecentActivityBtn)
+        helper.disabled(measurelibrary.cloneRecentActivityDisabledBtn)
+        helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
+        helper.disabled(measurelibrary.convertToFhirRecentActivityBtn)
+
+        cy.get(measurelibrary.row1RecentActivity).click()
+
     })
 
     it('Enabled/Disabled Measure Search Table Not The Owner', () => {
@@ -318,6 +354,24 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enabled(measurelibrary.convertToFhirMeasureSearchBtn)
 
         cy.get(measurelibrary.row1MeasureSearch).click()
+
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.wait(2000)
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
+        helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
+        helper.enabled(measurelibrary.historyMeasureSearchBtn)
+        helper.enabled(measurelibrary.editMeasureSearchBtn)
+        helper.enabled(measurelibrary.shareMeasureSearchBtn)
+        helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
+        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
 
     })
     it('Recent Activity Button bar Create Version', () => {
