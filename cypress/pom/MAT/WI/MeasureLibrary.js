@@ -6,6 +6,9 @@ export const cqlLibraryTab = '#CQL\\ Library'
 //new Measure
 export const newMeasureButton = '#newMeasure_button'
 
+// New Composite Measure
+export const newCompositeMeasureButton = '#newCompositeMeasure_button'
+
 //search
 export const searchBtn = '#SearchWidgetButton_forMeasure'
 export const filterByMyMeasureChkBox = '.customCheckBox'
