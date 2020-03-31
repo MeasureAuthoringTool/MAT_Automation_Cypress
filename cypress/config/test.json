@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://test-emeasuretool.hcqis.org/",
+  "baseUrl": "https://test-emeasuretool.hcqis.org/sbx/",
   "screenshotsFolder": "mochawesome-report/assets",
   "env": {
     "environment": "test",

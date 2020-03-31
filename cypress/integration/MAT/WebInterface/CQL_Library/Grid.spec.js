@@ -55,20 +55,23 @@ describe('CQL Library Grid Selection', () => {
 
         helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.wait(1000)
 
         helper.isChecked(cqlLibrary.row1RecentActivityCheckbox)
 
-        cy.get(cqlLibrary.row2RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row2RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row2RecentActivity).click()
 
         helper.isChecked(cqlLibrary.row2RecentActivityCheckbox)
         helper.isNotChecked(cqlLibrary.row1RecentActivityCheckbox)
 
         cy.wait(1000)
 
-        cy.get(cqlLibrary.row2RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row2RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row2RecentActivity).click()
 
         helper.isNotChecked(cqlLibrary.row2RecentActivityCheckbox)
         helper.isNotChecked(cqlLibrary.row1RecentActivityCheckbox)
@@ -141,7 +144,8 @@ describe('CQL Library Grid Button Bar', () => {
 
         helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         helper.disabled(cqlLibrary.createVersionDraftRecentActivityBtn)
         helper.enabled(cqlLibrary.historyRecentActivityBtn)
@@ -173,7 +177,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         helper.enabled(cqlLibrary.createVersionRecentActivityBtn)
         helper.enabled(cqlLibrary.historyRecentActivityBtn)
@@ -188,7 +193,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         helper.enabled(cqlLibrary.createDraftRecentActivityBtn)
         helper.enabled(cqlLibrary.historyRecentActivityBtn)
@@ -273,7 +279,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
 
@@ -308,7 +315,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
 
@@ -319,7 +327,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.createDraftRecentActivityBtn).click()
 
@@ -343,7 +352,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.historyRecentActivityBtn).click()
 
@@ -378,7 +388,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
 
@@ -389,7 +400,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.viewRecentActivityBtn).click()
 
@@ -427,7 +439,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.editRecentActivityEnabledBtn).click()
 
@@ -465,7 +478,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.shareRecentActivityBtn).click()
 
@@ -503,7 +517,8 @@ describe('CQL Library Grid Button Bar', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
         cy.get(cqlLibrary.deleteRecentActivityBtn).click()
 
@@ -511,7 +526,8 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.modalCloseBtn).click()
 
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
 
     })
 

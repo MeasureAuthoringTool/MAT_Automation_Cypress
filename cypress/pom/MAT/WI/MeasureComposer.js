@@ -32,7 +32,7 @@ export const cqlWorkspaceTitleIncludes = '#vPanel_VerticalPanelIncludeSection > 
 export const libraryAliasInputBox = '#aliasNameField_IncludeSection'
 export const searchInputBox = ':nth-child(2) > td > .input-group > .form-control'
 export const searchBtn = ':nth-child(2) > td > .input-group > .input-group-btn > .btn'
-export const availableLibrariesRow1checkbox = '.GB-MJYKBPC > .GB-MJYKBLD > div > table > tbody > tr > .emptySpaces > input'
+export const availableLibrariesRow1checkbox = '[__gwt_row="0"] > .GB-MJYKBLD > div > table > tbody > tr > .emptySpaces > input'
 export const saveIncludes = '#saveButton_includes'
 
 //Value Sets
