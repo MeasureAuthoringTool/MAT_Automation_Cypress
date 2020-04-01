@@ -12,7 +12,10 @@ describe('Creating New Composite Measure', () => {
         helper.preserveCookies()
     })
    
-
+    after('Log Out', () => {
+        helper.logout()
+    })
+    
     it('Verify that the FHIR model is not accessible for Composite Measure', () => {
 
         cy.get(measurelibrary.newCompositeMeasureButton).click();
@@ -25,10 +28,12 @@ describe('Creating New Composite Measure', () => {
 
         cy.get(measurelibrary.newCompositeMeasureButton).click();
 
-        cy.get(createnewcompositemeasure.measureName).type('Composite testing measure one', { delay: 50 })
+        let measureName = 'createCompositeMeasure' + Date.now()
+
+        cy.get(createnewcompositemeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createnewcompositemeasure.modelradioQDM).click();
-        cy.get(createnewcompositemeasure.cqlLibraryName).type('CompositeLibraryOne', { delay: 50 })
-        cy.get(createnewcompositemeasure.shortName).type('Comp1', { delay: 50 })
+        cy.get(createnewcompositemeasure.cqlLibraryName).type(measureName, { delay: 50 })
+        cy.get(createnewcompositemeasure.shortName).type(measureName, { delay: 50 })
         
         cy.get(createnewcompositemeasure.compositeScoringMethod).select('Patient-level linear');
         cy.get(createnewcompositemeasure.measureScoring).select('Continuous Variable');
@@ -66,10 +71,12 @@ describe('Creating New Composite Measure', () => {
 
     it('Validate the FHIR buttons are grayed out for Composite measure', () => {
 
-        cy.get(measurelibrary.searchInputBox).type('Composite testing measure one', { delay: 50 })
+        cy.get(createnewcompositemeasure.measureLibraryBtn).click();
+
+        cy.get(measurelibrary.searchInputBox).type('createCompositeMeasure', { delay: 50 })
         cy.get(measurelibrary.searchBtn).click();
 
-        cy.get(measurelibrary.row1MeasureSearchName).should('contain.text', 'Composite testing measure one');
+        cy.get(measurelibrary.row1MeasureSearchName).should('contain.text', 'createCompositeMeasure');
         cy.get(measurelibrary.row1MeasureSearchCheckbox).check({ force: true });
 
         cy.get(measurelibrary.runFhirValidationRecentActivityBtn).should('be.disabled');

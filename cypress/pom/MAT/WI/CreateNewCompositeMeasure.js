@@ -8,6 +8,7 @@ export const measureScoring = '#measScoringInput_ListBoxMVP'
 export const patientBasedMeasure = '#patientBasedMeasure_listbox'
 export const saveAndContinueBtn = '#SaveAndContinueButton_compositeMeasureDetail'
 export const cancelBtn = '#CancelButton_compositeMeasureDetail'
+export const measureLibraryBtn = '#Measure\\ Library'
 
 // Component Measures page
 export const searchInputBox = '#panel_measureFilterVP > tbody > tr > td [type="text"]'
