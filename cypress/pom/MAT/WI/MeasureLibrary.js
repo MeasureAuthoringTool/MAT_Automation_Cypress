@@ -25,6 +25,7 @@ export const row2RecentActivityCheckbox = '#MostRecentActivityCellTable [__gwt_r
 //Measure Search Table
 export const row1MeasureSearch = '#MeasureSearchCellTable [__gwt_row="0"]'
 export const row2MeasureSearch = '#MeasureSearchCellTable [__gwt_row="1"]'
+export const row3MeasureSearch = '#MeasureSearchCellTable [__gwt_row="2"]'
 export const row1MeasureSearchCheckbox = '#MeasureSearchCellTable [__gwt_row="0"] input'
 export const row2MeasureSearchCheckbox = '#MeasureSearchCellTable [__gwt_row="1"] input'
 export const itemSelectedLabel = '.gwt-Label'
@@ -33,7 +34,6 @@ export const row1MeasureSearchName = '#MeasureSearchCellTable [__gwt_row="0"] .p
 export const row2MeasureSearchName = '#MeasureSearchCellTable [__gwt_row="1"] .pull-left'
 export const row1Models = '#MeasureSearchCellTable [__gwt_row="0"] > :nth-child(4)'
 export const row2Models = '#MeasureSearchCellTable [__gwt_row="1"] > :nth-child(4)'
-
 
 
 //Recent Activity Button Bar
@@ -82,3 +82,18 @@ export const returnToMeasureLibraryLink = ':nth-child(6) > td > .gwt-Anchor'
 
 //Measure Sharing
 export const sharingCancelBtn = '#CancelButton_measureVersion'
+
+// WarningMessage after versioning
+export const successfulMessage = '#WarningMessage'
+
+// Draft Measure
+export const saveAndContinueButtonDraft = '#SaveAndContinueButton_measureDetail'
+
+// Draft Confirmation dialog
+export const confirmationContinue = '#yes_Button'
+
+// FHIR Converstion Warning dialog
+export const fhirConversionWarningMessage = '.modal-body'
+export const fhirConversionReturnBtn = '#Yes_ConfirmDialogBox'
+
+export const fhirConversionNoBtn = '#No_ConfirmDialogBox'
