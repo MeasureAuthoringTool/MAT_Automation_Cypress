@@ -4,7 +4,7 @@ import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 
 let measureName = ''
 
-describe('Measure Library: Validate Scenario 1 Conversion to FHIR', () => {
+describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
     before('Login', () => {
         helper.loginGeneric()
 
@@ -17,7 +17,7 @@ describe('Measure Library: Validate Scenario 1 Conversion to FHIR', () => {
         helper.logout()
     })
 
-    it('Reconverting QDM measure: Warning message', () => {
+    it('Scenario 3b: Reconverting QDM measure: Warning message', () => {
 
         helper.enterText(measureLibrary.searchInputBox, measureName)
         cy.get(measureLibrary.searchBtn).click();

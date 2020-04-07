@@ -4,7 +4,7 @@ import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 
 let measureName = ''
 
-describe('Measure Library: Validate Convert to FHIR', () => {
+describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
     before('Login', () => {
         helper.loginGeneric()
 
