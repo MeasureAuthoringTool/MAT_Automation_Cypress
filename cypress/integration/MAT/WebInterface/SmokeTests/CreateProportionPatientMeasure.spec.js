@@ -151,6 +151,7 @@ describe('Create Proportion Patient Measure', () => {
     //
     //     helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
     //     helper.visibleWithTimeout(measureComposer.warningMessage)
+    //     helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
     //
     //     cy.get(measurelibrary.measureLibraryTab).click()
     //     cy.get(measurelibrary.measureLibraryTab).click()
@@ -326,6 +327,8 @@ describe('Create Proportion Patient Measure', () => {
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
         helper.visibleWithTimeout(measureComposer.warningMessage)
+
+        helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
         cy.get(measurelibrary.measureLibraryTab).click()
