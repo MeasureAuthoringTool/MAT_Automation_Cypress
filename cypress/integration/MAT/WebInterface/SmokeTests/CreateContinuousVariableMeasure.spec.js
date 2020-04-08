@@ -18,7 +18,7 @@ describe('Create Continuous Variable Measure', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
 
-        let measureName = 'createContVariableMeasure' + Date.now()
+        let measureName = 'ContVariableMeasureCMS32v8' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioQDM).click()
@@ -57,17 +57,17 @@ describe('Create Continuous Variable Measure', () => {
 
         //Value Sets
 
-        helper.addValueSet('2.16.840.1.113883.17.4077.2.2079')
-        helper.addValueSet('2.16.840.1.113883.3.526.3.1520')
+        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
+        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.292')
+        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
+        helper.addValueSet('2.16.840.1.113762.1.4.1111.143')
         helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.299')
 
         //codes
 
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2018-09/Code/448951000124107/Info')
-        helper.addCode('CODE:/CodeSystem/LOINC/Version/2.66/Code/21112-8/Info')
-        helper.addCode('CODE:/CodeSystem/CPT/Version/2015/Code/99291/Info')
-        helper.addCode('CODE:/CodeSystem/DischargeDisposition/Version/HL7V2.5/Code/20/Info')
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2019-09/Code/371828006/Info')
+        helper.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
+        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
+        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
 
         //Parameter
 
@@ -84,35 +84,30 @@ describe('Create Continuous Variable Measure', () => {
 
         //Definition
 
-        helper.addDefinition('Emergency Department Visit During Measurement Period','( ["Encounter, Performed": "Emergency Department Visit"]\n' +
-            '\tunion ["Encounter, Performed": "Critical care, evaluation and management of the critically ill or critically injured patient; first 30-74 minutes"] ) EDVisit\n' +
-            '\twhere EDVisit.relevantPeriod during "Measurement Period"\n' +
-            '\t\tand EDVisit.dischargeDisposition is not null\n' +
-            '\t\tand EDVisit.lengthOfStay > 0 \'minutes\'')
+        helper.addDefinition('Emergency Department ED Visit','/*Emergency Department visit during the measurement period*/\n' +
+            '["Encounter, Performed": "Emergency Department Visit"] EDVisit\n' +
+            '  where EDVisit.relevantPeriod during "Measurement Period"')
 
-        helper.addDefinition('Initial Population','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
-            '  with ["Patient Characteristic Birthdate": "Birth date"] BirthDate\n' +
-            '    such that Global."CalendarAgeInYearsAt" ( BirthDate.birthDatetime, start of EDVisitMP.relevantPeriod ) >= 18')
+        helper.addDefinition('Initial Population','/*Emergency Department visit during the measurement period*/\n' +
+            '["Encounter, Performed": "Emergency Department Visit"] EDVisit\n' +
+            '  where EDVisit.relevantPeriod during "Measurement Period"')
 
-        helper.addDefinition('Measure Exclusions','"Patient Expired During Emergency Department Visit"\n' +
-            '\tunion "Patient Has Psychiatric or Mental Health Diagnosis"\n' +
-            '\tunion "Patient Transferred to Acute Care Hospital or Admitted to Observation"')
+        helper.addDefinition('Measure Population','/*Measure population does not include an ED visit where the date/times are null*/\n' +
+            '"Initial Population" EDVisit\n' +
+            '\twhere "Measure Observation"(EDVisit)is not null')
 
-        helper.addDefinition('Measure Population','"Initial Population"')
-
-        helper.addDefinition('Patient Expired During Emergency Department Visit','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
-            '  where ( EDVisitMP.dischargeDisposition ~ "Patient deceased during stay (discharge status = dead) (finding)"\n' +
-            '      or EDVisitMP.dischargeDisposition ~ "Expired (i.e. dead)"\n' +
+        helper.addDefinition('Measure Population Exclusions','/*ED visits where patient expired or the patient was admitted inpatient within an hour of the ED visit*/\n' +
+            '( "Emergency Department ED Visit" EDVisit\n' +
+            '    where EDVisit.dischargeDisposition ~ "Patient deceased during stay (discharge status = dead) (finding)"\n' +
+            ')\n' +
+            '  union ( "Emergency Department ED Visit" EDVisit\n' +
+            '      with ["Encounter, Performed": "Encounter Inpatient"] Encounter\n' +
+            '        such that EDVisit.relevantPeriod ends 1 hour or less before or on start of Encounter.relevantPeriod\n' +
             '  )')
 
-        helper.addDefinition('Patient Has Psychiatric or Mental Health Diagnosis','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
-            '\twith ["Diagnosis": "Psychiatric/Mental Health Diagnosis"] PsychDiagnosis\n' +
-            '\t\tsuch that PsychDiagnosis.prevalencePeriod overlaps after EDVisitMP.relevantPeriod')
-
-        helper.addDefinition('Patient Transferred to Acute Care Hospital or Admitted to Observation','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
-            '\twhere ( EDVisitMP.dischargeDisposition in "Acute Care or Inpatient Facility"\n' +
-            '\t\t\tor EDVisitMP.dischargeDisposition ~ "Admission to observation unit (procedure)"\n' +
-            '\t)')
+        helper.addDefinition('Stratification 2','/*Patients who are discharged to an acute care facility as detailed in the value set*/\n' +
+            '"Emergency Department ED Visit" EDVisit\n' +
+            '  where EDVisit.dischargeDisposition in "Discharge To Acute Care Facility"')
 
         //Function
 
@@ -127,20 +122,87 @@ describe('Create Continuous Variable Measure', () => {
         cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
         cy.get(measureComposer.addBtn).click()
-        cy.get(measureComposer.functionCQLExpressionEditorInput).type('Interval[start of Encounter.relevantPeriod, \n' +
-            'end of Encounter.relevantPeriod]', { delay: 50 })
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('/*Evaluates the interval from the first ED encounter time (arrival) to the last ED encounter time (departure)*/\n' +
+            'Interval[First(Encounter.facilityLocations Location\n' +
+            '    return start of Location.locationPeriod\n' +
+            '    sort ascending\n' +
+            '), Last(Encounter.facilityLocations Location\n' +
+            '    return \n' +
+            '    end of Location.locationPeriod\n' +
+            '    sort ascending\n' +
+            ')]', { delay: 50 })
         cy.get(measureComposer.functionSaveBtn).click()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
 
         cy.get(measureComposer.addNewBtn).click()
-        cy.get(measureComposer.functionNameInput).type('Duration of ED Visit', { delay: 50 })
+        cy.get(measureComposer.functionNameInput).type('Arrival Time', { delay: 50 })
         cy.get(measureComposer.addArgument).click()
         cy.get(measureComposer.argumentNameInput).type('Encounter', { delay: 50 })
         cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
         cy.get(measureComposer.addBtn).click()
-        cy.get(measureComposer.functionCQLExpressionEditorInput).type('duration in minutes of ( "Arrival and Departure Time"(Encounter))', { delay: 50 })
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('First(Encounter.facilityLocations Location\n' +
+            '    return start of Location.locationPeriod\n' +
+            '    sort ascending\n' +
+            ')', { delay: 50 })
+        cy.get(measureComposer.functionSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+
+        cy.get(measureComposer.addNewBtn).click()
+        cy.get(measureComposer.functionNameInput).type('Arrival to Observation Order or Departure Time', { delay: 50 })
+        cy.get(measureComposer.addArgument).click()
+        cy.get(measureComposer.argumentNameInput).type('Encounter', { delay: 50 })
+        cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
+        cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
+        cy.get(measureComposer.addBtn).click()
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('duration in minutes of Interval ["Arrival Time"(Encounter), Coalesce("Observation Services Order"(Encounter).authorDatetime, "Departure Time"(Encounter))]', { delay: 50 })
+        cy.get(measureComposer.functionSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+
+        cy.get(measureComposer.addNewBtn).click()
+        cy.get(measureComposer.functionNameInput).type('Departure Time', { delay: 50 })
+        cy.get(measureComposer.addArgument).click()
+        cy.get(measureComposer.argumentNameInput).type('Encounter', { delay: 50 })
+        cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
+        cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
+        cy.get(measureComposer.addBtn).click()
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('Last(Encounter.facilityLocations Location\n' +
+            '    return \n' +
+            '    end of Location.locationPeriod\n' +
+            '    sort ascending\n' +
+            ')', { delay: 50 })
+        cy.get(measureComposer.functionSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+
+        cy.get(measureComposer.addNewBtn).click()
+        cy.get(measureComposer.functionNameInput).type('Measure Observation', { delay: 50 })
+        cy.get(measureComposer.addArgument).click()
+        cy.get(measureComposer.argumentNameInput).type('Encounter', { delay: 50 })
+        cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
+        cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
+        cy.get(measureComposer.addBtn).click()
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('/*Time from ED visit arrival to observation order or ED departure for patients not admitted to inpatient*/\n' +
+            '"Arrival to Observation Order or Departure Time"(Encounter)', { delay: 50 })
+        cy.get(measureComposer.functionSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+
+        cy.get(measureComposer.addNewBtn).click()
+        cy.get(measureComposer.functionNameInput).type('Observation Services Order', { delay: 50 })
+        cy.get(measureComposer.addArgument).click()
+        cy.get(measureComposer.argumentNameInput).type('Encounter', { delay: 50 })
+        cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
+        cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
+        cy.get(measureComposer.addBtn).click()
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('/*Order to place patient in observation services*/\n' +
+            'Last(["Encounter, Order": "Observation Services"] ObservationOrder\n' +
+            '    where ObservationOrder.authorDatetime during Encounter.relevantPeriod\n' +
+            '    sort by authorDatetime\n' +
+            ')', { delay: 50 })
         cy.get(measureComposer.functionSaveBtn).click()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
