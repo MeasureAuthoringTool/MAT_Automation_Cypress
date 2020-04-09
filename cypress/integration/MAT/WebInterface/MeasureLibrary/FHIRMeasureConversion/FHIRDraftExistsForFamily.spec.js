@@ -40,8 +40,6 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
-        cy.get(measureLibrary.successfulMessage).should('contain.text', 'has been successfully create');
-
         // Create First Draft Measure 
         cy.get(measureLibrary.row1MeasureSearch).click();
         cy.get(measureLibrary.createDraftMeasureSearchBtn).click();
@@ -72,8 +70,6 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
-
-        cy.get(measureLibrary.successfulMessage).should('contain.text', 'has been successfully create');
 
         // Convert First measure to FHIR 
         cy.get(measureLibrary.row1MeasureSearch).click();
