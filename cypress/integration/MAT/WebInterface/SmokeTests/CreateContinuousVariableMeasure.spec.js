@@ -4,7 +4,8 @@ import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as matheader from "../../../../pom/MAT/WI/MATheader";
 
-describe('Create Continuous Variable Measure', () => {
+
+describe('QDM Continuous Variable Measure', () => {
     before('Login', () => {
         helper.loginGeneric()
     })
@@ -14,7 +15,7 @@ describe('Create Continuous Variable Measure', () => {
     after('Log Out', () => {
         helper.logout()
     })
-    it('Create Continuous Variable QDM', () => {
+    it('Continuous Variable QDM, creation, Population Workspace', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
 
@@ -212,11 +213,89 @@ describe('Create Continuous Variable Measure', () => {
         cy.get(measureComposer.cqlLibraryEditor).click()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
-        helper.visibleWithTimeout(measureComposer.warningMessage)
 
+        helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measureComposer.populationWorkspace).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.initialPopulation).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
+        cy.get(measureComposer.initialPopulationSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage,'Changes to Initial Populations have been successfully saved.')
+
+        cy.get(measureComposer.measurePopulations).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.measurePopulationsDefinitionListBox).select('Measure Population')
+        cy.get(measureComposer.measurePopulationsSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage,'Changes to Measure Populations have been successfully saved.')
+
+        cy.get(measureComposer.measurePopulationExclusions).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.measurePopulationExclusionsDefinitionListBox).select('Measure Population Exclusions')
+        cy.get(measureComposer.measurePopulationExclusionsSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage,'Changes to Measure Population Exclusions have been successfully saved.')
+
+        cy.get(measureComposer.stratification).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.stratificationDefinitionListBox).select('Stratification 2')
+        cy.get(measureComposer.stratificationSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage,'Changes to Stratification have been successfully saved.')
+
+        cy.get(measureComposer.measureObservations).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.measureObservationsAggregateFunctionListBox).select('Median')
+        cy.get(measureComposer.measureObservationsFunctionListBox).select('Measure Observation')
+        cy.get(measureComposer.measureObservationsSaveBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage,'Changes to Measure Observations have been successfully saved.')
+
+        //navigate to Measure Packager
+        cy.get(measureComposer.measurePackager).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
+        cy.get(measureComposer.populationsListItems).its('length').should('equal', 5)
+
+        cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
+        cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Measure Population 1')
+        cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Measure Population Exclusions 1')
+        cy.get(measureComposer.populationsListItems).eq(3).should('contain.text', 'Measure Observation 1')
+        cy.get(measureComposer.populationsListItems).eq(4).should('contain.text', 'Stratification 1')
+
         cy.get(measurelibrary.measureLibraryTab).click()
 
         helper.visibleWithTimeout(matheader.progressbar)
