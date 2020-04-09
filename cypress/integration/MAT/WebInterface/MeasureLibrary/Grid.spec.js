@@ -118,13 +118,6 @@ describe('Measure Library', () => {
         helper.notVisible(measurelibrary.clearSelectedBtn)
 
     })
-
-    it('Prevent issue from Afterall', () => {
-
-        //this is in place to prevent an issue with not being able to click in afterall section after a test fails
-
-    })
-
 })
 
 describe('Measure Library Grid Button Bar', () => {

@@ -1,5 +1,7 @@
 //tabs
 export const cqlWorkspace = '#CQL\\ Workspace'
+export const populationWorkspace = '#Population\\ Workspace'
+export const measurePackager = '#Measure\\ Packager'
 
 //CQL Workspace
 export const includes = '#includesLabel_Label'
@@ -83,3 +85,34 @@ export const closeBtn = '#No_addFxnArgsBox'
 
 //CQL Library Editor
 export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
+
+//Population Workspace
+export const initialPopulation = '#Initial\\ Populations_Anchor'
+export const measurePopulations = '#Measure\\ Populations_Anchor'
+export const measurePopulationExclusions = '#Measure\\ Population\\ Exclusions_Anchor'
+export const stratification = '#Stratification_Anchor'
+export const measureObservations = '#Measure\\ Observations_Anchor'
+
+//Population Workspace Initial Population
+export const initialPopulationDefinitionListBox = '#definitionList_Initial\\ Population\\ 1'
+export const initialPopulationSaveBtn = '#saveButton_Initial\\ Population'
+
+//Population Workspace Measure Populations
+export const measurePopulationsDefinitionListBox = '#definitionList_Measure\\ Population\\ 1'
+export const measurePopulationsSaveBtn = '#saveButton_Measure\\ Population'
+
+//Population Workspace Measure Population Exclusions
+export const measurePopulationExclusionsDefinitionListBox = '#definitionList_Measure\\ Population\\ Exclusions\\ 1'
+export const measurePopulationExclusionsSaveBtn = '#saveButton_Measure\\ Population\\ Exclusions'
+
+//Population Workspace Stratification
+export const stratificationDefinitionListBox = '#definitionList_1_Stratum\\ 1'
+export const stratificationSaveBtn = '#saveButton_Stratifications'
+
+//Population Workspace Measure Observations
+export const measureObservationsAggregateFunctionListBox = ':nth-child(2) > #definitionList_Measure\\ Observation\\ 1'
+export const measureObservationsFunctionListBox = ':nth-child(3) > #definitionList_Measure\\ Observation\\ 1'
+export const measureObservationsSaveBtn = '#saveButton_Measure\\ Observations'
+
+//Measure Packager
+export const populationsListItems = '#LeftPackagePanel .GB-MJYKBEB > Div > [__idx]'
