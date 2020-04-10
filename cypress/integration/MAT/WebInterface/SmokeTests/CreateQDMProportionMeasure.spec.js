@@ -3,6 +3,8 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as matheader from "../../../../pom/MAT/WI/MATheader";
+
+
 describe('QDM Proportion Measure', () => {
     before('Login', () => {
         helper.loginGeneric()
@@ -13,10 +15,10 @@ describe('QDM Proportion Measure', () => {
     after('Log Out', () => {
         helper.logout()
     })
-    it('Proportion QDM, creation', () => {
+    it('Proportion QDM, creation, Population Workspace, Measure Packager', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'createProportionMeasure' + Date.now()
+        let measureName = 'createQdmProportionMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioQDM).click()
@@ -114,13 +116,76 @@ describe('QDM Proportion Measure', () => {
         cy.get(measureComposer.cqlLibraryEditor).click()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
+       
         helper.visibleWithTimeout(measureComposer.warningMessage)
-
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
-        cy.get(measurelibrary.measureLibraryTab).click()
+        cy.wait(2000)
 
+        cy.get(measureComposer.populationWorkspace).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.initialPopulation).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
+        cy.get(measureComposer.initialPopulationSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage,'Changes to Initial Populations have been successfully saved.')
+
+        cy.get(measureComposer.denominator).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+        cy.get(measureComposer.denominatorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage,'Changes to Denominators have been successfully saved.')
+
+        cy.get(measureComposer.numerator).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+        cy.get(measureComposer.numeratorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage,'Changes to Numerators have been successfully saved.')
+
+        //navigate to Measure Packager
+        cy.get(measureComposer.measurePackager).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
+        cy.get(measureComposer.populationsListItems).its('length').should('equal', 3)
+
+        cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
+        cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Denominator 1')
+        cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Numerator 1')
+
+        //Package Grouping
+        cy.get(measureComposer.addAllItemsToGrouping).click()
+        cy.get(measureComposer.saveGrouping).click()
+
+        cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
+
+        //Create Measure Package
+        cy.get(measureComposer.createMeasurePackageBtn).click()
+
+        helper.waitToContainText(measureComposer.packageWarningMessage,'Measure packaged successfully. Please access the Measure Library to export the measure.')
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+        
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
