@@ -88,6 +88,8 @@ export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-ch
 
 //Population Workspace
 export const initialPopulation = '#Initial\\ Populations_Anchor'
+export const denominator = '#Denominators_Anchor'
+export const numerator = '#Numerators_Anchor'
 export const measurePopulations = '#Measure\\ Populations_Anchor'
 export const measurePopulationExclusions = '#Measure\\ Population\\ Exclusions_Anchor'
 export const stratification = '#Stratification_Anchor'
@@ -96,6 +98,14 @@ export const measureObservations = '#Measure\\ Observations_Anchor'
 //Population Workspace Initial Population
 export const initialPopulationDefinitionListBox = '#definitionList_Initial\\ Population\\ 1'
 export const initialPopulationSaveBtn = '#saveButton_Initial\\ Population'
+
+//Population Workspace Denominator
+export const denominatorDefinitionListBox = '#definitionList_Denominator\\ 1'
+export const denominatorSaveBtn = '#saveButton_Denominator'
+
+//Population Workspace Numerator
+export const numeratorDefinitionListBox = '#definitionList_Numerator\\ 1'
+export const numeratorSaveBtn = '#saveButton_Numerator'
 
 //Population Workspace Measure Populations
 export const measurePopulationsDefinitionListBox = '#definitionList_Measure\\ Population\\ 1'
@@ -116,3 +126,8 @@ export const measureObservationsSaveBtn = '#saveButton_Measure\\ Observations'
 
 //Measure Packager
 export const populationsListItems = '#LeftPackagePanel .GB-MJYKBEB > Div > [__idx]'
+export const addAllItemsToGrouping = '#AddAllClauseToRight'
+export const saveGrouping = '#Save_Grouping_button'
+export const measureGroupingTable = '#MeasureGroupingCellTable'
+export const createMeasurePackageBtn = '#Create_Measure_Package_button'
+export const packageWarningMessage = '#WarningMessage > .gwt-HTML'
