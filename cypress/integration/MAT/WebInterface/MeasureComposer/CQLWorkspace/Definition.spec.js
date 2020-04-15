@@ -166,4 +166,54 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
         helper.notVisibleWithTimeout(matheader.progressbar)
 
     })
+
+    
+    it('FHIR Measure: Validate the Attribute drop down is disabled', () => {
+
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.cqlWorkspace).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.definition).click()
+
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        cy.get(measureComposer.definitionNameInput).type('Id')
+
+        cy.get(measureComposer.definitionInsertBtn).click()
+
+        cy.get(measureComposer.itemTypeListBox).select('Attributes')
+
+        cy.get(measureComposer.attributesListBox).should('be.disabled')
+
+        cy.get(measureComposer.attributesDataTypeListBox).select('Communication')
+        cy.get(measureComposer.attributesListBox).should('be.enabled').select('id')
+
+        cy.get(measureComposer.insertDialogInsertBtn).click()
+
+        cy.get(measureComposer.definitionSaveBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureComposer.definitionLeftList).eq(0).should('have.text', 'Id')
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)     
+
+    })
 })

@@ -150,4 +150,48 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
 
     })
 
+
+    it('FHIR Measure: Validate the Attribute drop down is disabled', () => {
+
+        helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
+        cy.get(cqlLibrary.searchBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(cqlComposer.definition).click()
+
+        helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        cy.get(cqlComposer.definitionNameInput).type('Id')
+
+        cy.get(cqlComposer.definitionInsertBtn).click()
+
+        cy.get(cqlComposer.itemTypeListBox).select('Attributes')
+
+        cy.get(cqlComposer.attributesListBox).should('be.disabled')
+
+        cy.get(cqlComposer.attributesDataTypeListBox).select('Communication')
+        cy.get(cqlComposer.attributesListBox).should('be.enabled').select('id')
+
+        cy.get(cqlComposer.insertDialogInsertBtn).click()
+
+        cy.get(cqlComposer.definitionSaveBtn).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(cqlComposer.definitionLeftList).eq(0).should('have.text', 'Id')
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)     
+
+    })
 })
