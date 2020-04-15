@@ -47,7 +47,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         cy.get(cqlComposer.parameterListbox).contains('Measurement Period').dblclick()
 
         cy.get(cqlComposer.parameterEraseBtn).click()
-        cy.get(cqlComposer.parameterCQLExpressionEditorInput).type('Interval<DateTime>Test', { delay: 50 })
+        cy.get(cqlComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(cqlComposer.parameterSaveBtn).click()
 
         helper.visibleWithTimeout(matheader.progressbar)
@@ -57,7 +57,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
 
         //This error is specific to QDM and confirms we are getting errors from QDM source
         cy.get(cqlComposer.editorLeftPanel).click()
-        cy.get(cqlComposer.editorErrorToolTip).should('have.text','ERROR:Syntax error at Test' )
+        cy.get(cqlComposer.editorErrorToolTip).should('have.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader @70eb4846)' )
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -86,7 +86,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         cy.get(cqlComposer.parameterListbox).contains('Measurement Period').dblclick()
 
         cy.get(cqlComposer.parameterEraseBtn).click()
-        cy.get(cqlComposer.parameterCQLExpressionEditorInput).type('Interval<DateTime>Test', { delay: 50 })
+        cy.get(cqlComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(cqlComposer.parameterSaveBtn).click()
 
         helper.visibleWithTimeout(matheader.progressbar)
@@ -97,7 +97,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         //This error is specific to FHIR and confirms we are getting errors from FHIR source
         cy.get(cqlComposer.editorLeftPanel).click()
         cy.get(cqlComposer.editorErrorToolTip)
-            .should('have.text','ERROR:extraneous input \'Test\' expecting {<EOF>, \'public\', \'private\', \'parameter\', \'define\', \'context\'}' )
+            .should('have.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader @643b1d11)' )
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 

@@ -46,7 +46,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         cy.get('body').type('{enter}')
 
         cy.get(measureComposer.parameterEraseBtn).click()
-        cy.get(measureComposer.parameterCQLExpressionEditorInput).type('Interval<DateTime>Test', { delay: 50 })
+        cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(measureComposer.parameterSaveBtn).click()
 
         helper.visibleWithTimeout(matheader.progressbar)
@@ -56,7 +56,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
 
         //This error is specific to QDM and confirms we are getting errors from QDM source
         cy.get(measureComposer.editorLeftPanel).click()
-        cy.get(measureComposer.editorErrorToolTip).should('have.text','ERROR:Syntax error at Test' )
+        cy.get(measureComposer.editorErrorToolTip).should('have.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader @70eb4846)' )
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -90,7 +90,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         cy.get('body').type('{enter}')
 
         cy.get(measureComposer.parameterEraseBtn).click()
-        cy.get(measureComposer.parameterCQLExpressionEditorInput).type('Interval<DateTime>Test', { delay: 50 })
+        cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(measureComposer.parameterSaveBtn).click()
 
         helper.visibleWithTimeout(matheader.progressbar)
@@ -101,7 +101,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         //This error is specific to FHIR and confirms we are getting errors from FHIR source
         cy.get(measureComposer.editorLeftPanel).click()
         cy.get(measureComposer.editorErrorToolTip)
-            .should('have.text','ERROR:extraneous input \'Test\' expecting {<EOF>, \'public\', \'private\', \'parameter\', \'define\', \'context\'}' )
+            .should('have.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader @643b1d11)' )
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
