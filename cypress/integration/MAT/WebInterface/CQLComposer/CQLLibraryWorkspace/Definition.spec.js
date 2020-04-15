@@ -151,7 +151,7 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
     })
 
 
-    it('FHIR Measure: Validate the Attribute drop down is disabled', () => {
+    it('FHIR Library: Validate the Attribute drop down is disabled', () => {
 
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
