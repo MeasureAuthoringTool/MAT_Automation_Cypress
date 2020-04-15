@@ -45,6 +45,19 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
 
+        cy.get(measureLibrary.row1MeasureSearch).should('contain.text', 'FHIR / CQL')
+        cy.get(measureLibrary.row1MeasureSearch).dblclick()
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get('h1').should('contain.text', measureName + ' Draft v1.0.000 (FHIR / CQL)')
+
+        cy.get(measureLibrary.measureLibraryTab).click()
+        
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+        
     })
 
 })
