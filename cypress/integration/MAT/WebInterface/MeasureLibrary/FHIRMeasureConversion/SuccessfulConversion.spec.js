@@ -53,7 +53,7 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
 
         cy.get('h1').should('contain.text', measureName + ' Draft v1.0.000 (FHIR / CQL)')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measureLibrary.measureLibraryTab).click()
         
         helper.visibleWithTimeout(matheader.progressbar)
         helper.notVisibleWithTimeout(matheader.progressbar)
