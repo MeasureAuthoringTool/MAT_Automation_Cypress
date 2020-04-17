@@ -1,7 +1,6 @@
 export const userprofile = '#userprofile > .fa'
 export const signout = '.dropdown-menu > :nth-child(5) > a'
-export const progressbar = '.progress-bar'
-export const loadingPanel = '#LoadingPanel'
+export const spinner = '.spinner-loading'
 
 //UMLS
 export const UMLS = ':nth-child(1) > .loginSpacer > :nth-child(1) > .btn > span'
