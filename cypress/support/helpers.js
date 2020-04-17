@@ -87,8 +87,7 @@ export const login = (username, password) => {
 
   cy.visit('/MeasureAuthoringTool/Login.html')
 
-  visibleWithTimeout(matheader.progressbar)
-  notVisibleWithTimeout(matheader.progressbar)
+  notVisibleWithTimeout(matheader.spinner)
 
   cy.get(matlogin.username).type(username, { delay: 50 }).should('have.value', username)
   cy.get(matlogin.password).type(password, { delay: 50 })
@@ -98,8 +97,7 @@ export const login = (username, password) => {
 
   cy.get(matlogin.securityButtons).eq(0).click()
 
-  visibleWithTimeout(matheader.progressbar)
-  notVisibleWithTimeout(matheader.progressbar)
+  notVisibleWithTimeout(matheader.spinner)
 
   cy.log('Login Successful')
 
