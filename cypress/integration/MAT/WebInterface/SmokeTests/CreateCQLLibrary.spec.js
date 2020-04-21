@@ -34,8 +34,8 @@ describe('Create CQL Library', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
+
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation,'General Information')
 
@@ -155,8 +155,8 @@ describe('Create CQL Library', () => {
         cy.get(measurelibrary.measureLibraryTab).click()
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
+
 
     })
 })

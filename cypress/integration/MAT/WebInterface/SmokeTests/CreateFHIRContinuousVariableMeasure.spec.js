@@ -31,13 +31,13 @@ describe('FHIR Continuous Variable Measure', () => {
 
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
+
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
+
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
@@ -60,12 +60,12 @@ describe('FHIR Continuous Variable Measure', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
+
 
         cy.get(measurelibrary.measureLibraryTab).click()
         
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
+
     })
 })

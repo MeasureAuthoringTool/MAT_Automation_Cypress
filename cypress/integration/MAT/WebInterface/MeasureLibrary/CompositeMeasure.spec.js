@@ -42,22 +42,22 @@ describe('Creating New Composite Measure', () => {
         cy.get(createnewcompositemeasure.saveAndContinueBtn).click();
 
         // Component Measures
-        cy.get(createnewcompositemeasure.searchInputBox).type('anotherQDMmeasureforME01', { delay: 50 })
+        cy.get(createnewcompositemeasure.searchInputBox).type('createProportionMeasure1586529506892', { delay: 50 })
         cy.get(createnewcompositemeasure.searchButton).click();
 
-        cy.get(createnewcompositemeasure.row1ComponentMeasureSearchName).should('contain.text', 'anotherQDMmeasureforME01');
+        cy.get(createnewcompositemeasure.row1ComponentMeasureSearchName).should('contain.text', 'createProportionMeasure1586529506892');
         cy.get(createnewcompositemeasure.row1ComponentMeasureSelect).check({ force: true });
         
         cy.get(createnewcompositemeasure.searchInputBox).clear();
-        cy.get(createnewcompositemeasure.searchInputBox).type('CloneCVMeasure01', { delay: 50 })
+        cy.get(createnewcompositemeasure.searchInputBox).type('createProportionMeasure1586448273544', { delay: 50 })
         cy.get(createnewcompositemeasure.searchButton).click();
 
-        cy.get(createnewcompositemeasure.row1ComponentMeasureSearchName).should('contain.text', 'CloneCVMeasure01');
+        cy.get(createnewcompositemeasure.row1ComponentMeasureSearchName).should('contain.text', 'createProportionMeasure1586448273544');
         cy.get(createnewcompositemeasure.row1ComponentMeasureSelect).check({ force: true });
 
         // Applied Component Measures
-        cy.get(createnewcompositemeasure.row1AppliedComponentMeasureName).should('contain.text', 'anotherQDMmeasureforME01');
-        cy.get(createnewcompositemeasure.row2AppliedComponentMeasureName).should('contain.text', 'CloneCVMeasure01');
+        cy.get(createnewcompositemeasure.row1AppliedComponentMeasureName).should('contain.text', 'createProportionMeasure1586529506892');
+        cy.get(createnewcompositemeasure.row2AppliedComponentMeasureName).should('contain.text', 'createProportionMeasure1586448273544');
 
         cy.get(createnewcompositemeasure.row1AppliedComponentMeasureAlias).type('alias1');
         cy.get(createnewcompositemeasure.row2AppliedComponentMeasureAlias).type('alias2');

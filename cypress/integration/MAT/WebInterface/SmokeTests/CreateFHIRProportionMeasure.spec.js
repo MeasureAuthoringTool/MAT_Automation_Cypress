@@ -31,13 +31,13 @@ describe('FHIR Proportion Measure', () => {
 
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
+
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
+
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
@@ -50,22 +50,22 @@ describe('FHIR Proportion Measure', () => {
         cy.get(measureComposer.includesListItems).eq(0).should('contain.text', 'FHIRHelpers')
         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
-        
+
         //CQL Library Editor
 
         cy.get(measureComposer.cqlLibraryEditor).click()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
-       
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor, 'CQL Library Editor')
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'You are viewing CQL with no validation errors.')
+
+        helper.notVisibleWithTimeout(matheader.spinner)
+
 
         cy.get(measurelibrary.measureLibraryTab).click()
-        
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        helper.notVisibleWithTimeout(matheader.spinner)
+
     })
 })

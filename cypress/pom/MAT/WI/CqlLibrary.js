@@ -16,10 +16,10 @@ export const row1RecentActivityCheckbox = ':nth-child(3) > .GB-MJYKBPC > .GB-MJY
 export const row2RecentActivity = '#searchPanel_VerticalPanel [__gwt_row="1"]'
 export const row2RecentActivityCheckbox = ':nth-child(3) > .GB-MJYKBPD > .GB-MJYKBBD > div > input'
 
-
 //Library Search Table
 export const row1CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="0"]'
 export const row2CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="1"]'
+export const row3CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="2"]'
 export const row1CqlLibrarySearchCheckbox = '#CQLLibrarySearchCellTable [__gwt_row="0"] input'
 export const row2CqlLibrarySearchCheckbox = '#CQLLibrarySearchCellTable [__gwt_row="1"] input'
 export const row1CqlLibraryName = '#CQLLibrarySearchCellTable [__gwt_row="0"] #div2'
@@ -41,21 +41,27 @@ export const createDraftRecentActivityBtn = '#recentActivitySummary_gridToolbar 
 
 
 //All CQL Libraries Button Bar
-export const createVersionDraftCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create version or draft"]'
+export const createVersionDraftCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create version"]'
 export const historyCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to view history"]'
 export const viewCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Read-Only"]'
 export const editCqllibrariesEnabledBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to edit"]'
 export const shareCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to share"]'
 export const deleteCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to delete library"]'
-export const createVersionCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create version"]'
+export const createVersionCllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create version"]'
 export const createDraftCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create draft"]'
+export const convertToFhirLibraryBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to convert"]'
 
 //Draft Version
 export const majorVersionTypeRadio = '#cqlmajorRadio_RadioButton'
 export const minorVersionTypeRadio = '#cqlminorRadio_RadioButton'
-export const saveAndContinueBtn = '#SaveAndContinueButton_cqlVersion'
+export const saveAndContinueVersionBtn = '#SaveAndContinueButton_cqlVersion'
 export const cancelBtn = '#CancelButton_cqlVersion'
 export const draftCancelBtn = '#CancelButton_cqlDetail'
+
+export const saveAndContinueDraftBtn = '#SaveAndContinueButton_cqlDetail'
+
+// Draft Confirmation dialog
+export const confirmationContinue = '#yes_Button'
 
 //return to CQL Library
 export const returnToCqlLibrary = ':nth-child(6) > td > .gwt-Anchor'
@@ -66,3 +72,9 @@ export const shareCancelBtn = '#CancelButton_cqlShare'
 //modal dialog
 export const modal = '.modal-dialog'
 export const modalCloseBtn = '.close'
+
+// FHIR Converstion Warning dialog
+export const fhirConversionWarningMessage = '.modal-body'
+export const fhirConversionReturnBtn = '#Yes_ConfirmDialogBox'
+
+export const fhirConversionNoBtn = '#No_ConfirmDialogBox'

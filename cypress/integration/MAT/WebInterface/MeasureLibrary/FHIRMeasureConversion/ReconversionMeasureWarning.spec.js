@@ -27,7 +27,7 @@ describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
 
         cy.get(measureLibrary.row1MeasureSearch).click();
 
-        cy.get(measureLibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measureLibrary.createVersionMeasureSearchBtn).click();
         cy.get(measureLibrary.majorVersionTypeRadio).click();
         cy.get(measureLibrary.packageAndVersion).click();
 

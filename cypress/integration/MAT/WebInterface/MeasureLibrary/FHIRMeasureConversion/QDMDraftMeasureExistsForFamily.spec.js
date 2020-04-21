@@ -4,7 +4,7 @@ import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 
 let measureName = ''
 
-describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
+describe('Measure Library: Validate Scenario 1 Conversion to FHIR', () => {
     before('Login', () => {
         helper.loginGeneric()
 
@@ -17,7 +17,7 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
         helper.logout()
     })
 
-    it('Scenario 3a: Convert QDM measure to FHIR successfully', () => {
+    it('Scenario 1: QDM/CQL draft measure exists for that family', () => {
 
         helper.enterText(measureLibrary.searchInputBox, measureName)
         cy.get(measureLibrary.searchBtn).click();
@@ -27,7 +27,7 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
 
         cy.get(measureLibrary.row1MeasureSearch).click();
 
-        cy.get(measureLibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measureLibrary.createVersionMeasureSearchBtn).click();
         cy.get(measureLibrary.majorVersionTypeRadio).click();
         cy.get(measureLibrary.packageAndVersion).click();
 
@@ -40,24 +40,29 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
         helper.notVisibleWithTimeout(matheader.progressbar)
 
         cy.get(measureLibrary.row1MeasureSearch).click();
+        cy.get(measureLibrary.createDraftMeasureSearchBtn).click();
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get('h1').should('contain.text', 'My Measures > Draft Measure');
+
+        cy.get(measureLibrary.saveAndContinueButtonDraft).click();
+
+        cy.get(measureLibrary.confirmationContinue).click();
+
+        cy.get(measureLibrary.measureLibraryTab).click();
+
+        helper.visibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.progressbar)
+
+        cy.get(measureLibrary.row2MeasureSearch).click();
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        // FHIR Warning Dialog
+        cy.get(measureLibrary.fhirConversionWarningMessage).should('contain.text', 'Only one draft per measure family should be allowed.');
+        cy.get(measureLibrary.fhirConversionReturnBtn).click();
 
-        cy.get(measureLibrary.row1MeasureSearch).should('contain.text', 'FHIR / CQL')
-        cy.get(measureLibrary.row1MeasureSearch).dblclick()
-
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
-
-        cy.get('h1').should('contain.text', measureName + ' Draft v1.0.000 (FHIR / CQL)')
-
-        cy.get(measureLibrary.measureLibraryTab).click()
-        
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
-        
     })
 
 })

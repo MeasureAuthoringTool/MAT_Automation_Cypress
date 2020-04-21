@@ -17,45 +17,48 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         helper.logout()
     })
 
-    it('Scenario 2: FHIR/CQL draft exists for that family', () => {
+    it('Scenario 2: FHIR/CQL draft measure exists for that family', () => {
 
         // Versioning First measure
         helper.enterText(measureLibrary.searchInputBox, measureName)
         cy.get(measureLibrary.searchBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        cy.wait(1000)
+
+        helper.notVisibleWithTimeout(matheader.spinner)
 
         cy.get(measureLibrary.row1MeasureSearch).click();
 
-        cy.get(measureLibrary.createVersionDraftMeasureSearchBtn).click();
+        helper.notVisibleWithTimeout(matheader.spinner)
+
+        cy.get(measureLibrary.createVersionMeasureSearchBtn).click();
         cy.get(measureLibrary.majorVersionTypeRadio).click();
         cy.get(measureLibrary.packageAndVersion).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
 
         cy.get(measureLibrary.continueBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        cy.wait(1000)
+
+        helper.notVisibleWithTimeout(matheader.spinner)
 
         // Create First Draft Measure 
         cy.get(measureLibrary.row1MeasureSearch).click();
         cy.get(measureLibrary.createDraftMeasureSearchBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
 
         cy.get('h1').should('contain.text', 'My Measures > Draft Measure');
 
         cy.get(measureLibrary.saveAndContinueButtonDraft).click();
-
         cy.get(measureLibrary.confirmationContinue).click();
 
         cy.get(measureLibrary.measureLibraryTab).click();
 
-        cy.wait(2000)
+        cy.wait(1000)
+
+        helper.notVisibleWithTimeout(matheader.spinner)
 
         // Versioning draft measure
         cy.get(measureLibrary.row1MeasureSearch).click();
@@ -63,20 +66,21 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         cy.get(measureLibrary.majorVersionTypeRadio).click();
         cy.get(measureLibrary.packageAndVersion).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.notVisibleWithTimeout(matheader.spinner)
 
         cy.get(measureLibrary.continueBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        cy.wait(1000)
+
+        helper.notVisibleWithTimeout(matheader.spinner)
 
         // Convert First measure to FHIR 
         cy.get(measureLibrary.row1MeasureSearch).click();
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        cy.wait(4000)
+
+        helper.notVisibleWithTimeout(matheader.spinner)
 
         // Convert Second measure to FHIR
         cy.get(measureLibrary.row3MeasureSearch).click();
