@@ -1,6 +1,5 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 
 let fhirMeasure = ''
@@ -25,18 +24,15 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.parameter).click()
 
@@ -49,19 +45,17 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(measureComposer.parameterSaveBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
 
         //This error is specific to QDM and confirms we are getting errors from QDM source
         cy.get(measureComposer.editorLeftPanel).click()
-        cy.get(measureComposer.editorErrorToolTip).should('have.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader @70eb4846)' )
+        cy.get(measureComposer.editorErrorToolTip).should('contain.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader' )
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     it('FHIR: Verify errors are coming from correct source', () => {
@@ -69,18 +63,15 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.parameter).click()
 
@@ -93,20 +84,18 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(measureComposer.parameterSaveBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
 
         //This error is specific to FHIR and confirms we are getting errors from FHIR source
         cy.get(measureComposer.editorLeftPanel).click()
         cy.get(measureComposer.editorErrorToolTip)
-            .should('have.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader @643b1d11)' )
+            .should('contain.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader' )
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 

@@ -1,10 +1,8 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure";
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
-import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as measureDetails from "../../../../../pom/MAT/WI/MeasureDetails";
-import * as matlogin from "../../../../../pom/MAT/WI/login";
+
 
 let measureName = ''
 let today = new Date();
@@ -39,8 +37,7 @@ describe('Measure Composer: Measure Details: Save Data', () => {
         cy.get(createNewMeasure.saveAndContinueBtn).click()
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
 
         //Data Entry
@@ -53,14 +50,6 @@ describe('Measure Composer: Measure Details: Save Data', () => {
         helper.enterText(measureDetails.eCQMAbbreviatedTitleInput, newName)
         cy.get(measureDetails.measureScoringListbox).select('Proportion')
         cy.get(measureDetails.patientBasedMeasureListbox).select('No')
-
-        // cy.get(measureDetails.generateIdentifierBtn).click()
-        //
-        // let eCQMIdentifierTextBoxValue = cy.get(measureDetails.eCQMIdentifierTextBox).then(elem => {
-        //     let value = Cypress.$(elem).val()
-        //     return value.toString()
-        // })
-        // cy.log(eCQMIdentifierTextBoxValue)
 
         cy.get(measureDetails.endorsedByNQFListBox).select('Yes')
         helper.enterText(measureDetails.nQFIDInput, '123')
@@ -352,16 +341,14 @@ describe('Measure Composer: Measure Details: Save Data', () => {
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.logout()
         helper.loginGeneric()
 
         cy.get(measurelibrary.row1RecentActivity).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         //verification
 

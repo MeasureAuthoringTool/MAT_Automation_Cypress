@@ -1,7 +1,6 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 
 let fhircqlLibrary = ''
@@ -13,8 +12,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         qdmcqlLibrary = helper.createDraftCqlLibrary('qdmDraftMeasure','QDM')
         fhircqlLibrary = helper.createDraftCqlLibrary('fhirDraftMeasure','FHIR')
@@ -31,13 +29,11 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         helper.enterText(cqlLibrary.searchInputBox, qdmcqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.parameter).click()
 
@@ -50,19 +46,17 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         cy.get(cqlComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(cqlComposer.parameterSaveBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlComposer.warningMessage)
 
         //This error is specific to QDM and confirms we are getting errors from QDM source
         cy.get(cqlComposer.editorLeftPanel).click()
-        cy.get(cqlComposer.editorErrorToolTip).should('have.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader @70eb4846)' )
+        cy.get(cqlComposer.editorErrorToolTip).should('contain.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader' )
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     it('FHIR: Verify errors are coming from correct source', () => {
@@ -70,13 +64,11 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         helper.enterText(cqlLibrary.searchInputBox, fhircqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.parameter).click()
 
@@ -89,20 +81,18 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         cy.get(cqlComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(cqlComposer.parameterSaveBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlComposer.warningMessage)
 
         //This error is specific to FHIR and confirms we are getting errors from FHIR source
         cy.get(cqlComposer.editorLeftPanel).click()
         cy.get(cqlComposer.editorErrorToolTip)
-            .should('have.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader @643b1d11)' )
+            .should('contain.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader' )
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 

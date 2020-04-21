@@ -2,7 +2,6 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
-import * as matheader from "../../../../pom/MAT/WI/MATheader";
 
 
 describe('QDM Proportion Measure', () => {
@@ -31,13 +30,11 @@ describe('QDM Proportion Measure', () => {
 
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
@@ -124,13 +121,11 @@ describe('QDM Proportion Measure', () => {
 
         cy.get(measureComposer.populationWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.initialPopulation).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
         cy.get(measureComposer.initialPopulationSaveBtn).click()
@@ -140,8 +135,7 @@ describe('QDM Proportion Measure', () => {
 
         cy.get(measureComposer.denominator).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
         cy.get(measureComposer.denominatorSaveBtn).click()
@@ -151,8 +145,7 @@ describe('QDM Proportion Measure', () => {
 
         cy.get(measureComposer.numerator).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
         cy.get(measureComposer.numeratorSaveBtn).click()
@@ -163,8 +156,7 @@ describe('QDM Proportion Measure', () => {
         //navigate to Measure Packager
         cy.get(measureComposer.measurePackager).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
         cy.get(measureComposer.populationsListItems).its('length').should('equal', 3)
@@ -186,8 +178,7 @@ describe('QDM Proportion Measure', () => {
 
         cy.get(measurelibrary.measureLibraryTab).click()
         
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 })

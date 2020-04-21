@@ -1,6 +1,5 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as matheader from "../../../../pom/MAT/WI/MATheader";
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -28,8 +27,7 @@ describe('Filter', () => {
         helper.enterText(measurelibrary.searchInputBox,name)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearchName).eq(2).should('have.text', fhirMeasure)
         cy.get(measurelibrary.row2MeasureSearchName).eq(2).should('have.text', qdmMeasure)
@@ -40,8 +38,7 @@ describe('Filter', () => {
         cy.get(measurelibrary.modelTypeListBox).select('Model Type: FHIR / CQL Only')
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearchName).eq(2).should('have.text', fhirMeasure)
         cy.get(measurelibrary.row1Models).should('contain.text', 'FHIR / CQL')
@@ -50,8 +47,7 @@ describe('Filter', () => {
         cy.get(measurelibrary.modelTypeListBox).select('Model Type: QDM / CQL Only')
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearchName).eq(2).should('have.text', qdmMeasure)
         cy.get(measurelibrary.row1Models).should('contain.text', 'QDM / CQL')

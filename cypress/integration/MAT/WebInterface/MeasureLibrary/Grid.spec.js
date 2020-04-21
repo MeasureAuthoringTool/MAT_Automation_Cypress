@@ -1,6 +1,5 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as matheader from "../../../../pom/MAT/WI/MATheader";
 import * as createNewMeasure from "../../../../pom/MAT/WI/CreateNewMeasure";
 import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer";
 import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
@@ -20,8 +19,7 @@ describe('Measure Library', () => {
         cy.get(measurelibrary.filterByMyMeasureChkBox).click()
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -31,26 +29,26 @@ describe('Measure Library', () => {
     })
     it('Recent Activity: Row Selection', () => {
 
+        cy.wait(2000)
+
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+
         //populating recent activity grid
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row2MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -131,8 +129,7 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.filterByMyMeasureChkBox).click()
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         //creating new draft measure
         draftMeasure = helper.createDraftMeasure()
@@ -154,8 +151,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
@@ -163,13 +159,11 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
 
         cy.get(measurelibrary.row1RecentActivity).click()
@@ -198,8 +192,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
@@ -207,13 +200,11 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -231,8 +222,7 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.packageAndVersion).click()
         cy.get(measurelibrary.continueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -250,8 +240,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
@@ -259,13 +248,11 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -286,8 +273,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
@@ -310,8 +296,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, measureName)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.wait(2000)
 
@@ -331,8 +316,7 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.packageAndVersion).click()
         cy.get(measurelibrary.continueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.wait(2000)
 
@@ -351,8 +335,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.wait(2000)
 
@@ -385,13 +368,11 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(createNewMeasure.saveAndContinueBtn).click()
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -401,8 +382,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.cancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     it('Recent Activity Button bar Create Draft', () => {
@@ -422,13 +402,11 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(createNewMeasure.saveAndContinueBtn).click()
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -438,22 +416,19 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.packageAndVersion).click()
         cy.get(measurelibrary.continueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
         cy.get(measurelibrary.createDraftRecentActivityBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.title).contains("My Measures > Draft Measure")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     it('Recent Activity Button bar History', () => {
@@ -466,8 +441,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.returnToMeasureLibraryLink).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -477,8 +451,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.editRecentActivityBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureComposerTab).should(tab => {
             let value = tab.attr('class')
@@ -487,8 +460,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 
     it('Recent Activity Button bar View', () => {
@@ -508,13 +480,11 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(createNewMeasure.saveAndContinueBtn).click()
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -524,22 +494,19 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.packageAndVersion).click()
         cy.get(measurelibrary.continueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
         cy.get(measurelibrary.viewRecentActivityBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.disabled(measureComposer.measureNameInputBox)
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 
     it('Recent Activity Button bar Share', () => {
@@ -552,8 +519,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.sharingCancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 
     it('Recent Activity Button bar Clone', () => {
@@ -562,23 +528,20 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.cloneRecentActivityEnabledBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.title).contains("My Measures > Clone Measure")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
     it('Measure Search Button bar Create Version', () => {
 
         helper.enterText(measurelibrary.searchInputBox, draftMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
@@ -588,8 +551,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.cancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     it('Measure Search Button bar Create Draft', () => {
@@ -597,22 +559,19 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, versionMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         cy.get(measurelibrary.createDraftMeasureSearchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.title).contains("My Measures > Draft Measure")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     it('Measure Search Button bar History', () => {
@@ -620,8 +579,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, versionMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
@@ -631,8 +589,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.returnToMeasureLibraryLink).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -641,15 +598,13 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, draftMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         cy.get(measurelibrary.editMeasureSearchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureComposerTab).should(tab => {
             let value = tab.attr('class')
@@ -658,8 +613,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -668,22 +622,19 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, versionMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         cy.get(measurelibrary.viewMeasureSearchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.disabled(measureComposer.measureNameInputBox)
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -692,8 +643,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, draftMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
@@ -703,8 +653,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.sharingCancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     it('Measure Search Button bar Clone', () => {
@@ -712,22 +661,19 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enterText(measurelibrary.searchInputBox, draftMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         cy.get(measurelibrary.cloneMeasureSearchEnabledBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.title).contains("My Measures > Clone Measure")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 
 })

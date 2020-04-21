@@ -1,7 +1,6 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 
 let qdmCqlLibrary = ''
@@ -26,13 +25,11 @@ describe('CQL Composer: CQL Editor message', () => {
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.cqlLibraryEditor).click();
 
@@ -45,8 +42,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -55,13 +51,11 @@ describe('CQL Composer: CQL Editor message', () => {
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.cqlLibraryEditor).click();
 
@@ -72,8 +66,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -82,13 +75,11 @@ describe('CQL Composer: CQL Editor message', () => {
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.functionCQLComposer).click();
 
@@ -99,8 +90,7 @@ describe('CQL Composer: CQL Editor message', () => {
         cy.wait(2000);
 
         cy.get(cqlComposer.cqlLibraryEditor).click();
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
 
@@ -108,8 +98,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -118,13 +107,11 @@ describe('CQL Composer: CQL Editor message', () => {
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.functionCQLComposer).click();
 
@@ -135,8 +122,7 @@ describe('CQL Composer: CQL Editor message', () => {
         cy.wait(2000);
 
         cy.get(cqlComposer.cqlLibraryEditor).click();
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
 
@@ -144,8 +130,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 

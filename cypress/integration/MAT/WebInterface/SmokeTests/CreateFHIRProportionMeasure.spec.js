@@ -2,7 +2,6 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
-import * as matheader from "../../../../pom/MAT/WI/MATheader";
 
 
 describe('FHIR Proportion Measure', () => {
@@ -31,13 +30,11 @@ describe('FHIR Proportion Measure', () => {
 
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
@@ -50,12 +47,10 @@ describe('FHIR Proportion Measure', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
         
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 })

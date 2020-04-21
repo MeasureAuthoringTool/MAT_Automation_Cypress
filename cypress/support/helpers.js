@@ -87,7 +87,7 @@ export const login = (username, password) => {
 
   cy.visit('/MeasureAuthoringTool/Login.html')
 
-  notVisibleWithTimeout(matheader.spinner)
+  verifySpinnerAppearsAndDissappears()
 
   cy.get(matlogin.username).type(username, { delay: 50 }).should('have.value', username)
   cy.get(matlogin.password).type(password, { delay: 50 })
@@ -97,7 +97,7 @@ export const login = (username, password) => {
 
   cy.get(matlogin.securityButtons).eq(0).click()
 
-  notVisibleWithTimeout(matheader.spinner)
+  verifySpinnerAppearsAndDissappears()
 
   cy.log('Login Successful')
 
@@ -196,13 +196,11 @@ export const createDraftMeasure = (measure, model) => {
   cy.get(createNewMeasure.saveAndContinueBtn).click()
   cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-  visibleWithTimeout(matheader.progressbar)
-  notVisibleWithTimeout(matheader.progressbar)
+verifySpinnerAppearsAndDissappears()
 
   cy.get(measurelibrary.measureLibraryTab).click()
 
-  visibleWithTimeout(matheader.progressbar)
-  notVisibleWithTimeout(matheader.progressbar)
+verifySpinnerAppearsAndDissappears()
 
   return name
 }
@@ -223,8 +221,7 @@ export const createDraftCqlLibrary = (library, model) => {
 
     if (value.toString() === 'gwt-TabBarItem'){
       cy.get(measurelibrary.cqlLibraryTab).click()
-      visibleWithTimeout(matheader.progressbar)
-      notVisibleWithTimeout(matheader.progressbar)
+    verifySpinnerAppearsAndDissappears()
     }
 
   })
@@ -244,13 +241,11 @@ export const createDraftCqlLibrary = (library, model) => {
 
   cy.get(cqlComposer.confirmationContinueBtn).click()
 
-  visibleWithTimeout(matheader.progressbar)
-  notVisibleWithTimeout(matheader.progressbar)
+verifySpinnerAppearsAndDissappears()
 
   cy.get(measurelibrary.cqlLibraryTab).click()
 
-  visibleWithTimeout(matheader.progressbar)
-  notVisibleWithTimeout(matheader.progressbar)
+verifySpinnerAppearsAndDissappears()
 
   return name
 }
@@ -269,8 +264,7 @@ export const createMajorVersionMeasure = (measure) => {
   cy.get(measurelibrary.searchInputBox).type(name, { delay: 50 })
   cy.get(measurelibrary.searchBtn).click()
 
-  visibleWithTimeout(matheader.progressbar)
-  notVisibleWithTimeout(matheader.progressbar)
+verifySpinnerAppearsAndDissappears()
 
   visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
@@ -284,8 +278,7 @@ export const createMajorVersionMeasure = (measure) => {
   cy.get(measurelibrary.packageAndVersion).click()
   cy.get(measurelibrary.continueBtn).click()
 
-  visibleWithTimeout(matheader.progressbar)
-  notVisibleWithTimeout(matheader.progressbar)
+verifySpinnerAppearsAndDissappears()
 
   cy.get(measurelibrary.searchInputBox).clear()
 
@@ -779,24 +772,25 @@ export const getFileName = (fileType) => {
 export const checkColor = (element, r, g, b) => {
   cy.get(element).should('have.css', 'color').and('equal', `rgb(${r}, ${g}, ${b})`)
 }
-export const bitsSpinner = 'bits-spinner'
+
 export const spinnerVisible = () => {
-  visibleWithTimeout(bitsSpinner, 60000)
+  visibleWithTimeout(matheader.spinner, 60000)
 }
 export const spinnerNotVisible = () => {
-  notVisibleWithTimeout(bitsSpinner, 60000)
+  notVisibleWithTimeout(matheader.spinner, 60000)
 }
 export const spinnerExists = () => {
-  existsWithTimeout(bitsSpinner, 60000)
+  existsWithTimeout(matheader.spinner, 60000)
 }
 export const spinnerNotExists = () => {
-  notExistsWithTimeout(bitsSpinner, 60000)
+  notExistsWithTimeout(matheader.spinner, 60000)
 }
 export const verifySpinnerAppearsAndDissappears = () => {
-  spinnerExists()
-  spinnerVisible()
-  spinnerNotExists()
+  //spinnerExists()
+  //spinnerVisible()
+  //spinnerNotExists()
   spinnerNotVisible()
+  cy.wait(1000)
 }
 export const verifySpinnerExists = () => {
   spinnerExists()

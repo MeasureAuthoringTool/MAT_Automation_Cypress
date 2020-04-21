@@ -1,7 +1,6 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure";
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as measureDetails from "../../../../../pom/MAT/WI/MeasureDetails";
 
 let measureName = ''
@@ -33,8 +32,7 @@ describe('Measure Composer: Measure Details: References', () => {
         cy.get(createNewMeasure.saveAndContinueBtn).click()
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         //check reference type values
 
