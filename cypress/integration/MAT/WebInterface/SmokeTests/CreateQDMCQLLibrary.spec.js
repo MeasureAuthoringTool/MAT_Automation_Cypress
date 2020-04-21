@@ -1,8 +1,6 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
-import * as matheader from "../../../../pom/MAT/WI/MATheader";
 import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
 import * as createNewCqlLibrary from "../../../../pom/MAT/WI/CreateNewCQLLibrary";
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer";
@@ -34,8 +32,7 @@ describe('Create CQL Library', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation,'General Information')
 
@@ -155,8 +152,7 @@ describe('Create CQL Library', () => {
         cy.get(measurelibrary.measureLibraryTab).click()
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 })

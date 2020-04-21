@@ -32,11 +32,11 @@ describe('QDM Continuous Variable Measure', () => {
         cy.get(createNewMeasure.saveAndContinueBtn).click()
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation,'General Information')
 
@@ -217,11 +217,11 @@ describe('QDM Continuous Variable Measure', () => {
 
         cy.get(measureComposer.populationWorkspace).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.initialPopulation).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
         cy.get(measureComposer.initialPopulationSaveBtn).click()
@@ -231,7 +231,7 @@ describe('QDM Continuous Variable Measure', () => {
 
         cy.get(measureComposer.measurePopulations).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.measurePopulationsDefinitionListBox).select('Measure Population')
         cy.get(measureComposer.measurePopulationsSaveBtn).click()
@@ -241,7 +241,7 @@ describe('QDM Continuous Variable Measure', () => {
 
         cy.get(measureComposer.measurePopulationExclusions).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.measurePopulationExclusionsDefinitionListBox).select('Measure Population Exclusions')
         cy.get(measureComposer.measurePopulationExclusionsSaveBtn).click()
@@ -251,7 +251,7 @@ describe('QDM Continuous Variable Measure', () => {
 
         cy.get(measureComposer.stratification).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.stratificationDefinitionListBox).select('Stratification 2')
         cy.get(measureComposer.stratificationSaveBtn).click()
@@ -261,13 +261,13 @@ describe('QDM Continuous Variable Measure', () => {
 
         cy.get(measureComposer.measureObservations).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.measureObservationsAggregateFunctionListBox).select('Median')
         cy.get(measureComposer.measureObservationsFunctionListBox).select('Measure Observation')
         cy.get(measureComposer.measureObservationsSaveBtn).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'Changes to Measure Observations have been successfully saved.')
@@ -275,7 +275,7 @@ describe('QDM Continuous Variable Measure', () => {
         //navigate to Measure Packager
         cy.get(measureComposer.measurePackager).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
         //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
         cy.get(measureComposer.populationsListItems).its('length').should('equal', 5)
@@ -288,7 +288,7 @@ describe('QDM Continuous Variable Measure', () => {
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.notVisibleWithTimeout(matheader.spinner)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 })

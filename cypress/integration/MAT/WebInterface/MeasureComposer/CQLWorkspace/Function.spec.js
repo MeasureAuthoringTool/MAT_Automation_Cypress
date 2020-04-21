@@ -1,6 +1,5 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 
 let fhirMeasure = ''
@@ -25,18 +24,15 @@ describe('Measure Composer: CQL Workspace: Function', () => {
         helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.functionMeasureComposer).click()
 
@@ -54,8 +50,7 @@ describe('Measure Composer: CQL Workspace: Function', () => {
         cy.get(measurelibrary.measureLibraryTab).click()
         cy.get(measureComposer.yesBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 
     it('FHIR Add Argument: Select FHIR Datatype Object Data population', () => {
@@ -63,18 +58,15 @@ describe('Measure Composer: CQL Workspace: Function', () => {
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.functionMeasureComposer).click()
 
@@ -92,7 +84,6 @@ describe('Measure Composer: CQL Workspace: Function', () => {
         cy.get(measurelibrary.measureLibraryTab).click()
         cy.get(measureComposer.yesBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 })

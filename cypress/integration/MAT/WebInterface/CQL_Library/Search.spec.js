@@ -1,6 +1,5 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as matheader from "../../../../pom/MAT/WI/MATheader";
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 
 let fhirCqlLibrary = ''
@@ -14,8 +13,7 @@ describe('Filter', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         name = '_' + Date.now()
 
@@ -34,8 +32,7 @@ describe('Filter', () => {
         helper.enterText(cqlLibrary.searchInputBox,name)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibraryName).should('have.text', fhirCqlLibrary)
         cy.get(cqlLibrary.row2CqlLibraryName).should('have.text', qdmCqlLibrary)

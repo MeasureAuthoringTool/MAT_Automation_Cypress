@@ -1,6 +1,5 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 
@@ -13,8 +12,7 @@ describe('CQL Composer: CQL Library Workspace: Function', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         qdmLibrary = helper.createDraftCqlLibrary('qdmDraftLibrary','QDM')
         fhirLibrary = helper.createDraftCqlLibrary('fhirDraftLibrary','FHIR')
@@ -31,13 +29,11 @@ describe('CQL Composer: CQL Library Workspace: Function', () => {
         helper.enterText(cqlLibrary.searchInputBox, qdmLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.functionCQLComposer).click()
 
@@ -55,8 +51,7 @@ describe('CQL Composer: CQL Library Workspace: Function', () => {
         cy.get(measurelibrary.cqlLibraryTab).click()
         cy.get(cqlComposer.yesBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 
     it('FHIR Add Argument: Select FHIR Datatype Object Data population', () => {
@@ -64,13 +59,11 @@ describe('CQL Composer: CQL Library Workspace: Function', () => {
         helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.functionCQLComposer).click()
 
@@ -88,7 +81,6 @@ describe('CQL Composer: CQL Library Workspace: Function', () => {
         cy.get(measurelibrary.cqlLibraryTab).click()
         cy.get(cqlComposer.yesBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 })

@@ -1,6 +1,5 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as matheader from "../../../../pom/MAT/WI/MATheader";
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer"
@@ -14,15 +13,13 @@ describe('CQL Library Grid Selection', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         //populating search table
         cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -35,23 +32,19 @@ describe('CQL Library Grid Selection', () => {
         //populating recent activity grid
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row2CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
 
@@ -137,15 +130,13 @@ describe('CQL Library Grid Button Bar', () => {
         helper.loginGeneric()
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         //populating search table
         cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Session', () => {
         helper.preserveCookies()
@@ -159,18 +150,15 @@ describe('CQL Library Grid Button Bar', () => {
         helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryNotowner)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
 
@@ -209,13 +197,11 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -240,8 +226,7 @@ describe('CQL Library Grid Button Bar', () => {
         cy.get(cqlLibrary.majorVersionTypeRadio).click()
         cy.get(cqlLibrary.saveAndContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -290,20 +275,17 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.searchInputBox).clear()
         cy.get(cqlLibrary.searchInputBox).type(cqlLibraryName, { delay: 50 })
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
@@ -331,13 +313,11 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -358,8 +338,7 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.cancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
 
     })
@@ -377,13 +356,11 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -404,8 +381,7 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.saveAndContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -426,21 +402,18 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.draftCancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
 
     it('Recent Activity Button Bar History', () => {
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -461,8 +434,7 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.returnToCqlLibrary).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -480,13 +452,11 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -507,8 +477,7 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.saveAndContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -525,15 +494,13 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.viewRecentActivityBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.disabled(cqlComposer.saveBtn)
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -551,13 +518,11 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -574,15 +539,13 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.editRecentActivityEnabledBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabled(cqlComposer.saveBtn)
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -600,13 +563,11 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -623,15 +584,13 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.shareRecentActivityBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.title).contains("My CQL Libraries > CQL Library Sharing")
 
         cy.get(cqlLibrary.shareCancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -649,13 +608,11 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -705,20 +662,17 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.searchInputBox).clear()
         cy.get(cqlLibrary.searchInputBox).type(cqlLibraryName, { delay: 50 })
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
@@ -728,8 +682,7 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.cancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     it('CQL Libraries Button Bar Create Draft', () => {
@@ -746,20 +699,17 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.searchInputBox).clear()
         cy.get(cqlLibrary.searchInputBox).type(cqlLibraryName, { delay: 50 })
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
@@ -769,8 +719,7 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.saveAndContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
@@ -780,8 +729,7 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.draftCancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
     })
     it('CQL Libraries Button Bar History', () => {
 
@@ -793,8 +741,7 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.returnToCqlLibrary).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -804,15 +751,13 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlLibrary.viewCqllibrariesBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.disabled(cqlComposer.saveBtn)
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -830,35 +775,30 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.searchInputBox).clear()
         cy.get(cqlLibrary.searchInputBox).type(cqlLibraryName, { delay: 50 })
 
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
         cy.get(cqlLibrary.editCqllibrariesEnabledBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabled(cqlComposer.saveBtn)
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -876,35 +816,30 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.searchInputBox).clear()
         cy.get(cqlLibrary.searchInputBox).type(cqlLibraryName, { delay: 50 })
 
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
         cy.get(cqlLibrary.shareCqllibrariesBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.title).contains("My CQL Libraries > CQL Library Sharing")
 
         cy.get(cqlLibrary.shareCancelBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -922,21 +857,18 @@ describe('CQL Library Grid Button Bar', () => {
 
         cy.get(cqlComposer.confirmationContinueBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.searchInputBox).clear()
         cy.get(cqlLibrary.searchInputBox).type(cqlLibraryName, { delay: 50 })
 
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 

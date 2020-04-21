@@ -1,7 +1,6 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 
 let qdmCqlLibrary = ''
@@ -25,13 +24,11 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.definition).click()
 
@@ -47,8 +44,7 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -57,13 +53,11 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.definition).click()
 
@@ -79,8 +73,7 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -89,13 +82,11 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.definition).click()
 
@@ -112,8 +103,7 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -122,13 +112,11 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.definition).click()
 
@@ -138,15 +126,15 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         cy.get(cqlComposer.itemTypeListBox).select('Attributes')
 
         //verifying a unique datatype and attribute based on model type QDM, this ensures the correct data has been populated
-        cy.get(cqlComposer.attributesListBox).select('addresses').should('have.value', 'addresses')
         cy.get(cqlComposer.attributesDataTypeListBox).select('Condition').should('have.value', 'Condition')
+        cy.get(cqlComposer.attributesListBox).select('recorder').should('have.value', 'recorder')
+
 
         cy.get(cqlComposer.cancelBtn).click()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
