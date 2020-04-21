@@ -63,11 +63,14 @@ export const definitionCQLExpressionEditorInput = '#definition_CQLEditor'
 export const definitionSaveBtn = '#saveButton_definition'
 export const definitionEraseBtn = '#eraseButton_definition'
 export const definitionDeleteBtn = '#deleteButton_definition'
+export const definitionLeftList = '#defineListBox > option'
 
 //Definition Insert
 export const itemTypeListBox = '#availableItemToInsert_ListBox'
 export const attributesDataTypeListBox = '#DataTypeBtAtrr_listBox'
 export const attributesListBox = '#Atrr_listBox'
+export const insertDialogInsertBtn = '#addButton_Button'
+export const insertDialogCancelBtn = '#Cancel_button'
 
 //Function
 export const functionNameInput = '#FunctionNameField'

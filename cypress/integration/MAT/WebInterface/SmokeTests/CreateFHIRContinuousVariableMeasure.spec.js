@@ -38,6 +38,16 @@ describe('FHIR Continuous Variable Measure', () => {
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
+        //Includes
+
+        cy.get(measureComposer.includes).click()
+
+        cy.get(measureComposer.includesListItems).its('length').should('equal', 3)
+
+        cy.get(measureComposer.includesListItems).eq(0).should('contain.text', 'FHIRHelpers')
+        cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
+        cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
+
         //CQL Library Editor
 
         cy.get(measureComposer.cqlLibraryEditor).click()

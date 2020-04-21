@@ -36,6 +36,7 @@ export const searchInputBox = ':nth-child(2) > td > .input-group > .form-control
 export const searchBtn = ':nth-child(2) > td > .input-group > .input-group-btn > .btn'
 export const availableLibrariesRow1checkbox = '[__gwt_row="0"] > .GB-MJYKBLD > div > table > tbody > tr > .emptySpaces > input'
 export const saveIncludes = '#saveButton_includes'
+export const includesListItems = '#includesNameListBox_ListBox > option'
 
 //Value Sets
 export const OIDInput = '[style="padding: 10px; border: 1px solid rgb(232, 239, 247); margin-bottom: 10px;"] > :nth-child(1) > :nth-child(2) > td > .form-control'
@@ -62,11 +63,14 @@ export const definitionCQLExpressionEditorInput = '#definition_CQLEditor'
 export const definitionSaveBtn = '#saveButton_definition'
 export const definitionEraseBtn = '#eraseButton_definition'
 export const definitionDeleteBtn = '#deleteButton_definition'
+export const definitionLeftList = '#defineListBox > option'
 
 //Definition Insert
 export const itemTypeListBox = '#availableItemToInsert_ListBox'
 export const attributesDataTypeListBox = '#DataTypeBtAtrr_listBox'
 export const attributesListBox = '#Atrr_listBox'
+export const insertDialogInsertBtn = '#addButton_Button'
+export const insertDialogCancelBtn = '#Cancel_button'
 
 //Function
 export const functionNameInput = '#FunctionNameField'
