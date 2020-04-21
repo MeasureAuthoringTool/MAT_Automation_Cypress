@@ -19,8 +19,8 @@ export const row1ComponentMeasureSearchName = '#mainPanel_SimplePanel [__gwt_row
 export const row1ComponentMeasureSelect = '#mainPanel_SimplePanel [__gwt_row="0"] [type="checkbox"]'
 
 // Applied Component Measures
-export const row1AppliedComponentMeasureName = '#mainPanel_SimplePanel [title=" anotherQDMmeasureforME01"]'
-export const row2AppliedComponentMeasureName = '#mainPanel_SimplePanel [title=" CloneCVMeasure01"]'
+export const row1AppliedComponentMeasureName = '#mainPanel_SimplePanel [title=" createProportionMeasure1586529506892"]'
+export const row2AppliedComponentMeasureName = '#mainPanel_SimplePanel [title=" createProportionMeasure1586448273544"]'
 export const row1AppliedComponentMeasureAlias = '#mainPanel_SimplePanel [__gwt_row="0"] [title="Assign Alias Required"]'
 export const row2AppliedComponentMeasureAlias = '#mainPanel_SimplePanel [__gwt_row="1"] [title="Assign Alias Required"]'
 
@@ -31,5 +31,3 @@ export const cancelBtnComponent = "#CancelButton_componentMeasures"
 // Dialog
 export const confirmationContinueBtn = '#yes_Button'
 
-//anotherQDMmeasureforME01
-//CloneCVMeasure01
