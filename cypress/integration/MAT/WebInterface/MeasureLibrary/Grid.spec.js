@@ -19,7 +19,7 @@ describe('Measure Library', () => {
         cy.get(measurelibrary.filterByMyMeasureChkBox).click()
         cy.get(measurelibrary.searchBtn).click()
 
-helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -29,9 +29,8 @@ helper.verifySpinnerAppearsAndDissappears()
     })
     it('Recent Activity: Row Selection', () => {
 
-        cy.wait(2000)
-
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         //populating recent activity grid
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
