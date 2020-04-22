@@ -3,7 +3,7 @@ import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 
 let measureName = ''
 
-describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
+describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
     before('Login', () => {
         helper.loginGeneric()
 
@@ -16,7 +16,7 @@ describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
         helper.logout()
     })
 
-    it('Scenario 3b: Reconverting QDM measure: Warning message', () => {
+    it('Scenario 3a: Convert QDM measure to FHIR successfully', () => {
 
         helper.enterText(measureLibrary.searchInputBox, measureName)
         cy.get(measureLibrary.searchBtn).click();
@@ -39,14 +39,20 @@ describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+
+        cy.wait(3000)
+
+        cy.get(measureLibrary.row1MeasureSearch).should('contain.text', 'FHIR / CQL')
+        cy.get(measureLibrary.row1MeasureSearch).dblclick()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get('h1').should('contain.text', measureName + ' Draft v1.0.000 (FHIR / CQL)')
+
+        cy.get(measureLibrary.measureLibraryTab).click()
         
-        cy.get(measureLibrary.row2MeasureSearch).click();
-        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
-
-        // FHIR Warning Dialog
-        cy.get(measureLibrary.fhirConversionWarningMessage).should('contain.text', 'Are you sure you want to convert this measure again? The existing FHIR measure will be overwritten.');
-        cy.get(measureLibrary.fhirConversionNoBtn).click();
-
+        helper.verifySpinnerAppearsAndDissappears()
+        
     })
 
 })
