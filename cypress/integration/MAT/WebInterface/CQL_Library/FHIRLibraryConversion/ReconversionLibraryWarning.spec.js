@@ -42,7 +42,7 @@ describe('CQL Library: Validate Scenario 3b Conversion to FHIR', () => {
         cy.get(cqlLibrary.row2CqlLibrarySearch).click();
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
-        cy.get(cqlLibrary.fhirConversionWarningMessage).should('contain.text', 'Are you sure you want to convert this measure again? The existing FHIR measure will be overwritten.');
+        cy.get(cqlLibrary.fhirConversionWarningMessage).eq(1).should('contain.text', 'Are you sure you want to convert this Cql Library again? The existing FHIR Library will be overwritten.');
         cy.get(cqlLibrary.fhirConversionReturnBtn).click();
 
     })
