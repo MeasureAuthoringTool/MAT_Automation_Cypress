@@ -156,18 +156,15 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.definition).click()
 
@@ -188,15 +185,13 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
 
         cy.get(measureComposer.definitionSaveBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.definitionLeftList).eq(0).should('have.text', 'Id')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)     
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 })

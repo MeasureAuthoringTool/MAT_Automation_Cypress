@@ -144,13 +144,11 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.definition).click()
 
@@ -171,15 +169,13 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
 
         cy.get(cqlComposer.definitionSaveBtn).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.definitionLeftList).eq(0).should('have.text', 'Id')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.visibleWithTimeout(matheader.progressbar)
-        helper.notVisibleWithTimeout(matheader.progressbar)     
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 })

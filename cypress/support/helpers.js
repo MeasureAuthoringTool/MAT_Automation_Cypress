@@ -777,6 +777,14 @@ export const spinnerVisible = () => {
   visibleWithTimeout(matheader.spinner, 60000)
 }
 export const spinnerNotVisible = () => {
+
+  // waitToHaveText(matheader.spinnerShadow,'Loading Please Wait...')
+  // waitToHaveText(matheader.spinnerShadow,'...')
+
+  notVisibleWithTimeout(matheader.spinner, 60000)
+  notVisibleWithTimeout(matheader.spinnerWrapper, 60000)
+  notVisibleWithTimeout(matheader.spinnerShadow, 60000)
+  notVisibleWithTimeout(matheader.spinnerModal, 60000)
   notVisibleWithTimeout(matheader.spinner, 60000)
 }
 export const spinnerExists = () => {
@@ -784,13 +792,15 @@ export const spinnerExists = () => {
 }
 export const spinnerNotExists = () => {
   notExistsWithTimeout(matheader.spinner, 60000)
+  //notExistsWithTimeout(matheader.spinnerWrapper, 60000)
+  notExistsWithTimeout(matheader.spinnerShadow, 60000)
+  notExistsWithTimeout(matheader.spinnerModal, 60000)
 }
 export const verifySpinnerAppearsAndDissappears = () => {
-  //spinnerExists()
-  //spinnerVisible()
-  //spinnerNotExists()
+
   spinnerNotVisible()
-  cy.wait(1000)
+
+  cy.wait(1500)
 }
 export const verifySpinnerExists = () => {
   spinnerExists()
