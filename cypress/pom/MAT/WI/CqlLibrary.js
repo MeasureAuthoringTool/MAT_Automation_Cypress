@@ -20,6 +20,7 @@ export const row2RecentActivityCheckbox = ':nth-child(3) > .GB-MJYKBPD > .GB-MJY
 //Library Search Table
 export const row1CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="0"]'
 export const row2CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="1"]'
+export const row3CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="2"]'
 export const row1CqlLibrarySearchCheckbox = '#CQLLibrarySearchCellTable [__gwt_row="0"] input'
 export const row2CqlLibrarySearchCheckbox = '#CQLLibrarySearchCellTable [__gwt_row="1"] input'
 export const row1CqlLibraryName = '#CQLLibrarySearchCellTable [__gwt_row="0"] #div2'
@@ -49,13 +50,20 @@ export const shareCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [t
 export const deleteCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to delete library"]'
 export const createVersionCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create version"]'
 export const createDraftCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create draft"]'
+export const convertToFhirLibrarySearchBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to convert"]'
 
 //Draft Version
 export const majorVersionTypeRadio = '#cqlmajorRadio_RadioButton'
 export const minorVersionTypeRadio = '#cqlminorRadio_RadioButton'
-export const saveAndContinueBtn = '#SaveAndContinueButton_cqlVersion'
+export const versionSaveAndContinueBtn = '#SaveAndContinueButton_cqlVersion'
 export const cancelBtn = '#CancelButton_cqlVersion'
 export const draftCancelBtn = '#CancelButton_cqlDetail'
+
+//Draft CQL Library
+export const draftSaveAndContinueBtn = '#SaveAndContinueButton_cqlDetail'
+
+//Draft Confirmation
+export const confirmationContinue = '#yes_Button'
 
 //return to CQL Library
 export const returnToCqlLibrary = ':nth-child(6) > td > .gwt-Anchor'
@@ -66,3 +74,10 @@ export const shareCancelBtn = '#CancelButton_cqlShare'
 //modal dialog
 export const modal = '.modal-dialog'
 export const modalCloseBtn = '.close'
+
+
+// FHIR Converstion Warning dialog
+export const fhirConversionWarningMessage = '.modal-body'
+export const fhirConversionReturnBtn = '#Yes_ConfirmDialogBox'
+
+export const fhirConversionNoBtn = '#No_ConfirmDialogBox'

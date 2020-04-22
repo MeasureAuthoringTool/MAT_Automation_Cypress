@@ -70,6 +70,8 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        cy.wait(3000)
+
         // Convert Second measure to FHIR
         cy.get(measureLibrary.row3MeasureSearch).click();
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
