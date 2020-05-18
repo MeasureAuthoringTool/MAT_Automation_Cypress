@@ -1,8 +1,11 @@
 {
-  "baseUrl": "https://matdev.semanticbits.com",
+  "baseUrl": "https://dev-emeasuretool.hcqis.org/sbx",
   "screenshotsFolder": "mochawesome-report/assets",
   "env": {
     "environment": "dev",
-    "type": "base"
+    "type": "base",
+    "oktaUrl": "https://dev.idp.idm.cms.gov",
+    "redirectUri": "https://dev-emeasuretool.hcqis.org/sbx/MeasureAuthoringTool/Login.html"
   }
+
 }

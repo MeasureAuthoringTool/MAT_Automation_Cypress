@@ -11,6 +11,7 @@
         "cypress:open:sandbox": "cypress open --env configFile=sandbox",
         "cypress:open:test": "cypress open --env configFile=test",
         "cypress:open:dev": "cypress open --env configFile=dev",
+        "cypress:open:matdev": "cypress open --env configFile=matDev",
         "cypress:open:imp": "cypress open --env configFile=impl",
         "lint:cypress": "./node_modules/.bin/eslint ./cypress/integration/**/*spec.js",
         "lint:standard": "./node_modules/.bin/standard './cypress/integration/**/*spec.js' './cypress/support/**/*.js' --verbose | ./node_modules/.bin/snazzy",
@@ -47,7 +48,7 @@
     "devDependencies": {
         "@cypress/browserify-preprocessor": "^2.1.1",
         "axe-core": "^3.4.0",
-        "cypress": "^3.6.1",
+        "cypress": "^4.5.0",
         "cypress-axe": "^0.5.1",
         "data-driven": "^1.4.0",
         "eslint-plugin-chai-friendly": "^0.5.0",

@@ -1,5 +1,5 @@
 /// <reference types="../support" />
-import * as matlogin from '../pom/MAT/WI/login'
+import * as matlogin from '../pom/MAT/WI/LegacyLogin'
 import * as matheader from '../pom/MAT/WI/MATheader'
 import * as measurelibrary from "../pom/MAT/WI/MeasureLibrary";
 import * as createNewMeasure from "../pom/MAT/WI/CreateNewMeasure";
