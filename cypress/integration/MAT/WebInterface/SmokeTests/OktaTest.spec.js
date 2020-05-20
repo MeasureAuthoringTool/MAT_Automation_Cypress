@@ -4,17 +4,10 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 
-
 describe('OKTA Test', () => {
     before('Login', () => {
-
         //helper.loginGeneric()
-
-
         oktaLogin.Login()
-
-
-
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -23,9 +16,6 @@ describe('OKTA Test', () => {
         //helper.logout()
     })
     it('TEST', () => {
-
-        cy.pause()
-
-
+      cy.pause();
     })
 })
