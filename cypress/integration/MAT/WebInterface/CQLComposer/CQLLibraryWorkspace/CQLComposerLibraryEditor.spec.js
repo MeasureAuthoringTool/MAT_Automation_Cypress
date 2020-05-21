@@ -11,6 +11,7 @@ describe('CQL Composer: CQL Editor message', () => {
     before('Login', () => {
         oktaLogin.login()
 
+
         qdmCqlLibrary = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
         fhirCqlLibrary = helper.createDraftCqlLibrary('fhirCqlLibrary', 'FHIR')
     })

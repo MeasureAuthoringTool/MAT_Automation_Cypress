@@ -49,14 +49,35 @@ describe('FHIR Continuous Variable Measure', () => {
         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
 
+        //Value Sets
+
+        cy.get(measureComposer.valueSets).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
+        helper.addValueSet('2.16.840.1.113762.1.4.1182.118')
+        helper.addValueSet('2.16.840.1.113762.1.4.1111.161')
+        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
+        helper.addValueSet('2.16.840.1.114222.4.11.837')
+        helper.addValueSet('2.16.840.1.113883.3.3157.1004.20')
+        helper.addValueSet('2.16.840.1.113762.1.4.1')
+        helper.addValueSet('2.16.840.1.113762.1.4.1111.162')
+        helper.addValueSet('2.16.840.1.114222.4.11.3591')
+        helper.addValueSet('2.16.840.1.114222.4.11.836')
+        helper.addValueSet('2.16.840.1.113762.1.4.1125.2')        
+
         //CQL Library Editor
 
-        cy.get(measureComposer.cqlLibraryEditor).click()
+        cy.get(measureComposer.cqlLibraryEditor).click();
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
        
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
+
+        cy.get(measureComposer.cqlLibraryEditorInput).should('contain.text', 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307');
+        cy.get(measureComposer.cqlLibraryEditorInput).should('contain.text', 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1182.118');
 
         helper.verifySpinnerAppearsAndDissappears()
 
