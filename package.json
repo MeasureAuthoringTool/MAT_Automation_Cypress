@@ -25,7 +25,6 @@
         "lint:tslint": "tslint -c tslint.json './cypress/integration/**/*spec.ts' 'utils/**/*.ts'",
         "all:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/**/*.spec.js' --browser chrome;",
         "matdev:all:ui:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=matDev --spec 'cypress/integration/MAT/WebInterface/**/*.spec.js' --browser chrome;",
-        "matdev:cqlgrid": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=matDev --spec 'cypress/integration/MAT/WebInterface/CQL_Library/Grid.spec.js' --browser chrome;",
         "dev:all:ui:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/**/*.spec.js' --browser chrome;",
         "all:service:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/Services/**/*.spec.js' --browser chrome;",
         "combine:reports": "npx mochawesome-merge 'cypress/results/*.json' > mochawesome.json",
