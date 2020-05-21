@@ -1,12 +1,13 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
+import * as oktaLogin from "../../../../../support/oktaLogin";
 
 let fhirMeasure = ''
 
 describe('CQL Editor: Validate the Valueset Format', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
 

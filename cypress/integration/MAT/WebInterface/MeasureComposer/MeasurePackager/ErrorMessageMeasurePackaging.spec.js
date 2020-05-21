@@ -1,13 +1,14 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
+import * as oktaLogin from "../../../../../support/oktaLogin";
 
 let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Packager: Validate before packaging a FHIR measure', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure', 'QDM')
         fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
