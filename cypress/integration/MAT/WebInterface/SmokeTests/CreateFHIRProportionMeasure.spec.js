@@ -2,11 +2,12 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
+import * as oktaLogin from '../../../../support/oktaLogin'
 
 
 describe('FHIR Proportion Measure', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()

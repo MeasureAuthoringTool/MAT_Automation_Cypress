@@ -3,6 +3,7 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from "../../../../pom/MAT/WI/CreateNewMeasure";
 import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer";
 import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
+import * as oktaLogin from '../../../../support/oktaLogin'
 
 
 let measureName = ''
@@ -13,7 +14,7 @@ let fhirMeasure = ''
 
 describe('Measure Library', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         //populating search table
         cy.get(measurelibrary.filterByMyMeasureChkBox).click()
@@ -122,7 +123,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         versionMeasureNotOwner = helper.loginCreateVersionedMeasureNotOwnerLogout()
 
-        helper.loginGeneric()
+        oktaLogin.login()
 
         //populating search table
         cy.get(measurelibrary.filterByMyMeasureChkBox).click()

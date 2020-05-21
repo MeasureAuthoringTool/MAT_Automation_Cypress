@@ -1,11 +1,12 @@
 import * as helper from '../../../../../support/helpers';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
+import * as oktaLogin from '../../../../../support/oktaLogin';
 
 let measureName = ''
 
 describe('Measure Library: Validate Scenario 1 Conversion to FHIR', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         measureName = helper.createDraftMeasure('qdmCqlMeasure', 'QDM')
     })

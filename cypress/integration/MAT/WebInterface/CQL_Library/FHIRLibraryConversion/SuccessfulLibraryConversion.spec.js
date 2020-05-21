@@ -1,5 +1,5 @@
 import * as helper from '../../../../../support/helpers';
-import * as matheader from "../../../../../pom/MAT/WI/MATheader";
+import * as oktaLogin from '../../../../../support/oktaLogin';
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 
@@ -7,7 +7,7 @@ let libraryName = ''
 
 describe('CQL Library: Validate Scenario 3a Successfull Conversion to FHIR', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         libraryName = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
     })

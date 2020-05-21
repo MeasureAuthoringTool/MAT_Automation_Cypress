@@ -1,13 +1,14 @@
 import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
+import * as oktaLogin from "../../../../../support/oktaLogin";
 
 let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Composer: CQL Workspace: Function', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure','QDM')
         fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure','FHIR')

@@ -1,22 +1,16 @@
 /// <reference types="../support" />
-import * as matlogin from '../pom/MAT/WI/login'
 import * as matheader from '../pom/MAT/WI/MATheader'
-import * as measurelibrary from "../pom/MAT/WI/MeasureLibrary";
-import * as createNewMeasure from "../pom/MAT/WI/CreateNewMeasure";
-import * as measureComposer from "../pom/MAT/WI/MeasureComposer";
-import * as cqlLibrary from "../pom/MAT/WI/CqlLibrary";
-import * as createNewCqlLibrary from "../pom/MAT/WI/CreateNewCQLLibrary";
-import * as cqlComposer from "../pom/MAT/WI/CQLComposer";
+import * as measurelibrary from "../pom/MAT/WI/MeasureLibrary"
+import * as createNewMeasure from "../pom/MAT/WI/CreateNewMeasure"
+import * as measureComposer from "../pom/MAT/WI/MeasureComposer"
+import * as cqlLibrary from "../pom/MAT/WI/CqlLibrary"
+import * as createNewCqlLibrary from "../pom/MAT/WI/CreateNewCQLLibrary"
+import * as cqlComposer from "../pom/MAT/WI/CQLComposer"
+import * as oktaLogin from "./oktaLogin"
 const os = Cypress.platform // values are aix, darwin, freebsd, linux, openbsd, sunos, win32, android
-const env = Cypress.env('environment')
 
-var un = Cypress.env('MAT_DEV_USERNAME')
-var pw = Cypress.env('MAT_DEV_PASSWORD')
-var altUser = Cypress.env('MAT_DEV_ALT_USERNAME')
-var UMLS_userName = Cypress.env('MAT_UMLS_USERNAME')
-var UMLS_password = Cypress.env('MAT_UMLS_PASSWORD')
-var authcode = '123'
-
+let UMLS_userName = Cypress.env('MAT_UMLS_USERNAME')
+let UMLS_password = Cypress.env('MAT_UMLS_PASSWORD')
 
 let draftMeasure = 'DraftMeasure'
 
@@ -52,60 +46,11 @@ export const copyScreenshots = () => {
     cy.exec(`xcopy .\\cypress\\screenshots .\\screenshots\\current\\${env} /E /I /S`, { timeout: 60000 }).its('code').should('eq', 0)
   }
 }
-// login
-// login Generic function
-export const loginGeneric = () => {
-  cy.log(env)
-  switch (env) {
-    case 'dev':
-      login(un,pw)
-      loginUMLS()
-      break
-    case 'test':
-      login(un,pw)
-      loginUMLS()
-      break
-    case 'sandbox':
-      login(un,pw)
-      loginUMLS()
-      break
-    default:
-      login()
-      break
-  }
-}
-// login
-export const login = (username, password) => {
 
-  cy.clearCookies()
-
-  cy.clearLocalStorage()
-
-  cy.window().then((win) => {
-    win.sessionStorage.clear()
-  })
-
-  cy.visit('/MeasureAuthoringTool/Login.html')
-
-  verifySpinnerAppearsAndDissappears()
-
-  cy.get(matlogin.username).type(username, { delay: 50 }).should('have.value', username)
-  cy.get(matlogin.password).type(password, { delay: 50 })
-  cy.get(matlogin.authcode).type(authcode, { delay: 50 })
-
-  cy.get(matlogin.signInButton).click()
-
-  cy.get(matlogin.securityButtons).eq(0).click()
-
-  verifySpinnerAppearsAndDissappears()
-
-  cy.log('Login Successful')
-
-}
 
 export const loginCreateVersionedMeasureNotOwnerLogout = () => {
 
-  login(altUser,pw)
+  oktaLogin.login('alternative')
 
   let name = createMajorVersionMeasure()
 
@@ -117,7 +62,7 @@ export const loginCreateVersionedMeasureNotOwnerLogout = () => {
 
 export const loginCreateDraftCqlLibraryNotOwnerLogout = () => {
 
-  login(altUser,pw)
+  oktaLogin.login('alternative')
 
   let name = createDraftCqlLibrary()
 
@@ -131,8 +76,14 @@ export const loginCreateDraftCqlLibraryNotOwnerLogout = () => {
 export const loginUMLS = () => {
 
   cy.get(matheader.UMLS).click()
-  cy.get(matheader.UMLSUserName).type(UMLS_userName, { delay: 50 })
-  cy.get(matheader.UMLSPassword).type(UMLS_password, { delay: 50 })
+
+  visibleWithTimeout(matheader.UMLSUserName)
+  visibleWithTimeout(matheader.UMLSPassword)
+
+  cy.wait(1500)
+
+  enterText(matheader.UMLSUserName, UMLS_userName)
+  enterText(matheader.UMLSPassword, UMLS_password)
 
   cy.get(matheader.UMLS_signIn).click()
 
@@ -149,9 +100,6 @@ export const logout = () => {
   visibleWithTimeout(matheader.signout)
 
   cy.get(matheader.signout).click()
-
-  visibleWithTimeout(matlogin.username)
-  visibleWithTimeout(matlogin.password)
 
   cy.clearCookies()
 
