@@ -1,4 +1,5 @@
 import * as helper from "../../../../../support/helpers";
+import * as oktaLogin from "../../../../../support/oktaLogin";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
@@ -8,7 +9,7 @@ let fhirCqlLibrary = ''
 
 describe('CQL Composer: CQL Editor message', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         qdmCqlLibrary = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
         fhirCqlLibrary = helper.createDraftCqlLibrary('fhirCqlLibrary', 'FHIR')

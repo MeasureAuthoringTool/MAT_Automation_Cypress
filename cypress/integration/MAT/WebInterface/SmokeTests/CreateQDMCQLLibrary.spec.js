@@ -4,10 +4,11 @@ import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
 import * as createNewCqlLibrary from "../../../../pom/MAT/WI/CreateNewCQLLibrary";
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer";
+import * as oktaLogin from '../../../../support/oktaLogin'
 
 describe('Create CQL Library', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
     })

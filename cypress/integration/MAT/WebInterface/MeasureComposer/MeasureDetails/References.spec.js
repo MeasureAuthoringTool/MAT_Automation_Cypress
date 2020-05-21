@@ -2,12 +2,13 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure";
 import * as measureDetails from "../../../../../pom/MAT/WI/MeasureDetails";
+import * as oktaLogin from "../../../../../support/oktaLogin";
 
 let measureName = ''
 
 describe('Measure Composer: Measure Details: References', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()

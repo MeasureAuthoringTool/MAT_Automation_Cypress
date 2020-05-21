@@ -1,6 +1,7 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
+import * as oktaLogin from '../../../../support/oktaLogin'
 
 let fhirCqlLibrary = ''
 let qdmCqlLibrary = ''
@@ -9,7 +10,7 @@ let name = ''
 describe('Filter', () => {
     before('Login', () => {
 
-        helper.loginGeneric()
+        oktaLogin.login()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 

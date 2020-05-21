@@ -1,3 +1,5 @@
+import * as helper from './helpers'
+
 const oktaUrl = Cypress.env('oktaUrl')
 const redirectUri = Cypress.env('redirectUri')
 
@@ -5,38 +7,95 @@ let clientId = ''
 let username = ''
 let password = ''
 let name = ''
-let email = '';
+let email = ''
+let alt_username = ''
+let alt_name = ''
+let alt_email = ''
 
 if (Cypress.env('environment') === 'dev') {
+
+  alt_username = Cypress.env('DEV_USERNAME')
   username = Cypress.env('DEV_USERNAME')
   password = Cypress.env('DEV_PASSWORD')
   clientId = Cypress.env('DEV_CLIENTID')
   name = Cypress.env('DEV_NAME')
   email = Cypress.env('DEV_EMAIL')
+  alt_name = Cypress.env('DEV_NAME')
+  alt_email = Cypress.env('DEV_EMAIL')
+
 } else if (Cypress.env('environment') === 'matdev') {
+
+  alt_username = Cypress.env('MAT_DEV_USERNAME')
   username = Cypress.env('MAT_DEV_USERNAME')
   password = Cypress.env('MAT_DEV_PASSWORD')
   clientId = Cypress.env('MAT_DEV_CLIENTID')
   name = Cypress.env('MAT_DEV_NAME')
   email = Cypress.env('MAT_DEV_EMAIL')
+  alt_name = Cypress.env('MAT_DEV_NAME')
+  alt_email = Cypress.env('MAT_DEV_EMAIL')
+
 }
 
-// creating the authn request
-const request = {
-  method: 'POST',
-  url: oktaUrl + '/api/v1/authn',
-  body: {
-    username: username,
-    password: password,
-    options: {
-      warnBeforePasswordExpired: 'true',
-      multiOptionalFactorEnroll: 'false'
-    }
-  },
-  failOnStatusCode: false
+
+export const login = (user) => {
+
+  if (user === undefined) {
+    cy.clearCookies()
+
+    cy.clearLocalStorage()
+
+    cy.window().then((win) => {
+      win.sessionStorage.clear()
+    })
+    oktaLogin()
+    helper.loginUMLS()
+  }
+  else if (user === 'alternative'){
+    cy.clearCookies()
+
+    cy.clearLocalStorage()
+
+    cy.window().then((win) => {
+      win.sessionStorage.clear()
+    })
+    oktaLogin(alt_username, password, alt_name, alt_email)
+    helper.loginUMLS()
+  }
+
 }
 
-export const login = () => {
+
+export const oktaLogin = (un, pw, storage_name, storage_email) => {
+
+  if (un === undefined) {
+    un = username
+  }
+  if (pw === undefined) {
+    pw = password
+  }
+  if (storage_name === undefined) {
+    storage_name = name
+  }
+  if (storage_email === undefined) {
+    storage_email = email
+  }
+
+
+  // creating the authn request
+  const request = {
+    method: 'POST',
+    url: oktaUrl + '/api/v1/authn',
+    body: {
+      username: un,
+      password: pw,
+      options: {
+        warnBeforePasswordExpired: 'true',
+        multiOptionalFactorEnroll: 'false'
+      }
+    },
+    failOnStatusCode: false
+  }
+
   // getting the session Token from executing the authn request
   cy.request(request).then(response => {
     const sessionToken = response.body.sessionToken
@@ -73,11 +132,11 @@ export const login = () => {
       // To avoid token expiration, we create a new timestamp every time
       const oneDayFromNow = Date.now() + 1000 * 60 * 60 * 24
 
-      // need to add seeding the local storage with the Access and ID tokens
+      // seeding the local storage with the Access and ID tokens
       localStorage.setItem(
         'okta-token-storage',
         `{"accessToken":{"accessToken":"${accessToken}","expiresAt":${oneDayFromNow},"tokenType":"Bearer","scopes":["openid","email","profile"],"authorizeUrl":"https://dev-120913.okta.com/oauth2/v1/authorize","userinfoUrl":"https://dev-120913.okta.com/oauth2/v1/userinfo"},
-          "idToken":{"idToken":"${idToken}","claims":{"sub":"00u47i0j8NJCwyEen4x6","name":"${name}","email":"${email}","ver":1,"iss":"https://dev-120913.okta.com","aud":"0oa47t6l9KwCVD1cZ4x6","iat":1589906406,"exp":${oneDayFromNow},"jti":"ID.41b7-NnMsrocqWw7xf3wDBDnCcPPT63OLVbOLRBEV3M","amr":["pwd"],"idp":"00o47i0fx75plScfV4x6","nonce":"YJl2npsJl6ygF7v2Rwa1fzkONEwSxko0EGWcq7vIVN0MxyqlTFSVLYDvAfaa5WYJ","preferred_username":"${username}","auth_time":1589906404,"at_hash":"XyeRvH5cN_nprrfDZS0PJw"},"expiresAt":${oneDayFromNow},"scopes":["openid","email","profile"],"authorizeUrl":"https://dev-120913.okta.com/oauth2/v1/authorize","issuer":"https://dev-120913.okta.com","clientId":"0oa47t6l9KwCVD1cZ4x6"}}`
+          "idToken":{"idToken":"${idToken}","claims":{"sub":"00u47i0j8NJCwyEen4x6","name":"${storage_name}","email":"${storage_email}","ver":1,"iss":"https://dev-120913.okta.com","aud":"0oa47t6l9KwCVD1cZ4x6","iat":1589906406,"exp":${oneDayFromNow},"jti":"ID.41b7-NnMsrocqWw7xf3wDBDnCcPPT63OLVbOLRBEV3M","amr":["pwd"],"idp":"00o47i0fx75plScfV4x6","nonce":"YJl2npsJl6ygF7v2Rwa1fzkONEwSxko0EGWcq7vIVN0MxyqlTFSVLYDvAfaa5WYJ","preferred_username":"${un}","auth_time":1589906404,"at_hash":"XyeRvH5cN_nprrfDZS0PJw"},"expiresAt":${oneDayFromNow},"scopes":["openid","email","profile"],"authorizeUrl":"https://dev-120913.okta.com/oauth2/v1/authorize","issuer":"https://dev-120913.okta.com","clientId":"0oa47t6l9KwCVD1cZ4x6"}}`
       )
 
       localStorage.setItem(
@@ -90,6 +149,11 @@ export const login = () => {
         method: 'POST',
         body: { loginPost: accessToken }
       })
+
+      helper.verifySpinnerAppearsAndDissappears()
+
+      cy.log('Login Successful')
+
     })
   })
 }

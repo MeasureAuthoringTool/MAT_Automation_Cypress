@@ -1,11 +1,12 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createnewcompositemeasure from '../../../../pom/MAT/WI/CreateNewCompositeMeasure'
+import * as oktaLogin from '../../../../support/oktaLogin'
 
 
 describe('Creating New Composite Measure', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
     })
 
     beforeEach('Preserve Cookies', () => {

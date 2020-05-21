@@ -1,5 +1,6 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
+import * as oktaLogin from '../../../../support/oktaLogin'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -8,7 +9,7 @@ let name = ''
 describe('Filter', () => {
     before('Login', () => {
 
-        helper.loginGeneric()
+        oktaLogin.login()
 
         name = '_' + Date.now()
 

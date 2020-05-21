@@ -2,13 +2,14 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
+import * as oktaLogin from "../../../../../support/oktaLogin";
 
 let fhircqlLibrary = ''
 let qdmcqlLibrary = ''
 
 describe('CQL Composer: CQL Library Workspace: Parameter', () => {
     before('Login', () => {
-        helper.loginGeneric()
+        oktaLogin.login()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
