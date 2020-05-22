@@ -5,7 +5,8 @@
     "environment": "dev",
     "type": "base",
     "oktaUrl": "https://dev.idp.idm.cms.gov",
-    "redirectUri": "https://dev-emeasuretool.hcqis.org/sbx/MeasureAuthoringTool/Login.html"
+    "redirectUri": "https://dev-emeasuretool.hcqis.org/sbx/MeasureAuthoringTool/Login.html",
+    "qdmToQicoreMappinngsUrl": "http://internal-mat-dev-ecs-lb-1195232407.us-east-1.elb.amazonaws.com:9090"
   }
 
 }
