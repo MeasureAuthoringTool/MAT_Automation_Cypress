@@ -24,6 +24,7 @@ export const yesBtn = '#Clear_Yes_Button'
 export const editorError = '.ace_error'
 export const editorErrorToolTip = '.ace_tooltip'
 export const editorLeftPanel = '#parameter_CQLEditor > .ace_gutter > .ace_layer'
+export const deleteConfirmationYes = '#Yes_DeleteConfirmationBox'
 
 //Measure Details > General Measure Information
 export const measureNameInputBox = '#measureNameInput'
@@ -63,8 +64,8 @@ export const definitionCQLExpressionEditorInput = '#definition_CQLEditor'
 export const definitionSaveBtn = '#saveButton_definition'
 export const definitionEraseBtn = '#eraseButton_definition'
 export const definitionDeleteBtn = '#deleteButton_definition'
-export const definitionLeftList = '#defineListBox > option'
-
+export const definitionLeftListOptions = '#defineListBox > option'
+export const definitionLeftList = '#defineListBox'
 //Definition Insert
 export const itemTypeListBox = '#availableItemToInsert_ListBox'
 export const attributesDataTypeListBox = '#DataTypeBtAtrr_listBox'

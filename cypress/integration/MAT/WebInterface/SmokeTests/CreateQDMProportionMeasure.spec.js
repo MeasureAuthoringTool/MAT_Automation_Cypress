@@ -91,6 +91,7 @@ describe('QDM Proportion Measure', () => {
         helper.addDefinition('Denominator', 'true')
         helper.addDefinition('Numerator', 'true')
         helper.addDefinition('Breast Milk Feeding', '["Substance, Administered": "Breast Milk"] Feeding')
+        helper.addDefinition('ED Visit', 'Global."ED Encounter"')
         
         //Function
 
@@ -101,7 +102,7 @@ describe('QDM Proportion Measure', () => {
         cy.get(measureComposer.addNewBtn).click()
         cy.get(measureComposer.functionNameInput).type('CalendarDayOfOrDayAfter', { delay: 50 })
         cy.get(measureComposer.addArgument).click()
-        cy.get(measureComposer.argumentNameInput).type('StartValue', { delay: 50 })
+        helper.enterText(measureComposer.argumentNameInput, 'StartValue')
         cy.get(measureComposer.availableDatatypesListBox).select('DateTime')
         cy.get(measureComposer.addBtn).click()
         cy.get(measureComposer.functionCQLExpressionEditorInput).type('Interval[StartValue, ToDate(StartValue + 2 days))', { delay: 50 })
