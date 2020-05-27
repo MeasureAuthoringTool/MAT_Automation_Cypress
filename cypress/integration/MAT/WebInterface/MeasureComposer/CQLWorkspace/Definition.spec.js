@@ -188,7 +188,7 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.definitionLeftList).eq(0).should('have.text', 'Id')
+        cy.get(measureComposer.definitionLeftListOptions).eq(0).should('have.text', 'Id')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 

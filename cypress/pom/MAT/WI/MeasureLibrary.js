@@ -84,7 +84,8 @@ export const returnToMeasureLibraryLink = ':nth-child(6) > td > .gwt-Anchor'
 export const sharingCancelBtn = '#CancelButton_measureVersion'
 
 // WarningMessage after versioning
-export const successfulMessage = '#WarningMessage'
+export const warningMessageText = 'td > #WarningMessage > .gwt-HTML > b'
+export const warningMessage = '#WarningMessage'
 
 // Draft Measure
 export const saveAndContinueButtonDraft = '#SaveAndContinueButton_measureDetail'
