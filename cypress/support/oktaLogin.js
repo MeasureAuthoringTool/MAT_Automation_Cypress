@@ -14,7 +14,7 @@ let alt_email = ''
 
 if (Cypress.env('environment') === 'dev') {
 
-  alt_username = Cypress.env('DEV_USERNAME')
+  alt_username = Cypress.env('DEV_ALT_USERNAME')
   username = Cypress.env('DEV_USERNAME')
   password = Cypress.env('DEV_PASSWORD')
   clientId = Cypress.env('DEV_CLIENTID')
@@ -25,7 +25,7 @@ if (Cypress.env('environment') === 'dev') {
 
 } else if (Cypress.env('environment') === 'matdev') {
 
-  alt_username = Cypress.env('MAT_DEV_USERNAME')
+  alt_username = Cypress.env('MATDEV_ALT_USERNAME')
   username = Cypress.env('MAT_DEV_USERNAME')
   password = Cypress.env('MAT_DEV_PASSWORD')
   clientId = Cypress.env('MAT_DEV_CLIENTID')
@@ -153,6 +153,8 @@ export const oktaLogin = (un, pw, storage_name, storage_email) => {
       helper.verifySpinnerAppearsAndDissappears()
 
       cy.log('Login Successful')
+
+      helper.verifySpinnerAppearsAndDissappears()
 
     })
   })

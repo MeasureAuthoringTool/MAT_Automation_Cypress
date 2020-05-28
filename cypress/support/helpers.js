@@ -648,6 +648,16 @@ export const disabled = (el) => {
 export const enabled = (el) => {
   cy.get(el).should('be.enabled')
 }
+export const enabledWithTimeout = (element, timeout) => {
+  let time
+  if (timeout === undefined) {
+    time = 60000
+  } else {
+    time = timeout
+  }
+  cy.get(element, { timeout: time }).should('be.enabled')
+}
+
 export const selectRadio = (el) => {
   cy.get(el).check({ force: true })
   cy.get(el).should('be.checked')
