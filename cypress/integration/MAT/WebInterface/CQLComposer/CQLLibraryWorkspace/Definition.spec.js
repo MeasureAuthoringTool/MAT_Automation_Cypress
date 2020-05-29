@@ -164,7 +164,7 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         cy.get(cqlComposer.attributesListBox).should('be.disabled')
 
         cy.get(cqlComposer.attributesDataTypeListBox).select('Communication')
-        cy.get(cqlComposer.attributesListBox).should('be.enabled').select('id')
+        cy.get(cqlComposer.attributesListBox).should('be.enabled').select('topic')
 
         cy.get(cqlComposer.insertDialogInsertBtn).click()
 

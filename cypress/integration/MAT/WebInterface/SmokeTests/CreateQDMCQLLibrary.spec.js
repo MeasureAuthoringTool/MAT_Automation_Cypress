@@ -11,6 +11,8 @@ describe('Create CQL Library', () => {
         oktaLogin.login()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
+        helper.verifySpinnerAppearsAndDissappears()
+
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -18,9 +20,10 @@ describe('Create CQL Library', () => {
     after('Log Out', () => {
         helper.logout()
     })
-    it('Create CQL Library', () => {
+    it('Create CQL Library with definitions and functions', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
-
+        helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
         cy.get(cqlLibrary.newLibraryBtn).click()
 
         let cqlLibraryName = 'CQLLibraryTest' + Date.now()
@@ -119,7 +122,7 @@ describe('Create CQL Library', () => {
         cy.get(measureComposer.addNewBtn).click()
         cy.get(measureComposer.functionNameInput).type('Arrival and Departure Time', { delay: 50 })
         cy.get(measureComposer.addArgument).click()
-        cy.get(measureComposer.argumentNameInput).type('Encounter', { delay: 50 })
+        helper.enterText(measureComposer.argumentNameInput,'Encounter')
         cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
         cy.get(measureComposer.addBtn).click()
@@ -132,7 +135,7 @@ describe('Create CQL Library', () => {
         cy.get(measureComposer.addNewBtn).click()
         cy.get(measureComposer.functionNameInput).type('Duration of ED Visit', { delay: 50 })
         cy.get(measureComposer.addArgument).click()
-        cy.get(measureComposer.argumentNameInput).type('Encounter', { delay: 50 })
+        helper.enterText(measureComposer.argumentNameInput,'Encounter')
         cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
         cy.get(measureComposer.addBtn).click()
