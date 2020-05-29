@@ -12,13 +12,21 @@ let versionMeasureNotOwner = ''
 let versionMeasure = ''
 let fhirMeasure = ''
 
-describe('Measure Library', () => {
+describe('Measure Library Row Selection', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        //populating search table
-        cy.get(measurelibrary.filterByMyMeasureChkBox).click()
-        cy.get(measurelibrary.searchBtn).click()
+        //creating new draft measure
+        draftMeasure = helper.createDraftMeasure()
+
+        //creating new versioned measure
+        versionMeasure = helper.createMajorVersionMeasure()
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
+        cy.wait(1000)
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.verifySpinnerAppearsAndDissappears()
     })
@@ -29,24 +37,6 @@ describe('Measure Library', () => {
         helper.logout()
     })
     it('Recent Activity: Row Selection', () => {
-
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
-
-        //populating recent activity grid
-        cy.get(measurelibrary.row1MeasureSearch).dblclick()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.measureLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.row2MeasureSearch).dblclick()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.measureLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -72,6 +62,10 @@ describe('Measure Library', () => {
     })
 
     it('Measure Search Table: Row Selection', () => {
+
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
         helper.notVisible(measurelibrary.clearSelectedBtn)
@@ -118,18 +112,11 @@ describe('Measure Library', () => {
     })
 })
 
-describe('Measure Library Grid Button Bar', () => {
+describe('Measure Library Recent Activity Grid', () => {
     before('Login', () => {
-
         versionMeasureNotOwner = helper.loginCreateVersionedMeasureNotOwnerLogout()
 
         oktaLogin.login()
-
-        //populating search table
-        cy.get(measurelibrary.filterByMyMeasureChkBox).click()
-        cy.get(measurelibrary.searchBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
 
         //creating new draft measure
         draftMeasure = helper.createDraftMeasure()
@@ -138,7 +125,6 @@ describe('Measure Library Grid Button Bar', () => {
         versionMeasure = helper.createMajorVersionMeasure()
 
         fhirMeasure = helper.createDraftMeasure('fhirDraft','FHIR')
-
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -146,8 +132,13 @@ describe('Measure Library Grid Button Bar', () => {
     after('Log Out', () => {
         helper.logout()
     })
+
     it('Enabled/Disabled Recent Activity Not The Owner', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        cy.get(measurelibrary.filterByMyMeasureChkBox).eq(0).click()
         helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
         cy.get(measurelibrary.searchBtn).click()
 
@@ -268,88 +259,6 @@ describe('Measure Library Grid Button Bar', () => {
 
     })
 
-    it('Enabled/Disabled Measure Search Table Not The Owner', () => {
-
-        helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
-        cy.get(measurelibrary.searchBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.row1MeasureSearch).click()
-
-        helper.disabled(measurelibrary.createVersionDraftMeasureSearchBtn)
-        helper.enabled(measurelibrary.historyMeasureSearchBtn)
-        helper.enabled(measurelibrary.viewMeasureSearchBtn)
-        helper.disabled(measurelibrary.shareMeasureSearchBtn)
-        helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
-        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
-
-        cy.get(measurelibrary.row1MeasureSearch).click()
-
-    })
-
-    it('Enabled/Disabled Measure Search Table The Owner', () => {
-
-        measureName = helper.createDraftMeasure('TestMeasure')
-
-        helper.enterText(measurelibrary.searchInputBox, measureName)
-        cy.get(measurelibrary.searchBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.wait(2000)
-
-        cy.get(measurelibrary.row1MeasureSearch).click()
-
-        helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
-        helper.enabled(measurelibrary.historyMeasureSearchBtn)
-        helper.enabled(measurelibrary.editMeasureSearchBtn)
-        helper.enabled(measurelibrary.shareMeasureSearchBtn)
-        helper.enabled(measurelibrary.cloneMeasureSearchEnabledBtn)
-        helper.disabled(measurelibrary.runFhirValidationMeasureSearchBtn)
-        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
-
-        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
-        cy.get(measurelibrary.continueBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.wait(2000)
-
-        cy.get(measurelibrary.row1MeasureSearch).click()
-
-        helper.enabled(measurelibrary.createDraftMeasureSearchBtn)
-        helper.enabled(measurelibrary.historyMeasureSearchBtn)
-        helper.enabled(measurelibrary.viewMeasureSearchBtn)
-        helper.enabled(measurelibrary.shareMeasureSearchBtn)
-        helper.enabled(measurelibrary.cloneMeasureSearchEnabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
-        helper.enabled(measurelibrary.convertToFhirMeasureSearchBtn)
-
-        cy.get(measurelibrary.row1MeasureSearch).click()
-
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-        cy.get(measurelibrary.searchBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.wait(2000)
-
-        cy.get(measurelibrary.row1MeasureSearch).click()
-
-        helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
-        helper.enabled(measurelibrary.historyMeasureSearchBtn)
-        helper.enabled(measurelibrary.editMeasureSearchBtn)
-        helper.enabled(measurelibrary.shareMeasureSearchBtn)
-        helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
-        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
-
-    })
     it('Recent Activity Button bar Create Version', () => {
 
         //creating new measure
@@ -536,6 +445,126 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
     })
+
+})
+
+describe('Measure Library Grid Button Bar', () => {
+    before('Login', () => {
+
+        versionMeasureNotOwner = helper.loginCreateVersionedMeasureNotOwnerLogout()
+
+        oktaLogin.login()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        //creating new draft measure
+        draftMeasure = helper.createDraftMeasure()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        //creating new versioned measure
+        versionMeasure = helper.createMajorVersionMeasure()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        fhirMeasure = helper.createDraftMeasure('fhirDraft','FHIR')
+
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
+    })
+
+
+    it('Enabled/Disabled Measure Search Table Not The Owner', () => {
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        cy.get(measurelibrary.filterByMyMeasureChkBox).eq(0).click()
+        helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
+        helper.disabled(measurelibrary.createVersionDraftMeasureSearchBtn)
+        helper.enabled(measurelibrary.historyMeasureSearchBtn)
+        helper.enabled(measurelibrary.viewMeasureSearchBtn)
+        helper.disabled(measurelibrary.shareMeasureSearchBtn)
+        helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
+        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
+    })
+
+    it('Enabled/Disabled Measure Search Table The Owner', () => {
+
+        measureName = helper.createDraftMeasure('TestMeasure')
+
+        helper.enterText(measurelibrary.searchInputBox, measureName)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.wait(2000)
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
+        helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
+        helper.enabled(measurelibrary.historyMeasureSearchBtn)
+        helper.enabled(measurelibrary.editMeasureSearchBtn)
+        helper.enabled(measurelibrary.shareMeasureSearchBtn)
+        helper.enabled(measurelibrary.cloneMeasureSearchEnabledBtn)
+        helper.disabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
+
+        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+
+        cy.get(measurelibrary.majorVersionTypeRadio).click()
+        cy.get(measurelibrary.packageAndVersion).click()
+        cy.get(measurelibrary.continueBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.wait(2000)
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
+        helper.enabled(measurelibrary.createDraftMeasureSearchBtn)
+        helper.enabled(measurelibrary.historyMeasureSearchBtn)
+        helper.enabled(measurelibrary.viewMeasureSearchBtn)
+        helper.enabled(measurelibrary.shareMeasureSearchBtn)
+        helper.enabled(measurelibrary.cloneMeasureSearchEnabledBtn)
+        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+        helper.enabled(measurelibrary.convertToFhirMeasureSearchBtn)
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.wait(2000)
+
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
+        helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
+        helper.enabled(measurelibrary.historyMeasureSearchBtn)
+        helper.enabled(measurelibrary.editMeasureSearchBtn)
+        helper.enabled(measurelibrary.shareMeasureSearchBtn)
+        helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
+        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
+
+    })
+
     it('Measure Search Button bar Create Version', () => {
 
         helper.enterText(measurelibrary.searchInputBox, draftMeasure)
