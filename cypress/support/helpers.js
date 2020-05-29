@@ -298,6 +298,7 @@ export const createDraftMeasure = (measure, model) => {
   }
 
   //creating new measure
+  enabledWithTimeout(measurelibrary.newMeasureButton)
   cy.get(measurelibrary.newMeasureButton).click()
 
   cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
