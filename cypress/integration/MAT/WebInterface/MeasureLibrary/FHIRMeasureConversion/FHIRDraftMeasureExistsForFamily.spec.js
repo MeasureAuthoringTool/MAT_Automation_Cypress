@@ -19,7 +19,10 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
     it('Scenario 2: FHIR/CQL draft exists for that family', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
         // Versioning First measure
+        helper.enabledWithTimeout(measureLibrary.searchInputBox)
         helper.enterText(measureLibrary.searchInputBox, measureName)
         cy.get(measureLibrary.searchBtn).click();
 
@@ -37,7 +40,8 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        // Create First Draft Measure 
+        // Create First Draft Measure
+        helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.row1MeasureSearch).click();
         cy.get(measureLibrary.createDraftMeasureSearchBtn).click();
 
@@ -54,6 +58,7 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         cy.wait(2000)
 
         // Versioning draft measure
+        helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.row1MeasureSearch).click();
         cy.get(measureLibrary.createVersionDraftMeasureSearchBtn).click();
         cy.get(measureLibrary.majorVersionTypeRadio).click();
@@ -65,7 +70,8 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        // Convert First measure to FHIR 
+        // Convert First measure to FHIR
+        helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.row1MeasureSearch).click();
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 

@@ -180,7 +180,7 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
         cy.get(measureComposer.attributesListBox).should('be.disabled')
 
         cy.get(measureComposer.attributesDataTypeListBox).select('Communication')
-        cy.get(measureComposer.attributesListBox).should('be.enabled').select('id')
+        cy.get(measureComposer.attributesListBox).should('be.enabled').select('topic')
 
         cy.get(measureComposer.insertDialogInsertBtn).click()
 
