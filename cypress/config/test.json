@@ -3,6 +3,10 @@
   "screenshotsFolder": "mochawesome-report/assets",
   "env": {
     "environment": "test",
-    "type": "base"
+    "type": "base",
+    "oktaUrl": "https://test.idp.idm.cms.gov",
+    "redirectUri": "https://test-emeasuretool.hcqis.org/sbx/MeasureAuthoringTool/Login.html",
+    "qdmToQicoreMappinngsUrl": "need this still"
   }
+
 }
