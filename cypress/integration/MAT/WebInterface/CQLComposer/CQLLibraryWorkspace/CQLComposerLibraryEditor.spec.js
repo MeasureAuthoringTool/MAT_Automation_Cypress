@@ -20,7 +20,7 @@ describe('CQL Composer: CQL Editor message', () => {
         helper.logout()
     })
 
-    it('QDM measure: Validate the success message on CQL Library Editor', () => {
+    it('QDM Library: Validate the success message on CQL Library Editor', () => {
 
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
@@ -46,7 +46,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
     })
 
-    it('FHIR measure: Validate the success message on CQL Library Editor', () => {
+    it('FHIR Library: Validate the success message on CQL Library Editor', () => {
 
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
@@ -70,7 +70,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
     })
 
-    it('QDM measure: Validate the error message on CQL Library Editor', () => {
+    it('QDM Library: Validate the error message on CQL Library Editor', () => {
 
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
@@ -102,7 +102,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
     })
 
-    it('FHIR measure: Validate the error message on CQL Library Editor', () => {
+    it('FHIR Library: Validate the error message on CQL Library Editor', () => {
 
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
@@ -132,6 +132,40 @@ describe('CQL Composer: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+    })
+
+    it('FHIR Library: Validate the error message when editing directly on CQL Library Editor', () => {
+
+        helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
+        cy.get(cqlLibrary.searchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+
+        //Value Sets
+
+        cy.get(cqlComposer.valueSets).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
+
+         //CQL Library Editor
+
+         cy.get(cqlComposer.cqlLibraryEditor).click()
+
+         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+
+         cy.get(cqlComposer.cqlLibraryEditorBox).type('sdfasg')
+
+         cy.get(cqlComposer.cqlEditorSaveBtn).click()
+
+         cy.get(cqlComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
     })
 
 })

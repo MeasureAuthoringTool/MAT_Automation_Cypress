@@ -51,4 +51,39 @@ describe('CQL Editor: Validate invalid version error message', () => {
 
     })
 
+    it('FHIR Measure: Validate the error message when editing directly on CQL Library Editor', () => {
+
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+
+        //Value Sets
+
+        cy.get(measureComposer.valueSets).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
+
+         //CQL Library Editor
+
+         cy.get(measureComposer.cqlLibraryEditor).click()
+
+         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+
+         cy.get(measureComposer.cqlLibraryEditorBox).type('sdfasg')
+
+         cy.get(measureComposer.cqlEditorSaveBtn).click()
+
+         cy.get(measureComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
+    })
+
 })
