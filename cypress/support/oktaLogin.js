@@ -74,6 +74,31 @@ export const login = (user) => {
 
 }
 
+export const loginUserWithMultipleMAT = (user) => {
+
+    if (user === undefined) {
+      cy.clearCookies()
+  
+      cy.clearLocalStorage()
+  
+      cy.window().then((win) => {
+        win.sessionStorage.clear()
+      })
+      oktaLogin()
+    }
+    else if (user === 'alternative'){
+      cy.clearCookies()
+  
+      cy.clearLocalStorage()
+  
+      cy.window().then((win) => {
+        win.sessionStorage.clear()
+      })
+      oktaLogin(alt_username, password, alt_name, alt_email)
+    }
+  
+  }
+
 
 export const oktaLogin = (un, pw, storage_name, storage_email) => {
 
