@@ -90,4 +90,4 @@ export const closeBtn = '#No_addFxnArgsBox'
 //CQL Library Editor
 export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
 export const cqlLibraryEditorBox = '#cqlLibraryEditor_CQLEditor > textarea'
-export const cqlEditorSaveBtn = '#cqlLibraryEditor_Id > tbody > tr > td'
+export const cqlEditorSaveBtn = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(6) > td'

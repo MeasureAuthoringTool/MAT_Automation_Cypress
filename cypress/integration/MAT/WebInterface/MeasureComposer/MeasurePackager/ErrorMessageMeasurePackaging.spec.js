@@ -75,7 +75,7 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
         cy.get(measureComposer.functionMeasureComposer).click();
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Function')
         cy.get(measureComposer.functionNameInput).type('TestForValidationError', { delay: 50 });
-        cy.get(measureComposer.functionCQLExpressionEditorInput).type('dfgfkj', { delay: 50 });
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('{downarrow}dfgfkj', { delay: 50 });
         cy.get(measureComposer.functionSaveBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()

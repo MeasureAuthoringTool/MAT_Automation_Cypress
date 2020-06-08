@@ -18,37 +18,125 @@ describe('CQL Composer: CQL Editor message', () => {
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
     })
-    after('Log Out', () => {
-        helper.logout()
-    })
+    // after('Log Out', () => {
+    //     helper.logout()
+    // })
 
-    it('QDM measure: Validate the success message on CQL Library Editor', () => {
+    // it('QDM Library: Validate the success message on CQL Library Editor', () => {
 
-        helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click();
+    //     helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
+    //     cy.get(cqlLibrary.searchBtn).click();
 
-        helper.verifySpinnerAppearsAndDissappears()
+    //     helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+    //     cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
 
-        helper.verifySpinnerAppearsAndDissappears()
+    //     helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlComposer.cqlLibraryEditor).click();
+    //     cy.get(cqlComposer.cqlLibraryEditor).click();
 
-        cy.get('h4').should('contain.text', 'CQL Library Workspace > CQL Library Editor');
+    //     cy.get('h4').should('contain.text', 'CQL Library Workspace > CQL Library Editor');
 
-        cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
-        // cy.get(cqlComposer.generalInformation).click();
+    //     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+    //     // cy.get(cqlComposer.generalInformation).click();
 
-        cy.wait(2000);
+    //     cy.wait(2000);
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    //     cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    //     helper.verifySpinnerAppearsAndDissappears()
 
-    })
+    // })
 
-    it('FHIR measure: Validate the success message on CQL Library Editor', () => {
+    // it('FHIR Library: Validate the success message on CQL Library Editor', () => {
+
+    //     helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
+    //     cy.get(cqlLibrary.searchBtn).click();
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    //     cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    //     cy.get(cqlComposer.cqlLibraryEditor).click();
+
+    //     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+    //     // cy.get(cqlComposer.generalInformation).click();
+
+    //     cy.wait(2000);
+
+    //     cy.get(measurelibrary.cqlLibraryTab).click()
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    // })
+
+    // it('QDM Library: Validate the error message on CQL Library Editor', () => {
+
+    //     helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
+    //     cy.get(cqlLibrary.searchBtn).click();
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    //     cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    //     cy.get(cqlComposer.functionCQLComposer).click();
+
+    //     cy.get(cqlComposer.functionNameInput).type('FunctionName');
+    //     cy.get(cqlComposer.functionCQLExpressionEditorInput).type('fhlsdfi');
+    //     cy.get(cqlComposer.functionSaveBtn).click();
+
+    //     cy.wait(2000);
+
+    //     cy.get(cqlComposer.cqlLibraryEditor).click();
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    //     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
+
+    //     cy.wait(2000);
+
+    //     cy.get(measurelibrary.cqlLibraryTab).click()
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    // })
+
+    // it('FHIR Library: Validate the error message on CQL Library Editor', () => {
+
+    //     helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
+    //     cy.get(cqlLibrary.searchBtn).click();
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    //     cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    //     cy.get(cqlComposer.functionCQLComposer).click();
+
+    //     cy.get(cqlComposer.functionNameInput).type('FunctionNameFHIR');
+    //     cy.get(cqlComposer.functionCQLExpressionEditorInput).type('fhlsdfi');
+    //     cy.get(cqlComposer.functionSaveBtn).click();
+
+    //     cy.wait(2000);
+
+    //     cy.get(cqlComposer.cqlLibraryEditor).click();
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    //     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
+
+    //     cy.wait(2000);
+
+    //     cy.get(measurelibrary.cqlLibraryTab).click()
+
+    //     helper.verifySpinnerAppearsAndDissappears()
+
+    // })
+
+    it('FHIR Library: Validate the error message when editing directly on CQL Library Editor', () => {
 
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
@@ -59,81 +147,27 @@ describe('CQL Composer: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlComposer.cqlLibraryEditor).click();
+        helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-        cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
-        // cy.get(cqlComposer.generalInformation).click();
+        //Value Sets
 
-        cy.wait(2000);
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
+        cy.get(cqlComposer.valueSets).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
+
+         //CQL Library Editor
+
+         cy.get(cqlComposer.cqlLibraryEditor).click()
+
+         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+
+         cy.get(cqlComposer.cqlLibraryEditorBox).type('sdfasg')
+
+         cy.get(cqlComposer.cqlEditorSaveBtn).click()
+
+         cy.get(cqlComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
     })
 
-    it('QDM measure: Validate the error message on CQL Library Editor', () => {
-
-        helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click();
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlComposer.functionCQLComposer).click();
-
-        cy.get(cqlComposer.functionNameInput).type('FunctionName');
-        cy.get(cqlComposer.functionCQLExpressionEditorInput).type('fhlsdfi');
-        cy.get(cqlComposer.functionSaveBtn).click();
-
-        cy.wait(2000);
-
-        cy.get(cqlComposer.cqlLibraryEditor).click();
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
-
-        cy.wait(2000);
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-    })
-
-    it('FHIR measure: Validate the error message on CQL Library Editor', () => {
-
-        helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click();
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlComposer.functionCQLComposer).click();
-
-        cy.get(cqlComposer.functionNameInput).type('FunctionNameFHIR');
-        cy.get(cqlComposer.functionCQLExpressionEditorInput).type('fhlsdfi');
-        cy.get(cqlComposer.functionSaveBtn).click();
-
-        cy.wait(2000);
-
-        cy.get(cqlComposer.cqlLibraryEditor).click();
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
-
-        cy.wait(2000);
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-    })
-
-})
+}) 
