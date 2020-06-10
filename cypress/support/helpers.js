@@ -110,6 +110,25 @@ export const logout = () => {
   })
 }
 
+export const logoutUserwithMultipleMAT = () => {
+
+  visibleWithTimeout(matheader.userprofile)
+
+  cy.get(matheader.userprofile).click()
+
+  visibleWithTimeout(matheader.signoutMultipleMAT)
+
+  cy.get(matheader.signoutMultipleMAT).click()
+
+  cy.clearCookies()
+
+  cy.clearLocalStorage()
+
+  cy.window().then((win) => {
+    win.sessionStorage.clear()
+  })
+}
+
 //create Proportion QDM Draft Measure
 
 export const createQDMProportionMeasure = () => {

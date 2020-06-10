@@ -91,7 +91,7 @@ export const closeBtn = '#No_addFxnArgsBox'
 //CQL Library Editor
 export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
 export const cqlLibraryEditorInput = '#cqlLibraryEditor_CQLEditor'
-export const cqlEditorSaveBtn = '#cqlLibraryEditor_Id > tbody > tr > td > button'
+export const cqlEditorSaveBtn = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(6) > td'
 
 //Population Workspace
 export const initialPopulation = '#Initial\\ Populations_Anchor'
