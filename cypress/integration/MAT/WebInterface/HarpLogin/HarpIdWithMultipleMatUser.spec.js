@@ -5,7 +5,7 @@ import * as measurelibrary from "../../../../pom/MAT/WI/MeasureLibrary";
 
 describe('HARP ID: Multiple MAT Users', () => {
     before('Login', () => {
-        oktaLogin.loginUserWithMultipleMAT()
+        oktaLogin.login('multiple')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()

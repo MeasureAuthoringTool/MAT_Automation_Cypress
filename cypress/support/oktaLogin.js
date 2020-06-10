@@ -11,6 +11,9 @@ let email = ''
 let alt_username = ''
 let alt_name = ''
 let alt_email = ''
+let mul_username = ''
+let mul_name = ''
+let mul_email = ''
 
 if (Cypress.env('environment') === 'dev') {
 
@@ -22,6 +25,9 @@ if (Cypress.env('environment') === 'dev') {
   email = Cypress.env('DEV_EMAIL')
   alt_name = Cypress.env('DEV_NAME')
   alt_email = Cypress.env('DEV_EMAIL')
+  mul_username = Cypress.env('DEV_MUL_USERNAME')
+  mul_name = Cypress.env('DEV_MUL_NAME')
+  mul_email = Cypress.env('DEV_MUL_EMAIL')
 
 } else if (Cypress.env('environment') === 'matdev') {
 
@@ -33,6 +39,9 @@ if (Cypress.env('environment') === 'dev') {
   email = Cypress.env('MAT_DEV_EMAIL')
   alt_name = Cypress.env('MAT_DEV_NAME')
   alt_email = Cypress.env('MAT_DEV_EMAIL')
+  mul_username = Cypress.env('MAT_DEV_MUL_USERNAME')
+  mul_name = Cypress.env('MAT_DEV_MUL_NAME')
+  mul_email = Cypress.env('MAT_DEV_MUL_EMAIL')
 
 } else if (Cypress.env('environment') === 'test') {
 
@@ -44,8 +53,10 @@ if (Cypress.env('environment') === 'dev') {
   email = Cypress.env('TEST_EMAIL')
   alt_name = Cypress.env('TEST_ALT_NAME')
   alt_email = Cypress.env('TEST_ALT_EMAIL')
+  mul_username = Cypress.env('TEST_MUL_USERNAME')
+  mul_name = Cypress.env('TEST_MUL_NAME')
+  mul_email = Cypress.env('TEST_MUL_EMAIL')
 }
-
 
 export const login = (user) => {
 
@@ -71,34 +82,18 @@ export const login = (user) => {
     oktaLogin(alt_username, password, alt_name, alt_email)
     helper.loginUMLS()
   }
+  else if (user === 'multiple'){
+    cy.clearCookies()
 
-}
+    cy.clearLocalStorage()
 
-export const loginUserWithMultipleMAT = (user) => {
-
-    if (user === undefined) {
-      cy.clearCookies()
-  
-      cy.clearLocalStorage()
-  
-      cy.window().then((win) => {
-        win.sessionStorage.clear()
-      })
-      oktaLogin()
-    }
-    else if (user === 'alternative'){
-      cy.clearCookies()
-  
-      cy.clearLocalStorage()
-  
-      cy.window().then((win) => {
-        win.sessionStorage.clear()
-      })
-      oktaLogin(alt_username, password, alt_name, alt_email)
-    }
-  
+    cy.window().then((win) => {
+      win.sessionStorage.clear()
+    })
+    oktaLogin(mul_username, password, mul_name, mul_email)
+    helper.loginUMLS()
   }
-
+}
 
 export const oktaLogin = (un, pw, storage_name, storage_email) => {
 
@@ -144,8 +139,8 @@ export const oktaLogin = (un, pw, storage_name, storage_email) => {
           '&redirect_uri=' + redirectUri +
           '&response_type=token id_token' +
           '&sessionToken=' + sessionToken + 
-          '&state=uQJCnnawAWj9QyaHkVMesAaVXEkWcZMpVfDrQJqdUUPLnuIUprrlN5kRicCI4gaR' + 
-          '&scope=openid%20email',
+          '&state=uQJCnnawAWj9QyaHkVMesAaVXEkWcZMpVfDrQJqdUUPLnuIUprrlN5kRicCI4gaR' +
+          '&scope=openid%20email%20profile',
       form: true,
       followRedirect: false,
       failOnStatusCode: false
