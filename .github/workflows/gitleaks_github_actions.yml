@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REPO: https://github.com/MeasureAuthoringTool/MAT_Automation_Cypress
-      REMOTE_EXCLUDES_URL: https://raw.githubusercontent.com/casey-erdmann/bmat-gitleaks-automation/master/mat_auto_cypress/gitleaks.toml
-      GITLEAKS_VERSION: v3.0.3
+      REMOTE_EXCLUDES_URL: https://raw.githubusercontent.com/semanticbits/bmat-gitleaks-automation/master/mat_auto_cypress/gitleaks.toml
+      GITLEAKS_VERSION: v4.3.1
     steps:
     - name: Execute Gitleaks
       run: |
