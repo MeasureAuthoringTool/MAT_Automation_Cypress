@@ -40,7 +40,7 @@ describe('CQL Editor: Validate invalid version error message', () => {
         cy.get(measureComposer.cqlLibraryEditor).click();
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(measureComposer.cqlLibraryEditorInput).type("{downarrow}include Hospice_FHIR4 version '1.0' called Hospice");
-        cy.get(measureComposer.cqlEditorSaveBtn).eq(1).click();
+        cy.get(measureComposer.cqlEditorSaveBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -50,6 +50,27 @@ describe('CQL Editor: Validate invalid version error message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        cy.get(measurelibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+    })
+
+})
+
+describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
+    before('Login', () => {
+        oktaLogin.login()
+
+        // qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure', 'QDM')
+        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
+
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
     })
 
     it('FHIR Measure: Validate the error message when editing directly on CQL Library Editor', () => {
@@ -63,8 +84,9 @@ describe('CQL Editor: Validate invalid version error message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        cy.get(measureComposer.cqlWorkspace).click();
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+        helper.verifySpinnerAppearsAndDissappears()
 
         //Value Sets
 
@@ -74,17 +96,32 @@ describe('CQL Editor: Validate invalid version error message', () => {
 
         helper.addValueSet('2.16.840.1.113883.3.666.5.307')
 
-         //CQL Library Editor
+        //Code
 
-         cy.get(measureComposer.cqlLibraryEditor).click()
+        cy.get(measureComposer.codes).click()
 
-         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+        helper.verifySpinnerAppearsAndDissappears()
 
-         cy.get(measureComposer.cqlLibraryEditorBox).type('sdfasg')
+        helper.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
 
-         cy.get(measureComposer.cqlEditorSaveBtn).click()
+        //CQL Library Editor
 
-         cy.get(measureComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
+        cy.get(measureComposer.cqlLibraryEditor).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}sdfasg')
+
+        cy.get(measureComposer.cqlEditorSaveBtn).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
+
+        cy.get(measurelibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
     })
 
 })
