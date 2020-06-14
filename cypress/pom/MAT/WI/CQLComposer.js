@@ -80,6 +80,8 @@ export const selectQDMDatatypeObject = '#listSelectItem'
 export const addBtn = '#Yes_addFxnArgsBox'
 export const functionCQLExpressionEditorInput = '#function_CQLEditor'
 export const functionSaveBtn = '#saveButton_function'
+export const functionBox = '#funcListBox > option'
+export const deleteFunctionBtn = '#deleteButton_function'
 
 //Function Add Argument
 export const argumentNameInputBox = '#inputArgumentName'
@@ -90,4 +92,4 @@ export const closeBtn = '#No_addFxnArgsBox'
 //CQL Library Editor
 export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
 export const cqlLibraryEditorBox = '#cqlLibraryEditor_CQLEditor > textarea'
-export const cqlEditorSaveBtn = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(6) > td'
+export const cqlEditorSaveBtn = ':nth-child(6) > td > .btn'
