@@ -16,7 +16,7 @@ describe('Filter', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        name = '_' + Date.now()
+        name = 'A_' + Date.now()
 
         fhirCqlLibrary = helper.createDraftCqlLibrary(name+'fhir','fhir');
         qdmCqlLibrary = helper.createDraftCqlLibrary(name+'QDM','QDM')

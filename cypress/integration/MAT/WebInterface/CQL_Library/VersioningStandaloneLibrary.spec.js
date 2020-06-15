@@ -56,6 +56,7 @@ describe('Standalone Library: Version and include with measure', () => {
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
 
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
+        helper.enabledWithTimeout(cqlLibrary.majorVersionTypeRadio)
         cy.get(cqlLibrary.majorVersionTypeRadio).click();
         cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
 

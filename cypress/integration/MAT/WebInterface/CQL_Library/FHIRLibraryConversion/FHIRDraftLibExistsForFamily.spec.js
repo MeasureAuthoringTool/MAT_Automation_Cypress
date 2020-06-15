@@ -72,6 +72,7 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
         cy.wait(3000)
 
         // Convert Second library to FHIR
+        helper.visibleWithTimeout(cqlLibrary.row3CqlLibrarySearch)
         cy.get(cqlLibrary.row3CqlLibrarySearch).click();
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
