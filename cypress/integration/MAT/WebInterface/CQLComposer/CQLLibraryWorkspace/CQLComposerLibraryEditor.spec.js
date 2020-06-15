@@ -136,6 +136,22 @@ describe('CQL Composer: CQL Editor message', () => {
 
     })
 
+})
+
+describe('FHIR Library: Add code directly on CQL Library Editor', () => {
+    before('Login', () => {
+        oktaLogin.login()
+
+        fhirCqlLibrary = helper.createDraftCqlLibrary('fhirCqlLibrary', 'FHIR')
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
+    })
+
+
     it('FHIR Library: Validate the error message when editing directly on CQL Library Editor', () => {
 
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
@@ -157,17 +173,17 @@ describe('CQL Composer: CQL Editor message', () => {
 
         helper.addValueSet('2.16.840.1.113883.3.666.5.307')
 
-         //CQL Library Editor
+        //CQL Library Editor
 
-         cy.get(cqlComposer.cqlLibraryEditor).click()
+        cy.get(cqlComposer.cqlLibraryEditor).click()
 
-         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+        cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
 
-         cy.get(cqlComposer.cqlLibraryEditorBox).type('sdfasg')
+        cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}sdfasg')
 
-         cy.get(cqlComposer.cqlEditorSaveBtn).click()
+        cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
-         cy.get(cqlComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
+        cy.get(cqlComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
     })
 
 }) 

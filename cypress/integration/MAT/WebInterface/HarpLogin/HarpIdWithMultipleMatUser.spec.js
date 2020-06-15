@@ -1,6 +1,6 @@
-import * as oktaLogin from '../../../../support/oktaLogin'
-import * as helper from '../../../../support/helpers'
-import * as matheader from '../../../../pom/MAT/WI/MATheader'
+import * as oktaLogin from '../../../../support/oktaLogin';
+import * as helper from '../../../../support/helpers';
+import * as matheader from '../../../../pom/MAT/WI/MATheader';
 import * as measurelibrary from "../../../../pom/MAT/WI/MeasureLibrary";
 
 describe('HARP ID: Multiple MAT Users', () => {

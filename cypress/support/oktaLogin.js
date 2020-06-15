@@ -90,8 +90,7 @@ export const login = (user) => {
     cy.window().then((win) => {
       win.sessionStorage.clear()
     })
-    oktaLogin(mul_username, password, mul_name, mul_email)
-    helper.loginUMLS()
+    oktaLogin(mul_username, mul_name, mul_email)
   }
 }
 
