@@ -1,16 +1,14 @@
-import * as helper from '../../../../support/helpers';
-import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
-import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
-import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
+import * as helper from '../../../../../support/helpers';
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 
 let measureName = ''
 
 describe('Packaging: Ratio Measure', () => {
     before('Login', () => {
         oktaLogin.login()
-
-        measureName = helper.createDraftMeasure('fhirRatioMeasure', 'FHIR')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -28,7 +26,7 @@ describe('Packaging: Ratio Measure', () => {
         cy.get(createNewMeasure.modelradioFHIR).click()
         cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
+        cy.get(createNewMeasure.measureScoringListBox).select('Ratio')
         cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
@@ -108,6 +106,7 @@ describe('Packaging: Ratio Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        // Initial Population
         cy.get(measureComposer.initialPopulation).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -118,15 +117,39 @@ describe('Packaging: Ratio Measure', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'Changes to Initial Populations have been successfully saved.')
 
+         // Denominator
+         cy.get(measureComposer.denominator).click()
+
+         helper.verifySpinnerAppearsAndDissappears()
+ 
+         cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+         cy.get(measureComposer.denominatorSaveBtn).click()
+ 
+         helper.visibleWithTimeout(measureComposer.warningMessage)
+         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
+ 
+         // Numerator
+         cy.get(measureComposer.numerator).click()
+ 
+         helper.verifySpinnerAppearsAndDissappears()
+ 
+         cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+         cy.get(measureComposer.numeratorSaveBtn).click()
+ 
+         helper.visibleWithTimeout(measureComposer.warningMessage)
+         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
+ 
         //navigate to Measure Packager
         cy.get(measureComposer.measurePackager).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
         //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
-        cy.get(measureComposer.populationsListItems).its('length').should('equal', 1)
+       cy.get(measureComposer.populationsListItems).its('length').should('equal', 3)
 
         cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
+        cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Denominator')
+        cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Numerator')
 
         //Package Grouping
         cy.get(measureComposer.addAllItemsToGrouping).click()

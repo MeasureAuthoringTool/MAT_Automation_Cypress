@@ -38,7 +38,6 @@ describe('CQL Composer: CQL Editor message', () => {
         cy.get('h4').should('contain.text', 'CQL Library Workspace > CQL Library Editor');
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
-        // cy.get(cqlComposer.generalInformation).click();
 
         cy.wait(2000);
 
@@ -62,7 +61,6 @@ describe('CQL Composer: CQL Editor message', () => {
         cy.get(cqlComposer.cqlLibraryEditor).click();
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
-        // cy.get(cqlComposer.generalInformation).click();
 
         cy.wait(2000);
 
@@ -86,7 +84,7 @@ describe('CQL Composer: CQL Editor message', () => {
         cy.get(cqlComposer.functionCQLComposer).click();
 
         cy.get(cqlComposer.functionNameInput).type('FunctionName');
-        cy.get(cqlComposer.functionCQLExpressionEditorInput).type('fhlsdfi');
+        cy.get(cqlComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
         cy.get(cqlComposer.functionSaveBtn).click();
 
         cy.wait(2000);
@@ -118,7 +116,7 @@ describe('CQL Composer: CQL Editor message', () => {
         cy.get(cqlComposer.functionCQLComposer).click();
 
         cy.get(cqlComposer.functionNameInput).type('FunctionNameFHIR');
-        cy.get(cqlComposer.functionCQLExpressionEditorInput).type('fhlsdfi');
+        cy.get(cqlComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
         cy.get(cqlComposer.functionSaveBtn).click();
 
         cy.wait(2000);
@@ -152,7 +150,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
     })
 
 
-    it('FHIR Library: Validate the error message when editing directly on CQL Library Editor', () => {
+    it('FHIR Library: Validate the warning message when editing directly on CQL Library Editor', () => {
 
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
@@ -165,7 +163,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 
         helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-        //Value Sets
+         //Value Sets
 
         cy.get(cqlComposer.valueSets).click()
 
@@ -179,11 +177,15 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
 
-        cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}sdfasg')
+        cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}valueset \"Annual Wellness Visit\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'")
 
         cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
+    
+        cy.get(measurelibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
     })
 
 }) 
