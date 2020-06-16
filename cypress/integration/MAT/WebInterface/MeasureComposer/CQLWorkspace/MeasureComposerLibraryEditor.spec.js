@@ -6,93 +6,93 @@ import * as oktaLogin from "../../../../../support/oktaLogin";
 let fhirMeasure = ''
 let qdmMeasure = ''
 
-// describe('Measure: CQL Editor message', () => {
-//     before('Login', () => {
-//         oktaLogin.login()
+describe('Measure: CQL Editor message', () => {
+    before('Login', () => {
+        oktaLogin.login()
 
-//         qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure', 'QDM')
-//         fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
+        qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure', 'QDM')
+        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
 
-//     })
-//     beforeEach('Preserve Cookies', () => {
-//         helper.preserveCookies()
-//     })
-//     after('Log Out', () => {
-//         helper.logout()
-//     })
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
+    })
 
-//     it('QDM Measure: Validate the error message on CQL Editor', () => {
+    it('QDM Measure: Validate the error message on CQL Editor', () => {
 
-//         helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
-//         cy.get(measurelibrary.searchBtn).click();
+        helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
+        cy.get(measurelibrary.searchBtn).click();
 
-//         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-//         cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        cy.get(measurelibrary.row1MeasureSearch).dblclick();
 
-//         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-//         cy.get(measureComposer.cqlWorkspace).click();
+        cy.get(measureComposer.cqlWorkspace).click();
 
-//         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-//         cy.get(measureComposer.functionMeasureComposer).click();
+        cy.get(measureComposer.functionMeasureComposer).click();
 
-//         cy.get(measureComposer.functionNameInput).type('FunctionNameQDM');
-//         cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
-//         cy.get(measureComposer.functionSaveBtn).click();
+        cy.get(measureComposer.functionNameInput).type('FunctionNameQDM');
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
+        cy.get(measureComposer.functionSaveBtn).click();
 
-//         cy.wait(2000);
+        cy.wait(2000);
 
-//         cy.get(measureComposer.cqlLibraryEditor).click();
-//         helper.verifySpinnerAppearsAndDissappears()
+        cy.get(measureComposer.cqlLibraryEditor).click();
+        helper.verifySpinnerAppearsAndDissappears()
 
-//         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
 
-//         cy.wait(2000);
+        cy.wait(2000);
 
-//         cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measurelibrary.measureLibraryTab).click()
 
-//         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-//     })
+    })
 
-//     it('FHIR Measure: Validate the error message on CQL Editor', () => {
+    it('FHIR Measure: Validate the error message on CQL Editor', () => {
 
-//         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-//         cy.get(measurelibrary.searchBtn).click();
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click();
 
-//         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-//         cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        cy.get(measurelibrary.row1MeasureSearch).dblclick();
 
-//         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-//         cy.get(measureComposer.cqlWorkspace).click();
+        cy.get(measureComposer.cqlWorkspace).click();
 
-//         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-//         cy.get(measureComposer.functionMeasureComposer).click();
+        cy.get(measureComposer.functionMeasureComposer).click();
 
-//         cy.get(measureComposer.functionNameInput).type('FunctionNameFHIR');
-//         cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
-//         cy.get(measureComposer.functionSaveBtn).click();
+        cy.get(measureComposer.functionNameInput).type('FunctionNameFHIR');
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
+        cy.get(measureComposer.functionSaveBtn).click();
 
-//         cy.wait(2000);
+        cy.wait(2000);
 
-//         cy.get(measureComposer.cqlLibraryEditor).click();
-//         helper.verifySpinnerAppearsAndDissappears()
+        cy.get(measureComposer.cqlLibraryEditor).click();
+        helper.verifySpinnerAppearsAndDissappears()
 
-//         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
 
-//         cy.wait(2000);
+        cy.wait(2000);
 
-//         cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measurelibrary.measureLibraryTab).click()
 
-//         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-//     })
-// })
+    })
+})
 
 describe('FHIR Measure: Version error message', () => {
     before('Login', () => {
