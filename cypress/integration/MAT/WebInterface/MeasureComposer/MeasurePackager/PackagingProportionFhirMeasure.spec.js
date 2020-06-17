@@ -1,16 +1,14 @@
-import * as helper from '../../../../support/helpers';
-import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
-import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
-import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
+import * as helper from '../../../../../support/helpers';
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 
 let measureName = ''
 
 describe('Packaging: Proportion Measure', () => {
     before('Login', () => {
         oktaLogin.login()
-
-        measureName = helper.createDraftMeasure('fhirProportionMeasure', 'FHIR')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -28,7 +26,7 @@ describe('Packaging: Proportion Measure', () => {
         cy.get(createNewMeasure.modelradioFHIR).click()
         cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
+        cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
         cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
@@ -43,25 +41,25 @@ describe('Packaging: Proportion Measure', () => {
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-         //Includes
+        //Includes
 
-         cy.get(measureComposer.includes).click()
+        cy.get(measureComposer.includes).click()
 
-         cy.get(measureComposer.includesListItems).its('length').should('equal', 3)
+        cy.get(measureComposer.includesListItems).its('length').should('equal', 3)
 
-         cy.get(measureComposer.includesListItems).eq(0).should('contain.text', 'FHIRHelpers')
-         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
-         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
+        cy.get(measureComposer.includesListItems).eq(0).should('contain.text', 'FHIRHelpers')
+        cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
+        cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
 
-         cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
-         cy.get(measureComposer.searchBtn).click()
-         cy.get(measureComposer.availableLibrariesRow1checkbox).click()
-         cy.get(measureComposer.libraryAliasInputBox).type('TJC', { delay: 50 })
-         cy.get(measureComposer.saveIncludes).click()
+        cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
+        cy.get(measureComposer.searchBtn).click()
+        cy.get(measureComposer.availableLibrariesRow1checkbox).click()
+        cy.get(measureComposer.libraryAliasInputBox).type('TJC', { delay: 50 })
+        cy.get(measureComposer.saveIncludes).click()
 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.visibleWithTimeout(measureComposer.warningMessage)
 
-         //Value Sets
+        //Value Sets
 
         cy.get(measureComposer.valueSets).click()
 
@@ -95,10 +93,10 @@ describe('Packaging: Proportion Measure', () => {
 
         cy.get(measureComposer.cqlLibraryEditor).click()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor, 'CQL Library Editor')
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
+        helper.waitToContainText(measureComposer.warningMessage, 'You are viewing CQL with no validation errors.')
 
         cy.wait(2000)
 
@@ -108,6 +106,7 @@ describe('Packaging: Proportion Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        // Initial Population
         cy.get(measureComposer.initialPopulation).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -116,7 +115,29 @@ describe('Packaging: Proportion Measure', () => {
         cy.get(measureComposer.initialPopulationSaveBtn).click()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'Changes to Initial Populations have been successfully saved.')
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
+
+        // Denominator
+        cy.get(measureComposer.denominator).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+        cy.get(measureComposer.denominatorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
+
+        // Numerator
+        cy.get(measureComposer.numerator).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+        cy.get(measureComposer.numeratorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
 
         //navigate to Measure Packager
         cy.get(measureComposer.measurePackager).click()
@@ -124,9 +145,11 @@ describe('Packaging: Proportion Measure', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
-        cy.get(measureComposer.populationsListItems).its('length').should('equal', 1)
+        cy.get(measureComposer.populationsListItems).its('length').should('equal', 3)
 
         cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
+        cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Denominator')
+        cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Numerator')
 
         //Package Grouping
         cy.get(measureComposer.addAllItemsToGrouping).click()
@@ -141,7 +164,7 @@ describe('Packaging: Proportion Measure', () => {
 
         cy.wait(3000)
 
-        helper.waitToContainText(measureComposer.packageWarningMessage,'Measure packaged successfully. Please access the Measure Library to export the measure.')
+        helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
