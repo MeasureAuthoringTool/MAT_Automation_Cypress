@@ -1,8 +1,8 @@
-import * as helper from '../../../../support/helpers';
-import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
-import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
-import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
+import * as helper from '../../../../../support/helpers';
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 
 describe('Packaging: Cohort Measure', () => {
     before('Login', () => {

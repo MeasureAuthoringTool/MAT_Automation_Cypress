@@ -49,6 +49,14 @@ describe('FHIR Proportion Measure', () => {
         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
         
+         cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
+         cy.get(measureComposer.searchBtn).click()
+         cy.get(measureComposer.availableLibrariesRow1checkbox).click()
+         cy.get(measureComposer.libraryAliasInputBox).type('TJC', { delay: 50 })
+         cy.get(measureComposer.saveIncludes).click()
+
+         helper.visibleWithTimeout(measureComposer.warningMessage)
+        
         //Value Sets
 
         cy.get(measureComposer.valueSets).click();
@@ -67,22 +75,95 @@ describe('FHIR Proportion Measure', () => {
         helper.addValueSet('2.16.840.1.114222.4.11.836')
         helper.addValueSet('2.16.840.1.113762.1.4.1125.2')
 
+         // Definition
+
+        cy.get(measureComposer.definition).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+        helper.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
+        helper.addDefinition('Numerator', 'true')
+
         //CQL Library Editor
 
         cy.get(measureComposer.cqlLibraryEditor).click()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
-       
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor, 'CQL Library Editor')
 
-        cy.get(measureComposer.cqlLibraryEditorInput).should('contain.text', 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307');
-        cy.get(measureComposer.cqlLibraryEditorInput).should('contain.text', 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1182.118');
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'You are viewing CQL with no validation errors.')
+
+        cy.wait(2000)
+
+        // Population Workspace
+
+        cy.get(measureComposer.populationWorkspace).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        // Initial Population
+        cy.get(measureComposer.initialPopulation).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
+        cy.get(measureComposer.initialPopulationSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
+
+        // Denominator
+        cy.get(measureComposer.denominator).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+        cy.get(measureComposer.denominatorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
+
+        // Numerator
+        cy.get(measureComposer.numerator).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+        cy.get(measureComposer.numeratorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
+
+        //navigate to Measure Packager
+        cy.get(measureComposer.measurePackager).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
+        cy.get(measureComposer.populationsListItems).its('length').should('equal', 3)
+
+        cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
+        cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Denominator')
+        cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Numerator')
+
+        //Package Grouping
+        cy.get(measureComposer.addAllItemsToGrouping).click()
+        cy.get(measureComposer.saveGrouping).click()
+
+        cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
+
+        //Create Measure Package
+        cy.get(measureComposer.createMeasurePackageBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.wait(3000)
+
+        helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
+
         cy.get(measurelibrary.measureLibraryTab).click()
-        
+
         helper.verifySpinnerAppearsAndDissappears()
     })
 })
