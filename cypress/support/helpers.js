@@ -77,6 +77,7 @@ export const loginUMLS = () => {
 
   cy.get(matheader.UMLS).click()
 
+  visibleWithTimeout(matheader.UMLSTitle)
   visibleWithTimeout(matheader.UMLSUserName)
   visibleWithTimeout(matheader.UMLSPassword)
 
@@ -85,8 +86,12 @@ export const loginUMLS = () => {
   enterText(matheader.UMLSUserName, UMLS_userName)
   enterText(matheader.UMLSPassword, UMLS_password)
 
+  visibleWithTimeout(matheader.UMLS_signIn)
+  enabledWithTimeout(matheader.UMLS_signIn)
   cy.get(matheader.UMLS_signIn).click()
 
+  visibleWithTimeout(matheader.UMLS_continue)
+  enabledWithTimeout(matheader.UMLS_continue)
   cy.get(matheader.UMLS_continue).click()
 
 }
@@ -368,6 +373,7 @@ export const createDraftCqlLibrary = (library, model) => {
 
   })
 
+  enabledWithTimeout(cqlLibrary.newLibraryBtn)
   cy.get(cqlLibrary.newLibraryBtn).click()
 
   cy.get(createNewCqlLibrary.cqlLibraryName).type(name, { delay: 50 })

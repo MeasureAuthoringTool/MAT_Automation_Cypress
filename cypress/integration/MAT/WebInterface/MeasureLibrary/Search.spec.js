@@ -11,7 +11,7 @@ describe('Filter', () => {
 
         oktaLogin.login()
 
-        name = 'CreateNew' + Date.now()
+        name = 'A_' + Date.now()
 
         fhirMeasure = helper.createDraftMeasure(name+'fhir','fhir')
         qdmMeasure = helper.createDraftMeasure(name+'QDM','QDM')

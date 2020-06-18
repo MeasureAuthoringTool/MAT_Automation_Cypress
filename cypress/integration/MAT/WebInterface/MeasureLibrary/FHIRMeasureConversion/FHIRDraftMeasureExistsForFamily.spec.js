@@ -73,6 +73,7 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         // Convert First measure to FHIR
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.row1MeasureSearch).click();
+        cy.pause()
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -80,6 +81,7 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         cy.wait(3000)
 
         // Convert Second measure to FHIR
+        helper.visibleWithTimeout(measureLibrary.row3MeasureSearch)
         cy.get(measureLibrary.row3MeasureSearch).click();
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 

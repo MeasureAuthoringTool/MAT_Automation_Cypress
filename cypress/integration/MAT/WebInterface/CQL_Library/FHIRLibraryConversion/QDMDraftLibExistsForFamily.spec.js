@@ -20,6 +20,8 @@ describe('CQL Library: Validate Scenario 1 Conversion to FHIR', () => {
 
     it('Scenario 1: QDM/CQL draft Library exists for that family', () => {
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+
         helper.enterText(cqlLibrary.searchInputBox, libraryName)
         cy.get(cqlLibrary.searchBtn).click();
 

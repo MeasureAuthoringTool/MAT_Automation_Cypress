@@ -11,6 +11,7 @@ export const secondMATUser = '.dropdown-menu > [title="Top Level User @ Semantic
 
 //UMLS
 export const UMLS = ':nth-child(1) > .loginSpacer > :nth-child(1) > .btn > span'
+export const UMLSTitle = 'strong'
 export const UMLSUserName = '#inputUserId'
 export const UMLSPassword = '#inputPwd'
 export const UMLS_signIn = ':nth-child(7) > [align="left"] > table > tbody > tr > :nth-child(1) > .btn'

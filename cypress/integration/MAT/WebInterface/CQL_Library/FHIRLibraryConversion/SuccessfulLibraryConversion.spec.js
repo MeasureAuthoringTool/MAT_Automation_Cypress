@@ -20,6 +20,7 @@ describe('CQL Library: Validate Scenario 3a Successfull Conversion to FHIR', () 
 
     it('Scenario 3a: ', () => {
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, libraryName)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -33,6 +34,7 @@ describe('CQL Library: Validate Scenario 3a Successfull Conversion to FHIR', () 
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
@@ -40,6 +42,7 @@ describe('CQL Library: Validate Scenario 3a Successfull Conversion to FHIR', () 
 
         cy.wait(3000)
 
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).should('contain.text', 'FHIR / CQL')
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
 

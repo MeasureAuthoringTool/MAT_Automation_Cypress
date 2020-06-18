@@ -1,6 +1,7 @@
 describe('OrchestrationMeasure', () => {
 
     it('Validation Success', () => {
+        this.skip()
         cy.request({
             url: '/mat-fhir-services/orchestration/measure',
             method: 'PUT',
@@ -15,6 +16,7 @@ describe('OrchestrationMeasure', () => {
     })
 
     it('Validation Not Found', () => {
+        this.skip()
         cy.request({
             url: '/mat-fhir-services/orchestration/measure',
             method: 'PUT',
@@ -32,6 +34,7 @@ describe('OrchestrationMeasure', () => {
     })
 
     it('Validation Not Found NULL ID', () => {
+        this.skip()
         cy.request({
             url: '/mat-fhir-services/orchestration/measure',
             method: 'PUT',
