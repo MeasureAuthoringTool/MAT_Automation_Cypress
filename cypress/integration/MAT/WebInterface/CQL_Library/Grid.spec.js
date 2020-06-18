@@ -18,8 +18,14 @@ describe('CQL Library Grid Selection', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.createDraftCqlLibrary('qdmDraft')
+
+        helper.createDraftCqlLibrary('fhirDraft', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
+
         //populating search table
-        cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
+        helper.enabledWithTimeout(cqlLibrary.searchBtn)
         cy.get(cqlLibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -36,6 +42,7 @@ describe('CQL Library Grid Selection', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         //populating recent activity grid
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
         helper.verifySpinnerAppearsAndDissappears()

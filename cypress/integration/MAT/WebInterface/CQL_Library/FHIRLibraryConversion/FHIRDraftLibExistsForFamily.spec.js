@@ -9,6 +9,8 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
     before('Login', () => {
         oktaLogin.login()
 
+        helper.verifySpinnerAppearsAndDissappears()
+
         libraryName = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
     })
     beforeEach('Preserve Cookies', () => {
@@ -20,7 +22,10 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
 
     it('Scenario 2: FHIR/CQL draft Library exists for that family', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
         // Versioning First library
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, libraryName)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -35,6 +40,7 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         // Create First Draft library
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
         cy.get(cqlLibrary.createDraftCqllibrariesBtn).click();
 
@@ -52,6 +58,7 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         // Versioning draft library
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
         cy.get(cqlLibrary.majorVersionTypeRadio).click();
@@ -64,12 +71,12 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         // Convert First library to FHIR
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
-
-        cy.wait(3000)
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Convert Second library to FHIR
         helper.visibleWithTimeout(cqlLibrary.row3CqlLibrarySearch)

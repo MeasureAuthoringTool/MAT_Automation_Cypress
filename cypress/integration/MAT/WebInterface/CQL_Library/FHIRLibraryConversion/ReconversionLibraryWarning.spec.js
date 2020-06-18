@@ -19,6 +19,7 @@ describe('CQL Library: Validate Scenario 3b Conversion to FHIR', () => {
 
     it('Scenario 3b: Reconverting QDM library: Warning message', () => {
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, libraryName)
         cy.get(cqlLibrary.searchBtn).click();
 
