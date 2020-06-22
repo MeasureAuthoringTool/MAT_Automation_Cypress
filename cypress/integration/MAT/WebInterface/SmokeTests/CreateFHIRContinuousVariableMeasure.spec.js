@@ -66,7 +66,6 @@ describe('FHIR Continuous Variable Measure', () => {
         helper.addValueSet('2.16.840.1.113883.3.666.5.307')
         helper.addValueSet('2.16.840.1.113762.1.4.1182.118')
         helper.addValueSet('2.16.840.1.113762.1.4.1111.161')
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
         helper.addValueSet('2.16.840.1.114222.4.11.837')
         helper.addValueSet('2.16.840.1.113883.3.3157.1004.20')
         helper.addValueSet('2.16.840.1.113762.1.4.1')
