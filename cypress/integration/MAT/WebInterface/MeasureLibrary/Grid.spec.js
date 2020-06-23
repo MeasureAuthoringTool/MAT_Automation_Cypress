@@ -40,6 +40,7 @@ describe('Measure Library Row Selection', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
         cy.get(measurelibrary.row1RecentActivity).click()
 
         helper.isChecked(measurelibrary.row1RecentActivityCheckbox)
@@ -62,7 +63,9 @@ describe('Measure Library Row Selection', () => {
     })
 
     it('Measure Search Table: Row Selection', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(measurelibrary.searchBtn)
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -70,12 +73,17 @@ describe('Measure Library Row Selection', () => {
         helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
         helper.notVisible(measurelibrary.clearSelectedBtn)
 
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
         helper.visible(measurelibrary.clearSelectedBtn)
 
+        helper.visibleWithTimeout(measurelibrary.row2MeasureSearch)
         cy.get(measurelibrary.row2MeasureSearch).click()
 
         helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)

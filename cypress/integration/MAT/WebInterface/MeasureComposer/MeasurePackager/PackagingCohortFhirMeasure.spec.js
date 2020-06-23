@@ -18,7 +18,7 @@ describe('Packaging: Cohort Measure', () => {
     it('Validate the measure packaging for Cohort FHIR Measure', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'createFhirCohortMeasure' + Date.now()
+        let measureName = 'CreateFhirCohortMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()

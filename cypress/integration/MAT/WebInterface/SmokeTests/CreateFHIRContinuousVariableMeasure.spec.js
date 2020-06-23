@@ -184,9 +184,9 @@ describe('FHIR Continuous Variable Measure', () => {
         cy.get(measureComposer.createMeasurePackageBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(3000)
-
+        helper.visibleWithTimeout(measureComposer.packageWarningMessage)
         helper.waitToContainText(measureComposer.packageWarningMessage,'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
         cy.get(measurelibrary.measureLibraryTab).click()

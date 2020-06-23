@@ -9,7 +9,7 @@ describe('CQL Editor: Validate the Valueset Format', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
+        fhirMeasure = helper.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {
