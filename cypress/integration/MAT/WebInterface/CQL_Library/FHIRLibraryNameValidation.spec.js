@@ -68,20 +68,12 @@ describe('FHIR Library: Validate the library naming rules', () => {
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
     })
 
     it('Validate the FHIR name requirement: Incorrect format', () => {
 
         nameWithSpecialSymbols = 'NewFhir@' + Date.now()
         nameWithSpaces = 'New Fhir' + Date.now()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
         cy.get(cqlLibrary.newLibraryBtn).click()
@@ -107,19 +99,11 @@ describe('FHIR Library: Validate the library naming rules', () => {
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
     })
 
     it('Successfully create a FHIR Library with Start with an Upper Case', () => {
 
         firstCharacterUpperCase = 'NewFhirLibrary' + Date.now()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
         cy.get(cqlLibrary.newLibraryBtn).click()
@@ -134,7 +118,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measurelibrary.cqlLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -143,10 +127,6 @@ describe('FHIR Library: Validate the library naming rules', () => {
     it('Successfully create a FHIR Library with Start with an Upper Case, followed by alpha-numeric', () => {
 
         firstCharacterUpperCaseFollowedAlphaNumeric = 'NewFhir001Library' + Date.now()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
         cy.get(cqlLibrary.newLibraryBtn).click()
@@ -161,7 +141,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measurelibrary.cqlLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -170,10 +150,6 @@ describe('FHIR Library: Validate the library naming rules', () => {
     it('Successfully create a FHIR Library with Start with an Upper Case, followed by underscore', () => {
 
         firstCharacterUpperCaseFollowedUnderscore = 'New_Fhir_Library' + Date.now()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
         cy.get(cqlLibrary.newLibraryBtn).click()

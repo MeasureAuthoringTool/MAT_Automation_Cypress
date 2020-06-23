@@ -11,7 +11,7 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
         oktaLogin.login()
 
         qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure','QDM')
-        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure','FHIR')
+        fhirMeasure = helper.createDraftMeasure('FhirDraftMeasure','FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {

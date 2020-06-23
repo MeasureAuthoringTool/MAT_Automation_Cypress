@@ -13,8 +13,12 @@ describe('Standalone Library: Version and include with measure', () => {
     before('Login', () => {
         oktaLogin.login()
 
+        cy.get(measurelibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
         qdmLibraryName = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
-        fhirLibraryName = helper.createDraftCqlLibrary('fhirCqlLibrary', 'FHIR')
+        fhirLibraryName = helper.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {
@@ -26,6 +30,10 @@ describe('Standalone Library: Version and include with measure', () => {
 
     it('QDM Standalone Library: Version and include with QDM measure', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmLibraryName)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -47,7 +55,9 @@ describe('Standalone Library: Version and include with measure', () => {
         // Navigate to CQL Library
         cy.get(measurelibrary.cqlLibraryTab).click()
 
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmLibraryName)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -56,7 +66,7 @@ describe('Standalone Library: Version and include with measure', () => {
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
 
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
-        helper.enabledWithTimeout(cqlLibrary.majorVersionTypeRadio)
+        helper.visibleWithTimeout(cqlLibrary.majorVersionTypeRadio)
         cy.get(cqlLibrary.majorVersionTypeRadio).click();
         cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
 
@@ -110,7 +120,7 @@ describe('Standalone Library: Version and include with measure', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+        cy.get(measurelibrary.cqlLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -118,8 +128,10 @@ describe('Standalone Library: Version and include with measure', () => {
 
     it('FHIR Standalone Library: Version and include with FHIR measure', () => {
 
-        cy.get(measurelibrary.cqlLibraryTab).click();
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+        helper.visibleWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirLibraryName)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -161,7 +173,7 @@ describe('Standalone Library: Version and include with measure', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'createFHIRMeasure' + Date.now()
+        let measureName = 'CreateFHIRMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()

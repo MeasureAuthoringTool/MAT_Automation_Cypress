@@ -124,7 +124,7 @@ describe('Measure Library Recent Activity Grid', () => {
         //creating new versioned measure
         versionMeasure = helper.createMajorVersionMeasure()
 
-        fhirMeasure = helper.createDraftMeasure('fhirDraft','FHIR')
+        fhirMeasure = helper.createDraftMeasure('FhirDraft','FHIR')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -467,7 +467,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        fhirMeasure = helper.createDraftMeasure('fhirDraft','FHIR')
+        fhirMeasure = helper.createDraftMeasure('FhirDraft','FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {

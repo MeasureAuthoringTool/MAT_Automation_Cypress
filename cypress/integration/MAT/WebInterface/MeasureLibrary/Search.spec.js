@@ -13,7 +13,7 @@ describe('Filter', () => {
 
         name = 'A_' + Date.now()
 
-        fhirMeasure = helper.createDraftMeasure(name+'fhir','fhir')
+        fhirMeasure = helper.createDraftMeasure(name+'Fhir','FHIR')
         qdmMeasure = helper.createDraftMeasure(name+'QDM','QDM')
 
     })

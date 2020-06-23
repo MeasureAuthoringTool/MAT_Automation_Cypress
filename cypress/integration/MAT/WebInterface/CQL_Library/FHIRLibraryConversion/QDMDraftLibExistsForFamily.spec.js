@@ -27,6 +27,7 @@ describe('CQL Library: Validate Scenario 1 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
 
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
@@ -34,7 +35,9 @@ describe('CQL Library: Validate Scenario 1 Conversion to FHIR', () => {
         cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
         cy.get(cqlLibrary.createDraftCqllibrariesBtn).click();
 

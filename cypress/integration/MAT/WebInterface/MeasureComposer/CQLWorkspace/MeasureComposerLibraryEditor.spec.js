@@ -11,7 +11,7 @@ describe('Measure: CQL Editor message', () => {
         oktaLogin.login()
 
         qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure', 'QDM')
-        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
+        fhirMeasure = helper.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {
@@ -98,7 +98,7 @@ describe('FHIR Measure: Version error message', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
+        fhirMeasure = helper.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {
@@ -149,7 +149,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
+        fhirMeasure = helper.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {
