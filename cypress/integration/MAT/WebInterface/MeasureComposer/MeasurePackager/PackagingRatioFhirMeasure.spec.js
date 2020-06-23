@@ -20,7 +20,7 @@ describe('Packaging: Ratio Measure', () => {
     it('Validate the measure packaging for Ratio FHIR Measure', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'createFhirRatioMeasure' + Date.now()
+        measureName = 'CreateFhirRatioMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
@@ -161,9 +161,10 @@ describe('Packaging: Ratio Measure', () => {
         cy.get(measureComposer.createMeasurePackageBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(3000)
-
+        helper.visibleWithTimeout(measureComposer.packageWarningMessage)
         helper.waitToContainText(measureComposer.packageWarningMessage,'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
         cy.get(measurelibrary.measureLibraryTab).click()

@@ -117,6 +117,7 @@ describe('QDM Continuous Variable Measure', () => {
         cy.get(measureComposer.addNewBtn).click()
         cy.get(measureComposer.functionNameInput).type('Arrival and Departure Time', { delay: 50 })
         cy.get(measureComposer.addArgument).click()
+        helper.enabledWithTimeout(measureComposer.argumentNameInput)
         helper.enterText(measureComposer.argumentNameInput, 'Encounter')
         cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')

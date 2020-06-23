@@ -55,7 +55,8 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         cy.get(measureLibrary.measureLibraryTab).click();
 
-        cy.wait(2000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Versioning draft measure
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
@@ -69,13 +70,15 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         cy.get(measureLibrary.continueBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Convert First measure to FHIR
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.row1MeasureSearch).click();
-        cy.pause()
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 
+        helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 

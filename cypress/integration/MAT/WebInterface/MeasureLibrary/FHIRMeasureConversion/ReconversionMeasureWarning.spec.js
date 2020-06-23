@@ -9,6 +9,8 @@ describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
         oktaLogin.login()
 
         measureName = helper.createDraftMeasure('qdmCqlMeasure', 'QDM')
+
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -18,7 +20,9 @@ describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
     })
 
     it('Scenario 3b: Reconverting QDM measure: Warning message', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(measureLibrary.searchInputBox)
         helper.enterText(measureLibrary.searchInputBox, measureName)
         cy.get(measureLibrary.searchBtn).click();
 
@@ -36,19 +40,20 @@ describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureLibrary.row1MeasureSearch).click();
-        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
+        cy.get(measureLibrary.row1MeasureSearch).click()
+        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
-        
-        cy.wait(3000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureLibrary.row2MeasureSearch).click();
-        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
+        helper.visibleWithTimeout(measureLibrary.row2MeasureSearch)
+        cy.get(measureLibrary.row2MeasureSearch).click()
+        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click()
 
         // FHIR Warning Dialog
         cy.get(measureLibrary.fhirConversionWarningMessage).should('contain.text', 'Are you sure you want to convert this measure again? The existing FHIR measure will be overwritten.');
-        cy.get(measureLibrary.fhirConversionNoBtn).click();
+        cy.get(measureLibrary.fhirConversionNoBtn).click()
 
     })
 
