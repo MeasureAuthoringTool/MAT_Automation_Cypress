@@ -1,4 +1,5 @@
 import * as helper from './helpers'
+import * as measurelibrary from "../pom/MAT/WI/MeasureLibrary";
 
 const oktaUrl = Cypress.env('oktaUrl')
 const redirectUri = Cypress.env('redirectUri')
@@ -69,6 +70,7 @@ export const login = (user) => {
       win.sessionStorage.clear()
     })
     oktaLogin()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
     helper.loginUMLS()
   }
   else if (user === 'alternative'){
@@ -80,6 +82,7 @@ export const login = (user) => {
       win.sessionStorage.clear()
     })
     oktaLogin(alt_username, password, alt_name, alt_email)
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
     helper.loginUMLS()
   }
   else if (user === 'multiple'){

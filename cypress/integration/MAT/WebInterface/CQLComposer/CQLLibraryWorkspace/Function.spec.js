@@ -16,7 +16,9 @@ describe('CQL Composer: CQL Library Workspace: Function', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         qdmLibrary = helper.createDraftCqlLibrary('qdmDraftLibrary','QDM')
-        fhirLibrary = helper.createDraftCqlLibrary('fhirDraftLibrary','FHIR')
+        fhirLibrary = helper.createDraftCqlLibrary('FhirDraftLibrary','FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -26,7 +28,9 @@ describe('CQL Composer: CQL Library Workspace: Function', () => {
     })
 
     it('QDM Add Argument: Select QDM Datatype Object Data population', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
@@ -56,7 +60,9 @@ describe('CQL Composer: CQL Library Workspace: Function', () => {
     })
 
     it('FHIR Add Argument: Select FHIR Datatype Object Data population', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 

@@ -13,7 +13,9 @@ describe('CQL Composer: CQL Editor message', () => {
 
 
         qdmCqlLibrary = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
-        fhirCqlLibrary = helper.createDraftCqlLibrary('fhirCqlLibrary', 'FHIR')
+        fhirCqlLibrary = helper.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -24,6 +26,9 @@ describe('CQL Composer: CQL Editor message', () => {
 
     it('QDM Library: Validate the success message on CQL Library Editor', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -48,7 +53,9 @@ describe('CQL Composer: CQL Editor message', () => {
     })
 
     it('FHIR Library: Validate the success message on CQL Library Editor', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -71,7 +78,9 @@ describe('CQL Composer: CQL Editor message', () => {
     })
 
     it('QDM Library: Validate the error message on CQL Library Editor', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -104,6 +113,9 @@ describe('CQL Composer: CQL Editor message', () => {
 
     it('FHIR Library: Validate the error message on CQL Library Editor', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
@@ -140,7 +152,9 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        fhirCqlLibrary = helper.createDraftCqlLibrary('fhirCqlLibrary', 'FHIR')
+        fhirCqlLibrary = helper.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -152,6 +166,9 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 
     it('FHIR Library: Validate the warning message when editing directly on CQL Library Editor', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 

@@ -20,7 +20,7 @@ describe('CQL Library Grid Selection', () => {
 
         helper.createDraftCqlLibrary('qdmDraft')
 
-        helper.createDraftCqlLibrary('fhirDraft', 'FHIR')
+        helper.createDraftCqlLibrary('FhirDraft', 'FHIR')
 
         helper.verifySpinnerAppearsAndDissappears()
 

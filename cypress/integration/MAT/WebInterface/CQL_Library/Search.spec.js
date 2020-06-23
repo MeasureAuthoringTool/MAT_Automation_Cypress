@@ -18,7 +18,7 @@ describe('Filter', () => {
 
         name = 'A_' + Date.now()
 
-        fhirCqlLibrary = helper.createDraftCqlLibrary(name+'fhir','fhir');
+        fhirCqlLibrary = helper.createDraftCqlLibrary(name+'Fhir','fhir');
         qdmCqlLibrary = helper.createDraftCqlLibrary(name+'QDM','QDM')
 
     })
@@ -30,6 +30,7 @@ describe('Filter', () => {
     })
     it('QDM/CQL, FHIR/CQL or ALL', () => {
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox,name)
         cy.get(cqlLibrary.searchBtn).click()
 

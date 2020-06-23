@@ -18,7 +18,7 @@ describe('FHIR Continuous Variable Measure', () => {
     it('Continuous Variable FHIR, creation', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'createFhirContinuousMeasure' + Date.now()
+        let measureName = 'CreateFhirContinuousMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()

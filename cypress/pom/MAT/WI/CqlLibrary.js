@@ -6,7 +6,7 @@ export const title = '.contentWithHeadingHeader > h1'
 //Search
 export const filterByMyLibrariesChkBox = '.searchWidgetCheckBox .customCheckBox'
 export const searchBtn = '#SearchWidgetButton_forCqlLibrary'
-export const searchInputBox = '#SearchFilterWidget_SearchInputHPanel_forCqlLibrary > tbody > tr > td > input'
+export const searchInputBox = '#SearchFilterWidget_SearchInputHPanel_forCqlLibrary > tbody > tr > td > .form-control'
 export const modelTypeListBox = '#SearchFilterWidget_verticalPanel_forCqlLibrary #modelType'
 
 //Recent Activity Table

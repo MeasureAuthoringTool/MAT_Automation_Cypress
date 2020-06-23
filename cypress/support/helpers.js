@@ -357,7 +357,7 @@ export const createDraftCqlLibrary = (library, model) => {
   let name = ''
 
   if (library === undefined) {
-    name = 'draftCqllibrary' + Date.now()
+    name = 'DraftCqllibrary' + Date.now()
   }
   else {
     name = library + Date.now()
@@ -372,7 +372,8 @@ export const createDraftCqlLibrary = (library, model) => {
     }
 
   })
-
+  verifySpinnerAppearsAndDissappears()
+  verifySpinnerAppearsAndDissappears()
   enabledWithTimeout(cqlLibrary.newLibraryBtn)
   cy.get(cqlLibrary.newLibraryBtn).click()
 
@@ -939,11 +940,11 @@ export const spinnerNotVisible = () => {
   // waitToHaveText(matheader.spinnerShadow,'Loading Please Wait...')
   // waitToHaveText(matheader.spinnerShadow,'...')
 
-  notVisibleWithTimeout(matheader.spinner, 60000)
-  notVisibleWithTimeout(matheader.spinnerWrapper, 60000)
-  notVisibleWithTimeout(matheader.spinnerShadow, 60000)
-  notVisibleWithTimeout(matheader.spinnerModal, 60000)
-  notVisibleWithTimeout(matheader.spinner, 60000)
+  notVisibleWithTimeout(matheader.spinner, 90000)
+  notVisibleWithTimeout(matheader.spinnerWrapper, 90000)
+  notVisibleWithTimeout(matheader.spinnerShadow, 90000)
+  notVisibleWithTimeout(matheader.spinnerModal, 90000)
+  notVisibleWithTimeout(matheader.spinner, 90000)
 }
 export const spinnerExists = () => {
   existsWithTimeout(matheader.spinner, 60000)
@@ -957,7 +958,6 @@ export const spinnerNotExists = () => {
 export const verifySpinnerAppearsAndDissappears = () => {
 
   spinnerNotVisible()
-
   cy.wait(1500)
 }
 export const verifySpinnerExists = () => {

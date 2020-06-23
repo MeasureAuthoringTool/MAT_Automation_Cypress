@@ -1,7 +1,6 @@
 describe('filtered', () => {
 
-    it('Validation Success', () => {
-        this.skip()
+    it.skip('Validation Success', () => {
         cy.request({
             url: '/qdm-qicore-mapping-services/filtered',
             method: 'GET'
@@ -13,8 +12,7 @@ describe('filtered', () => {
 
 describe('find', () => {
 
-    it('Validation Success', () => {
-        this.skip()
+    it.skip('Validation Success', () => {
         cy.request({
             url: '/qdm-qicore-mapping-services/find',
             method: 'GET'

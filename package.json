@@ -24,6 +24,7 @@
         "compile:utils": "tsc -p ./utils/tsconfig.json;",
         "lint:tslint": "tslint -c tslint.json './cypress/integration/**/*spec.ts' 'utils/**/*.ts'",
         "dev:all:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/**/*.spec.js' --browser chrome;",
+        "TEST": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=matDev --spec 'cypress/integration/MAT/WebInterface/CQL_Library/FHIRLibraryConversion/*.spec.js' --browser chrome;",
         "matdev:all:ui:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=matDev --spec 'cypress/integration/MAT/WebInterface/**/*.spec.js' --browser chrome;",
         "dev:all:ui:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/**/*.spec.js' --browser chrome;",
         "all:service:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/Services/**/*.spec.js' --browser chrome;",
@@ -33,6 +34,7 @@
         "matdev:all:ui:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run matdev:all:ui:tests; npm run combine:reports; npm run generateOne:report",
         "dev:all:ui:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run dev:all:ui:tests; npm run combine:reports; npm run generateOne:report",
         "dev:all:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run dev:all:tests; npm run combine:reports; npm run generateOne:report",
+        "TEST:report": "npm run delete:reports; npm run delete:mochawesome; npm run TEST; npm run combine:reports; npm run generateOne:report",
         "all:service:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run all:service:tests; npm run combine:reports; npm run generateOne:report",
         "delete:mochawesome": "rm mochawesome.json",
         "delete:reports": "rm cypress/results/*.json"

@@ -12,7 +12,9 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         oktaLogin.login()
 
         qdmCqlLibrary = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
-        fhirCqlLibrary = helper.createDraftCqlLibrary('fhirCqlLibrary', 'FHIR')
+        fhirCqlLibrary = helper.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -21,7 +23,9 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
         helper.logout()
     })
     it('Enabled/Disabled QDM CQL Library Owner', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
@@ -50,7 +54,9 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
     })
 
     it('Enabled/Disabled FHIR CQL Library Owner', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
@@ -79,7 +85,9 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
     })
 
     it('QDM Insert Attribute Data population', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
@@ -109,7 +117,9 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
     })
 
     it('FHIR Insert Attribute Data population', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
@@ -141,7 +151,9 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
 
 
     it('FHIR Library: Validate the Attribute drop down is disabled', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
