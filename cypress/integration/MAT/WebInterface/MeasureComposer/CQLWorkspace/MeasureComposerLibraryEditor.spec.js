@@ -126,7 +126,7 @@ describe('FHIR Measure: Version error message', () => {
         // CQL Library Editor
         cy.get(measureComposer.cqlLibraryEditor).click();
         helper.verifySpinnerAppearsAndDissappears()
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}include Hospice_FHIR4 version '1.0' called Hospice");
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}include Hospice_FHIR4 version '1.0' called Hospice");
         cy.get(measureComposer.cqlEditorSaveBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -188,7 +188,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
         cy.get(measureComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+        cy.get(measurelibrary.measureLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
