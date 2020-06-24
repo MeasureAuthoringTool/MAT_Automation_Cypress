@@ -55,6 +55,12 @@ export const measureStewardListBox = '#stewardListBox'
 export const referenceTypeListBox = '.gwt-ListBox'
 export const referenceDescriptionRow = '.GB-MJYKBBD > div > span'
 
+// Improvement Notation
+
+export const improvementNotationTitle = '#measureDetailsView_HeadingContent'
+export const improvementNotationDropDown = '.gwt-ListBox'
+export const improvementNotationSaveBtn = ':nth-child(6) > [align="left"] > table > tbody > tr > td > .btn-toolbar > .btn'
+
 
 
 
