@@ -1,4 +1,5 @@
 import * as helper from '../../../../support/helpers'
+import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
@@ -56,17 +57,17 @@ describe('Create CQL Library', () => {
 
         //Value Sets
 
-        helper.addValueSet('2.16.840.1.113883.17.4077.2.2079')
-        helper.addValueSet('2.16.840.1.113883.3.526.3.1520')
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.299')
+        dataCreation.addValueSet('2.16.840.1.113883.17.4077.2.2079')
+        dataCreation.addValueSet('2.16.840.1.113883.3.526.3.1520')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.299')
 
         //codes
 
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2018-09/Code/448951000124107/Info')
-        helper.addCode('CODE:/CodeSystem/LOINC/Version/2.66/Code/21112-8/Info')
-        helper.addCode('CODE:/CodeSystem/CPT/Version/2015/Code/99291/Info')
-        helper.addCode('CODE:/CodeSystem/DischargeDisposition/Version/HL7V2.5/Code/20/Info')
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2019-09/Code/371828006/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2018-09/Code/448951000124107/Info')
+        dataCreation.addCode('CODE:/CodeSystem/LOINC/Version/2.66/Code/21112-8/Info')
+        dataCreation.addCode('CODE:/CodeSystem/CPT/Version/2015/Code/99291/Info')
+        dataCreation.addCode('CODE:/CodeSystem/DischargeDisposition/Version/HL7V2.5/Code/20/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2019-09/Code/371828006/Info')
 
         //Parameter
 
@@ -83,32 +84,32 @@ describe('Create CQL Library', () => {
 
         //Definition
 
-        helper.addDefinition('Emergency Department Visit During Measurement Period','( ["Encounter, Performed": "Emergency Department Visit"]\n' +
+        dataCreation.addDefinition('Emergency Department Visit During Measurement Period','( ["Encounter, Performed": "Emergency Department Visit"]\n' +
             '\tunion ["Encounter, Performed": "Critical care, evaluation and management of the critically ill or critically injured patient; first 30-74 minutes"] ) EDVisit\n' +
             '\twhere EDVisit.relevantPeriod during "Measurement Period"\n' +
             '\t\tand EDVisit.dischargeDisposition is not null\n' +
             '\t\tand EDVisit.lengthOfStay > 0 \'minutes\'')
 
-        helper.addDefinition('Initial Population','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
+        dataCreation.addDefinition('Initial Population','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
             '  with ["Patient Characteristic Birthdate": "Birth date"] BirthDate\n' +
             '    such that Global."CalendarAgeInYearsAt" ( BirthDate.birthDatetime, start of EDVisitMP.relevantPeriod ) >= 18')
 
-        helper.addDefinition('Measure Exclusions','"Patient Expired During Emergency Department Visit"\n' +
+        dataCreation.addDefinition('Measure Exclusions','"Patient Expired During Emergency Department Visit"\n' +
             '\tunion "Patient Has Psychiatric or Mental Health Diagnosis"\n' +
             '\tunion "Patient Transferred to Acute Care Hospital or Admitted to Observation"')
 
-        helper.addDefinition('Measure Population','"Initial Population"')
+        dataCreation.addDefinition('Measure Population','"Initial Population"')
 
-        helper.addDefinition('Patient Expired During Emergency Department Visit','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
+        dataCreation.addDefinition('Patient Expired During Emergency Department Visit','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
             '  where ( EDVisitMP.dischargeDisposition ~ "Patient deceased during stay (discharge status = dead) (finding)"\n' +
             '      or EDVisitMP.dischargeDisposition ~ "Expired (i.e. dead)"\n' +
             '  )')
 
-        helper.addDefinition('Patient Has Psychiatric or Mental Health Diagnosis','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
+        dataCreation.addDefinition('Patient Has Psychiatric or Mental Health Diagnosis','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
             '\twith ["Diagnosis": "Psychiatric/Mental Health Diagnosis"] PsychDiagnosis\n' +
             '\t\tsuch that PsychDiagnosis.prevalencePeriod overlaps after EDVisitMP.relevantPeriod')
 
-        helper.addDefinition('Patient Transferred to Acute Care Hospital or Admitted to Observation','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
+        dataCreation.addDefinition('Patient Transferred to Acute Care Hospital or Admitted to Observation','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
             '\twhere ( EDVisitMP.dischargeDisposition in "Acute Care or Inpatient Facility"\n' +
             '\t\t\tor EDVisitMP.dischargeDisposition ~ "Admission to observation unit (procedure)"\n' +
             '\t)')

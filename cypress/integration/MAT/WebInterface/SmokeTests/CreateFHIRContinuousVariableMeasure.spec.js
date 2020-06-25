@@ -1,4 +1,5 @@
 import * as helper from '../../../../support/helpers'
+import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
@@ -63,16 +64,16 @@ describe('FHIR Continuous Variable Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
-        helper.addValueSet('2.16.840.1.113762.1.4.1182.118')
-        helper.addValueSet('2.16.840.1.113762.1.4.1111.161')
-        helper.addValueSet('2.16.840.1.114222.4.11.837')
-        helper.addValueSet('2.16.840.1.113883.3.3157.1004.20')
-        helper.addValueSet('2.16.840.1.113762.1.4.1')
-        helper.addValueSet('2.16.840.1.113762.1.4.1111.162')
-        helper.addValueSet('2.16.840.1.114222.4.11.3591')
-        helper.addValueSet('2.16.840.1.114222.4.11.836')
-        helper.addValueSet('2.16.840.1.113762.1.4.1125.2')        
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
+        dataCreation.addValueSet('2.16.840.1.113883.3.3157.1004.20')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.162')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1125.2')
 
         // Codes
 
@@ -80,9 +81,9 @@ describe('FHIR Continuous Variable Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
+        dataCreation.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
 
         // Definition
 
@@ -90,8 +91,8 @@ describe('FHIR Continuous Variable Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
-        helper.addDefinition('Measure Population', '"Initial Population"')
+        dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+        dataCreation.addDefinition('Measure Population', '"Initial Population"')
 
         // Function
 

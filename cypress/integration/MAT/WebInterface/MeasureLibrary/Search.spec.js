@@ -1,6 +1,8 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
+
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -13,8 +15,10 @@ describe('Filter', () => {
 
         name = 'A_' + Date.now()
 
-        fhirMeasure = helper.createDraftMeasure(name+'Fhir','FHIR')
-        qdmMeasure = helper.createDraftMeasure(name+'QDM','QDM')
+        fhirMeasure = dataCreation.createDraftMeasure(name+'Fhir','FHIR')
+        qdmMeasure = dataCreation.createDraftMeasure(name+'QDM','QDM')
+
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     beforeEach('Preserve Cookies', () => {
@@ -24,7 +28,9 @@ describe('Filter', () => {
         helper.logout()
     })
     it('QDM/CQL, FHIR/CQL or ALL', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox,name)
         cy.get(measurelibrary.searchBtn).click()
 

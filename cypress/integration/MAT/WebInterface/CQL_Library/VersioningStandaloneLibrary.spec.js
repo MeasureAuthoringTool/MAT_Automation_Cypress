@@ -5,6 +5,7 @@ import * as oktaLogin from '../../../../support/oktaLogin'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer";
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let qdmLibraryName = ''
 let fhirLibraryName = ''
@@ -17,8 +18,10 @@ describe('Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        qdmLibraryName = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
-        fhirLibraryName = helper.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+        qdmLibraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+        fhirLibraryName = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     beforeEach('Preserve Cookies', () => {
@@ -31,11 +34,10 @@ describe('Standalone Library: Version and include with measure', () => {
     it('QDM Standalone Library: Version and include with QDM measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmLibraryName)
-        cy.get(cqlLibrary.searchBtn).click();
+        cy.get(cqlLibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -48,9 +50,9 @@ describe('Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
-        helper.addValueSet('2.16.840.1.113762.1.4.1182.118')
-        helper.addValueSet('2.16.840.1.113762.1.4.1111.161')
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
 
         // Navigate to CQL Library
         cy.get(measurelibrary.cqlLibraryTab).click()
@@ -133,11 +135,11 @@ describe('Standalone Library: Version and include with measure', () => {
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.visibleWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirLibraryName)
-        cy.get(cqlLibrary.searchBtn).click();
+        cy.get(cqlLibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
@@ -146,14 +148,16 @@ describe('Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
-        helper.addValueSet('2.16.840.1.113762.1.4.1182.118')
-        helper.addValueSet('2.16.840.1.113762.1.4.1111.161')
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
 
-        // Navigate to CQL Library
+        //Navigate to CQL Library
         cy.get(measurelibrary.cqlLibraryTab).click()
 
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirLibraryName)
         cy.get(cqlLibrary.searchBtn).click();
 

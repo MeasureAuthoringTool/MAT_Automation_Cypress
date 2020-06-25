@@ -2,6 +2,7 @@ import * as helper from '../../../../../support/helpers';
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as oktaLogin from '../../../../../support/oktaLogin';
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let libraryName = ''
 
@@ -11,7 +12,10 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        libraryName = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+        libraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+
+        helper.verifySpinnerAppearsAndDissappears()
+
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -51,13 +55,19 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
         cy.get(cqlLibrary.draftSaveAndContinueBtn).click();
         cy.get(cqlLibrary.confirmationContinue).click();
 
+        cy.get(measureLibrary.cqlLibraryTab).click()
+
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+        helper.enterText(cqlLibrary.searchInputBox, libraryName)
         cy.get(measureLibrary.cqlLibraryTab).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Versioning draft library
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
@@ -72,6 +82,7 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         // Convert First library to FHIR
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 

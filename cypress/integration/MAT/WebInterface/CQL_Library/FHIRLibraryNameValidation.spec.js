@@ -18,6 +18,10 @@ describe('FHIR Library: Validate the library naming rules', () => {
     before('Login', () => {
         oktaLogin.login()
 
+        cy.get(measurelibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -31,10 +35,6 @@ describe('FHIR Library: Validate the library naming rules', () => {
         firstCharacterLowerCase = 'newFhir' + Date.now()
         firstCharacterUnderscore = '_newFhir' + Date.now()
         firstCharacterNumeric = '001New' + Date.now()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
         cy.get(cqlLibrary.newLibraryBtn).click()

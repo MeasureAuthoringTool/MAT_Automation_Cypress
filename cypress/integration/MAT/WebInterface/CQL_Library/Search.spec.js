@@ -2,6 +2,7 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let fhirCqlLibrary = ''
 let qdmCqlLibrary = ''
@@ -18,8 +19,8 @@ describe('Filter', () => {
 
         name = 'A_' + Date.now()
 
-        fhirCqlLibrary = helper.createDraftCqlLibrary(name+'Fhir','fhir');
-        qdmCqlLibrary = helper.createDraftCqlLibrary(name+'QDM','QDM')
+        fhirCqlLibrary = dataCreation.createDraftCqlLibrary(name+'Fhir','fhir');
+        qdmCqlLibrary = dataCreation.createDraftCqlLibrary(name+'QDM','QDM')
 
     })
     beforeEach('Preserve Cookies', () => {
