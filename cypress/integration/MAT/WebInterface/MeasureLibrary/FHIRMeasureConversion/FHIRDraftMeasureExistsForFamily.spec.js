@@ -1,6 +1,7 @@
 import * as helper from '../../../../../support/helpers';
 import * as oktaLogin from '../../../../../support/oktaLogin';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let measureName = ''
 
@@ -8,7 +9,7 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        measureName = helper.createDraftMeasure('qdmCqlMeasure', 'QDM')
+        measureName = dataCreation.createDraftMeasure('qdmCqlMeasure', 'QDM')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()

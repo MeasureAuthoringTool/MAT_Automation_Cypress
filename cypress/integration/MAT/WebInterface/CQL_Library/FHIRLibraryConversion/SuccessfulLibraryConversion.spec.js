@@ -2,6 +2,7 @@ import * as helper from '../../../../../support/helpers';
 import * as oktaLogin from '../../../../../support/oktaLogin';
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let libraryName = ''
 
@@ -9,7 +10,7 @@ describe('CQL Library: Validate Scenario 3a Successfull Conversion to FHIR', () 
     before('Login', () => {
         oktaLogin.login()
 
-        libraryName = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+        libraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()

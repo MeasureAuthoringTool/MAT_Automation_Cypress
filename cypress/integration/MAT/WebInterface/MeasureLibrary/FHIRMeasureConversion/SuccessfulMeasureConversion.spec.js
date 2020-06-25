@@ -1,6 +1,7 @@
 import * as helper from '../../../../../support/helpers';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as oktaLogin from '../../../../../support/oktaLogin';
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let measureName = ''
 
@@ -8,7 +9,7 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        measureName = helper.createDraftMeasure('qdmCqlMeasure', 'QDM')
+        measureName = dataCreation.createDraftMeasure('QdmCqlMeasure', 'QDM')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -19,6 +20,9 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
 
     it('Scenario 3a: Convert QDM measure to FHIR successfully', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measureLibrary.searchInputBox)
         helper.enterText(measureLibrary.searchInputBox, measureName)
         cy.get(measureLibrary.searchBtn).click();
 
@@ -35,13 +39,16 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
         cy.get(measureLibrary.continueBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.row1MeasureSearch).click();
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(3000)
+        helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
 
         cy.get(measureLibrary.row1MeasureSearch).should('contain.text', 'FHIR / CQL')
         cy.get(measureLibrary.row1MeasureSearch).dblclick()

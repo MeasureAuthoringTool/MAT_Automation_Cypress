@@ -1,4 +1,5 @@
 import * as helper from '../../../../support/helpers'
+import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
@@ -17,6 +18,9 @@ describe('FHIR Proportion Measure', () => {
     })
     it('Proportion FHIR, creation', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.newMeasureButton)
         cy.get(measurelibrary.newMeasureButton).click()
         let measureName = 'CreateFhirProportionMeasure' + Date.now()
 
@@ -62,18 +66,18 @@ describe('FHIR Proportion Measure', () => {
         cy.get(measureComposer.valueSets).click();
 
         helper.verifySpinnerAppearsAndDissappears()
-        
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
-        helper.addValueSet('2.16.840.1.113762.1.4.1182.118')
-        helper.addValueSet('2.16.840.1.113762.1.4.1111.161')
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
-        helper.addValueSet('2.16.840.1.114222.4.11.837')
-        helper.addValueSet('2.16.840.1.113883.3.3157.1004.20')
-        helper.addValueSet('2.16.840.1.113762.1.4.1')
-        helper.addValueSet('2.16.840.1.113762.1.4.1111.162')
-        helper.addValueSet('2.16.840.1.114222.4.11.3591')
-        helper.addValueSet('2.16.840.1.114222.4.11.836')
-        helper.addValueSet('2.16.840.1.113762.1.4.1125.2')
+
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
+        dataCreation.addValueSet('2.16.840.1.113883.3.3157.1004.20')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.162')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1125.2')
 
          // Definition
 
@@ -81,9 +85,9 @@ describe('FHIR Proportion Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
-        helper.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
-        helper.addDefinition('Numerator', 'true')
+        dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+        dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
+        dataCreation.addDefinition('Numerator', 'true')
 
         //CQL Library Editor
 
@@ -157,9 +161,10 @@ describe('FHIR Proportion Measure', () => {
         cy.get(measureComposer.createMeasurePackageBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(3000)
-
+        helper.visibleWithTimeout(measureComposer.packageWarningMessage)
         helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
         cy.get(measurelibrary.measureLibraryTab).click()

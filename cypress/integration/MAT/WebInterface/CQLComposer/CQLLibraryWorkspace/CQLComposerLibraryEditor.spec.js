@@ -3,6 +3,7 @@ import * as oktaLogin from "../../../../../support/oktaLogin";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
@@ -11,9 +12,8 @@ describe('CQL Composer: CQL Editor message', () => {
     before('Login', () => {
         oktaLogin.login()
 
-
-        qdmCqlLibrary = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
-        fhirCqlLibrary = helper.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+        qdmCqlLibrary = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+        fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
         helper.verifySpinnerAppearsAndDissappears()
     })
@@ -152,7 +152,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        fhirCqlLibrary = helper.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+        fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
         helper.verifySpinnerAppearsAndDissappears()
     })
@@ -186,7 +186,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
 
         //CQL Library Editor
 

@@ -2,6 +2,7 @@ import * as helper from '../../../../../support/helpers';
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as oktaLogin from '../../../../../support/oktaLogin';
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let libraryName = ''
 
@@ -9,7 +10,7 @@ describe('CQL Library: Validate Scenario 1 Conversion to FHIR', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        libraryName = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+        libraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -21,7 +22,6 @@ describe('CQL Library: Validate Scenario 1 Conversion to FHIR', () => {
     it('Scenario 1: QDM/CQL draft Library exists for that family', () => {
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-
         helper.enterText(cqlLibrary.searchInputBox, libraryName)
         cy.get(cqlLibrary.searchBtn).click();
 

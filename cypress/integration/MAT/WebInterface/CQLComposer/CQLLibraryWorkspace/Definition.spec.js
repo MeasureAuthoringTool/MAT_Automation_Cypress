@@ -3,6 +3,7 @@ import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
@@ -11,8 +12,8 @@ describe('CQL Composer: CQL Library Workspace: Definition', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        qdmCqlLibrary = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
-        fhirCqlLibrary = helper.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+        qdmCqlLibrary = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+        fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
         helper.verifySpinnerAppearsAndDissappears()
     })
