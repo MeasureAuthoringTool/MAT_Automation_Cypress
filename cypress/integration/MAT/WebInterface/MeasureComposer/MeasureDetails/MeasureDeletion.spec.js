@@ -80,7 +80,7 @@ describe('FHIR Measure: Deletion', () => {
 describe('QDM Measure: Deletion', () => {
     before('Login', () => {
         oktaLogin.login()
-        qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'FHIR')
+        qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -109,7 +109,7 @@ describe('QDM Measure: Deletion', () => {
 
     it('Validate the QDM versioned measure deletion', () => {
 
-        qdmVersionMeasure = dataCreation.createDraftMeasure('qdmVersionMeasure', 'FHIR')
+        qdmVersionMeasure = dataCreation.createDraftMeasure('qdmVersionMeasure', 'QDM')
 
         helper.enterText(measurelibrary.searchInputBox, qdmVersionMeasure)
         cy.get(measurelibrary.searchBtn).click();
