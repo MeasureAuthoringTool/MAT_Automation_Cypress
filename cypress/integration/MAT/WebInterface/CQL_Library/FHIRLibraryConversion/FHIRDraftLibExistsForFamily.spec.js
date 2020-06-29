@@ -22,7 +22,7 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
     })
     after('Log Out', () => {
         helper.logout()
-    })
+     })
 
     it('Scenario 2: FHIR/CQL draft Library exists for that family', () => {
 
@@ -98,6 +98,5 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
         cy.get(cqlLibrary.fhirConversionWarningMessage).should('contain.text', ' Are you sure you want to convert this Cql Library again? The existing FHIR Library will be overwritten.');
         cy.get(cqlLibrary.fhirConversionReturnBtn).click();
 
-    })
-
+     })
 })
