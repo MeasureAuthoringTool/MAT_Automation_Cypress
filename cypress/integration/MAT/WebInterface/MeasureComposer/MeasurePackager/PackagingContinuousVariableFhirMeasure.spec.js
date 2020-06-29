@@ -1,4 +1,5 @@
-import * as helper from '../../../../../support/helpers';
+import * as helper from '../../../../../support/helpers'
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
@@ -21,7 +22,7 @@ describe('Packaging: Continuous Variable Measure', () => {
     it('Validate the measure packaging for Continuous Variable FHIR Measure', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'createFhirContinuousVariableMeasure' + Date.now()
+        let measureName = 'CreateFhirContinuousVariableMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
@@ -66,9 +67,9 @@ describe('Packaging: Continuous Variable Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
-        helper.addValueSet('2.16.840.1.113762.1.4.1182.118')
-        helper.addValueSet('2.16.840.1.113762.1.4.1111.161')
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
 
         // Codes
 
@@ -76,9 +77,9 @@ describe('Packaging: Continuous Variable Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
+        dataCreation.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
 
         // Definition
 
@@ -86,8 +87,8 @@ describe('Packaging: Continuous Variable Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
-        helper.addDefinition('Measure Population', '"Initial Population"')
+        dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+        dataCreation.addDefinition('Measure Population', '"Initial Population"')
 
         // Function
 
@@ -180,8 +181,8 @@ describe('Packaging: Continuous Variable Measure', () => {
         cy.get(measureComposer.createMeasurePackageBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
-
-        cy.wait(3000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.waitToContainText(measureComposer.packageWarningMessage,'Measure packaged successfully. Please access the Measure Library to export the measure.')
 

@@ -1,6 +1,7 @@
 import * as helper from '../../../../../support/helpers';
 import * as oktaLogin from '../../../../../support/oktaLogin';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let measureName = ''
 
@@ -8,7 +9,7 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        measureName = helper.createDraftMeasure('qdmCqlMeasure', 'QDM')
+        measureName = dataCreation.createDraftMeasure('qdmCqlMeasure', 'QDM')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -55,7 +56,8 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         cy.get(measureLibrary.measureLibraryTab).click();
 
-        cy.wait(2000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Versioning draft measure
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
@@ -69,6 +71,8 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         cy.get(measureLibrary.continueBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Convert First measure to FHIR
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
@@ -77,8 +81,10 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Convert Second measure to FHIR
+        helper.visibleWithTimeout(measureLibrary.row3MeasureSearch)
         cy.get(measureLibrary.row3MeasureSearch).click();
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 

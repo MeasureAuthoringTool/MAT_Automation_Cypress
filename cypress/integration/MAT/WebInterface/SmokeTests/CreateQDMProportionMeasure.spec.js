@@ -1,4 +1,5 @@
 import * as helper from '../../../../support/helpers'
+import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
@@ -55,22 +56,22 @@ describe('QDM Proportion Measure', () => {
 
         //Value Sets
 
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.30')
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.27')
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
-        helper.addValueSet('2.16.840.1.114222.4.11.837')
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.35')
-        helper.addValueSet('2.16.840.1.113762.1.4.1029.205')
-        helper.addValueSet('2.16.840.1.113762.1.4.1')
-        helper.addValueSet('2.16.840.1.113762.1.4.1029.67')
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.38')
-        helper.addValueSet('2.16.840.1.114222.4.11.3591')
-        helper.addValueSet('2.16.840.1.114222.4.11.836')
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.26')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.30')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.27')
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.35')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1029.205')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1029.67')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.38')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.26')
 
         //Codes
 
-        helper.addCode('CODE:/CodeSystem/CPT/Version/2020/Code/99201/Info')
+        dataCreation.addCode('CODE:/CodeSystem/CPT/Version/2020/Code/99201/Info')
 
         //Parameter
 
@@ -87,11 +88,11 @@ describe('QDM Proportion Measure', () => {
 
         //Definition
 
-        helper.addDefinition('Initial Population', 'AgeInYearsAt(start of "Measurement Period")> 12')
-        helper.addDefinition('Denominator', 'true')
-        helper.addDefinition('Numerator', 'true')
-        helper.addDefinition('Breast Milk Feeding', '["Substance, Administered": "Breast Milk"] Feeding')
-        helper.addDefinition('ED Visit', 'Global."ED Encounter"')
+        dataCreation.addDefinition('Initial Population', 'AgeInYearsAt(start of "Measurement Period")> 12')
+        dataCreation.addDefinition('Denominator', 'true')
+        dataCreation.addDefinition('Numerator', 'true')
+        dataCreation.addDefinition('Breast Milk Feeding', '["Substance, Administered": "Breast Milk"] Feeding')
+        dataCreation.addDefinition('ED Visit', 'Global."ED Encounter"')
         
         //Function
 

@@ -1,4 +1,8 @@
 {
+  "env":
+  {
+    "RETRIES": 0
+  },
   "chromeWebSecurity": false,
   "pageLoadTimeout": 100000,
   "defaultCommandTimeout": 10000,

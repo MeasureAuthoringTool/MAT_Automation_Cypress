@@ -1,4 +1,5 @@
 import * as helper from './helpers'
+import * as measurelibrary from "../pom/MAT/WI/MeasureLibrary";
 
 const oktaUrl = Cypress.env('oktaUrl')
 const redirectUri = Cypress.env('redirectUri')
@@ -12,7 +13,6 @@ let alt_username = ''
 let alt_name = ''
 let alt_email = ''
 let mul_username = ''
-let mul_password = ''
 let mul_name = ''
 let mul_email = ''
 
@@ -27,7 +27,6 @@ if (Cypress.env('environment') === 'dev') {
   alt_name = Cypress.env('DEV_NAME')
   alt_email = Cypress.env('DEV_EMAIL')
   mul_username = Cypress.env('DEV_MUL_USERNAME')
-  mul_password = Cypress.env('DEV_MUL_PASSWORD')
   mul_name = Cypress.env('DEV_MUL_NAME')
   mul_email = Cypress.env('DEV_MUL_EMAIL')
 
@@ -71,6 +70,7 @@ export const login = (user) => {
       win.sessionStorage.clear()
     })
     oktaLogin()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
     helper.loginUMLS()
   }
   else if (user === 'alternative'){
@@ -82,6 +82,7 @@ export const login = (user) => {
       win.sessionStorage.clear()
     })
     oktaLogin(alt_username, password, alt_name, alt_email)
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
     helper.loginUMLS()
   }
   else if (user === 'multiple'){
@@ -92,7 +93,7 @@ export const login = (user) => {
     cy.window().then((win) => {
       win.sessionStorage.clear()
     })
-    oktaLogin(mul_username, mul_password, mul_name, mul_email)
+    oktaLogin(mul_username, mul_name, mul_email)
   }
 }
 

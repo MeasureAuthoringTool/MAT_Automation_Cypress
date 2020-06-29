@@ -2,6 +2,7 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let fhirMeasure = ''
 
@@ -9,7 +10,7 @@ describe('CQL Editor: Validate the Valueset Format', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure', 'FHIR')
+        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {

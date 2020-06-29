@@ -2,6 +2,7 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureDetails from "../../../../../pom/MAT/WI/MeasureDetails";
 import * as oktaLogin from "../../../../../support/oktaLogin";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let fhirMeasure = ''
 
@@ -9,7 +10,7 @@ describe('FHIR Measure: Improvement Notation', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        fhirMeasure = helper.createDraftMeasure('FhirDraftMeasure', 'FHIR')
+        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {

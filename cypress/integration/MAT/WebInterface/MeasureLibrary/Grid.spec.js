@@ -1,4 +1,5 @@
 import * as helper from '../../../../support/helpers'
+import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from "../../../../pom/MAT/WI/CreateNewMeasure";
 import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer";
@@ -17,10 +18,10 @@ describe('Measure Library Row Selection', () => {
         oktaLogin.login()
 
         //creating new draft measure
-        draftMeasure = helper.createDraftMeasure()
+        draftMeasure = dataCreation.createDraftMeasure()
 
         //creating new versioned measure
-        versionMeasure = helper.createMajorVersionMeasure()
+        versionMeasure = dataCreation.createMajorVersionMeasure()
 
         cy.get(measurelibrary.row1MeasureSearch).click()
 
@@ -40,6 +41,7 @@ describe('Measure Library Row Selection', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
         cy.get(measurelibrary.row1RecentActivity).click()
 
         helper.isChecked(measurelibrary.row1RecentActivityCheckbox)
@@ -62,7 +64,9 @@ describe('Measure Library Row Selection', () => {
     })
 
     it('Measure Search Table: Row Selection', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(measurelibrary.searchBtn)
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -70,12 +74,17 @@ describe('Measure Library Row Selection', () => {
         helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
         helper.notVisible(measurelibrary.clearSelectedBtn)
 
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
         helper.visible(measurelibrary.clearSelectedBtn)
 
+        helper.visibleWithTimeout(measurelibrary.row2MeasureSearch)
         cy.get(measurelibrary.row2MeasureSearch).click()
 
         helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
@@ -114,17 +123,17 @@ describe('Measure Library Row Selection', () => {
 
 describe('Measure Library Recent Activity Grid', () => {
     before('Login', () => {
-        versionMeasureNotOwner = helper.loginCreateVersionedMeasureNotOwnerLogout()
+        versionMeasureNotOwner = dataCreation.loginCreateVersionedMeasureNotOwnerLogout()
 
         oktaLogin.login()
 
         //creating new draft measure
-        draftMeasure = helper.createDraftMeasure()
+        draftMeasure = dataCreation.createDraftMeasure()
 
         //creating new versioned measure
-        versionMeasure = helper.createMajorVersionMeasure()
+        versionMeasure = dataCreation.createMajorVersionMeasure()
 
-        fhirMeasure = helper.createDraftMeasure('fhirDraft','FHIR')
+        fhirMeasure = dataCreation.createDraftMeasure('FhirDraft','FHIR')
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -177,7 +186,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
     it('Enabled/Disabled Recent Activity The Owner', () => {
 
-        measureName = helper.createDraftMeasure('TestMeasure')
+        measureName = dataCreation.createDraftMeasure('TestMeasure')
 
         helper.enterText(measurelibrary.searchInputBox, measureName)
 
@@ -451,23 +460,25 @@ describe('Measure Library Recent Activity Grid', () => {
 describe('Measure Library Grid Button Bar', () => {
     before('Login', () => {
 
-        versionMeasureNotOwner = helper.loginCreateVersionedMeasureNotOwnerLogout()
+        versionMeasureNotOwner = dataCreation.loginCreateVersionedMeasureNotOwnerLogout()
 
         oktaLogin.login()
 
         helper.verifySpinnerAppearsAndDissappears()
 
         //creating new draft measure
-        draftMeasure = helper.createDraftMeasure()
+        draftMeasure = dataCreation.createDraftMeasure()
 
         helper.verifySpinnerAppearsAndDissappears()
 
         //creating new versioned measure
-        versionMeasure = helper.createMajorVersionMeasure()
+        versionMeasure = dataCreation.createMajorVersionMeasure()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        fhirMeasure = helper.createDraftMeasure('fhirDraft','FHIR')
+        fhirMeasure = dataCreation.createDraftMeasure('FhirDraft','FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
     beforeEach('Preserve Cookies', () => {
@@ -488,7 +499,9 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.disabled(measurelibrary.createVersionDraftMeasureSearchBtn)
@@ -505,15 +518,18 @@ describe('Measure Library Grid Button Bar', () => {
 
     it('Enabled/Disabled Measure Search Table The Owner', () => {
 
-        measureName = helper.createDraftMeasure('TestMeasure')
+        measureName = dataCreation.createDraftMeasure('TestMeasure')
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, measureName)
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(2000)
-
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
@@ -531,9 +547,9 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.continueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(2000)
-
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.enabled(measurelibrary.createDraftMeasureSearchBtn)
@@ -550,9 +566,9 @@ describe('Measure Library Grid Button Bar', () => {
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(2000)
-
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
@@ -572,6 +588,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.row1MeasureSearch).click()
 
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click()

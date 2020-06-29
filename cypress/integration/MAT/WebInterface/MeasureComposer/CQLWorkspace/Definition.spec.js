@@ -2,6 +2,7 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -10,8 +11,8 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure','QDM')
-        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure','FHIR')
+        qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure','QDM')
+        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure','FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {

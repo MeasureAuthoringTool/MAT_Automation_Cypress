@@ -4,6 +4,7 @@ import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer"
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let draftCqlLibraryNotowner = ''
 let draftCqlLibraryOwner = ''
@@ -18,8 +19,14 @@ describe('CQL Library Grid Selection', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        dataCreation.createDraftCqlLibrary('qdmDraft')
+
+        dataCreation.createDraftCqlLibrary('FhirDraft', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
+
         //populating search table
-        cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
+        helper.enabledWithTimeout(cqlLibrary.searchBtn)
         cy.get(cqlLibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -36,6 +43,7 @@ describe('CQL Library Grid Selection', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         //populating recent activity grid
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -112,6 +120,7 @@ describe('CQL Library Grid Selection', () => {
 
     it('CQL Library Search Table', () => {
 
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
         helper.isChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
@@ -134,12 +143,12 @@ describe('CQL Library Grid Selection', () => {
 describe('CQL Library Recent Activity Grid Button Bar', () => {
     before('Login', () => {
 
-        draftCqlLibraryNotowner = helper.loginCreateDraftCqlLibraryNotOwnerLogout()
+        draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
 
         oktaLogin.login()
-        draftCqlLibraryOwner = helper.createDraftCqlLibrary('qdmDraft')
+        draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('qdmDraft')
 
-        versionedCQLLibary = helper.createDraftCqlLibrary('qdmVersioned')
+        versionedCQLLibary = dataCreation.createDraftCqlLibrary('qdmVersioned')
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
         helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
@@ -626,13 +635,13 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 describe('CQL Library Search Grid Button Bar', () => {
     before('Login', () => {
 
-        draftCqlLibraryNotowner = helper.loginCreateDraftCqlLibraryNotOwnerLogout()
+        draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
 
         oktaLogin.login()
 
-        draftCqlLibraryOwner = helper.createDraftCqlLibrary('QDMOwner')
+        draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('QDMOwner')
 
-        versionedCQLLibary = helper.createDraftCqlLibrary('versionedCQLLibary')
+        versionedCQLLibary = dataCreation.createDraftCqlLibrary('versionedCQLLibary')
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
         helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)

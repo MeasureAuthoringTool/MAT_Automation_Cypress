@@ -1,4 +1,5 @@
 import * as helper from '../../../../support/helpers'
+import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
@@ -17,6 +18,9 @@ describe('QDM Continuous Variable Measure', () => {
     })
     it('Continuous Variable QDM, creation, Population Workspace', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.newMeasureButton)
         cy.get(measurelibrary.newMeasureButton).click()
 
         let measureName = 'ContVariableMeasureCMS32v8' + Date.now()
@@ -56,17 +60,17 @@ describe('QDM Continuous Variable Measure', () => {
 
         //Value Sets
 
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.292')
-        helper.addValueSet('2.16.840.1.113883.3.666.5.307')
-        helper.addValueSet('2.16.840.1.113762.1.4.1111.143')
-        helper.addValueSet('2.16.840.1.113883.3.117.1.7.1.299')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.292')
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.143')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.299')
 
         //codes
 
-        helper.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
-        helper.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
+        dataCreation.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
 
         //Parameter
 
@@ -83,19 +87,19 @@ describe('QDM Continuous Variable Measure', () => {
 
         //Definition
 
-        helper.addDefinition('Emergency Department ED Visit','/*Emergency Department visit during the measurement period*/\n' +
+        dataCreation.addDefinition('Emergency Department ED Visit','/*Emergency Department visit during the measurement period*/\n' +
             '["Encounter, Performed": "Emergency Department Visit"] EDVisit\n' +
             '  where EDVisit.relevantPeriod during "Measurement Period"')
 
-        helper.addDefinition('Initial Population','/*Emergency Department visit during the measurement period*/\n' +
+        dataCreation.addDefinition('Initial Population','/*Emergency Department visit during the measurement period*/\n' +
             '["Encounter, Performed": "Emergency Department Visit"] EDVisit\n' +
             '  where EDVisit.relevantPeriod during "Measurement Period"')
 
-        helper.addDefinition('Measure Population','/*Measure population does not include an ED visit where the date/times are null*/\n' +
+        dataCreation.addDefinition('Measure Population','/*Measure population does not include an ED visit where the date/times are null*/\n' +
             '"Initial Population" EDVisit\n' +
             '\twhere "Measure Observation"(EDVisit)is not null')
 
-        helper.addDefinition('Measure Population Exclusions','/*ED visits where patient expired or the patient was admitted inpatient within an hour of the ED visit*/\n' +
+        dataCreation.addDefinition('Measure Population Exclusions','/*ED visits where patient expired or the patient was admitted inpatient within an hour of the ED visit*/\n' +
             '( "Emergency Department ED Visit" EDVisit\n' +
             '    where EDVisit.dischargeDisposition ~ "Patient deceased during stay (discharge status = dead) (finding)"\n' +
             ')\n' +
@@ -104,7 +108,7 @@ describe('QDM Continuous Variable Measure', () => {
             '        such that EDVisit.relevantPeriod ends 1 hour or less before or on start of Encounter.relevantPeriod\n' +
             '  )')
 
-        helper.addDefinition('Stratification 2','/*Patients who are discharged to an acute care facility as detailed in the value set*/\n' +
+        dataCreation.addDefinition('Stratification 2','/*Patients who are discharged to an acute care facility as detailed in the value set*/\n' +
             '"Emergency Department ED Visit" EDVisit\n' +
             '  where EDVisit.dischargeDisposition in "Discharge To Acute Care Facility"')
 
@@ -117,6 +121,7 @@ describe('QDM Continuous Variable Measure', () => {
         cy.get(measureComposer.addNewBtn).click()
         cy.get(measureComposer.functionNameInput).type('Arrival and Departure Time', { delay: 50 })
         cy.get(measureComposer.addArgument).click()
+        helper.enabledWithTimeout(measureComposer.argumentNameInput)
         helper.enterText(measureComposer.argumentNameInput, 'Encounter')
         cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')

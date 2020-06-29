@@ -3,6 +3,7 @@ import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let fhircqlLibrary = ''
 let qdmcqlLibrary = ''
@@ -15,9 +16,10 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        qdmcqlLibrary = helper.createDraftCqlLibrary('qdmDraftMeasure','QDM')
-        fhircqlLibrary = helper.createDraftCqlLibrary('fhirDraftMeasure','FHIR')
+        qdmcqlLibrary = dataCreation.createDraftCqlLibrary('qdmDraftMeasure','QDM')
+        fhircqlLibrary = dataCreation.createDraftCqlLibrary('FhirDraftMeasure','FHIR')
 
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -26,7 +28,9 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         helper.logout()
     })
     it('QDM: Verify errors are coming from correct source', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmcqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
@@ -61,7 +65,9 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
 
     })
     it('FHIR: Verify errors are coming from correct source', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhircqlLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
@@ -89,7 +95,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
         //This error is specific to FHIR and confirms we are getting errors from FHIR source
         cy.get(cqlComposer.editorLeftPanel).click()
         cy.get(cqlComposer.editorErrorToolTip)
-            .should('contain.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader' )
+            .should('contain.text','ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader' )
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 

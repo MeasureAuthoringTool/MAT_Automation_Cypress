@@ -2,6 +2,7 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let fhirCqlLibrary = ''
 let qdmCqlLibrary = ''
@@ -16,10 +17,10 @@ describe('Filter', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        name = 'CreateNew' + Date.now()
+        name = 'A_' + Date.now()
 
-        fhirCqlLibrary = helper.createDraftCqlLibrary(name+'fhir','fhir');
-        qdmCqlLibrary = helper.createDraftCqlLibrary(name+'QDM','QDM')
+        fhirCqlLibrary = dataCreation.createDraftCqlLibrary(name+'Fhir','fhir');
+        qdmCqlLibrary = dataCreation.createDraftCqlLibrary(name+'QDM','QDM')
 
     })
     beforeEach('Preserve Cookies', () => {
@@ -30,6 +31,7 @@ describe('Filter', () => {
     })
     it('QDM/CQL, FHIR/CQL or ALL', () => {
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox,name)
         cy.get(cqlLibrary.searchBtn).click()
 

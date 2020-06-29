@@ -2,6 +2,7 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
 import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer";
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let name = ''
 
@@ -19,8 +20,11 @@ describe('Create Version', () => {
     })
     it('Create Major Version with Successful Package, Proportion Measure', () => {
 
-        name = helper.createQDMProportionMeasure()
+        name = dataCreation.createQDMProportionMeasure()
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox,name)
         cy.get(measurelibrary.searchBtn).click()
 
@@ -41,8 +45,11 @@ describe('Create Version', () => {
 
     it('Create Major Version with Successful Package, Proportion Measure, Unused Included CQL Library', () => {
 
-        name = helper.createQDMProportionMeasure()
+        name = dataCreation.createQDMProportionMeasure()
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox,name)
         cy.get(measurelibrary.searchBtn).click()
 
@@ -69,6 +76,7 @@ describe('Create Version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
         cy.get(measurelibrary.row1RecentActivity).click()
 
         cy.get(measurelibrary.createVersionRecentActivityBtn).click()

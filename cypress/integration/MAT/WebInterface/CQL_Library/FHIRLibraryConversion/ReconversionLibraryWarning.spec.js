@@ -1,6 +1,8 @@
 import * as helper from '../../../../../support/helpers';
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
 import * as oktaLogin from '../../../../../support/oktaLogin';
+import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let libraryName = ''
 
@@ -8,7 +10,9 @@ describe('CQL Library: Validate Scenario 3b Conversion to FHIR', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        libraryName = helper.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+        libraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+
+        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -19,11 +23,14 @@ describe('CQL Library: Validate Scenario 3b Conversion to FHIR', () => {
 
     it('Scenario 3b: Reconverting QDM library: Warning message', () => {
 
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, libraryName)
         cy.get(cqlLibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
 
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
@@ -31,18 +38,22 @@ describe('CQL Library: Validate Scenario 3b Conversion to FHIR', () => {
         cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        cy.wait(2000)
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
-        cy.wait(3000)
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(cqlLibrary.row2CqlLibrarySearch)
         cy.get(cqlLibrary.row2CqlLibrarySearch).click();
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
-        cy.get(cqlLibrary.fhirConversionWarningMessage).eq(1).should('contain.text', 'Are you sure you want to convert this Cql Library again? The existing FHIR Library will be overwritten.');
-        cy.get(cqlLibrary.fhirConversionReturnBtn).click();
+        cy.get(cqlLibrary.modal).should('contain.text', 'Are you sure you want to convert this Cql Library again? The existing FHIR Library will be overwritten.')
+        cy.get(cqlLibrary.fhirConversionReturnBtn).click()
 
     })
 

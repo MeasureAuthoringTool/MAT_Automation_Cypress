@@ -3,6 +3,7 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createnewcompositemeasure from '../../../../pom/MAT/WI/CreateNewCompositeMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let measureNameOne = ''
 let measureNameTwo = ''
@@ -11,8 +12,10 @@ describe('Creating New Composite Measure', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        measureNameOne = helper.createDraftMeasure('qdmCqlMeasureOne', 'QDM')
-        measureNameTwo = helper.createDraftMeasure('qdmCqlMeasureTwo', 'QDM')
+        measureNameOne = dataCreation.createDraftMeasure('qdmCqlMeasureOne', 'QDM')
+        measureNameTwo = dataCreation.createDraftMeasure('qdmCqlMeasureTwo', 'QDM')
+
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -26,6 +29,7 @@ describe('Creating New Composite Measure', () => {
 
     it('Packaging and versioning the first Proportion measure', () => {
 
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
         cy.get(measurelibrary.searchInputBox).type(measureNameOne, { delay: 50 })
         cy.get(measurelibrary.searchBtn).click()
 
@@ -47,9 +51,9 @@ describe('Creating New Composite Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addDefinition('Initial Population', 'true')
-        helper.addDefinition('Denominator', 'true')
-        helper.addDefinition('Numerator', 'true')
+        dataCreation.addDefinition('Initial Population', 'true')
+        dataCreation.addDefinition('Denominator', 'true')
+        dataCreation.addDefinition('Numerator', 'true')
 
          // Population Workspace
 
@@ -157,9 +161,9 @@ describe('Creating New Composite Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.addDefinition('Initial Population', 'true')
-        helper.addDefinition('Denominator', 'true')
-        helper.addDefinition('Numerator', 'true')
+        dataCreation.addDefinition('Initial Population', 'true')
+        dataCreation.addDefinition('Denominator', 'true')
+        dataCreation.addDefinition('Numerator', 'true')
 
          // Population Workspace
 

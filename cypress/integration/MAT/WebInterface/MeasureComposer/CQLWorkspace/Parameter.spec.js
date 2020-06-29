@@ -2,6 +2,7 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -10,8 +11,8 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
     before('Login', () => {
         oktaLogin.login()
 
-        qdmMeasure = helper.createDraftMeasure('qdmDraftMeasure','QDM')
-        fhirMeasure = helper.createDraftMeasure('fhirDraftMeasure','FHIR')
+        qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure','QDM')
+        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure','FHIR')
 
     })
     beforeEach('Preserve Cookies', () => {
@@ -42,6 +43,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         cy.get(measureComposer.parameterListbox).select('Measurement Period')
         cy.get('body').type('{enter}')
 
+        cy.get(measureComposer.parameterNameInput).should("have.value",'Measurement Period')
         cy.get(measureComposer.parameterEraseBtn).click()
         cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(measureComposer.parameterSaveBtn).click()
@@ -92,7 +94,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
         //This error is specific to FHIR and confirms we are getting errors from FHIR source
         cy.get(measureComposer.editorLeftPanel).click()
         cy.get(measureComposer.editorErrorToolTip)
-            .should('contain.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader' )
+            .should('contain.text','ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader' )
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
