@@ -39,7 +39,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -62,7 +62,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -87,14 +87,14 @@ describe('CQL Composer: CQL Editor message', () => {
         cy.get(cqlComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
         cy.get(cqlComposer.functionSaveBtn).click();
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.cqlLibraryEditor).click();
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -119,14 +119,14 @@ describe('CQL Composer: CQL Editor message', () => {
         cy.get(cqlComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
         cy.get(cqlComposer.functionSaveBtn).click();
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.cqlLibraryEditor).click();
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 

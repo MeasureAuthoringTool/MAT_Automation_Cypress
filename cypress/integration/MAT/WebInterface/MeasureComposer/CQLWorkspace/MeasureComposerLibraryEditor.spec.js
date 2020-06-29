@@ -42,14 +42,14 @@ describe('Measure: CQL Editor message', () => {
         cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
         cy.get(measureComposer.functionSaveBtn).click();
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlLibraryEditor).click();
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -78,14 +78,14 @@ describe('Measure: CQL Editor message', () => {
         cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
         cy.get(measureComposer.functionSaveBtn).click();
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlLibraryEditor).click();
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.');
 
-        cy.wait(2000);
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -131,7 +131,11 @@ describe('FHIR Measure: Version error message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', "The MAT was unable to save the changes. Errors: Invalid version , 1.0, for lib Hospice_FHIR4. Must be in MAT version format, e.g. '1.0.000'.");
+        cy.get(measureComposer.warningMessage).should('contain.text', " The MAT was unable to save the changes. Errors: Library version must follow this regex: ^(([1-9][0-9][0-9])|([1-9][0-9])|([0-9])).(([1-9][0-9][0-9])|([1-9][0-9])|([0-9])).[0-9][0-9][0-9]$, e.g. 1.0.000");
+
+        cy.get(measureComposer.includes).click()
+
+        cy.get(measureComposer.yesBtn).click()
 
         cy.get(measurelibrary.measureLibraryTab).click();
 

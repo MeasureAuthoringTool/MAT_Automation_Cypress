@@ -16,6 +16,10 @@ export const definition = '#measureDetailsNavigation_measureDetailsNavigationPil
 export const guidance = '#measureDetailsNavigation_measureDetailsNavigationPills > [title="Guidance"]'
 export const transmissionFormat = '#measureDetailsNavigation_measureDetailsNavigationPills > [title="Transmission Format"]'
 export const populations = '#measureDetailsNavigation_measureDetailsNavigationPills > [title="Populations"]'
+export const deleteBtn = '#MeasureDetailsView\\.deleteMeasureButton'
+export const confirmDeleteText = '#password_PasswordTextBox'
+export const confirmDeleteBtn = '.modal-footer > :nth-child(2)'
+
 //populations
 export const initialPopulation = '#measureDetailsNavigation_populationsNavigationPills > [title="Initial Population"]'
 export const denominator = '#measureDetailsNavigation_populationsNavigationPills > [title="Denominator"]'

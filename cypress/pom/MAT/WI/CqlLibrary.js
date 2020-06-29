@@ -48,6 +48,8 @@ export const viewCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [ti
 export const editCqllibrariesEnabledBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to edit"]'
 export const shareCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to share"]'
 export const deleteCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to delete library"]'
+export const confirmDeleteText = '#password_PasswordTextBox'
+export const confirmDeleteBtn = '.modal-footer > :nth-child(2)'
 export const createVersionCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create version"]'
 export const createDraftCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create draft"]'
 export const convertToFhirLibrarySearchBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to convert"]'
