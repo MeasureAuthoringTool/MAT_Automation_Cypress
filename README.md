@@ -55,3 +55,30 @@ This tool will lint on every commit.
 * `npm run lint:standard:fix` - run the linter and fixes any issues it can
 * `npm run lint:all` - runs all the linters - jenkins build
 * standard linter is ran on every commit and also run as part of the jenkins build
+
+
+
+
+<!-- Docker commands -->
+
+To see list of images
+* docker images -a
+
+Running test for the very first time
+* docker-compose -f docker-compose.yml up {service name}
+
+To rebuild same docker image
+* docker-compose up --build
+
+To remove all the images
+* docker rmi -f $(docker images -a -q)
+
+To remove single image
+* docker rmi {name or image id}
+
+To remove all the containers and volumes
+* docker rm -vf $(docker ps -a -q)
+
+To simply remove everthing
+* docker system prune --all
+
