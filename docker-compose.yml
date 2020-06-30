@@ -1,0 +1,19 @@
+version: '3.3'
+services: 
+  ui-e2e-matdev:
+    image: matdevuserinterface
+    build: .
+    container_name: cymatdev
+    command: "npm run matdev:all:ui:tests"
+
+  ui-e2e-dev:
+    image: devuserinterface
+    build: .
+    container_name: cydev
+    command: "npm run dev:all:ui:tests"
+
+  ui-e2e-test:
+    image: testuserinterface
+    build: .
+    container_name: cytest
+    command: "npm run test:all:ui:tests"
