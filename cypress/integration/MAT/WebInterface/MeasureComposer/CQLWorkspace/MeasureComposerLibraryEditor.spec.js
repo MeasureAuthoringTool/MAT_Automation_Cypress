@@ -170,7 +170,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
         helper.logout()
     })
 
-    it('FHIR Measure: Validate the warning message when editing directly on CQL Library Editor', () => {
+    it('FHIR Measure: Validate the successful when editing directly on CQL Library Editor', () => {
 
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click();
@@ -197,7 +197,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', 'Changes made to the CQL library declaration and model declaration can not be saved through the CQL Library Editor. Please make those changes in the appropriate areas of the CQL Workspace.')
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
