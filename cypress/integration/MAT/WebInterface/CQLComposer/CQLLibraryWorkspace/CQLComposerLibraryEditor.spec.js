@@ -148,3 +148,61 @@ describe('CQL Composer: CQL Editor message', () => {
 
 })
 
+describe('FHIR Library: Add code directly on CQL Library Editor', () => {
+    before('Login', () => {
+        oktaLogin.login()
+
+        fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
+    })
+
+
+    it('FHIR Library: Validate the successful message when editing directly on CQL Library Editor', () => {
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+        helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
+        cy.get(cqlLibrary.searchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+
+         //Value Sets
+
+        cy.get(cqlComposer.valueSets).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+
+        //CQL Library Editor
+
+        cy.get(cqlComposer.cqlLibraryEditor).click()
+
+        cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+
+        cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}valueset \"Annual Wellness Visit\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'")
+
+        cy.get(cqlComposer.cqlEditorSaveBtn).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
+    
+        cy.get(measurelibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+    })
+
+})
