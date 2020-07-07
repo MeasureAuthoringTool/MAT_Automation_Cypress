@@ -197,7 +197,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
+        cy.get(measureComposer.warningMessage).should('contain.text', ' Changes to the CQL File have been successfully saved.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
