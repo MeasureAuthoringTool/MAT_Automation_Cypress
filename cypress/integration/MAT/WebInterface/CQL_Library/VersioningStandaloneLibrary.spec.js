@@ -19,7 +19,6 @@ describe('Standalone Library: Version and include with measure', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         qdmLibraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
-        fhirLibraryName = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -126,6 +125,28 @@ describe('Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+    })
+
+})
+
+describe('Standalone Library: Version and include with measure', () => {
+    before('Login', () => {
+        oktaLogin.login()
+
+        cy.get(measurelibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        fhirLibraryName = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
     })
 
     it('FHIR Standalone Library: Version and include with FHIR measure', () => {
