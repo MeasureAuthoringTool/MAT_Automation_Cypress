@@ -156,3 +156,53 @@ describe('FHIR Measure: Version error message', () => {
 
 })
 
+describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
+    before('Login', () => {
+        oktaLogin.login()
+
+        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
+
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
+    })
+
+    it('FHIR Measure: Validate the successful when editing directly on CQL Library Editor', () => {
+
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.cqlWorkspace).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        //CQL Library Editor
+
+        cy.get(measureComposer.cqlLibraryEditor).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset \"Annual Wellness Visit\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'")
+
+        cy.get(measureComposer.cqlEditorSaveBtn).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+    })
+
+})
