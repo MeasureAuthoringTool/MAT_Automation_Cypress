@@ -5,6 +5,7 @@ import * as oktaLogin from "../../../../../support/oktaLogin";
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 
 let fhirMeasure = ''
+let fhirMeasureSecond = ''
 let qdmMeasure = ''
 
 describe('Measure: CQL Editor message', () => {
@@ -197,7 +198,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
+        cy.get(measureComposer.warningMessage).should('contain.text', ' Changes to the CQL File have been successfully saved.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -205,4 +206,102 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
     })
 
+})
+
+describe('FHIR Measure: Add codesystems and valuesets in CQL Editor without UMLS', () => {
+    before('Login', () => {
+        oktaLogin.loginWithoutUMLS()
+
+        fhirMeasure = dataCreation.createDraftMeasure('FhirMeasure', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
+    })
+
+    it('Validate the error message for adding codesystems without UMLS', () => {
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.row1MeasureSearchName).dblclick({force: true})
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.cqlWorkspace).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+
+        //CQL Library Editor
+
+        cy.get(measureComposer.cqlLibraryEditor).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
+
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{downarrow}{downarrow}{downarrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
+
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{downarrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
+
+        cy.get(measureComposer.cqlEditorSaveBtn).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+    })
+
+    it('Validate the error message for adding valuesets without UMLS', () => {
+
+        fhirMeasureSecond = dataCreation.createDraftMeasure('FhirMeasureSecond', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        helper.enterText(measurelibrary.searchInputBox, fhirMeasureSecond)
+        cy.get(measurelibrary.searchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.row1MeasureSearchName).dblclick({force: true})
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.cqlWorkspace).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+
+        //CQL Library Editor
+
+        cy.get(measureComposer.cqlLibraryEditor).click()
+
+        cy.get(measureComposer.cqlLibraryEditor).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
+
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{downarrow}{downarrow}{downarrow}valueset \"AAN - Encounter Codes Grouping\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286'")
+
+        cy.get(measureComposer.cqlEditorSaveBtn).click()
+
+        cy.get(measureComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+    })
 })

@@ -97,6 +97,21 @@ export const login = (user) => {
   }
 }
 
+export const loginWithoutUMLS = (user) => {
+
+  if (user === undefined) {
+    cy.clearCookies()
+
+    cy.clearLocalStorage()
+
+    cy.window().then((win) => {
+      win.sessionStorage.clear()
+    })
+    oktaLogin()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+  }
+}
+
 export const oktaLogin = (un, pw, storage_name, storage_email) => {
 
   if (un === undefined) {
