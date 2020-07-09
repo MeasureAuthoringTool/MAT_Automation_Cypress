@@ -46,6 +46,7 @@ export const retrieveOIDBtn = ':nth-child(2) > td > .btn'
 //Codes
 export const codeUrlInput = ':nth-child(2) > td > .input-group > .form-control'
 export const retrieveBtn = ':nth-child(2) > td > .input-group > .input-group-btn > .btn'
+export const codeDeleteBtn = ':nth-child(7) > div > table > tbody > tr > .emptySpaces > .btn > .fa'
 
 //Parameter
 export const parameterNameInput = '#parameterNameField'
