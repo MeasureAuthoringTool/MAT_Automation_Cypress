@@ -1,9 +1,9 @@
-import * as helper from "../../../../../support/helpers";
-import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
-import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as helper from "../../../../../support/helpers"
+import * as oktaLogin from "../../../../../support/oktaLogin"
+import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary"
+import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary"
+import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer"
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
 
 let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
@@ -200,7 +200,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
         cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
         cy.get(measureComposer.warningMessage).should('contain.text', ' Changes to the CQL File have been successfully saved.')
-    
+
         cy.get(measurelibrary.cqlLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -295,4 +295,90 @@ describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS
 
     })
 
+})
+
+describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Errors, ability to save FHIR Libraries with errors ' +
+  'and correct Error Messages are displayed', () => {
+    before('Login', () => {
+
+        oktaLogin.login()
+
+        fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
+    })
+
+    it('Ability to save with CQL error or syntax error', () => {
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+        helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
+        cy.get(cqlLibrary.searchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(cqlComposer.definition).click()
+
+        helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        dataCreation.addDefinition('Initial Population','"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
+          '  with ["Patient Characteristic Birthdate": "Birth date"] BirthDate\n' +
+          '    such that Global."CalendarAgeInYearsAt" ( BirthDate.birthDatetime, start of EDVisitMP.relevantPeriod ) >= 18')
+
+        cy.get(cqlComposer.cqlLibraryEditor).click()
+
+        helper.visibleWithTimeout(cqlComposer.warningMessage)
+        cy.get(cqlComposer.warningMessage).should('contain.text', ' You are viewing the CQL file with validation errors. ' +
+          'Errors are marked with a red square on the line number.')
+
+        cy.get(cqlComposer.cqlEditorSaveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        //assertion for being able to save with CQL errors
+        helper.visibleWithTimeout(cqlComposer.warningMessage)
+        cy.get(cqlComposer.warningMessage).should('contain.text', ' The CQL file was saved with errors.')
+
+        cy.get(cqlComposer.definition).click()
+
+        helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2,'Definition')
+
+        dataCreation.addDefinition('syntax errors', 'asdfasdf\n' +
+          'asdfasdf\n' +
+          '\n' +
+          'asdfasdf')
+
+        cy.get(cqlComposer.cqlLibraryEditor).click()
+
+        //checking message when loading the CQL editor with syntax error
+        helper.visibleWithTimeout(cqlComposer.warningMessage)
+        cy.get(cqlComposer.warningMessage).eq(0).should('contain.text', ' You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.')
+        cy.get(cqlComposer.warningMessage).eq(1).should('contain.text', ' Please correct the syntax errors so the CQL can be validated.')
+
+        cy.get(cqlComposer.cqlEditorSaveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        //assertion for being able to save with syntax error
+        helper.visibleWithTimeout(cqlComposer.warningMessage)
+        cy.get(cqlComposer.warningMessage).eq(0).should('contain.text', ' The CQL file was saved with errors.')
+        cy.get(cqlComposer.warningMessage).eq(1).should('contain.text', ' Please correct the syntax errors so the CQL can be validated.')
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+    })
 })
