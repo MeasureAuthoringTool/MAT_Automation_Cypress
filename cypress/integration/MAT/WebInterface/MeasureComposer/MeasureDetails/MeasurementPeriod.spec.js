@@ -101,19 +101,25 @@ describe('Validate the Measure Period', () => {
 
         cy.get(measurelibrary.row1MeasureSearch).click();
 
-        cy.get(measureLibrary.createVersionDraftMeasureSearchBtn).click();
-        cy.get(measureLibrary.majorVersionTypeRadio).click();
-        cy.get(measureLibrary.packageAndVersion).click();
+        cy.get(measurelibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measurelibrary.majorVersionTypeRadio).click();
+        cy.get(measurelibrary.packageAndVersion).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureLibrary.continueBtn).click();
+        cy.get(measurelibrary.continueBtn).click();
 
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).click();
+        cy.get(measurelibrary.convertToFhirMeasureSearchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick();
-
-        helper.verifySpinnerAppearsAndDissappears()
 
         // Initial visit
         cy.get(measureDetails.measurePeriodHeaderLabel).should('contain.text', 'Measurement Period')
