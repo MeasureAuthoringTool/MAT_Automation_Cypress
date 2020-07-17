@@ -83,3 +83,7 @@ export const fhirConversionWarningMessage = '.modal-body'
 export const fhirConversionReturnBtn = '#Yes_ConfirmDialogBox'
 
 export const fhirConversionNoBtn = '#No_ConfirmDialogBox'
+
+// History UI
+export const historyConvertToFHIRUserActionLogEntry = '#HistorySearchCellTable [title=" Converted from QDM/CQL to FHIR"]'
+export const historyCQLLibraryCreatedUserActionLogEntry = '#HistorySearchCellTable [title=" CQL Library Created"]'
