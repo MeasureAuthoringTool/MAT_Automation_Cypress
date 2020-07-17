@@ -86,7 +86,7 @@ export const historyConvertToFHIRUserActionLogEntry = '#HistorySearchCellTable [
 export const historyCQLLibraryCreatedUserActionLogEntry = '#HistorySearchCellTable [title=" CQL Library Created"]'
 
 // Library Sharing
-export const libraryName = '#measureNamePanel_FlowPanel'
+export const libraryName = '#cqlLibraryNamePanel_FlowPanel'
 export const shareSearchField = '#CQLLibrarySharing_Search'
 export const shareSearchBtn = '#CQLLibrarySharing_Button'
 export const shareWithFirstUserCheckBox = '[__gwt_row="0"] > .GB-MJYKBLD > div > input'
