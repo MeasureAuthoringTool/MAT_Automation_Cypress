@@ -105,3 +105,7 @@ export const exportOptionList = '#exportTab > :nth-child(1) > :nth-child(6) > tb
 export const saveExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Save"]'
 export const openExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Open"]'
 export const cancelExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Cancel"]'
+
+// History UI
+export const historyConvertToFHIRUserActionLogEntry = '#HistorySearchCellTable [title=" Converted from QDM/CQL to FHIR"]'
+export const historyMeasureCreatedUserActionLogEntry = '#HistorySearchCellTable [title=" Measure Created"]'

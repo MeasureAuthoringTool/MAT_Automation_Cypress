@@ -6,7 +6,7 @@ import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCr
 
 let libraryName = ''
 
-describe('CQL Library: Validate Scenario 3a Successfull Conversion to FHIR', () => {
+describe('CQL Library: FHIR Library Conversion: Successfull Conversion to FHIR', () => {
     before('Login', () => {
         oktaLogin.login()
 
@@ -19,7 +19,7 @@ describe('CQL Library: Validate Scenario 3a Successfull Conversion to FHIR', () 
         helper.logout()
     })
 
-    it('Scenario 3a: ', () => {
+    it('Convert QDM CQL Library to FHIR successfully, verify CQL Library history', () => {
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, libraryName)
@@ -53,7 +53,20 @@ describe('CQL Library: Validate Scenario 3a Successfull Conversion to FHIR', () 
 
         cy.get('h1').should('contain.text', libraryName + ' Draft v1.0.000 (FHIR / CQL)')
         
-        cy.get(measureLibrary.cqlLibraryTab).click();
+        cy.get(measureLibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
+
+        cy.get(cqlLibrary.historyCqllibrariesBtn).click()
+
+        //verifying the log entries
+        helper.visibleWithTimeout(cqlLibrary.historyConvertToFHIRUserActionLogEntry)
+        helper.visibleWithTimeout(cqlLibrary.historyCQLLibraryCreatedUserActionLogEntry)
+
+        cy.get(cqlLibrary.returnToCqlLibrary).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 

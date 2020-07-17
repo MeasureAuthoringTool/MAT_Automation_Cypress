@@ -7,6 +7,7 @@ const redirectUri = Cypress.env('redirectUri')
 let clientId = ''
 let username = ''
 let password = ''
+let alt_password = ''
 let name = ''
 let email = ''
 let alt_username = ''
@@ -20,7 +21,8 @@ if (Cypress.env('environment') === 'dev') {
 
   alt_username = Cypress.env('DEV_ALT_USERNAME')
   username = Cypress.env('DEV_USERNAME')
-  password = Cypress.env('DEV_PASSWORD')
+  password = Cypress.env('DEV_USERNAME_PASSWORD')
+  alt_password = Cypress.env('DEV_ALT_USERNAME_PASSWORD')
   clientId = Cypress.env('DEV_CLIENTID')
   name = Cypress.env('DEV_NAME')
   email = Cypress.env('DEV_EMAIL')
@@ -29,20 +31,6 @@ if (Cypress.env('environment') === 'dev') {
   mul_username = Cypress.env('DEV_MUL_USERNAME')
   mul_name = Cypress.env('DEV_MUL_NAME')
   mul_email = Cypress.env('DEV_MUL_EMAIL')
-
-} else if (Cypress.env('environment') === 'matdev') {
-
-  alt_username = Cypress.env('MATDEV_ALT_USERNAME')
-  username = Cypress.env('MAT_DEV_USERNAME')
-  password = Cypress.env('MAT_DEV_PASSWORD')
-  clientId = Cypress.env('MAT_DEV_CLIENTID')
-  name = Cypress.env('MAT_DEV_NAME')
-  email = Cypress.env('MAT_DEV_EMAIL')
-  alt_name = Cypress.env('MAT_DEV_NAME')
-  alt_email = Cypress.env('MAT_DEV_EMAIL')
-  mul_username = Cypress.env('MAT_DEV_MUL_USERNAME')
-  mul_name = Cypress.env('MAT_DEV_MUL_NAME')
-  mul_email = Cypress.env('MAT_DEV_MUL_EMAIL')
 
 } else if (Cypress.env('environment') === 'test') {
 
@@ -81,7 +69,7 @@ export const login = (user) => {
     cy.window().then((win) => {
       win.sessionStorage.clear()
     })
-    oktaLogin(alt_username, password, alt_name, alt_email)
+    oktaLogin(alt_username, alt_password, alt_name, alt_email)
     helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
     helper.loginUMLS()
   }

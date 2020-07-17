@@ -5,7 +5,7 @@ import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCr
 
 let measureName = ''
 
-describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
+describe('Measure Library: FHIR Measure Conversion: Conversion to FHIR', () => {
     before('Login', () => {
         oktaLogin.login()
 
@@ -18,7 +18,7 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
         helper.logout()
     })
 
-    it('Scenario 3a: Convert QDM measure to FHIR successfully', () => {
+    it('Convert QDM measure to FHIR successfully, verify measure history', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -59,6 +59,19 @@ describe('Measure Library: Validate Scenario 3a Conversion to FHIR', () => {
 
         cy.get(measureLibrary.measureLibraryTab).click()
         
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
+        cy.get(measureLibrary.row1MeasureSearch).click()
+
+        cy.get(measureLibrary.historyMeasureSearchBtn).click()
+
+        //verifying the log entries
+        helper.visibleWithTimeout(measureLibrary.historyConvertToFHIRUserActionLogEntry)
+        helper.visibleWithTimeout(measureLibrary.historyMeasureCreatedUserActionLogEntry)
+
+        cy.get(measureLibrary.returnToMeasureLibraryLink).click()
+
         helper.verifySpinnerAppearsAndDissappears()
         
     })
