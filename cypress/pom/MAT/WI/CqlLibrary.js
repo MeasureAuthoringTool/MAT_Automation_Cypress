@@ -70,9 +70,6 @@ export const confirmationContinue = '#yes_Button'
 //return to CQL Library
 export const returnToCqlLibrary = ':nth-child(6) > td > .gwt-Anchor'
 
-//CQL Share
-export const shareCancelBtn = '#CancelButton_cqlShare'
-
 //modal dialog
 export const modal = '.modal-dialog'
 export const modalCloseBtn = '.close'
@@ -87,3 +84,13 @@ export const fhirConversionNoBtn = '#No_ConfirmDialogBox'
 // History UI
 export const historyConvertToFHIRUserActionLogEntry = '#HistorySearchCellTable [title=" Converted from QDM/CQL to FHIR"]'
 export const historyCQLLibraryCreatedUserActionLogEntry = '#HistorySearchCellTable [title=" CQL Library Created"]'
+
+// Library Sharing
+export const libraryName = '#cqlLibraryNamePanel_FlowPanel'
+export const shareSearchField = '#CQLLibrarySharing_Search'
+export const shareSearchBtn = '#CQLLibrarySharing_Button'
+export const shareWithFirstUserCheckBox = '[__gwt_row="0"] > .GB-MJYKBLD > div > input'
+export const shareWithSecondUserCheckBox = '[__gwt_row="1"] > .GB-MJYKBLD > div > input'
+export const shareSaveAndContinueBtn = '#SaveAndContinueButton_cqlShare'
+export const shareCancelBtn = '#CancelButton_cqlShare'
+export const shareWarningMessage = '#WarningMessage'

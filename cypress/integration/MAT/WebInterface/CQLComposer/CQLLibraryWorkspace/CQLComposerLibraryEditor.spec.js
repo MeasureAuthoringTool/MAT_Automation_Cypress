@@ -211,9 +211,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS', () => {
     before('Login', () => {
         oktaLogin.loginWithoutUMLS()
-
         fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
-
         helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
@@ -222,7 +220,6 @@ describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS
     after('Log Out', () => {
         helper.logout()
     })
-
     it('Validate the error message for adding codesystems without UMLS', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -240,61 +237,20 @@ describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS
         helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
         //CQL Library Editor
-
         cy.get(cqlComposer.cqlLibraryEditor).click()
-
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
-
+       
         cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
-
         cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
-
+        cy.get(cqlComposer.cqlLibraryEditorBox).type("valueset \"AAN - Encounter Codes Grouping\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286'{enter}")
+       
         cy.get(cqlComposer.cqlEditorSaveBtn).click()
-
+        
         cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')
-
         cy.get(measurelibrary.cqlLibraryTab).click()
-
+        
         helper.verifySpinnerAppearsAndDissappears()
-
     })
-
-    it('Validate the error message for adding valuesets without UMLS', () => {
-
-        fhirCqlLibrarySecond = dataCreation.createDraftCqlLibrary('FhirCqlLibrarySecond', 'FHIR')
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-        helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrarySecond)
-        cy.get(cqlLibrary.searchBtn).click();
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
-
-        //CQL Library Editor
-
-        cy.get(cqlComposer.cqlLibraryEditor).click()
-
-        cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
-
-        cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}valueset \"AAN - Encounter Codes Grouping\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286'")
-
-        cy.get(cqlComposer.cqlEditorSaveBtn).click()
-
-        cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-    })
-
 })
 
 describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Errors, ability to save FHIR Libraries with errors ' +

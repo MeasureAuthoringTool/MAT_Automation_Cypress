@@ -80,9 +80,6 @@ export const continueBtn = '#Yes_ConfirmDialogBox'
 //return to measure library
 export const returnToMeasureLibraryLink = ':nth-child(6) > td > .gwt-Anchor'
 
-//Measure Sharing
-export const sharingCancelBtn = '#CancelButton_measureVersion'
-
 // WarningMessage after versioning
 export const warningMessageText = 'td > #WarningMessage > .gwt-HTML > b'
 export const warningMessage = '#WarningMessage'
@@ -109,3 +106,14 @@ export const cancelExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [tit
 // History UI
 export const historyConvertToFHIRUserActionLogEntry = '#HistorySearchCellTable [title=" Converted from QDM/CQL to FHIR"]'
 export const historyMeasureCreatedUserActionLogEntry = '#HistorySearchCellTable [title=" Measure Created"]'
+
+// Measure Sharing
+export const measureName = '#measureNamePanel_FlowPanel'
+export const privateMeasureCheckbox = '#content_SimplePanel > .contentPanel > #privateMeasure_CheckBox > .customCheckBox'
+export const shareSearchField = '#MeasureSharing_Search'
+export const shareSearchBtn = '#MeasureSharing_Button'
+export const shareWithFirstUserCheckBox = '[__gwt_row="0"] > .GB-MJYKBLD > div > input'
+export const shareWithSecondUserCheckBox = '[__gwt_row="1"] > .GB-MJYKBLD > div > input'
+export const shareSaveAndContinueBtn = '#SaveAndContinueButton_measureVersion'
+export const shareCancelBtn = '#CancelButton_measureVersion'
+export const shareWarningMessage = '#WarningMessage'
