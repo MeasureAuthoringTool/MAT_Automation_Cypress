@@ -24,9 +24,22 @@ describe('Dashboard Upload Dialog', () => {
 
         helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
 
-        cy.get(importMeasureDialog.closeBtn).click()
+        //upload the file to the modal
+        cy.uploadFile('createQdmProportionMeasure159551_v6_0_Artifacts.zip', importMeasureDialog.importMeasureDialog.fileImportInput)
 
-        helper.notVisibleWithTimeout(importMeasureDialog.importMeasureDialog)
+        //wait for VSAC username field to display for the user
+        //helper.visible(importMeasureDialog.vsacUserField)
+        //helper.enterText(importMeasureDialog.vsacUserField, importMeasureDialog.vsacUser)
+        //helper.enterText(importMeasureDialog.vsacPasswordField, importMeasureDialog.vsacPassword)
+
+        //cy.get(importMeasureDialog.closeBtn).click()
+        //let loadBtn = cy.get(importMeasureDialog.importLoadBtn)
+        //helper.enabled(loadBtn)
+        //helper.click(loadBtn)
+
+        //helper.notVisibleWithTimeout(importMeasureDialog.importMeasureDialog)
+
+
     })
 
 })
