@@ -31,14 +31,14 @@ describe('Dashboard Upload Dialog', () => {
         cy.get(importMeasureDialog.fileImportInput).attachFile(fileToUpload)
 
         //wait for VSAC username field to display for the user
-        helper.visible(importMeasureDialog.vsacUserField)
-        //helper.enterText(importMeasureDialog.vsacUserField, importMeasureDialog.vsacUser)
-        //helper.enterText(importMeasureDialog.vsacPasswordField, importMeasureDialog.vsacPassword)
+        //helper.visibleWithTimeout(importMeasureDialog.vsacUserField)
+        helper.enterText(importMeasureDialog.vsacUserField, importMeasureDialog.vsacUser)
+        helper.enterText(importMeasureDialog.vsacPasswordField, importMeasureDialog.vsacPassword)
 
         //cy.get(importMeasureDialog.closeBtn).click()
-        //let loadBtn = cy.get(importMeasureDialog.importLoadBtn)
-        //helper.enabled(loadBtn)
-        //helper.click(loadBtn)
+        let loadBtn = cy.get(importMeasureDialog.importLoadBtn)
+        helper.enabled(loadBtn)
+        helper.click(loadBtn)
 
         //helper.notVisibleWithTimeout(importMeasureDialog.importMeasureDialog)
 
