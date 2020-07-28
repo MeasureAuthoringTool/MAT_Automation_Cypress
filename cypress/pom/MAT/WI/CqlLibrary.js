@@ -93,4 +93,4 @@ export const shareWithFirstUserCheckBox = '[__gwt_row="0"] > .GB-MJYKBLD > div >
 export const shareWithSecondUserCheckBox = '[__gwt_row="1"] > .GB-MJYKBLD > div > input'
 export const shareSaveAndContinueBtn = '#SaveAndContinueButton_cqlShare'
 export const shareCancelBtn = '#CancelButton_cqlShare'
-export const shareWarningMessage = '#WarningMessage'
+export const shareWarningMessage = '#CQLLibrary_MainPanel > .alert-success'

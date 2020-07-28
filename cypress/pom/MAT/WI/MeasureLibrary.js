@@ -116,4 +116,4 @@ export const shareWithFirstUserCheckBox = '[__gwt_row="0"] > .GB-MJYKBLD > div >
 export const shareWithSecondUserCheckBox = '[__gwt_row="1"] > .GB-MJYKBLD > div > input'
 export const shareSaveAndContinueBtn = '#SaveAndContinueButton_measureVersion'
 export const shareCancelBtn = '#CancelButton_measureVersion'
-export const shareWarningMessage = '#WarningMessage'
+export const shareWarningMessage = '#measureLibrary_MainPanel > [style="margin-top: 20px;"]'
