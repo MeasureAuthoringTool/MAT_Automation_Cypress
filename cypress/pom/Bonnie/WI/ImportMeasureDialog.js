@@ -6,6 +6,8 @@ export const vsacUserField = '#vsacUser'
 export const vsacPasswordField = '#vsacPassword'
 export const importLoadBtn = '#loadButton'
 export const closeBtn = '.col-sm-offset-3 > .btn-default'
-
-export const vsacUser = Cypress.env('CYPRESS_MAT_UMLS_USERNAME')
-export const vsacPassword = Cypress.env('CYPRESS_MAT_UMLS_PASSWORD')
+export const measureNameDiv = '.measure-title'
+export const measureDetailsParentDiv = '.measure-title'
+export const measureDetailsCogWheel = '.settings-container'
+export const inverseDangerButton = '.btn-danger-inverse'
+export const deleteMeasureButton = '.delete-measure'
