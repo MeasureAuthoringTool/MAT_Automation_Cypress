@@ -4,6 +4,8 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
 
 let measureName = ''
+let firstPackagedMeasure = ''
+let secondPackagedMeasure = ''
 
 describe('FHIR Measure: Export', () => {
     before('Login', () => {
@@ -79,3 +81,35 @@ describe('FHIR Measure: Export', () => {
     })
 
 })
+
+
+// describe('FHIR Measure: Multiple Export', () => {
+//     before('Login', () => {
+//         oktaLogin.login()        
+
+//     })
+//     beforeEach('Preserve Cookies', () => {
+//         helper.preserveCookies()
+//     })
+//     after('Log Out', () => {
+//         helper.logout()
+//     })
+
+//     it('FHIR Measure: Select 2 packaged measures and export', () => {
+
+//         firstPackagedMeasure = dataCreation.createFhirCohortMeasure()
+//         secondPackagedMeasure = dataCreation.createFhirCohortMeasure()
+
+//     })
+
+//     it('FHIR Measure: Select 1 packaged measure and 1 non-packaged measure then export', () => {
+
+
+//     })
+
+//     it('FHIR Measure: Validate the Export button disabled for non-packaged measure', () => {
+
+
+//     })
+
+// })

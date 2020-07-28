@@ -42,13 +42,13 @@ describe('CQL Editor: Validate the system version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'")
 
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', ' Changes to the CQL File have been successfully saved.')
+        cy.get(measureComposer.warningMessage).should('contain.text', 'Changes to the CQL File have been successfully saved.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -87,9 +87,9 @@ describe('CQL Editor: Validate the system version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '3.00'{enter}")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '3.00'{enter}")
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'")
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 
         cy.get(measureComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')
