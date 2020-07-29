@@ -4,6 +4,7 @@ import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary"
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary"
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer"
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer"
 
 let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
@@ -189,9 +190,13 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 
         dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
 
+        helper.verifySpinnerAppearsAndDissappears()
+
         //CQL Library Editor
 
         cy.get(cqlComposer.cqlLibraryEditor).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
 
@@ -204,6 +209,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
         cy.get(measurelibrary.cqlLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+
     })
 
 })

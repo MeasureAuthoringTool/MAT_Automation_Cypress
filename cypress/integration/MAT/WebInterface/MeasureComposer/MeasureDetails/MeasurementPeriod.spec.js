@@ -121,10 +121,12 @@ describe('Validate the Measure Period', () => {
 
         cy.get(measurelibrary.row1MeasureSearch).dblclick();
 
+        helper.verifySpinnerAppearsAndDissappears()
+
         // Initial visit
         cy.get(measureDetails.measurePeriodHeaderLabel).should('contain.text', 'Measurement Period')
 
-        cy.get(measureDetails.measurementPeriodCheckbox).should('be.unchecked')
+        cy.get(measureDetails.measurementPeriodCheckbox).should('not.to.be.checked')
 
         cy.get(measureDetails.checkboxLabel).should('contain.text', 'Next Calendar Year')
 
