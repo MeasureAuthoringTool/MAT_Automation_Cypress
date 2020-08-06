@@ -4,6 +4,7 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 
 
 describe('FHIR Continuous Variable Measure', () => {
@@ -33,6 +34,23 @@ describe('FHIR Continuous Variable Measure', () => {
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+
+        //entering required meta data
+        cy.get(measureDetails.measureStewardDeveloper).click()
+        cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
+        cy.get(measureDetails.row1CheckBox).click()
+        cy.get(measureDetails.saveBtn).click()
+        helper.visibleWithTimeout(measureDetails.warningMessage)
+
+        cy.get(measureDetails.description).click()
+        helper.enterText(measureDetails.textAreaInput, 'description')
+        cy.get(measureDetails.saveBtn).click()
+        helper.visibleWithTimeout(measureDetails.warningMessage)
+
+        cy.get(measureDetails.measureType).click()
+        cy.get(measureDetails.row1CheckBox).click()
+        cy.get(measureDetails.saveBtn).click()
+        helper.visibleWithTimeout(measureDetails.warningMessage)
 
         cy.get(measureComposer.cqlWorkspace).click()
 
