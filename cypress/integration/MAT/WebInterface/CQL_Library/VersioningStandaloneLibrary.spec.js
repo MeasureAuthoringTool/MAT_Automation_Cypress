@@ -10,7 +10,7 @@ import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreat
 let qdmLibraryName = ''
 let fhirLibraryName = ''
 
-describe('Standalone Library: Version and include with measure', () => {
+describe('QDM Standalone Library: Version and include with measure', () => {
     before('Login', () => {
         oktaLogin.login()
 
@@ -129,7 +129,7 @@ describe('Standalone Library: Version and include with measure', () => {
 
 })
 
-describe('Standalone Library: Version and include with measure', () => {
+describe('FHIR Standalone Library: Version and include with measure', () => {
     before('Login', () => {
         oktaLogin.login()
 
@@ -162,7 +162,21 @@ describe('Standalone Library: Version and include with measure', () => {
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+        helper.verifySpinnerAppearsAndDissappears()
+
+        // General Information
+        cy.get(cqlComposer.cqlLibraryNameField).should('contain.value', fhirLibraryName)
+        cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '0.0.000')
+        cy.get(cqlComposer.cqlLibraryDescriptionField).type('This is library description text to validate')
+        cy.get(cqlComposer.cqlLibraryCommentsField).type('This is library comment text to validate')
+        cy.get(cqlComposer.cqlLibraryUsingModel).should('contain.value', 'FHIR / CQL')
+        cy.get(cqlComposer.cqlLibraryModelVersion).should('contain.value', '4.0.1')
+        cy.get(cqlComposer.cqlLibraryPublisherDropDown).select('Allscripts')
+        cy.get(cqlComposer.cqlLibraryExperimentalCheckbox).click()
+
+        cy.get(cqlComposer.saveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Valuesets
         cy.get(cqlComposer.valueSets).click()
@@ -246,3 +260,48 @@ describe('Standalone Library: Version and include with measure', () => {
     })
 
 }) 
+
+describe('FHIR Standalone Library: Meta data requirement to version', () => {
+    before('Login', () => {
+        oktaLogin.login()
+
+        cy.get(measurelibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        fhirLibraryName = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+    })
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+    after('Log Out', () => {
+        helper.logout()
+    })
+
+    it('Validate error message for required meta data while versioning', () => {
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+        helper.visibleWithTimeout(cqlLibrary.searchInputBox)
+        helper.enterText(cqlLibrary.searchInputBox, fhirLibraryName)
+        cy.get(cqlLibrary.searchBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+
+        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
+        cy.get(cqlLibrary.majorVersionTypeRadio).click();
+        cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+
+        cy.get(cqlComposer.warningMessage).should('have.text', ' Description is required for Standalone Libraries. Please populate it in General Information.')
+
+        cy.get(cqlLibrary.cancelBtn).click()
+
+    })
+
+})

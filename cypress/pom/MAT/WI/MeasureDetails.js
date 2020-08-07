@@ -36,7 +36,7 @@ export const saveBtn = '[title="Save"]'
 export const yesConfirmDialogBox = '#Yes_ConfirmDialogBox'
 export const warningMessage = ':nth-child(2) > :nth-child(1) > table > tbody > :nth-child(1) > td > #WarningMessage'
 export const textAreaInput = '.gwt-TextArea'
-export const row1CheckBox = '[__gwt_row="0"] > .GB-MJYKBBD > div > input'
+export const row1CheckBox = ':nth-child(4) > [__gwt_row="0"] > .GB-MJYKBBD > div > input'
 
 //General Measure Information
 export const measureNameInput = '#measureNameInput'

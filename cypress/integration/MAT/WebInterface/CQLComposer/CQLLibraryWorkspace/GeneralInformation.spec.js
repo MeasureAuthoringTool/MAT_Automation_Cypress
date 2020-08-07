@@ -28,7 +28,7 @@ describe('CQL Composer: Validate the components on General Information page', ()
     after('Log Out', () => {
         helper.logout()
     })
-    it('FHIR: Verify the General Information components', () => {
+    it('FHIR: Verify the General Information components and required meta data', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
@@ -44,10 +44,18 @@ describe('CQL Composer: Validate the components on General Information page', ()
         // General Information
         cy.get(cqlComposer.cqlLibraryNameField).should('contain.value', fhircqlLibrary)
         cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '0.0.000')
-        cy.get(cqlComposer.cqlLibraryDescriptionField).type('This is library description text to validate')
         cy.get(cqlComposer.cqlLibraryCommentsField).type('This is library comment text to validate')
         cy.get(cqlComposer.cqlLibraryUsingModel).should('contain.value', 'FHIR / CQL')
         cy.get(cqlComposer.cqlLibraryModelVersion).should('contain.value', '4.0.1')
+
+        cy.get(cqlComposer.saveBtn).click()
+        cy.get(cqlComposer.warningMessage).should('contain.text', ' CQL Library Description is required.')
+
+        cy.get(cqlComposer.cqlLibraryDescriptionField).type('This is library description text to validate')
+        cy.get(cqlComposer.saveBtn).click()
+
+        cy.get(cqlComposer.warningMessage).should('contain.text', ' CQL Library Publisher is required.')
+
         cy.get(cqlComposer.cqlLibraryPublisherDropDown).select('Allscripts')
         cy.get(cqlComposer.cqlLibraryExperimentalCheckbox).click()
 
@@ -129,4 +137,5 @@ describe('CQL Composer: Validate the components on General Information page', ()
    })
 
 })
+
 
