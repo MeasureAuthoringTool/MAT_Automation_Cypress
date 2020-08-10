@@ -11,6 +11,16 @@ export const definition = '#defineLabel_Label'
 export const functionCQLComposer = '#functionLibLabel_label'
 export const cqlLibraryEditor = '#cqlLibraryEditor_Anchor'
 
+//General Information
+export const cqlLibraryNameField = '#libraryNameValue_TextBox'
+export const cqlLibraryVersionField = '#libraryVersionValue_TextBox'
+export const cqlLibraryDescriptionField = '#descriptionTextArea'
+export const cqlLibraryCommentsField = '#commentsContent'
+export const cqlLibraryUsingModel = '#usingModelValue_TextBox'
+export const cqlLibraryModelVersion = '#modelVersionValue_TextBox' 
+export const cqlLibraryPublisherDropDown = '#publisherListBoxMVP'
+export const cqlLibraryExperimentalCheckbox = '#gwt-uid-19'
+
 //Global
 export const cqlWorkspaceTitleGlobal = '#vPanel_VerticalPanel > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
 export const cqlWorkspaceTitleGlobal2 = '.topping > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
