@@ -29,6 +29,7 @@ export const deleteConfirmationYes = '#Yes_DeleteConfirmationBox'
 //Measure Details > General Measure Information
 export const measureNameInputBox = '#measureNameInput'
 export const cqlWorkspaceTitleGeneralInformation = ':nth-child(1) > .marginLeft15px > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
+export const saveBtnGeneralInfo = '#saveButton_GeneralInfo'
 
 //Includes
 export const cqlWorkspaceTitleIncludes = '#vPanel_VerticalPanelIncludeSection > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
