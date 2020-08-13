@@ -382,6 +382,45 @@ export const createDraftMeasure = (measure, model) => {
     return name
 }
 
+//create FHIR Measure, specifying measure type
+export const createFHIRMeasureByType = (measure, type, patient_based) => {
+
+    let name = ''
+
+    if (measure === undefined) {
+        name = draftMeasure + Date.now()
+    }
+    else {
+        name = measure + Date.now()
+    }
+
+    //creating new measure
+    helper.enabledWithTimeout(measurelibrary.newMeasureButton)
+    cy.get(measurelibrary.newMeasureButton).click()
+
+    cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
+    //cy.pause()
+    //cy.get(createNewMeasure.modelradioFHIR).click()
+    //cy.pause()
+    cy.get(createNewMeasure.cqlLibraryName).type(name, { delay: 50 })
+    //cy.pause()
+    cy.get(createNewMeasure.shortName).type(name, { delay: 50 })
+
+    cy.get(createNewMeasure.measureScoringListBox).select(type)
+    cy.get(createNewMeasure.patientBasedMeasureListBox).select(patient_based)
+
+    cy.get(createNewMeasure.saveAndContinueBtn).click()
+    cy.get(createNewMeasure.confirmationContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    return name
+}
+
 export const createDraftCqlLibrary = (library, model) => {
 
     let name = ''
