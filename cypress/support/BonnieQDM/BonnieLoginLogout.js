@@ -1,16 +1,16 @@
 import * as helper from "../helpers"
-import * as signInpage from "../../pom/Bonnie/WI/Sign_in"
-import * as dashboard from "../../pom/Bonnie/WI/Dashboard"
+import * as signInpage from "../../pom/BonnieQDM/WI/Sign_in"
+import * as dashboard from "../../pom/BonnieQDM/WI/Dashboard"
 
-let bonnieURL = Cypress.env('bonnieBaseUrl')
+let bonnieURL = Cypress.env('bonnieQdmBaseUrl')
 let username = ''
 let password = ''
 
 
 if (Cypress.env('environment') === 'dev') {
 
-    username = Cypress.env('BONNIE_DEV_USERNAME')
-    password = Cypress.env('BONNIE_DEV_PASSWORD')
+    username = Cypress.env('BONNIE_QDM_DEV_USERNAME')
+    password = Cypress.env('BONNIE_QDM_DEV_PASSWORD')
 }
 
 export const login = () => {
