@@ -39,6 +39,8 @@ export const editorLeftPanel = '#parameter_CQLEditor > .ace_gutter > .ace_layer'
 export const measureNameInputBox = '#measureNameInput'
 export const cqlWorkspaceTitleGeneralInformation = ':nth-child(1) > .marginLeft15px > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
 export const saveBtn = '#saveButton_GeneralInfo'
+export const cqlLibraryDescription = '#descriptionTextArea'
+export const publisher = '#publisherListBoxMVP'
 
 //Includes
 export const cqlWorkspaceTitleIncludes = '#vPanel_VerticalPanelIncludeSection > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
@@ -94,12 +96,22 @@ export const functionCQLExpressionEditorInput = '#function_CQLEditor'
 export const functionSaveBtn = '#saveButton_function'
 export const functionBox = '#funcListBox > option'
 export const deleteFunctionBtn = '#deleteButton_function'
+export const insertBtn = '#insertButton_function'
 
 //Function Add Argument
 export const argumentNameInputBox = '#inputArgumentName'
 export const otherTypeInputBox = '#inputOtherType'
 export const datatypeObjectListBox = '#listSelectItem'
 export const closeBtn = '#No_addFxnArgsBox'
+
+//Function Insert Argument and Attributes
+export const selectItemType = '#availableItemToInsert_ListBox'
+export const insertSaveBtn = '#addButton_Insert'
+export const insertCloseBtn = '#No_InsertIntoAceEditor'
+export const selectAttributesDataType = '#DataTypeBtAtrr_listBox'
+export const selectAttributes = '#Atrr_listBox'
+export const attributeInsertBtn = '#addButton_Button'
+export const attributeCancelBtn = '#Cancel_button'
 
 //CQL Library Editor
 export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
