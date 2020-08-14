@@ -9,7 +9,8 @@
     "qdmToQicoreMappinngsUrl": "http://internal-mat-dev-ecs-lb-1195232407.us-east-1.elb.amazonaws.com:9090",
     "db_host": "dev-data-rds.cichbigzeylu.us-east-1.rds.amazonaws.com",
     "db_database": "MAT_dev_sbx",
-    "bonnieBaseUrl": "https://bonnie.ahrqstg.org/"
+    "bonnieQdmBaseUrl": "https://bonniedev.semanticbits.com/",
+    "bonnieFhirBaseUrl": "https://bonniedev-fhir.semanticbits.com/"
   }
 
 }
