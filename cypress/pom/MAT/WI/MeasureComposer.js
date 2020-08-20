@@ -108,6 +108,8 @@ export const cqlEditorSaveBtn = ':nth-child(6) > td > .btn'
 //Population Workspace
 export const initialPopulation = '#Initial\\ Populations_Anchor'
 export const denominator = '#Denominators_Anchor'
+export const denominatorExclusions = '#Denominator\\ Exclusions_Anchor'
+export const denominatorExceptions = '#Denominator\\ Exceptions_Anchor'
 export const numerator = '#Numerators_Anchor'
 export const measurePopulations = '#Measure\\ Populations_Anchor'
 export const measurePopulationExclusions = '#Measure\\ Population\\ Exclusions_Anchor'
@@ -121,6 +123,14 @@ export const initialPopulationSaveBtn = '#saveButton_Initial\\ Population'
 //Population Workspace Denominator
 export const denominatorDefinitionListBox = '#definitionList_Denominator\\ 1'
 export const denominatorSaveBtn = '#saveButton_Denominator'
+
+//Population Workspace Denominator Exclusions
+export const denominatorExclusionsDefinitionListBox = '#definitionList_Denominator\\ Exclusions\\ 1'
+export const denominatorExclusionsSaveBtn = '#saveButton_Denominator\\ Exclusions'
+
+//Population Workspace Denominator Exceptions
+export const denominatorExceptionsDefinitionListBox = '#definitionList_Denominator\\ Exceptions\\ 1'
+export const denominatorExceptionsSaveBtn = '#saveButton_Denominator\\ Exceptions'
 
 //Population Workspace Numerator
 export const numeratorDefinitionListBox = '#definitionList_Numerator\\ 1'

@@ -37,6 +37,12 @@ describe('Packaging: Continuous Variable Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        //select population basis
+        cy.get(measureDetails.populationBasisListbox).select('Encounter')
+        cy.get(measureDetails.saveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()    
+
         //entering required meta data
         cy.get(measureDetails.measureStewardDeveloper).click()
         cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
@@ -120,7 +126,7 @@ describe('Packaging: Continuous Variable Measure', () => {
         cy.get(measureComposer.availableDatatypesListBox).select('FHIR Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter')
         cy.get(measureComposer.addBtn).click()
-        cy.get(measureComposer.functionCQLExpressionEditorInput).type('true', { delay: 50 })
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('Encounter', { delay: 50 })
         cy.get(measureComposer.functionSaveBtn).click()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
@@ -134,7 +140,8 @@ describe('Packaging: Continuous Variable Measure', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-        cy.wait(2000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Population Workspace
 
