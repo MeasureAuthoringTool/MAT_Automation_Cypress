@@ -38,6 +38,12 @@ describe('Packaging: Cohort Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        //select population basis
+        cy.get(measureDetails.populationBasisListbox).select('Encounter')
+        cy.get(measureDetails.saveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()        
+
         //entering required meta data
         cy.get(measureDetails.measureStewardDeveloper).click()
         cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
@@ -116,7 +122,8 @@ describe('Packaging: Cohort Measure', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-        cy.wait(2000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Population Workspace
 

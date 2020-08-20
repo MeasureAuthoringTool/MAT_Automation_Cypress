@@ -20,7 +20,7 @@ describe('FHIR Continuous Variable Measure', () => {
     it('Continuous Variable FHIR, creation', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'CreateFhirContinuousMeasure' + Date.now()
+        let measureName = 'CreateFhirContinuousVariableMeasure' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
@@ -34,6 +34,12 @@ describe('FHIR Continuous Variable Measure', () => {
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+
+        //select population basis
+        cy.get(measureDetails.populationBasisListbox).select('Encounter')
+        cy.get(measureDetails.saveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()    
 
         //entering required meta data
         cy.get(measureDetails.measureStewardDeveloper).click()
@@ -58,15 +64,15 @@ describe('FHIR Continuous Variable Measure', () => {
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-        //Includes
+         //Includes
 
-        cy.get(measureComposer.includes).click()
+         cy.get(measureComposer.includes).click()
 
-        cy.get(measureComposer.includesListItems).its('length').should('equal', 3)
+         cy.get(measureComposer.includesListItems).its('length').should('equal', 3)
 
-        cy.get(measureComposer.includesListItems).eq(0).should('contain.text', 'FHIRHelpers')
-        cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
-        cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
+         cy.get(measureComposer.includesListItems).eq(0).should('contain.text', 'FHIRHelpers')
+         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
+         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
 
          cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
          cy.get(measureComposer.searchBtn).click()
@@ -76,22 +82,15 @@ describe('FHIR Continuous Variable Measure', () => {
 
          helper.visibleWithTimeout(measureComposer.warningMessage)
 
-        //Value Sets
+         //Value Sets
 
-        cy.get(measureComposer.valueSets).click();
+        cy.get(measureComposer.valueSets).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
         dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
         dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
         dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
-        dataCreation.addValueSet('2.16.840.1.113883.3.3157.1004.20')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.162')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1125.2')
 
         // Codes
 
@@ -125,7 +124,7 @@ describe('FHIR Continuous Variable Measure', () => {
         cy.get(measureComposer.availableDatatypesListBox).select('FHIR Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter')
         cy.get(measureComposer.addBtn).click()
-        cy.get(measureComposer.functionCQLExpressionEditorInput).type('true', { delay: 50 })
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('Encounter', { delay: 50 })
         cy.get(measureComposer.functionSaveBtn).click()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
@@ -139,7 +138,8 @@ describe('FHIR Continuous Variable Measure', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-        cy.wait(2000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Population Workspace
 
@@ -204,8 +204,8 @@ describe('FHIR Continuous Variable Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measureComposer.packageWarningMessage)
         helper.waitToContainText(measureComposer.packageWarningMessage,'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
         cy.get(measurelibrary.measureLibraryTab).click()

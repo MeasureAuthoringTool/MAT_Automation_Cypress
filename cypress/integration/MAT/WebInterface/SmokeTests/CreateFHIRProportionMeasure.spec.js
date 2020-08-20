@@ -38,6 +38,12 @@ describe('FHIR Proportion Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        //select population basis
+        cy.get(measureDetails.populationBasisListbox).select('Encounter')
+        cy.get(measureDetails.saveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()   
+
         //entering required meta data
         cy.get(measureDetails.measureStewardDeveloper).click()
         cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
@@ -70,34 +76,36 @@ describe('FHIR Proportion Measure', () => {
         cy.get(measureComposer.includesListItems).eq(0).should('contain.text', 'FHIRHelpers')
         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
-        
-         cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
-         cy.get(measureComposer.searchBtn).click()
-         cy.get(measureComposer.availableLibrariesRow1checkbox).click()
-         cy.get(measureComposer.libraryAliasInputBox).type('TJC', { delay: 50 })
-         cy.get(measureComposer.saveIncludes).click()
 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
-        
+        cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
+        cy.get(measureComposer.searchBtn).click()
+        cy.get(measureComposer.availableLibrariesRow1checkbox).click()
+        cy.get(measureComposer.libraryAliasInputBox).type('TJC', { delay: 50 })
+        cy.get(measureComposer.saveIncludes).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+
         //Value Sets
 
-        cy.get(measureComposer.valueSets).click();
+        cy.get(measureComposer.valueSets).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
         dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
         dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
         dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
-        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
-        dataCreation.addValueSet('2.16.840.1.113883.3.3157.1004.20')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.162')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1125.2')
 
-         // Definition
+        // Codes
+
+        cy.get(measureComposer.valueSets).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2020-03/Code/420523002/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
+
+        // Definition
 
         cy.get(measureComposer.definition).click()
 
@@ -105,7 +113,7 @@ describe('FHIR Proportion Measure', () => {
 
         dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
         dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
-        dataCreation.addDefinition('Numerator', 'true')
+        dataCreation.addDefinition('Numerator', '"Initial Population"')
 
         //CQL Library Editor
 
@@ -116,7 +124,8 @@ describe('FHIR Proportion Measure', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage, 'You are viewing CQL with no validation errors.')
 
-        cy.wait(2000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // Population Workspace
 
