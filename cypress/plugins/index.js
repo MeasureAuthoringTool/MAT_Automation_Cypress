@@ -91,7 +91,7 @@ function queryMongo(query, config) {
   console.log(config.env.ssh_key)
   const sshTunnelConfig = {
     agent: process.env.SSH_AUTH_SOCK,
-    username: 'centos',
+    username: config.env.ssh_username,
     privateKey: require('fs').readFileSync(config.env.ssh_key),
     host: config.env.ssh_host,
     port: 22,
@@ -100,13 +100,13 @@ function queryMongo(query, config) {
     localHost: '127.0.0.1',
     localPort: 50001
   }
-  // tunnel to dev
+  // tunnel to dev -- See https://github.com/agebrock/tunnel-ssh#readme
   tunnel(sshTunnelConfig, (error, server) => {
     if (error) {
       console.log("SSH connection error: ", error);
     }
     // Connection URL
-    const url = 'mongodb://localhost:50001';
+    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort;
     // Database Name
     const dbName = config.env.mongo_db;
     // Use connect method to connect to the server
