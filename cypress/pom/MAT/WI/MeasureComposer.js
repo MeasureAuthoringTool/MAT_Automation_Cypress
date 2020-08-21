@@ -83,12 +83,22 @@ export const selectQDMDatatypeObject = '#listSelectItem'
 export const addBtn = '#Yes_addFxnArgsBox'
 export const functionCQLExpressionEditorInput = '#function_CQLEditor'
 export const functionSaveBtn = '#saveButton_function'
+export const insertBtn = '#insertButton_function'
 
 //Function Add Argument
 export const argumentNameInputBox = '#inputArgumentName'
 export const otherTypeInputBox = '#inputOtherType'
 export const datatypeObjectListBox = '#listSelectItem'
 export const closeBtn = '#No_addFxnArgsBox'
+
+//Function Insert Argument and Attributes
+export const selectItemType = '#availableItemToInsert_ListBox'
+export const insertSaveBtn = '#addButton_Insert'
+export const insertCloseBtn = '#No_InsertIntoAceEditor'
+export const selectAttributesDataType = '#DataTypeBtAtrr_listBox'
+export const selectAttributes = '#Atrr_listBox'
+export const attributeInsertBtn = '#addButton_Button'
+export const attributeCancelBtn = '#Cancel_button'
 
 //CQL Library Editor
 export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
@@ -98,6 +108,8 @@ export const cqlEditorSaveBtn = ':nth-child(6) > td > .btn'
 //Population Workspace
 export const initialPopulation = '#Initial\\ Populations_Anchor'
 export const denominator = '#Denominators_Anchor'
+export const denominatorExclusions = '#Denominator\\ Exclusions_Anchor'
+export const denominatorExceptions = '#Denominator\\ Exceptions_Anchor'
 export const numerator = '#Numerators_Anchor'
 export const measurePopulations = '#Measure\\ Populations_Anchor'
 export const measurePopulationExclusions = '#Measure\\ Population\\ Exclusions_Anchor'
@@ -111,6 +123,14 @@ export const initialPopulationSaveBtn = '#saveButton_Initial\\ Population'
 //Population Workspace Denominator
 export const denominatorDefinitionListBox = '#definitionList_Denominator\\ 1'
 export const denominatorSaveBtn = '#saveButton_Denominator'
+
+//Population Workspace Denominator Exclusions
+export const denominatorExclusionsDefinitionListBox = '#definitionList_Denominator\\ Exclusions\\ 1'
+export const denominatorExclusionsSaveBtn = '#saveButton_Denominator\\ Exclusions'
+
+//Population Workspace Denominator Exceptions
+export const denominatorExceptionsDefinitionListBox = '#definitionList_Denominator\\ Exceptions\\ 1'
+export const denominatorExceptionsSaveBtn = '#saveButton_Denominator\\ Exceptions'
 
 //Population Workspace Numerator
 export const numeratorDefinitionListBox = '#definitionList_Numerator\\ 1'
