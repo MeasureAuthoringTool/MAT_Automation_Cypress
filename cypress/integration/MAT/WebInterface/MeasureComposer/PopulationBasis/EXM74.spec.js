@@ -7,7 +7,7 @@ import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 
 
-describe('EXM105: Discharged on Statin Medication', () => {
+describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Care Providers, including Dentists', () => {
     before('Login', () => {
         oktaLogin.login()
     })
@@ -17,23 +17,29 @@ describe('EXM105: Discharged on Statin Medication', () => {
     after('Log Out', () => {
         helper.logout()
     })
-    it('Continuous Variable FHIR, creation', () => {
+    it('Primary Caries Prevention Intervention as Offered by Primary Care Providers, including Dentists, creation, grouping, and packaging', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'Discharge_Statin_Medication' + Date.now()
+        let measureName = 'Primary_Caries_Prevention_Intervention' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
         cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
-        cy.get(createNewMeasure.patientBasedMeasureListBox).select('No')
+        cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+
+        //select population basis
+        cy.get(measureDetails.populationBasisListbox).select('Boolean')
+        cy.get(measureDetails.saveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears() 
 
         //entering required meta data
         cy.get(measureDetails.measureStewardDeveloper).click()
@@ -68,40 +74,48 @@ describe('EXM105: Discharged on Statin Medication', () => {
         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
 
-         cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
+         cy.get(measureComposer.searchInputBox).type('hospice', { delay: 50 })
          cy.get(measureComposer.searchBtn).click()
          cy.get(measureComposer.availableLibrariesRow1checkbox).click()
-         cy.get(measureComposer.libraryAliasInputBox).type('TJC', { delay: 50 })
+         cy.get(measureComposer.libraryAliasInputBox).type('Hospice', { delay: 50 })
          cy.get(measureComposer.saveIncludes).click()
 
          helper.visibleWithTimeout(measureComposer.warningMessage)
 
+         helper.verifySpinnerAppearsAndDissappears()
+         helper.verifySpinnerAppearsAndDissappears()
+
         //Value Sets
 
-        cy.get(measureComposer.valueSets).click();
+        //CQL Library Editor
+
+        cy.get(measureComposer.cqlLibraryEditor).click()
+
+        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
+
+        cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "Clinical Oral Evaluation": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003\'\n' +
+        'valueset "Fluoride Varnish Application for Children": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002\'\n' + 
+        'valueset "Office Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001\'\n' +
+        'valueset "Preventive Care - Established Office Visit, 0 to 17": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024\'\n' +
+        'valueset "Preventive Care Services - Established Office Visit, 18 and Up": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025\'\n' + 
+        'valueset "Preventive Care Services-Initial Office Visit, 18 and Up": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023\'\n' +
+        'valueset "Preventive Care- Initial Office Visit, 0 to 17": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022\'{enter}')
+
+        cy.get(measureComposer.cqlEditorSaveBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        dataCreation.addValueSet('1.3.6.1.4.1.33895.1.3.0.45')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.207')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.209')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.292')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.212')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.247')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.215')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.308')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.473')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.424')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.143')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.309')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.93')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.423')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1110.19')
+        // cy.get(measureComposer.valueSets).click();
+
+        // helper.verifySpinnerAppearsAndDissappears()
+
+        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1003')
+        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1002')
+        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1001')
+        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1024')
+        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1025')
+        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1023')
+        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1022')
 
         // Codes
 
@@ -110,7 +124,6 @@ describe('EXM105: Discharged on Statin Medication', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         dataCreation.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
-        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
 
         // Definition
 
@@ -118,72 +131,40 @@ describe('EXM105: Discharged on Statin Medication', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
-        dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
+        dataCreation.addDefinition('Initial Population', 'exists ( ["Patient"] BirthDate\n' +
+        '\twhere Global."CalendarAgeInMonthsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) >= 6\n' +
+          '\tand Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) < 20\n' +
+          ')\n' +
+        '\tand exists ( "Qualifying Encounters" )')
 
-        dataCreation.addDefinition('Denominator Exception', '( TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' + 
-            '\twith "Statin Not Given at Discharge" NoDischargeStatin\n' +
-            '\tsuch that NoDischargeStatin.authoredOn during day of IschemicStrokeEncounter.period\n' +
-            ')\n' +
-        'union ( TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-            '\twith "Statin Allergy" StatinAllergy\n' +
-                '\tsuch that Global."Normalize Interval" ( StatinAllergy.onset ) starts on or before\n' + 
-                '\tend of IschemicStrokeEncounter.period\n' +
-        ')\n' +
-        'union "Encounter with Max LDL less than 70 mg per dL"\n' +
-        '// NOTE: Added status check and category check, consider define Statin Medication Request for reuse')
+        dataCreation.addDefinition('Denominator', '"Initial Population"')
+        dataCreation.addDefinition('Denominator Exclusion', 'Hospice."Has Hospice"')
 
-        dataCreation.addDefinition('Denominator Exclusion', 'TJC."Ischemic Stroke Encounters with Discharge Disposition"\n' +
-            '\tunion TJC."Comfort Measures during Hospitalization"')
+        dataCreation.addDefinition('Numerator', 'exists ["Procedure": "Fluoride Varnish Application for Children"] FluorideApplication\n' +
+        '\twhere FluorideApplication.performed during "Measurement Period"\n' +
+          '\tand FluorideApplication.status = \'completed\'')
+       
+        dataCreation.addDefinition('Qualifying Encounters', '( ["Encounter": "Office Visit"]\n' +
+        '\tunion ["Encounter": "Preventive Care - Established Office Visit, 0 to 17"]\n' + 
+        'union ["Encounter": "Preventive Care- Initial Office Visit, 0 to 17"]\n' + 
+        'union ["Encounter": "Preventive Care Services - Established Office Visit, 18 and Up"]\n' +
+        'union ["Encounter": "Preventive Care Services-Initial Office Visit, 18 and Up"]\n' + 
+        'union ["Encounter": "Clinical Oral Evaluation"] ) ValidEncounter\n' +
+        'where Global."Normalize Interval" ( ValidEncounter.period ) during "Measurement Period"\n' + 
+          '\tand ValidEncounter.status = \'finished\'')
 
-        dataCreation.addDefinition('Encounter with Max LDL less than 70 mg per dL', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-        '\twhere Max(["Observation": "LDL-c"] Ldl\n' +
-            '\twhere Ldl.status in {{} \'final\', \'amended\' }\n' +
-                '\tand Ldl.issued during Interval[IschemicStrokeEncounter.period.start - 30 days, IschemicStrokeEncounter.period.\n' +
-                '\tend]\n' +
-            '\treturn Ldl.value as Quantity\n' +
-        '\t)< 70 \'mg/dL\'')
+        dataCreation.addDefinition('Stratification 1', 'exists ( ["Patient"] BirthDate\n' +
+        '\twhere Global."CalendarAgeInMonthsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) >= 6\n' +
+          '\tand Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) <= 4\n' +
+        ')')
 
-        dataCreation.addDefinition('Numerator', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-        '\twith "Statin at Discharge" DischargeStatin\n' +
-            '\tsuch that DischargeStatin.authoredOn during day of Global."Normalize Interval" ( IschemicStrokeEncounter.period )\n' +
+        dataCreation.addDefinition('Stratification 2', 'exists ["Patient"] BirthDate\n' +
+            '\twhere Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate\n' +
+        '.birthDate ), start of "Measurement Period" ) in Interval[5, 11]') 
 
-        '// NOTE: Added check for Statin.status in {{} \'active\', \'completed\' }\n' +
-        '// Discussion about whether to check for both active and completed, versus just specifying active\n' +
-        '// Also discussion about whether to use "Community" or "Discharge"\n' +
-        '// Suggest using both since there is potential overlap and even some instances that would have both codes\n' +
-        '// Will keep both and followup with Pharmacy to verify the approach\n' +
-        '// NOTE: Changed intent to only "order", since we\'re specifically looking for authorized prescriptions')
-
-        dataCreation.addDefinition('Statin Allergy', '["AllergyIntolerance": "Statin Allergen"] StatinAllergy\n' +
-        '\twhere ( StatinAllergy.clinicalStatus is null\n' +
-            '\tor FHIRHelpers.ToConcept ( StatinAllergy.clinicalStatus ) ~ Global."allergy-active"\n' +
-        ')\n' +
-            '\tand FHIRHelpers.ToConcept ( StatinAllergy.verificationStatus ) in {{} Global."allergy-unconfirmed", Global."allergy-confirmed" }\n' +
-        '// NOTE: Added check for status in final or amended')
-
-        dataCreation.addDefinition('Statin at Discharge', '["MedicationRequest": medication in "Statin Grouper"] Statin\n' +
-            '\t//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-        '\twhere exists ( Statin.category C\n' +
-            '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-                '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-        ')\n' +
-            '\tand Statin.status in {{} \'active\', \'completed\' }\n' +
-            '\tand Statin.intent = \'order\'')
-
-        dataCreation.addDefinition('Statin Not Given at Discharge', '["MedicationRequest": medication in "Statin Grouper"] NoStatin\n' +
-        '\twhere NoStatin.doNotPerform is true\n' +
-            '\tand ( NoStatin.reasonCode in "Medical Reason"\n' +
-                '\tor NoStatin.reasonCode in "Patient Refusal"\n' +
-            ')\n' +
-            '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-            '\tand exists ( NoStatin.category C\n' +
-                '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-                '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-            ')\n' +
-            '\tand NoStatin.status = \'completed\'\n' +
-            '\tand NoStatin.intent = \'order\'\n' +
-        '// NOTE: Added clinicalStatus and verificationStatus check')    
+        dataCreation.addDefinition('Stratification 3', 'exists ["Patient"] BirthDate\n' +
+            '\twhere Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate\n' +
+        '.birthDate ), start of "Measurement Period" ) in Interval[12, 20]')    
         
         //CQL Library Editor
 
@@ -249,19 +230,6 @@ describe('EXM105: Discharged on Statin Medication', () => {
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage,'Changes to Denominator Exclusions have been successfully saved.')
 
-        // Denominator Exceptions
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measureComposer.denominatorExceptions).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measureComposer.denominatorExceptionsDefinitionListBox).select('Denominator Exception')
-        cy.get(measureComposer.denominatorExceptionsSaveBtn).click()
-
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'Changes to Denominator Exceptions have been successfully saved.')
-
         //navigate to Measure Packager
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -270,13 +238,13 @@ describe('EXM105: Discharged on Statin Medication', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
-        cy.get(measureComposer.populationsListItems).its('length').should('equal', 5)
+        cy.get(measureComposer.populationsListItems).its('length').should('equal', 4)
 
         cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
         cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Denominator 1')
         cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Denominator Exclusions 1')
-        cy.get(measureComposer.populationsListItems).eq(3).should('contain.text', 'Denominator Exceptions 1')
-        cy.get(measureComposer.populationsListItems).eq(4).should('contain.text', 'Numerator 1')
+        cy.get(measureComposer.populationsListItems).eq(3).should('contain.text', 'Numerator 1')
+
         //Package Grouping
 
         cy.get(measureComposer.addAllItemsToGrouping).click()
@@ -296,6 +264,44 @@ describe('EXM105: Discharged on Statin Medication', () => {
         cy.get(measurelibrary.measureLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        //versioning a measure
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        helper.enterText(measurelibrary.searchInputBox, measureName)
+        cy.get(measurelibrary.searchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.row1MeasureSearch).click();
+
+        cy.get(measurelibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measurelibrary.majorVersionTypeRadio).click();
+        cy.get(measurelibrary.packageAndVersion).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.continueBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        // Create First Draft Measure
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).click();
+        cy.get(measurelibrary.createDraftMeasureSearchBtn).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get('h1').should('contain.text', 'My Measures > Draft Measure');
+
+        cy.get(measurelibrary.saveAndContinueButtonDraft).click();
+
+        cy.get(measurelibrary.confirmationContinue).click();
+
+        cy.get(measurelibrary.measureLibraryTab).click();
+
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
     })
 })
