@@ -1,4 +1,4 @@
-import * as helper from '../../../../../support/helpers'
+import * as helper from '../../../../support/helpers'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
@@ -7,33 +7,39 @@ import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 
 
-describe('EXM74: Measure', () => {
+describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     before('Login', () => {
         oktaLogin.login()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
     })
-    // after('Log Out', () => {
-    //     helper.logout()
-    // })
-    it('Continuous Variable FHIR, creation', () => {
+    after('Log Out', () => {
+        helper.logout()
+    })
+    it('Discharged on Antithrombotic Therapy, creation, grouping, and packaging', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'Measure_EXM74' + Date.now()
+        let measureName = 'Discharge_Antithrombotic_Therapy' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
         cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
-        cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
+        cy.get(createNewMeasure.patientBasedMeasureListBox).select('No')
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+
+        //select population basis
+        cy.get(measureDetails.populationBasisListbox).select('Encounter')
+        cy.get(measureDetails.saveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears() 
 
         //entering required meta data
         cy.get(measureDetails.measureStewardDeveloper).click()
@@ -68,10 +74,10 @@ describe('EXM74: Measure', () => {
         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
 
-         cy.get(measureComposer.searchInputBox).type('hospice', { delay: 50 })
+         cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
          cy.get(measureComposer.searchBtn).click()
          cy.get(measureComposer.availableLibrariesRow1checkbox).click()
-         cy.get(measureComposer.libraryAliasInputBox).type('Hospice', { delay: 50 })
+         cy.get(measureComposer.libraryAliasInputBox).type('TJC', { delay: 50 })
          cy.get(measureComposer.saveIncludes).click()
 
          helper.visibleWithTimeout(measureComposer.warningMessage)
@@ -82,14 +88,26 @@ describe('EXM74: Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1003')
-        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1002')
-        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1001')
-        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1024')
-        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1025')
-        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1023')
-        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1022')
-
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.201')
+        dataCreation.addValueSet('1.3.6.1.4.1.33895.1.3.0.45')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.207')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.209')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.292')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.212')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.247')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.308')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.473')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.424')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.143')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.309')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.93')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
+        dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1110.39')
+     
         // Codes
 
         cy.get(measureComposer.valueSets).click()
@@ -104,39 +122,57 @@ describe('EXM74: Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        dataCreation.addDefinition('Initial Population', 'exists ( ["Patient"] BirthDate\n' +
-        '\twhere Global."CalendarAgeInMonthsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) >= 6\n' +
-          '\tand Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) < 20)\n' +
-      'and exists ( "Qualifying Encounters" )')
+        dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+        dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
 
-        dataCreation.addDefinition('Denominator', '"Initial Population"')
-        dataCreation.addDefinition('Denominator Exclusion', 'Hospice."Has Hospice"')
+        dataCreation.addDefinition('Denominator Exception', '"Encounter With No Antithrombotic At Discharge"\n' + 
+            '\tunion "Encounter With Ticagrelor at Discharge"')
 
-        dataCreation.addDefinition('Numerator', 'exists ["Procedure": "Fluoride Varnish Application for Children"] FluorideApplication\n' +
-        '\twhere FluorideApplication.performed during "Measurement Period"\n' +
-          '\tand FluorideApplication.status = \'completed\'')
-       
-        dataCreation.addDefinition('Qualifying Encounters', '( ["Encounter": "Office Visit"]\n' +
-        '\tunion ["Encounter": "Preventive Care - Established Office Visit, 0 to 17"]\n' +
-        'union ["Encounter": "Preventive Care- Initial Office Visit, 0 to 17"]\n' +
-        'union ["Encounter": "Preventive Care Services - Established Office Visit, 18 and Up"]\n' +
-        'union ["Encounter": "Preventive Care Services-Initial Office Visit, 18 and Up"]\n' +
-        'union ["Encounter": "Clinical Oral Evaluation"] ) ValidEncounter\n' +
-        'where Global."Normalize Interval" ( ValidEncounter.period ) during "Measurement Period"\n' +
-          '\tand ValidEncounter.status = \'finished\'')
+        dataCreation.addDefinition('Denominator Exclusion', 'TJC."Ischemic Stroke Encounters with Discharge Disposition"\n' +
+            '\tunion TJC."Comfort Measures during Hospitalization"')
 
-        dataCreation.addDefinition('Stratification 1', 'exists ( ["Patient"] BirthDate\n' +
-        '\twhere Global."CalendarAgeInMonthsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) >= 6\n' +
-          '\tand Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) <= 4\n' +
-        ')')
+        dataCreation.addDefinition('Antithrombotic Not Given at Discharge', '["MedicationRequest": medication in "Antithrombotic Therapy"] NoAntithromboticDischarge\n' +
+        '\twhere NoAntithromboticDischarge.doNotPerform is true\n' +
+            '\tand ( NoAntithromboticDischarge.reasonCode in "Medical Reason"\n' +
+                '\tor NoAntithromboticDischarge.reasonCode in "Patient Refusal"\n' +
+                ')\n' +
+            '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
+        'and exists ( NoAntithromboticDischarge.category C\n' +
+        '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
+        '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+        ')\n' +
+        'and NoAntithromboticDischarge.status = \'completed\'\n' +
+        'and NoAntithromboticDischarge.intent = \'order\'\n')
 
-        dataCreation.addDefinition('Stratification 2', 'exists ["Patient"] BirthDate\n' +
-            '\twhere Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate\n' +
-        '.birthDate ), start of "Measurement Period" ) in Interval[5, 11]') 
+        dataCreation.addDefinition('Numerator', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+        '\twith "Antithrombotic Therapy at Discharge" DischargeAntithrombotic\n' +
+        '\tsuch that DischargeAntithrombotic.authoredOn during Global."Normalize Interval"( IschemicStrokeEncounter.period )')
 
-        dataCreation.addDefinition('Stratification 3', 'exists ["Patient"] BirthDate\n' +
-            '\twhere Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate\n' +
-        '.birthDate ), start of "Measurement Period" ) in Interval[12, 20]')    
+        dataCreation.addDefinition('Antithrombotic Therapy at Discharge', '["MedicationRequest": medication in "Antithrombotic Therapy"] Antithrombotic\n' +
+        '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
+            'where exists ( Antithrombotic.category C\n' +
+        'where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
+            '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+        ')\n' +
+        'and Antithrombotic.status in {{} \'active\', \'completed\' }\n' +
+        'and Antithrombotic.intent.value = \'order\'')
+
+        dataCreation.addDefinition('Encounter With No Antithrombotic At Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+            'with "Antithrombotic Not Given at Discharge" NoDischargeAntithrombotic\n' +
+        'such that NoDischargeAntithrombotic.authoredOn during IschemicStrokeEncounter.period')
+
+        dataCreation.addDefinition('Encounter With Ticagrelor at Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+        'with "Ticagrelor Therapy at Discharge" DischargeTicagrelor\n' +
+            '\tsuch that DischargeTicagrelor.authoredOn during IschemicStrokeEncounter.period') 
+
+        dataCreation.addDefinition('Ticagrelor Therapy at Discharge', '["MedicationRequest": medication in TJC."Ticagrelor Therapy"] Ticagrelor\n' +
+        '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
+        'where exists ( Ticagrelor.category C\n' + 
+        '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
+        '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+        ')\n' +
+        'and Ticagrelor.status in {{} \'active\', \'completed\' }\n' +
+        'and Ticagrelor.intent = \'order\'')
         
         //CQL Library Editor
 
@@ -230,6 +266,7 @@ describe('EXM74: Measure', () => {
         cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Denominator Exclusions 1')
         cy.get(measureComposer.populationsListItems).eq(3).should('contain.text', 'Denominator Exceptions 1')
         cy.get(measureComposer.populationsListItems).eq(4).should('contain.text', 'Numerator 1')
+        
         //Package Grouping
 
         cy.get(measureComposer.addAllItemsToGrouping).click()
