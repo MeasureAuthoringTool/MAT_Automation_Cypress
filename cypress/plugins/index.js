@@ -83,17 +83,17 @@ function queryTestDb(query, config) {
   })
 }
 
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
-const tunnel = require('tunnel-ssh');
+const MongoClient = require('mongodb').MongoClient
+const assert = require('assert')
+const tunnel = require('tunnel-ssh')
 
 function queryMongo(query, config) {
   console.log(config.env.ssh_key)
   const sshTunnelConfig = {
     agent: process.env.SSH_AUTH_SOCK,
-    username: config.env.ssh_username,
+    username: config.env.DEV_DB_MONGO_SSH_USERNAME,
     privateKey: require('fs').readFileSync(config.env.ssh_key),
-    host: config.env.ssh_host,
+    host: config.env.DEV_DB_MONGO_SSH_HOST,
     port: 22,
     dstHost: 'localhost',
     dstPort: 27017,
@@ -103,7 +103,7 @@ function queryMongo(query, config) {
   // tunnel to dev -- See https://github.com/agebrock/tunnel-ssh#readme
   tunnel(sshTunnelConfig, (error, server) => {
     if (error) {
-      console.log("SSH connection error: ", error);
+      console.log("SSH connection error: ", error)
     }
     // Connection URL
     const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort;
@@ -112,24 +112,24 @@ function queryMongo(query, config) {
     // Use connect method to connect to the server
     MongoClient.connect(url, function (err, client) {
       assert.equal(null, err);
-      console.log("Connected successfully to server");
+      console.log("Connected successfully to server")
 
       const db = client.db(dbName);
       findDocuments(db, 'cqm_measures', query, function() {
-        client.close();
-      });
-    });
-  });
+        client.close()
+      })
+    })
+  })
 }
 
 const findDocuments = function (db, collection, query, callback) {
   // Find some documents
   db.collection(collection).find(query).toArray(function (err, docs) {
-    assert.equal(err, null);
-    console.log("Found the following records");
+    assert.equal(err, null)
+    console.log("Found the following records")
     console.log(docs)
-    callback(docs);
-  });
+    callback(docs)
+  })
 }
 
 //usage for cy.task queryDb, to use data returned outside of the .then you can write the data to file and then use it later

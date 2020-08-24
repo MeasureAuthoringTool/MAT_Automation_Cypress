@@ -12,9 +12,7 @@
     "mongo_db": "bonnie_fhir_development",
     "bonnieQdmBaseUrl": "https://bonniedev.semanticbits.com/",
     "bonnieFhirBaseUrl": "https://bonniedev-fhir.semanticbits.com/",
-    "ssh_host": "",
-    "ssh_key": "./cypress/config/bonnie-mat-dev.pem",
-    "ssh_username": ""
+    "ssh_key": "./cypress/config/bonnie-mat-dev.pem"
   }
 
 }
