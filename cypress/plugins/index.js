@@ -15,7 +15,6 @@ const path = require('path')
 
 function getConfigurationByFile (file) {
   const pathToConfigFile = path.resolve('./cypress/', 'config', `${file}.json`)
-
   return fs.readJson(pathToConfigFile)
 }
 
@@ -31,6 +30,7 @@ function getConfigurationByFile (file) {
 const browserify = require('@cypress/browserify-preprocessor')
 const getCompareSnapshotsPlugin = require('cypress-visual-regression/dist/plugin');
 module.exports = (on, config) => {
+  const file = config.env.configFile || 'qa'
   const options = {
     browserifyOptions: {
       extensions: ['.js', '.ts'],
@@ -44,8 +44,15 @@ module.exports = (on, config) => {
       return queryTestDb(query, config)
     },
   })
+  on('task', {
+    queryMongo: query => {
+      getConfigurationByFile(file).then((envConfig) =>
+        queryMongo(query, envConfig)
+      )
+      return null;
+    }
+  });
   on('file:preprocessor', browserify(options))
-  const file = config.env.configFile || 'qa'
   getCompareSnapshotsPlugin(on);
   return getConfigurationByFile(file)
 }
@@ -54,14 +61,12 @@ const mysql = require('mysql')
 
 function queryTestDb(query, config) {
   // creates a new mysql connection using credentials from cypress.json env's
-
   const db = {
     host: config.env.db_host,
     user: config.env.DEV_DB_USER,
     password: config.env.DEV_DB_PASSWORD,
     database: config.env.db_database
   }
-
   const connection = mysql.createConnection(db)
   // start connection to db
   connection.connect()
@@ -75,6 +80,55 @@ function queryTestDb(query, config) {
         return resolve(results)
       }
     })
+  })
+}
+
+const MongoClient = require('mongodb').MongoClient
+const assert = require('assert')
+const tunnel = require('tunnel-ssh')
+
+function queryMongo(query, config) {
+  console.log(config.env.ssh_key)
+  const sshTunnelConfig = {
+    agent: process.env.SSH_AUTH_SOCK,
+    username: config.env.DEV_DB_MONGO_SSH_USERNAME,
+    privateKey: require('fs').readFileSync(config.env.ssh_key),
+    host: config.env.DEV_DB_MONGO_SSH_HOST,
+    port: 22,
+    dstHost: 'localhost',
+    dstPort: 27017,
+    localHost: '127.0.0.1',
+    localPort: 50001
+  }
+  // tunnel to dev -- See https://github.com/agebrock/tunnel-ssh#readme
+  tunnel(sshTunnelConfig, (error, server) => {
+    if (error) {
+      console.log("SSH connection error: ", error)
+    }
+    // Connection URL
+    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort;
+    // Database Name
+    const dbName = config.env.mongo_db;
+    // Use connect method to connect to the server
+    MongoClient.connect(url, function (err, client) {
+      assert.equal(null, err);
+      console.log("Connected successfully to server")
+
+      const db = client.db(dbName);
+      findDocuments(db, 'cqm_measures', query, function() {
+        client.close()
+      })
+    })
+  })
+}
+
+const findDocuments = function (db, collection, query, callback) {
+  // Find some documents
+  db.collection(collection).find(query).toArray(function (err, docs) {
+    assert.equal(err, null)
+    console.log("Found the following records")
+    console.log(docs)
+    callback(docs)
   })
 }
 
