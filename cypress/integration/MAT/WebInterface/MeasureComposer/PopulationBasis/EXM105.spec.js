@@ -7,20 +7,20 @@ import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 
 
-describe('EXM104: Discharged on Antithrombotic Therapy', () => {
+describe('EXM105: Discharged on Statin Medication', () => {
     before('Login', () => {
         oktaLogin.login()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
     })
-    // after('Log Out', () => {
-    //     helper.logout()
-    // })
-    it('Continuous Variable FHIR, creation', () => {
+    after('Log Out', () => {
+        helper.logout()
+    })
+    it('Discharged on Statin Medication, creation, grouping, and packaging', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'Discharge_Antithrombotic_Therapy' + Date.now()
+        let measureName = 'Discharge_Statin_Medication' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
@@ -34,6 +34,12 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+
+        //select population basis
+        cy.get(measureDetails.populationBasisListbox).select('Encounter')
+        cy.get(measureDetails.saveBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears() 
 
         //entering required meta data
         cy.get(measureDetails.measureStewardDeveloper).click()
@@ -82,7 +88,6 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.201')
         dataCreation.addValueSet('1.3.6.1.4.1.33895.1.3.0.45')
         dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
         dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.207')
@@ -91,6 +96,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
         dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
         dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.212')
         dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.247')
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.215')
         dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.308')
         dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.473')
         dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.424')
@@ -100,8 +106,9 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
         dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.93')
         dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
         dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1110.39')
-     
+        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.423')
+        dataCreation.addValueSet('2.16.840.1.113762.1.4.1110.19')
+
         // Codes
 
         cy.get(measureComposer.valueSets).click()
@@ -109,6 +116,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         dataCreation.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
+        dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
 
         // Definition
 
@@ -119,54 +127,69 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
         dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
         dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
 
-        dataCreation.addDefinition('Denominator Exception', '"Encounter With No Antithrombotic At Discharge"\n' + 
-            '\tunion "Encounter With Ticagrelor at Discharge"')
+        dataCreation.addDefinition('Denominator Exception', '( TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' + 
+            '\twith "Statin Not Given at Discharge" NoDischargeStatin\n' +
+            '\tsuch that NoDischargeStatin.authoredOn during day of IschemicStrokeEncounter.period\n' +
+            ')\n' +
+        'union ( TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+            '\twith "Statin Allergy" StatinAllergy\n' +
+                '\tsuch that Global."Normalize Interval" ( StatinAllergy.onset ) starts on or before\n' + 
+                '\tend of IschemicStrokeEncounter.period\n' +
+        ')\n' +
+        'union "Encounter with Max LDL less than 70 mg per dL"\n' +
+        '// NOTE: Added status check and category check, consider define Statin Medication Request for reuse')
 
         dataCreation.addDefinition('Denominator Exclusion', 'TJC."Ischemic Stroke Encounters with Discharge Disposition"\n' +
             '\tunion TJC."Comfort Measures during Hospitalization"')
 
-        dataCreation.addDefinition('Antithrombotic Not Given at Discharge', '["MedicationRequest": medication in "Antithrombotic Therapy"] NoAntithromboticDischarge\n' +
-        '\twhere NoAntithromboticDischarge.doNotPerform is true\n' +
-            '\tand ( NoAntithromboticDischarge.reasonCode in "Medical Reason"\n' +
-                '\tor NoAntithromboticDischarge.reasonCode in "Patient Refusal"\n' +
-                ')\n' +
-            '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-        'and exists ( NoAntithromboticDischarge.category C\n' +
-        '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-        '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-        ')\n' +
-        'and NoAntithromboticDischarge.status = \'completed\'\n' +
-        'and NoAntithromboticDischarge.intent = \'order\'\n')
+        dataCreation.addDefinition('Encounter with Max LDL less than 70 mg per dL', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+        '\twhere Max(["Observation": "LDL-c"] Ldl\n' +
+            '\twhere Ldl.status in {{} \'final\', \'amended\' }\n' +
+                '\tand Ldl.issued during Interval[IschemicStrokeEncounter.period.start - 30 days, IschemicStrokeEncounter.period.\n' +
+                '\tend]\n' +
+            '\treturn Ldl.value as Quantity\n' +
+        '\t)< 70 \'mg/dL\'')
 
         dataCreation.addDefinition('Numerator', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-        '\twith "Antithrombotic Therapy at Discharge" DischargeAntithrombotic\n' +
-        '\tsuch that DischargeAntithrombotic.authoredOn during Global."Normalize Interval"( IschemicStrokeEncounter.period )')
+        '\twith "Statin at Discharge" DischargeStatin\n' +
+            '\tsuch that DischargeStatin.authoredOn during day of Global."Normalize Interval" ( IschemicStrokeEncounter.period )\n' +
 
-        dataCreation.addDefinition('Antithrombotic Therapy at Discharge', '["MedicationRequest": medication in "Antithrombotic Therapy"] Antithrombotic\n' +
-        '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-            'where exists ( Antithrombotic.category C\n' +
-        'where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-            '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+        '// NOTE: Added check for Statin.status in {{} \'active\', \'completed\' }\n' +
+        '// Discussion about whether to check for both active and completed, versus just specifying active\n' +
+        '// Also discussion about whether to use "Community" or "Discharge"\n' +
+        '// Suggest using both since there is potential overlap and even some instances that would have both codes\n' +
+        '// Will keep both and followup with Pharmacy to verify the approach\n' +
+        '// NOTE: Changed intent to only "order", since we\'re specifically looking for authorized prescriptions')
+
+        dataCreation.addDefinition('Statin Allergy', '["AllergyIntolerance": "Statin Allergen"] StatinAllergy\n' +
+        '\twhere ( StatinAllergy.clinicalStatus is null\n' +
+            '\tor FHIRHelpers.ToConcept ( StatinAllergy.clinicalStatus ) ~ Global."allergy-active"\n' +
         ')\n' +
-        'and Antithrombotic.status in {{} \'active\', \'completed\' }\n' +
-        'and Antithrombotic.intent.value = \'order\'')
+            '\tand FHIRHelpers.ToConcept ( StatinAllergy.verificationStatus ) in {{} Global."allergy-unconfirmed", Global."allergy-confirmed" }\n' +
+        '// NOTE: Added check for status in final or amended')
 
-        dataCreation.addDefinition('Encounter With No Antithrombotic At Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-            'with "Antithrombotic Not Given at Discharge" NoDischargeAntithrombotic\n' +
-        'such that NoDischargeAntithrombotic.authoredOn during IschemicStrokeEncounter.period')
-
-        dataCreation.addDefinition('Encounter With Ticagrelor at Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-        'with "Ticagrelor Therapy at Discharge" DischargeTicagrelor\n' +
-            '\tsuch that DischargeTicagrelor.authoredOn during IschemicStrokeEncounter.period') 
-
-        dataCreation.addDefinition('Ticagrelor Therapy at Discharge', '["MedicationRequest": medication in TJC."Ticagrelor Therapy"] Ticagrelor\n' +
-        '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-        'where exists ( Ticagrelor.category C\n' + 
-        '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-        '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+        dataCreation.addDefinition('Statin at Discharge', '["MedicationRequest": medication in "Statin Grouper"] Statin\n' +
+            '\t//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
+        '\twhere exists ( Statin.category C\n' +
+            '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
+                '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
         ')\n' +
-        'and Ticagrelor.status in {{} \'active\', \'completed\' }\n' +
-        'and Ticagrelor.intent = \'order\'')
+            '\tand Statin.status in {{} \'active\', \'completed\' }\n' +
+            '\tand Statin.intent = \'order\'')
+
+        dataCreation.addDefinition('Statin Not Given at Discharge', '["MedicationRequest": medication in "Statin Grouper"] NoStatin\n' +
+        '\twhere NoStatin.doNotPerform is true\n' +
+            '\tand ( NoStatin.reasonCode in "Medical Reason"\n' +
+                '\tor NoStatin.reasonCode in "Patient Refusal"\n' +
+            ')\n' +
+            '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
+            '\tand exists ( NoStatin.category C\n' +
+                '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
+                '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+            ')\n' +
+            '\tand NoStatin.status = \'completed\'\n' +
+            '\tand NoStatin.intent = \'order\'\n' +
+        '// NOTE: Added clinicalStatus and verificationStatus check')    
         
         //CQL Library Editor
 

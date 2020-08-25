@@ -6,6 +6,7 @@ import * as measureComposer from "../../pom/MAT/WI/MeasureComposer";
 import * as cqlLibrary from "../../pom/MAT/WI/CqlLibrary";
 import * as createNewCqlLibrary from "../../pom/MAT/WI/CreateNewCQLLibrary";
 import * as cqlComposer from "../../pom/MAT/WI/CQLComposer";
+import * as measureDetails from '../../pom/MAT/WI/MeasureDetails'
 
 let draftMeasure = 'DraftMeasure'
 
@@ -375,6 +376,22 @@ export const createDraftMeasure = (measure, model) => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    cy.get(measureDetails.measureStewardDeveloper).click()
+    cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
+    cy.get(measureDetails.row1CheckBox).click()
+    cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
+
+    cy.get(measureDetails.description).click()
+    helper.enterText(measureDetails.textAreaInput, 'description')
+    cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
+
+    cy.get(measureDetails.measureType).click()
+    cy.get(measureDetails.row1CheckBox).click()
+    cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
+
     cy.get(measurelibrary.measureLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -412,11 +429,11 @@ export const createFHIRMeasureByType = (measure, type, patient_based) => {
     cy.get(createNewMeasure.saveAndContinueBtn).click()
     cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-    helper.verifySpinnerAppearsAndDissappears()
+    //helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measurelibrary.measureLibraryTab).click()
+    //cy.get(measurelibrary.measureLibraryTab).click()
 
-    helper.verifySpinnerAppearsAndDissappears()
+    //helper.verifySpinnerAppearsAndDissappears()
 
     return name
 }
