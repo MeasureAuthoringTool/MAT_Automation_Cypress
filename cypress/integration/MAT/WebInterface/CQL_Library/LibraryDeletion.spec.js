@@ -2,8 +2,8 @@ import * as helper from "../../../../support/helpers";
 import * as oktaLogin from "../../../../support/oktaLogin";
 import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
 import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
-import * as measureDetails from "../../../../pom/MAT/WI/MeasureDetails"
-
+import * as measureLibrary from "../../../../pom/MAT/WI/MeasureLibrary";
+import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer";
 
 let fhirCqlLibrary = ''
 let fhirCQLVersionLibrary = ''
@@ -42,6 +42,8 @@ describe('FHIR Library: Deletion', () => {
         cy.get(cqlLibrary.confirmDeleteText).type('DELETE', { force: true })
         cy.get(cqlLibrary.confirmDeleteBtn).click()
 
+        helper.verifySpinnerAppearsAndDissappears()
+
     })
 
     it('Validate the Delete button has disabled for Versioned FHIR Library', () => {
@@ -56,8 +58,32 @@ describe('FHIR Library: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()     
+        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()  
         
+        helper.verifySpinnerAppearsAndDissappears()
+
+        // General Information
+        cy.get(cqlComposer.cqlLibraryNameField).should('contain.value', name)
+        cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '0.0.000')
+        cy.get(cqlComposer.cqlLibraryDescriptionField).type('This is library description text to validate')
+        cy.get(cqlComposer.cqlLibraryCommentsField).type('This is library comment text to validate')
+        cy.get(cqlComposer.cqlLibraryUsingModel).should('contain.value', 'FHIR / CQL')
+        cy.get(cqlComposer.cqlLibraryModelVersion).should('contain.value', '4.0.1')
+        cy.get(cqlComposer.cqlLibraryPublisherDropDown).select('Allscripts')
+        cy.get(cqlComposer.cqlLibraryExperimentalCheckbox).click()
+        cy.get(cqlComposer.saveBtn).click()
+        helper.verifySpinnerAppearsAndDissappears()
+
+        // Navigate back to CQL Library Tab
+        cy.get(measureLibrary.cqlLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(cqlLibrary.row1CqlLibrarySearch).click()  
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        // Versioning
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
         cy.get(cqlLibrary.majorVersionTypeRadio).click();
         cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
