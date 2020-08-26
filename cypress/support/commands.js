@@ -64,7 +64,7 @@ Cypress.Commands.add('uploadMultipleFiles', (fileUrlOrUrls, selector, type = '')
         })
     })
   ).then(() => {
-    console.log('files:', files)
+    //console.log('files:', files)
     const event = { dataTransfer: { files } }
     return cy.get(selector).trigger('drop', event)
   })

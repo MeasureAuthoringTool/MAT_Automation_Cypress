@@ -1,6 +1,7 @@
 {
   "baseUrl": "https://dev-emeasuretool.hcqis.org/sbx",
   "screenshotsFolder": "mochawesome-report/assets",
+  "numTestsKeptInMemory": 5,
   "env": {
     "environment": "dev",
     "type": "base",
