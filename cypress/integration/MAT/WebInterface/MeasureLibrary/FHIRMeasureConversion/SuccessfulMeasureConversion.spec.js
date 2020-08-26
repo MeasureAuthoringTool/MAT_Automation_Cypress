@@ -2,6 +2,7 @@ import * as helper from '../../../../../support/helpers';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as oktaLogin from '../../../../../support/oktaLogin';
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 
 let measureName = ''
 
@@ -57,6 +58,12 @@ describe('Measure Library: FHIR Measure Conversion: Conversion to FHIR', () => {
 
         cy.get('h1').should('contain.text', measureName + ' Draft v1.0.000 (FHIR / CQL)')
 
+        //navigation to measure packager to validate error message
+        cy.get(measureComposer.measurePackager).click();
+        helper.verifySpinnerAppearsAndDissappears()
+        cy.get(measureComposer.packageWarningMessage).should('contain.text', ' Please select the measure\'s Population basis prior to packaging.')
+
+        //measure library tab
         cy.get(measureLibrary.measureLibraryTab).click()
         
         helper.verifySpinnerAppearsAndDissappears()

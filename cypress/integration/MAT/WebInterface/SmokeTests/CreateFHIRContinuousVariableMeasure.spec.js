@@ -124,7 +124,7 @@ describe('FHIR Continuous Variable Measure', () => {
         cy.get(measureComposer.availableDatatypesListBox).select('FHIR Datatype')
         cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter')
         cy.get(measureComposer.addBtn).click()
-        cy.get(measureComposer.functionCQLExpressionEditorInput).type('Encounter', { delay: 50 })
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type(23, { delay: 50 })
         cy.get(measureComposer.functionSaveBtn).click()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
