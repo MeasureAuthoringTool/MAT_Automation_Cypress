@@ -189,7 +189,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset \"Annual Wellness Visit\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'{enter}")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset \"Annual Wellness Visit\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'{enter}")
 
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 

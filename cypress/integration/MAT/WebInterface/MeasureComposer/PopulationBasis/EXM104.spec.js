@@ -1,4 +1,4 @@
-import * as helper from '../../../../support/helpers'
+import * as helper from '../../../../../support/helpers'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
