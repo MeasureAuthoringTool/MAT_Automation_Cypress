@@ -2,10 +2,8 @@ import * as helper from '../../../../../support/helpers'
 import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as dashboard from '../../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as importMeasureDialog from '../../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
-import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 
-let VSAC_user = Cypress.env('MAT_UMLS_USERNAME')
-let VSAC_pass = Cypress.env('MAT_UMLS_PASSWORD')
+let VsacApiKey = Cypress.env('VSAC_API_KEY')
 
 
 describe('Dashboard: Upload Dialog: Error handling', () => {
@@ -32,13 +30,10 @@ describe('Dashboard: Upload Dialog: Error handling', () => {
 
         cy.get(importMeasureDialog.fileImportInput).attachFile(fileToUpload)
 
-        //wait for VSAC username field to display for the user, and enter username
-        helper.visibleWithTimeout(importMeasureDialog.vsacUserField)
-        helper.enabledWithTimeout(importMeasureDialog.vsacUserField)
-        helper.enterText(importMeasureDialog.vsacUserField, VSAC_user)
-
-        //enter password
-        helper.enterText(importMeasureDialog.vsacPasswordField, VSAC_pass)
+        //wait for VSAC Key field to display for the user, and enter Key
+        helper.visibleWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
+        helper.enabledWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
+        helper.enterText(importMeasureDialog.vsacApiKeyTextBox, VsacApiKey)
 
         //click load button to import the measure
         helper.enabled(importMeasureDialog.importLoadBtn)
