@@ -89,11 +89,13 @@ describe('FHIR Library: Deletion', () => {
         cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirCQLVersionLibrary)
         cy.get(cqlLibrary.searchBtn).click()
 
+        helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).click() 
