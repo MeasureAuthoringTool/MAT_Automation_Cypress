@@ -40,6 +40,9 @@ export const deleteRecentActivityBtn = '#recentActivitySummary_gridToolbar > [ti
 export const createVersionRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to create version"]'
 export const createDraftRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to create draft"]'
 
+//Library search columns 
+export const cqlLibrarySearchTable = '#cqlCellTablePanel_VerticalPanel > .cellTablePanel > :nth-child(1) > :nth-child(7) > [align="left"]'
+export const row1CqlLibraryModelVersion = '#CQLLibrarySearchCellTable > :nth-child(3) > .GB-MJYKBKI > :nth-child(3)'
 
 //All CQL Libraries Button Bar
 export const createVersionDraftCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create version or draft"]'

@@ -65,6 +65,8 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
 
     it('FHIR Measure: Validate error message for cql workspace requirement', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click();
 
@@ -243,6 +245,8 @@ describe('Measure Packager: Validate the error message for details requirement',
     })
 
     it('FHIR Measure: Validate population basis requirement error message', () => {
+
+        helper.verifySpinnerAppearsAndDissappears()
 
         //select population basis
         cy.get(measureDetails.populationBasisListbox).select('--Select--')
