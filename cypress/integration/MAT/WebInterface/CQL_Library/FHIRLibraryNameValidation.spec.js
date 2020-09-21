@@ -10,9 +10,9 @@ let firstCharacterUnderscore = ''
 let firstCharacterNumeric = ''
 let nameWithSpecialSymbols = ''
 let nameWithSpaces = ''
+let nameWithUnderscore = ''
 let firstCharacterUpperCase = ''
 let firstCharacterUpperCaseFollowedAlphaNumeric = ''
-let firstCharacterUpperCaseFollowedUnderscore = ''
 
 describe('FHIR Library: Validate the library naming rules', () => {
     before('Login', () => {
@@ -45,7 +45,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
         cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-        cy.get(cqlComposer.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(cqlComposer.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(firstCharacterUnderscore, { delay: 50 })
 
@@ -53,7 +53,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
         cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-        cy.get(cqlComposer.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(cqlComposer.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(firstCharacterNumeric, { delay: 50 })
 
@@ -61,7 +61,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
         cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-        cy.get(cqlComposer.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(cqlComposer.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewCqlLibrary.cancelBtn).click()
 
@@ -74,6 +74,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
         nameWithSpecialSymbols = 'NewFhir@' + Date.now()
         nameWithSpaces = 'New Fhir' + Date.now()
+        nameWithUnderscore = 'New_Fhir' + Date.now()
 
         helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
         cy.get(cqlLibrary.newLibraryBtn).click()
@@ -84,7 +85,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
         cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-        cy.get(cqlComposer.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(cqlComposer.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(nameWithSpaces, { delay: 50 })
 
@@ -92,7 +93,15 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
         cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-        cy.get(cqlComposer.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(cqlComposer.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+
+        cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(nameWithUnderscore, { delay: 50 })
+
+        cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+
+        cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+
+        cy.get(cqlComposer.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewCqlLibrary.cancelBtn).click()
 
@@ -147,26 +156,4 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     })
 
-    it('Successfully create a FHIR Library with Start with an Upper Case, followed by underscore', () => {
-
-        firstCharacterUpperCaseFollowedUnderscore = 'New_Fhir_Library' + Date.now()
-
-        helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
-        cy.get(cqlLibrary.newLibraryBtn).click()
-
-        cy.get(createNewCqlLibrary.cqlLibraryName).type(firstCharacterUpperCaseFollowedUnderscore, { delay: 50 })
-
-        cy.get(createNewCqlLibrary.modelFHIRRadio).click()
-
-        cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
-
-        cy.get(cqlComposer.confirmationContinueBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.measureLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-    })
 })
