@@ -20,7 +20,7 @@ describe('EXM105: Discharged on Statin Medication', () => {
     it('Discharged on Statin Medication, creation, grouping, and packaging', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'Discharge_Statin_Medication' + Date.now()
+        let measureName = 'DischargeStatinMedication' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
