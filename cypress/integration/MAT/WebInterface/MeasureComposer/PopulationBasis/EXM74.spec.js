@@ -20,7 +20,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
     it('Primary Caries Prevention Intervention as Offered by Primary Care Providers, including Dentists, creation, grouping, and packaging', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'Primary_Caries_Prevention_Intervention' + Date.now()
+        let measureName = 'PrimaryCariesPreventionIntervention' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
@@ -281,8 +281,6 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.continueBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 

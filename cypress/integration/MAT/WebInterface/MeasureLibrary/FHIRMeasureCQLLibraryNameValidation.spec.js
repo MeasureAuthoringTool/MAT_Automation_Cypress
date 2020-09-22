@@ -9,6 +9,7 @@ let firstCharacterUnderscore = ''
 let firstCharacterNumeric = ''
 let nameWithSpecialSymbols = ''
 let nameWithSpaces = ''
+let nameWithUnderscore = ''
 let name = ''
 
 describe('FHIR Measure: Validate the CQL library naming rules', () => {
@@ -47,21 +48,23 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         //underscore for first character
         cy.get(createNewMeasure.cqlLibraryName).clear().type(firstCharacterUnderscore, { delay: 50 })
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         //number for first character
         cy.get(createNewMeasure.cqlLibraryName).clear().type(firstCharacterNumeric, { delay: 50 })
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
@@ -74,6 +77,7 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
         name = 'newFhir' + Date.now()
         nameWithSpecialSymbols = 'NewFhir@' + Date.now()
         nameWithSpaces = 'New Fhir' + Date.now()
+        nameWithUnderscore = 'New_Fhir' + Date.now()
 
         //special symbols
         helper.enabledWithTimeout(measurelibrary.newMeasureButton)
@@ -91,14 +95,21 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         //spaces
         cy.get(createNewMeasure.cqlLibraryName).clear().type(nameWithSpaces, { delay: 50 })
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+
+        //underscore
+        cy.get(createNewMeasure.cqlLibraryName).clear().type(nameWithUnderscore, { delay: 50 })
+
+        cy.get(createNewMeasure.saveAndContinueBtn).click()
+
+        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
@@ -106,9 +117,9 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
     })
 
-    it('Validate the FHIR CQL Library name requirement: Correct format with alpha-numeric and underscore', () => {
+    it('Validate the FHIR CQL Library name requirement: Correct format with alpha-numeric', () => {
 
-        name = 'NewFhir_Measure_CQL_Library_001' + Date.now()
+        name = 'NewFhirMeasureCQLLibrary001' + Date.now()
         
         //correct format
         helper.enabledWithTimeout(measurelibrary.newMeasureButton)
@@ -152,7 +163,7 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
 
     it('CQL Library name format: Validate the incorrect error message on CQL Workspace', () => {
 
-        name = 'New_Measure_CQL_Library_001' + Date.now()
+        name = 'NewMeasureCQLLibrary001' + Date.now()
         firstCharacterLowerCase = 'newMeasure' + Date.now()
 
         //qdm measure with incorrect cql library name format
@@ -219,7 +230,7 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.warningMessage).should('have.text', ' Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) or underscore(s), and must not contain spaces.')
+        cy.get(measureComposer.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(measureComposer.cqlLibraryEditor).click()
 

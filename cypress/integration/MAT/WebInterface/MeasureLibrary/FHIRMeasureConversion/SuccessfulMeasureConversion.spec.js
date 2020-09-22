@@ -2,6 +2,8 @@ import * as helper from '../../../../../support/helpers';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as oktaLogin from '../../../../../support/oktaLogin';
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
+import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 
 let measureName = ''
 
@@ -27,6 +29,11 @@ describe('Measure Library: FHIR Measure Conversion: Conversion to FHIR', () => {
         cy.get(measureLibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+
+        //assert model version for QDM Measure
+        cy.get(measureLibrary.measureSearchTable).should('contain.text', 'Model Version')
+        cy.get(measureLibrary.row1MeasureModelVersion).should('contain.text', '5.5')
 
         cy.get(measureLibrary.row1MeasureSearch).click();
 
@@ -50,6 +57,10 @@ describe('Measure Library: FHIR Measure Conversion: Conversion to FHIR', () => {
 
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
 
+        //assert model version for FHIR Measure
+        cy.get(measureLibrary.measureSearchTable).should('contain.text', 'Model Version')
+        cy.get(measureLibrary.row1MeasureModelVersion).should('contain.text', '4.0.1')
+
         cy.get(measureLibrary.row1MeasureSearch).should('contain.text', 'FHIR / CQL')
         cy.get(measureLibrary.row1MeasureSearch).dblclick()
 
@@ -57,6 +68,12 @@ describe('Measure Library: FHIR Measure Conversion: Conversion to FHIR', () => {
 
         cy.get('h1').should('contain.text', measureName + ' Draft v1.0.000 (FHIR / CQL)')
 
+        //navigation to measure packager to validate error message
+        cy.get(measureComposer.measurePackager).click();
+        helper.verifySpinnerAppearsAndDissappears()
+        cy.get(measureComposer.packageWarningMessage).should('contain.text', ' Please select the measure\'s Population basis prior to packaging.')
+
+        //measure library tab
         cy.get(measureLibrary.measureLibraryTab).click()
         
         helper.verifySpinnerAppearsAndDissappears()

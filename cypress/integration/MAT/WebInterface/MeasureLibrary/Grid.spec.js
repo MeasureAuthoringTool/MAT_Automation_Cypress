@@ -223,6 +223,7 @@ describe('Measure Library Recent Activity Grid', () => {
         cy.get(measurelibrary.continueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -234,9 +235,7 @@ describe('Measure Library Recent Activity Grid', () => {
         helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
         helper.enabled(measurelibrary.convertToFhirRecentActivityBtn)
 
-        cy.get(measurelibrary.row1RecentActivity).click()
-
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchInputBox).clear().type(fhirMeasure)
 
         cy.get(measurelibrary.searchBtn).click()
 
@@ -249,7 +248,7 @@ describe('Measure Library Recent Activity Grid', () => {
         cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
         helper.verifySpinnerAppearsAndDissappears()
-
+ 
         cy.get(measurelibrary.measureLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -435,7 +434,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         cy.get(measurelibrary.title).contains("My Measures > Measure Sharing")
 
-        cy.get(measurelibrary.sharingCancelBtn).click()
+        cy.get(measurelibrary.shareCancelBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
     })
@@ -560,9 +559,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
         helper.enabled(measurelibrary.convertToFhirMeasureSearchBtn)
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
-
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        cy.get(measurelibrary.searchInputBox).clear().type(fhirMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -697,7 +694,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         cy.get(measurelibrary.title).contains("My Measures > Measure Sharing")
 
-        cy.get(measurelibrary.sharingCancelBtn).click()
+        cy.get(measurelibrary.shareCancelBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -723,4 +720,3 @@ describe('Measure Library Grid Button Bar', () => {
     })
 
 })
-

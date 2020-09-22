@@ -1,4 +1,4 @@
-import * as helper from '../../../../support/helpers'
+import * as helper from '../../../../../support/helpers'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
@@ -20,7 +20,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     it('Discharged on Antithrombotic Therapy, creation, grouping, and packaging', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'Discharge_Antithrombotic_Therapy' + Date.now()
+        let measureName = 'Discharge' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
