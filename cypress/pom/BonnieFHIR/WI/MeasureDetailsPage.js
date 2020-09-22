@@ -1,0 +1,17 @@
+export const addPatientBtn = '.patient-data-col > .btn'
+export const measurePageNavigationBtn = '.breadcrumb > :nth-child(1)'
+export const measureDetailsTitle = '.measure-title > .short-title'
+export const measureTitle = '.full-title'
+export const settingBtn = '.measure-title > .settings-container > .btn-settings > .fa'
+export const measureInverseBtn = '.measure-settings > .btn-danger-inverse'
+export const measureDeleteBtn = '.delete-measure'
+
+//summary section
+export const newStatus = '.status-col > div > .status'
+export const patientListing = '.patient-listing'
+export const patientName = '.patient-name'
+export const patientStatusSection = '.measure-calculation > .panel > .panel-heading'
+export const patientExpandBtn = '.close > .fa'
+export const patientEditBtn = '.panel-body > a.btn'
+export const patientInverseBtn = '.panel-body > .btn-danger-inverse'
+export const patientDeleteBtn = '.measure-calculation > .panel > .panel-body'
