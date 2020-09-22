@@ -4,9 +4,6 @@ import * as measureDetails from '../../pom/BonnieQDM/WI/MeasureDetails'
 
 export const DeleteMeasureFromBonnie = (measureName) => {
 
-  //Find the correct measure name and click the link
-  cy.get(dashboard.measureNameDiv).contains(measureName).click()
-
   //Ensure the measure details page has loaded
   helper.verifySpinnerAppearsAndDissappears()
   helper.visibleWithTimeout(measureDetails.measureDetailsParentDiv)
@@ -15,9 +12,12 @@ export const DeleteMeasureFromBonnie = (measureName) => {
   cy.get(measureDetails.measureDetailsParentDiv).children(measureDetails.measureDetailsCogWheel).click()
 
   //Click the red circle "Inverse Danger" button
-  helper.click(measureDetails.inverseDangerButton)
+  helper.verifySpinnerAppearsAndDissappears()
+  //helper.click(measureDetails.inverseDangerButton, multiple: true)
+  cy.get(measureDetails.inverseDangerButton).first().click()
 
   //Click Delete Button
+  helper.verifySpinnerAppearsAndDissappears()
   helper.click(measureDetails.deleteMeasureButton)
 
   //Validate that the measure was in fact deleted and does not show on the dashboard

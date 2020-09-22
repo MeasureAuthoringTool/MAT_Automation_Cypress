@@ -4,8 +4,8 @@ import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
 
 export const UploadMeasureToBonnie = (fileToUpload) => {
 
-  let VSAC_user = Cypress.env('MAT_UMLS_USERNAME')
-  let VSAC_pass = Cypress.env('MAT_UMLS_PASSWORD')
+  let VsacApiKey = Cypress.env('VSAC_API_KEY')
+  cy.log(VsacApiKey)
 
   helper.enabledWithTimeout(dashboard.uploadBtn)
   cy.get(dashboard.uploadBtn).click()
