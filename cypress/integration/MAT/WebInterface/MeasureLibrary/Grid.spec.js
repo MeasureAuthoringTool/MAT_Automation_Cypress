@@ -720,4 +720,3 @@ describe('Measure Library Grid Button Bar', () => {
     })
 
 })
-})

@@ -65,7 +65,10 @@ export const exportMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [ti
 export const runFhirValidationMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to Run FHIR Validation"]'
 export const convertToFhirMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to convert"]'
 
-
+//Measure search columns 
+//Library search columns 
+export const measureSearchTable = '#cellTablePanel_VerticalPanel > :nth-child(1) > :nth-child(7) > [align="left"]'
+export const row1MeasureModelVersion = '.GB-MJYKBKI > :nth-child(3)'
 
 //Create Measure Version of Draft
 export const title = '.contentWithHeadingHeader > h1'

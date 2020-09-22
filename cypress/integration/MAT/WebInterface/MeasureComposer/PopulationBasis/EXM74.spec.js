@@ -20,7 +20,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
     it('Primary Caries Prevention Intervention as Offered by Primary Care Providers, including Dentists, creation, grouping, and packaging', () => {
 
         cy.get(measurelibrary.newMeasureButton).click()
-        let measureName = 'Primary_Caries_Prevention_Intervention' + Date.now()
+        let measureName = 'PrimaryCariesPreventionIntervention' + Date.now()
 
         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
         cy.get(createNewMeasure.modelradioFHIR).click()
@@ -93,7 +93,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "Clinical Oral Evaluation": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003\'\n' +
+        cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "Clinical Oral Evaluation": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003\'\n' +
         'valueset "Fluoride Varnish Application for Children": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002\'\n' + 
         'valueset "Office Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001\'\n' +
         'valueset "Preventive Care - Established Office Visit, 0 to 17": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024\'\n' +

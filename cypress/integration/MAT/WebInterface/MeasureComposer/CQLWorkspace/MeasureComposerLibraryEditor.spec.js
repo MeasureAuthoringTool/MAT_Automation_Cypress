@@ -189,7 +189,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset \"Annual Wellness Visit\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'{enter}")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset \"Annual Wellness Visit\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'{enter}")
 
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 
@@ -241,12 +241,13 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
         cy.get(measureComposer.cqlLibraryEditor).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
         
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset \"AAN - Encounter Codes Grouping\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286'")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
+        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset \"AAN - Encounter Codes Grouping\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286'")
         
         cy.get(measureComposer.cqlEditorSaveBtn).click()
         
@@ -297,9 +298,9 @@ describe('MAT: MeasureComposer: CQLWorkspace: CQL Library Editor: FHIR Errors, a
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
     })
-    after('Log Out', () => {
-        helper.logout()
-    })
+    // after('Log Out', () => {
+    //     helper.logout()
+    // })
 
     it('Ability to save with CQL error or syntax error', () => {
 
@@ -338,7 +339,8 @@ describe('MAT: MeasureComposer: CQLWorkspace: CQL Library Editor: FHIR Errors, a
 
         cy.get(measureComposer.cqlLibraryEditor).click()
 
-        cy.wait(2000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         //checking message when loading the CQL editor with syntax error
         helper.visibleWithTimeout(measureComposer.warningMessage)

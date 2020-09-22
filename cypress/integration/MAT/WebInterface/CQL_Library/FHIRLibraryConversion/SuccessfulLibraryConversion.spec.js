@@ -28,6 +28,11 @@ describe('CQL Library: FHIR Library Conversion: Successfull Conversion to FHIR',
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
+        //assert model version for QDM Library
+        cy.get(cqlLibrary.cqlLibrarySearchTable).should('contain.text', 'Model Version')
+        cy.get(cqlLibrary.row1CqlLibraryModelVersion).should('contain.text', '5.5')
+
         cy.get(cqlLibrary.row1CqlLibrarySearch).click();
 
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
@@ -41,10 +46,15 @@ describe('CQL Library: FHIR Library Conversion: Successfull Conversion to FHIR',
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
-
-        cy.wait(3000)
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
+         //assert model version for FHIR Library
+         cy.get(cqlLibrary.cqlLibrarySearchTable).should('contain.text', 'Model Version')
+         cy.get(cqlLibrary.row1CqlLibraryModelVersion).should('contain.text', '4.0.1')
+
         cy.get(cqlLibrary.row1CqlLibrarySearch).should('contain.text', 'FHIR / CQL')
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
