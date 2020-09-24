@@ -108,7 +108,6 @@ describe('Patient: Create and then Delete New Patient', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-  // Get patient records in
   function getPatientRecord (lastName) {
     return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
   }
