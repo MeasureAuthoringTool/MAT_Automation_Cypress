@@ -13,6 +13,7 @@ export const measureDetailsCogWheel = '.settings-container'
 export const inverseDangerButton = '.btn-danger-inverse'
 export const deleteMeasureButton = '.delete-measure'
 
+
 //Error Modal
 export const errorDialog = '#errorDialog'
 export const modalBody = '.modal-body'
