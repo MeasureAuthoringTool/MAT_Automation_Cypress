@@ -2,29 +2,18 @@ import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as bonnieUploadMeasire from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as measureDetails from '../../../../pom/BonnieFHIR/WI/MeasureDetails'
-import * as measureDefinitionsValidations from '../../../../support/BonnieFHIR/MesureDefinitionsValidations'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as helper from '../../../../support/helpers'
-import { colonoscopyPerformedCQL } from '../../../../pom/BonnieFHIR/WI/MeasureDetails'
 
 const proportionMeasureWithPatients = "CMS130v7_ProportionPatient_v6_0_Artifacts.zip"
-const proportionMeasureWithoutPatients = ""
-const ratioMeasure = ""
-const continuousVariableMeasure = ""
-const cohortMeasure = ""
-const measureWithMultipleGroupings = ""
-const measureWithStratifications = ""
-
+const proportionMeasureWithoutPatients = "CMS0104"
+const ratioMeasure = "CMS144"
 
 //NAme of measure as it should appear on bonnie dashboard.
 //NOTE: This will need to be changed if the above filenames are changed
 const proportionMeasureWithPatientsMeasureName = "CMS130v7"
-const proportionMeasureWithoutPatientsMeasureName = ""
-const ratioMeasureMeasureName = ""
-const continuousVariableMeasureMeasureName = ""
-const cohortMeasureMeasureName = ""
-const measureWithMultipleGroupingsMeasureName = ""
-const measureWithStratificationsMeasureName = ""
+const proportionMeasureWithoutPatientsMeasureName = "CMS0104"
+const ratioMeasureMeasureName = "CMS144"
 
 describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Details', () => {
     before('Login', () => {
@@ -163,7 +152,7 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
 
 
         //Upload file to Bonnie
-        bonnieUploadMeasire.UploadMeasureToBonnie(proportionMeasureWithPatients)
+        bonnieUploadMeasire.UploadMeasureToBonnie(proportionMeasureWithoutPatients)
 
         //Validate measure was uploaded and click on the measure to go to measure details
         helper.verifySpinnerAppearsAndDissappears()
@@ -269,7 +258,7 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
 
 
         //Upload file to Bonnie
-        bonnieUploadMeasire.UploadMeasureToBonnie(proportionMeasureWithPatients)
+        bonnieUploadMeasire.UploadMeasureToBonnie(ratioMeasure)
 
         //Validate measure was uploaded and click on the measure to go to measure details
         helper.verifySpinnerAppearsAndDissappears()
@@ -355,33 +344,5 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
         deleteMeasure.DeleteMeasureFromBonnie(proportionMeasureWithPatientsMeasureName)
 
     })
-/*
-    it('Upload Continuous Variable Measure into Bonnie FHIR using exported zip file', () => {
 
-        //Upload file to Bonnie
-        bonnieUploadMeasire.UploadMeasureToBonnie(fileToUpload)
-
-    })
-
-    it('Upload Cohort Measure into Bonnie FHIR using exported zip file', () => {
-
-        //Upload file to Bonnie
-        bonnieUploadMeasire.UploadMeasureToBonnie(fileToUpload)
-
-    })
-
-    it('Upload Measure with Multiple Groupings into Bonnie FHIR using exported zip file', () => {
-
-        //Upload file to Bonnie
-        bonnieUploadMeasire.UploadMeasureToBonnie(fileToUpload)
-
-    })
-
-    it('Upload Measure with Stratifications into Bonnie FHIR using exported zip file', () => {
-
-        //Upload file to Bonnie
-        bonnieUploadMeasire.UploadMeasureToBonnie(fileToUpload)
-
-    })
-*/
 })
