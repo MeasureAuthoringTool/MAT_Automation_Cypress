@@ -33,5 +33,17 @@ export const genderDropdown = '#gender'
 export const ethnicityLabel = ':nth-child(2) > :nth-child(3) > .control-label'
 export const ethnicityDropdown = '#ethnicity'
 
-export const saveBtn = '.btn-primary'
+export const saveBtn = '.pull-right > .btn-primary'
 export const cancelBtn = '.pull-right > .btn-default'
+
+//criteria elements container
+export const elementsHeader = '#criteriaElements > .heading-muted'
+export const patientHistoryHeader = '.heading-primary'
+export const criteriaElementsContainer = '#criteriaElements'
+
+//drag and drop section
+export const draggableElement = '.draggable'
+export const criteriaSectionBody = '.criteria-body'
+export const criteriaSectionData = '.criteria-data'
+export const criteriaSectionTitle = '.pull-left > p'
+export const criteriaSectionDeleteBtn = '.btn-danger-inverse'
