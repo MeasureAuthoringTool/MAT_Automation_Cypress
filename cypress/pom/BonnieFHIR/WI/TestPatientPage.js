@@ -1,7 +1,13 @@
 export const measurePageNavigationBtn = '.breadcrumb > :nth-child(1)'
 export const measureDetailsPageNavigationBtn = '.breadcrumb > :nth-child(2)'
+export const measureDetailsPagePatientNameDiv = '.patient-name'
+export const measureDetailsPatientArrowBtn = '.patient-btn'
+export const measureDetailsPatientExpandArrowBtn =  '[data-call-method="expandResult"]'
+export const measureDetailsPatientCloneButton = 'button[Title="Clone"]'
 export const testPatientLogo = '.timeline-icon > .fa'
 export const warningAlert = '.validation-alerts'
+export const patientinverseDangerButton = '[data-call-method="showDelete"]'
+export const patientdeleteButton = '[data-call-method="deletePatient"]'
 
 //first and last name section
 export const lastNameLabel = '.col-left > :nth-child(1) > .control-label'
