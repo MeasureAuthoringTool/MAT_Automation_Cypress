@@ -15,7 +15,7 @@ export const cqlLibraryEditor = '#cqlLibraryEditor_Anchor'
 //Global
 export const cqlWorkspaceTitleGlobal = '#vPanel_VerticalPanel > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
 export const cqlWorkspaceTitleGlobal2 = '.topping > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
-export const warningMessage = 'td > #WarningMessage > .gwt-HTML'
+export const warningMessage = 'td > #WarningMessage'
 export const applyBtn = ':nth-child(2) > :nth-child(1) > table > tbody > :nth-child(1) > td > .btn-toolbar > .btn-primary'
 export const addNewBtn = '#Add_New_ID'
 export const cancelBtn = '#Cancel_button'
