@@ -1,8 +1,6 @@
 import * as helper from '../../support/helpers'
 import * as measureDetails from '../../pom/BonnieQDM/WI/MeasureDetails'
 import * as testPatientPage from '../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
-import { click } from '../../support/helpers'
 
 export const DeletePatientFromMeasure = (PatientName) => {
 
