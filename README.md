@@ -23,6 +23,14 @@ In Intellij, set the debug configurations as follows:
 
 `npm run cypress:open:dev` - opens cypress with the dev config <- This is where QA performs automation development
 
+## Congifuration and Permissions for Bonnie/MAT
+The QA team uses environment variables to ensure data security. 
+
+Please contact Bonnie/MAT QA for the current list of environment variables and values. 
+
+These values should be placed inside the user's `.bash_profile` 
+
+NOTE: In case the user does not own their bash profile, run the following command: `sudo chown your_user_name ~/.bash_profile`
 
 ## Visual Diffing
 Set your cypress.json or environment config
