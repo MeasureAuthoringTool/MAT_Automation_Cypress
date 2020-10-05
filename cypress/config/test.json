@@ -1,12 +1,12 @@
 {
-  "baseUrl": "https://test-emeasuretool.hcqis.org/sbx/",
+  "baseUrl": "https://test-emeasuretool.hcqis.org/",
   "screenshotsFolder": "mochawesome-report/assets",
   "numTestsKeptInMemory": 5,
   "env": {
     "environment": "test",
     "type": "base",
     "oktaUrl": "https://test.idp.idm.cms.gov",
-    "redirectUri": "https://test-emeasuretool.hcqis.org/sbx/MeasureAuthoringTool/Login.html",
+    "redirectUri": "https://test-emeasuretool.hcqis.org/MeasureAuthoringTool/Login.html",
     "qdmToQicoreMappinngsUrl": "need this still"
   }
 

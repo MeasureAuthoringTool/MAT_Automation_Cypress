@@ -6,7 +6,7 @@ import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../support/oktaLogin'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 
-let measureName = 'Primary_Caries_Prevention_Intervention' + Date.now()
+let measureName = 'PrimaryCariesPreventionIntervention' + Date.now()
 let firstPackagedMeasure = ''
 let secondPackagedMeasure = ''
 

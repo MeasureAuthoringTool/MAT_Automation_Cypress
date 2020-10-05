@@ -326,8 +326,8 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
 
         //checking message when loading the CQL editor with syntax error
         helper.visibleWithTimeout(cqlComposer.warningMessage)
-        cy.get(cqlComposer.warningMessage).eq(0).should('contain.text', ' You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.')
-        cy.get(cqlComposer.warningMessage).eq(1).should('contain.text', ' Please correct the syntax errors so the CQL can be validated.')
+      
+        cy.get(measureComposer.warningMessage).should('contain.text', ' You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number. Please correct the syntax errors so the CQL can be validated.')
 
         cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -335,8 +335,8 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
 
         //assertion for being able to save with syntax error
         helper.visibleWithTimeout(cqlComposer.warningMessage)
-        cy.get(cqlComposer.warningMessage).eq(0).should('contain.text', ' The CQL file was saved with errors.')
-        cy.get(cqlComposer.warningMessage).eq(1).should('contain.text', ' Please correct the syntax errors so the CQL can be validated.')
+       
+        cy.get(measureComposer.warningMessage).should('contain.text', ' The CQL file was saved with errors. Please correct the syntax errors so the CQL can be validated.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
