@@ -32,6 +32,9 @@ These values should be placed inside the user's `.bash_profile`
 
 NOTE: In case the user does not own their bash profile, run the following command: `sudo chown your_user_name ~/.bash_profile`
 
+Cypress environment variables should begin with the word `CYPRESS`, for example: `CYPRESS_DEV_PASSWORD`
+However, when the environment variable is referenced within the automation suite, the `CYPRESS` portion of the variable should be left out. 
+
 ## Visual Diffing
 Set your cypress.json or environment config
 To compare screenshots against base shots
