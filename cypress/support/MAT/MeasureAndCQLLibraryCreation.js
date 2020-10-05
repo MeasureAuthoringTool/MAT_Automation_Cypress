@@ -521,12 +521,15 @@ export const createMajorVersionMeasure = (measure) => {
 }
 
 export const addValueSet = (OID) => {
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(measureComposer.valueSets).click()
 
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal,'Value Sets')
 
     cy.get(measureComposer.OIDInput).type(OID, { delay: 50 })
     cy.get(measureComposer.retrieveOIDBtn).click()
+    helper.waitForElementEnabled(measureComposer.applyBtn)
     cy.get(measureComposer.applyBtn).click()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
