@@ -12,6 +12,7 @@ https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
 The QA team uses Intellij IDE as the main development ide for cypress. 
 
 ## First, clone the repository into your intellij
+## NOTE: DO NOT INSTALL CYPRESS OR ITS RELATED TOOLS AS SUDO/ADMINISTRATOR
 Once the repo has been cloned, you can begin working with the repository.
 To begin working with the repository, first run `npm install` in the console.
 
