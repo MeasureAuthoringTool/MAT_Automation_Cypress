@@ -24,7 +24,7 @@ export const cqlLibraryExperimentalCheckbox = '#gwt-uid-19'
 //Global
 export const cqlWorkspaceTitleGlobal = '#vPanel_VerticalPanel > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
 export const cqlWorkspaceTitleGlobal2 = '.topping > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
-export const warningMessage = ':nth-child(4) > td > #WarningMessage'
+export const warningMessage = 'td > #WarningMessage'
 export const applyBtn = ':nth-child(2) > :nth-child(1) > table > tbody > :nth-child(1) > td > .btn-toolbar > .btn-primary'
 export const addNewBtn = '#Add_New_ID'
 export const cancelBtn = '#Cancel_button'
@@ -34,6 +34,8 @@ export const editorError = '.ace_error'
 export const editorErrorToolTip = '.ace_tooltip'
 export const editorLeftPanel = '#parameter_CQLEditor > .ace_gutter > .ace_layer'
 
+//warning version
+export const warningMessageVersionPage = '#content_SimplePanel > .contentPanel > #WarningMessage'
 
 //Measure Details > General Measure Information
 export const measureNameInputBox = '#measureNameInput'

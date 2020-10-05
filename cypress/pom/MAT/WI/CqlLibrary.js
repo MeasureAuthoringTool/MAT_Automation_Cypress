@@ -25,8 +25,8 @@ export const row1CqlLibrarySearchCheckbox = '#CQLLibrarySearchCellTable [__gwt_r
 export const row2CqlLibrarySearchCheckbox = '#CQLLibrarySearchCellTable [__gwt_row="1"] input'
 export const row1CqlLibraryName = '#CQLLibrarySearchCellTable [__gwt_row="0"] #div2'
 export const row2CqlLibraryName = '#CQLLibrarySearchCellTable [__gwt_row="1"] #div2'
-export const row1Models = '#CQLLibrarySearchCellTable [__gwt_row="0"] > :nth-child(4)'
-export const row2Models = '#CQLLibrarySearchCellTable [__gwt_row="1"] > :nth-child(4)'
+export const row1Models = '#CQLLibrarySearchCellTable [__gwt_row="0"] > .GB-MJYKBGJ'
+export const row2Models = '#CQLLibrarySearchCellTable [__gwt_row="1"] > .GB-MJYKBGJ'
 
 //Recent Activity Button Bar
 export const recentActivityButtonBar = '#recentActivitySummary_gridToolbar > [type="button"]'
