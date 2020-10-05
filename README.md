@@ -20,6 +20,7 @@ In Intellij, set the debug configurations as follows:
 
 
 `npm run cypress:open:qa` - opens cypress with the QA config
+
 `npm run cypress:open:dev` - opens cypress with the dev config <- This is where QA performs automation development
 
 
