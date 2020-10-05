@@ -3,19 +3,25 @@
 
 # Semanticbits Cypress Template
 
-This is a template for QA folks that has cypress completely setup. All you need to do is add your tests and application specific functionality. Please ask `dan.reale@semanticbits.com` for login credentials for the examples.
+This is based on a template for QA folks that have cypress completely setup. All you need to do is add your tests and application specific functionality. Please ask `dan.reale@semanticbits.com` for login credentials for the template setup.
 
 please refer to the cypress docs:
 https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
 
-`npm install` to get started
+# Setting up the Workspace
+The QA team uses Intellij IDE as the main development ide for cypress. 
+
+## First, clone the repository into your intellij
+Once the repo has been cloned, you can begin working with the repository.
+To begin working with the repository, first run `npm install` in the console.
 
 ## Cypress - Running Manual
-`npm run cypress:open:qa` - opens cypress with the QA config
+In Intellij, set the debug configurations as follows:
 
-## Cypress Command Line
-`npm run ui:smoke` - runs the smoke tests
-`npm run ui:smoke:ts` - runs the typescript smoke tests
+
+`npm run cypress:open:qa` - opens cypress with the QA config
+`npm run cypress:open:dev` - opens cypress with the dev config <- This is where QA performs automation development
+
 
 ## Visual Diffing
 Set your cypress.json or environment config
