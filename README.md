@@ -3,19 +3,38 @@
 
 # Semanticbits Cypress Template
 
-This is a template for QA folks that has cypress completely setup. All you need to do is add your tests and application specific functionality. Please ask `dan.reale@semanticbits.com` for login credentials for the examples.
+This is based on a template for QA folks that have cypress completely setup. All you need to do is add your tests and application specific functionality. Please ask `dan.reale@semanticbits.com` for login credentials for the template setup.
 
 please refer to the cypress docs:
 https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
 
-`npm install` to get started
+# Setting up the Workspace
+The QA team uses Intellij IDE as the main development ide for cypress. 
+
+## First, clone the repository into your intellij
+## NOTE: DO NOT INSTALL CYPRESS OR ITS RELATED TOOLS AS SUDO/ADMINISTRATOR
+Once the repo has been cloned, you can begin working with the repository.
+To begin working with the repository, first run `npm install` in the console.
 
 ## Cypress - Running Manual
+In Intellij, set the debug configurations as follows:
+
+
 `npm run cypress:open:qa` - opens cypress with the QA config
 
-## Cypress Command Line
-`npm run ui:smoke` - runs the smoke tests
-`npm run ui:smoke:ts` - runs the typescript smoke tests
+`npm run cypress:open:dev` - opens cypress with the dev config <- This is where QA performs automation development
+
+## Congifuration and Permissions for Bonnie/MAT
+The QA team uses environment variables to ensure data security. 
+
+Please contact Bonnie/MAT QA for the current list of environment variables and values. 
+
+These values should be placed inside the user's `.bash_profile` 
+
+NOTE: In case the user does not own their bash profile, run the following command: `sudo chown your_user_name ~/.bash_profile`
+
+Cypress environment variables should begin with the word `CYPRESS`, for example: `CYPRESS_DEV_PASSWORD`
+However, when the environment variable is referenced within the automation suite, the `CYPRESS` portion of the variable should be left out. 
 
 ## Visual Diffing
 Set your cypress.json or environment config

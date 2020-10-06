@@ -15,9 +15,9 @@ describe('FHIR Measure: Validate the components on General Information page', ()
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
     })
-    // after('Log Out', () => {
-    //     helper.logout()
-    // })
+    after('Log Out', () => {
+        helper.logout()
+    })
 
     it('Validate the Population Basis field', () => {
 

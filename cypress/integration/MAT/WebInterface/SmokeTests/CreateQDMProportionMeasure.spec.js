@@ -46,7 +46,7 @@ describe('QDM Proportion Measure', () => {
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleIncludes, 'Includes')
 
-        cy.get(measureComposer.searchInputBox).type('global', { delay: 50 })
+        cy.get(measureComposer.searchInputBox).type('matglobal', { delay: 50 })
         cy.get(measureComposer.searchBtn).click()
         cy.get(measureComposer.availableLibrariesRow1checkbox).click()
         cy.get(measureComposer.libraryAliasInputBox).type('Global', { delay: 50 })

@@ -298,7 +298,7 @@ describe('FHIR Standalone Library: Meta data requirement to version', () => {
         cy.get(cqlLibrary.majorVersionTypeRadio).click();
         cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
 
-        cy.get(cqlComposer.warningMessage).should('have.text', ' Description is required for Standalone Libraries. Please populate it in General Information.')
+        cy.get(cqlComposer.warningMessageVersionPage).should('have.text', ' Description is required for Standalone Libraries. Please populate it in General Information.')
 
         cy.get(cqlLibrary.cancelBtn).click()
 
