@@ -36,7 +36,7 @@ describe('Patient: Create and then Delete New Patient', () => {
       enterPatientCharacteristics(distinctLastName)
       clickSavePatient()
       verifyPatientAdded(initialPatientCount, distinctLastName)
-      navigateToHomeMeasurePage()
+      measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
       deletePatient(distinctLastName)
       verifyPatientRemoved(initialPatientCount)
@@ -88,12 +88,6 @@ describe('Patient: Create and then Delete New Patient', () => {
     cy.log('deletePatient - done')
   }
 
-  function navigateToHomeMeasurePage () {
-    cy.log('navigateToHomeMeasurePage')
-    cy.get(measureDetailsPage.measurePageNavigationBtn).click()
-    cy.log('navigateToHomeMeasurePage - done')
-  }
-
   function enterPatientCharacteristics (lastName) {
     cy.log('enterPatientCharacteristics')
     cy.get(testPatientPage.lastNameTextField).type(lastName)
@@ -141,12 +135,10 @@ describe('Patient: Create and then Delete New Patient', () => {
 
   function deleteMeasure (measureName) {
     cy.log('deleteMeasure')
-    navigateToHomeMeasurePage()
+    measureDetailsPage.navigateToHomeMeasurePage()
     navigateToMeasureDetails(measureName)
 
-    cy.get(measureDetailsPage.measureSettingBtn).click()
-    cy.get(measureDetailsPage.measureInverseBtn).click()
-    cy.get(measureDetailsPage.measureDeleteBtn).click()
+    measureDetailsPage.clickDeleteMeasure()
     cy.log('deleteMeasure - done')
   }
 
