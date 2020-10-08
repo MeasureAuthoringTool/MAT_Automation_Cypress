@@ -33,3 +33,9 @@ export function clickDeleteMeasure() {
   cy.get(measureInverseBtn).click()
   cy.get(measureDeleteBtn).click()
 }
+
+export function clickAddPatient () {
+  cy.log('clickAddPatient')
+  cy.get(addPatientBtn).click()
+  cy.log('clickAddPatient - done')
+}

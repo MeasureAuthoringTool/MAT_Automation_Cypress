@@ -2,13 +2,18 @@ import * as helper from '../../support/helpers'
 import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
 
-export const UploadMeasureToBonnie = (fileToUpload) => {
+export const UploadMeasureToBonnie = (fileToUpload, calculation) => {
+  cy.log('UploadMeasureToBonnie')
 
   let VsacApiKey = Cypress.env('VSAC_API_KEY')
   cy.log(VsacApiKey)
 
   helper.enabledWithTimeout(dashboard.uploadBtn)
   cy.get(dashboard.uploadBtn).click()
+
+  if (calculation) {
+    changeMeasureCalculation(calculation)
+  }
 
   //upload the file to the modal
   helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
@@ -25,4 +30,10 @@ export const UploadMeasureToBonnie = (fileToUpload) => {
   helper.enabled(importMeasureDialog.importLoadBtn)
   helper.click(importMeasureDialog.importLoadBtn)
 
+  cy.log('UploadMeasureToBonnie - done')
+}
+
+function changeMeasureCalculation (calculation) {
+  const radio = calculation === 'episode' ? importMeasureDialog.episodeOfCareCalculation : importMeasureDialog.patientCalculation
+  cy.get(radio).check({ force: true })
 }

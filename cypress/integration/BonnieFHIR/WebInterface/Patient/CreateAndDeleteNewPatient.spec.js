@@ -1,12 +1,9 @@
 import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
-import * as importMeasureDialog from '../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-
-const VsacApiKey = Cypress.env('VSAC_API_KEY')
+import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
 describe('Patient: Create and then Delete New Patient', () => {
 
@@ -32,9 +29,9 @@ describe('Patient: Create and then Delete New Patient', () => {
       const initialPatientCount = parseInt(patientListing.text())
       cy.log('patient count was:' + initialPatientCount)
 
-      clickAddPatient()
+      measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      clickSavePatient()
+      testPatientPage.clickSavePatient()
       verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
@@ -50,25 +47,7 @@ describe('Patient: Create and then Delete New Patient', () => {
   })
 
   function uploadTestMeasure () {
-    cy.log('uploadTestMeasure')
-    helper.enabledWithTimeout(dashboard.uploadBtn)
-    cy.get(dashboard.uploadBtn).click()
-
-    // upload the file to the modal
-    helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
-    helper.enabledWithTimeout(importMeasureDialog.fileImportInput)
-
-    cy.get(importMeasureDialog.fileImportInput).attachFile(measureFileToUpload)
-
-    // wait for VSAC Key field to display for the user, and enter Key
-    helper.visibleWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
-    helper.enabledWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
-    helper.enterText(importMeasureDialog.vsacApiKeyTextBox, VsacApiKey)
-
-    // click load button to import the measure
-    helper.enabled(importMeasureDialog.importLoadBtn)
-    helper.click(importMeasureDialog.importLoadBtn)
-    cy.log('uploadTestMeasure - done')
+    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload)
   }
 
   function navigateToMeasureDetails (measureName) {
@@ -104,18 +83,6 @@ describe('Patient: Create and then Delete New Patient', () => {
 
   function getPatientRecord (lastName) {
     return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
-  }
-
-  function clickAddPatient () {
-    cy.log('clickAddPatient')
-    cy.get(measureDetailsPage.addPatientBtn).click()
-    cy.log('clickAddPatient - done')
-  }
-
-  function clickSavePatient () {
-    cy.log('clickSavePatient')
-    cy.get(testPatientPage.saveBtn).click()
-    cy.log('clickAddPatient - done')
   }
 
   function verifyPatientAdded (initialPatientCount, lastName) {

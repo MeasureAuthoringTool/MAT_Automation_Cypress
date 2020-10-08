@@ -1,12 +1,9 @@
 import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
-import * as importMeasureDialog from '../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-
-const VsacApiKey = Cypress.env('VSAC_API_KEY')
+import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
 describe('Patient: Handle Expected Patient Values', () => {
 
@@ -20,8 +17,16 @@ describe('Patient: Handle Expected Patient Values', () => {
     bonnieLogin.logout()
   })
 
-  it('Load measure as "episode"', () => {
-    uploadTestMeasure('episode')
+  it('Expected values for a measure as "episode"', () => {
+    runScriptFor('episode', enterExpectedValuesForEpisodeOfCareBasedMeasure, verifyExpectedPatientsForEpisodeOfCareBasedMeasure)
+  })
+
+  it('Expected values for a measure as "patient"', () => {
+    runScriptFor('patient', enterExpectedValuesForPatientBasedMeasure, verifyExpectedPatientsForPatientBasedMeasure)
+  })
+
+  function runScriptFor(calculationType, enterExpectedValues, validateExpectedValues) {
+    uploadTestMeasure(calculationType)
     navigateToMeasureDetails(measureName)
 
     const lastNameSuffix = new Date().getTime()
@@ -31,18 +36,15 @@ describe('Patient: Handle Expected Patient Values', () => {
       const initialPatientCount = parseInt(patientListing.text())
       cy.log('patient count was: ' + initialPatientCount)
 
-      clickAddPatient()
+      measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(lastName)
-      enterExpectedValuesForEpisodeOfCareBasedMeasure()
-
-      clickSavePatient()
+      enterExpectedValues()
+      testPatientPage.clickSavePatient()
 
       cy.log('verifyPatient')
-
       const patient = getPatientRecord(lastName)
       patient.find(measureDetailsPage.patientExpandBtn).click()
-      verifyExpectedPatientsForEpisodeOfCareBasedMeasure()
-
+      validateExpectedValues()
       cy.log('verifyPatient - done')
 
       measureDetailsPage.navigateToHomeMeasurePage()
@@ -54,73 +56,10 @@ describe('Patient: Handle Expected Patient Values', () => {
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
     deleteMeasure(measureName)
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-  })
-
-  it('Load measure as "patient"', () => {
-    uploadTestMeasure('patient')
-    navigateToMeasureDetails(measureName)
-
-    const lastNameSuffix = new Date().getTime()
-    const lastName = 'President' + lastNameSuffix
-
-    cy.get(measureDetailsPage.patientListing).then((patientListing) => {
-      const initialPatientCount = parseInt(patientListing.text())
-      cy.log('patient count was: ' + initialPatientCount)
-
-      clickAddPatient()
-      enterPatientCharacteristics(lastName)
-      enterExpectedValuesForPatientBasedMeasure()
-
-      clickSavePatient()
-
-      cy.log('verifyPatient')
-      const patient = getPatientRecord(lastName)
-      patient.find(measureDetailsPage.patientExpandBtn).click()
-      verifyExpectedPatientsForPatientBasedMeasure()
-      cy.log('verifyPatient - done')
-
-      measureDetailsPage.navigateToHomeMeasurePage()
-      navigateToMeasureDetails(measureName)
-      deletePatient(lastName)
-      verifyPatientRemoved(initialPatientCount)
-    })
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-    deleteMeasure(measureName)
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-  })
-
-
-
-  function uploadTestMeasure (calculation) {
-    cy.log('uploadTestMeasure')
-    helper.enabledWithTimeout(dashboard.uploadBtn)
-    cy.get(dashboard.uploadBtn).click()
-
-    if (calculation) {
-      changeMeasureCalculation(calculation)
-    }
-
-    // upload the file to the modal
-    helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
-    helper.enabledWithTimeout(importMeasureDialog.fileImportInput)
-
-    cy.get(importMeasureDialog.fileImportInput).attachFile(measureFileToUpload)
-
-    // wait for VSAC Key field to display for the user, and enter Key
-    helper.visibleWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
-    helper.enabledWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
-    helper.enterText(importMeasureDialog.vsacApiKeyTextBox, VsacApiKey)
-
-    // click load button to import the measure
-    helper.enabled(importMeasureDialog.importLoadBtn)
-    helper.click(importMeasureDialog.importLoadBtn)
-    cy.log('uploadTestMeasure - done')
   }
 
-  function changeMeasureCalculation (calculation) {
-    let radio = calculation === 'episode' ? importMeasureDialog.episodeOfCareCalculation : importMeasureDialog.patientCalculation
-    cy.get(radio).check({ force: true })
+  function uploadTestMeasure (calculation) {
+    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, calculation)
   }
 
   function navigateToMeasureDetails (measureName) {
@@ -158,18 +97,6 @@ describe('Patient: Handle Expected Patient Values', () => {
     return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
   }
 
-  function clickAddPatient () {
-    cy.log('clickAddPatient')
-    cy.get(measureDetailsPage.addPatientBtn).click()
-    cy.log('clickAddPatient - done')
-  }
-
-  function clickSavePatient () {
-    cy.log('clickSavePatient')
-    cy.get(testPatientPage.saveBtn).click()
-    cy.log('clickAddPatient - done')
-  }
-
   function verifyPatientRemoved (initialPatientCount) {
     cy.log('verifyPatientRemoved')
     cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
@@ -187,7 +114,6 @@ describe('Patient: Handle Expected Patient Values', () => {
   }
 
   function enterExpectedValuesForPatientBasedMeasure () {
-    // Verify Expected input values are displayed
     cy.get('input[name="IPP"][type="checkbox"]').should('be.visible')
     cy.get('input[name="DENOM"][type="checkbox"]').should('be.visible')
     cy.get('input[name="DENEX"][type="checkbox"]').should('be.visible')
@@ -225,7 +151,6 @@ describe('Patient: Handle Expected Patient Values', () => {
   }
 
   function enterExpectedValuesForEpisodeOfCareBasedMeasure () {
-    // Verify Expected input values are displayed
     cy.get('input[name="IPP"][type="number"]').should('be.visible')
     cy.get('input[name="DENOM"][type="number"]').should('be.visible')
     cy.get('input[name="DENEX"][type="number"]').should('be.visible')

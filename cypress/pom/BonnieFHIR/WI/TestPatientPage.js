@@ -47,3 +47,9 @@ export const criteriaSectionBody = '.criteria-body'
 export const criteriaSectionData = '.criteria-data'
 export const criteriaSectionTitle = '.pull-left > p'
 export const criteriaSectionDeleteBtn = '.btn-danger-inverse'
+
+export function clickSavePatient () {
+  cy.log('clickSavePatient')
+  cy.get(saveBtn).click()
+  cy.log('clickSavePatient - done')
+}
