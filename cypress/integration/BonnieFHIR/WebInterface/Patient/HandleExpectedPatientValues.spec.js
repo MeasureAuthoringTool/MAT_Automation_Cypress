@@ -33,35 +33,15 @@ describe('Patient: Handle Expected Patient Values', () => {
 
       clickAddPatient()
       enterPatientCharacteristics(lastName)
-
-      // Verify Expected input values are displayed
-      cy.get('input[name="IPP"][type="number"]').should('be.visible')
-      cy.get('input[name="DENOM"][type="number"]').should('be.visible')
-      cy.get('input[name="DENEX"][type="number"]').should('be.visible')
-      cy.get('input[name="NUMER"][type="number"]').should('be.visible')
-      cy.get('input[name="DENEXCEP"][type="number"]').should('be.visible')
-
-      cy.get('input[name="IPP"][type="number"]').type(1)
-      cy.get('input[name="DENOM"][type="number"]').type(2)
-      cy.get('input[name="DENEX"][type="number"]').type(3)
-      cy.get('input[name="NUMER"][type="number"]').type(4)
-      cy.get('input[name="DENEXCEP"][type="number"]').type(5)
-
+      enterExpectedValuesForEpisodeOfCareBasedMeasure()
 
       clickSavePatient()
 
       cy.log('verifyPatient')
 
-      cy.log('before expanding')
       const patient = getPatientRecord(lastName)
       patient.find(measureDetailsPage.patientExpandBtn).click()
-      cy.log('after expanding')
-
-      cy.get('.patient tr:nth-child(2)').should('contain.text', 'IPP').and('contain.text', '5')
-      cy.get('.patient tr:nth-child(3)').should('contain.text', 'DENOM').and('contain.text', '5')
-      cy.get('.patient tr:nth-child(4)').should('contain.text', 'DENEX').and('contain.text', '3')
-      cy.get('.patient tr:nth-child(5)').should('contain.text', 'NUMER').and('contain.text', '4')
-      cy.get('.patient tr:nth-child(6)').should('contain.text', 'DENEXCEP').and('contain.text', '5')
+      verifyExpectedPatientsForEpisodeOfCareBasedMeasure()
 
       cy.log('verifyPatient - done')
 
@@ -89,50 +69,14 @@ describe('Patient: Handle Expected Patient Values', () => {
 
       clickAddPatient()
       enterPatientCharacteristics(lastName)
-
-      // Verify Expected input values are displayed
-      cy.get('input[name="IPP"][type="checkbox"]').should('be.visible')
-      cy.get('input[name="DENOM"][type="checkbox"]').should('be.visible')
-      cy.get('input[name="DENEX"][type="checkbox"]').should('be.visible')
-      cy.get('input[name="NUMER"][type="checkbox"]').should('be.visible')
-      cy.get('input[name="DENEXCEP"][type="checkbox"]').should('be.visible')
-
-      cy.get('input[name="IPP"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
-      cy.get('input[name="DENOM"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
-      cy.get('input[name="DENEX"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
-      cy.get('input[name="NUMER"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
-      cy.get('input[name="DENEXCEP"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
+      enterExpectedValuesForPatientBasedMeasure()
 
       clickSavePatient()
 
       cy.log('verifyPatient')
-
-      cy.log('before expanding')
       const patient = getPatientRecord(lastName)
       patient.find(measureDetailsPage.patientExpandBtn).click()
-      cy.log('after expanding')
-
-      cy.get('.patient tr:nth-child(2)')
-        .should('contain.text', 'IPP')
-        .and('contain.text', 'checked')
-        .and('contain.text', 'unchecked')
-      cy.get('.patient tr:nth-child(3)')
-        .should('contain.text', 'DENOM')
-        .and('contain.text', 'checked')
-        .and('contain.text', 'unchecked')
-      cy.get('.patient tr:nth-child(4)')
-        .should('contain.text', 'DENEX')
-        .and('contain.text', 'checked')
-        .and('contain.text', 'unchecked')
-      cy.get('.patient tr:nth-child(5)')
-        .should('contain.text', 'NUMER')
-        .and('contain.text', 'checked')
-        .and('contain.text', 'unchecked')
-      cy.get('.patient tr:nth-child(6)')
-        .should('contain.text', 'DENEXCEP')
-        .and('contain.text', 'checked')
-        .and('contain.text', 'unchecked')
-
+      verifyExpectedPatientsForPatientBasedMeasure()
       cy.log('verifyPatient - done')
 
       measureDetailsPage.navigateToHomeMeasurePage()
@@ -145,6 +89,8 @@ describe('Patient: Handle Expected Patient Values', () => {
     deleteMeasure(measureName)
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
+
+
 
   function uploadTestMeasure (calculation) {
     cy.log('uploadTestMeasure')
@@ -240,4 +186,64 @@ describe('Patient: Handle Expected Patient Values', () => {
     cy.log('deleteMeasure - done')
   }
 
+  function enterExpectedValuesForPatientBasedMeasure () {
+    // Verify Expected input values are displayed
+    cy.get('input[name="IPP"][type="checkbox"]').should('be.visible')
+    cy.get('input[name="DENOM"][type="checkbox"]').should('be.visible')
+    cy.get('input[name="DENEX"][type="checkbox"]').should('be.visible')
+    cy.get('input[name="NUMER"][type="checkbox"]').should('be.visible')
+    cy.get('input[name="DENEXCEP"][type="checkbox"]').should('be.visible')
+
+    cy.get('input[name="IPP"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
+    cy.get('input[name="DENOM"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
+    cy.get('input[name="DENEX"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
+    cy.get('input[name="NUMER"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
+    cy.get('input[name="DENEXCEP"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
+  }
+
+  function verifyExpectedPatientsForPatientBasedMeasure () {
+    cy.get('.patient tr:nth-child(2)')
+      .should('contain.text', 'IPP')
+      .and('contain.text', 'checked')
+      .and('contain.text', 'unchecked')
+    cy.get('.patient tr:nth-child(3)')
+      .should('contain.text', 'DENOM')
+      .and('contain.text', 'checked')
+      .and('contain.text', 'unchecked')
+    cy.get('.patient tr:nth-child(4)')
+      .should('contain.text', 'DENEX')
+      .and('contain.text', 'checked')
+      .and('contain.text', 'unchecked')
+    cy.get('.patient tr:nth-child(5)')
+      .should('contain.text', 'NUMER')
+      .and('contain.text', 'checked')
+      .and('contain.text', 'unchecked')
+    cy.get('.patient tr:nth-child(6)')
+      .should('contain.text', 'DENEXCEP')
+      .and('contain.text', 'checked')
+      .and('contain.text', 'unchecked')
+  }
+
+  function enterExpectedValuesForEpisodeOfCareBasedMeasure () {
+    // Verify Expected input values are displayed
+    cy.get('input[name="IPP"][type="number"]').should('be.visible')
+    cy.get('input[name="DENOM"][type="number"]').should('be.visible')
+    cy.get('input[name="DENEX"][type="number"]').should('be.visible')
+    cy.get('input[name="NUMER"][type="number"]').should('be.visible')
+    cy.get('input[name="DENEXCEP"][type="number"]').should('be.visible')
+
+    cy.get('input[name="IPP"][type="number"]').type(1)
+    cy.get('input[name="DENOM"][type="number"]').type(2)
+    cy.get('input[name="DENEX"][type="number"]').type(3)
+    cy.get('input[name="NUMER"][type="number"]').type(4)
+    cy.get('input[name="DENEXCEP"][type="number"]').type(5)
+  }
+
+  function verifyExpectedPatientsForEpisodeOfCareBasedMeasure () {
+    cy.get('.patient tr:nth-child(2)').should('contain.text', 'IPP').and('contain.text', '5')
+    cy.get('.patient tr:nth-child(3)').should('contain.text', 'DENOM').and('contain.text', '5')
+    cy.get('.patient tr:nth-child(4)').should('contain.text', 'DENEX').and('contain.text', '3')
+    cy.get('.patient tr:nth-child(5)').should('contain.text', 'NUMER').and('contain.text', '4')
+    cy.get('.patient tr:nth-child(6)').should('contain.text', 'DENEXCEP').and('contain.text', '5')
+  }
 })
