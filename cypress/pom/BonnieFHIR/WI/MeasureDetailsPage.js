@@ -21,3 +21,21 @@ export const patientExpandBtn = '.close > .fa'
 export const patientEditBtn = '.panel-body > a.btn'
 export const patientInverseBtn = 'button.btn-danger-inverse:visible[data-call-method="showDelete"]'
 export const patientDeleteBtn = 'button.btn-danger:visible[data-call-method="deletePatient"]'
+
+export function navigateToHomeMeasurePage () {
+  cy.log('navigateToHomeMeasurePage')
+  cy.get(measurePageNavigationBtn).click()
+  cy.log('navigateToHomeMeasurePage - done')
+}
+
+export function clickDeleteMeasure() {
+  cy.get(measureSettingBtn).click()
+  cy.get(measureInverseBtn).click()
+  cy.get(measureDeleteBtn).click()
+}
+
+export function clickAddPatient () {
+  cy.log('clickAddPatient')
+  cy.get(addPatientBtn).click()
+  cy.log('clickAddPatient - done')
+}

@@ -12,7 +12,8 @@ export const measureDetailsParentDiv = '.measure-title'
 export const measureDetailsCogWheel = '.settings-container'
 export const inverseDangerButton = '.btn-danger-inverse'
 export const deleteMeasureButton = '.delete-measure'
-
+export const episodeOfCareCalculation = '#EC'
+export const patientCalculation = '#calculationTypeRadios'
 
 //Error Modal
 export const errorDialog = '#errorDialog'

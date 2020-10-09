@@ -58,3 +58,9 @@ export const startTime = 'input[name="start_time"]'
 export const endDate = 'input[name="end_date"]'
 export const endTime = 'input[name="end_time"]'
 export const attributeDeleteButton = '[data-call-method="removeCriteria"]'
+
+export function clickSavePatient () {
+  cy.log('clickSavePatient')
+  cy.get(saveBtn).click()
+  cy.log('clickSavePatient - done')
+}
