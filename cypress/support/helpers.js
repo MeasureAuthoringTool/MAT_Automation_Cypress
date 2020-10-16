@@ -1,9 +1,10 @@
 /// <reference types="../support" />
 import * as matheader from '../pom/MAT/WI/MATheader'
+import * as cqlComposer from '../pom/MAT/WI/CQLComposer'
+import * as measurelibrary from '../pom/MAT/WI/MeasureLibrary'
 const os = Cypress.platform // values are aix, darwin, freebsd, linux, openbsd, sunos, win32, android
 
-let UMLS_userName = Cypress.env('MAT_UMLS_USERNAME')
-let UMLS_password = Cypress.env('MAT_UMLS_PASSWORD')
+let API_Key = Cypress.env('VSAC_API_KEY')
 
 // Cookie management
 export const preserveCookies = () => {
@@ -43,18 +44,16 @@ export const loginUMLS = () => {
 
   cy.get(matheader.UMLS).click()
 
-  visibleWithTimeout(matheader.UMLSTitle)
-  visibleWithTimeout(matheader.UMLSUserName)
-  visibleWithTimeout(matheader.UMLSPassword)
+  visibleWithTimeout(matheader.API_Key)
+  enabledWithTimeout(matheader.API_Key)
 
   cy.wait(1500)
 
-  enterText(matheader.UMLSUserName, UMLS_userName)
-  enterText(matheader.UMLSPassword, UMLS_password)
+  enterText(matheader.API_Key, API_Key)
 
-  visibleWithTimeout(matheader.UMLS_signIn)
-  enabledWithTimeout(matheader.UMLS_signIn)
-  cy.get(matheader.UMLS_signIn).click()
+  visibleWithTimeout(matheader.connectToUMLSBtn)
+  enabledWithTimeout(matheader.connectToUMLSBtn)
+  cy.get(matheader.connectToUMLSBtn).click()
 
   visibleWithTimeout(matheader.UMLS_continue)
   enabledWithTimeout(matheader.UMLS_continue)

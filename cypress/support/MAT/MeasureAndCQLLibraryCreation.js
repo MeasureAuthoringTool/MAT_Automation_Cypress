@@ -554,6 +554,11 @@ export const addDefinition = (definitionName, CQL) => {
 
     cy.get(measureComposer.addNewBtn).click()
     cy.get(measureComposer.definitionNameInput).type(definitionName, { delay: 50 })
+
+    helper.visibleWithTimeout(measureComposer.definitionCQLExpressionEditorInput)
+
+    cy.wait(1500)
+
     cy.get(measureComposer.definitionCQLExpressionEditorInput).type(CQL, { delay: 50 })
     cy.get(measureComposer.definitionSaveBtn).click()
 
