@@ -6,7 +6,7 @@ import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCr
 
 let fhirMeasure = ''
 
-describe('CQL Editor: Validate the system version', () => {
+describe('CQLWorkspace: Codes: Validate the system version', () => {
     before('Login', () => {
         oktaLogin.login()
 

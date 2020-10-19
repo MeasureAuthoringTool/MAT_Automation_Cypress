@@ -104,12 +104,13 @@ describe('QDM Proportion Measure', () => {
         helper.enabledWithTimeout(measureComposer.functionNameInput)
         helper.enterText(measureComposer.functionNameInput,'CalendarDayOfOrDayAfter', { delay: 50 })
         cy.get(measureComposer.addArgument).click()
+
         helper.enabledWithTimeout(measureComposer.argumentNameInput)
         helper.enterText(measureComposer.argumentNameInput, 'StartValue')
         cy.get(measureComposer.availableDatatypesListBox).select('DateTime')
         cy.get(measureComposer.addBtn).click()
         cy.wait(1500)
-        cy.get(measureComposer.argumentNameInput).type('Interval[StartValue, ToDate(StartValue + 2 days))', { delay: 50 })
+        cy.get(measureComposer.functionCQLExpressionEditorInput).type('Interval[StartValue, ToDate(StartValue + 2 days))', { delay: 50 })
         cy.get(measureComposer.functionSaveBtn).click()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
