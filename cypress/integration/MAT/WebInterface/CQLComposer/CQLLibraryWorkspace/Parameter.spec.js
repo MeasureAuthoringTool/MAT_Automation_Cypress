@@ -81,13 +81,9 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
 
         helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2,'Parameter')
 
-        cy.get(cqlComposer.parameterListbox).select('Measurement Period')
-        cy.get(cqlComposer.parameterListbox).contains('Measurement Period').dblclick()
-
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlComposer.parameterEraseBtn).click()
-        helper.verifySpinnerAppearsAndDissappears()
+        cy.get(cqlComposer.parameterNameInput).type('TEST')
         cy.get(cqlComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
         cy.get(cqlComposer.parameterSaveBtn).click()
 
