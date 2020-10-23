@@ -33,6 +33,36 @@ it('Edit Patient Details', () => {
 
     cy.get(testPatientPage.patientDescriptionTextField).clear().type('He is recovered now')
 
+
+    //deceased section
+
+    //assert label
+    cy.get(testPatientPage.livingStatusLabel).should('contain.text', 'Living Status')
+
+    //check deceased
+    cy.get(testPatientPage.deceasedCheckBox).check().then(() => {
+        cy.get(testPatientPage.dateOfDeathLabel).should('have.text', 'Date of Death')
+
+        cy.get(testPatientPage.deathDateField).should('be.visible')
+        cy.get(testPatientPage.deathDateOptionalLabel).should('contain.text', 'optional')
+        cy.get(testPatientPage.deathTimeField).should('be.visible')
+        cy.get(testPatientPage.deathTimeOptionalLabel).should('contain.text', 'optional')
+
+    })
+
+    //enter death date and time
+    cy.get(testPatientPage.deathDateField).clear().type('05/02/2020')
+    cy.get(testPatientPage.deathTimeField).clear().type('10:30 PM')
+
+    //uncheck deceased
+    cy.get(testPatientPage.deceasedCheckBox).uncheck().then(() => {
+        
+        cy.get(testPatientPage.deathDateField).should('not.be.visible')
+        
+        cy.get(testPatientPage.deathTimeField).should('not.be.visible')
+        
+    })
+
     //save
     cy.get(testPatientPage.saveBtn).click()
 
@@ -61,7 +91,7 @@ it('Delete Patient Details', () => {
     //delete patient
     cy.get(measureDetailsPage.patientExpandBtn).click()
     cy.get(measureDetailsPage.patientInverseBtn).click()
-    cy.get(measureDetailsPage.patientDeleteBtn).contains('Delete').click()
+    cy.get(measureDetailsPage.patientDeleteBtn).click()
     
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
@@ -71,24 +101,3 @@ it('Delete Patient Details', () => {
   })
 
 })
-
-// describe('Deleting measure', () => {
-
-//     it('Delete Patient Details', () => {
-
-//     //click and navigate to measure details
-//     cy.get(homePage.measure).contains('CMS104_TEST').click()
-//     // cy.wait(1000)
-//     cy.get(measureDetailsPage.measureDetailsTitle).should('have.text', ' Measure details')
-
-//     //delete measure
-//     cy.get(measureDetailsPage.settingBtn).click()
-//     cy.get(measureDetailsPage.measureInverseBtn).click()
-//     cy.get(measureDetailsPage.measureDeleteBtn).click()
-
-//     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
-    // //navigate to home/measure page
-    // cy.get(measureDetailsPage.measurePageNavigationBtn).click()
-// })
-// })
