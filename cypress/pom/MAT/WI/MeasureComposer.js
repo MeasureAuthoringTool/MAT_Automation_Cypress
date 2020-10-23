@@ -42,7 +42,11 @@ export const includesListItems = '#includesNameListBox_ListBox > option'
 
 //Value Sets
 export const OIDInput = '[style="padding: 10px; border: 1px solid rgb(232, 239, 247); margin-bottom: 10px;"] > :nth-child(1) > :nth-child(2) > td > .form-control'
+export const programListBox = '.form-control[title="Program selection list"]'
+export const releaseListBox = '.form-control[title="Release selection list"]'
 export const retrieveOIDBtn = ':nth-child(2) > td > .btn'
+
+export const row1AppliedQDMTable = '#AppliedQDMTable [__gwt_row="0"]'
 
 //Codes
 export const codeUrlInput = ':nth-child(2) > td > .input-group > .form-control'
