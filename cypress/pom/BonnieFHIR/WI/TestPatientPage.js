@@ -61,6 +61,24 @@ export const endDate = 'input[name="end_date"]'
 export const endTime = 'input[name="end_time"]'
 export const attributeDeleteButton = '[data-call-method="removeCriteria"]'
 
+//codeSystem 
+export const primaryCodeSystem = '.col-md-3 > .form-control'
+export const chooseCodeSystem = '.col-md-8 > .form-control'
+export const addCodeBtn = '.col-md-1'
+export const exsistingCode = '.existing-values'
+
+//attributeWidgets
+export const attributeNameSelect = '.col-md-7 > [name="attribute_name"]'
+export const attributeTypeSelect = '.col-md-5 > [name="attribute_type"]'
+export const valueSetDirectRefSelect = '.code-control-valueset > .form-control'
+export const addWidgetBtn = '.input-add'
+export const exsistingAttribute = '.form-group > .existing-values'
+
+//this element is for rangeWidget
+export const lowValueField = '.col-md-6 > [name="low_value"]'
+export const highValueField = '.col-md-6 > [name="high_value"]'
+
+
 export function clickSavePatient () {
   cy.log('clickSavePatient')
   cy.get(saveBtn).click()
