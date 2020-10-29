@@ -28,7 +28,7 @@ describe('Patient: Create New Patient', () => {
 
         //upload the file to the modal
         helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
-        const fileToUpload = "CMS104.zip"
+        const fileToUpload = "FHIRmeasureCMS347.zip"
         helper.enabledWithTimeout(importMeasureDialog.fileImportInput)
 
         cy.get(importMeasureDialog.fileImportInput).attachFile(fileToUpload)
@@ -36,14 +36,14 @@ describe('Patient: Create New Patient', () => {
         //wait for VSAC Key field to display for the user, and enter Key
         helper.visibleWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
         helper.enabledWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
-        helper.enterText(importMeasureDialog.vsacApiKeyTextBox, VsacApiKey)
+        helper.enterText(importMeasureDialog.vsacApiKeyTextBox, '57d1a36d-c0f0-4f51-a1c0-4ae38e51806d')
 
         //click load button to import the measure
         helper.enabled(importMeasureDialog.importLoadBtn)
         helper.click(importMeasureDialog.importLoadBtn)
 
         //click and navigate to measure details
-        cy.get(homePage.measure).contains('CMS104_TEST').click()
+        cy.get(homePage.measure).contains('FHIRmeasureCMS347').click()
         // cy.wait(1000)
         cy.get(measureDetailsPage.measureDetailsTitle).should('have.text', ' Measure details')
 

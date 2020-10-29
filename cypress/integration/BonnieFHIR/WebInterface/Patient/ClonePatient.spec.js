@@ -6,7 +6,7 @@ import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieDeletePatient from '../../../../support/BonnieFHIR/DeletePatient'
 
-const fileToUpload = "CMS104.zip"
+const fileToUpload = "ContinuousVariableCMS111.zip"
 
 describe('Clone a patient that exists in a measure', () => {
 
@@ -15,11 +15,11 @@ describe('Clone a patient that exists in a measure', () => {
     bonnieLogin.login()
 
   })
-  after('Log Out', () => {
-      bonnieDelete.DeleteMeasureFromBonnie("CMS104")
-      bonnieLogin.logout()
+  // after('Log Out', () => {
+  //     bonnieDelete.DeleteMeasureFromBonnie("CMS111TestMeasureNK")
+  //     bonnieLogin.logout()
 
-  })
+  // })
 
   it('Successful Patient Clone', () => {
 
@@ -31,7 +31,7 @@ describe('Clone a patient that exists in a measure', () => {
 
     //Click into the measure that was just uploaded
     cy.get(dashboard.measureNameDiv).each(function($el) {
-      if ($el.text().includes("CMS104")) {
+      if ($el.text().includes("CMS111TestMeasureNK")) {
         cy.wrap($el).click()
       }
     })
