@@ -78,6 +78,8 @@ export const exsistingAttribute = '.form-group > .existing-values'
 export const lowValueField = '.col-md-6 > [name="low_value"]'
 export const highValueField = '.col-md-6 > [name="high_value"]'
 
+//this element is for ratioWidger
+export const ratioValueField = '.col-md-6 > [name="value_value"]'
 
 export function clickSavePatient () {
   cy.log('clickSavePatient')
