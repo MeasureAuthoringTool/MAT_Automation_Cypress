@@ -2,13 +2,15 @@ import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
 describe('Patient: Handle Expected Patient Values', () => {
 
-  const measureName = 'CMS104_TEST'
-  const measureFileToUpload = 'CMS104.zip'
+  const measureName = 'FHIRmeasureCMS347'
+  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
 
   beforeEach('Login', () => {
     bonnieLogin.login()
@@ -49,12 +51,14 @@ describe('Patient: Handle Expected Patient Values', () => {
 
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
-      deletePatient(lastName)
+      deletePatient.DeletePatient(lastName)
       verifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-    deleteMeasure(measureName)
+
+    deleteMeasure.DeleteMeasure(measureName)
+
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   }
 
@@ -68,15 +72,6 @@ describe('Patient: Handle Expected Patient Values', () => {
     // cy.wait(1000)
     cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
     cy.log('navigateToMeasureDetails - done')
-  }
-
-  function deletePatient (lastName) {
-    cy.log('deletePatient')
-    const patient = getPatientRecord(lastName)
-    patient.find(measureDetailsPage.patientExpandBtn).click()
-    cy.get(measureDetailsPage.patientInverseBtn).click()
-    cy.get(measureDetailsPage.patientDeleteBtn).click()
-    cy.log('deletePatient - done')
   }
 
   function enterPatientCharacteristics (lastName) {
@@ -102,15 +97,6 @@ describe('Patient: Handle Expected Patient Values', () => {
     cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
     cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
     cy.log('verifyPatientRemoved - done')
-  }
-
-  function deleteMeasure (measureName) {
-    cy.log('deleteMeasure')
-    measureDetailsPage.navigateToHomeMeasurePage()
-    navigateToMeasureDetails(measureName)
-
-    measureDetailsPage.clickDeleteMeasure()
-    cy.log('deleteMeasure - done')
   }
 
   function enterExpectedValuesForPatientBasedMeasure () {

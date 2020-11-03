@@ -24,7 +24,7 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation) => {
   //wait for VSAC api key field to display for the user, and enter api key
   helper.visibleWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
   helper.enabledWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
-  helper.enterText(importMeasureDialog.vsacApiKeyTextBox, VsacApiKey)
+  helper.enterText(importMeasureDialog.vsacApiKeyTextBox, '57d1a36d-c0f0-4f51-a1c0-4ae38e51806d')
 
   //click load button to import the measure
   helper.enabled(importMeasureDialog.importLoadBtn)

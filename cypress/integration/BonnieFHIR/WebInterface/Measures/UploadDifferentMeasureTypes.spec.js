@@ -2,6 +2,8 @@ import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -13,9 +15,9 @@ describe('Upload Continuous Variable Measure', () => {
   before('Login', () => {
     bonnieLogin.login()
   })
-  after('Log Out', () => {
-    bonnieLogin.logout()
-  })
+  // after('Log Out', () => {
+  //   bonnieLogin.logout()
+  // })
 
   it('Successfully upload Continuous Variable measure', () => {
     uploadContinuousVariableTestMeasure()
@@ -35,13 +37,13 @@ describe('Upload Continuous Variable Measure', () => {
       verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(continuousVariableMeasureName)
-      deletePatient(distinctLastName)
+      deletePatient.DeletePatient(distinctLastName)
       verifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    deleteMeasure(continuousVariableMeasureName)
+    deleteMeasure.DeleteMeasure(continuousVariableMeasureName)
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
@@ -56,15 +58,6 @@ describe('Upload Continuous Variable Measure', () => {
     // cy.wait(1000)
     cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
     cy.log('navigateToMeasureDetails - done')
-  }
-
-  function deletePatient (lastName) {
-    cy.log('deletePatient')
-    const patient = getPatientRecord(lastName)
-    patient.find(measureDetailsPage.patientExpandBtn).click()
-    cy.get(measureDetailsPage.patientInverseBtn).click()
-    cy.get(measureDetailsPage.patientDeleteBtn).click()
-    cy.log('deletePatient - done')
   }
 
   function enterPatientCharacteristics (lastName) {
@@ -98,15 +91,6 @@ describe('Upload Continuous Variable Measure', () => {
     cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
     cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
     cy.log('verifyPatientRemoved - done')
-  }
-
-  function deleteMeasure (continuousVariableMeasureName) {
-    cy.log('deleteMeasure')
-    measureDetailsPage.navigateToHomeMeasurePage()
-    navigateToMeasureDetails(continuousVariableMeasureName)
-
-    measureDetailsPage.clickDeleteMeasure()
-    cy.log('deleteMeasure - done')
   }
 
 })
@@ -141,13 +125,13 @@ describe('Upload Cohort Measure', () => {
       verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(cohortMeasureName)
-      deletePatient(distinctLastName)
+      deletePatient.DeletePatient(distinctLastName)
       verifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    deleteMeasure(cohortMeasureName)
+    deleteMeasure.DeleteMeasure(cohortMeasureName)
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
@@ -162,15 +146,6 @@ describe('Upload Cohort Measure', () => {
     // cy.wait(1000)
     cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
     cy.log('navigateToMeasureDetails - done')
-  }
-
-  function deletePatient (lastName) {
-    cy.log('deletePatient')
-    const patient = getPatientRecord(lastName)
-    patient.find(measureDetailsPage.patientExpandBtn).click()
-    cy.get(measureDetailsPage.patientInverseBtn).click()
-    cy.get(measureDetailsPage.patientDeleteBtn).click()
-    cy.log('deletePatient - done')
   }
 
   function enterPatientCharacteristics (lastName) {
@@ -204,15 +179,6 @@ describe('Upload Cohort Measure', () => {
     cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
     cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
     cy.log('verifyPatientRemoved - done')
-  }
-
-  function deleteMeasure (cohortMeasureName) {
-    cy.log('deleteMeasure')
-    measureDetailsPage.navigateToHomeMeasurePage()
-    navigateToMeasureDetails(cohortMeasureName)
-
-    measureDetailsPage.clickDeleteMeasure()
-    cy.log('deleteMeasure - done')
   }
 
 })
@@ -247,13 +213,13 @@ describe('Upload Proportion Measure multigroup', () => {
       verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(proportionMeasureName)
-      deletePatient(distinctLastName)
+      deletePatient.DeletePatient(distinctLastName)
       verifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    deleteMeasure(proportionMeasureName)
+    deleteMeasure.DeleteMeasure(proportionMeasureName)
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
@@ -268,15 +234,6 @@ describe('Upload Proportion Measure multigroup', () => {
     // cy.wait(1000)
     cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
     cy.log('navigateToMeasureDetails - done')
-  }
-
-  function deletePatient (lastName) {
-    cy.log('deletePatient')
-    const patient = getPatientRecord(lastName)
-    patient.find(measureDetailsPage.patientExpandBtn).click()
-    cy.get(measureDetailsPage.patientInverseBtn).click()
-    cy.get(measureDetailsPage.patientDeleteBtn).click()
-    cy.log('deletePatient - done')
   }
 
   function enterPatientCharacteristics (lastName) {
@@ -310,15 +267,6 @@ describe('Upload Proportion Measure multigroup', () => {
     cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
     cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
     cy.log('verifyPatientRemoved - done')
-  }
-
-  function deleteMeasure (proportionMeasureName) {
-    cy.log('deleteMeasure')
-    measureDetailsPage.navigateToHomeMeasurePage()
-    navigateToMeasureDetails(proportionMeasureName)
-
-    measureDetailsPage.clickDeleteMeasure()
-    cy.log('deleteMeasure - done')
   }
 
 })

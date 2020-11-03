@@ -19,8 +19,8 @@ export const login = () => {
 
     helper.enabledWithTimeout(signInpage.passwordInputBox)
 
-    helper.enterText(signInpage.usernameInputBox, username)
-    helper.enterText(signInpage.passwordInputBox, password)
+    helper.enterText(signInpage.usernameInputBox, 'nirmal.thanga@semanticbits.com')
+    helper.enterText(signInpage.passwordInputBox, 'Salem2Erode#123')
 
     cy.get(signInpage.loginBtn).click()
 

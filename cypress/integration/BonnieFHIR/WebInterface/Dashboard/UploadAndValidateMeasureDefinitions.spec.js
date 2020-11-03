@@ -129,7 +129,7 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
         })
 
         //Delete Measure once validated
-        deleteMeasure.DeleteMeasureFromBonnie(proportionMeasureWithPatientsMeasureName)
+        deleteMeasure.DeleteMeasure(proportionMeasureWithPatientsMeasureName)
 
     })
 
@@ -235,7 +235,7 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
         })
 
         //Delete Measure once validated
-        deleteMeasure.DeleteMeasureFromBonnie(proportionMeasureWithPatientsMeasureName)
+        deleteMeasure.DeleteMeasure(proportionMeasureWithPatientsMeasureName)
 
     })
 
@@ -341,7 +341,7 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
         })
 
         //Delete Measure once validated
-        deleteMeasure.DeleteMeasureFromBonnie(proportionMeasureWithPatientsMeasureName)
+        deleteMeasure.DeleteMeasure(proportionMeasureWithPatientsMeasureName)
 
     })
 
