@@ -1,20 +1,15 @@
-import * as helper from '../../support/helpers'
-import * as measureDetails from '../../pom/BonnieQDM/WI/MeasureDetails'
-import * as testPatientPage from '../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
-export const DeletePatientFromMeasure = (PatientName) => {
+export const DeletePatient = (lastName) => {
 
-  //Ensure the measure details page has loaded
-  helper.verifySpinnerAppearsAndDissappears()
-  helper.visibleWithTimeout(measureDetails.measureDetailsParentDiv)
+  cy.log('deletePatient')
+  const patient = getPatientRecord(lastName)
+  patient.find(measureDetailsPage.patientExpandBtn).click()
+  cy.get(measureDetailsPage.patientInverseBtn).click()
+  cy.get(measureDetailsPage.patientDeleteBtn).click()
+  cy.log('deletePatient - done')
 
-  //Click the arrow next to the patient to be deleted, in this case the second patient listed
-  cy.get(testPatientPage.measureDetailsPatientExpandArrowBtn).eq(1).trigger('click')
-
-  //Click the red circle "Inverse Danger" button
-  cy.get(testPatientPage.patientinverseDangerButton).eq(2).trigger('click')
-
-  //Click Delete Button
-  cy.get(testPatientPage.patientdeleteButton).eq(1).trigger('click')
-
+  function getPatientRecord (lastName) {
+    return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
+  }
 }
