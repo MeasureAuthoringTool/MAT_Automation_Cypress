@@ -78,11 +78,29 @@ export const exsistingAttribute = '.form-group > .existing-values'
 export const lowValueField = '.col-md-6 > [name="low_value"]'
 export const highValueField = '.col-md-6 > [name="high_value"]'
 
-//this element is for ratioWidger
+//this element is for ratioWidget
 export const ratioValueField = '.col-md-6 > [name="value_value"]'
+
+//extensions section
+export const extensionsSection = '.form-group > .extension-display-container'
+export const extensionsUrlField = 'input[name="url"]'
+export const extensionsValueDropDown = 'select[name="value"]'
+export const exsistingExtension = '.extension-display-container > .existing-values'
+export const exsistingExtensionUrl = '.extension-url > .expand_caret'
+
+//this element is for age extension
+export const extensionsAgeValue = 'input[name=value_value]'
+export const extensionsAgeUnit = 'input[name=value_unit]'
+
+//this element is for boolean extension
+export const extensionsBooleanDropDown = '[data-cy="boolean_select"]'
+
+//this element is for date extension
+export const extensionsDateCheckbox = '.col-md-2 > input[type="checkbox"]'
+export const extensionsDateField = '.date-control-date > input[name="date"]'
 
 export function clickSavePatient () {
   cy.log('clickSavePatient')
-  cy.get(saveBtn).click()
+  cy.get(saveBtn).click( {force:true} )
   cy.log('clickSavePatient - done')
 }
