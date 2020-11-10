@@ -20,6 +20,7 @@ import 'cypress-axe'
 // Retry failed tests:
 require('cypress-plugin-retries')
 require('cypress-file-upload')
+require('cypress-commands')
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

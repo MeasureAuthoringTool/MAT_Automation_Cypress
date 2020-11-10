@@ -1,13 +1,13 @@
-import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
-import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
-import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as helper from '../../../../../support/helpers'
+import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
+import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
+import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
-describe('Attribute UI: Code Widget', () => {
+describe('Test Patient: Adding Code', () => {
 
   const measureName = 'FHIRmeasureCMS347'
   const measureFileToUpload = 'FHIRmeasureCMS347.zip'
@@ -19,7 +19,7 @@ describe('Attribute UI: Code Widget', () => {
     bonnieLogin.logout()
   })
 
-  it.only('Verify the Code Widget', () => {
+  it('Verify the patient code', () => {
     uploadTestMeasure()
 
     navigateToMeasureDetails(measureName)
@@ -34,7 +34,7 @@ describe('Attribute UI: Code Widget', () => {
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
       dragAndDrop()
-      codeWidget()
+      addCode()
       testPatientPage.clickSavePatient()
       verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
@@ -87,14 +87,13 @@ describe('Attribute UI: Code Widget', () => {
     cy.log('DragAndDropMedicationAttribute - done')
   }
 
-  function codeWidget () {
-    cy.log('addCodeWidget')
-    cy.get(testPatientPage.attributeNameSelect).select('status')
-    cy.get(testPatientPage.attributeTypeSelect).should('contain.text', 'Code')
-    cy.get(testPatientPage.valueSetDirectRefSelect).select('MedicationAdministration Status Codes')
-    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains('status: "in-progress"')
-    cy.log('AddCodeWidget - done')
+  function addCode () {
+    cy.log('addCodeSystem')
+    cy.get(testPatientPage.primaryCodeSystem).select('RXNORM')
+    cy.get(testPatientPage.chooseCodeSystem).select('1944264 (Simvastatin 8 MG/ML Oral Suspension)')
+    cy.get(testPatientPage.addCodeBtn).eq(0).click()
+    cy.get(testPatientPage.exsistingCode).contains('RXNORM: 1944264')
+    cy.log('AddCode - done')
   }
 
   function getPatientRecord (lastName) {
