@@ -26,6 +26,7 @@
         "dev:all:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/**/*.spec.js' --browser chrome;",
         "dev:all:mat:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/**/*.spec.js' --browser chrome;",
         "dev:mat:smoke:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/SmokeTests/**/*.spec.js' --browser chrome;",
+        "dev:all:bonnieFHIR:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/BonnieFHIR/**/*.spec.js' --browser chrome;",
         "dev:mat:cql:library": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/CQL_Library/**/*.spec.js' --browser chrome;",
         "dev:mat:cql:composer": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/CQLComposer/CQLLibraryWorkspace/*.spec.js' --browser chrome;",
         "dev:mat:measure:composer": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/MeasureComposer/**/*.spec.js' --browser chrome;",
@@ -52,6 +53,7 @@
         "matdev:all:ui:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run matdev:all:ui:tests; npm run combine:reports; npm run generateOne:report",
         "dev:all:ui:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run dev:all:ui:tests; npm run combine:reports; npm run generateOne:report",
         "dev:all:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run dev:all:tests; npm run combine:reports; npm run generateOne:report",
+        "dev:all:bonnieFHIR:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run dev:all:bonnieFHIR:tests; npm run combine:reports; npm run generateOne:report",
         "dev:all:mat:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run dev:all:mat:tests; npm run combine:reports; npm run generateOne:report",
         "dev:mat:cql:library:report": "npm run delete:reports; npm run delete:mochawesome; npm run dev:mat:cql:library; npm run combine:reports; npm run generateOne:report",
         "dev:mat:cql:composer:report": "npm run delete:reports; npm run delete:mochawesome; npm run dev:mat:cql:composer; npm run combine:reports; npm run generateOne:report",
@@ -101,6 +103,7 @@
     "dependencies": {
         "@cypress/webpack-preprocessor": "^4.1.5",
         "@types/node": "^12.19.3",
+        "cypress-commands": "^1.1.0",
         "cypress-visual-regression": "^1.5.2",
         "mocha": "^8.2.1",
         "mochawesome": "^4.1.0",

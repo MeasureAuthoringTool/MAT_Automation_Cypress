@@ -1,3 +1,5 @@
+import * as homePage from './Homepage'
+
 export const addPatientBtn = '.patient-data-col > .btn'
 export const measurePageNavigationBtn = '.breadcrumb > :nth-child(1)'
 export const measureDetailsTitle = '.measure-title > .short-title'
@@ -38,4 +40,12 @@ export function clickAddPatient () {
   cy.log('clickAddPatient')
   cy.get(addPatientBtn).click()
   cy.log('clickAddPatient - done')
+}
+
+export function navigateToMeasureDetails (measureName) {
+  cy.log('navigateToMeasureDetails')
+  cy.get(homePage.measure).contains(measureName).click()
+  cy.wait(1000)
+  cy.get(measureDetailsTitle).should('contain.text', 'Measure details')
+  cy.log('navigateToMeasureDetails - done')
 }

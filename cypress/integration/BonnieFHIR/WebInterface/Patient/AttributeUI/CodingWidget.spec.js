@@ -1,11 +1,11 @@
-import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
-import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
-import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as helper from '../../../../../support/helpers'
+import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
+import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
+import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
 describe('Attribute UI: Coding Widget', () => {
 

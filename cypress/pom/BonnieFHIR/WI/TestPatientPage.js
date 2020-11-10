@@ -44,6 +44,7 @@ export const elementsHeader = '#criteriaElements > .heading-muted'
 export const patientHistoryHeader = '.heading-primary'
 export const criteriaElementsContainer = '#criteriaElements'
 export const elementTitle = '.element-title'
+export const criteriaArrowToggle = '.criteria-details .fa-angle-right'
 
 //drag and drop section
 export const draggableElement = '.draggable'
@@ -73,6 +74,7 @@ export const attributeTypeSelect = '.col-md-5 > [name="attribute_type"]'
 export const valueSetDirectRefSelect = '.code-control-valueset > .form-control'
 export const addWidgetBtn = '.input-add'
 export const exsistingAttribute = '.form-group > .existing-values'
+export const addedAttributeValue = '.form-group > .existing-values [title="value"]'
 
 //this element is for rangeWidget
 export const lowValueField = '.col-md-6 > [name="low_value"]'
@@ -80,6 +82,18 @@ export const highValueField = '.col-md-6 > [name="high_value"]'
 
 //this element is for ratioWidget
 export const ratioValueField = '.col-md-6 > [name="value_value"]'
+
+
+//SampledData Widget
+export const originValueInputbox = '.quantity-control-value'
+export const originUnitInputbox = '.quantity-control-unit'
+export const periodDecimalInputbox = '[data-view-name="period"]'
+export const dimensionsPositiveIntegerInputbox = '[data-cy=positive-integer-input]'
+export const showOptionalElementsBtn = '[data-cy=optional_toggle]'
+export const factorDecimalInputbox = '[data-view-name="factor"]'
+export const lowerLimitDecimalInputbox = '[data-view-name="lower limit"]'
+export const upperLimitDecimalInputbox = '[data-view-name="upper limit"]'
+export const dataStringInputBox = '[data-view-name="data"]'
 
 //extensions section
 export const extensionsSection = '.form-group > .extension-display-container'
@@ -99,8 +113,36 @@ export const extensionsBooleanDropDown = '[data-cy="boolean_select"]'
 export const extensionsDateCheckbox = '.col-md-2 > input[type="checkbox"]'
 export const extensionsDateField = '.date-control-date > input[name="date"]'
 
-export function clickSavePatient () {
+
+export const enterPatientCharacteristics = (lastName) => {
+  cy.log('enterPatientCharacteristics')
+  cy.get(lastNameTextField).type(lastName)
+  cy.get(firstNameTextField).type('Current')
+  cy.get(patientDescriptionTextField).type('Patient is very special')
+  cy.get(dateofBithField).type('01/01/1950')
+  cy.get(patientDescriptionTextField).click()
+  cy.get(raceDropdown).select('Asian')
+  cy.get(genderDropdown).select('Male')
+  cy.get(ethnicityDropdown).select('Not Hispanic or Latino')
+  cy.log('enterPatientCharacteristics - done')
+}
+
+export const clickSavePatient = () => {
   cy.log('clickSavePatient')
   cy.get(saveBtn).click( {force:true} )
   cy.log('clickSavePatient - done')
+
 }
+export const dragAndDrop = (element, elementTitle,draggableIndex) => {
+  cy.log('dragAndDropAttribute')
+  cy.get(criteriaElementsContainer).contains(element).click()
+  cy.get('.draggable').eq(draggableIndex)
+    .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
+    .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
+    .trigger('mouseup')
+  cy.get(criteriaSectionTitle)
+    .should('contain.text', elementTitle)
+  cy.log('DragAndDropMedicationAttribute - done')
+}
+
+

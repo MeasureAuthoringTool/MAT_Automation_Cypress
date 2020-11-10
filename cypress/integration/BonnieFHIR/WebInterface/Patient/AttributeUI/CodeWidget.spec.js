@@ -1,13 +1,13 @@
-import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
-import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
-import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as helper from '../../../../../support/helpers'
+import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
+import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
+import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
-describe('Attribute UI: Range Widget', () => {
+describe('Attribute UI: Code Widget', () => {
 
   const measureName = 'FHIRmeasureCMS347'
   const measureFileToUpload = 'FHIRmeasureCMS347.zip'
@@ -19,7 +19,7 @@ describe('Attribute UI: Range Widget', () => {
     bonnieLogin.logout()
   })
 
-  it.only('Verify the Range Widget', () => {
+  it.only('Verify the Code Widget', () => {
     uploadTestMeasure()
 
     navigateToMeasureDetails(measureName)
@@ -34,7 +34,7 @@ describe('Attribute UI: Range Widget', () => {
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
       dragAndDrop()
-      rangeWidget()
+      codeWidget()
       testPatientPage.clickSavePatient()
       verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
@@ -77,25 +77,24 @@ describe('Attribute UI: Range Widget', () => {
 
   function dragAndDrop () {
     cy.log('dragAndDropAttribute')
-    cy.get(testPatientPage.criteriaElementsContainer).contains('clinical summary').click()
-    cy.get('.draggable').eq(2)
+    cy.get(testPatientPage.criteriaElementsContainer).contains('medications').click()
+    cy.get('.draggable').eq(36)
         .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
         .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
         .trigger('mouseup') 
     cy.get(testPatientPage.criteriaSectionTitle)
-        .should('contain.text', 'Clinical Summary: AllergyIntolerance: Statin Allergen')
-    cy.log('DragAndDropAllergyIntolerance - done')
+        .should('contain.text', 'Medications: MedicationAdministration: Low Intensity Statin Therapy')
+    cy.log('DragAndDropMedicationAttribute - done')
   }
 
-  function rangeWidget () {
-    cy.log('addRangeWidget')
-    cy.get(testPatientPage.attributeNameSelect).select('onset')
-    cy.get(testPatientPage.attributeTypeSelect).select('Range')
-    cy.get(testPatientPage.lowValueField).type(13)
-    cy.get(testPatientPage.highValueField).type(25)
+  function codeWidget () {
+    cy.log('addCodeWidget')
+    cy.get(testPatientPage.attributeNameSelect).select('status')
+    cy.get(testPatientPage.attributeTypeSelect).should('contain.text', 'Code')
+    cy.get(testPatientPage.valueSetDirectRefSelect).select('MedicationAdministration Status Codes')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains('onset: 13 - 25')
-    cy.log('AddRangeWidget - done')
+    cy.get(testPatientPage.exsistingAttribute).contains('status: "in-progress"')
+    cy.log('AddCodeWidget - done')
   }
 
   function getPatientRecord (lastName) {
