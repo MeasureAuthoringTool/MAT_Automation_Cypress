@@ -1,10 +1,10 @@
-import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
-import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
-import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
-import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieDeletePatient from '../../../../support/BonnieFHIR/DeletePatient'
+import * as helper from '../../../../../support/helpers'
+import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as dashboard from '../../../../../pom/BonnieFHIR/WI/Dashboard'
+import * as bonnieUpload from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieDelete from '../../../../../support/BonnieFHIR/DeleteMeasure'
+import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieDeletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
 
 const fileToUpload = "TestImmun_v6_0_Artifacts.zip"
 const todaysDate = Cypress.moment().format('MM/DD/YYYY')
