@@ -17,7 +17,6 @@ export const DeletePatient = (lastName) => {
 export const VerifyPatientRemoved = (initialPatientCount) => {
 
   cy.log('verifyPatientRemoved')
-  cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
   cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
   cy.log('verifyPatientRemoved - done')
 

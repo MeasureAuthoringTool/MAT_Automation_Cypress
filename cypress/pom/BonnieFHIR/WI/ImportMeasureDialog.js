@@ -17,5 +17,4 @@ export const patientCalculation = '#calculationTypeRadios'
 
 //Error Modal
 export const errorDialog = '#errorDialog'
-export const modalBody = '.modal-body'
 export const modalCloseBtn = '.modal-footer > .btn'
