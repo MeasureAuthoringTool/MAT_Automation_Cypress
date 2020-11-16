@@ -1,3 +1,5 @@
+import * as measureDetailsPage from './MeasureDetailsPage'
+
 export const measurePageNavigationBtn = '.breadcrumb > :nth-child(1)'
 export const measureDetailsPageNavigationBtn = '.breadcrumb > :nth-child(2)'
 export const measureDetailsPagePatientNameDiv = '.patient-name'
@@ -129,4 +131,13 @@ export const dragAndDrop = (element, elementTitle,draggableIndex) => {
   cy.log('DragAndDropMedicationAttribute - done')
 }
 
+export const verifyPatientAdded = (initialPatientCount, lastName) => {
+  cy.log('verifyPatientAdded')
+  cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount + 1).toString())
+  getPatientRecord(lastName).find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
+  cy.log('verifyPatientAdded - done')
+}
 
+function getPatientRecord (lastName) {
+  return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
+}
