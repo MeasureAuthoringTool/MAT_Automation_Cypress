@@ -1,12 +1,12 @@
-import * as helper from '../../../../../support/helpers'
-import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as dashboard from '../../../../../pom/BonnieFHIR/WI/Dashboard'
-import * as bonnieUpload from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
-import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as bonnieDelete from '../../../../../support/BonnieFHIR/DeleteMeasure'
-import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieDeletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
-import { measureYearDiv } from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as helper from '../../../../support/helpers'
+import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
+import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
+import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieDeletePatient from '../../../../support/BonnieFHIR/DeletePatient'
+import { measureYearDiv } from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
 const fileToUpload = "FHIRmeasureCMS347.zip"
 const todaysDate = Cypress.moment().format('MM/DD/YYYY')
