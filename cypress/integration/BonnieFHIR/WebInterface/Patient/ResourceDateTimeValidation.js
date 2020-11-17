@@ -40,20 +40,6 @@ describe('Valiidate DateTime for Attributes from Patient', () => {
       }
     })
 
-    //Retrieve the year of the measure from the page
-    /*
-    var year = ''
-    cy.get(measureDetailsPage.measureYearDiv)
-      .invoke('text')
-      .then((text) => {
-       year = text.replace(/\D/g, '')
-        cy.log ("returned year is " + year)
-      })
-
-    cy.pause()
-    cy.log("year after is " + year)
-    */
-
     //Create New Patient for the measure
     measureDetailsPage.clickAddPatient()
 
