@@ -9,7 +9,7 @@ import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 
 describe('FHIR Continuous Variable Measure', () => {
     before('Login', () => {
-        oktaLogin.login()
+        oktaLogin.login("alternative")
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()

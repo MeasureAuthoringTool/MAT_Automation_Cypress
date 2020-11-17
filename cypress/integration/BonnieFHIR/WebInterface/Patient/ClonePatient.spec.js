@@ -5,6 +5,7 @@ import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasur
 import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieDeletePatient from '../../../../support/BonnieFHIR/DeletePatient'
+import { lastNameTextField } from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 const fileToUpload = "CMS104.zip"
 
@@ -16,18 +17,21 @@ describe('Clone a patient that exists in a measure', () => {
 
   })
   after('Log Out', () => {
-      bonnieDelete.DeleteMeasureFromBonnie("CMS104")
+      bonnieDelete.DeleteMeasure("CMS104")
       bonnieLogin.logout()
 
   })
 
   it('Successful Patient Clone', () => {
 
+    cy.log("in main test")
     //Validate that dashboard page is displayed to user
     helper.enabledWithTimeout(dashboard.uploadBtn)
+    cy.log("uploadbtn enabled")
 
     //Upload file that contains a patient
     bonnieUpload.UploadMeasureToBonnie(fileToUpload)
+    cy.log("measure uploaded")
 
     //Click into the measure that was just uploaded
     cy.get(dashboard.measureNameDiv).each(function($el) {
@@ -53,6 +57,8 @@ describe('Clone a patient that exists in a measure', () => {
 
     //Validate Last Name
     cy.get(testPatientPage.lastNameTextField).should('have.value', 'President')
+    //Change last name value to help delete method
+    helper.enterText(lastNameTextField, "ClonedPatient")
 
     //Validate Patient Description
     cy.get(testPatientPage.patientDescriptionTextField).should('have.value', 'Patient is very special')
@@ -73,15 +79,16 @@ describe('Clone a patient that exists in a measure', () => {
     helper.click(testPatientPage.saveBtn)
 
     //Validate that two patients now exist for the measure and the names are correct
+    cy.log("validating patients exist")
     cy.get(testPatientPage.measureDetailsPagePatientNameDiv)
       .should(($element) => {
         expect($element).to.have.length(2)
-        expect($element.first()).to.contain('President Current')
-        expect($element[1]).to.contain('President Current (1)')
+        expect($element.first()).to.contain('ClonedPatient Current (1)')
+        expect($element[1]).to.contain('President Current')
     })
 
     //Delete the clone, because cloning is currently outlawed by the Geneva Convention and we don't want to end up in Gitmo
-    bonnieDeletePatient.DeletePatientFromMeasure()
+    bonnieDeletePatient.DeletePatient("ClonedPatient")
 
     })
 

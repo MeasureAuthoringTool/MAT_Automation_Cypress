@@ -135,11 +135,11 @@ export const clickSavePatient = () => {
 }
 export const dragAndDrop = (element, elementTitle,draggableIndex) => {
   cy.log('dragAndDropAttribute')
-  cy.get(criteriaElementsContainer).contains(element).click()
+  cy.get(criteriaElementsContainer).contains(element).click({force: true})
   cy.get('.draggable').eq(draggableIndex)
-    .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-    .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-    .trigger('mouseup')
+    .trigger('mousedown', { which: 1, pageX: 600, pageY: 100, force: true })
+    .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100, force: true })
+    .trigger('mouseup', {force: true})
   cy.get(criteriaSectionTitle)
     .should('contain.text', elementTitle)
   cy.log('DragAndDropMedicationAttribute - done')
