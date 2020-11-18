@@ -5,7 +5,6 @@ import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasur
 import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieDeletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import { lastNameTextField } from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 const fileToUpload = "CMS104.zip"
 
