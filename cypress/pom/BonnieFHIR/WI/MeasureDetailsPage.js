@@ -1,7 +1,7 @@
 import * as homePage from './Homepage'
 //import * as string from 'cypress/types/minimatch'
 
-export const addPatientBtn = '.patient-data-col > .btn'
+export const addPatientBtn = '.patient-listing-col > .btn'
 export const measurePageNavigationBtn = '.breadcrumb > :nth-child(1)'
 export const measureDetailsTitle = '.measure-title > .short-title'
 export const measureTitle = '.full-title'
@@ -41,7 +41,7 @@ export function clickDeleteMeasure() {
 
 export function clickAddPatient () {
   cy.log('clickAddPatient')
-  cy.get(addPatientBtn).click()
+  cy.get(addPatientBtn).eq(0).click()
   cy.log('clickAddPatient - done')
 }
 

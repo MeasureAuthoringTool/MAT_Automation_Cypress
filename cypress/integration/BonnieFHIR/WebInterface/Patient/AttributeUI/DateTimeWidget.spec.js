@@ -1,23 +1,24 @@
 import * as helper from '../../../../../support/helpers'
 import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
+import * as bonnieUpload from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
+import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
-const measureName = 'FHIRmeasureCMS347'
-const measureFileToUpload = 'FHIRmeasureCMS347.zip'
 
-const lastNameSuffix = new Date().getTime()
-const distinctLastName = 'President' + lastNameSuffix
+describe('Attribute UI: Value: DateTime', () => {
 
-describe('Attribute UI: Value: SampledData', () => {
+  const measureName = 'FHIRmeasureCMS347'
+  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
+
+  const lastNameSuffix = new Date().getTime()
+  const distinctLastName = 'President' + lastNameSuffix
 
   before('Login', () => {
 
     bonnieLogin.login()
-    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload,false)
+    bonnieUpload.UploadMeasureToBonnie(measureFileToUpload,false)
     measureDetailsPage.navigateToMeasureDetails(measureName)
 
   })
@@ -29,7 +30,7 @@ describe('Attribute UI: Value: SampledData', () => {
 
   })
 
-  it('Verify the SampledData Widget', () => {
+  it('Verify the DateTime Widget is working and saving as expected', () => {
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
       const initialPatientCount = parseInt(patientListing.text())
@@ -41,8 +42,8 @@ describe('Attribute UI: Value: SampledData', () => {
       //add Observation Element
       testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
 
-      //verify adding SampledData
-      valueSampledData()
+      //verify DateTime Widget
+      verifyDateTimeWidget()
 
       testPatientPage.clickSavePatient()
 
@@ -72,29 +73,13 @@ describe('Attribute UI: Value: SampledData', () => {
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
-  function valueSampledData () {
-    cy.log('valueSampledData Add and Verify Attribute is added correctly')
+  function verifyDateTimeWidget () {
+
     cy.get(testPatientPage.attributeNameSelect).select('value')
-    cy.get(testPatientPage.attributeTypeSelect).select('SampledData')
+    cy.get(testPatientPage.attributeTypeSelect).select('DateTime')
 
-    cy.get(testPatientPage.originValueInputbox).type('3462346234')
-    cy.get(testPatientPage.originUnitInputbox).type('Mg')
-    cy.get(testPatientPage.periodDecimalInputbox).type('50000.61261')
-    cy.get(testPatientPage.dimensionsPositiveIntegerInputbox).type('568578362346')
+    //do your specific testing for DateTime here
 
-    cy.get(testPatientPage.showOptionalElementsBtn).click()
-
-    cy.get(testPatientPage.factorDecimalInputbox).type('8000.2154')
-    cy.get(testPatientPage.lowerLimitDecimalInputbox).type('15.5')
-    cy.get(testPatientPage.upperLimitDecimalInputbox).type('37.2')
-    cy.get(testPatientPage.dataStringInputBox).type('This is a test string value')
-
-    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-
-    cy.get(testPatientPage.exsistingAttribute).contains('value: origin : 3462346234 \'Mg\' | period : ' +
-      '50000.61261 | dimensions : 568578362346 | factor : 8000.2154 | lower limit : 15.5 | upper limit : 37.2 | data : ' +
-      'This is a test string value')
-    cy.log('valueSampledData - done')
   }
 
 })
