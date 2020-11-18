@@ -1,5 +1,5 @@
 import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../support/BonnieQDM/BonnieLoginLogout'
 import * as CreatePatient from '../../../../pom/Bonnie/WI/CreatePatient'
 import { clickForce } from '../../../../support/helpers'
 
@@ -17,6 +17,7 @@ describe('Create Patient From Dashboard', () => {
 
   it('Create Patient For Top Level Maesure', () => {
     //helper.enabledWithTimeout(CreatePatient.createNewPatientButton)
+
     cy.get(CreatePatient.createNewPatientButton).contains("add new patient to measure").click({ force: true })
 
     helper.enabledWithTimeout(CreatePatient.patientLastNameInputField)
