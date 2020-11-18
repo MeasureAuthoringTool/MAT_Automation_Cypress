@@ -6,14 +6,13 @@ import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
+const measureName = 'FHIRmeasureCMS347'
+const measureFileToUpload = 'FHIRmeasureCMS347.zip'
+
+const lastNameSuffix = new Date().getTime()
+const distinctLastName = 'President' + lastNameSuffix
 
 describe('Attribute UI: Value: SampledData', () => {
-
-  const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
-
-  const lastNameSuffix = new Date().getTime()
-  const distinctLastName = 'President' + lastNameSuffix
 
   before('Login', () => {
 
