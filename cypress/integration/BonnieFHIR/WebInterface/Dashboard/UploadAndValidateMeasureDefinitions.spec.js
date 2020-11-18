@@ -133,6 +133,7 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
 
     })
 
+    /*
     it('Upload Proportion Measure that is NOT Patient Based into Bonnie FHIR using exported zip file', () => {
 
         //The following strings are the expected cql values to be shown for validation post upload
@@ -344,5 +345,5 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
         deleteMeasure.DeleteMeasure(proportionMeasureWithPatientsMeasureName)
 
     })
-
+*/
 })
