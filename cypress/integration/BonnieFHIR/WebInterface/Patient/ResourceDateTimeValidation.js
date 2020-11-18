@@ -5,8 +5,6 @@ import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasur
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieDeletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import { measureYearDiv } from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
 const fileToUpload = "FHIRmeasureCMS347.zip"
 const todaysDate = Cypress.moment().format('MM/DD/YYYY')
