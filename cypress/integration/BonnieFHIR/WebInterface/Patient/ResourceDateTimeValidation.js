@@ -7,7 +7,6 @@ import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 const fileToUpload = "FHIRmeasureCMS347.zip"
-const todaysDate = Cypress.moment().format('MM/DD/YYYY')
 
 describe('Valiidate DateTime for Attributes from Patient', () => {
 
