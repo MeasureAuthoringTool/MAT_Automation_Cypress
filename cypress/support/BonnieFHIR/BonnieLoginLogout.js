@@ -33,7 +33,7 @@ export const logout = () => {
 
     helper.visibleWithTimeout(dashboard.signoutBtn)
 
-    cy.get(dashboard.signoutBtn).click()
+    cy.get(dashboard.signOutBtn).click()
 
     helper.visibleWithTimeout(signInpage.usernameInputBox)
 

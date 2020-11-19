@@ -5,6 +5,7 @@ import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
 import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 
 const continuousVariableMeasureName = 'CMS111TestMeasureNK'
 const continuousVariableMeasureFileToUpload = 'ContinuousVariableCMS111.zip'
@@ -39,6 +40,8 @@ describe('Measure Upload', () => {
       const initialPatientCount = parseInt(patientListing.text())
       cy.log('patient count was:' + initialPatientCount)
 
+      dashboard.navigateToMeasureDetails(continuousVariableMeasureName)
+
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
 
@@ -65,6 +68,8 @@ describe('Measure Upload', () => {
       const initialPatientCount = parseInt(patientListing.text())
       cy.log('patient count was:' + initialPatientCount)
 
+      dashboard.navigateToMeasureDetails(cohortMeasureName)
+
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
 
@@ -89,6 +94,8 @@ describe('Measure Upload', () => {
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
       const initialPatientCount = parseInt(patientListing.text())
       cy.log('patient count was:' + initialPatientCount)
+
+      dashboard.navigateToMeasureDetails(proportionMultiGroupMeasureName)
 
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)

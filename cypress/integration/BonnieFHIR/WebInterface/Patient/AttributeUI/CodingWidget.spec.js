@@ -33,14 +33,14 @@ describe('Attribute UI: Coding Widget', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      dragAndDrop()
+      testPatientPage.dragAndDrop('management', 'Management: Encounter: Emergency Department Visit', 3)
       codingWidget()
       testPatientPage.clickSavePatient()
-      verifyPatientAdded(initialPatientCount, distinctLastName)
+      testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
       deletePatient.DeletePatient(distinctLastName)
-      verifyPatientRemoved(initialPatientCount)
+      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
@@ -74,17 +74,7 @@ describe('Attribute UI: Coding Widget', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-  function dragAndDrop () {
-    cy.log('dragAndDropAttribute')
-    cy.get(testPatientPage.criteriaElementsContainer).contains('management').click()
-    cy.get('.draggable').eq(3)
-        .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-        .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-        .trigger('mouseup') 
-    cy.get(testPatientPage.criteriaSectionTitle)
-        .should('contain.text', 'Management: Encounter: Emergency Department Visit')
-    cy.log('DragAndDropManagementAttribute - done')
-  }
+
 
   function codingWidget () {
     cy.log('addCodingWidget')
@@ -96,23 +86,8 @@ describe('Attribute UI: Coding Widget', () => {
     cy.log('AddCodingWidget - done')
   }
 
-  function getPatientRecord (lastName) {
-    return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
-  }
 
-  function verifyPatientAdded (initialPatientCount, lastName) {
-    cy.log('verifyPatientAdded')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount + 1).toString())
-    getPatientRecord(lastName).find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
-    cy.log('verifyPatientAdded - done')
-  }
 
-  function verifyPatientRemoved (initialPatientCount) {
-    cy.log('verifyPatientRemoved')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
-    cy.log('verifyPatientRemoved - done')
-  }
+
 
 })

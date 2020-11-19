@@ -156,6 +156,6 @@ export const verifyPatientAdded = (initialPatientCount, lastName) => {
   cy.log('verifyPatientAdded - done')
 }
 
-function getPatientRecord (lastName) {
+export const getPatientRecord = (lastName) => {
   return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
 }

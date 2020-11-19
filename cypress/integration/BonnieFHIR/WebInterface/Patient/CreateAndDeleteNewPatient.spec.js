@@ -34,11 +34,11 @@ describe('Patient: Create and then Delete New Patient', () => {
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
       testPatientPage.clickSavePatient()
-      verifyPatientAdded(initialPatientCount, distinctLastName)
+      testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
       deletePatient.DeletePatient(distinctLastName)
-      verifyPatientRemoved(initialPatientCount)
+      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
@@ -72,25 +72,6 @@ describe('Patient: Create and then Delete New Patient', () => {
     cy.get(testPatientPage.genderDropdown).select('Male')
     cy.get(testPatientPage.ethnicityDropdown).select('Not Hispanic or Latino')
     cy.log('enterPatientCharacteristics - done')
-  }
-
-  function getPatientRecord (lastName) {
-    return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
-  }
-
-  function verifyPatientAdded (initialPatientCount, lastName) {
-    cy.log('verifyPatientAdded')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount + 1).toString())
-    getPatientRecord(lastName).find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
-    cy.log('verifyPatientAdded - done')
-  }
-
-  function verifyPatientRemoved (initialPatientCount) {
-    cy.log('verifyPatientRemoved')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
-    cy.log('verifyPatientRemoved - done')
   }
 
 })
