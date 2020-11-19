@@ -20,7 +20,7 @@ describe('Test Patient: Extensions section', () => {
   })
 
   it.only('Validate the Extensions Components', () => {
-    uploadTestMeasure()
+    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload)
 
     navigateToMeasureDetails(measureName)
 
@@ -53,9 +53,7 @@ describe('Test Patient: Extensions section', () => {
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
-  function uploadTestMeasure () {
-    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload)
-  }
+
 
   function navigateToMeasureDetails (measureName) {
     cy.log('navigateToMeasureDetails')

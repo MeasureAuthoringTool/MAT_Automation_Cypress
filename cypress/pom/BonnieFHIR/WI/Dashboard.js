@@ -5,7 +5,7 @@ import * as homePage from './Homepage'
 import * as measureDetailsPage from './MeasureDetailsPage'
 
 export const navigationBar = '[role="navigation"]'
-export const signoutBtn = 'a[href$=sign_out]'
+export const signOutBtn = 'a[href$=sign_out]'
 export const measureNameDiv = 'div.measure-title'
 export const uploadBtn = 'button[data-call-method="importMeasure"]'
 
