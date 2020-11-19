@@ -19,7 +19,8 @@ describe('Test Patient: Adding Code', () => {
     bonnieLogin.logout()
   })
 
-  it('Verify the patient code', () => {
+  //skipping this test until we get a chance to work on it
+  it.skip('Verify the patient code', () => {
     uploadTestMeasure()
 
     navigateToMeasureDetails(measureName)
@@ -33,14 +34,14 @@ describe('Test Patient: Adding Code', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      dragAndDrop()
+      testPatientPage.dragAndDrop('medications', 'Medications: MedicationAdministration: Low Intensity Statin Therapy', 37)
       addCode()
       testPatientPage.clickSavePatient()
-      verifyPatientAdded(initialPatientCount, distinctLastName)
+      testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
       deletePatient.DeletePatient(distinctLastName)
-      verifyPatientRemoved(initialPatientCount)
+      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
@@ -75,17 +76,7 @@ describe('Test Patient: Adding Code', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-  function dragAndDrop () {
-    cy.log('dragAndDropAttribute')
-    cy.get(testPatientPage.criteriaElementsContainer).contains('medications').click()
-    cy.get('.draggable').eq(36)
-        .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-        .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-        .trigger('mouseup') 
-    cy.get(testPatientPage.criteriaSectionTitle)
-        .should('contain.text', 'Medications: MedicationAdministration: Low Intensity Statin Therapy')
-    cy.log('DragAndDropMedicationAttribute - done')
-  }
+
 
   function addCode () {
     cy.log('addCodeSystem')
@@ -96,23 +87,6 @@ describe('Test Patient: Adding Code', () => {
     cy.log('AddCode - done')
   }
 
-  function getPatientRecord (lastName) {
-    return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
-  }
 
-  function verifyPatientAdded (initialPatientCount, lastName) {
-    cy.log('verifyPatientAdded')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount + 1).toString())
-    getPatientRecord(lastName).find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
-    cy.log('verifyPatientAdded - done')
-  }
-
-  function verifyPatientRemoved (initialPatientCount) {
-    cy.log('verifyPatientRemoved')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
-    cy.log('verifyPatientRemoved - done')
-  }
 
 })

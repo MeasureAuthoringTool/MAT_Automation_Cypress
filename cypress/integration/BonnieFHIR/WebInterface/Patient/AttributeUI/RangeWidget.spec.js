@@ -33,14 +33,16 @@ describe('Attribute UI: Range Widget', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      dragAndDrop()
+
+      testPatientPage.dragAndDrop('clinical summary', 'Clinical Summary: AllergyIntolerance: Statin Allergen', 2)
+
       rangeWidget()
       testPatientPage.clickSavePatient()
-      verifyPatientAdded(initialPatientCount, distinctLastName)
+      testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
       deletePatient.DeletePatient(distinctLastName)
-      verifyPatientRemoved(initialPatientCount)
+      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)

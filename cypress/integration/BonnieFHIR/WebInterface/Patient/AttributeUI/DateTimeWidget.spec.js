@@ -30,7 +30,8 @@ describe('Attribute UI: Value: DateTime', () => {
 
   })
 
-  it('Verify the DateTime Widget is working and saving as expected', () => {
+  //skipping this test as it is not finished yet
+  it.skip('Verify the DateTime Widget is working and saving as expected', () => {
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
       const initialPatientCount = parseInt(patientListing.text())

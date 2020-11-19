@@ -1,11 +1,11 @@
-import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
-import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
-import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as helper from '../../../../../support/helpers'
+import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
+import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
+import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
 describe('Test Patient: Extensions section', () => {
 
@@ -33,14 +33,17 @@ describe('Test Patient: Extensions section', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      dragAndDrop()
+
+      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
+
       ageExtension()
       testPatientPage.clickSavePatient()
-      verifyPatientAdded(initialPatientCount, distinctLastName)
+      testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
+      //verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
       deletePatient.DeletePatient(distinctLastName)
-      verifyPatientRemoved(initialPatientCount)
+      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
@@ -75,17 +78,7 @@ describe('Test Patient: Extensions section', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-  function dragAndDrop () {
-    cy.log('dragAndDropAttribute')
-    cy.get(testPatientPage.criteriaElementsContainer).contains('medications').click()
-    cy.get('.draggable').eq(36)
-        .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-        .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-        .trigger('mouseup')
-    cy.get(testPatientPage.criteriaSectionTitle)
-        .should('contain.text', 'Medications: MedicationAdministration: Low Intensity Statin Therapy')
-    cy.log('DragAndDropMedicationAttribute - done')
-  }
+
 
   function ageExtension () {
     cy.log('validateAgeExtension')
@@ -102,23 +95,8 @@ describe('Test Patient: Extensions section', () => {
     cy.log('AgeExtensionValidation - done')
   }
 
-  function getPatientRecord (lastName) {
-    return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
-  }
 
-  function verifyPatientAdded (initialPatientCount, lastName) {
-    cy.log('verifyPatientAdded')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount + 1).toString())
-    getPatientRecord(lastName).find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
-    cy.log('verifyPatientAdded - done')
-  }
 
-  function verifyPatientRemoved (initialPatientCount) {
-    cy.log('verifyPatientRemoved')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
-    cy.log('verifyPatientRemoved - done')
-  }
+
 
 })
