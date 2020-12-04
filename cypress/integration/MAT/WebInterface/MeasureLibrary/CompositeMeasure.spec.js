@@ -3,7 +3,8 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createnewcompositemeasure from '../../../../pom/MAT/WI/CreateNewCompositeMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../support/oktaLogin'
-import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 let measureNameOne = ''
 let measureNameTwo = ''
@@ -17,29 +18,17 @@ describe('Creating New Composite Measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-    })
-
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-
-    after('Log Out', () => {
-        helper.logout()
-    })
-
-    it('Packaging and versioning the first Proportion measure', () => {
-
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
         cy.get(measurelibrary.searchInputBox).type(measureNameOne, { delay: 50 })
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click();
+        cy.get(measureComposer.cqlWorkspace).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -55,45 +44,45 @@ describe('Creating New Composite Measure', () => {
         dataCreation.addDefinition('Denominator', 'true')
         dataCreation.addDefinition('Numerator', 'true')
 
-         // Population Workspace
+        // Population Workspace
 
-         cy.get(measureComposer.populationWorkspace).click()
+        cy.get(measureComposer.populationWorkspace).click()
 
-         helper.verifySpinnerAppearsAndDissappears()
- 
-         // Initial Population
-         cy.get(measureComposer.initialPopulation).click()
- 
-         helper.verifySpinnerAppearsAndDissappears()
- 
-         cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
-         cy.get(measureComposer.initialPopulationSaveBtn).click()
- 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
-         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
- 
-         // Denominator
-         cy.get(measureComposer.denominator).click()
- 
-         helper.verifySpinnerAppearsAndDissappears()
- 
-         cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
-         cy.get(measureComposer.denominatorSaveBtn).click()
- 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
-         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
- 
-         // Numerator
-         cy.get(measureComposer.numerator).click()
- 
-         helper.verifySpinnerAppearsAndDissappears()
- 
-         cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
-         cy.get(measureComposer.numeratorSaveBtn).click()
- 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
-         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
- 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        // Initial Population
+        cy.get(measureComposer.initialPopulation).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
+        cy.get(measureComposer.initialPopulationSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
+
+        // Denominator
+        cy.get(measureComposer.denominator).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+        cy.get(measureComposer.denominatorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
+
+        // Numerator
+        cy.get(measureComposer.numerator).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+        cy.get(measureComposer.numeratorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
+
         //navigate to Measure Packager
         cy.get(measureComposer.measurePackager).click()
 
@@ -126,26 +115,22 @@ describe('Creating New Composite Measure', () => {
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
         cy.wait(2000)
-      
-        cy.get(measurelibrary.row1MeasureSearch).click()
-      
+
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-      
+
         cy.get(measurelibrary.majorVersionTypeRadio).click()
         cy.get(measurelibrary.packageAndVersion).click()
-      
+
         helper.verifySpinnerAppearsAndDissappears()
-
-    })
-
-    it('Packaging and versioning the second Proportion measure', () => {
 
         cy.get(measurelibrary.searchInputBox).clear().type(measureNameTwo, { delay: 50 })
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -165,45 +150,45 @@ describe('Creating New Composite Measure', () => {
         dataCreation.addDefinition('Denominator', 'true')
         dataCreation.addDefinition('Numerator', 'true')
 
-         // Population Workspace
+        // Population Workspace
 
-         cy.get(measureComposer.populationWorkspace).click()
+        cy.get(measureComposer.populationWorkspace).click()
 
-         helper.verifySpinnerAppearsAndDissappears()
- 
-         // Initial Population
-         cy.get(measureComposer.initialPopulation).click()
- 
-         helper.verifySpinnerAppearsAndDissappears()
- 
-         cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
-         cy.get(measureComposer.initialPopulationSaveBtn).click()
- 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
-         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
- 
-         // Denominator
-         cy.get(measureComposer.denominator).click()
- 
-         helper.verifySpinnerAppearsAndDissappears()
- 
-         cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
-         cy.get(measureComposer.denominatorSaveBtn).click()
- 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
-         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
- 
-         // Numerator
-         cy.get(measureComposer.numerator).click()
- 
-         helper.verifySpinnerAppearsAndDissappears()
- 
-         cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
-         cy.get(measureComposer.numeratorSaveBtn).click()
- 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
-         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
- 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        // Initial Population
+        cy.get(measureComposer.initialPopulation).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
+        cy.get(measureComposer.initialPopulationSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
+
+        // Denominator
+        cy.get(measureComposer.denominator).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+        cy.get(measureComposer.denominatorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
+
+        // Numerator
+        cy.get(measureComposer.numerator).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+        cy.get(measureComposer.numeratorSaveBtn).click()
+
+        helper.visibleWithTimeout(measureComposer.warningMessage)
+        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
+
         //navigate to Measure Packager
         cy.get(measureComposer.measurePackager).click()
 
@@ -236,16 +221,24 @@ describe('Creating New Composite Measure', () => {
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
         cy.wait(2000)
-      
-        cy.get(measurelibrary.row1MeasureSearch).click()
-      
+
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-      
+
         cy.get(measurelibrary.majorVersionTypeRadio).click()
         cy.get(measurelibrary.packageAndVersion).click()
-      
+
         helper.verifySpinnerAppearsAndDissappears()
 
+    })
+
+    beforeEach('Preserve Cookies', () => {
+        helper.preserveCookies()
+    })
+
+    after('Log Out', () => {
+        helper.logout()
     })
 
     it('Create Composite measure', () => {

@@ -2,6 +2,7 @@ import * as helper from '../../../../support/helpers'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -32,7 +33,7 @@ describe('Sharing Measure with other measure developer', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.shareMeasureSearchBtn).click()
 
@@ -58,7 +59,7 @@ describe('Sharing Measure with other measure developer', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.shareMeasureSearchBtn).click()
 

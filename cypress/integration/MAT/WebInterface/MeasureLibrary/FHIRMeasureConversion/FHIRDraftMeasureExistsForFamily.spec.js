@@ -1,7 +1,8 @@
 import * as helper from '../../../../../support/helpers';
 import * as oktaLogin from '../../../../../support/oktaLogin';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let measureName = ''
 
@@ -29,9 +30,9 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureLibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
 
-        cy.get(measureLibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measureLibrary.createVersionMeasureSearchBtn).click();
         cy.get(measureLibrary.majorVersionTypeRadio).click();
         cy.get(measureLibrary.packageAndVersion).click();
 
@@ -43,7 +44,7 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         // Create First Draft Measure
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
-        cy.get(measureLibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.createDraftMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -61,8 +62,8 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         // Versioning draft measure
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
-        cy.get(measureLibrary.row1MeasureSearch).click();
-        cy.get(measureLibrary.createVersionDraftMeasureSearchBtn).click();
+        gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
+        cy.get(measureLibrary.createVersionMeasureSearchBtn).click();
         cy.get(measureLibrary.majorVersionTypeRadio).click();
         cy.get(measureLibrary.packageAndVersion).click();
 
@@ -76,7 +77,7 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         // Convert First measure to FHIR
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
-        cy.get(measureLibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -85,8 +86,8 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         // Convert Second measure to FHIR
         helper.visibleWithTimeout(measureLibrary.row3MeasureSearch)
-        cy.get(measureLibrary.row3MeasureSearch).click();
-        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
+        gridRowActions.selectRow(measureLibrary.row3MeasureSearch)
+        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click()
 
         // FHIR Warning Dialog
         cy.get(measureLibrary.fhirConversionWarningMessage).should('contain.text', 'Only one draft per measure family should be allowed.');

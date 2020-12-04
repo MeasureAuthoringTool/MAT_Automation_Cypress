@@ -2,7 +2,8 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasureCohort = ''
 let fhirMeasureContVariable = ''
@@ -33,7 +34,7 @@ describe('Test cohort Validation Messages for FHIR Measure in Package Manager', 
     helper.verifySpinnerAppearsAndDissappears()
 
     //click row 1 of the measures to get the new measures
-    cy.get(measurelibrary.row1MeasureSearch).dblclick()
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
     //enter a measure description
     //cy.get(measureComposer.)

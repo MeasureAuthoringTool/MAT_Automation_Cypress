@@ -4,6 +4,7 @@ import * as createNewMeasure from "../../../../pom/MAT/WI/createNewMeasure"
 import * as measurelibrary from "../../../../pom/MAT/WI/MeasureLibrary"
 import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer"
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 import { describe } from 'mocha'
 
 let name = ''
@@ -104,7 +105,7 @@ describe('Measure Conversion with incorrect measure name format', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.createVersionDraftMeasureSearchBtn).click();
         cy.get(measurelibrary.majorVersionTypeRadio).click();
@@ -119,7 +120,7 @@ describe('Measure Conversion with incorrect measure name format', () => {
 
         //convert to FHIR measure
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.convertToFhirMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -127,7 +128,7 @@ describe('Measure Conversion with incorrect measure name format', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -195,7 +196,7 @@ describe('Measure Conversion with incorrect measure name and CQL library name fo
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.createVersionDraftMeasureSearchBtn).click();
         cy.get(measurelibrary.majorVersionTypeRadio).click();
@@ -210,7 +211,7 @@ describe('Measure Conversion with incorrect measure name and CQL library name fo
 
         //convert to FHIR measure
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.convertToFhirMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -218,7 +219,7 @@ describe('Measure Conversion with incorrect measure name and CQL library name fo
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

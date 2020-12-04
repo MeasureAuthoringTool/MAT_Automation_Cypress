@@ -5,6 +5,7 @@ import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary"
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer"
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
@@ -36,7 +37,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -63,7 +64,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -88,7 +89,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -123,7 +124,7 @@ describe('CQL Composer: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -176,7 +177,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -236,7 +237,7 @@ describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -287,7 +288,7 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
