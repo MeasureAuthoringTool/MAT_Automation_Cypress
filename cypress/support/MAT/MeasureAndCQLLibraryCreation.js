@@ -374,6 +374,9 @@ export const createDraftMeasure = (measure, model) => {
     cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(createNewMeasure.confirmationContinueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -392,6 +395,9 @@ export const createDraftMeasure = (measure, model) => {
     cy.get(measureDetails.measureType).click()
     cy.get(measureDetails.row1CheckBox).click()
     cy.get(measureDetails.saveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
     helper.visibleWithTimeout(measureDetails.warningMessage)
 
     cy.get(measurelibrary.measureLibraryTab).click()
@@ -513,6 +519,10 @@ export const createMajorVersionMeasure = (measure) => {
 
     cy.get(measurelibrary.majorVersionTypeRadio).click()
     cy.get(measurelibrary.packageAndVersion).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(measurelibrary.continueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()

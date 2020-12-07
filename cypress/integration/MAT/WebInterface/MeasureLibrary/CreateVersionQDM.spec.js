@@ -89,13 +89,8 @@ describe('Create Version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        // helper.waitToContainText(measurelibrary.warningMessageText,'You have included libraries that are unused. In order to version '+ name +
-        //     ', these must be removed. Select Continue to have the MAT remove these included libraries or Cancel to stop the version process.')
-
-        cy.get(measurelibrary.warningMessageText).invoke('text').then((text) => {
-            expect(text).to.include('You have included libraries that are unused. In order to version '+ name +
-              ', these must be removed. Select Continue to have the MAT remove these included libraries or Cancel to stop the version process.')
-        })
+        helper.waitToContainText(measurelibrary.warningMessageText,'You have included libraries that are unused. In order to version '+ name +
+            ', these must be removed. Select Continue to have the MAT remove these included libraries or Cancel to stop the version process.')
 
         cy.get(measurelibrary.continueBtn).click()
 

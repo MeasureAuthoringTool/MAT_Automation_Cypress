@@ -24,13 +24,6 @@ describe('Measure Library Row Selection', () => {
         //creating new versioned measure
         versionMeasure = dataCreation.createMajorVersionMeasure()
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
-
-        cy.wait(1000)
-
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
-
-        helper.verifySpinnerAppearsAndDissappears()
     })
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
@@ -58,10 +51,9 @@ describe('Measure Library Row Selection', () => {
 
         helper.isNotChecked(measurelibrary.row2RecentActivityCheckbox)
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+        cy.get(measurelibrary.row1RecentActivity).click()
 
         helper.isNotChecked(measurelibrary.row1RecentActivityCheckbox)
-
     })
 
     it('Measure Search Table: Row Selection', () => {
@@ -73,13 +65,14 @@ describe('Measure Library Row Selection', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
-        helper.notVisible(measurelibrary.clearSelectedBtn)
+        //helper.notVisible(measurelibrary.clearSelectedBtn)
 
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).click()
+
 
         helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
@@ -92,20 +85,20 @@ describe('Measure Library Row Selection', () => {
         helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '2 Items Selected')
 
-        cy.wait(1000)
+        cy.wait(3000)
 
         cy.get(measurelibrary.row2MeasureSearch).click()
 
         helper.isNotChecked(measurelibrary.row2MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).click()
 
         helper.isNotChecked(measurelibrary.row1MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
         helper.notVisible(measurelibrary.clearSelectedBtn)
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).click()
         cy.get(measurelibrary.row2MeasureSearch).click()
 
         helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
@@ -249,7 +242,7 @@ describe('Measure Library Recent Activity Grid', () => {
         gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
- 
+
         cy.get(measurelibrary.measureLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -305,34 +298,20 @@ describe('Measure Library Recent Activity Grid', () => {
     })
     it('Recent Activity Button bar Create Draft', () => {
 
-        cy.get(measurelibrary.newMeasureButton).click()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        measureName = 'createProportionMeasure' + Date.now()
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        helper.enterText(measurelibrary.searchInputBox, versionMeasure)
+        cy.get(measurelibrary.searchBtn).click()
 
-        cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.modelradioQDM).click()
-        cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
-        cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
-
-        cy.get(createNewMeasure.saveAndContinueBtn).click()
-        cy.get(createNewMeasure.confirmationContinueBtn).click()
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
-
-        cy.get(measurelibrary.createVersionRecentActivityBtn).click()
-
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
-        cy.get(measurelibrary.continueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -365,6 +344,24 @@ describe('Measure Library Recent Activity Grid', () => {
 
     it('Recent Activity Button bar Edit', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        helper.enterText(measurelibrary.searchInputBox, draftMeasure)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        cy.get(measurelibrary.measureLibraryTab).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
         gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.editRecentActivityBtn).click()
@@ -383,34 +380,20 @@ describe('Measure Library Recent Activity Grid', () => {
 
     it('Recent Activity Button bar View', () => {
 
-        cy.get(measurelibrary.newMeasureButton).click()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        measureName = 'createProportionMeasure' + Date.now()
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        helper.enterText(measurelibrary.searchInputBox, versionMeasure)
+        cy.get(measurelibrary.searchBtn).click()
 
-        cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.modelradioQDM).click()
-        cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
+        helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
-        cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
-
-        cy.get(createNewMeasure.saveAndContinueBtn).click()
-        cy.get(createNewMeasure.confirmationContinueBtn).click()
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.measureLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
-
-        cy.get(measurelibrary.createVersionRecentActivityBtn).click()
-
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
-        cy.get(measurelibrary.continueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 

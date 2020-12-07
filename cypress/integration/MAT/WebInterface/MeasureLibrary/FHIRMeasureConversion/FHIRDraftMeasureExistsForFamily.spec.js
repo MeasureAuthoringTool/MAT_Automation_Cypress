@@ -78,7 +78,7 @@ describe('Measure Library: Validate Scenario 2 Conversion to FHIR', () => {
         // Convert First measure to FHIR
         helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
         gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
-        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
+        cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()

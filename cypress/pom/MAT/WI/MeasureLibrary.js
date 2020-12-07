@@ -86,6 +86,7 @@ export const returnToMeasureLibraryLink = ':nth-child(6) > td > .gwt-Anchor'
 // WarningMessage after versioning
 export const warningMessageText = 'td > #WarningMessage > .gwt-HTML > b'
 export const warningMessage = '#WarningMessage'
+export const warningModal = '.modal-content'
 
 // Draft Measure
 export const saveAndContinueButtonDraft = '#SaveAndContinueButton_measureDetail'
