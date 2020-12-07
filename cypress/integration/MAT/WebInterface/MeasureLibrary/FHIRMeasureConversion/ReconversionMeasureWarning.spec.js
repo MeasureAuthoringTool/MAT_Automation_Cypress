@@ -29,7 +29,9 @@ describe('Measure Library: Validate Scenario 3b Conversion to FHIR', () => {
         cy.get(measureLibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
         gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
 
         cy.get(measureLibrary.createVersionMeasureSearchBtn).click();

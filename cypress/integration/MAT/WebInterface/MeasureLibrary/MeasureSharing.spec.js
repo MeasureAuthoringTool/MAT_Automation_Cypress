@@ -32,7 +32,9 @@ describe('Sharing Measure with other measure developer', () => {
         cy.get(measurelibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.shareMeasureSearchBtn).click()
@@ -58,7 +60,9 @@ describe('Sharing Measure with other measure developer', () => {
         cy.get(measurelibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.shareMeasureSearchBtn).click()
