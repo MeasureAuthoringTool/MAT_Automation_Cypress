@@ -5,13 +5,13 @@ import * as measureDetails from '../../../../pom/BonnieFHIR/WI/MeasureDetails'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as helper from '../../../../support/helpers'
 
-const proportionMeasureWithPatients = "CMS130v7_ProportionPatient_v6_0_Artifacts.zip"
+const proportionMeasureWithPatients = 'CMS130v7_ProportionPatient_v6_0_Artifacts.zip'
 const proportionMeasureWithoutPatients = "CMS0104"
 const ratioMeasure = "CMS144"
 
 //NAme of measure as it should appear on bonnie dashboard.
 //NOTE: This will need to be changed if the above filenames are changed
-const proportionMeasureWithPatientsMeasureName = "CMS130v7"
+const proportionMeasureWithPatients = "CMS130v7"
 const proportionMeasureWithoutPatientsMeasureName = "CMS0104"
 const ratioMeasureMeasureName = "CMS144"
 

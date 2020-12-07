@@ -5,6 +5,7 @@ import * as oktaLogin from "../../../../../support/oktaLogin";
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -34,7 +35,7 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -72,7 +73,7 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

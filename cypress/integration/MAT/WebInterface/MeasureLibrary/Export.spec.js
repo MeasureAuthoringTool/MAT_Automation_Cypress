@@ -5,10 +5,9 @@ import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../support/oktaLogin'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 let measureName = 'PrimaryCariesPreventionIntervention' + Date.now()
-let firstPackagedMeasure = ''
-let secondPackagedMeasure = ''
 
 describe('FHIR Measure: Export', () => {
     before('Login', () => {
@@ -18,9 +17,9 @@ describe('FHIR Measure: Export', () => {
     beforeEach('Preserve Cookies', () => {
         helper.preserveCookies()
     })
-    // after('Log Out', () => {
-    //     helper.logout()
-    // })
+    after('Log Out', () => {
+        helper.logout()
+    })
 
     it('Regular User: Validate the Export UI for FHIR Measure', () => {
 
@@ -178,7 +177,7 @@ describe('FHIR Measure: Export', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
        
         cy.get(measurelibrary.exportMeasureSearchBtn).click()
 
@@ -209,7 +208,7 @@ describe('FHIR Measure: Export', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
        
         cy.get(measurelibrary.exportMeasureSearchBtn).click()
 
@@ -231,33 +230,3 @@ describe('FHIR Measure: Export', () => {
 })
 
 
-// describe('FHIR Measure: Multiple Export', () => {
-//     before('Login', () => {
-//         oktaLogin.login()        
-
-//     })
-//     beforeEach('Preserve Cookies', () => {
-//         helper.preserveCookies()
-//     })
-//     after('Log Out', () => {
-//         helper.logout()
-//     })
-
-//     it('FHIR Measure: Select 2 packaged measures and export', () => {
-
-//         firstPackagedMeasure = dataCreation.createFhirCohortMeasure()
-//         secondPackagedMeasure = dataCreation.createFhirCohortMeasure()
-
-//     })
-
-//     it('FHIR Measure: Select 1 packaged measure and 1 non-packaged measure then export', () => {
-
-
-//     })
-
-//     it('FHIR Measure: Validate the Export button disabled for non-packaged measure', () => {
-
-
-//     })
-
-// })

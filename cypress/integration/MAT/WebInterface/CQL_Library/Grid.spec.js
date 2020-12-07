@@ -4,7 +4,8 @@ import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer"
 import * as oktaLogin from '../../../../support/oktaLogin'
-import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 let draftCqlLibraryNotowner = ''
 let draftCqlLibraryOwner = ''
@@ -44,7 +45,7 @@ describe('CQL Library Grid Selection', () => {
 
         //populating recent activity grid
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -53,7 +54,7 @@ describe('CQL Library Grid Selection', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row2CqlLibrarySearch)
-        cy.get(cqlLibrary.row2CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row2CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -187,7 +188,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -348,7 +349,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -383,7 +384,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -424,7 +425,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

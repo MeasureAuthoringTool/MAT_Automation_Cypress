@@ -5,7 +5,8 @@ import * as oktaLogin from '../../../../support/oktaLogin'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer";
-import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 let qdmLibraryName = ''
 let fhirLibraryName = ''
@@ -40,7 +41,7 @@ describe('QDM Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
@@ -160,7 +161,7 @@ describe('FHIR Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

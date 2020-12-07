@@ -5,8 +5,10 @@ import * as createNewMeasure from "../../pom/MAT/WI/CreateNewMeasure";
 import * as measureComposer from "../../pom/MAT/WI/MeasureComposer";
 import * as cqlLibrary from "../../pom/MAT/WI/CqlLibrary";
 import * as createNewCqlLibrary from "../../pom/MAT/WI/CreateNewCQLLibrary";
-import * as cqlComposer from "../../pom/MAT/WI/CQLComposer";
+import * as cqlComposer from "../../pom/MAT/WI/CQLComposer"
 import * as measureDetails from '../../pom/MAT/WI/MeasureDetails'
+import * as gridRowActions from './GridRowActions'
+
 
 let draftMeasure = 'DraftMeasure'
 
@@ -505,7 +507,7 @@ export const createMajorVersionMeasure = (measure) => {
     helper.enabledWithTimeout(measurelibrary.searchInputBox)
     helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
-    cy.get(measurelibrary.row1MeasureSearch).click()
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
     cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
 
@@ -529,8 +531,15 @@ export const addValueSet = (OID) => {
 
     cy.get(measureComposer.OIDInput).type(OID, { delay: 50 })
     cy.get(measureComposer.retrieveOIDBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     helper.waitForElementEnabled(measureComposer.applyBtn)
     cy.get(measureComposer.applyBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 }
@@ -540,6 +549,9 @@ export const addCode = (codeUrl) => {
 
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal,'Codes')
 
+    helper.visibleWithTimeout(measureComposer.codeUrlInput)
+    helper.enabledWithTimeout(measureComposer.codeUrlInput)
+    cy.get(measureComposer.codeUrlInput).click()
     cy.get(measureComposer.codeUrlInput).type(codeUrl, { delay: 50 })
     cy.get(measureComposer.retrieveBtn).click()
     cy.get(measureComposer.applyBtn).click()

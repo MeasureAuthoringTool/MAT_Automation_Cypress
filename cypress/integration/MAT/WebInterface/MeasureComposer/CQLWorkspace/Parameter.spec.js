@@ -2,7 +2,8 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -28,7 +29,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -68,7 +69,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

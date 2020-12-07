@@ -3,7 +3,8 @@ import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirLibrary = ''
 let qdmLibrary = ''
@@ -38,7 +39,7 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -95,7 +96,7 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -184,7 +185,7 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -224,7 +225,7 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

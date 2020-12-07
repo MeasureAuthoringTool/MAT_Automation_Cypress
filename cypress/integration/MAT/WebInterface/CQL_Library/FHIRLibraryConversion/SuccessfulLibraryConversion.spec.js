@@ -2,7 +2,8 @@ import * as helper from '../../../../../support/helpers';
 import * as oktaLogin from '../../../../../support/oktaLogin';
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let libraryName = ''
 
@@ -57,7 +58,7 @@ describe('CQL Library: FHIR Library Conversion: Successfull Conversion to FHIR',
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).should('contain.text', 'FHIR / CQL')
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

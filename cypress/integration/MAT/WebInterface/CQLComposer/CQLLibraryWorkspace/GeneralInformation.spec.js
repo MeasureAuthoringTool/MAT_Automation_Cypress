@@ -6,6 +6,7 @@ import * as oktaLogin from "../../../../../support/oktaLogin"
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
 import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure"
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 
 let fhircqlLibrary = ''
@@ -37,7 +38,7 @@ describe('CQL Composer: Validate the components on General Information page', ()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

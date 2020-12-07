@@ -5,6 +5,7 @@ import * as createNewMeasure from "../../../../pom/MAT/WI/CreateNewMeasure";
 import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer";
 import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 
 let measureName = ''
@@ -23,11 +24,11 @@ describe('Measure Library Row Selection', () => {
         //creating new versioned measure
         versionMeasure = dataCreation.createMajorVersionMeasure()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.wait(1000)
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
     })
@@ -42,7 +43,7 @@ describe('Measure Library Row Selection', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         helper.isChecked(measurelibrary.row1RecentActivityCheckbox)
 
@@ -57,7 +58,7 @@ describe('Measure Library Row Selection', () => {
 
         helper.isNotChecked(measurelibrary.row2RecentActivityCheckbox)
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         helper.isNotChecked(measurelibrary.row1RecentActivityCheckbox)
 
@@ -78,7 +79,7 @@ describe('Measure Library Row Selection', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
@@ -98,13 +99,13 @@ describe('Measure Library Row Selection', () => {
         helper.isNotChecked(measurelibrary.row2MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         helper.isNotChecked(measurelibrary.row1MeasureSearchCheckbox)
         helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
         helper.notVisible(measurelibrary.clearSelectedBtn)
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.row2MeasureSearch).click()
 
         helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
@@ -157,7 +158,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         cy.wait(2000)
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -166,7 +167,7 @@ describe('Measure Library Recent Activity Grid', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         helper.disabled(measurelibrary.createVersionDraftRecentActivityBtn)
         helper.enabled(measurelibrary.historyRecentActivityBtn)
@@ -198,7 +199,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         cy.wait(2000)
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -206,7 +207,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         helper.enabled(measurelibrary.createVersionRecentActivityBtn)
         helper.enabled(measurelibrary.historyRecentActivityBtn)
@@ -225,7 +226,7 @@ describe('Measure Library Recent Activity Grid', () => {
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         helper.enabled(measurelibrary.createDraftRecentActivityBtn)
         helper.enabled(measurelibrary.historyRecentActivityBtn)
@@ -245,7 +246,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         cy.wait(2000)
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
  
@@ -253,7 +254,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         helper.enabled(measurelibrary.createVersionRecentActivityBtn)
         helper.enabled(measurelibrary.historyRecentActivityBtn)
@@ -291,7 +292,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.createVersionRecentActivityBtn).click()
 
@@ -325,7 +326,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.createVersionRecentActivityBtn).click()
 
@@ -335,7 +336,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.createDraftRecentActivityBtn).click()
 
@@ -350,7 +351,7 @@ describe('Measure Library Recent Activity Grid', () => {
     })
     it('Recent Activity Button bar History', () => {
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.historyRecentActivityBtn).click()
 
@@ -364,7 +365,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
     it('Recent Activity Button bar Edit', () => {
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.editRecentActivityBtn).click()
 
@@ -403,7 +404,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.createVersionRecentActivityBtn).click()
 
@@ -413,7 +414,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.viewRecentActivityBtn).click()
 
@@ -428,7 +429,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
     it('Recent Activity Button bar Share', () => {
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.shareRecentActivityBtn).click()
 
@@ -441,7 +442,7 @@ describe('Measure Library Recent Activity Grid', () => {
 
     it('Recent Activity Button bar Clone', () => {
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
         cy.get(measurelibrary.cloneRecentActivityEnabledBtn).click()
 
@@ -501,7 +502,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         helper.disabled(measurelibrary.createVersionDraftMeasureSearchBtn)
         helper.enabled(measurelibrary.historyMeasureSearchBtn)
@@ -511,7 +512,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
         helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
     })
 
@@ -529,7 +530,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
         helper.enabled(measurelibrary.historyMeasureSearchBtn)
@@ -549,7 +550,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         helper.enabled(measurelibrary.createDraftMeasureSearchBtn)
         helper.enabled(measurelibrary.historyMeasureSearchBtn)
@@ -566,7 +567,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
         helper.enabled(measurelibrary.historyMeasureSearchBtn)
@@ -586,7 +587,7 @@ describe('Measure Library Grid Button Bar', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
 
@@ -604,7 +605,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.createDraftMeasureSearchBtn).click()
 
@@ -624,7 +625,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.historyMeasureSearchBtn).click()
 
@@ -643,7 +644,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.editMeasureSearchBtn).click()
 
@@ -667,7 +668,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.viewMeasureSearchBtn).click()
 
@@ -688,7 +689,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.shareMeasureSearchBtn).click()
 
@@ -706,7 +707,7 @@ describe('Measure Library Grid Button Bar', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.cloneMeasureSearchEnabledBtn).click()
 
