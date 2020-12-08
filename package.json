@@ -65,6 +65,7 @@
         "test:mat:smoke:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:smoke:tests; npm run combine:reports; npm run generateOne:report",
         "test:mat:measure:composer:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:measure:composer; npm run combine:reports; npm run generateOne:report",
         "test:mat:cql:library:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:cql:library; npm run combine:reports; npm run generateOne:report",
+        "test:mat:cql:composer:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:cql:composer; npm run combine:reports; npm run generateOne:report",
         "test:mat:CreateContinuousVariableMeasure:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:smoke:tests:CreateContinuousVariableMeasure; npm run combine:reports; npm run generateOne:report",
         "test:mat:CreateFHIRContinuousVariableMeasure:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:smoke:tests:CreateFHIRContinuousVariableMeasure:reporter:json; npm run combine:reports; npm run generateOne:report",
         "test:mat:CreateContinuousVariableMeasure:report:json": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:smoke:tests:CreateContinuousVariableMeasure:reporter:json; npm run combine:reports; npm run generateOne:report",

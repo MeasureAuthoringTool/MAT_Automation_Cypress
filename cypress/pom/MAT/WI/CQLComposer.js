@@ -117,5 +117,5 @@ export const attributeCancelBtn = '#Cancel_button'
 
 //CQL Library Editor
 export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
-export const cqlLibraryEditorBox = '#cqlLibraryEditor_CQLEditor > textarea'
+export const cqlLibraryEditorBox = '#cqlLibraryEditor_CQLEditor'
 export const cqlEditorSaveBtn = ':nth-child(6) > td > .btn'
