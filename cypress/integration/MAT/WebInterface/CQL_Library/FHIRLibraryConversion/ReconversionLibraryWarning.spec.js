@@ -1,8 +1,8 @@
-import * as helper from '../../../../../support/helpers';
-import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
-import * as oktaLogin from '../../../../../support/oktaLogin';
-import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as helper from '../../../../../support/helpers'
+import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let libraryName = ''
 
@@ -31,25 +31,25 @@ describe('CQL Library: Validate Scenario 3b Conversion to FHIR', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
-        cy.get(cqlLibrary.majorVersionTypeRadio).click();
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.wait(2000)
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
-        cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+        cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row2CqlLibrarySearch)
-        cy.get(cqlLibrary.row2CqlLibrarySearch).click();
+        gridRowActions.selectRow(cqlLibrary.row2CqlLibrarySearch)
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
         cy.get(cqlLibrary.modal).should('contain.text', 'Are you sure you want to convert this Cql Library again? The existing FHIR Library will be overwritten.')

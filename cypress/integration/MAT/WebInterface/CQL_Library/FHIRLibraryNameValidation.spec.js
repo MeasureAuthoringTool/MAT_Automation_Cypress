@@ -2,7 +2,7 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
-import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer";
+import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer"
 import * as createNewCqlLibrary from "../../../../pom/MAT/WI/CreateNewCQLLibrary"
 
 let firstCharacterLowerCase = ''

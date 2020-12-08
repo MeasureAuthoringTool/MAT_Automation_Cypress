@@ -2,7 +2,8 @@ import * as helper from '../../../../../support/helpers';
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as oktaLogin from '../../../../../support/oktaLogin';
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let libraryName = ''
 
@@ -35,18 +36,19 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
-        cy.get(cqlLibrary.majorVersionTypeRadio).click();
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
         // Create First Draft library
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
-        cy.get(cqlLibrary.createDraftCqllibrariesBtn).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+        cy.get(cqlLibrary.createDraftCqllibrariesBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -69,7 +71,7 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
         // Versioning draft library
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
         cy.get(cqlLibrary.majorVersionTypeRadio).click();
         cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
@@ -83,7 +85,7 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
         // Convert First library to FHIR
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -91,12 +93,12 @@ describe('CQL Library: Validate Scenario 2 Conversion to FHIR', () => {
 
         // Convert Second library to FHIR
         helper.visibleWithTimeout(cqlLibrary.row3CqlLibrarySearch)
-        cy.get(cqlLibrary.row3CqlLibrarySearch).click();
-        cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
+        gridRowActions.selectRow(cqlLibrary.row3CqlLibrarySearch)
+        cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click()
 
         // FHIR Warning Dialog
         cy.get(cqlLibrary.fhirConversionWarningMessage).should('contain.text', ' Are you sure you want to convert this Cql Library again? The existing FHIR Library will be overwritten.');
-        cy.get(cqlLibrary.fhirConversionReturnBtn).click();
+        cy.get(cqlLibrary.fhirConversionReturnBtn).click()
 
      })
 })

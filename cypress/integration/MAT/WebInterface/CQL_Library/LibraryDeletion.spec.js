@@ -36,7 +36,7 @@ describe('FHIR Library: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
         cy.get(cqlLibrary.deleteCqllibrariesBtn).click()
 
@@ -80,7 +80,7 @@ describe('FHIR Library: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()  
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -99,7 +99,7 @@ describe('FHIR Library: Deletion', () => {
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click() 
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
         
         cy.get(cqlLibrary.deleteCqllibrariesBtn).should('be.disabled')
 
@@ -131,7 +131,7 @@ describe('QDM Library: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
         cy.get(cqlLibrary.deleteCqllibrariesBtn).click()
 
@@ -152,11 +152,11 @@ describe('QDM Library: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()     
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
         
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
-        cy.get(cqlLibrary.majorVersionTypeRadio).click();
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -166,7 +166,7 @@ describe('QDM Library: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click() 
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
         
         cy.get(cqlLibrary.deleteCqllibrariesBtn).should('be.disabled')
 

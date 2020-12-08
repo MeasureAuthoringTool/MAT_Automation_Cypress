@@ -503,6 +503,9 @@ export const createDraftCqlLibrary = (library, model) => {
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(cqlComposer.confirmationContinueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
