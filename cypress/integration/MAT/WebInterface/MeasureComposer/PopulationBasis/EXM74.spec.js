@@ -62,6 +62,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
         cy.get(measureComposer.cqlWorkspace).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 

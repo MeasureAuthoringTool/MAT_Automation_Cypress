@@ -96,7 +96,7 @@ describe('Validate the Measure Period without Data changes', () => {
 
         gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measurelibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measurelibrary.createVersionMeasureSearchBtn).click();
         cy.get(measurelibrary.majorVersionTypeRadio).click();
         cy.get(measurelibrary.packageAndVersion).click();
 
@@ -187,7 +187,7 @@ describe('Validate the Measure Period with date changes', () => {
 
         gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measurelibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measurelibrary.createVersionMeasureSearchBtn).click();
         cy.get(measurelibrary.majorVersionTypeRadio).click();
         cy.get(measurelibrary.packageAndVersion).click();
 

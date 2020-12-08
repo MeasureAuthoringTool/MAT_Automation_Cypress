@@ -224,15 +224,16 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
 
-        cy.get(measurelibrary.searchBtn).click();
+        cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearchName).dblclick({force: true})
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click();
+        cy.get(measureComposer.cqlWorkspace).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 

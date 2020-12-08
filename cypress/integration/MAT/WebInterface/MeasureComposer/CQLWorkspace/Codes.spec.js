@@ -38,8 +38,9 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         // CQL Library Editor
-        cy.get(measureComposer.cqlLibraryEditor).click();
+        cy.get(measureComposer.cqlLibraryEditor).click()
 
+        helper.visibleWithTimeout(measureComposer.warningMessage)
         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -50,6 +51,7 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
 
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 
+        helper.visibleWithTimeout(measureComposer.warningMessage)
         cy.get(measureComposer.warningMessage).should('contain.text', 'Changes to the CQL File have been successfully saved.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
