@@ -424,24 +424,45 @@ export const createFHIRMeasureByType = (measure, type, patient_based) => {
     cy.get(measurelibrary.newMeasureButton).click()
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
-    //cy.pause()
-    //cy.get(createNewMeasure.modelradioFHIR).click()
-    //cy.pause()
+
     cy.get(createNewMeasure.cqlLibraryName).type(name, { delay: 50 })
-    //cy.pause()
     cy.get(createNewMeasure.shortName).type(name, { delay: 50 })
 
     cy.get(createNewMeasure.measureScoringListBox).select(type)
     cy.get(createNewMeasure.patientBasedMeasureListBox).select(patient_based)
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-    //helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    //cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measureDetails.measureStewardDeveloper).click()
+    cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
+    cy.get(measureDetails.row1CheckBox).click()
+    cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-    //helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureDetails.description).click()
+    helper.enterText(measureDetails.textAreaInput, 'description')
+    cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
+
+    cy.get(measureDetails.measureType).click()
+    cy.get(measureDetails.row1CheckBox).click()
+    cy.get(measureDetails.saveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(measureDetails.warningMessage)
+
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     return name
 }

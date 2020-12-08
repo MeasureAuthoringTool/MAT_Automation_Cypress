@@ -2,8 +2,7 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
-import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
@@ -46,14 +45,14 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
         // Function
         cy.get(measureComposer.functionMeasureComposer).click()
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Function')
-      
+
         cy.get(measureComposer.functionNameInput).type('TestForValidationError', { delay: 50 })
         cy.get(measureComposer.functionCQLExpressionEditorInput).type('.dfgfkj', { delay: 50 })
         cy.get(measureComposer.functionSaveBtn).click()
-      
+
         helper.verifySpinnerAppearsAndDissappears()
 
-        // Measure Packager 
+        // Measure Packager
         cy.get(measureComposer.measurePackager).click()
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(measureComposer.packageWarningMessage).should('contain.text', 'Your CQL file contains validation errors. Errors must be corrected before proceeding to measure packaging. Please return to the CQL Workspace to make corrections.');
@@ -77,24 +76,7 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        //entering required meta data
-        cy.get(measureDetails.measureStewardDeveloper).click()
-        cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
-        cy.get(measureDetails.row1CheckBox).click()
-        cy.get(measureDetails.saveBtn).click()
-        helper.visibleWithTimeout(measureDetails.warningMessage)
-
-        cy.get(measureDetails.description).click()
-        helper.enterText(measureDetails.textAreaInput, 'description')
-        cy.get(measureDetails.saveBtn).click()
-        helper.visibleWithTimeout(measureDetails.warningMessage)
-
-        cy.get(measureDetails.measureType).click()
-        cy.get(measureDetails.row1CheckBox).click()
-        cy.get(measureDetails.saveBtn).click()
-        helper.visibleWithTimeout(measureDetails.warningMessage)
-
-        cy.get(measureComposer.cqlWorkspace).click();
+        cy.get(measureComposer.cqlWorkspace).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -110,7 +92,8 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
         // Measure Packager 
         cy.get(measureComposer.measurePackager).click();
         helper.verifySpinnerAppearsAndDissappears()
-        cy.get(measureComposer.packageWarningMessage).should('contain.text', 'Your CQL file contains validation errors. Errors must be corrected before proceeding to measure packaging. Please return to the CQL Workspace to make corrections.');
+        cy.get(measureComposer.packageWarningMessage).should('contain.text', 'Your CQL file contains validation errors. ' +
+          'Errors must be corrected before proceeding to measure packaging. Please return to the CQL Workspace to make corrections.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -149,7 +132,7 @@ describe('Measure Packager: Validate the error message for details requirement',
     })
 
     it('FHIR Measure: Validate error message for missing meta data', () => {
-       
+
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measureComposer.cqlWorkspace).click();
@@ -234,7 +217,7 @@ describe('Measure Packager: Validate the error message for details requirement',
         helper.visibleWithTimeout(measureComposer.warningMessage)
         helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
 
-        // Measure Packager 
+        // Measure Packager
         cy.get(measureComposer.measurePackager).click();
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(measureComposer.packageWarningMessage).should('contain.text', ' Please enter the Measure Description prior to packaging.');
@@ -242,50 +225,7 @@ describe('Measure Packager: Validate the error message for details requirement',
         cy.get(measurelibrary.measureLibraryTab).click()
 
         helper.verifySpinnerAppearsAndDissappears()
-        
-    })
 
-    it('FHIR Measure: Validate population basis requirement error message', () => {
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        //select population basis
-        cy.get(measureDetails.populationBasisListbox).select('--Select--')
-        cy.get(measureDetails.saveBtn).click()
-        helper.verifySpinnerAppearsAndDissappears()        
-
-        //entering required meta data
-        cy.get(measureDetails.measureStewardDeveloper).click()
-        cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
-        cy.get(measureDetails.row1CheckBox).click()
-        cy.get(measureDetails.saveBtn).click()
-        helper.visibleWithTimeout(measureDetails.warningMessage)
-
-        cy.get(measureDetails.description).click()
-        helper.enterText(measureDetails.textAreaInput, 'description')
-        cy.get(measureDetails.saveBtn).click()
-        helper.visibleWithTimeout(measureDetails.warningMessage)
-
-        cy.get(measureDetails.measureType).click()
-        cy.get(measureDetails.row1CheckBox).click()
-        cy.get(measureDetails.saveBtn).click()
-        helper.visibleWithTimeout(measureDetails.warningMessage)        
-
-        cy.get(measureComposer.cqlWorkspace).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
-        
-        // Measure Packager 
-        cy.get(measureComposer.measurePackager).click();
-        helper.verifySpinnerAppearsAndDissappears()
-        cy.get(measureComposer.packageWarningMessage).should('contain.text', ' Please select the measure\'s Population basis prior to packaging.')
-        
-        cy.get(measurelibrary.measureLibraryTab).click()
-        
-        helper.verifySpinnerAppearsAndDissappears()
-        
     })
 
 })

@@ -208,6 +208,7 @@ describe('Packaging: Continuous Variable Measure', () => {
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measureComposer.packageWarningMessage)
         helper.waitToContainText(measureComposer.packageWarningMessage,'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
