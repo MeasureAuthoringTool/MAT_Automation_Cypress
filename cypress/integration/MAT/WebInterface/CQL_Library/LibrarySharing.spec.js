@@ -2,6 +2,7 @@ import * as helper from '../../../../support/helpers'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 let fhirCqlLibrary = ''
 let qdmCqlLibrary = ''
@@ -28,11 +29,11 @@ describe('Sharing Measure with other measure developer', () => {
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click();
+        cy.get(cqlLibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibraryName).click()
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
         cy.get(cqlLibrary.shareCqllibrariesBtn).click()
 
@@ -54,11 +55,11 @@ describe('Sharing Measure with other measure developer', () => {
 
         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
         helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click();
+        cy.get(cqlLibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibraryName).click()
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
         cy.get(cqlLibrary.shareCqllibrariesBtn).click()
 

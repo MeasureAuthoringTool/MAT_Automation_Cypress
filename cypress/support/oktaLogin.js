@@ -37,6 +37,7 @@ if (Cypress.env('environment') === 'dev') {
   alt_username = Cypress.env('TEST_ALT_USERNAME')
   username = Cypress.env('TEST_USERNAME')
   password = Cypress.env('TEST_PASSWORD')
+  alt_password = Cypress.env('TEST_PASSWORD')
   clientId = Cypress.env('TEST_CLIENTID')
   name = Cypress.env('TEST_NAME')
   email = Cypress.env('TEST_EMAIL')

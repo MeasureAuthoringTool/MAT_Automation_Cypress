@@ -65,12 +65,12 @@ describe('QDM Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
+        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
         helper.visibleWithTimeout(cqlLibrary.majorVersionTypeRadio)
-        cy.get(cqlLibrary.majorVersionTypeRadio).click();
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -161,6 +161,7 @@ describe('FHIR Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -199,11 +200,11 @@ describe('FHIR Standalone Library: Version and include with measure', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
-        cy.get(cqlLibrary.majorVersionTypeRadio).click();
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -293,11 +294,11 @@ describe('FHIR Standalone Library: Meta data requirement to version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
-        cy.get(cqlLibrary.majorVersionTypeRadio).click();
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
         cy.get(cqlComposer.warningMessageVersionPage).should('have.text', ' Description is required for Standalone Libraries. Please populate it in General Information.')
 
