@@ -40,6 +40,8 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
+
+
         cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
 
         cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
