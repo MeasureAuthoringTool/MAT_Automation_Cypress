@@ -39,9 +39,11 @@ describe('FHIR Continuous Variable Measure', () => {
         cy.get(measureDetails.populationBasisListbox).select('Encounter')
         cy.get(measureDetails.saveBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()    
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         //entering required meta data
+        helper.visibleWithTimeout(measureDetails.measureStewardDeveloper)
         cy.get(measureDetails.measureStewardDeveloper).click()
         cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
         cy.get(measureDetails.row1CheckBox).click()
