@@ -42,15 +42,15 @@ describe('Create CQL Library', () => {
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation,'General Information')
 
         //Includes
-
+        helper.verifySpinnerAppearsAndDissappears()
         cy.get(measureComposer.includes).click()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleIncludes,'Includes')
 
+        cy.get(measureComposer.libraryAliasInputBox).type('Global', { delay: 50 })
         cy.get(measureComposer.searchInputBox).type('matglobal', { delay: 50 })
         cy.get(measureComposer.searchBtn).click()
         cy.get(measureComposer.availableLibrariesRow1checkbox).click()
-        cy.get(measureComposer.libraryAliasInputBox).type('Global', { delay: 50 })
         cy.get(measureComposer.saveIncludes).click()
 
         helper.visibleWithTimeout(measureComposer.warningMessage)
