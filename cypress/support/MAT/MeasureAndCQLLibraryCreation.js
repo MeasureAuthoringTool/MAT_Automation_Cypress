@@ -324,10 +324,15 @@ export const createQDMProportionMeasure = () => {
     cy.get(measureComposer.addAllItemsToGrouping).click()
     cy.get(measureComposer.saveGrouping).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
 
     //Create Measure Package
     cy.get(measureComposer.createMeasurePackageBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     helper.waitToContainText(measureComposer.packageWarningMessage,'Measure packaged successfully. Please access the Measure Library to export the measure.')
 

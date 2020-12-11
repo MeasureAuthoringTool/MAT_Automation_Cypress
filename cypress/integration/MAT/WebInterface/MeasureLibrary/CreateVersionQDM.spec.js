@@ -19,28 +19,28 @@ describe('Create Version', () => {
         helper.logout()
     })
     it('Create Major Version with Successful Package, Proportion Measure', () => {
-
+    
         name = dataCreation.createQDMProportionMeasure()
-
+    
         helper.verifySpinnerAppearsAndDissappears()
-
+    
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox,name)
         cy.get(measurelibrary.searchBtn).click()
-
+    
         helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.row1MeasureSearch).click()
-
+    
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-
+    
         cy.get(measurelibrary.majorVersionTypeRadio).click()
         cy.get(measurelibrary.packageAndVersion).click()
-
+    
         helper.verifySpinnerAppearsAndDissappears()
-
+    
         helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.')
-
+    
     })
 
     it('Create Major Version with Successful Package, Proportion Measure, Unused Included CQL Library', () => {
@@ -83,14 +83,16 @@ describe('Create Version', () => {
         cy.get(measurelibrary.majorVersionTypeRadio).click()
         cy.get(measurelibrary.packageAndVersion).click()
 
-        helper.waitToContainText(measurelibrary.warningMessageText,'You have included libraries that are unused. In order to version '+ name +
-            ', these must be removed. Select Continue to have the MAT remove these included libraries or Cancel to stop the version process.')
+        helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
+        
+        helper.waitToContainText(measurelibrary.warningMessageText, 'You have included libraries that are unused. In order to version ' + name2 + ', these must be removed. Select Continue to have the MAT remove these included libraries or Cancel to stop the version process.')
 
         cy.get(measurelibrary.continueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.')
+        helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name2 + ' has been successfully packaged and v1.0.000 has been successfully created.')
 
     })
 })

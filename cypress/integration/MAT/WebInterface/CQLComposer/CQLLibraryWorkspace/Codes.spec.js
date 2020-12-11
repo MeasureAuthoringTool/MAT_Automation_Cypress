@@ -39,9 +39,9 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
+        cy.get(cqlComposer.cqlLibraryEditorBox).type("{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
 
-        cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
+        cy.get(cqlComposer.cqlLibraryEditorBox).type("{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
 
         cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -72,6 +72,7 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
         cy.get(cqlComposer.deleteConfirmationYes).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         // CQL Library Editor
         cy.get(cqlComposer.cqlLibraryEditor).click();
@@ -80,9 +81,9 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}codesystem \"LOINC\": 'http://loinc.org' version '3.00'{enter}")
+        cy.get(cqlComposer.cqlLibraryEditorBox).type("{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '3.00'{enter}")
 
-        cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
+        cy.get(cqlComposer.cqlLibraryEditorBox).type("{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
  
         cy.get(cqlComposer.cqlEditorSaveBtn).click()
 

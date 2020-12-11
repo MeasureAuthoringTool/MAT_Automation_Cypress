@@ -74,7 +74,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
         cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
         cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
 
-         cy.get(measureComposer.searchInputBox).type('hospice', { delay: 50 })
+         cy.get(measureComposer.searchInputBox).type('HospiceFHIR4', { delay: 50 })
          cy.get(measureComposer.searchBtn).click()
          cy.get(measureComposer.availableLibrariesRow1checkbox).click()
          cy.get(measureComposer.libraryAliasInputBox).type('Hospice', { delay: 50 })
@@ -105,17 +105,17 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        // cy.get(measureComposer.valueSets).click();
+        cy.get(measureComposer.valueSets).click();
 
-        // helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
-        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1003')
-        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1002')
-        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1001')
-        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1024')
-        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1025')
-        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1023')
-        // dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1022')
+        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1003')
+        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1002')
+        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1001')
+        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1024')
+        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1025')
+        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1023')
+        dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1022')
 
         // Codes
 
@@ -275,7 +275,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
         cy.get(measurelibrary.row1MeasureSearch).click();
 
-        cy.get(measurelibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measurelibrary.createVersionMeasureSearchBtn).click();
         cy.get(measurelibrary.majorVersionTypeRadio).click();
         cy.get(measurelibrary.packageAndVersion).click();
 
