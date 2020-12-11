@@ -3,6 +3,7 @@ import * as oktaLogin from '../../../../support/oktaLogin'
 import * as createNewMeasure from "../../../../pom/MAT/WI/createNewMeasure"
 import * as measurelibrary from "../../../../pom/MAT/WI/MeasureLibrary"
 import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer"
+import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 let firstCharacterLowerCase = ''
 let firstCharacterUnderscore = ''
@@ -197,9 +198,9 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measurelibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measurelibrary.createVersionMeasureSearchBtn).click();
         cy.get(measurelibrary.majorVersionTypeRadio).click();
         cy.get(measurelibrary.packageAndVersion).click();
 
@@ -212,7 +213,7 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
 
         //convert to FHIR measure
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.convertToFhirMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -220,7 +221,7 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

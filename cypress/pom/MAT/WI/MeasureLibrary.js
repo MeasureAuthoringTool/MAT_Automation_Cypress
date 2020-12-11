@@ -61,7 +61,7 @@ export const editMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [titl
 export const shareMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to share"]'
 export const cloneMeasureSearchDisabledBtn = '#MeasureSearchCellTable_gridToolbar > [title="Measure not cloneable"]'
 export const cloneMeasureSearchEnabledBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to clone"]'
-export const exportMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to export"]'
+export const exportMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to Export MAT v6.02"]'
 export const runFhirValidationMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to Run FHIR Validation"]'
 export const convertToFhirMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to convert"]'
 
@@ -86,6 +86,7 @@ export const returnToMeasureLibraryLink = ':nth-child(6) > td > .gwt-Anchor'
 // WarningMessage after versioning
 export const warningMessageText = 'td > #WarningMessage > .gwt-HTML > b'
 export const warningMessage = '#WarningMessage'
+export const warningModal = '.modal-content'
 
 // Draft Measure
 export const saveAndContinueButtonDraft = '#SaveAndContinueButton_measureDetail'

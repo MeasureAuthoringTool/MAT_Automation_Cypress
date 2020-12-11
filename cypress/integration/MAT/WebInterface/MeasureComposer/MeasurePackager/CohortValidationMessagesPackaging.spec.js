@@ -2,7 +2,8 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasureCohort = ''
 let fhirMeasureContVariable = ''
@@ -21,7 +22,7 @@ describe('Test cohort Validation Messages for FHIR Measure in Package Manager', 
     helper.preserveCookies()
   })
   after('Log Out', () => {
-    //helper.logout()
+    helper.logout()
   })
 
   it('Validate error Messages for FHIR Cohort Measure', () => {
@@ -33,7 +34,8 @@ describe('Test cohort Validation Messages for FHIR Measure in Package Manager', 
     helper.verifySpinnerAppearsAndDissappears()
 
     //click row 1 of the measures to get the new measures
-    cy.get(measurelibrary.row1MeasureSearch).dblclick()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
     //enter a measure description
     //cy.get(measureComposer.)
@@ -62,7 +64,7 @@ describe('Test cohort Validation Messages for FHIR Measure in Package Manager', 
     //attempt to save the grouping with no Initial Population
     cy.get(measureComposer.saveGrouping).click()
     helper.verifySpinnerAppearsAndDissappears()
-    cy.get(measureComposer.cohortInitialPopulationValidationError).should('contain', 'For a Cohort measure, a grouping must contain exactly one Initial Population.')
+    cy.get(measureComposer.groupingErrorOne).should('contain', 'For a Cohort measure, a grouping must contain exactly one Initial Population.')
   })
 })
 /* NOTE: The below test case needs to be completed when the validation work has been completed. See

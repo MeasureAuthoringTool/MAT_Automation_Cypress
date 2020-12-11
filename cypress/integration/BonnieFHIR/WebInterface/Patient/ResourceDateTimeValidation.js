@@ -2,12 +2,11 @@ import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieDeletePatient from '../../../../support/BonnieFHIR/DeletePatient'
 
-const fileToUpload = "TestImmun_v6_0_Artifacts.zip"
-const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+const fileToUpload = "FHIRmeasureCMS347.zip"
 
 describe('Valiidate DateTime for Attributes from Patient', () => {
 
@@ -18,12 +17,12 @@ describe('Valiidate DateTime for Attributes from Patient', () => {
 
   })
   after('Log Out', () => {
-    bonnieDelete.DeleteMeasureFromBonnie("TestImmun")
+    bonnieDelete.DeleteMeasure("FHIRmeasureCMS347")
     bonnieLogin.logout()
 
   })
 
-  it('Successful Patient Clone', () => {
+  it('Verify Date Timings in Resources', () => {
 
     //Validate that dashboard page is displayed to user
     helper.enabledWithTimeout(dashboard.uploadBtn)
@@ -33,42 +32,43 @@ describe('Valiidate DateTime for Attributes from Patient', () => {
 
     //Click into the measure that was just uploaded
     cy.get(dashboard.measureNameDiv).each(function($el) {
-      if ($el.text().includes("TestImmun")) {
+      if ($el.text().includes("FHIRmeasureCMS347")) {
         cy.wrap($el).click()
       }
     })
 
-    //Validate that one patient exists for the measure and it has the below name
-    //cy.get(testPatientPage.measureDetailsPagePatientNameDiv).should('have.length', 1).should('contain', 'President Current')
+    //Create New Patient for the measure
+    measureDetailsPage.clickAddPatient()
 
-    //Click the arrow Btn to show the patient actions
-    helper.click(testPatientPage.measureDetailsPatientArrowBtn)
-
-    //Click the Edit button For the patient
-    helper.click(testPatientPage.measureDetailsPatientEditBtn)
+    //enter in patient data before proceeding
+    testPatientPage.enterPatientCharacteristics("distinctLastName")
 
     //criteria elements section
     helper.verifySpinnerAppearsAndDissappears()
     cy.get(testPatientPage.elementsHeader).should('have.text', 'Elements')
 
-    //drag and drop financial support attribute
-    cy.get(testPatientPage.elementTitle).contains('financial support').click()
+    //Caclulate the expected date values to be used
+    var oneYearFromNow = new Date();
+    oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+    var dd = String(oneYearFromNow.getDate()).padStart(2, '0');
+    var mm = String(oneYearFromNow.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = oneYearFromNow.getFullYear();
 
-    //service request
-    cy.get('.draggable').eq(1)
-      .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-      .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-      .trigger('mouseup')
+    var expectedDate = mm + '/' + dd + '/' + yyyy;
+    cy.log("expected date is " + expectedDate)
+
+    //drag and drop financial support attribute
+    testPatientPage.dragAndDrop('financial support', 'Financial Support: Coverage: Payer', '24')
 
     //get Start Date from generated control and validate the date
     helper.verifySpinnerAppearsAndDissappears()
-    cy.get(testPatientPage.startDate).should('have.value', todaysDate)
+    cy.get(testPatientPage.startDate).should('have.value', expectedDate)
 
     //Get Start time and validate it equals 8am
     cy.get(testPatientPage.startTime).should('have.value', "8:00 AM")
 
     //Get end Date and validate the data
-    cy.get(testPatientPage.endDate).should('have.value', todaysDate)
+    cy.get(testPatientPage.endDate).should('have.value', expectedDate)
 
     //Get the End time and validate the end time
     cy.get(testPatientPage.endTime).should('have.value', "8:15 AM")
@@ -77,24 +77,18 @@ describe('Valiidate DateTime for Attributes from Patient', () => {
     helper.click(testPatientPage.patientinverseDangerButton)
     helper.click(testPatientPage.attributeDeleteButton)
 
-    //drag and drop financial support attribute
-    cy.get(testPatientPage.elementTitle).contains('management').click()
-
-    //service request
-    cy.get('.draggable').eq(2)
-      .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-      .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-      .trigger('mouseup')
+    //drag and drop management attribute
+    testPatientPage.dragAndDrop('management', 'Management: Encounter: Annual Wellness Visit', '25')
 
     //get Start Date from generated control and validate the date
     helper.verifySpinnerAppearsAndDissappears()
-    cy.get(testPatientPage.startDate).should('have.value', todaysDate)
+    cy.get(testPatientPage.startDate).should('have.value', expectedDate)
 
     //Get Start time and validate it equals 8am
     cy.get(testPatientPage.startTime).should('have.value', "8:00 AM")
 
     //Get end Date and validate the data
-    cy.get(testPatientPage.endDate).should('have.value', todaysDate)
+    cy.get(testPatientPage.endDate).should('have.value', expectedDate)
 
     //Get the End time and validate the end time
     cy.get(testPatientPage.endTime).should('have.value', "8:15 AM")
@@ -103,31 +97,22 @@ describe('Valiidate DateTime for Attributes from Patient', () => {
     helper.click(testPatientPage.patientinverseDangerButton)
     helper.click(testPatientPage.attributeDeleteButton)
 
-    //drag and drop financial support attribute
-    cy.get(testPatientPage.elementTitle).contains('medications').click()
-
-    //service request
-    cy.get('.draggable').eq(5)
-      .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-      .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-      .trigger('mouseup')
+    //drag and drop medication attribute
+    testPatientPage.dragAndDrop('medications', 'Medications: MedicationRequest: Low Intensity Statin Therapy', '40')
 
     //get Start Date from generated control and validate the date
     helper.verifySpinnerAppearsAndDissappears()
-    cy.get(testPatientPage.dateGeneric).eq(0).should('have.value', todaysDate)
+    cy.get(testPatientPage.dateGeneric).eq(0).should('have.value', expectedDate)
 
     //Get Start time and validate it equals 8am
     cy.get(testPatientPage.timeGeneric).should('have.value', "8:00 AM")
-
-    //Get end Date and validate the data
-    cy.get(testPatientPage.dateGeneric).eq(1).should('have.value', todaysDate)
 
     //Delete attribute now that it has been validated
     helper.click(testPatientPage.patientinverseDangerButton)
     helper.click(testPatientPage.attributeDeleteButton)
 
     //Click save button for patient to proceed back to measure details
-    helper.click(testPatientPage.saveBtn)
+    helper.click(testPatientPage.cancelBtn)
 
   })
 

@@ -1,3 +1,6 @@
+import * as homePage from './Homepage'
+//import * as string from 'cypress/types/minimatch'
+
 export const addPatientBtn = '.patient-data-col > .btn'
 export const measurePageNavigationBtn = '.breadcrumb > :nth-child(1)'
 export const measureDetailsTitle = '.measure-title > .short-title'
@@ -8,6 +11,7 @@ export const measureDeleteBtn = '.settings-container button.btn-danger[data-call
 
 //summary section
 export const newStatus = '.status-col > div > .status'
+export const measureYearDiv = '.actions-container > .btn'
 // Section with calculation results and patients
 export const measureCalculation = '.measure-calculation'
 // Section with patients
@@ -21,6 +25,7 @@ export const patientExpandBtn = '.close > .fa'
 export const patientEditBtn = '.panel-body > a.btn'
 export const patientInverseBtn = 'button.btn-danger-inverse:visible[data-call-method="showDelete"]'
 export const patientDeleteBtn = 'button.btn-danger:visible[data-call-method="deletePatient"]'
+
 
 export function navigateToHomeMeasurePage () {
   cy.log('navigateToHomeMeasurePage')
@@ -38,4 +43,12 @@ export function clickAddPatient () {
   cy.log('clickAddPatient')
   cy.get(addPatientBtn).click()
   cy.log('clickAddPatient - done')
+}
+
+export function navigateToMeasureDetails (measureName) {
+  cy.log('navigateToMeasureDetails')
+  cy.get(homePage.measure).contains(measureName).click()
+  cy.wait(1000)
+  cy.get(measureDetailsTitle).should('contain.text', 'Measure details')
+  cy.log('navigateToMeasureDetails - done')
 }

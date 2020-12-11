@@ -3,7 +3,8 @@ import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary";
 import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirLibrary = ''
 let qdmLibrary = ''
@@ -38,7 +39,8 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -56,9 +58,9 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
         cy.get(cqlComposer.datatypeObjectListBox).select( 'Substance, Not Recommended')
         .invoke('val').should('deep.equal', 'Substance, Not Recommended')
-        
+
         cy.get(cqlComposer.argumentNameInput).type('Encounter')
-        
+
         cy.get(cqlComposer.addBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -95,7 +97,8 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -121,12 +124,12 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
         cy.get(cqlComposer.datatypeObjectListBox).select( 'AllergyIntolerance')
         .invoke('val').should('deep.equal', 'AllergyIntolerance')
-        
+
         cy.get(cqlComposer.datatypeObjectListBox).select( 'Task')
         .invoke('val').should('deep.equal', 'Task')
 
         cy.get(cqlComposer.argumentNameInput).type('Encounter')
-        
+
         cy.get(cqlComposer.addBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -184,7 +187,8 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -224,7 +228,8 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -260,7 +265,6 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
         cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
     })

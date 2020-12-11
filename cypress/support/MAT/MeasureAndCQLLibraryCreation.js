@@ -5,8 +5,10 @@ import * as createNewMeasure from "../../pom/MAT/WI/CreateNewMeasure";
 import * as measureComposer from "../../pom/MAT/WI/MeasureComposer";
 import * as cqlLibrary from "../../pom/MAT/WI/CqlLibrary";
 import * as createNewCqlLibrary from "../../pom/MAT/WI/CreateNewCQLLibrary";
-import * as cqlComposer from "../../pom/MAT/WI/CQLComposer";
+import * as cqlComposer from "../../pom/MAT/WI/CQLComposer"
 import * as measureDetails from '../../pom/MAT/WI/MeasureDetails'
+import * as gridRowActions from './GridRowActions'
+
 
 let draftMeasure = 'DraftMeasure'
 
@@ -377,6 +379,9 @@ export const createDraftMeasure = (measure, model) => {
     cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(createNewMeasure.confirmationContinueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -395,6 +400,9 @@ export const createDraftMeasure = (measure, model) => {
     cy.get(measureDetails.measureType).click()
     cy.get(measureDetails.row1CheckBox).click()
     cy.get(measureDetails.saveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
     helper.visibleWithTimeout(measureDetails.warningMessage)
 
     cy.get(measurelibrary.measureLibraryTab).click()
@@ -421,24 +429,45 @@ export const createFHIRMeasureByType = (measure, type, patient_based) => {
     cy.get(measurelibrary.newMeasureButton).click()
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
-    //cy.pause()
-    //cy.get(createNewMeasure.modelradioFHIR).click()
-    //cy.pause()
+
     cy.get(createNewMeasure.cqlLibraryName).type(name, { delay: 50 })
-    //cy.pause()
     cy.get(createNewMeasure.shortName).type(name, { delay: 50 })
 
     cy.get(createNewMeasure.measureScoringListBox).select(type)
     cy.get(createNewMeasure.patientBasedMeasureListBox).select(patient_based)
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-    //helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    //cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measureDetails.measureStewardDeveloper).click()
+    cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
+    cy.get(measureDetails.row1CheckBox).click()
+    cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-    //helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureDetails.description).click()
+    helper.enterText(measureDetails.textAreaInput, 'description')
+    cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
+
+    cy.get(measureDetails.measureType).click()
+    cy.get(measureDetails.row1CheckBox).click()
+    cy.get(measureDetails.saveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(measureDetails.warningMessage)
+
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     return name
 }
@@ -479,6 +508,9 @@ export const createDraftCqlLibrary = (library, model) => {
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(cqlComposer.confirmationContinueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -510,12 +542,16 @@ export const createMajorVersionMeasure = (measure) => {
     helper.enabledWithTimeout(measurelibrary.searchInputBox)
     helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
-    cy.get(measurelibrary.row1MeasureSearch).click()
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
     cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
 
     cy.get(measurelibrary.majorVersionTypeRadio).click()
     cy.get(measurelibrary.packageAndVersion).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(measurelibrary.continueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -534,8 +570,15 @@ export const addValueSet = (OID) => {
 
     cy.get(measureComposer.OIDInput).type(OID, { delay: 50 })
     cy.get(measureComposer.retrieveOIDBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     helper.waitForElementEnabled(measureComposer.applyBtn)
     cy.get(measureComposer.applyBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 }
@@ -545,6 +588,9 @@ export const addCode = (codeUrl) => {
 
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal,'Codes')
 
+    helper.visibleWithTimeout(measureComposer.codeUrlInput)
+    helper.enabledWithTimeout(measureComposer.codeUrlInput)
+    cy.get(measureComposer.codeUrlInput).click()
     cy.get(measureComposer.codeUrlInput).type(codeUrl, { delay: 50 })
     cy.get(measureComposer.retrieveBtn).click()
     cy.get(measureComposer.applyBtn).click()

@@ -5,6 +5,7 @@ import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 
 describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Care Providers, including Dentists', () => {
@@ -60,6 +61,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
         cy.get(measureComposer.cqlWorkspace).click()
 
+        helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
@@ -273,7 +275,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click();
         cy.get(measurelibrary.majorVersionTypeRadio).click();
@@ -286,7 +288,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
         // Create First Draft Measure
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.createDraftMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()

@@ -3,6 +3,7 @@ import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary"
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer"
 import * as oktaLogin from "../../../../../support/oktaLogin"
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -223,7 +224,7 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
 
-        cy.get(measurelibrary.searchBtn).click();
+      cy.get(measurelibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -273,7 +274,7 @@ describe('MAT: MeasureComposer: CQLWorkspace: CQL Library Editor: FHIR Errors, a
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
 
@@ -284,7 +285,7 @@ describe('MAT: MeasureComposer: CQLWorkspace: CQL Library Editor: FHIR Errors, a
 
         helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
         helper.verifySpinnerAppearsAndDissappears()
-        cy.get(measurelibrary.row1RecentActivity).click()
+        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
         cy.get(measurelibrary.convertToFhirRecentActivityBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()

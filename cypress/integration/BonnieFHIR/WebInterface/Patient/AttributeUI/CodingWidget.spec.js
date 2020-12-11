@@ -1,16 +1,16 @@
-import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
-import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
-import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as helper from '../../../../../support/helpers'
+import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
+import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
+import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
-describe('Patient: Create and then Delete New Patient', () => {
+describe('Attribute UI: Coding Widget', () => {
 
-  const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
+  const measureName = 'CMS111TestMeasureNK'
+  const measureFileToUpload = 'ContinuousVariableCMS111.zip'
 
   before('Login', () => {
     bonnieLogin.login()
@@ -19,7 +19,7 @@ describe('Patient: Create and then Delete New Patient', () => {
     bonnieLogin.logout()
   })
 
-  it('Create and delete patient', () => {
+  it.only('Verify the Coding Widget', () => {
     uploadTestMeasure()
 
     navigateToMeasureDetails(measureName)
@@ -33,6 +33,8 @@ describe('Patient: Create and then Delete New Patient', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
+      testPatientPage.dragAndDrop('management', 'Management: Encounter: Emergency Department Visit', 3)
+      codingWidget()
       testPatientPage.clickSavePatient()
       testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
@@ -55,7 +57,6 @@ describe('Patient: Create and then Delete New Patient', () => {
   function navigateToMeasureDetails (measureName) {
     cy.log('navigateToMeasureDetails')
     cy.get(homePage.measure).contains(measureName).click()
-    // cy.wait(1000)
     cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
     cy.log('navigateToMeasureDetails - done')
   }
@@ -64,7 +65,6 @@ describe('Patient: Create and then Delete New Patient', () => {
     cy.log('enterPatientCharacteristics')
     cy.get(testPatientPage.lastNameTextField).type(lastName)
     cy.get(testPatientPage.firstNameTextField).type('Current')
-
     cy.get(testPatientPage.patientDescriptionTextField).type('Patient is very special')
     cy.get(testPatientPage.dateofBithField).type('01/01/1950')
     cy.get(testPatientPage.patientDescriptionTextField).click()
@@ -73,5 +73,21 @@ describe('Patient: Create and then Delete New Patient', () => {
     cy.get(testPatientPage.ethnicityDropdown).select('Not Hispanic or Latino')
     cy.log('enterPatientCharacteristics - done')
   }
+
+
+
+  function codingWidget () {
+    cy.log('addCodingWidget')
+    cy.get(testPatientPage.attributeNameSelect).select('class')
+    cy.get(testPatientPage.attributeTypeSelect).should('contain.text', 'Coding')
+    cy.get(testPatientPage.valueSetDirectRefSelect).select('ActEncounterCode')
+    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
+    cy.get(testPatientPage.exsistingAttribute).contains('class: ActCode: AMB')
+    cy.log('AddCodingWidget - done')
+  }
+
+
+
+
 
 })

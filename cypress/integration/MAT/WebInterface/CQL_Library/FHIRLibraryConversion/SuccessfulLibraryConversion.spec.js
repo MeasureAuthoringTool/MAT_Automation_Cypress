@@ -1,8 +1,9 @@
-import * as helper from '../../../../../support/helpers';
-import * as oktaLogin from '../../../../../support/oktaLogin';
-import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary';
-import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as helper from '../../../../../support/helpers'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
+import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary"
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let libraryName = ''
 
@@ -33,17 +34,17 @@ describe('CQL Library: FHIR Library Conversion: Successfull Conversion to FHIR',
         cy.get(cqlLibrary.cqlLibrarySearchTable).should('contain.text', 'Model Version')
         cy.get(cqlLibrary.row1CqlLibraryModelVersion).should('contain.text', '5.5')
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
-        cy.get(cqlLibrary.majorVersionTypeRadio).click();
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click();
-        cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click();
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+        cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
@@ -57,7 +58,7 @@ describe('CQL Library: FHIR Library Conversion: Successfull Conversion to FHIR',
 
         cy.get(cqlLibrary.row1CqlLibrarySearch).should('contain.text', 'FHIR / CQL')
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick();
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -68,7 +69,7 @@ describe('CQL Library: FHIR Library Conversion: Successfull Conversion to FHIR',
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
+        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
         cy.get(cqlLibrary.historyCqllibrariesBtn).click()
 

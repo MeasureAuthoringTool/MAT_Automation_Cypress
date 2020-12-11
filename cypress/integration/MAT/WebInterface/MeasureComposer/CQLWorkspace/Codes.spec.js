@@ -2,7 +2,8 @@ import * as helper from "../../../../../support/helpers";
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
 import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 
@@ -27,7 +28,7 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -37,8 +38,9 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         // CQL Library Editor
-        cy.get(measureComposer.cqlLibraryEditor).click();
+        cy.get(measureComposer.cqlLibraryEditor).click()
 
+        helper.visibleWithTimeout(measureComposer.warningMessage)
         cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -49,6 +51,7 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
 
         cy.get(measureComposer.cqlEditorSaveBtn).click()
 
+        helper.visibleWithTimeout(measureComposer.warningMessage)
         cy.get(measureComposer.warningMessage).should('contain.text', 'Changes to the CQL File have been successfully saved.')
 
         cy.get(measurelibrary.measureLibraryTab).click()
@@ -64,7 +67,7 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

@@ -13,3 +13,11 @@ export const DeletePatient = (lastName) => {
     return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
   }
 }
+
+export const VerifyPatientRemoved = (initialPatientCount) => {
+
+  cy.log('verifyPatientRemoved')
+  cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
+  cy.log('verifyPatientRemoved - done')
+
+}

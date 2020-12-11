@@ -2,7 +2,8 @@ import * as helper from "../../../../../support/helpers"
 import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary"
 import * as measureDetails from "../../../../../pom/MAT/WI/MeasureDetails"
 import * as oktaLogin from "../../../../../support/oktaLogin"
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 let fhirVersionMeasure = ''
@@ -28,7 +29,7 @@ describe('FHIR Measure: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -48,7 +49,7 @@ describe('FHIR Measure: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
         cy.get(measurelibrary.majorVersionTypeRadio).click()
         cy.get(measurelibrary.packageAndVersion).click()
@@ -64,7 +65,7 @@ describe('FHIR Measure: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -96,7 +97,7 @@ describe('QDM Measure: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -116,7 +117,7 @@ describe('QDM Measure: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
         cy.get(measurelibrary.majorVersionTypeRadio).click()
         cy.get(measurelibrary.packageAndVersion).click()
@@ -132,7 +133,7 @@ describe('QDM Measure: Deletion', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

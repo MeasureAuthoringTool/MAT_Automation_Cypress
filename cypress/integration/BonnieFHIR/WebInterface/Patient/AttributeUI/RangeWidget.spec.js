@@ -1,16 +1,16 @@
-import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
-import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
-import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as helper from '../../../../../support/helpers'
+import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
+import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
+import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
-describe('Attribute UI: Coding Widget', () => {
+describe('Attribute UI: Range Widget', () => {
 
-  const measureName = 'CMS111TestMeasureNK'
-  const measureFileToUpload = 'ContinuousVariableCMS111.zip'
+  const measureName = 'FHIRmeasureCMS347'
+  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
 
   before('Login', () => {
     bonnieLogin.login()
@@ -19,7 +19,7 @@ describe('Attribute UI: Coding Widget', () => {
     bonnieLogin.logout()
   })
 
-  it.only('Verify the Coding Widget', () => {
+  it.only('Verify the Range Widget', () => {
     uploadTestMeasure()
 
     navigateToMeasureDetails(measureName)
@@ -33,14 +33,16 @@ describe('Attribute UI: Coding Widget', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      dragAndDrop()
-      codingWidget()
+
+      testPatientPage.dragAndDrop('clinical summary', 'Clinical Summary: AllergyIntolerance: Statin Allergen', 2)
+
+      rangeWidget()
       testPatientPage.clickSavePatient()
-      verifyPatientAdded(initialPatientCount, distinctLastName)
+      testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
       deletePatient.DeletePatient(distinctLastName)
-      verifyPatientRemoved(initialPatientCount)
+      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
@@ -57,6 +59,7 @@ describe('Attribute UI: Coding Widget', () => {
   function navigateToMeasureDetails (measureName) {
     cy.log('navigateToMeasureDetails')
     cy.get(homePage.measure).contains(measureName).click()
+    // cy.wait(1000)
     cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
     cy.log('navigateToMeasureDetails - done')
   }
@@ -76,24 +79,25 @@ describe('Attribute UI: Coding Widget', () => {
 
   function dragAndDrop () {
     cy.log('dragAndDropAttribute')
-    cy.get(testPatientPage.criteriaElementsContainer).contains('management').click()
-    cy.get('.draggable').eq(3)
+    cy.get(testPatientPage.criteriaElementsContainer).contains('clinical summary').click()
+    cy.get('.draggable').eq(2)
         .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
         .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
         .trigger('mouseup') 
     cy.get(testPatientPage.criteriaSectionTitle)
-        .should('contain.text', 'Management: Encounter: Emergency Department Visit')
-    cy.log('DragAndDropManagementAttribute - done')
+        .should('contain.text', 'Clinical Summary: AllergyIntolerance: Statin Allergen')
+    cy.log('DragAndDropAllergyIntolerance - done')
   }
 
-  function codingWidget () {
-    cy.log('addCodingWidget')
-    cy.get(testPatientPage.attributeNameSelect).select('class')
-    cy.get(testPatientPage.attributeTypeSelect).should('contain.text', 'Coding')
-    cy.get(testPatientPage.valueSetDirectRefSelect).select('ActEncounterCode')
+  function rangeWidget () {
+    cy.log('addRangeWidget')
+    cy.get(testPatientPage.attributeNameSelect).select('onset')
+    cy.get(testPatientPage.attributeTypeSelect).select('Range')
+    cy.get(testPatientPage.lowValueField).type(13)
+    cy.get(testPatientPage.highValueField).type(25)
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains('class: ActCode: AMB')
-    cy.log('AddCodingWidget - done')
+    cy.get(testPatientPage.exsistingAttribute).contains('onset: 13 - 25')
+    cy.log('AddRangeWidget - done')
   }
 
   function getPatientRecord (lastName) {

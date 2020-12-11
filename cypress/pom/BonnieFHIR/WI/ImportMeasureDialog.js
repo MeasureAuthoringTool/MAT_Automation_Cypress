@@ -2,6 +2,7 @@
 
 export const importMeasureDialog = '#importMeasureDialog'
 export const fileImportInput = '#measureFileInput'
+export const vsacMessage = '#vsacCachedMsg'
 export const vsacUserField = '#vsacUser'
 export const vsacPasswordField = '#vsacPassword'
 export const vsacApiKeyTextBox = '#vsacApiKey'
@@ -14,8 +15,8 @@ export const inverseDangerButton = '.btn-danger-inverse'
 export const deleteMeasureButton = '.delete-measure'
 export const episodeOfCareCalculation = '#EC'
 export const patientCalculation = '#calculationTypeRadios'
+export const fileToUploadLabel = '.file-input-name'
 
 //Error Modal
 export const errorDialog = '#errorDialog'
-export const modalBody = '.modal-body'
 export const modalCloseBtn = '.modal-footer > .btn'

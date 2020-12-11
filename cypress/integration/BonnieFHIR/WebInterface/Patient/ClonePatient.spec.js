@@ -1,92 +1,94 @@
 import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
-import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
-import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
-import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
+import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
+import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieDeletePatient from '../../../../support/BonnieFHIR/DeletePatient'
+import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
-const fileToUpload = "CMS104.zip"
+const measureName = 'FHIRmeasureCMS347'
+const measureFileToUpload = 'FHIRmeasureCMS347.zip'
 
-describe('Clone a patient that exists in a measure', () => {
+const lastNameSuffix = new Date().getTime()
+const distinctLastName = 'President' + lastNameSuffix
+
+describe('Patient: Clone Patient', () => {
 
   before('Login', () => {
 
     bonnieLogin.login()
+    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload,false)
+    measureDetailsPage.navigateToMeasureDetails(measureName)
 
   })
   after('Log Out', () => {
-      bonnieDelete.DeleteMeasureFromBonnie("CMS104")
-      bonnieLogin.logout()
+
+    deleteMeasure.DeleteMeasure(measureName)
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+    bonnieLogin.logout()
 
   })
 
-  it('Successful Patient Clone', () => {
+  it('Verify the ability to clone a Patient', () => {
 
-    //Validate that dashboard page is displayed to user
-    helper.enabledWithTimeout(dashboard.uploadBtn)
+    cy.get(measureDetailsPage.patientListing).then((patientListing) => {
+      const initialPatientCount = parseInt(patientListing.text())
+      cy.log('patient count was:' + initialPatientCount)
 
-    //Upload file that contains a patient
-    bonnieUpload.UploadMeasureToBonnie(fileToUpload)
+      measureDetailsPage.clickAddPatient()
+      testPatientPage.enterPatientCharacteristics(distinctLastName)
 
-    //Click into the measure that was just uploaded
-    cy.get(dashboard.measureNameDiv).each(function($el) {
-      if ($el.text().includes("CMS104")) {
-        cy.wrap($el).click()
-      }
+      testPatientPage.clickSavePatient()
+
+      //Click the arrow Btn to show the patient actions
+      helper.click(testPatientPage.measureDetailsPatientArrowBtn)
+
+      //Click the Clone button
+      helper.click(testPatientPage.measureDetailsPatientCloneButton)
+
+      //Validate Cloned patient attributes
+      //First, validate Name was incremented with the (1) value
+      helper.enabledWithTimeout(testPatientPage.firstNameTextField)
+      cy.get(testPatientPage.firstNameTextField).should('have.value', 'Current (1)')
+
+      //Validate Last Name
+      cy.get(testPatientPage.lastNameTextField).should('have.value', distinctLastName)
+      //Change last name value to help delete method
+      helper.enterText(testPatientPage.lastNameTextField, 'ClonedPatient')
+
+      //Validate Patient Description
+      cy.get(testPatientPage.patientDescriptionTextField).should('have.value', 'Patient is very special')
+
+      //Validate Date of Birth
+      cy.get(testPatientPage.dateofBithField).should('have.value', '01/01/1950')
+
+      //Validate Race Dropdown Option
+      cy.get(testPatientPage.raceDropdown).find(':selected').contains('Asian')
+
+      //Validate ethnicity selection
+      cy.get(testPatientPage.ethnicityDropdown).find(':selected').contains('Not Hispanic or Latino')
+
+      //Validate Gender selection
+      cy.get(testPatientPage.genderDropdown).find(':selected').contains('Male')
+
+      testPatientPage.clickSavePatient()
+
+      cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount + 2).toString())
+      testPatientPage.getPatientRecord(distinctLastName).find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
+      testPatientPage.getPatientRecord('ClonedPatient').find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
+
+      helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+      deletePatient.DeletePatient(distinctLastName)
+
+      helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+      deletePatient.DeletePatient('ClonedPatient')
+
+      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
 
-    //Validate that one patient exists for the measure and it has the below name
-    cy.get(testPatientPage.measureDetailsPagePatientNameDiv).should('have.length', 1).should('contain', 'President Current')
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    //Click the arrow Btn to show the patient actions
-    helper.click(testPatientPage.measureDetailsPatientArrowBtn)
-
-    //Click the Clone button
-    helper.click(testPatientPage.measureDetailsPatientCloneButton)
-    helper.verifySpinnerAppearsAndDissappears()
-
-    //Validate Cloned patient attributes
-    //First, validate Name was incremented with the (1) value
-    helper.enabledWithTimeout(testPatientPage.firstNameTextField)
-    cy.get(testPatientPage.firstNameTextField).should('have.value', 'Current (1)')
-
-    //Validate Last Name
-    cy.get(testPatientPage.lastNameTextField).should('have.value', 'President')
-
-    //Validate Patient Description
-    cy.get(testPatientPage.patientDescriptionTextField).should('have.value', 'Patient is very special')
-
-    //Validate Date of Birth
-    cy.get(testPatientPage.dateofBithField).should('have.value', '01/01/1950')
-
-    //Validate Race Dropdown Option
-    cy.get(testPatientPage.raceDropdown).find(':selected').contains('Asian')
-
-    //Validate ethnicity selection
-    cy.get(testPatientPage.ethnicityDropdown).find(':selected').contains('Not Hispanic or Latino')
-
-    //Validate Gender selection
-    cy.get(testPatientPage.genderDropdown).find(':selected').contains('Male')
-
-    //Click the save button
-    helper.click(testPatientPage.saveBtn)
-
-    //Validate that two patients now exist for the measure and the names are correct
-    cy.get(testPatientPage.measureDetailsPagePatientNameDiv)
-      .should(($element) => {
-        expect($element).to.have.length(2)
-        expect($element.first()).to.contain('President Current')
-        expect($element[1]).to.contain('President Current (1)')
-    })
-
-    //Delete the clone, because cloning is currently outlawed by the Geneva Convention and we don't want to end up in Gitmo
-    bonnieDeletePatient.DeletePatientFromMeasure()
-
-    })
-
-
-
-
-
+  })
 })

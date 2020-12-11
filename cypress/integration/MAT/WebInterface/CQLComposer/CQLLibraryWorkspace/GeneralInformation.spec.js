@@ -6,6 +6,7 @@ import * as oktaLogin from "../../../../../support/oktaLogin"
 import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
 import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure"
 import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 
 let fhircqlLibrary = ''
@@ -37,7 +38,7 @@ describe('CQL Composer: Validate the components on General Information page', ()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).dblclick()
+        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -76,10 +77,10 @@ describe('CQL Composer: Validate the components on General Information page', ()
        // Versioning draft library
        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-       cy.get(cqlLibrary.row1CqlLibrarySearch).click();
-       cy.get(cqlLibrary.createVersionCqllibrariesBtn).click();
-       cy.get(cqlLibrary.majorVersionTypeRadio).click();
-       cy.get(cqlLibrary.versionSaveAndContinueBtn).click();
+      gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+       cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+       cy.get(cqlLibrary.majorVersionTypeRadio).click()
+       cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
        helper.verifySpinnerAppearsAndDissappears()
 
@@ -88,6 +89,7 @@ describe('CQL Composer: Validate the components on General Information page', ()
        helper.verifySpinnerAppearsAndDissappears()
 
        // Include library with new FHIR Measure
+      helper.visibleWithTimeout(measurelibrary.newMeasureButton)
        cy.get(measurelibrary.newMeasureButton).click()
        let measureName = 'CreateFHIRMeasure' + Date.now()
 

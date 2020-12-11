@@ -1,9 +1,11 @@
 import * as helper from '../../../../../support/helpers';
 import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
 import * as oktaLogin from '../../../../../support/oktaLogin';
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let measureName = ''
+
 
 describe('Measure Library: Validate Scenario 1 Conversion to FHIR', () => {
     before('Login', () => {
@@ -25,9 +27,9 @@ describe('Measure Library: Validate Scenario 1 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureLibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
 
-        cy.get(measureLibrary.createVersionDraftMeasureSearchBtn).click();
+        cy.get(measureLibrary.createVersionMeasureSearchBtn).click();
         cy.get(measureLibrary.majorVersionTypeRadio).click();
         cy.get(measureLibrary.packageAndVersion).click();
 
@@ -37,7 +39,7 @@ describe('Measure Library: Validate Scenario 1 Conversion to FHIR', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureLibrary.row1MeasureSearch).click();
+        gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
         cy.get(measureLibrary.createDraftMeasureSearchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -54,7 +56,7 @@ describe('Measure Library: Validate Scenario 1 Conversion to FHIR', () => {
 
         cy.wait(3000)
 
-        cy.get(measureLibrary.row2MeasureSearch).click();
+        gridRowActions.selectRow(measureLibrary.row2MeasureSearch)
         cy.get(measureLibrary.convertToFhirMeasureSearchBtn).click();
 
         // FHIR Warning Dialog
