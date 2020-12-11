@@ -34,7 +34,7 @@ describe('Measure: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).dblclick();
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -72,7 +72,7 @@ describe('Measure: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).dblclick()
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -123,7 +123,7 @@ describe('FHIR Measure: Version error message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).dblclick();
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -174,7 +174,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearch).dblclick();
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -224,16 +224,15 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
 
-        cy.get(measurelibrary.searchBtn).click()
+      cy.get(measurelibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+        cy.get(measurelibrary.row1MeasureSearchName).dblclick({force: true})
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click()
+        cy.get(measureComposer.cqlWorkspace).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -266,10 +265,10 @@ describe('MAT: MeasureComposer: CQLWorkspace: CQL Library Editor: FHIR Errors, a
     before('Login', () => {
         oktaLogin.login()
 
-        fhirMeasure = dataCreation.createQDMProportionMeasure()
+        qdmMeasure = dataCreation.createQDMProportionMeasure()
 
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+        helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -289,6 +288,7 @@ describe('MAT: MeasureComposer: CQLWorkspace: CQL Library Editor: FHIR Errors, a
         gridRowActions.selectRow(measurelibrary.row1RecentActivity)
         cy.get(measurelibrary.convertToFhirRecentActivityBtn).click()
 
+        helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
