@@ -63,6 +63,7 @@
         "test:all:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:all:tests; npm run combine:reports; npm run generateOne:report",
         "test:all:mat:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:all:mat:tests; npm run combine:reports; npm run generateOne:report",
         "test:mat:smoke:tests:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:smoke:tests; npm run combine:reports; npm run generateOne:report",
+        "test:mat:measure:library:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:measure:library; npm run combine:reports; npm run generateOne:report",
         "test:mat:measure:composer:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:measure:composer; npm run combine:reports; npm run generateOne:report",
         "test:mat:cql:library:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:cql:library; npm run combine:reports; npm run generateOne:report",
         "test:mat:cql:composer:report": "npm run delete:reports; npm run delete:mochawesome; npm run test:mat:cql:composer; npm run combine:reports; npm run generateOne:report",
@@ -89,10 +90,8 @@
     "devDependencies": {
         "@cypress/browserify-preprocessor": "^2.2.4",
         "axe-core": "^3.5.5",
-        "cypress": "^4.12.1",
         "cypress-axe": "^0.5.3",
         "cypress-file-upload": "^4.1.1",
-        "cypress-plugin-retries": "^1.5.2",
         "data-driven": "^1.4.0",
         "eslint-plugin-chai-friendly": "^0.5.0",
         "eslint-plugin-cypress": "^2.11.2",

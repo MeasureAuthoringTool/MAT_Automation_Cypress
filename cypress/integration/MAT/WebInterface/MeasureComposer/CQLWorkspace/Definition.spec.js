@@ -156,6 +156,9 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
     
     it('FHIR Measure: Validate the Attribute drop down is disabled', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.visibleWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click()
 
