@@ -33,8 +33,8 @@ describe('Measure: CQL Editor message', () => {
         cy.get(measurelibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -72,7 +72,7 @@ describe('Measure: CQL Editor message', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick()
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -117,13 +117,15 @@ describe('FHIR Measure: Version error message', () => {
     })
 
     it('FHIR Measure: Invalid version error message on CQL Editor', () => {
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -169,12 +171,15 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
     it('FHIR Measure: Validate the successful when editing directly on CQL Library Editor', () => {
 
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearch).dblclick();
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -228,7 +233,7 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.row1MeasureSearchName).dblclick({force: true})
+        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 

@@ -17,8 +17,6 @@
 import './commands'
 import 'cypress-axe'
 
-// Retry failed tests:
-require('cypress-plugin-retries')
 require('cypress-file-upload')
 require('cypress-commands')
 
