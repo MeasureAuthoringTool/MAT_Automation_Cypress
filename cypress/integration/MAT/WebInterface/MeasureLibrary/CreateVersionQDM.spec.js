@@ -22,30 +22,30 @@ describe('Create Version', () => {
         helper.logout()
     })
   
-    // it('Create Major Version with Successful Package, Proportion Measure', () => {
-    //
-    //     name = dataCreation.createQDMProportionMeasure()
-    //
-    //     helper.verifySpinnerAppearsAndDissappears()
-    //
-    //     helper.enabledWithTimeout(measurelibrary.searchInputBox)
-    //     helper.enterText(measurelibrary.searchInputBox,name)
-    //     cy.get(measurelibrary.searchBtn).click()
-    //
-    //     helper.verifySpinnerAppearsAndDissappears()
-    //
-    //     gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
-    //
-    //     cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-    //
-    //     cy.get(measurelibrary.majorVersionTypeRadio).click()
-    //     cy.get(measurelibrary.packageAndVersion).click()
-    //
-    //     helper.verifySpinnerAppearsAndDissappears()
-    //
-    //     helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.')
-    //
-    // })
+    it('Create Major Version with Successful Package, Proportion Measure', () => {
+
+        name = dataCreation.createQDMProportionMeasure()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.enabledWithTimeout(measurelibrary.searchInputBox)
+        helper.enterText(measurelibrary.searchInputBox,name)
+        cy.get(measurelibrary.searchBtn).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+
+        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+
+        cy.get(measurelibrary.majorVersionTypeRadio).click()
+        cy.get(measurelibrary.packageAndVersion).click()
+
+        helper.verifySpinnerAppearsAndDissappears()
+
+        helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.')
+
+    })
 
     it('Create Major Version with Successful Package, Proportion Measure, Unused Included CQL Library', () => {
 
