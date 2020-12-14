@@ -28,6 +28,7 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
         cy.get(cqlLibrary.searchBtn).click();
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
         gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
@@ -59,6 +60,7 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
         helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)
         cy.get(cqlLibrary.searchBtn).click();
 
+        helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
         gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
