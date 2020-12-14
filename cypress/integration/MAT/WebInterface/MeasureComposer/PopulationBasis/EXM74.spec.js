@@ -87,26 +87,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
          helper.verifySpinnerAppearsAndDissappears()
          helper.verifySpinnerAppearsAndDissappears()
 
-        //Value Sets
-
-        //CQL Library Editor
-
-        cy.get(measureComposer.cqlLibraryEditor).click()
-
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
-
-        cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "Clinical Oral Evaluation": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003\'\n' +
-        'valueset "Fluoride Varnish Application for Children": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002\'\n' + 
-        'valueset "Office Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001\'\n' +
-        'valueset "Preventive Care - Established Office Visit, 0 to 17": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024\'\n' +
-        'valueset "Preventive Care Services - Established Office Visit, 18 and Up": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025\'\n' + 
-        'valueset "Preventive Care Services-Initial Office Visit, 18 and Up": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023\'\n' +
-        'valueset "Preventive Care- Initial Office Visit, 0 to 17": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022\'{enter}')
-
-        cy.get(measureComposer.cqlEditorSaveBtn).click();
-
-        helper.verifySpinnerAppearsAndDissappears()
-
+        //valuesets
         cy.get(measureComposer.valueSets).click();
 
         helper.verifySpinnerAppearsAndDissappears()
@@ -118,6 +99,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
         dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1025')
         dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1023')
         dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1022')
+      
 
         // Codes
 
@@ -147,8 +129,8 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
           '\tand FluorideApplication.status = \'completed\'')
        
         dataCreation.addDefinition('Qualifying Encounters', '( ["Encounter": "Office Visit"]\n' +
-        '\tunion ["Encounter": "Preventive Care - Established Office Visit, 0 to 17"]\n' + 
-        'union ["Encounter": "Preventive Care- Initial Office Visit, 0 to 17"]\n' + 
+        '\tunion ["Encounter": "Preventive Care, Established Office Visit, 0 to 17"]\n' + 
+        'union ["Encounter": "Preventive Care Services, Initial Office Visit, 0 to 17"]\n' + 
         'union ["Encounter": "Preventive Care Services - Established Office Visit, 18 and Up"]\n' +
         'union ["Encounter": "Preventive Care Services-Initial Office Visit, 18 and Up"]\n' + 
         'union ["Encounter": "Clinical Oral Evaluation"] ) ValidEncounter\n' +

@@ -328,6 +328,7 @@ export const createQDMProportionMeasure = () => {
 
   helper.verifySpinnerAppearsAndDissappears()
   helper.verifySpinnerAppearsAndDissappears()
+  helper.verifySpinnerAppearsAndDissappears()
 
   helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
