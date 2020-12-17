@@ -5,15 +5,8 @@ import * as measureDetails from '../../../../pom/BonnieFHIR/WI/MeasureDetails'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as helper from '../../../../support/helpers'
 
-const proportionMeasureWithPatients = 'CMS130v7_ProportionPatient_v6_0_Artifacts.zip'
-const proportionMeasureWithoutPatients = "CMS0104"
-const ratioMeasure = "CMS144"
-
-//NAme of measure as it should appear on bonnie dashboard.
-//NOTE: This will need to be changed if the above filenames are changed
-const proportionMeasureWithPatients = "CMS130v7"
-const proportionMeasureWithoutPatientsMeasureName = "CMS0104"
-const ratioMeasureMeasureName = "CMS144"
+let proportionMeasureWithPatients = 'FHIRmeasureCMS347v603-Artifacts.zip'
+let proportionMeasureWithPatientsMeasureName = 'FHIRmeasureCMS347'
 
 describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Details', () => {
     before('Login', () => {
@@ -27,7 +20,7 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
 
     })
 
-    it('Upload Proportion Measure that is Patient Based into Bonnie FHIR using exported zip file', () => {
+    it.skip('Upload Proportion Measure that is Patient Based into Bonnie FHIR using exported zip file', () => {
 
         //The following strings are the expected cql values to be shown for validation post upload
         let initialPopulationCqlExpected = 'define "Initial Population":\n  Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( Patient.birthDate ), start of "Measurement Period" ) in Interval[50, 75]\n    and exists AdultOutpatientEncounters."Qualifying Encounters"'

@@ -9,8 +9,8 @@ import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUp
 
 describe('Attribute UI: Coding Widget', () => {
 
-  const measureName = 'CMS111TestMeasureNK'
-  const measureFileToUpload = 'ContinuousVariableCMS111.zip'
+  const measureName = 'Cms111testingMeasure'
+  const measureFileToUpload = 'Cms111testingMeasurev603-Artifacts.zip'
 
   before('Login', () => {
     bonnieLogin.login()

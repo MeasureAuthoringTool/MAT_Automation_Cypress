@@ -6,11 +6,14 @@ let bonnieURL = Cypress.env('bonnieFhirBaseUrl')
 let username = ''
 let password = ''
 
-
-if (Cypress.env('environment') === 'dev') {
-
-    username = Cypress.env('BONNIE_FHIR_DEV_USERNAME')
-    password = Cypress.env('BONNIE_FHIR_DEV_PASSWORD')
+switch (Cypress.env('environment')) {
+    case 'dev':
+        username = Cypress.env('BONNIE_FHIR_DEV_USERNAME')
+        password = Cypress.env('BONNIE_FHIR_DEV_PASSWORD')
+    break
+    case 'stag':
+        username = Cypress.env('BONNIE_FHIR_STAG_USERNAME')
+        password = Cypress.env('BONNIE_FHIR_STAG_PASSWORD')
 }
 
 export const login = () => {

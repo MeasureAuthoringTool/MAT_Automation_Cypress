@@ -1,8 +1,0 @@
-{
-  "baseUrl": "https://www.emeasuretool.cms.gov/sbx/",
-  "screenshotsFolder": "mochawesome-report/assets",
-  "env": {
-    "environment": "sandbox",
-    "type": "base"
-  }
-}

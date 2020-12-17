@@ -63,6 +63,7 @@ export const startTime = 'input[name="start_time"]'
 export const endDate = 'input[name="end_date"]'
 export const endTime = 'input[name="end_time"]'
 export const attributeDeleteButton = '[data-call-method="removeCriteria"]'
+export const dateCheckboxGeneric = 'input[name="date_is_defined"]'
 
 //codeSystem 
 export const primaryCodeSystem = '.col-md-3 > .form-control'

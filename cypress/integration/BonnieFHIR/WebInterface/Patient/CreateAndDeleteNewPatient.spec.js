@@ -10,7 +10,7 @@ import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploa
 describe('Patient: Create and then Delete New Patient', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
+  const measureFileToUpload = 'FHIRmeasureCMS347v603-Artifacts.zip'
 
   before('Login', () => {
     bonnieLogin.login()
