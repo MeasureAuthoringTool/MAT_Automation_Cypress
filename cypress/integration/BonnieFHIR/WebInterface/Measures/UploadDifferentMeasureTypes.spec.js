@@ -7,14 +7,14 @@ import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 
-const continuousVariableMeasureName = 'CMS111TestMeasureNK'
-const continuousVariableMeasureFileToUpload = 'ContinuousVariableCMS111.zip'
+const continuousVariableMeasureName = 'Cms111testingMeasure'
+const continuousVariableMeasureFileToUpload = 'Cms111testingMeasurev603-Artifacts.zip'
 
 const cohortMeasureName = 'EXM529'
-const cohortMeasureFileToUpload = 'EXM529_v6_02_Artifacts.zip'
+const cohortMeasureFileToUpload = 'EXM529v603-Artifacts.zip'
 
 const proportionMultiGroupMeasureName = 'SBTESTCMS347'
-const proportionMultiGroupMeasureFileToUpload = 'SBTESTCMS347_v6_02_Artifacts.zip'
+const proportionMultiGroupMeasureFileToUpload = 'SBTESTCMS347v603-Artifacts.zip'
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = 'President' + lastNameSuffix
@@ -88,6 +88,7 @@ describe('Measure Upload', () => {
   })
 
   it('Multi-Group Proportion Measure: Successful Upload', () => {
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
     bonnieUploadMeasure.UploadMeasureToBonnie(proportionMultiGroupMeasureFileToUpload,false, true)
 

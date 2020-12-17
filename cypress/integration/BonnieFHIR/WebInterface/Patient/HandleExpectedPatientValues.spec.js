@@ -10,7 +10,7 @@ import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploa
 describe('Patient: Handle Expected Patient Values', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
+  const measureFileToUpload = 'FHIRmeasureCMS347v603-Artifacts.zip'
 
   beforeEach('Login', () => {
     bonnieLogin.login()

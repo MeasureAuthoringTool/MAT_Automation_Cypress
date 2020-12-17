@@ -10,7 +10,7 @@ import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUp
 describe('Test Patient: Adding Code', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
+  const measureFileToUpload = 'FHIRmeasureCMS347v603-Artifacts.zip'
 
   before('Login', () => {
     bonnieLogin.login()
@@ -20,7 +20,7 @@ describe('Test Patient: Adding Code', () => {
   })
 
   //skipping this test until we get a chance to work on it
-  it.skip('Verify the patient code', () => {
+  it('Verify the patient code', () => {
     uploadTestMeasure()
 
     navigateToMeasureDetails(measureName)

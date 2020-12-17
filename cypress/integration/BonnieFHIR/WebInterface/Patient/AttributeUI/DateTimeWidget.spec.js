@@ -10,7 +10,7 @@ import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDet
 describe('Attribute UI: Value: DateTime', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347.zip'
+  const measureFileToUpload = 'FHIRmeasureCMS347v603-Artifacts.zip'
 
   const lastNameSuffix = new Date().getTime()
   const distinctLastName = 'President' + lastNameSuffix
@@ -30,8 +30,7 @@ describe('Attribute UI: Value: DateTime', () => {
 
   })
 
-  //skipping this test as it is not finished yet
-  it.skip('Verify the DateTime Widget is working and saving as expected', () => {
+  it('Verify the DateTime Widget is working and saving as expected', () => {
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
       const initialPatientCount = parseInt(patientListing.text())
@@ -59,8 +58,7 @@ describe('Attribute UI: Value: DateTime', () => {
 
       //verify Value SampledData attribute is still viewable on the Observation Criteria in Patient History
       cy.get(testPatientPage.exsistingAttribute).invoke('text').then((text) => {
-        expect(text).to.include('value: origin : 3462346234.0 \'Mg\' | period : 50000.61261 | dimensions : 568578362346 | ' +
-          'factor : 8000.2154 | lower limit : 15.5 | upper limit : 37.2 | data : This is a test string value')
+        expect(text).to.include('value: 12/01/2000 8:00 AM')
       })
 
       cy.get(testPatientPage.cancelBtn).click()
@@ -79,8 +77,12 @@ describe('Attribute UI: Value: DateTime', () => {
     cy.get(testPatientPage.attributeNameSelect).select('value')
     cy.get(testPatientPage.attributeTypeSelect).select('DateTime')
 
-    //do your specific testing for DateTime here
+    cy.get(testPatientPage.dateCheckboxGeneric).eq(1).click()
+
+    cy.get(testPatientPage.dateGeneric).eq(1).clear()
+    cy.get(testPatientPage.dateGeneric).eq(1).type('12/01/2000')
+
+    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
 
   }
-
 })
