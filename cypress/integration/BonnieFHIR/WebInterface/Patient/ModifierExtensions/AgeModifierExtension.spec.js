@@ -80,16 +80,16 @@ describe('Test Patient: Extensions section', () => {
 
   function ageExtension () {
     cy.log('validateAgeExtension')
-    cy.get(testPatientPage.extensionsShow).click()
-    cy.get(testPatientPage.extensionsUrlField).type('https://google.com')
-    cy.get(testPatientPage.extensionsValueDropDown).select('Age')
-    cy.get(testPatientPage.extensionsAgeValue).type('22')
-    cy.get(testPatientPage.extensionsAgeUnit).type('year')
-    cy.get(testPatientPage.extensionAddWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingExtension).contains('https://google.com')
-    cy.get(testPatientPage.exsistingExtensionUrl).click()
+    cy.get(testPatientPage.modifierExtensionsShow).click()
+    cy.get(testPatientPage.modifierExtensionsUrlField).type('https://google.com')
+    cy.get(testPatientPage.modifierExtensionsValueDropDown).select('Age')
+    cy.get(testPatientPage.extensionsModifierAgeValue).type('22')
+    cy.get(testPatientPage.extensionsModifierAgeUnit).type('year')
+    cy.get(testPatientPage.extensionModifierAddWidgetBtn).eq(0).click()
+    cy.get(testPatientPage.exsistingModifierExtension).contains('https://google.com')
+    cy.get(testPatientPage.exsistingModifierExtensionUrl).click()
         .then(() => {
-        cy.get(testPatientPage.exsistingExtension).contains("22 'year'")
+        cy.get(testPatientPage.exsistingModifierExtension).contains("22 'year'")
         })
     cy.log('AgeExtensionValidation - done')
   }

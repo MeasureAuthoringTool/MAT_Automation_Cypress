@@ -65,13 +65,13 @@ export const endTime = 'input[name="end_time"]'
 export const attributeDeleteButton = '[data-call-method="removeCriteria"]'
 export const dateCheckboxGeneric = 'input[name="date_is_defined"]'
 
-//codeSystem 
+// codeSystem
 export const primaryCodeSystem = '.col-md-3 > .form-control'
 export const chooseCodeSystem = '.col-md-8 > .form-control'
 export const addCodeBtn = '.col-md-1'
 export const exsistingCode = '.existing-values'
 
-//attributeWidgets
+// attributeWidgets
 export const attributeNameSelect = '.col-md-7 > [name="attribute_name"]'
 export const attributeTypeSelect = '.col-md-5 > [name="attribute_type"]'
 export const valueSetDirectRefSelect = '.code-control-valueset > .form-control'
@@ -79,15 +79,14 @@ export const addWidgetBtn = '.input-add'
 export const exsistingAttribute = '.form-group > .existing-values'
 export const addedAttributeValue = '.form-group > .existing-values [title="value"]'
 
-//this element is for rangeWidget
+// this element is for rangeWidget
 export const lowValueField = '.col-md-6 > [name="low_value"]'
 export const highValueField = '.col-md-6 > [name="high_value"]'
 
-//this element is for ratioWidget
+// this element is for ratioWidget
 export const ratioValueField = '.col-md-6 > [name="value_value"]'
 
-
-//SampledData Widget
+// SampledData Widget
 export const originValueInputbox = '.quantity-control-value'
 export const originUnitInputbox = '.quantity-control-unit'
 export const periodDecimalInputbox = '[data-view-name="period"]'
@@ -98,23 +97,35 @@ export const lowerLimitDecimalInputbox = '[data-view-name="lower limit"]'
 export const upperLimitDecimalInputbox = '[data-view-name="upper limit"]'
 export const dataStringInputBox = '[data-view-name="data"]'
 
-//extensions section
-export const extensionsSection = '.form-group > .extension-display-container'
-export const extensionsUrlField = 'input[name="url"]'
-export const extensionsValueDropDown = 'select[name="value"]'
-export const exsistingExtension = '.extension-display-container > .existing-values'
-export const exsistingExtensionUrl = '.extension-url > .expand_caret'
+// extensions section
+export const extensionsShow = '[data-cy="extensions-form-group"] > .collapsed > .control-label'
+export const extensionsSection = '[data-cy="extensions-form-group"] .extension-display-container'
+export const extensionsUrlField = '[data-cy="extensions-form-group"] input[name="url"]'
+export const extensionsValueDropDown = '[data-cy="extensions-form-group"] select[name="value_type"]'
+export const exsistingExtension = '[data-cy="extensions-form-group"] .extension-display-container .existing-values'
+export const exsistingExtensionUrl = '[data-cy="extensions-form-group"] .extension-url > .expand_caret'
+export const extensionAddWidgetBtn = '[data-cy="extensions-form-group"] .input-add'
+export const extensionsAgeValue = '[data-cy="extensions-form-group"] input[name=value_value]'
+export const extensionsAgeUnit = '[data-cy="extensions-form-group"] input[name=value_unit]'
+// this element is for boolean extension
+export const extensionsBooleanDropDown = '[data-cy="extensions-form-group"] [data-cy="boolean_select"]'
+// this element is for date extension
+export const extensionsDateCheckbox = '[data-cy="extensions-form-group"] .col-md-2 > input[type="checkbox"]'
+export const extensionsDateField = '[data-cy="extensions-form-group"] .date-control-date > input[name="date"]'
 
-//this element is for age extension
-export const extensionsAgeValue = 'input[name=value_value]'
-export const extensionsAgeUnit = 'input[name=value_unit]'
-
-//this element is for boolean extension
-export const extensionsBooleanDropDown = '[data-cy="boolean_select"]'
-
-//this element is for date extension
-export const extensionsDateCheckbox = '.col-md-2 > input[type="checkbox"]'
-export const extensionsDateField = '.date-control-date > input[name="date"]'
+// modifier extensions section
+export const modifierExtensionsShow = '[data-cy="modifier-extensions-form-group"] > .collapsed > .control-label'
+export const modifierExtensionsSection = '[data-cy="modifier-extensions-form-group"] .extension-display-container'
+export const modifierExtensionsUrlField = '[data-cy="modifier-extensions-form-group"] input[name="url"]'
+export const modifierExtensionsValueDropDown = '[data-cy="modifier-extensions-form-group"] select[name="value_type"]'
+export const exsistingModifierExtension = '[data-cy="modifier-extensions-form-group"] .extension-display-container .existing-values'
+export const exsistingModifierExtensionUrl = '[data-cy="modifier-extensions-form-group"] .extension-url > .expand_caret'
+export const extensionModifierAddWidgetBtn = '[data-cy="modifier-extensions-form-group"] .input-add'
+export const extensionsModifierAgeValue = '[data-cy="modifier-extensions-form-group"] input[name=value_value]'
+export const extensionsModifierAgeUnit = '[data-cy="modifier-extensions-form-group"] input[name=value_unit]'
+export const extensionsModifierBooleanDropDown = '[data-cy="modifier-extensions-form-group"] [data-cy="boolean_select"]'
+export const extensionsModifierDateCheckbox = '[data-cy="modifier-extensions-form-group"] .col-md-2 > input[type="checkbox"]'
+export const extensionsModifierDateField = '[data-cy="modifier-extensions-form-group"] .date-control-date > input[name="date"]'
 
 
 export const enterPatientCharacteristics = (lastName) => {

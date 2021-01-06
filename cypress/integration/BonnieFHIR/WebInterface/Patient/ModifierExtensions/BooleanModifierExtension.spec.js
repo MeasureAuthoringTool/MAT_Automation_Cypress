@@ -53,15 +53,15 @@ describe('Test Patient: Extensions section', () => {
 
   function booleanExtension () {
     cy.log('validateBooleanExtension')
-    cy.get(testPatientPage.extensionsShow).click()
-    cy.get(testPatientPage.extensionsUrlField).type('https://google.com')
-    cy.get(testPatientPage.extensionsValueDropDown).select('Boolean')
-    cy.get(testPatientPage.extensionsBooleanDropDown).select('True')
-    cy.get(testPatientPage.extensionAddWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingExtension).contains('https://google.com')
-    cy.get(testPatientPage.exsistingExtensionUrl).click()
+    cy.get(testPatientPage.modifierExtensionsShow).click()
+    cy.get(testPatientPage.modifierExtensionsUrlField).type('https://google.com')
+    cy.get(testPatientPage.modifierExtensionsValueDropDown).select('Boolean')
+    cy.get(testPatientPage.extensionsModifierBooleanDropDown).select('True')
+    cy.get(testPatientPage.extensionModifierAddWidgetBtn).eq(0).click()
+    cy.get(testPatientPage.exsistingModifierExtension).contains('https://google.com')
+    cy.get(testPatientPage.exsistingModifierExtensionUrl).click()
     .then(() => {
-    cy.get(testPatientPage.exsistingExtension).contains('true')
+    cy.get(testPatientPage.exsistingModifierExtension).contains('true')
     })
     cy.log('BooleanExtensionValidation - done')
   }
