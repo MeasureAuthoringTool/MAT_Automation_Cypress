@@ -16,31 +16,30 @@ const cohortMeasureFileToUpload = 'EXM529v603-Artifacts.zip'
 const proportionMultiGroupMeasureName = 'SBTESTCMS347'
 const proportionMultiGroupMeasureFileToUpload = 'SBTESTCMS347v603-Artifacts.zip'
 
+const measureWithStratificationsMeasureName = 'CMS111Test'
+const measureWithStratificationsFileToUpload = 'CMS111Test_v6_02_Artifacts.zip'
+
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = 'President' + lastNameSuffix
 
 describe('Measure Upload', () => {
-
-  before('Login', () => {
-
+  beforeEach('Login', () => {
     bonnieLogin.login()
-
   })
-  after('Log Out', () => {
-
+  
+  afterEach('Log Out', () => {
     bonnieLogin.logout()
-
   })
 
   it('Continuous Variable Measure: Successful Upload', () => {
+    bonnieUploadMeasure.UploadMeasureToBonnie(continuousVariableMeasureFileToUpload, false)
 
-    bonnieUploadMeasure.UploadMeasureToBonnie(continuousVariableMeasureFileToUpload,false)
+    // First navigate to measure, then count the patients within the measure
+    dashboard.navigateToMeasureDetails(continuousVariableMeasureName)
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
       const initialPatientCount = parseInt(patientListing.text())
       cy.log('patient count was:' + initialPatientCount)
-
-      dashboard.navigateToMeasureDetails(continuousVariableMeasureName)
 
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
@@ -57,18 +56,16 @@ describe('Measure Upload', () => {
     deleteMeasure.DeleteMeasure(continuousVariableMeasureName)
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
   })
 
   it('Cohort Measure: Successful Upload', () => {
+    bonnieUploadMeasure.UploadMeasureToBonnie(cohortMeasureFileToUpload, false)
 
-    bonnieUploadMeasure.UploadMeasureToBonnie(cohortMeasureFileToUpload,false, true)
+    dashboard.navigateToMeasureDetails(cohortMeasureName)
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
       const initialPatientCount = parseInt(patientListing.text())
       cy.log('patient count was:' + initialPatientCount)
-
-      dashboard.navigateToMeasureDetails(cohortMeasureName)
 
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
@@ -90,13 +87,13 @@ describe('Measure Upload', () => {
   it('Multi-Group Proportion Measure: Successful Upload', () => {
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    bonnieUploadMeasure.UploadMeasureToBonnie(proportionMultiGroupMeasureFileToUpload,false, true)
+    bonnieUploadMeasure.UploadMeasureToBonnie(proportionMultiGroupMeasureFileToUpload, false)
+
+    dashboard.navigateToMeasureDetails(proportionMultiGroupMeasureName)
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
       const initialPatientCount = parseInt(patientListing.text())
       cy.log('patient count was:' + initialPatientCount)
-
-      dashboard.navigateToMeasureDetails(proportionMultiGroupMeasureName)
 
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
@@ -114,5 +111,81 @@ describe('Measure Upload', () => {
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
-})
 
+  it.only('Uploads a measure with stratifications', () => {
+    
+    bonnieUploadMeasure.UploadMeasureToBonnie(measureWithStratificationsFileToUpload, false)
+
+    // First navigate to measure, then count the patients within the measure
+    dashboard.navigateToMeasureDetails(measureWithStratificationsMeasureName)
+
+    cy.get(measureDetailsPage.patientListing).then((patientListing) => {
+      const initialPatientCount = parseInt(patientListing.text())
+      cy.log('patient count was:' + initialPatientCount)
+
+      measureDetailsPage.clickAddPatient()
+      testPatientPage.enterPatientCharacteristics(distinctLastName)
+
+
+      // Verify populations are present
+      cy.get('div.patient-builder div.expected-values li > a').should('contain.text', 'Population Criteria Section')
+      cy.get('div.patient-builder div.expected-values li > a').should('contain.text', 'PopSet1 Stratification 1')
+      cy.get('div.patient-builder div.expected-values li > a').should('contain.text', 'PopSet1 Stratification 2')
+
+      // ---  Population Criteria Section ---
+      // Check Population Criteria Section is active
+      cy.get('.expected-values ul > li:first > a').should('contain.text', 'Population Criteria Section')
+
+      // Verify initial state of populations
+      cy.get('div.active input[name=IPP][type=checkbox]').should('not.be.checked')
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').should('not.be.checked')
+      cy.get('div.active input[name=MSRPOPLEX][type=checkbox]').should('not.be.checked')
+  
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').check({ force: true })
+      cy.get('div.active input[name=IPP][type=checkbox]').should('be.checked')
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').should('be.checked')
+      cy.get('div.active input[name="OBSERV"][type=number]').type(13)
+      cy.get('div.active input[name="OBSERV"][type=number]').should('have.value', '013')
+
+
+      //  --- PopSet1 Stratification 1 ---
+      cy.get('.expected-values ul > li:nth-child(2) > a').contains('PopSet1 Stratification 1').click()
+      // Verify initial state of populations
+      cy.get('div.active input[name=IPP][type=checkbox]').should('not.be.checked')
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').should('not.be.checked')
+      cy.get('div.active input[name=MSRPOPLEX][type=checkbox]').should('not.be.checked')
+  
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').check({ force: true })
+      cy.get('div.active input[name=IPP][type=checkbox]').should('be.checked')
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').should('be.checked')
+      cy.get('div.active input[name="OBSERV"][type=number]').type(13)
+      cy.get('div.active input[name="OBSERV"][type=number]').should('have.value', '013')
+
+      //  --- PopSet1 Stratification 2 ---
+      cy.get('.expected-values ul > li:nth-child(3) > a').contains('PopSet1 Stratification 2').click()
+      // Verify initial state of populations
+      cy.get('div.active input[name=IPP][type=checkbox]').should('not.be.checked')
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').should('not.be.checked')
+      cy.get('div.active input[name=MSRPOPLEX][type=checkbox]').should('not.be.checked')
+  
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').check({ force: true })
+      cy.get('div.active input[name=IPP][type=checkbox]').should('be.checked')
+      cy.get('div.active input[name=MSRPOPL][type=checkbox]').should('be.checked')
+      cy.get('div.active input[name="OBSERV"][type=number]').type(31)
+      cy.get('div.active input[name="OBSERV"][type=number]').should('have.value', '031')
+
+      testPatientPage.clickSavePatient()
+
+      helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+      deletePatient.DeletePatient(distinctLastName)
+      deletePatient.VerifyPatientRemoved(initialPatientCount)
+    })
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+    deleteMeasure.DeleteMeasure(measureWithStratificationsMeasureName)
+
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+  })
+
+})
