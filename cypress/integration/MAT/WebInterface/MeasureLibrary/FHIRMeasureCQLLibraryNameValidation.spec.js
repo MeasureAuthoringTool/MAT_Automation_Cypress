@@ -51,21 +51,21 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+        cy.get(measurelibrary.fieldLevelError).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         //underscore for first character
         cy.get(createNewMeasure.cqlLibraryName).clear().type(firstCharacterUnderscore, { delay: 50 })
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+        cy.get(measurelibrary.fieldLevelError).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         //number for first character
         cy.get(createNewMeasure.cqlLibraryName).clear().type(firstCharacterNumeric, { delay: 50 })
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+        cy.get(measurelibrary.fieldLevelError).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
@@ -96,21 +96,21 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+        cy.get(measurelibrary.fieldLevelError).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         //spaces
         cy.get(createNewMeasure.cqlLibraryName).clear().type(nameWithSpaces, { delay: 50 })
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+        cy.get(measurelibrary.fieldLevelError).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         //underscore
         cy.get(createNewMeasure.cqlLibraryName).clear().type(nameWithUnderscore, { delay: 50 })
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+        cy.get(measurelibrary.fieldLevelError).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
@@ -121,7 +121,7 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
     it('Validate the FHIR CQL Library name requirement: Correct format with alpha-numeric', () => {
 
         name = 'NewFhirMeasureCQLLibrary001' + Date.now()
-        
+
         //correct format
         helper.enabledWithTimeout(measurelibrary.newMeasureButton)
         cy.get(measurelibrary.newMeasureButton).click()
@@ -141,9 +141,9 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
-    
+
         cy.get(measurelibrary.measureLibraryTab).click()
-    
+
         helper.verifySpinnerAppearsAndDissappears()
 
     })
@@ -194,10 +194,11 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
         //versioning the qdm measure
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, name)
-        cy.get(measurelibrary.searchBtn).click();
+        cy.get(measurelibrary.searchBtn).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
+        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
         cy.get(measurelibrary.createVersionMeasureSearchBtn).click();
@@ -231,13 +232,15 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+        cy.get(measureComposer.fieldLevelError).should('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
 
         cy.get(measureComposer.cqlLibraryEditor).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', ' You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number. Please correct the syntax errors so the CQL can be validated.')
+        cy.get(measureComposer.warningMessage).should('contain.text', "The CQL does not conform to the ANTLR grammar: https://cql.hl7.org/grammar.html")
+        cy.get(measureComposer.warningMessage).should('contain.text', "Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, Parameters, Definitions, and Functions will be disabled.")
+        cy.get(measureComposer.warningMessage).should('contain.text', "Commenting out offending defines and functions is an easy temporary fix.")
 
         cy.get(measurelibrary.measureLibraryTab).click()
     

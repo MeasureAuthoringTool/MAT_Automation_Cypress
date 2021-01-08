@@ -30,19 +30,20 @@ describe('Measure: CQL Editor message', () => {
 
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
         helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+        cy.get(measurelibrary.searchBtn).click()
 
+        helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
         gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click();
+        cy.get(measureComposer.cqlWorkspace).click()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.functionMeasureComposer).click();
+        cy.get(measureComposer.functionMeasureComposer).click()
 
         cy.get(measureComposer.functionNameInput).type('FunctionNameQDM');
         cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi');
@@ -63,7 +64,7 @@ describe('Measure: CQL Editor message', () => {
 
     })
 
-    it('FHIR Measure: Validate the error message on CQL Editor', () => {
+    it.skip('FHIR Measure: Validate the error message on CQL Editor', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
@@ -116,7 +117,7 @@ describe('FHIR Measure: Version error message', () => {
         helper.logout()
     })
 
-    it('FHIR Measure: Invalid version error message on CQL Editor', () => {
+    it.skip('FHIR Measure: Invalid version error message on CQL Editor', () => {
         helper.verifySpinnerAppearsAndDissappears()
 
         helper.enabledWithTimeout(measurelibrary.searchInputBox)
@@ -222,7 +223,7 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
         helper.logout()
     })
 
-    it('Validate the error message for adding codesystems and valuesets without UMLS', () => {
+    it.skip('Validate the error message for adding codesystems and valuesets without UMLS', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -309,7 +310,7 @@ describe('MAT: MeasureComposer: CQLWorkspace: CQL Library Editor: FHIR Errors, a
         helper.logout()
     })
 
-    it('Ability to save with CQL error or syntax error', () => {
+    it.skip('Ability to save with CQL error or syntax error', () => {
 
         helper.verifySpinnerAppearsAndDissappears()
 

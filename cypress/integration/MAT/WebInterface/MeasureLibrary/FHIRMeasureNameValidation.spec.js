@@ -5,7 +5,7 @@ import * as measurelibrary from "../../../../pom/MAT/WI/MeasureLibrary"
 import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer"
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
-import { describe } from 'mocha'
+
 
 let name = ''
 let cqlLibraryName = ''
@@ -46,7 +46,7 @@ describe('FHIR Measure: Validate the naming rules', () => {
 
         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-        cy.get(measurelibrary.warningMessage).should('contain.text', "Measure Name must not contain '_' (underscores).")
+        cy.get(measurelibrary.fieldLevelError).should('contain.text', "Measure Name must not contain '_' (underscores).")
 
         cy.get(createNewMeasure.cancelBtn).click()
 
@@ -77,10 +77,8 @@ describe('Measure Conversion with incorrect measure name format', () => {
         //qdm measure with incorrect cql library name format
         helper.enabledWithTimeout(measurelibrary.newMeasureButton)
         cy.get(measurelibrary.newMeasureButton).click()
-
-        cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
-
         cy.get(createNewMeasure.modelradioQDM).click()
+        cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
         cy.get(createNewMeasure.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
         cy.get(createNewMeasure.shortName).type(cqlLibraryName, { delay: 50 })
@@ -137,7 +135,7 @@ describe('Measure Conversion with incorrect measure name format', () => {
         helper.verifySpinnerAppearsAndDissappears()
         helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', "Measure Name must not contain '_' (underscores).")
+        cy.get(measureComposer.fieldLevelError).eq(0).should('contain.text', "Measure Name must not contain '_' (underscores).")
 
         cy.get(measurelibrary.measureLibraryTab).click()
     
@@ -168,10 +166,8 @@ describe('Measure Conversion with incorrect measure name and CQL library name fo
         //qdm measure with incorrect cql library name format
         helper.enabledWithTimeout(measurelibrary.newMeasureButton)
         cy.get(measurelibrary.newMeasureButton).click()
-
-        cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
-
         cy.get(createNewMeasure.modelradioQDM).click()
+        cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
         cy.get(createNewMeasure.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
         cy.get(createNewMeasure.shortName).type(cqlLibraryName, { delay: 50 })
@@ -225,11 +221,8 @@ describe('Measure Conversion with incorrect measure name and CQL library name fo
 
         cy.get(measureDetails.saveBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measureComposer.warningMessage).should('contain.text', "Measure Name must not contain '_' (underscores).")
-        .and('contain.text', "Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  '_' (underscores).")
+        cy.get(measureComposer.fieldLevelError).eq(0).should('contain.text', "Measure Name must not contain '_' (underscores).")
+        cy.get(measureComposer.fieldLevelError).eq(1).should('contain.text', "This field is required.")
 
         cy.get(measurelibrary.measureLibraryTab).click()
     

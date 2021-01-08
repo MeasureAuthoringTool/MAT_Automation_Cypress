@@ -47,8 +47,8 @@ describe('Validate the Measure Period without Data changes', () => {
         // Uncheck default measure period
         cy.get(measureDetails.measurementPeriodCheckbox).uncheck()
 
-        cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value', '01/01/2021')
-        cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2021')
+        cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value', '01/01/2022')
+        cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2022')
 
         cy.get(measureDetails.saveBtn).click()
 
@@ -125,8 +125,8 @@ describe('Validate the Measure Period without Data changes', () => {
 
         cy.get(measureDetails.checkboxLabel).should('contain.text', 'Next Calendar Year')
 
-        cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value','01/01/2021')
-        cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2021')
+        cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value','01/01/2022')
+        cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2022')
 
         // uncheck default measure period
         cy.get(measureDetails.measurementPeriodCheckbox).uncheck()
@@ -171,8 +171,8 @@ describe('Validate the Measure Period with date changes', () => {
 
         cy.get(measureDetails.measurementPeriodCheckbox).uncheck()
 
-        cy.get(measureDetails.measurementPeriodFromInputBox).type('05/01/2019')
-        cy.get(measureDetails.measurementPeriodToInputBox).type('11/30/2020')
+        cy.get(measureDetails.measurementPeriodFromInputBox).type('05/01/2020')
+        cy.get(measureDetails.measurementPeriodToInputBox).type('11/30/2021')
 
         cy.get(measureDetails.saveBtn).click()
 
@@ -221,14 +221,14 @@ describe('Validate the Measure Period with date changes', () => {
 
         cy.get(measureDetails.checkboxLabel).should('contain.text', 'Next Calendar Year')
 
-        cy.get(measureDetails.measurementPeriodFromInputBox).type('05/01/2019')
-        cy.get(measureDetails.measurementPeriodToInputBox).type('11/30/2020')
+        cy.get(measureDetails.measurementPeriodFromInputBox).type('05/01/2020')
+        cy.get(measureDetails.measurementPeriodToInputBox).type('11/30/2021')
 
         // check default measure period
         cy.get(measureDetails.measurementPeriodCheckbox).check()
 
-        cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value','01/01/2021')
-        cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2021')
+        cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value','01/01/2022')
+        cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2022')
 
         cy.get(measureDetails.saveBtn).click()
 

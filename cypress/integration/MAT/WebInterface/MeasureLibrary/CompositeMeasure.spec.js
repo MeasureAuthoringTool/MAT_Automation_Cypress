@@ -124,7 +124,9 @@ describe('Creating New Composite Measure', () => {
         cy.get(measurelibrary.packageAndVersion).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
+        helper.waitForElementEnabled(measurelibrary.searchInputBox)
         cy.get(measurelibrary.searchInputBox).clear().type(measureNameTwo, { delay: 50 })
         cy.get(measurelibrary.searchBtn).click()
 
@@ -230,6 +232,7 @@ describe('Creating New Composite Measure', () => {
         cy.get(measurelibrary.packageAndVersion).click()
 
         helper.verifySpinnerAppearsAndDissappears()
+        helper.verifySpinnerAppearsAndDissappears()
 
     })
 
@@ -243,6 +246,7 @@ describe('Creating New Composite Measure', () => {
 
     it('Create Composite measure', () => {
 
+        helper.waitForElementEnabled(measurelibrary.newCompositeMeasureButton)
         cy.get(measurelibrary.newCompositeMeasureButton).click();
 
         let measureName = 'createCompositeMeasure' + Date.now()
