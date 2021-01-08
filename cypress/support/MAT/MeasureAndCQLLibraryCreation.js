@@ -8,7 +8,6 @@ import * as createNewCqlLibrary from '../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from '../../pom/MAT/WI/CQLComposer'
 import * as measureDetails from '../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from './GridRowActions'
-import { verifySpinnerAppearsAndDissappears } from '../helpers'
 
 const draftMeasure = 'DraftMeasure'
 
