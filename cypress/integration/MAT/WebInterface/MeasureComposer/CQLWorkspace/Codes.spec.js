@@ -21,7 +21,7 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
         helper.logout()
     })
 
-    it('FHIR Measure: Add correct version for code system', () => {
+    it.skip('FHIR Measure: Add correct version for code system', () => {
 
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click();
@@ -60,7 +60,7 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
                 
     })
 
-    it('FHIR Measure: Add incorrect version for code system', () => {
+    it.skip('FHIR Measure: Add incorrect version for code system', () => {
 
         helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
         cy.get(measurelibrary.searchBtn).click();

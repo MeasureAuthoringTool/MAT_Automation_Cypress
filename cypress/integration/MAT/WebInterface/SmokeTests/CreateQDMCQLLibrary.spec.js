@@ -44,6 +44,7 @@ describe('Create CQL Library', () => {
         //Includes
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(measureComposer.includes).click()
+        helper.verifySpinnerAppearsAndDissappears()
 
         helper.waitToContainText(measureComposer.cqlWorkspaceTitleIncludes,'Includes')
 

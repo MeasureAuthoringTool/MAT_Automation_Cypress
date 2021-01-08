@@ -206,9 +206,9 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
         cy.get(cqlComposer.selectAttributesDataType).select( 'Substance, Not Recommended')
         .invoke('val').should('deep.equal', 'Substance, Not Recommended')
-        
+
         cy.get(cqlComposer.attributeCancelBtn).click()
-        
+
         helper.verifySpinnerAppearsAndDissappears()
 
         cy.get(measurelibrary.cqlLibraryTab).click()
@@ -259,6 +259,7 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
         cy.get(cqlComposer.selectAttributesDataType).select( 'Encounter.Diagnosis')
         .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
 
+        cy.get(cqlComposer.attributeCancelBtn).click()
         cy.get(cqlComposer.attributeCancelBtn).click()
         
         helper.verifySpinnerAppearsAndDissappears()

@@ -50,13 +50,10 @@ describe('CQL Composer: Validate the components on General Information page', ()
         cy.get(cqlComposer.cqlLibraryModelVersion).should('contain.value', '4.0.1')
 
         cy.get(cqlComposer.saveBtn).click()
-        cy.get(cqlComposer.warningMessage).should('contain.text', ' CQL Library Description is required.')
+        cy.get(cqlComposer.fieldLevelError).eq(0).should('contain.text', 'This field is required.')
+        cy.get(cqlComposer.fieldLevelError).eq(1).should('contain.text', 'This field is required.')
 
         cy.get(cqlComposer.cqlLibraryDescriptionField).type('This is library description text to validate')
-        cy.get(cqlComposer.saveBtn).click()
-
-        cy.get(cqlComposer.warningMessage).should('contain.text', ' CQL Library Publisher is required.')
-
         cy.get(cqlComposer.cqlLibraryPublisherDropDown).select('Allscripts')
         cy.get(cqlComposer.cqlLibraryExperimentalCheckbox).click()
 
@@ -74,68 +71,69 @@ describe('CQL Composer: Validate the components on General Information page', ()
 
         helper.verifySpinnerAppearsAndDissappears()
 
-       // Versioning draft library
-       helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-       helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-      gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
-       cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
-       cy.get(cqlLibrary.majorVersionTypeRadio).click()
-       cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
+         // Versioning draft library
+         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+         gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+         cy.get(cqlLibrary.majorVersionTypeRadio).click()
+         cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
-       helper.verifySpinnerAppearsAndDissappears()
+         helper.verifySpinnerAppearsAndDissappears()
+         helper.verifySpinnerAppearsAndDissappears()
 
-       cy.get(measurelibrary.measureLibraryTab).click()
+         cy.get(measurelibrary.measureLibraryTab).click()
 
-       helper.verifySpinnerAppearsAndDissappears()
+         helper.verifySpinnerAppearsAndDissappears()
 
-       // Include library with new FHIR Measure
-      helper.visibleWithTimeout(measurelibrary.newMeasureButton)
-       cy.get(measurelibrary.newMeasureButton).click()
-       let measureName = 'CreateFHIRMeasure' + Date.now()
+         // Include library with new FHIR Measure
+         helper.visibleWithTimeout(measurelibrary.newMeasureButton)
+         cy.get(measurelibrary.newMeasureButton).click()
+         let measureName = 'CreateFHIRMeasure' + Date.now()
 
-       cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-       cy.get(createNewMeasure.modelradioFHIR).click()
-       cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
-       cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
-       cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
-       cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
+         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
+         cy.get(createNewMeasure.modelradioFHIR).click()
+         cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
+         cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
+         cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
+         cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
-       cy.get(createNewMeasure.saveAndContinueBtn).click()
+         cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-       cy.get(createNewMeasure.confirmationContinueBtn).click()
+         cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-       helper.verifySpinnerAppearsAndDissappears()
+         helper.verifySpinnerAppearsAndDissappears()
 
-       cy.get(measureComposer.cqlWorkspace).click()
+         cy.get(measureComposer.cqlWorkspace).click()
 
-       helper.verifySpinnerAppearsAndDissappears()
+         helper.verifySpinnerAppearsAndDissappears()
 
-       helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-       //Includes
+         //Includes
 
-       cy.get(measureComposer.includes).click()
+         cy.get(measureComposer.includes).click()
 
-       cy.get(measureComposer.searchInputBox).type(fhircqlLibrary, { delay: 50 })
-       cy.get(measureComposer.searchBtn).click()
-       cy.get(measureComposer.availableLibrariesRow1checkbox).click()
-       cy.get(measureComposer.libraryAliasInputBox).type('Test', { delay: 50 })
-       cy.get(measureComposer.saveIncludes).click()
+         cy.get(measureComposer.searchInputBox).type(fhircqlLibrary, { delay: 50 })
+         cy.get(measureComposer.searchBtn).click()
+         cy.get(measureComposer.availableLibrariesRow1checkbox).click()
+         cy.get(measureComposer.libraryAliasInputBox).type('Test', { delay: 50 })
+         cy.get(measureComposer.saveIncludes).click()
 
-       helper.visibleWithTimeout(measureComposer.warningMessage)
+         helper.visibleWithTimeout(measureComposer.warningMessage)
 
-       //CQL Library Editor
+         //CQL Library Editor
 
-       cy.get(measureComposer.cqlLibraryEditor).click()
+         cy.get(measureComposer.cqlLibraryEditor).click()
 
-       helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
+         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
 
-       helper.visibleWithTimeout(measureComposer.warningMessage)
-       helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
+         helper.visibleWithTimeout(measureComposer.warningMessage)
+         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
 
-       cy.get(measurelibrary.measureLibraryTab).click()
+         cy.get(measurelibrary.measureLibraryTab).click()
 
-       helper.verifySpinnerAppearsAndDissappears()
+         helper.verifySpinnerAppearsAndDissappears()
    })
 
 })

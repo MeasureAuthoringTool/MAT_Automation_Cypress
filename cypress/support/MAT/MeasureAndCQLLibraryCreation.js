@@ -8,6 +8,7 @@ import * as createNewCqlLibrary from '../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from '../../pom/MAT/WI/CQLComposer'
 import * as measureDetails from '../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from './GridRowActions'
+import { verifySpinnerAppearsAndDissappears } from '../helpers'
 
 const draftMeasure = 'DraftMeasure'
 
@@ -380,11 +381,13 @@ export const createDraftMeasure = (measure, model) => {
   cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
   cy.get(measureDetails.row1CheckBox).click()
   cy.get(measureDetails.saveBtn).click()
+  helper.verifySpinnerAppearsAndDissappears()
   helper.visibleWithTimeout(measureDetails.warningMessage)
 
   cy.get(measureDetails.description).click()
   helper.enterText(measureDetails.textAreaInput, 'description')
   cy.get(measureDetails.saveBtn).click()
+  helper.verifySpinnerAppearsAndDissappears()
   helper.visibleWithTimeout(measureDetails.warningMessage)
 
   cy.get(measureDetails.measureType).click()
@@ -581,7 +584,9 @@ export const addCode = (codeUrl) => {
   cy.get(measureComposer.codeUrlInput).click()
   cy.get(measureComposer.codeUrlInput).type(codeUrl, { delay: 50 })
   cy.get(measureComposer.retrieveBtn).click()
+  helper.verifySpinnerAppearsAndDissappears()
   cy.get(measureComposer.applyBtn).click()
+  helper.verifySpinnerAppearsAndDissappears()
 
   helper.visibleWithTimeout(measureComposer.warningMessage)
 }

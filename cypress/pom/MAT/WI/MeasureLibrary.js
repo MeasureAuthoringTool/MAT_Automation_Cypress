@@ -88,6 +88,9 @@ export const warningMessageText = 'td > #WarningMessage > .gwt-HTML > b'
 export const warningMessage = '#WarningMessage'
 export const warningModal = '.modal-content'
 
+//field level error
+export const fieldLevelError = '.MatEHError'
+
 // Draft Measure
 export const saveAndContinueButtonDraft = '#SaveAndContinueButton_measureDetail'
 
