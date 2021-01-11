@@ -69,7 +69,7 @@ describe("Measure Upload", () => {
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
-  it.only('can update an existing measure', () => {
+  it('can update an existing measure', () => {
 
     // Can be any measure
     const measureFileName = continuousVariableMeasureFileToUpload
