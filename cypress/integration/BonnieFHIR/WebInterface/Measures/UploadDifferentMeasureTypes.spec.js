@@ -69,6 +69,28 @@ describe("Measure Upload", () => {
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
+  it.only('can update an existing measure', () => {
+
+    // Can be any measure
+    const measureFileName = continuousVariableMeasureFileToUpload
+    const measureName = continuousVariableMeasureName
+
+    bonnieUploadMeasure.UploadMeasureToBonnie(
+      measureFileName,
+      false
+    )
+
+    dashboard.navigateToMeasureDetails(measureName)
+    
+    bonnieUploadMeasure.UpdateMeasure(measureFileName)
+
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+    deleteMeasure.DeleteMeasure(measureName)
+
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+  })  
+
   it("Continuous Variable Measure: Successful Upload", () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(
       continuousVariableMeasureFileToUpload,
