@@ -14,7 +14,7 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
   helper.visibleWithTimeout(dashboard.uploadBtn)
   helper.enabledWithTimeout(dashboard.uploadBtn)
 
-  //setup for grabing the VSAC call profile_names
+  //setup for grabbing the VSAC call profile_names
   cy.server({ method: 'GET'})
   cy.route('/vsac_util/profile_names').as('vsac')
 
@@ -59,11 +59,6 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
 
 export const UpdateMeasure = (fileToUpload) => {
   cy.log('UpdateMeasure')
-
-  let VsacApiKey = Cypress.env('VSAC_API_KEY')
-  cy.log(VsacApiKey)
-
-  cy.wait(1500)
   measureDetailsPage.clickUpdateMeasure()
 
   helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)

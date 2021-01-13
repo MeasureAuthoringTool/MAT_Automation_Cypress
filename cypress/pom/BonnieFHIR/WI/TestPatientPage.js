@@ -9,8 +9,8 @@ export const measureDetailsPatientCloneButton = 'button[Title="Clone"]'
 export const measureDetailsPatientEditBtn = 'a[Title="Edit"]'
 export const testPatientLogo = '.timeline-icon > .fa'
 export const warningAlert = '.validation-alerts'
-export const patientinverseDangerButton = '[data-call-method="showDelete"]'
-export const patientdeleteButton = '[data-call-method="deletePatient"]'
+export const patientinverseDangerButton = '[data-call-method="showDelete"]:visible:last'
+export const patientdeleteButton = '[data-call-method="deletePatient"]:visible:last'
 
 //first and last name section
 export const lastNameLabel = '.col-left > :nth-child(1) > .control-label'
@@ -62,7 +62,7 @@ export const timeGeneric = 'input[name="time"]'
 export const startTime = 'input[name="start_time"]'
 export const endDate = 'input[name="end_date"]'
 export const endTime = 'input[name="end_time"]'
-export const attributeDeleteButton = '[data-call-method="removeCriteria"]'
+export const attributeDeleteButton = '[data-call-method="removeCriteria"]:visible:last'
 export const dateCheckboxGeneric = 'input[name="date_is_defined"]'
 
 // codeSystem
@@ -72,12 +72,15 @@ export const addCodeBtn = '.col-md-1'
 export const exsistingCode = '.existing-values'
 
 // attributeWidgets
-export const attributeNameSelect = '.col-md-7 > [name="attribute_name"]'
-export const attributeTypeSelect = '.col-md-5 > [name="attribute_type"]'
-export const valueSetDirectRefSelect = '.code-control-valueset > .form-control'
-export const addWidgetBtn = '.input-add'
-export const exsistingAttribute = '.form-group > .existing-values'
-export const addedAttributeValue = '.form-group > .existing-values [title="value"]'
+export const attributeNameSelect = 'select[name="attribute_name"]:visible:last'
+export const attributeTypeSelect = 'select[name="attribute_type"]:visible:last'
+export const attributeReferenceTypeSelect = 'select[data-cy="referenceType-select"]:visible:last'
+export const valueSetDirectRefSelect = 'select[name="valueset"]:visible:last'
+export const valueSetCodeSelect = 'select[name=vs_code]:visible:last'
+export const referenceValueSetDirectRefSelect = 'select[data-cy="valueset-select"]:visible:last'
+export const addWidgetBtn = 'button[data-call-method="addValue"]:visible:last'
+export const exsistingAttribute = '.form-group > .existing-values:visible'
+export const addedAttributeValue = '.form-group > .existing-values [title="value"]:visible'
 
 // this element is for rangeWidget
 export const lowValueField = '.col-md-6 > [name="low_value"]'
@@ -170,4 +173,9 @@ export const verifyPatientAdded = (initialPatientCount, lastName) => {
 
 export const getPatientRecord = (lastName) => {
   return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
+}
+
+// Toggles a data element by its 0 based index
+export const toggleDataElement = (index) => {
+  cy.get('button[data-call-method="toggleDetails"]:visible:eq(' + index + ')').click()
 }
