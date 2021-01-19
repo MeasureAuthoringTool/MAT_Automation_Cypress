@@ -6,6 +6,7 @@ import * as deleteMeasure from "../../../../support/BonnieFHIR/DeleteMeasure"
 import * as testPatientPage from "../../../../pom/BonnieFHIR/WI/TestPatientPage"
 import * as bonnieUploadMeasure from "../../../../support/BonnieFHIR/BonnieUploadMeasure"
 import * as dashboard from "../../../../pom/BonnieFHIR/WI/Dashboard"
+import * as homePage from "../../../../pom/BonnieFHIR/WI/Homepage"
 
 const continuousVariableMeasureName = "Cms111testingMeasure"
 const continuousVariableMeasureFileToUpload =
@@ -32,6 +33,63 @@ describe("Measure Upload", () => {
   afterEach("Log Out", () => {
     bonnieLogin.logout()
   })
+
+  it('Handles duplicate measure error', () => {
+
+    // Can be any measure
+    const duplicateMeasureFileName = continuousVariableMeasureFileToUpload
+    const duplicateMeasureName = continuousVariableMeasureName
+
+    bonnieUploadMeasure.UploadMeasureToBonnie(
+      duplicateMeasureFileName,
+      false
+    )
+    bonnieUploadMeasure.UploadMeasureToBonnie(
+      duplicateMeasureFileName,
+      false,
+      true
+    )
+    
+    // Error is displayed
+    cy.get(homePage.errorDialog).should('have.attr', 'aria-hidden', 'false')
+    cy.get(homePage.errorDialog).should('be.visible')
+    cy.get(homePage.errorDialog).should('contain.text', 'A version of this measure is already loaded.')
+    cy.get(homePage.errorDialog).should(
+      'contain.text', 
+      'You have a version of this measure loaded already. Either update that measure with the update button, or delete that measure and re-upload it.')
+    cy.get(homePage.errorDialog).should('contain.text', 'If the problem continues, please report the issue on the BONNIE Issue Tracker.')
+
+    // Close error dialog
+    cy.get(homePage.errorDialogCloseButton).click()
+
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+    deleteMeasure.DeleteMeasure(duplicateMeasureName)
+
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+  })
+
+  it('can update an existing measure', () => {
+
+    // Can be any measure
+    const measureFileName = continuousVariableMeasureFileToUpload
+    const measureName = continuousVariableMeasureName
+
+    bonnieUploadMeasure.UploadMeasureToBonnie(
+      measureFileName,
+      false
+    )
+
+    dashboard.navigateToMeasureDetails(measureName)
+    
+    bonnieUploadMeasure.UpdateMeasure(measureFileName)
+
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+    deleteMeasure.DeleteMeasure(measureName)
+
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+  })  
 
   it("Continuous Variable Measure: Successful Upload", () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(
@@ -62,6 +120,7 @@ describe("Measure Upload", () => {
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
+
 
   it("Cohort Measure: Successful Upload", () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(cohortMeasureFileToUpload, false)

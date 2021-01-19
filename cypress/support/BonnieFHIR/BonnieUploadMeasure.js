@@ -1,6 +1,7 @@
 import * as helper from '../../support/helpers'
 import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
+import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
 
 export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) => {
@@ -13,7 +14,7 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
   helper.visibleWithTimeout(dashboard.uploadBtn)
   helper.enabledWithTimeout(dashboard.uploadBtn)
 
-  //setup for grabing the VSAC call profile_names
+  //setup for grabbing the VSAC call profile_names
   cy.server({ method: 'GET'})
   cy.route('/vsac_util/profile_names').as('vsac')
 
@@ -54,6 +55,26 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
   helper.click(importMeasureDialog.importLoadBtn)
 
   cy.log('UploadMeasureToBonnie - done')
+}
+
+export const UpdateMeasure = (fileToUpload) => {
+  cy.log('UpdateMeasure')
+  measureDetailsPage.clickUpdateMeasure()
+
+  helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
+  helper.visibleWithTimeout(importMeasureDialog.importLoadBtn)
+  helper.visibleWithTimeout(importMeasureDialog.fileImportInput)
+
+  //upload the file to the modal
+  helper.enabledWithTimeout(importMeasureDialog.fileImportInput)
+  cy.get(importMeasureDialog.fileImportInput).attachFile(fileToUpload)
+
+  //click load button to import the measure
+  helper.visibleWithTimeout(importMeasureDialog.importLoadBtn)
+  helper.enabled(importMeasureDialog.importLoadBtn)
+  helper.click(importMeasureDialog.importLoadBtn)
+
+  cy.log('UpdateMeasure - done')
 }
 
 function changeMeasureCalculation (calculation) {
