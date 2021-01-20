@@ -37,7 +37,7 @@ describe('Patient: Copy to another measure', () => {
   it('Can send a patient to another measure', () => {
     measureDetailsPage.navigateToMeasureDetails(measureName)
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
-      const initialPatientCount = parseInt(patientListing.text())
+      const initialPatientCount = parseInt(patientListing.text(), 10)
       cy.log('The source measure\'s patient count was:' + initialPatientCount)
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
@@ -75,7 +75,7 @@ describe('Patient: Copy to another measure', () => {
     // Remove from the target measure
     measureDetailsPage.navigateToMeasureDetails(anotherMeasureName)
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
-      const initialPatientCount = parseInt(patientListing.text())
+      const initialPatientCount = parseInt(patientListing.text(), 10)
       cy.log('The target measure\'s patient count was:' + initialPatientCount)
       validateTargetPatient()
       deletePatient.DeletePatient(distinctLastName)
