@@ -32,7 +32,7 @@ describe('Patient: Clone Patient', () => {
   it('Verify the ability to clone a Patient', () => {
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
-      const initialPatientCount = parseInt(patientListing.text())
+      const initialPatientCount = parseInt(patientListing.text(), 10)
       cy.log('patient count was:' + initialPatientCount)
 
       measureDetailsPage.clickAddPatient()
