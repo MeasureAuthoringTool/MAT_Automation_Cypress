@@ -6,6 +6,7 @@ import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
 export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) => {
   cy.log('UploadMeasureToBonnie')
+  cy.log('UploadMeasureToBonnie measure file ' + fileToUpload)
 
   let VsacApiKey = Cypress.env('VSAC_API_KEY')
   cy.log(VsacApiKey)
@@ -59,6 +60,7 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
 
 export const UpdateMeasure = (fileToUpload) => {
   cy.log('UpdateMeasure')
+  cy.log('UpdateMeasure measure file ' + fileToUpload)
   measureDetailsPage.clickUpdateMeasure()
 
   helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
