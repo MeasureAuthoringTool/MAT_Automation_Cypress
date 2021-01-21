@@ -17,7 +17,10 @@ export const measureCalculation = '.measure-calculation'
 // Section with patients
 export const measureCalculationPanel = '.measure-calculation > .panel'
 export const patient = '.patient'
+// Number of passed patients
 export const patientListing = '.patient-listing'
+// Total number of patients (fraction)
+export const patientFraction = '.fraction'
 export const patientStatus = '.patient-status'
 export const patientName = '.patient-name'
 export const patientStatusSection = '.measure-calculation > .panel > .panel-heading'
