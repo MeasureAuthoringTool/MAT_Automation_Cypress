@@ -1,106 +1,106 @@
-import * as helper from "../../../../../support/helpers";
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
-import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as helper from '../../../../../support/helpers'
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Composer: CQL Workspace: Parameter', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-        qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure','QDM')
-        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure','FHIR')
+    qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
-    it('QDM: Verify errors are coming from correct source', () => {
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+  it('QDM: Verify errors are coming from correct source', () => {
 
-        helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click()
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.parameter).click()
+    cy.get(measureComposer.parameter).click()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Parameter')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Parameter')
 
-        cy.get(measureComposer.parameterListbox).select('Measurement Period')
-        cy.get('body').type('{enter}')
+    cy.get(measureComposer.parameterListbox).select('Measurement Period')
+    cy.get('body').type('{enter}')
 
-        cy.get(measureComposer.parameterNameInput).should("have.value",'Measurement Period')
-        cy.get(measureComposer.parameterEraseBtn).click()
-        cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
-        cy.get(measureComposer.parameterSaveBtn).click()
+    cy.get(measureComposer.parameterNameInput).should('have.value', 'Measurement Period')
+    cy.get(measureComposer.parameterEraseBtn).click()
+    cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
+    cy.get(measureComposer.parameterSaveBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.visibleWithTimeout(measureComposer.warningMessage)
 
-        //This error is specific to QDM and confirms we are getting errors from QDM source
-        cy.get(measureComposer.editorLeftPanel).click()
-        cy.get(measureComposer.editorErrorToolTip).should('contain.text','ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader' )
+    //This error is specific to QDM and confirms we are getting errors from QDM source
+    cy.get(measureComposer.editorLeftPanel).click()
+    cy.get(measureComposer.editorErrorToolTip).should('contain.text', 'ERROR:A named type is required in this context.ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.apache.catalina.loader.ParallelWebappClassLoader')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
-    it('FHIR: Verify errors are coming from correct source', () => {
+  })
+  it('FHIR: Verify errors are coming from correct source', () => {
 
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click()
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.parameter).click()
+    cy.get(measureComposer.parameter).click()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Parameter')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Parameter')
 
-        cy.get(measureComposer.parameterListbox).select('Measurement Period')
-        cy.get('body').type('{enter}')
+    cy.get(measureComposer.parameterListbox).select('Measurement Period')
+    cy.get('body').type('{enter}')
 
-        cy.get(measureComposer.parameterEraseBtn).click()
-        cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
-        cy.get(measureComposer.parameterSaveBtn).click()
+    cy.get(measureComposer.parameterEraseBtn).click()
+    cy.get(measureComposer.parameterCQLExpressionEditorInput).type('sdffgsdffgsdfg', { delay: 50 })
+    cy.get(measureComposer.parameterSaveBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.visibleWithTimeout(measureComposer.warningMessage)
 
-        //This error is specific to FHIR and confirms we are getting errors from FHIR source
-        cy.get(measureComposer.editorLeftPanel).click()
-        cy.get(measureComposer.editorErrorToolTip)
-            .should('contain.text','ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader' )
+    //This error is specific to FHIR and confirms we are getting errors from FHIR source
+    cy.get(measureComposer.editorLeftPanel).click()
+    cy.get(measureComposer.editorErrorToolTip)
+      .should('contain.text', 'ERROR:class org.hl7.elm.r1.Null cannot be cast to class org.hl7.elm.r1.TypeSpecifier (org.hl7.elm.r1.Null and org.hl7.elm.r1.TypeSpecifier are in unnamed module of loader org.springframework.boot.loader.LaunchedURLClassLoader')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+  })
 
 })

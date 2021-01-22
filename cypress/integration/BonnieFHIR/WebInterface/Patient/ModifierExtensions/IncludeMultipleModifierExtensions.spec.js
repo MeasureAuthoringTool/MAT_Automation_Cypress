@@ -52,7 +52,6 @@ describe('Test Patient: Extensions section', () => {
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
-
   function multipleExtensions () {
     cy.log('validateMultipleExtensions')
 
@@ -64,9 +63,9 @@ describe('Test Patient: Extensions section', () => {
     cy.get(testPatientPage.extensionModifierAddWidgetBtn).eq(0).click()
     cy.get(testPatientPage.exsistingModifierExtension).contains('https://google.com')
     cy.get(testPatientPage.exsistingModifierExtensionUrl).click()
-    .then(() => {
-    cy.get(testPatientPage.exsistingModifierExtension).contains('true')
-    })
+      .then(() => {
+        cy.get(testPatientPage.exsistingModifierExtension).contains('true')
+      })
 
     // date type
     cy.get(testPatientPage.extensionsUrlField).type('https://google.com')
@@ -76,9 +75,9 @@ describe('Test Patient: Extensions section', () => {
     cy.get(testPatientPage.extensionModifierAddWidgetBtn).eq(0).click()
     cy.get(testPatientPage.exsistingModifierExtension).contains('https://google.com')
     cy.get(testPatientPage.exsistingModifierExtensionUrl).eq(1).click()
-    .then(() => {
-    cy.get(testPatientPage.exsistingModifierExtension).contains(todaysDate)
-    })
+      .then(() => {
+        cy.get(testPatientPage.exsistingModifierExtension).contains(todaysDate)
+      })
     cy.log('MultipleExtensionsValidation - done')
   }
 

@@ -44,7 +44,7 @@ export const eCQMAbbreviatedTitleInput = '#abbrInput'
 export const measureScoringListbox = ':nth-child(2) > :nth-child(1) > .generalInformationPanel > tbody > :nth-child(2) > td > #measScoringInput_ListBoxMVP'
 export const patientBasedMeasureListbox = ':nth-child(2) > td > #patientBasedMeasure_listbox'
 export const populationBasisListbox = ':nth-child(4) > :nth-child(1) > .generalInformationPanel > tbody > :nth-child(2) > td > #measScoringInput_ListBoxMVP'
-export const eCQMIdentifierTextBox  = '#eMeasureIdentifierInput_TextBox'
+export const eCQMIdentifierTextBox = '#eMeasureIdentifierInput_TextBox'
 export const generateIdentifierBtn = '#generateeMeasureIDButton_Button'
 export const endorsedByNQFListBox = '#endorsedByNQFListBox'
 export const nQFIDInput = '#NQFIDInput_TextBox'
@@ -53,7 +53,6 @@ export const checkboxLabel = '#calendarYear_HorizontalPanel'
 export const measurementPeriodCheckbox = '#calendarYear_CustomCheckBox > .customCheckBox'
 export const measurementPeriodFromInputBox = '#measurePeriodFromInput'
 export const measurementPeriodToInputBox = '#measurePeriodToInput'
-
 
 //Measure Steward / Developer
 export const measureStewardListBox = '#stewardListBox'

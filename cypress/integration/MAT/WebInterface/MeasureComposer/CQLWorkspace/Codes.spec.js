@@ -1,107 +1,107 @@
-import * as helper from "../../../../../support/helpers";
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
-import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as helper from '../../../../../support/helpers'
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 
 describe('CQLWorkspace: Codes: Validate the system version', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
-    it.skip('FHIR Measure: Add correct version for code system', () => {
+  it.skip('FHIR Measure: Add correct version for code system', () => {
 
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click();
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        // CQL Library Editor
-        cy.get(measureComposer.cqlLibraryEditor).click()
+    // CQL Library Editor
+    cy.get(measureComposer.cqlLibraryEditor).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'")
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'')
 
-        cy.get(measureComposer.cqlEditorSaveBtn).click()
+    cy.get(measureComposer.cqlEditorSaveBtn).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        cy.get(measureComposer.warningMessage).should('contain.text', 'Changes to the CQL File have been successfully saved.')
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    cy.get(measureComposer.warningMessage).should('contain.text', 'Changes to the CQL File have been successfully saved.')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-                
-    })
+    helper.verifySpinnerAppearsAndDissappears()
 
-    it.skip('FHIR Measure: Add incorrect version for code system', () => {
+  })
 
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+  it.skip('FHIR Measure: Add incorrect version for code system', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measureComposer.cqlWorkspace).click();
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        // Delete exisiting code system
-        cy.get(measureComposer.codes).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.codeDeleteBtn).click()
+    // Delete exisiting code system
+    cy.get(measureComposer.codes).click()
 
-        cy.get(measureComposer.deleteConfirmationYes).click()
+    cy.get(measureComposer.codeDeleteBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.deleteConfirmationYes).click()
 
-        // CQL Library Editor
-        cy.get(measureComposer.cqlLibraryEditor).click();
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.');
+    // CQL Library Editor
+    cy.get(measureComposer.cqlLibraryEditor).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem \"LOINC\": 'http://loinc.org' version '3.00'{enter}")
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlLibraryEditorInput).type("{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'")
-        cy.get(measureComposer.cqlEditorSaveBtn).click()
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'3.00\'{enter}')
 
-        cy.get(measureComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'')
+    cy.get(measureComposer.cqlEditorSaveBtn).click()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measureComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')
 
-        helper.verifySpinnerAppearsAndDissappears()
-        
-    })
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
 })

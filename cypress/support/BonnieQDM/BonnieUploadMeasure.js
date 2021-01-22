@@ -20,7 +20,6 @@ export const UploadMeasureToBonnie = (fileToUpload) => {
   helper.enabledWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
   helper.enterText(importMeasureDialog.vsacApiKeyTextBox, VsacApiKey)
 
-
   //click load button to import the measure
   helper.enabled(importMeasureDialog.importLoadBtn)
   helper.click(importMeasureDialog.importLoadBtn)

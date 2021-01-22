@@ -4,7 +4,7 @@ export const measurePageNavigationBtn = '.breadcrumb > :nth-child(1)'
 export const measureDetailsPageNavigationBtn = '.breadcrumb > :nth-child(2)'
 export const measureDetailsPagePatientNameDiv = '.patient-name'
 export const measureDetailsPatientArrowBtn = '.patient-btn'
-export const measureDetailsPatientExpandArrowBtn =  '[data-call-method="expandResult"]'
+export const measureDetailsPatientExpandArrowBtn = '[data-call-method="expandResult"]'
 export const measureDetailsPatientCloneButton = 'button[Title="Clone"]'
 export const measureDetailsPatientCopyAndSendButton = 'button[data-call-method="copyPatient"]:visible:last'
 export const measureDetailsPatientEditBtn = 'a[Title="Edit"]'
@@ -131,7 +131,6 @@ export const extensionsModifierBooleanDropDown = '[data-cy="modifier-extensions-
 export const extensionsModifierDateCheckbox = '[data-cy="modifier-extensions-form-group"] .col-md-2 > input[type="checkbox"]'
 export const extensionsModifierDateField = '[data-cy="modifier-extensions-form-group"] .date-control-date > input[name="date"]'
 
-
 export const enterPatientCharacteristics = (lastName) => {
   cy.log('enterPatientCharacteristics')
   cy.get(lastNameTextField).type(lastName)
@@ -147,11 +146,11 @@ export const enterPatientCharacteristics = (lastName) => {
 
 export const clickSavePatient = () => {
   cy.log('clickSavePatient')
-  cy.get(saveBtn).click( {force:true} )
+  cy.get(saveBtn).click({ force: true })
   cy.log('clickSavePatient - done')
 
 }
-export const dragAndDrop = (element, elementTitle,draggableIndex) => {
+export const dragAndDrop = (element, elementTitle, draggableIndex) => {
   cy.log('dragAndDropAttribute')
   cy.get(criteriaElementsContainer).contains(element).click()
   cy.get('.draggable').eq(draggableIndex)
@@ -159,7 +158,7 @@ export const dragAndDrop = (element, elementTitle,draggableIndex) => {
     .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100, })
     .trigger('mouseup',)
   let title = cy.get(criteriaSectionTitle).valueOf()
-  cy.log("title is " + title)
+  cy.log('title is ' + title)
   cy.get(criteriaSectionTitle)
     .should('contain.text', elementTitle)
   cy.log('DragAndDropMedicationAttribute - done')

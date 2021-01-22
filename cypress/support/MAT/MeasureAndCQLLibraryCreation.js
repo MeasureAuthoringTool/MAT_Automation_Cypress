@@ -484,19 +484,17 @@ export const createDraftCqlLibrary = (library, model) => {
   helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
   cy.get(cqlLibrary.newLibraryBtn).click()
 
-    if (model === 'QDM' || model === undefined) {
+  if (model === 'QDM' || model === undefined) {
 
-        cy.get(createNewCqlLibrary.modelQDMRadio).click()
+    cy.get(createNewCqlLibrary.modelQDMRadio).click()
 
-    } else {
+  } else {
 
-        cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
 
-    }
+  }
 
   cy.get(createNewCqlLibrary.cqlLibraryName).type(name, { delay: 50 })
-
-
 
   cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 

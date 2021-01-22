@@ -1,12 +1,11 @@
 import * as helper from '../../../../support/helpers'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as createNewMeasure from "../../../../pom/MAT/WI/CreateNewMeasure";
-import * as measureComposer from "../../../../pom/MAT/WI/MeasureComposer";
-import * as cqlLibrary from "../../../../pom/MAT/WI/CqlLibrary";
+import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
+import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
+import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as oktaLogin from '../../../../support/oktaLogin'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
-
 
 let measureName = ''
 let draftMeasure = ''
@@ -15,692 +14,688 @@ let versionMeasure = ''
 let fhirMeasure = ''
 
 describe('Measure Library Row Selection', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-        //creating new draft measure
-        draftMeasure = dataCreation.createDraftMeasure()
+    //creating new draft measure
+    draftMeasure = dataCreation.createDraftMeasure()
 
-        //creating new versioned measure
-        versionMeasure = dataCreation.createMajorVersionMeasure()
+    //creating new versioned measure
+    versionMeasure = dataCreation.createMajorVersionMeasure()
 
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
-    it('Recent Activity: Row Selection', () => {
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+  it('Recent Activity: Row Selection', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        helper.isChecked(measurelibrary.row1RecentActivityCheckbox)
+    helper.isChecked(measurelibrary.row1RecentActivityCheckbox)
 
-        cy.get(measurelibrary.row2RecentActivity).click()
+    cy.get(measurelibrary.row2RecentActivity).click()
 
-        helper.isChecked(measurelibrary.row2RecentActivityCheckbox)
-        helper.isChecked(measurelibrary.row1RecentActivityCheckbox)
+    helper.isChecked(measurelibrary.row2RecentActivityCheckbox)
+    helper.isChecked(measurelibrary.row1RecentActivityCheckbox)
 
-        cy.wait(1000)
+    cy.wait(1000)
 
-        cy.get(measurelibrary.row2RecentActivity).click()
+    cy.get(measurelibrary.row2RecentActivity).click()
 
-        helper.isNotChecked(measurelibrary.row2RecentActivityCheckbox)
+    helper.isNotChecked(measurelibrary.row2RecentActivityCheckbox)
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+    cy.get(measurelibrary.row1RecentActivity).click()
 
-        helper.isNotChecked(measurelibrary.row1RecentActivityCheckbox)
-    })
+    helper.isNotChecked(measurelibrary.row1RecentActivityCheckbox)
+  })
 
-    it('Measure Search Table: Row Selection', () => {
-        helper.verifySpinnerAppearsAndDissappears()
+  it('Measure Search Table: Row Selection', () => {
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(measurelibrary.searchBtn)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.enabledWithTimeout(measurelibrary.searchBtn)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
-        //helper.notVisible(measurelibrary.clearSelectedBtn)
+    helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
+    //helper.notVisible(measurelibrary.clearSelectedBtn)
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.row1MeasureSearch).click()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.row1MeasureSearch).click()
 
+    helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
+    helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
+    helper.visible(measurelibrary.clearSelectedBtn)
 
-        helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
-        helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
-        helper.visible(measurelibrary.clearSelectedBtn)
+    helper.visibleWithTimeout(measurelibrary.row2MeasureSearch)
+    cy.get(measurelibrary.row2MeasureSearch).click()
 
-        helper.visibleWithTimeout(measurelibrary.row2MeasureSearch)
-        cy.get(measurelibrary.row2MeasureSearch).click()
+    helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
+    helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
+    helper.haveText(measurelibrary.itemSelectedLabel, '2 Items Selected')
 
-        helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
-        helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
-        helper.haveText(measurelibrary.itemSelectedLabel, '2 Items Selected')
+    cy.wait(3000)
 
-        cy.wait(3000)
+    cy.get(measurelibrary.row2MeasureSearch).click()
 
-        cy.get(measurelibrary.row2MeasureSearch).click()
+    helper.isNotChecked(measurelibrary.row2MeasureSearchCheckbox)
+    helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
 
-        helper.isNotChecked(measurelibrary.row2MeasureSearchCheckbox)
-        helper.haveText(measurelibrary.itemSelectedLabel, '1 Item Selected')
+    cy.get(measurelibrary.row1MeasureSearch).click()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
+    helper.isNotChecked(measurelibrary.row1MeasureSearchCheckbox)
+    helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
+    helper.notVisible(measurelibrary.clearSelectedBtn)
 
-        helper.isNotChecked(measurelibrary.row1MeasureSearchCheckbox)
-        helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
-        helper.notVisible(measurelibrary.clearSelectedBtn)
+    cy.get(measurelibrary.row1MeasureSearch).click()
+    cy.get(measurelibrary.row2MeasureSearch).click()
 
-        cy.get(measurelibrary.row1MeasureSearch).click()
-        cy.get(measurelibrary.row2MeasureSearch).click()
+    helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
+    helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
+    helper.haveText(measurelibrary.itemSelectedLabel, '2 Items Selected')
 
-        helper.isChecked(measurelibrary.row2MeasureSearchCheckbox)
-        helper.isChecked(measurelibrary.row1MeasureSearchCheckbox)
-        helper.haveText(measurelibrary.itemSelectedLabel, '2 Items Selected')
+    cy.get(measurelibrary.clearSelectedBtn).click()
 
-        cy.get(measurelibrary.clearSelectedBtn).click()
+    helper.isNotChecked(measurelibrary.row1MeasureSearchCheckbox)
+    helper.isNotChecked(measurelibrary.row2MeasureSearchCheckbox)
+    helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
+    helper.notVisible(measurelibrary.clearSelectedBtn)
 
-        helper.isNotChecked(measurelibrary.row1MeasureSearchCheckbox)
-        helper.isNotChecked(measurelibrary.row2MeasureSearchCheckbox)
-        helper.haveText(measurelibrary.itemSelectedLabel, '0 Items Selected')
-        helper.notVisible(measurelibrary.clearSelectedBtn)
-
-    })
+  })
 })
 
 describe('Measure Library Recent Activity Grid', () => {
-    before('Login', () => {
-        versionMeasureNotOwner = dataCreation.loginCreateVersionedMeasureNotOwnerLogout()
+  before('Login', () => {
+    versionMeasureNotOwner = dataCreation.loginCreateVersionedMeasureNotOwnerLogout()
 
-        oktaLogin.login()
+    oktaLogin.login()
 
-        //creating new draft measure
-        draftMeasure = dataCreation.createDraftMeasure()
+    //creating new draft measure
+    draftMeasure = dataCreation.createDraftMeasure()
 
-        //creating new versioned measure
-        versionMeasure = dataCreation.createMajorVersionMeasure()
+    //creating new versioned measure
+    versionMeasure = dataCreation.createMajorVersionMeasure()
 
-        fhirMeasure = dataCreation.createDraftMeasure('FhirDraft','FHIR')
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraft', 'FHIR')
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
-    it('Enabled/Disabled Recent Activity Not The Owner', () => {
+  it('Enabled/Disabled Recent Activity Not The Owner', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        cy.get(measurelibrary.filterByMyMeasureChkBox).eq(0).click()
-        helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    cy.get(measurelibrary.filterByMyMeasureChkBox).eq(0).click()
+    helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
-        cy.wait(2000)
+    cy.wait(2000)
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    helper.disabled(measurelibrary.createVersionDraftRecentActivityBtn)
+    helper.enabled(measurelibrary.historyRecentActivityBtn)
+    helper.enabled(measurelibrary.viewRecentActivityBtn)
+    helper.disabled(measurelibrary.shareRecentActivityBtn)
+    helper.disabled(measurelibrary.cloneRecentActivityDisabledBtn)
+    helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
+    helper.disabled(measurelibrary.convertToFhirRecentActivityBtn)
 
-        helper.disabled(measurelibrary.createVersionDraftRecentActivityBtn)
-        helper.enabled(measurelibrary.historyRecentActivityBtn)
-        helper.enabled(measurelibrary.viewRecentActivityBtn)
-        helper.disabled(measurelibrary.shareRecentActivityBtn)
-        helper.disabled(measurelibrary.cloneRecentActivityDisabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
-        helper.disabled(measurelibrary.convertToFhirRecentActivityBtn)
+    //need to figure out export, either have to package a measure or have ability to look up a packaged measure in DB
+    //cvasile 11/27/2019
 
+    cy.get(measurelibrary.row1RecentActivity).click()
 
-        //need to figure out export, either have to package a measure or have ability to look up a packaged measure in DB
-        //cvasile 11/27/2019
+  })
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+  it('Enabled/Disabled Recent Activity The Owner', () => {
 
-    })
+    measureName = dataCreation.createDraftMeasure('TestMeasure')
 
-    it('Enabled/Disabled Recent Activity The Owner', () => {
+    helper.enterText(measurelibrary.searchInputBox, measureName)
 
-        measureName = dataCreation.createDraftMeasure('TestMeasure')
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.enterText(measurelibrary.searchInputBox, measureName)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.searchBtn).click()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.wait(2000)
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        cy.wait(2000)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enabled(measurelibrary.createVersionRecentActivityBtn)
+    helper.enabled(measurelibrary.historyRecentActivityBtn)
+    helper.enabled(measurelibrary.editRecentActivityBtn)
+    helper.enabled(measurelibrary.shareRecentActivityBtn)
+    helper.enabled(measurelibrary.cloneRecentActivityEnabledBtn)
+    helper.disabled(measurelibrary.runFhirValidationRecentActivityBtn)
+    helper.disabled(measurelibrary.convertToFhirRecentActivityBtn)
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.createVersionRecentActivityBtn).click()
 
-        helper.enabled(measurelibrary.createVersionRecentActivityBtn)
-        helper.enabled(measurelibrary.historyRecentActivityBtn)
-        helper.enabled(measurelibrary.editRecentActivityBtn)
-        helper.enabled(measurelibrary.shareRecentActivityBtn)
-        helper.enabled(measurelibrary.cloneRecentActivityEnabledBtn)
-        helper.disabled(measurelibrary.runFhirValidationRecentActivityBtn)
-        helper.disabled(measurelibrary.convertToFhirRecentActivityBtn)
+    cy.get(measurelibrary.majorVersionTypeRadio).click()
+    cy.get(measurelibrary.packageAndVersion).click()
+    cy.get(measurelibrary.continueBtn).click()
 
-        cy.get(measurelibrary.createVersionRecentActivityBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
-        cy.get(measurelibrary.continueBtn).click()
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enabled(measurelibrary.createDraftRecentActivityBtn)
+    helper.enabled(measurelibrary.historyRecentActivityBtn)
+    helper.enabled(measurelibrary.viewRecentActivityBtn)
+    helper.enabled(measurelibrary.shareRecentActivityBtn)
+    helper.enabled(measurelibrary.cloneRecentActivityEnabledBtn)
+    helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
+    helper.enabled(measurelibrary.convertToFhirRecentActivityBtn)
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.searchInputBox).clear().type(fhirMeasure)
 
-        helper.enabled(measurelibrary.createDraftRecentActivityBtn)
-        helper.enabled(measurelibrary.historyRecentActivityBtn)
-        helper.enabled(measurelibrary.viewRecentActivityBtn)
-        helper.enabled(measurelibrary.shareRecentActivityBtn)
-        helper.enabled(measurelibrary.cloneRecentActivityEnabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
-        helper.enabled(measurelibrary.convertToFhirRecentActivityBtn)
+    cy.get(measurelibrary.searchBtn).click()
 
-        cy.get(measurelibrary.searchInputBox).clear().type(fhirMeasure)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.searchBtn).click()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.wait(2000)
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        cy.wait(2000)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enabled(measurelibrary.createVersionRecentActivityBtn)
+    helper.enabled(measurelibrary.historyRecentActivityBtn)
+    helper.enabled(measurelibrary.editRecentActivityBtn)
+    helper.enabled(measurelibrary.shareRecentActivityBtn)
+    helper.disabled(measurelibrary.cloneRecentActivityDisabledBtn)
+    helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
+    helper.disabled(measurelibrary.convertToFhirRecentActivityBtn)
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.row1RecentActivity).click()
 
-        helper.enabled(measurelibrary.createVersionRecentActivityBtn)
-        helper.enabled(measurelibrary.historyRecentActivityBtn)
-        helper.enabled(measurelibrary.editRecentActivityBtn)
-        helper.enabled(measurelibrary.shareRecentActivityBtn)
-        helper.disabled(measurelibrary.cloneRecentActivityDisabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
-        helper.disabled(measurelibrary.convertToFhirRecentActivityBtn)
+  })
 
-        cy.get(measurelibrary.row1RecentActivity).click()
+  it('Recent Activity Button bar Create Version', () => {
 
-    })
+    //creating new measure
+    cy.get(measurelibrary.newMeasureButton).click()
 
-    it('Recent Activity Button bar Create Version', () => {
+    let localmeasure = 'createProportionMeasure' + Date.now()
 
-        //creating new measure
-        cy.get(measurelibrary.newMeasureButton).click()
+    cy.get(createNewMeasure.measureName).type(localmeasure, { delay: 50 })
+    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.cqlLibraryName).type(localmeasure, { delay: 50 })
+    cy.get(createNewMeasure.shortName).type(localmeasure, { delay: 50 })
 
-        let localmeasure = 'createProportionMeasure' + Date.now()
+    cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
+    cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
-        cy.get(createNewMeasure.measureName).type(localmeasure, { delay: 50 })
-        cy.get(createNewMeasure.modelradioQDM).click()
-        cy.get(createNewMeasure.cqlLibraryName).type(localmeasure, { delay: 50 })
-        cy.get(createNewMeasure.shortName).type(localmeasure, { delay: 50 })
+    cy.get(createNewMeasure.saveAndContinueBtn).click()
+    cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
-        cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(createNewMeasure.saveAndContinueBtn).click()
-        cy.get(createNewMeasure.confirmationContinueBtn).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.createVersionRecentActivityBtn).click()
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.title).contains('My Measures > Create Measure Version of Draft')
 
-        cy.get(measurelibrary.createVersionRecentActivityBtn).click()
+    cy.get(measurelibrary.cancelBtn).click()
 
-        cy.get(measurelibrary.title).contains("My Measures > Create Measure Version of Draft")
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.cancelBtn).click()
+  })
+  it('Recent Activity Button bar Create Draft', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
-    it('Recent Activity Button bar Create Draft', () => {
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, versionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        helper.enterText(measurelibrary.searchInputBox, versionMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.createDraftRecentActivityBtn).click()
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.createDraftRecentActivityBtn).click()
+    cy.get(measurelibrary.title).contains('My Measures > Draft Measure')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(createNewMeasure.cancelBtn).click()
 
-        cy.get(measurelibrary.title).contains("My Measures > Draft Measure")
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(createNewMeasure.cancelBtn).click()
+  })
+  it('Recent Activity Button bar History', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-    })
-    it('Recent Activity Button bar History', () => {
+    cy.get(measurelibrary.historyRecentActivityBtn).click()
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.title).contains('My Measures > History')
 
-        cy.get(measurelibrary.historyRecentActivityBtn).click()
+    cy.get(measurelibrary.returnToMeasureLibraryLink).click()
 
-        cy.get(measurelibrary.title).contains("My Measures > History")
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.returnToMeasureLibraryLink).click()
+  })
 
-        helper.verifySpinnerAppearsAndDissappears()
+  it('Recent Activity Button bar Edit', () => {
 
-    })
+    helper.verifySpinnerAppearsAndDissappears()
 
-    it('Recent Activity Button bar Edit', () => {
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, draftMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        helper.enterText(measurelibrary.searchInputBox, draftMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.editRecentActivityBtn).click()
 
-        helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.editRecentActivityBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.measureComposerTab).should(tab => {
-            let value = tab.attr('class')
-            expect(value).contains("selected")
-        })
-
-        cy.get(measurelibrary.measureLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.measureComposerTab).should(tab => {
+      let value = tab.attr('class')
+      expect(value).contains('selected')
     })
 
-    it('Recent Activity Button bar View', () => {
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        helper.enterText(measurelibrary.searchInputBox, versionMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+  it('Recent Activity Button bar View', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, versionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        cy.get(measurelibrary.viewRecentActivityBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        helper.disabled(measureComposer.measureNameInputBox)
+    cy.get(measurelibrary.viewRecentActivityBtn).click()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-    })
+    helper.disabled(measureComposer.measureNameInputBox)
 
-    it('Recent Activity Button bar Share', () => {
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
-        cy.get(measurelibrary.shareRecentActivityBtn).click()
+  it('Recent Activity Button bar Share', () => {
 
-        cy.get(measurelibrary.title).contains("My Measures > Measure Sharing")
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        cy.get(measurelibrary.shareCancelBtn).click()
+    cy.get(measurelibrary.shareRecentActivityBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-    })
+    cy.get(measurelibrary.title).contains('My Measures > Measure Sharing')
 
-    it('Recent Activity Button bar Clone', () => {
+    cy.get(measurelibrary.shareCancelBtn).click()
 
-        gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
-        cy.get(measurelibrary.cloneRecentActivityEnabledBtn).click()
+  it('Recent Activity Button bar Clone', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
-        cy.get(measurelibrary.title).contains("My Measures > Clone Measure")
+    cy.get(measurelibrary.cloneRecentActivityEnabledBtn).click()
 
-        cy.get(createNewMeasure.cancelBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-    })
+    cy.get(measurelibrary.title).contains('My Measures > Clone Measure')
+
+    cy.get(createNewMeasure.cancelBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
 })
 
 describe('Measure Library Grid Button Bar', () => {
-    before('Login', () => {
+  before('Login', () => {
 
-        versionMeasureNotOwner = dataCreation.loginCreateVersionedMeasureNotOwnerLogout()
+    versionMeasureNotOwner = dataCreation.loginCreateVersionedMeasureNotOwnerLogout()
 
-        oktaLogin.login()
+    oktaLogin.login()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        //creating new draft measure
-        draftMeasure = dataCreation.createDraftMeasure()
+    //creating new draft measure
+    draftMeasure = dataCreation.createDraftMeasure()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        //creating new versioned measure
-        versionMeasure = dataCreation.createMajorVersionMeasure()
+    //creating new versioned measure
+    versionMeasure = dataCreation.createMajorVersionMeasure()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        fhirMeasure = dataCreation.createDraftMeasure('FhirDraft','FHIR')
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraft', 'FHIR')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
+  it('Enabled/Disabled Measure Search Table Not The Owner', () => {
 
-    it('Enabled/Disabled Measure Search Table Not The Owner', () => {
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    cy.get(measurelibrary.filterByMyMeasureChkBox).eq(0).click()
+    helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        cy.get(measurelibrary.filterByMyMeasureChkBox).eq(0).click()
-        helper.enterText(measurelibrary.searchInputBox, versionMeasureNotOwner)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    helper.disabled(measurelibrary.createVersionDraftMeasureSearchBtn)
+    helper.enabled(measurelibrary.historyMeasureSearchBtn)
+    helper.enabled(measurelibrary.viewMeasureSearchBtn)
+    helper.disabled(measurelibrary.shareMeasureSearchBtn)
+    helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
+    helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+    helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
 
-        helper.disabled(measurelibrary.createVersionDraftMeasureSearchBtn)
-        helper.enabled(measurelibrary.historyMeasureSearchBtn)
-        helper.enabled(measurelibrary.viewMeasureSearchBtn)
-        helper.disabled(measurelibrary.shareMeasureSearchBtn)
-        helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
-        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+  })
 
-    })
+  it('Enabled/Disabled Measure Search Table The Owner', () => {
 
-    it('Enabled/Disabled Measure Search Table The Owner', () => {
+    measureName = dataCreation.createDraftMeasure('TestMeasure')
 
-        measureName = dataCreation.createDraftMeasure('TestMeasure')
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, measureName)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        helper.enterText(measurelibrary.searchInputBox, measureName)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
+    helper.enabled(measurelibrary.historyMeasureSearchBtn)
+    helper.enabled(measurelibrary.editMeasureSearchBtn)
+    helper.enabled(measurelibrary.shareMeasureSearchBtn)
+    helper.enabled(measurelibrary.cloneMeasureSearchEnabledBtn)
+    helper.disabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+    helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
 
-        helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
-        helper.enabled(measurelibrary.historyMeasureSearchBtn)
-        helper.enabled(measurelibrary.editMeasureSearchBtn)
-        helper.enabled(measurelibrary.shareMeasureSearchBtn)
-        helper.enabled(measurelibrary.cloneMeasureSearchEnabledBtn)
-        helper.disabled(measurelibrary.runFhirValidationMeasureSearchBtn)
-        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
+    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
 
-        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+    cy.get(measurelibrary.majorVersionTypeRadio).click()
+    cy.get(measurelibrary.packageAndVersion).click()
+    cy.get(measurelibrary.continueBtn).click()
 
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
-        cy.get(measurelibrary.continueBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    helper.enabled(measurelibrary.createDraftMeasureSearchBtn)
+    helper.enabled(measurelibrary.historyMeasureSearchBtn)
+    helper.enabled(measurelibrary.viewMeasureSearchBtn)
+    helper.enabled(measurelibrary.shareMeasureSearchBtn)
+    helper.enabled(measurelibrary.cloneMeasureSearchEnabledBtn)
+    helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+    helper.enabled(measurelibrary.convertToFhirMeasureSearchBtn)
 
-        helper.enabled(measurelibrary.createDraftMeasureSearchBtn)
-        helper.enabled(measurelibrary.historyMeasureSearchBtn)
-        helper.enabled(measurelibrary.viewMeasureSearchBtn)
-        helper.enabled(measurelibrary.shareMeasureSearchBtn)
-        helper.enabled(measurelibrary.cloneMeasureSearchEnabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
-        helper.enabled(measurelibrary.convertToFhirMeasureSearchBtn)
+    cy.get(measurelibrary.searchInputBox).clear().type(fhirMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        cy.get(measurelibrary.searchInputBox).clear().type(fhirMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
+    helper.enabled(measurelibrary.historyMeasureSearchBtn)
+    helper.enabled(measurelibrary.editMeasureSearchBtn)
+    helper.enabled(measurelibrary.shareMeasureSearchBtn)
+    helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
+    helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
+    helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
 
-        helper.enabled(measurelibrary.createVersionMeasureSearchBtn)
-        helper.enabled(measurelibrary.historyMeasureSearchBtn)
-        helper.enabled(measurelibrary.editMeasureSearchBtn)
-        helper.enabled(measurelibrary.shareMeasureSearchBtn)
-        helper.disabled(measurelibrary.cloneMeasureSearchDisabledBtn)
-        helper.enabled(measurelibrary.runFhirValidationMeasureSearchBtn)
-        helper.disabled(measurelibrary.convertToFhirMeasureSearchBtn)
+  })
 
-    })
+  it('Measure Search Button bar Create Version', () => {
 
-    it('Measure Search Button bar Create Version', () => {
+    helper.enterText(measurelibrary.searchInputBox, draftMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.enterText(measurelibrary.searchInputBox, draftMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
 
-        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+    cy.get(cqlLibrary.title).contains('My Measures > Create Measure Version of Draft')
 
-        cy.get(cqlLibrary.title).contains("My Measures > Create Measure Version of Draft")
+    cy.get(measurelibrary.cancelBtn).click()
 
-        cy.get(measurelibrary.cancelBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+  })
+  it('Measure Search Button bar Create Draft', () => {
 
-    })
-    it('Measure Search Button bar Create Draft', () => {
+    helper.enterText(measurelibrary.searchInputBox, versionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.enterText(measurelibrary.searchInputBox, versionMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.createDraftMeasureSearchBtn).click()
 
-        cy.get(measurelibrary.createDraftMeasureSearchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.title).contains('My Measures > Draft Measure')
 
-        cy.get(measurelibrary.title).contains("My Measures > Draft Measure")
+    cy.get(createNewMeasure.cancelBtn).click()
 
-        cy.get(createNewMeasure.cancelBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+  })
+  it('Measure Search Button bar History', () => {
 
-    })
-    it('Measure Search Button bar History', () => {
+    helper.enterText(measurelibrary.searchInputBox, versionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.enterText(measurelibrary.searchInputBox, versionMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.historyMeasureSearchBtn).click()
 
-        cy.get(measurelibrary.historyMeasureSearchBtn).click()
+    cy.get(measurelibrary.title).contains('My Measures > History')
 
-        cy.get(measurelibrary.title).contains("My Measures > History")
+    cy.get(measurelibrary.returnToMeasureLibraryLink).click()
 
-        cy.get(measurelibrary.returnToMeasureLibraryLink).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+  })
 
-    })
+  it('Measure Search Button bar Edit', () => {
 
-    it('Measure Search Button bar Edit', () => {
+    helper.enterText(measurelibrary.searchInputBox, draftMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.enterText(measurelibrary.searchInputBox, draftMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.editMeasureSearchBtn).click()
 
-        cy.get(measurelibrary.editMeasureSearchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.measureComposerTab).should(tab => {
-            let value = tab.attr('class')
-            expect(value).contains("selected")
-        })
-
-        cy.get(measurelibrary.measureLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
+    cy.get(measurelibrary.measureComposerTab).should(tab => {
+      let value = tab.attr('class')
+      expect(value).contains('selected')
     })
 
-    it('Measure Search Button bar View', () => {
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.enterText(measurelibrary.searchInputBox, versionMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+  })
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+  it('Measure Search Button bar View', () => {
 
-        cy.get(measurelibrary.viewMeasureSearchBtn).click()
+    helper.enterText(measurelibrary.searchInputBox, versionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.disabled(measureComposer.measureNameInputBox)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.viewMeasureSearchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+    helper.disabled(measureComposer.measureNameInputBox)
 
-    it('Measure Search Button bar Share', () => {
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.enterText(measurelibrary.searchInputBox, draftMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+  })
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+  it('Measure Search Button bar Share', () => {
 
-        cy.get(measurelibrary.shareMeasureSearchBtn).click()
+    helper.enterText(measurelibrary.searchInputBox, draftMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        cy.get(measurelibrary.title).contains("My Measures > Measure Sharing")
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.shareCancelBtn).click()
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.shareMeasureSearchBtn).click()
 
-    })
-    it('Measure Search Button bar Clone', () => {
+    cy.get(measurelibrary.title).contains('My Measures > Measure Sharing')
 
-        helper.enterText(measurelibrary.searchInputBox, draftMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+    cy.get(measurelibrary.shareCancelBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+  })
+  it('Measure Search Button bar Clone', () => {
 
-        cy.get(measurelibrary.cloneMeasureSearchEnabledBtn).click()
+    helper.enterText(measurelibrary.searchInputBox, draftMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.title).contains("My Measures > Clone Measure")
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(createNewMeasure.cancelBtn).click()
+    cy.get(measurelibrary.cloneMeasureSearchEnabledBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-    })
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.title).contains('My Measures > Clone Measure')
+
+    cy.get(createNewMeasure.cancelBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
 })

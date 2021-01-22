@@ -1,5 +1,3 @@
-import * as helper from "../../../support/helpers";
-
 export const newLibraryBtn = '#newLibrary_button'
 export const title = '.contentWithHeadingHeader > h1'
 
@@ -15,7 +13,6 @@ export const row1RecentActivity = '#searchPanel_VerticalPanel [__gwt_row="0"]'
 export const row1RecentActivityCheckbox = ':nth-child(3) > .GB-MJYKBPC > .GB-MJYKBBD > div > input'
 export const row2RecentActivity = '#searchPanel_VerticalPanel [__gwt_row="1"]'
 export const row2RecentActivityCheckbox = ':nth-child(3) > .GB-MJYKBPD > .GB-MJYKBBD > div > input'
-
 
 //Library Search Table
 export const row1CqlLibrarySearch = '#CQLLibrarySearchCellTable [__gwt_row="0"]'
@@ -76,7 +73,6 @@ export const returnToCqlLibrary = ':nth-child(6) > td > .gwt-Anchor'
 //modal dialog
 export const modal = '.modal-dialog'
 export const modalCloseBtn = '.close'
-
 
 // FHIR Converstion Warning dialog
 export const fhirConversionWarningMessage = '.modal-body'

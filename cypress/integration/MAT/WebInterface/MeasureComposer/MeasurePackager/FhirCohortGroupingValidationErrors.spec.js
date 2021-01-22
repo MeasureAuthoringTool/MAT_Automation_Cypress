@@ -1,8 +1,8 @@
-import * as helper from "../../../../../support/helpers";
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
-import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as helper from '../../../../../support/helpers'
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
@@ -106,7 +106,7 @@ describe('Test cohort Grouping Validation Messages for FHIR Measure in Measure P
     cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
     cy.get(measureComposer.initialPopulationSaveBtn).click()
     helper.visibleWithTimeout(measureComposer.warningMessage)
-    helper.waitToContainText(measureComposer.warningMessage,'Changes to Initial Populations have been successfully saved.')
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
 
     //navigate to Measure Packager
     cy.get(measureComposer.measurePackager).click()

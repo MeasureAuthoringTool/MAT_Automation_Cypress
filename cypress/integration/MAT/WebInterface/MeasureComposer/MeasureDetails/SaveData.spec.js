@@ -1,516 +1,513 @@
-import * as helper from "../../../../../support/helpers";
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure";
-import * as measureDetails from "../../../../../pom/MAT/WI/MeasureDetails";
-import * as oktaLogin from "../../../../../support/oktaLogin";
-
+import * as helper from '../../../../../support/helpers'
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
+import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
+import * as oktaLogin from '../../../../../support/oktaLogin'
 
 let measureName = ''
-let today = new Date();
-let dd = today.getDayFormatted();
+let today = new Date()
+let dd = today.getDayFormatted()
 let mm = today.getMonthFormatted()
-let yyyy = today.getFullYear();
+let yyyy = today.getFullYear()
 
 describe('Measure Composer: Measure Details: Save Data', () => {
-    before('Login', () => {
-        oktaLogin.login()
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
-    it('Verify all Measure Details data is saved correctly', () => {
+  before('Login', () => {
+    oktaLogin.login()
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+  it('Verify all Measure Details data is saved correctly', () => {
 
-        cy.get(measurelibrary.newMeasureButton).click()
+    cy.get(measurelibrary.newMeasureButton).click()
 
-        measureName = 'createProportionMeasure' + Date.now()
+    measureName = 'createProportionMeasure' + Date.now()
 
-        cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.modelradioQDM).click()
-        cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
-        cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
+    cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
+    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
+    cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
 
-        cy.get(createNewMeasure.measureScoringListBox).select('Ratio')
-        cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
+    cy.get(createNewMeasure.measureScoringListBox).select('Ratio')
+    cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
-        cy.get(createNewMeasure.saveAndContinueBtn).click()
-        cy.get(createNewMeasure.confirmationContinueBtn).click()
+    cy.get(createNewMeasure.saveAndContinueBtn).click()
+    cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
+    //Data Entry
 
-        //Data Entry
+    //General Measure Information
 
-        //General Measure Information
+    let newName = 'NewNAME' + Date.now()
 
-        let newName = 'NewNAME' + Date.now()
+    helper.enterText(measureDetails.measureNameInput, newName)
+    helper.enterText(measureDetails.eCQMAbbreviatedTitleInput, newName)
+    cy.get(measureDetails.measureScoringListbox).select('Proportion')
+    cy.get(measureDetails.patientBasedMeasureListbox).select('No')
 
-        helper.enterText(measureDetails.measureNameInput, newName)
-        helper.enterText(measureDetails.eCQMAbbreviatedTitleInput, newName)
-        cy.get(measureDetails.measureScoringListbox).select('Proportion')
-        cy.get(measureDetails.patientBasedMeasureListbox).select('No')
+    cy.get(measureDetails.endorsedByNQFListBox).select('Yes')
+    helper.enterText(measureDetails.nQFIDInput, '123')
 
-        cy.get(measureDetails.endorsedByNQFListBox).select('Yes')
-        helper.enterText(measureDetails.nQFIDInput, '123')
+    cy.get(measureDetails.measurementPeriodCheckbox).click()
 
-        cy.get(measureDetails.measurementPeriodCheckbox).click()
+    let fromDate = mm + '/' + dd + '/' + yyyy
+    yyyy = yyyy + 1
+    let toDate = mm + '/' + dd + '/' + yyyy
 
-        let fromDate = mm + '/' + dd + '/' + yyyy;
-        yyyy = yyyy + 1
-        let toDate = mm + '/' + dd + '/' + yyyy;
+    helper.enterText(measureDetails.measurementPeriodFromInputBox, fromDate)
+    helper.enterText(measureDetails.measurementPeriodToInputBox, toDate)
 
-        helper.enterText(measureDetails.measurementPeriodFromInputBox, fromDate)
-        helper.enterText(measureDetails.measurementPeriodToInputBox, toDate)
+    cy.get(measureDetails.saveBtn).click()
+    cy.get(measureDetails.yesConfirmDialogBox).click()
 
-        cy.get(measureDetails.saveBtn).click()
-        cy.get(measureDetails.yesConfirmDialogBox).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Measure Steward / Developer
 
-        //Measure Steward / Developer
+    cy.get(measureDetails.measureStewardDeveloper).click()
 
-        cy.get(measureDetails.measureStewardDeveloper).click()
+    cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
+    cy.get(measureDetails.row1CheckBox).click()
 
-        cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
-        cy.get(measureDetails.row1CheckBox).click()
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Description
 
-        //Description
+    let description = 'description'
 
-        let description = 'description'
+    cy.get(measureDetails.description).click()
 
-        cy.get(measureDetails.description).click()
+    helper.enterText(measureDetails.textAreaInput, description)
 
-        helper.enterText(measureDetails.textAreaInput, description)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Copyright
 
-        //Copyright
+    let copyright = 'copyright'
 
-        let copyright = 'copyright'
+    cy.get(measureDetails.copyright).click()
 
-        cy.get(measureDetails.copyright).click()
+    helper.enterText(measureDetails.textAreaInput, copyright)
 
-        helper.enterText(measureDetails.textAreaInput, copyright)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Disclaimer
 
-        //Disclaimer
+    let disclaimer = 'disclaimer'
 
-        let disclaimer = 'disclaimer'
+    cy.get(measureDetails.disclaimer).click()
 
-        cy.get(measureDetails.disclaimer).click()
+    helper.enterText(measureDetails.textAreaInput, disclaimer)
 
-        helper.enterText(measureDetails.textAreaInput, disclaimer)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Measure Type
 
-        //Measure Type
+    cy.get(measureDetails.measureType).click()
 
-        cy.get(measureDetails.measureType).click()
+    cy.get(measureDetails.row1CheckBox).click()
 
-        cy.get(measureDetails.row1CheckBox).click()
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Stratification
 
-        //Stratification
+    let stratification = 'stratification'
 
-        let stratification = 'stratification'
+    cy.get(measureDetails.stratification).click()
 
-        cy.get(measureDetails.stratification).click()
+    helper.enterText(measureDetails.textAreaInput, stratification)
 
-        helper.enterText(measureDetails.textAreaInput, stratification)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Risk Adjustment
 
-        //Risk Adjustment
+    let riskAdjustment = 'riskAdjustment'
 
-        let riskAdjustment = 'riskAdjustment'
+    cy.get(measureDetails.riskAdjustment).click()
 
-        cy.get(measureDetails.riskAdjustment).click()
+    helper.enterText(measureDetails.textAreaInput, riskAdjustment)
 
-        helper.enterText(measureDetails.textAreaInput, riskAdjustment)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Rate Aggregation
 
-        //Rate Aggregation
+    let rateAggregation = 'rateAggregation'
 
-        let rateAggregation = 'rateAggregation'
+    cy.get(measureDetails.rateAggregation).click()
 
-        cy.get(measureDetails.rateAggregation).click()
+    helper.enterText(measureDetails.textAreaInput, rateAggregation)
 
-        helper.enterText(measureDetails.textAreaInput, rateAggregation)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Rationale
 
-        //Rationale
+    let rationale = 'rationale'
 
-        let rationale = 'rationale'
+    cy.get(measureDetails.rationale).click()
 
-        cy.get(measureDetails.rationale).click()
+    helper.enterText(measureDetails.textAreaInput, rationale)
 
-        helper.enterText(measureDetails.textAreaInput, rationale)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Clinical Recommendation
 
-        //Clinical Recommendation
+    let clinicalRecommendation = 'clinicalRecommendation'
 
-        let clinicalRecommendation = 'clinicalRecommendation'
+    cy.get(measureDetails.clinicalRecommendation).click()
 
-        cy.get(measureDetails.clinicalRecommendation).click()
+    helper.enterText(measureDetails.textAreaInput, clinicalRecommendation)
 
-        helper.enterText(measureDetails.textAreaInput, clinicalRecommendation)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Improvement Notation
 
-        //Improvement Notation
+    let improvementNotation = 'improvementNotation'
 
-        let improvementNotation = 'improvementNotation'
+    cy.get(measureDetails.improvementNotation).click()
 
-        cy.get(measureDetails.improvementNotation).click()
+    helper.enterText(measureDetails.textAreaInput, improvementNotation)
 
-        helper.enterText(measureDetails.textAreaInput, improvementNotation)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //References
 
-        //References
+    let references = 'references'
 
-        let references = 'references'
+    cy.get(measureDetails.references).click()
 
-        cy.get(measureDetails.references).click()
+    helper.enterText(measureDetails.textAreaInput, references)
 
-        helper.enterText(measureDetails.textAreaInput, references)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Definition
 
-        //Definition
+    let definition = 'definition'
 
-        let definition = 'definition'
+    cy.get(measureDetails.definition).click()
 
-        cy.get(measureDetails.definition).click()
+    helper.enterText(measureDetails.textAreaInput, definition)
 
-        helper.enterText(measureDetails.textAreaInput, definition)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Guidance
 
-        //Guidance
+    let guidance = 'guidance'
 
-        let guidance = 'guidance'
+    cy.get(measureDetails.guidance).click()
 
-        cy.get(measureDetails.guidance).click()
+    helper.enterText(measureDetails.textAreaInput, guidance)
 
-        helper.enterText(measureDetails.textAreaInput, guidance)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Transmission Format
 
-        //Transmission Format
+    let transmissionFormat = 'transmissionFormat'
 
-        let transmissionFormat = 'transmissionFormat'
+    cy.get(measureDetails.transmissionFormat).click()
 
-        cy.get(measureDetails.transmissionFormat).click()
+    helper.enterText(measureDetails.textAreaInput, transmissionFormat)
 
-        helper.enterText(measureDetails.textAreaInput, transmissionFormat)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Populations
 
-        //Populations
+    cy.get(measureDetails.populations).click()
 
-        cy.get(measureDetails.populations).click()
+    //Initial Population
+    let initialPopulation = 'initialPopulation'
 
-        //Initial Population
-        let initialPopulation = 'initialPopulation'
+    cy.get(measureDetails.initialPopulation).click()
 
-        cy.get(measureDetails.initialPopulation).click()
+    helper.enterText(measureDetails.textAreaInput, initialPopulation)
 
-        helper.enterText(measureDetails.textAreaInput, initialPopulation)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Denominator
+    let denominator = 'denominator'
 
-        //Denominator
-        let denominator = 'denominator'
+    cy.get(measureDetails.denominator).click()
 
-        cy.get(measureDetails.denominator).click()
+    helper.enterText(measureDetails.textAreaInput, denominator)
 
-        helper.enterText(measureDetails.textAreaInput, denominator)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Denominator Exclusions
+    let denominatorExclusions = 'denominatorExclusions'
 
-        //Denominator Exclusions
-        let denominatorExclusions = 'denominatorExclusions'
+    cy.get(measureDetails.denominatorExclusions).click()
 
-        cy.get(measureDetails.denominatorExclusions).click()
+    helper.enterText(measureDetails.textAreaInput, denominatorExclusions)
 
-        helper.enterText(measureDetails.textAreaInput, denominatorExclusions)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Numerator
+    let numerator = 'numerator'
 
-        //Numerator
-        let numerator = 'numerator'
+    cy.get(measureDetails.numerator).click()
 
-        cy.get(measureDetails.numerator).click()
+    helper.enterText(measureDetails.textAreaInput, numerator)
 
-        helper.enterText(measureDetails.textAreaInput, numerator)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Numerator Exclusions
+    let numeratorExclusions = 'numeratorExclusions'
 
-        //Numerator Exclusions
-        let numeratorExclusions = 'numeratorExclusions'
+    cy.get(measureDetails.numeratorExclusions).click()
 
-        cy.get(measureDetails.numeratorExclusions).click()
+    helper.enterText(measureDetails.textAreaInput, numeratorExclusions)
 
-        helper.enterText(measureDetails.textAreaInput, numeratorExclusions)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Denominator Exceptions
+    let denominatorExceptions = 'denominatorExceptions'
 
-        //Denominator Exceptions
-        let denominatorExceptions = 'denominatorExceptions'
+    cy.get(measureDetails.denominatorExceptions).click()
 
-        cy.get(measureDetails.denominatorExceptions).click()
+    helper.enterText(measureDetails.textAreaInput, denominatorExceptions)
 
-        helper.enterText(measureDetails.textAreaInput, denominatorExceptions)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Supplemental Data Elements
+    let supplementalDataElements = 'supplementalDataElements'
 
-        //Supplemental Data Elements
-        let supplementalDataElements = 'supplementalDataElements'
+    cy.get(measureDetails.supplementalDataElements).click()
 
-        cy.get(measureDetails.supplementalDataElements).click()
+    helper.enterText(measureDetails.textAreaInput, supplementalDataElements)
 
-        helper.enterText(measureDetails.textAreaInput, supplementalDataElements)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Measure Set
+    let measureSet = 'measureSet'
 
-        //Measure Set
-        let measureSet = 'measureSet'
+    cy.get(measureDetails.measureSet).click()
 
-        cy.get(measureDetails.measureSet).click()
+    helper.enterText(measureDetails.textAreaInput, measureSet)
 
-        helper.enterText(measureDetails.textAreaInput, measureSet)
+    cy.get(measureDetails.saveBtn).click()
 
-        cy.get(measureDetails.saveBtn).click()
+    helper.visibleWithTimeout(measureDetails.warningMessage)
 
-        helper.visibleWithTimeout(measureDetails.warningMessage)
+    //Exit MAT, Login and reopen Measure
 
-        //Exit MAT, Login and reopen Measure
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.logout()
+    oktaLogin.login()
 
-        helper.logout()
-        oktaLogin.login()
+    cy.get(measurelibrary.row1RecentActivity).dblclick()
 
-        cy.get(measurelibrary.row1RecentActivity).dblclick()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    //verification
 
-        //verification
+    //General Measure Information
 
-        //General Measure Information
+    cy.get(measureDetails.measureNameInput).should('have.value', newName)
+    cy.get(measureDetails.eCQMAbbreviatedTitleInput).should('have.value', newName)
+    cy.get(measureDetails.measureScoringListbox).should('have.value', 'Proportion')
+    cy.get(measureDetails.patientBasedMeasureListbox).should('have.value', 'No')
+    //cy.get(measureDetails.eCQMIdentifierTextBox).should('have.value', eCQMIdentifierTextBoxValue)
+    cy.get(measureDetails.endorsedByNQFListBox).should('have.value', 'true')
+    cy.get(measureDetails.nQFIDInput).should('have.value', '123')
+    cy.get(measureDetails.measurementPeriodFromInputBox).should('have.value', fromDate)
+    cy.get(measureDetails.measurementPeriodToInputBox).should('have.value', toDate)
 
-        cy.get(measureDetails.measureNameInput).should('have.value', newName)
-        cy.get(measureDetails.eCQMAbbreviatedTitleInput).should('have.value', newName)
-        cy.get(measureDetails.measureScoringListbox).should('have.value', 'Proportion')
-        cy.get(measureDetails.patientBasedMeasureListbox).should('have.value', 'No')
-        //cy.get(measureDetails.eCQMIdentifierTextBox).should('have.value', eCQMIdentifierTextBoxValue)
-        cy.get(measureDetails.endorsedByNQFListBox).should('have.value', 'true')
-        cy.get(measureDetails.nQFIDInput).should('have.value', '123')
-        cy.get(measureDetails.measurementPeriodFromInputBox).should('have.value', fromDate)
-        cy.get(measureDetails.measurementPeriodToInputBox).should('have.value', toDate)
+    //Measure Steward / Developer
 
+    cy.get(measureDetails.measureStewardDeveloper).click()
 
-        //Measure Steward / Developer
+    cy.get(measureDetails.measureStewardListBox).should('have.value', '207')
+    helper.isChecked(measureDetails.row1CheckBox)
 
-        cy.get(measureDetails.measureStewardDeveloper).click()
+    //Description
 
-        cy.get(measureDetails.measureStewardListBox).should('have.value', '207')
-        helper.isChecked(measureDetails.row1CheckBox)
+    cy.get(measureDetails.description).click()
 
-        //Description
+    cy.get(measureDetails.textAreaInput).should('have.value', description)
 
-        cy.get(measureDetails.description).click()
+    //Copyright
 
-        cy.get(measureDetails.textAreaInput).should('have.value', description)
+    cy.get(measureDetails.copyright).click()
 
-        //Copyright
+    cy.get(measureDetails.textAreaInput).should('have.value', copyright)
 
-        cy.get(measureDetails.copyright).click()
+    //Disclaimer
 
-        cy.get(measureDetails.textAreaInput).should('have.value', copyright)
+    cy.get(measureDetails.disclaimer).click()
 
-        //Disclaimer
+    cy.get(measureDetails.textAreaInput).should('have.value', disclaimer)
 
-        cy.get(measureDetails.disclaimer).click()
+    //Measure Type
 
-        cy.get(measureDetails.textAreaInput).should('have.value', disclaimer)
+    cy.get(measureDetails.measureType).click()
 
-        //Measure Type
+    helper.isChecked(measureDetails.row1CheckBox)
 
-        cy.get(measureDetails.measureType).click()
+    //Stratification
 
-        helper.isChecked(measureDetails.row1CheckBox)
+    cy.get(measureDetails.stratification).click()
 
-        //Stratification
+    cy.get(measureDetails.textAreaInput).should('have.value', stratification)
 
-        cy.get(measureDetails.stratification).click()
+    //Risk Adjustment
 
-        cy.get(measureDetails.textAreaInput).should('have.value', stratification)
+    cy.get(measureDetails.riskAdjustment).click()
 
-        //Risk Adjustment
+    cy.get(measureDetails.textAreaInput).should('have.value', riskAdjustment)
 
-        cy.get(measureDetails.riskAdjustment).click()
+    //Rate Aggregation
 
-        cy.get(measureDetails.textAreaInput).should('have.value', riskAdjustment)
+    cy.get(measureDetails.rateAggregation).click()
 
-        //Rate Aggregation
+    cy.get(measureDetails.textAreaInput).should('have.value', rateAggregation)
 
-        cy.get(measureDetails.rateAggregation).click()
+    //Rationale
 
-        cy.get(measureDetails.textAreaInput).should('have.value', rateAggregation)
+    cy.get(measureDetails.rationale).click()
 
-        //Rationale
+    cy.get(measureDetails.textAreaInput).should('have.value', rationale)
 
-        cy.get(measureDetails.rationale).click()
+    //Clinical Recommendation
 
-        cy.get(measureDetails.textAreaInput).should('have.value', rationale)
+    cy.get(measureDetails.clinicalRecommendation).click()
 
-        //Clinical Recommendation
+    cy.get(measureDetails.textAreaInput).should('have.value', clinicalRecommendation)
 
-        cy.get(measureDetails.clinicalRecommendation).click()
+    //Improvement Notation
 
-        cy.get(measureDetails.textAreaInput).should('have.value', clinicalRecommendation)
+    cy.get(measureDetails.improvementNotation).click()
 
-        //Improvement Notation
+    cy.get(measureDetails.textAreaInput).should('have.value', improvementNotation)
 
-        cy.get(measureDetails.improvementNotation).click()
+    //References
 
-        cy.get(measureDetails.textAreaInput).should('have.value', improvementNotation)
+    cy.get(measureDetails.references).click()
 
-        //References
+    cy.get(measureDetails.textAreaInput).should('have.value', '')
 
-        cy.get(measureDetails.references).click()
+    cy.get(measureDetails.referenceDescriptionRow).should('have.text', references)
 
-        cy.get(measureDetails.textAreaInput).should('have.value', '')
+    //Definition
 
-        cy.get(measureDetails.referenceDescriptionRow).should('have.text', references)
+    cy.get(measureDetails.definition).click()
 
-        //Definition
+    cy.get(measureDetails.textAreaInput).should('have.value', definition)
 
-        cy.get(measureDetails.definition).click()
+    //Guidance
 
-        cy.get(measureDetails.textAreaInput).should('have.value', definition)
+    cy.get(measureDetails.guidance).click()
 
-        //Guidance
+    cy.get(measureDetails.textAreaInput).should('have.value', guidance)
 
-        cy.get(measureDetails.guidance).click()
+    //Transmission Format
 
-        cy.get(measureDetails.textAreaInput).should('have.value', guidance)
+    cy.get(measureDetails.transmissionFormat).click()
 
-        //Transmission Format
+    cy.get(measureDetails.textAreaInput).should('have.value', transmissionFormat)
 
-        cy.get(measureDetails.transmissionFormat).click()
+    //Populations
 
-        cy.get(measureDetails.textAreaInput).should('have.value', transmissionFormat)
+    cy.get(measureDetails.populations).click()
 
-        //Populations
+    //Initial Population
 
-        cy.get(measureDetails.populations).click()
+    cy.get(measureDetails.initialPopulation).click()
 
-        //Initial Population
+    cy.get(measureDetails.textAreaInput).should('have.value', initialPopulation)
 
-        cy.get(measureDetails.initialPopulation).click()
+    //Denominator
 
-        cy.get(measureDetails.textAreaInput).should('have.value', initialPopulation)
+    cy.get(measureDetails.denominator).click()
 
-        //Denominator
+    cy.get(measureDetails.textAreaInput).should('have.value', denominator)
 
-        cy.get(measureDetails.denominator).click()
+    //Denominator Exclusions
 
-        cy.get(measureDetails.textAreaInput).should('have.value', denominator)
+    cy.get(measureDetails.denominatorExclusions).click()
 
-        //Denominator Exclusions
+    cy.get(measureDetails.textAreaInput).should('have.value', denominatorExclusions)
 
-        cy.get(measureDetails.denominatorExclusions).click()
+    //Numerator
 
-        cy.get(measureDetails.textAreaInput).should('have.value', denominatorExclusions)
+    cy.get(measureDetails.numerator).click()
 
-        //Numerator
+    cy.get(measureDetails.textAreaInput).should('have.value', numerator)
 
-        cy.get(measureDetails.numerator).click()
+    //Numerator Exclusions
 
-        cy.get(measureDetails.textAreaInput).should('have.value', numerator)
+    cy.get(measureDetails.numeratorExclusions).click()
 
-        //Numerator Exclusions
+    cy.get(measureDetails.textAreaInput).should('have.value', numeratorExclusions)
 
-        cy.get(measureDetails.numeratorExclusions).click()
+    //Denominator Exceptions
 
-        cy.get(measureDetails.textAreaInput).should('have.value', numeratorExclusions)
+    cy.get(measureDetails.denominatorExceptions).click()
 
-        //Denominator Exceptions
+    cy.get(measureDetails.textAreaInput).should('have.value', denominatorExceptions)
 
-        cy.get(measureDetails.denominatorExceptions).click()
+    //Supplemental Data Elements
 
-        cy.get(measureDetails.textAreaInput).should('have.value', denominatorExceptions)
+    cy.get(measureDetails.supplementalDataElements).click()
 
-        //Supplemental Data Elements
+    cy.get(measureDetails.textAreaInput).should('have.value', supplementalDataElements)
 
-        cy.get(measureDetails.supplementalDataElements).click()
+    //Measure Set
 
-        cy.get(measureDetails.textAreaInput).should('have.value', supplementalDataElements)
+    cy.get(measureDetails.measureSet).click()
 
-        //Measure Set
+    cy.get(measureDetails.textAreaInput).should('have.value', measureSet)
 
-        cy.get(measureDetails.measureSet).click()
-
-        cy.get(measureDetails.textAreaInput).should('have.value', measureSet)
-
-    })
+  })
 
 })

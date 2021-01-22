@@ -17,7 +17,7 @@ export const cqlLibraryVersionField = '#libraryVersionValue_TextBox'
 export const cqlLibraryDescriptionField = '#descriptionTextArea'
 export const cqlLibraryCommentsField = '#commentsContent'
 export const cqlLibraryUsingModel = '#usingModelValue_TextBox'
-export const cqlLibraryModelVersion = '#modelVersionValue_TextBox' 
+export const cqlLibraryModelVersion = '#modelVersionValue_TextBox'
 export const cqlLibraryPublisherDropDown = '#publisherListBoxMVP'
 export const cqlLibraryExperimentalCheckbox = '#gwt-uid-19'
 

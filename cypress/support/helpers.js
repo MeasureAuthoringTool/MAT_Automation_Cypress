@@ -1,7 +1,6 @@
 /// <reference types="../support" />
 import * as matheader from '../pom/MAT/WI/MATheader'
-import * as cqlComposer from '../pom/MAT/WI/CQLComposer'
-import * as measurelibrary from '../pom/MAT/WI/MeasureLibrary'
+
 const os = Cypress.platform // values are aix, darwin, freebsd, linux, openbsd, sunos, win32, android
 
 let API_Key = Cypress.env('VSAC_API_KEY')
@@ -38,7 +37,6 @@ export const copyScreenshots = () => {
     cy.exec(`xcopy .\\cypress\\screenshots .\\screenshots\\current\\${env} /E /I /S`, { timeout: 60000 }).its('code').should('eq', 0)
   }
 }
-
 
 export const loginUMLS = () => {
 
@@ -173,6 +171,9 @@ export const notExistsWithTimeout = (element, timeout) => {
 }
 export const visibleWithTimeout = (element, timeout) => {
   let time
+
+  cy.log('Element->' + element)
+
   if (timeout === undefined) {
     time = 60000
   } else {
@@ -607,6 +608,7 @@ export const createVirusTestFile = (fileType) => {
 }
 let username
 let password
+
 function getLoginCreds () {
   if (env === 'dev') {
     username = un
@@ -619,6 +621,7 @@ function getLoginCreds () {
     password = pwProd1
   }
 }
+
 let user
 export const loginSilent = () => {
   getLoginCreds()
@@ -644,12 +647,12 @@ export const loginSilent = () => {
   sleep(1000)
 }
 
-Date.prototype.getMonthFormatted = function() {
-  var month = this.getMonth() + 1;
-  return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
+Date.prototype.getMonthFormatted = function () {
+  var month = this.getMonth() + 1
+  return month < 10 ? '0' + month : '' + month // ('' + month) for string result
 }
 
-Date.prototype.getDayFormatted = function() {
-  var day = this.getDate();
-  return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
+Date.prototype.getDayFormatted = function () {
+  var day = this.getDate()
+  return day < 10 ? '0' + day : '' + day // ('' + month) for string result
 }
