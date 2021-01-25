@@ -4,8 +4,9 @@ export const measurePageNavigationBtn = '.breadcrumb > :nth-child(1)'
 export const measureDetailsPageNavigationBtn = '.breadcrumb > :nth-child(2)'
 export const measureDetailsPagePatientNameDiv = '.patient-name'
 export const measureDetailsPatientArrowBtn = '.patient-btn'
-export const measureDetailsPatientExpandArrowBtn =  '[data-call-method="expandResult"]'
+export const measureDetailsPatientExpandArrowBtn =  '[data-call-method="expandResult"]:visible:last'
 export const measureDetailsPatientCloneButton = 'button[Title="Clone"]'
+export const measureDetailsPatientCopyAndSendButton = 'button[data-call-method="copyPatient"]:visible:last'
 export const measureDetailsPatientEditBtn = 'a[Title="Edit"]'
 export const testPatientLogo = '.timeline-icon > .fa'
 export const warningAlert = '.validation-alerts'
@@ -142,6 +143,12 @@ export const enterPatientCharacteristics = (lastName) => {
   cy.get(genderDropdown).select('Male')
   cy.get(ethnicityDropdown).select('Not Hispanic or Latino')
   cy.log('enterPatientCharacteristics - done')
+}
+
+export const enterExpectedResults = (expected) => {
+  for (let pop of expected) {
+    cy.get('input[name="' + pop + '"][type="checkbox"]').check({ force: true }).and('have.prop', 'checked')
+  }
 }
 
 export const clickSavePatient = () => {
