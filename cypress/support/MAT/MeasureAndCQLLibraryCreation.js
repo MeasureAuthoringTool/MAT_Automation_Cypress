@@ -378,7 +378,7 @@ export const createDraftMeasure = (measure, model) => {
 
   cy.get(measureDetails.measureStewardDeveloper).click()
   cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
-  cy.get(measureDetails.row1CheckBox).click()
+  cy.get(measureDetails.measureDeveloperList).click()
   cy.get(measureDetails.saveBtn).click()
   helper.verifySpinnerAppearsAndDissappears()
   helper.visibleWithTimeout(measureDetails.warningMessage)
@@ -390,7 +390,7 @@ export const createDraftMeasure = (measure, model) => {
   helper.visibleWithTimeout(measureDetails.warningMessage)
 
   cy.get(measureDetails.measureType).click()
-  cy.get(measureDetails.row1CheckBox).click()
+  cy.get(measureDetails.measureTypeList).click()
   cy.get(measureDetails.saveBtn).click()
 
   helper.verifySpinnerAppearsAndDissappears()
@@ -485,13 +485,9 @@ export const createDraftCqlLibrary = (library, model) => {
   cy.get(cqlLibrary.newLibraryBtn).click()
 
   if (model === 'QDM' || model === undefined) {
-
     cy.get(createNewCqlLibrary.modelQDMRadio).click()
-
   } else {
-
     cy.get(createNewCqlLibrary.modelFHIRRadio).click()
-
   }
 
   cy.get(createNewCqlLibrary.cqlLibraryName).type(name, { delay: 50 })
