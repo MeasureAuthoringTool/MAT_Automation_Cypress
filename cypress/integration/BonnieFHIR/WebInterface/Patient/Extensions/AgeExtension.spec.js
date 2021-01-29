@@ -53,8 +53,6 @@ describe('Test Patient: Extensions section', () => {
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
-
-
   function navigateToMeasureDetails (measureName) {
     cy.log('navigateToMeasureDetails')
     cy.get(homePage.measure).contains(measureName).click()
@@ -76,8 +74,6 @@ describe('Test Patient: Extensions section', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-
-
   function ageExtension () {
     cy.log('validateAgeExtension')
     cy.get(testPatientPage.extensionsShow).click()
@@ -88,9 +84,9 @@ describe('Test Patient: Extensions section', () => {
     cy.get(testPatientPage.extensionAddWidgetBtn).eq(0).click()
     cy.get(testPatientPage.exsistingExtension).contains('https://google.com')
     cy.get(testPatientPage.exsistingExtensionUrl).click()
-        .then(() => {
-        cy.get(testPatientPage.exsistingExtension).contains("22 'year'")
-        })
+      .then(() => {
+        cy.get(testPatientPage.exsistingExtension).contains('22 \'year\'')
+      })
     cy.log('AgeExtensionValidation - done')
   }
 

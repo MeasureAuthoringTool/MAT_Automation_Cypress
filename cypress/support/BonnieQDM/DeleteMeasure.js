@@ -23,6 +23,4 @@ export const DeleteMeasureFromBonnie = (measureName) => {
   //Validate that the measure was in fact deleted and does not show on the dashboard
   cy.get(dashboard.measureNameDiv).contains(measureName).should('not.exist')
 
-
-
 }

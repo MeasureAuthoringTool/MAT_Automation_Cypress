@@ -1,86 +1,84 @@
 import * as helper from '../../../../../support/helpers'
 import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
-import * as measureLibrary from "../../../../../pom/MAT/WI/MeasureLibrary"
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as cqlLibraryHelper from '../../../../../support/MAT/CqlLibraryHelper'
 
-let libraryName = ''
+let qdmCqlLibraryName = ''
 
-describe('CQL Library: FHIR Library Conversion: Successfull Conversion to FHIR', () => {
-    before('Login', () => {
-        oktaLogin.login()
+describe('CQL Library: FHIR Library Conversion: Successful Conversion to FHIR', () => {
+  before('Login', () => {
+    oktaLogin.login()
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    cqlLibraryHelper.deleteCqlLibrary(qdmCqlLibraryName + 'FHIR')
+    helper.logout()
+  })
 
-        libraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
+  it('Convert QDM CQL Library to FHIR successfully', () => {
+    qdmCqlLibraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+    // Search for created draft QDM lib
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibraryName)
+    cy.get(cqlLibrary.searchBtn).click()
 
-    it('Convert QDM CQL Library to FHIR successfully, verify CQL Library history', () => {
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-        helper.enterText(cqlLibrary.searchInputBox, libraryName)
-        cy.get(cqlLibrary.searchBtn).click();
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    // assert model version for QDM Library
+    cy.get(cqlLibrary.cqlLibrarySearchTable).should('contain.text', 'Model Version')
+    cy.get(cqlLibrary.row1CqlLibraryModelVersion).should('contain.text', '5.5')
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    // Select the Qdm Cql library created and version it
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    cqlLibraryHelper.createCqlLibraryVersionAndVerify()
 
-        //assert model version for QDM Library
-        cy.get(cqlLibrary.cqlLibrarySearchTable).should('contain.text', 'Model Version')
-        cy.get(cqlLibrary.row1CqlLibraryModelVersion).should('contain.text', '5.5')
+    cqlLibraryHelper.convertCqlLibraryToFHIRAndVerify(qdmCqlLibraryName)
+  })
 
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+  it('Verify FHIR reconversion and cql library history', () => {
+    gridRowActions.selectRow(cqlLibrary.row2CqlLibrarySearch)
+    helper.disabledWithTimeout(cqlLibrary.convertToFhirLibrarySearchBtn)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
-        cy.get(cqlLibrary.majorVersionTypeRadio).click()
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
+    cy.get(cqlLibrary.editCqllibrariesEnabledBtn).should('be.visible')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(cqlLibrary.historyCqllibrariesBtn).click()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.convertToFhirLibrarySearchBtn).click()
+    // verifying the log entries
+    helper.visibleWithTimeout(cqlLibrary.historyConvertToFHIRUserActionLogEntry)
+    helper.visibleWithTimeout(cqlLibrary.historyCQLLibraryCreatedUserActionLogEntry)
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(cqlLibrary.returnToCqlLibrary).click()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
-         //assert model version for FHIR Library
-         cy.get(cqlLibrary.cqlLibrarySearchTable).should('contain.text', 'Model Version')
-         cy.get(cqlLibrary.row1CqlLibraryModelVersion).should('contain.text', '4.0.1')
+  it('Verify QDM Cql library reconversion and Cql library history', () => {
+    // Verify to see if reconversion is disabled
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.disabledWithTimeout(cqlLibrary.convertToFhirLibrarySearchBtn)
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).should('contain.text', 'FHIR / CQL')
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+    cy.get(cqlLibrary.historyCqllibrariesBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    // verifying the log entries
+    helper.visibleWithTimeout(cqlLibrary.historyConvertToFHIRUserActionLogEntry)
 
-        cy.get('h1').should('contain.text', libraryName + ' Draft v1.0.000 (FHIR / CQL)')
-        
-        cy.get(measureLibrary.cqlLibraryTab).click()
+    cy.get(cqlLibrary.returnToCqlLibrary).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+  it('Delete converted FHIR library and reconvert', () => {
+    cqlLibraryHelper.deleteCqlLibrary(qdmCqlLibraryName + 'FHIR')
 
-        cy.get(cqlLibrary.historyCqllibrariesBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        //verifying the log entries
-        helper.visibleWithTimeout(cqlLibrary.historyConvertToFHIRUserActionLogEntry)
-        helper.visibleWithTimeout(cqlLibrary.historyCQLLibraryCreatedUserActionLogEntry)
-
-        cy.get(cqlLibrary.returnToCqlLibrary).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-    })
-
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    cqlLibraryHelper.convertCqlLibraryToFHIRAndVerify(qdmCqlLibraryName)
+  })
 })

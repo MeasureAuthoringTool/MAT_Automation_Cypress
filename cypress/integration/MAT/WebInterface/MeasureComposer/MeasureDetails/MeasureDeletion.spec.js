@@ -1,8 +1,8 @@
-import * as helper from "../../../../../support/helpers"
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary"
-import * as measureDetails from "../../../../../pom/MAT/WI/MeasureDetails"
-import * as oktaLogin from "../../../../../support/oktaLogin"
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as helper from '../../../../../support/helpers'
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
@@ -11,137 +11,137 @@ let qdmMeasure = ''
 let qdmVersionMeasure = ''
 
 describe('FHIR Measure: Deletion', () => {
-    before('Login', () => {
-        oktaLogin.login()
-        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
+  before('Login', () => {
+    oktaLogin.login()
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
-    it('Validate the Fhir draft measure deletion', () => {
+  it('Validate the Fhir draft measure deletion', () => {
 
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureDetails.deleteBtn).click();
-        
-        cy.get(measureDetails.confirmDeleteText).clear().type('DELETE', { force: true })
-        cy.get(measureDetails.confirmDeleteBtn).click()
+    cy.get(measureDetails.deleteBtn).click()
 
-    })
+    cy.get(measureDetails.confirmDeleteText).clear().type('DELETE', { force: true })
+    cy.get(measureDetails.confirmDeleteBtn).click()
 
-    it('Validate the Fhir versioned measure deletion', () => {
+  })
 
-        fhirVersionMeasure = dataCreation.createDraftMeasure('FhirVersionMeasure', 'FHIR')
+  it('Validate the Fhir versioned measure deletion', () => {
 
-        helper.enterText(measurelibrary.searchInputBox, fhirVersionMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    fhirVersionMeasure = dataCreation.createDraftMeasure('FhirVersionMeasure', 'FHIR')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enterText(measurelibrary.searchInputBox, fhirVersionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
-        
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.continueBtn).click()
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+    cy.get(measurelibrary.majorVersionTypeRadio).click()
+    cy.get(measurelibrary.packageAndVersion).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enterText(measurelibrary.searchInputBox, fhirVersionMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    cy.get(measurelibrary.continueBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.enterText(measurelibrary.searchInputBox, fhirVersionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureDetails.deleteBtn).click();
-               
-        cy.get(measureDetails.confirmDeleteText).clear().type('DELETE', { force: true })
-        cy.get(measureDetails.confirmDeleteBtn).click()
-    
-    })
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureDetails.deleteBtn).click()
+
+    cy.get(measureDetails.confirmDeleteText).clear().type('DELETE', { force: true })
+    cy.get(measureDetails.confirmDeleteBtn).click()
+
+  })
 
 })
 
 describe('QDM Measure: Deletion', () => {
-    before('Login', () => {
-        oktaLogin.login()
-        qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
+  before('Login', () => {
+    oktaLogin.login()
+    qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
-    it('Validate the QDM draft measure deletion', () => {
+  it('Validate the QDM draft measure deletion', () => {
 
-        helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureDetails.deleteBtn).click();
-        
-        cy.get(measureDetails.confirmDeleteText).clear().type('DELETE', { force: true })
-        cy.get(measureDetails.confirmDeleteBtn).click()
+    cy.get(measureDetails.deleteBtn).click()
 
-    })
+    cy.get(measureDetails.confirmDeleteText).clear().type('DELETE', { force: true })
+    cy.get(measureDetails.confirmDeleteBtn).click()
 
-    it('Validate the QDM versioned measure deletion', () => {
+  })
 
-        qdmVersionMeasure = dataCreation.createDraftMeasure('qdmVersionMeasure', 'QDM')
+  it('Validate the QDM versioned measure deletion', () => {
 
-        helper.enterText(measurelibrary.searchInputBox, qdmVersionMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    qdmVersionMeasure = dataCreation.createDraftMeasure('qdmVersionMeasure', 'QDM')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enterText(measurelibrary.searchInputBox, qdmVersionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
-        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
-        
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.continueBtn).click()
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+    cy.get(measurelibrary.majorVersionTypeRadio).click()
+    cy.get(measurelibrary.packageAndVersion).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enterText(measurelibrary.searchInputBox, qdmVersionMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    cy.get(measurelibrary.continueBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.enterText(measurelibrary.searchInputBox, qdmVersionMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureDetails.deleteBtn).click();
-               
-        cy.get(measureDetails.confirmDeleteText).clear().type('DELETE', { force: true })
-        cy.get(measureDetails.confirmDeleteBtn).click()
-    
-    })
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureDetails.deleteBtn).click()
+
+    cy.get(measureDetails.confirmDeleteText).clear().type('DELETE', { force: true })
+    cy.get(measureDetails.confirmDeleteBtn).click()
+
+  })
 
 })

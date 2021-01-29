@@ -10,477 +10,477 @@ let measureNameOne = ''
 let measureNameTwo = ''
 
 describe('Creating New Composite Measure', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-        measureNameOne = dataCreation.createDraftMeasure('qdmCqlMeasureOne', 'QDM')
-        measureNameTwo = dataCreation.createDraftMeasure('qdmCqlMeasureTwo', 'QDM')
+    measureNameOne = dataCreation.createDraftMeasure('qdmCqlMeasureOne', 'QDM')
+    measureNameTwo = dataCreation.createDraftMeasure('qdmCqlMeasureTwo', 'QDM')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        cy.get(measurelibrary.searchInputBox).type(measureNameOne, { delay: 50 })
-        cy.get(measurelibrary.searchBtn).click()
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    cy.get(measurelibrary.searchInputBox).type(measureNameOne, { delay: 50 })
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click()
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-        // Definition
+    // Definition
 
-        cy.get(measureComposer.definition).click()
+    cy.get(measureComposer.definition).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        dataCreation.addDefinition('Initial Population', 'true')
-        dataCreation.addDefinition('Denominator', 'true')
-        dataCreation.addDefinition('Numerator', 'true')
+    dataCreation.addDefinition('Initial Population', 'true')
+    dataCreation.addDefinition('Denominator', 'true')
+    dataCreation.addDefinition('Numerator', 'true')
 
-        // Population Workspace
+    // Population Workspace
 
-        cy.get(measureComposer.populationWorkspace).click()
+    cy.get(measureComposer.populationWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        // Initial Population
-        cy.get(measureComposer.initialPopulation).click()
+    // Initial Population
+    cy.get(measureComposer.initialPopulation).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
-        cy.get(measureComposer.initialPopulationSaveBtn).click()
+    cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
+    cy.get(measureComposer.initialPopulationSaveBtn).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
 
-        // Denominator
-        cy.get(measureComposer.denominator).click()
+    // Denominator
+    cy.get(measureComposer.denominator).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
-        cy.get(measureComposer.denominatorSaveBtn).click()
+    cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+    cy.get(measureComposer.denominatorSaveBtn).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
 
-        // Numerator
-        cy.get(measureComposer.numerator).click()
+    // Numerator
+    cy.get(measureComposer.numerator).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
-        cy.get(measureComposer.numeratorSaveBtn).click()
+    cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+    cy.get(measureComposer.numeratorSaveBtn).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
 
-        //navigate to Measure Packager
-        cy.get(measureComposer.measurePackager).click()
+    //navigate to Measure Packager
+    cy.get(measureComposer.measurePackager).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        //Package Grouping
-        cy.get(measureComposer.addAllItemsToGrouping).click()
-        cy.get(measureComposer.saveGrouping).click()
+    //Package Grouping
+    cy.get(measureComposer.addAllItemsToGrouping).click()
+    cy.get(measureComposer.saveGrouping).click()
 
-        cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
+    cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
 
-        //Create Measure Package
-        cy.get(measureComposer.createMeasurePackageBtn).click()
+    //Create Measure Package
+    cy.get(measureComposer.createMeasurePackageBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(3000)
+    cy.wait(3000)
 
-        helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
+    helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.searchInputBox).clear().type(measureNameOne, { delay: 50 })
-        cy.get(measurelibrary.searchBtn).click()
+    cy.get(measurelibrary.searchInputBox).clear().type(measureNameOne, { delay: 50 })
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
-        cy.wait(2000)
+    cy.wait(2000)
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
 
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
+    cy.get(measurelibrary.majorVersionTypeRadio).click()
+    cy.get(measurelibrary.packageAndVersion).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.waitForElementEnabled(measurelibrary.searchInputBox)
-        cy.get(measurelibrary.searchInputBox).clear().type(measureNameTwo, { delay: 50 })
-        cy.get(measurelibrary.searchBtn).click()
+    helper.waitForElementEnabled(measurelibrary.searchInputBox)
+    cy.get(measurelibrary.searchInputBox).clear().type(measureNameTwo, { delay: 50 })
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click();
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-        // Definition
+    // Definition
 
-        cy.get(measureComposer.definition).click()
+    cy.get(measureComposer.definition).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        dataCreation.addDefinition('Initial Population', 'true')
-        dataCreation.addDefinition('Denominator', 'true')
-        dataCreation.addDefinition('Numerator', 'true')
+    dataCreation.addDefinition('Initial Population', 'true')
+    dataCreation.addDefinition('Denominator', 'true')
+    dataCreation.addDefinition('Numerator', 'true')
 
-        // Population Workspace
+    // Population Workspace
 
-        cy.get(measureComposer.populationWorkspace).click()
+    cy.get(measureComposer.populationWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        // Initial Population
-        cy.get(measureComposer.initialPopulation).click()
+    // Initial Population
+    cy.get(measureComposer.initialPopulation).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
-        cy.get(measureComposer.initialPopulationSaveBtn).click()
+    cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
+    cy.get(measureComposer.initialPopulationSaveBtn).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
 
-        // Denominator
-        cy.get(measureComposer.denominator).click()
+    // Denominator
+    cy.get(measureComposer.denominator).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
-        cy.get(measureComposer.denominatorSaveBtn).click()
+    cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+    cy.get(measureComposer.denominatorSaveBtn).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
 
-        // Numerator
-        cy.get(measureComposer.numerator).click()
+    // Numerator
+    cy.get(measureComposer.numerator).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
-        cy.get(measureComposer.numeratorSaveBtn).click()
+    cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+    cy.get(measureComposer.numeratorSaveBtn).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
 
-        //navigate to Measure Packager
-        cy.get(measureComposer.measurePackager).click()
+    //navigate to Measure Packager
+    cy.get(measureComposer.measurePackager).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        //Package Grouping
-        cy.get(measureComposer.addAllItemsToGrouping).click()
-        cy.get(measureComposer.saveGrouping).click()
+    //Package Grouping
+    cy.get(measureComposer.addAllItemsToGrouping).click()
+    cy.get(measureComposer.saveGrouping).click()
 
-        cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
+    cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
 
-        //Create Measure Package
-        cy.get(measureComposer.createMeasurePackageBtn).click()
+    //Create Measure Package
+    cy.get(measureComposer.createMeasurePackageBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.wait(3000)
+    cy.wait(3000)
 
-        helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
+    helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.searchInputBox).clear().type(measureNameTwo, { delay: 50 })
-        cy.get(measurelibrary.searchBtn).click()
+    cy.get(measurelibrary.searchInputBox).clear().type(measureNameTwo, { delay: 50 })
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
-        cy.wait(2000)
+    cy.wait(2000)
 
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
 
-        cy.get(measurelibrary.majorVersionTypeRadio).click()
-        cy.get(measurelibrary.packageAndVersion).click()
+    cy.get(measurelibrary.majorVersionTypeRadio).click()
+    cy.get(measurelibrary.packageAndVersion).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+  })
 
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
 
-    after('Log Out', () => {
-        helper.logout()
-    })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
-    it('Create Composite measure', () => {
+  it('Create Composite measure', () => {
 
-        helper.waitForElementEnabled(measurelibrary.newCompositeMeasureButton)
-        cy.get(measurelibrary.newCompositeMeasureButton).click();
+    helper.waitForElementEnabled(measurelibrary.newCompositeMeasureButton)
+    cy.get(measurelibrary.newCompositeMeasureButton).click()
 
-        let measureName = 'createCompositeMeasure' + Date.now()
+    let measureName = 'createCompositeMeasure' + Date.now()
 
-        cy.get(createnewcompositemeasure.measureName).type(measureName, { delay: 50 })
-        cy.get(createnewcompositemeasure.modelradioQDM).click();
-        cy.get(createnewcompositemeasure.cqlLibraryName).type(measureName, { delay: 50 })
-        cy.get(createnewcompositemeasure.shortName).type(measureName, { delay: 50 })
+    cy.get(createnewcompositemeasure.measureName).type(measureName, { delay: 50 })
+    cy.get(createnewcompositemeasure.modelradioQDM).click()
+    cy.get(createnewcompositemeasure.cqlLibraryName).type(measureName, { delay: 50 })
+    cy.get(createnewcompositemeasure.shortName).type(measureName, { delay: 50 })
 
-        cy.get(createnewcompositemeasure.compositeScoringMethod).select('All or Nothing');
-        cy.get(createnewcompositemeasure.measureScoring).select('Proportion');
-        cy.get(createnewcompositemeasure.patientBasedMeasure).select('Yes');
+    cy.get(createnewcompositemeasure.compositeScoringMethod).select('All or Nothing')
+    cy.get(createnewcompositemeasure.measureScoring).select('Proportion')
+    cy.get(createnewcompositemeasure.patientBasedMeasure).select('Yes')
 
-        cy.get(createnewcompositemeasure.saveAndContinueBtn).click();
+    cy.get(createnewcompositemeasure.saveAndContinueBtn).click()
 
-        // Component Measures
-        cy.get(createnewcompositemeasure.searchInputBox).type(measureNameOne, { delay: 50 })
-        cy.get(createnewcompositemeasure.searchButton).click();
+    // Component Measures
+    cy.get(createnewcompositemeasure.searchInputBox).type(measureNameOne, { delay: 50 })
+    cy.get(createnewcompositemeasure.searchButton).click()
 
-        cy.get(createnewcompositemeasure.row1ComponentMeasureSearchName).should('contain.text', measureNameOne);
-        cy.get(createnewcompositemeasure.row1ComponentMeasureSelect).check({ force: true });
+    cy.get(createnewcompositemeasure.row1ComponentMeasureSearchName).should('contain.text', measureNameOne)
+    cy.get(createnewcompositemeasure.row1ComponentMeasureSelect).check({ force: true })
 
-        cy.get(createnewcompositemeasure.searchInputBox).clear();
-        cy.get(createnewcompositemeasure.searchInputBox).type(measureNameTwo, { delay: 50 })
-        cy.get(createnewcompositemeasure.searchButton).click();
+    cy.get(createnewcompositemeasure.searchInputBox).clear()
+    cy.get(createnewcompositemeasure.searchInputBox).type(measureNameTwo, { delay: 50 })
+    cy.get(createnewcompositemeasure.searchButton).click()
 
-        cy.get(createnewcompositemeasure.row1ComponentMeasureSearchName).should('contain.text', measureNameTwo);
-        cy.get(createnewcompositemeasure.row1ComponentMeasureSelect).check({ force: true });
+    cy.get(createnewcompositemeasure.row1ComponentMeasureSearchName).should('contain.text', measureNameTwo)
+    cy.get(createnewcompositemeasure.row1ComponentMeasureSelect).check({ force: true })
 
-        // Applied Component Measures
+    // Applied Component Measures
 
-        cy.get(createnewcompositemeasure.row1AppliedComponentMeasureAlias).type('alias1');
-        cy.get(createnewcompositemeasure.row2AppliedComponentMeasureAlias).type('alias2');
+    cy.get(createnewcompositemeasure.row1AppliedComponentMeasureAlias).type('alias1')
+    cy.get(createnewcompositemeasure.row2AppliedComponentMeasureAlias).type('alias2')
 
-        cy.get(createnewcompositemeasure.saveAndContinueBtnComponent).click();
+    cy.get(createnewcompositemeasure.saveAndContinueBtnComponent).click()
 
-        // Dialog
-        cy.get(createnewcompositemeasure.confirmationContinueBtn).click();
+    // Dialog
+    cy.get(createnewcompositemeasure.confirmationContinueBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.cqlWorkspace).click()
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-        //Includes
+    //Includes
 
-        cy.get(measureComposer.includes).click()
+    cy.get(measureComposer.includes).click()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleIncludes, 'Includes')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleIncludes, 'Includes')
 
-        cy.get(measureComposer.searchInputBox).type('matglobal', { delay: 50 })
-        cy.get(measureComposer.searchBtn).click()
-        cy.get(measureComposer.availableLibrariesRow1checkbox).click()
-        cy.get(measureComposer.libraryAliasInputBox).type('Global', { delay: 50 })
-        cy.get(measureComposer.saveIncludes).click()
+    cy.get(measureComposer.searchInputBox).type('matglobal', { delay: 50 })
+    cy.get(measureComposer.searchBtn).click()
+    cy.get(measureComposer.availableLibrariesRow1checkbox).click()
+    cy.get(measureComposer.libraryAliasInputBox).type('Global', { delay: 50 })
+    cy.get(measureComposer.saveIncludes).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.visibleWithTimeout(measureComposer.warningMessage)
 
-        //Value Sets
+    //Value Sets
 
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.30')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.27')
-        dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.35')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1029.205')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
-        dataCreation.addValueSet('2.16.840.1.113762.1.4.1029.67')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.38')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
-        dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
-        dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.26')
+    dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.30')
+    dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.27')
+    dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+    dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
+    dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.35')
+    dataCreation.addValueSet('2.16.840.1.113762.1.4.1029.205')
+    dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
+    dataCreation.addValueSet('2.16.840.1.113762.1.4.1029.67')
+    dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.38')
+    dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
+    dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
+    dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.26')
 
-        //Codes
+    //Codes
 
-        dataCreation.addCode('CODE:/CodeSystem/CPT/Version/2020/Code/99201/Info')
+    dataCreation.addCode('CODE:/CodeSystem/CPT/Version/2020/Code/99201/Info')
 
-        //Parameter
+    //Parameter
 
-        cy.get(measureComposer.parameter).click()
+    cy.get(measureComposer.parameter).click()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Parameter')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Parameter')
 
-        cy.get(measureComposer.addNewBtn).click()
-        cy.get(measureComposer.parameterNameInput).type('test.Parameter', { delay: 50 })
-        cy.get(measureComposer.parameterCQLExpressionEditorInput).type('Interval<DateTime>', { delay: 50 })
-        cy.get(measureComposer.parameterSaveBtn).click()
+    cy.get(measureComposer.addNewBtn).click()
+    cy.get(measureComposer.parameterNameInput).type('test.Parameter', { delay: 50 })
+    cy.get(measureComposer.parameterCQLExpressionEditorInput).type('Interval<DateTime>', { delay: 50 })
+    cy.get(measureComposer.parameterSaveBtn).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.visibleWithTimeout(measureComposer.warningMessage)
 
-        //Definition
+    //Definition
 
-        dataCreation.addDefinition('Initial Population', 'AgeInYearsAt(start of "Measurement Period")> 12')
-        dataCreation.addDefinition('Denominator', 'true')
-        dataCreation.addDefinition('Numerator', 'true')
-        dataCreation.addDefinition('Breast Milk Feeding', '["Substance, Administered": "Breast Milk"] Feeding')
-        dataCreation.addDefinition('ED Visit', 'Global."ED Encounter"')
-        
-        //Function
+    dataCreation.addDefinition('Initial Population', 'AgeInYearsAt(start of "Measurement Period")> 12')
+    dataCreation.addDefinition('Denominator', 'true')
+    dataCreation.addDefinition('Numerator', 'true')
+    dataCreation.addDefinition('Breast Milk Feeding', '["Substance, Administered": "Breast Milk"] Feeding')
+    dataCreation.addDefinition('ED Visit', 'Global."ED Encounter"')
 
-        cy.get(measureComposer.functionMeasureComposer).click()
+    //Function
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Function')
+    cy.get(measureComposer.functionMeasureComposer).click()
 
-        cy.get(measureComposer.addNewBtn).click()
-        cy.get(measureComposer.functionNameInput).type('CalendarDayOfOrDayAfter', { delay: 50 })
-        cy.get(measureComposer.addArgument).click()
-        helper.enterText(measureComposer.argumentNameInput, 'StartValue')
-        cy.get(measureComposer.availableDatatypesListBox).select('DateTime')
-        cy.get(measureComposer.addBtn).click()
-        cy.get(measureComposer.functionCQLExpressionEditorInput).type('Interval[StartValue, ToDate(StartValue + 2 days))', { delay: 50 })
-        cy.get(measureComposer.functionSaveBtn).click()
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Function')
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
+    cy.get(measureComposer.addNewBtn).click()
+    cy.get(measureComposer.functionNameInput).type('CalendarDayOfOrDayAfter', { delay: 50 })
+    cy.get(measureComposer.addArgument).click()
+    helper.enterText(measureComposer.argumentNameInput, 'StartValue')
+    cy.get(measureComposer.availableDatatypesListBox).select('DateTime')
+    cy.get(measureComposer.addBtn).click()
+    cy.get(measureComposer.functionCQLExpressionEditorInput).type('Interval[StartValue, ToDate(StartValue + 2 days))', { delay: 50 })
+    cy.get(measureComposer.functionSaveBtn).click()
 
-        //CQL Library Editor
+    helper.visibleWithTimeout(measureComposer.warningMessage)
 
-        cy.get(measureComposer.cqlLibraryEditor).click()
+    //CQL Library Editor
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
-       
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
+    cy.get(measureComposer.cqlLibraryEditor).click()
 
-        cy.wait(2000)
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor, 'CQL Library Editor')
 
-        cy.get(measureComposer.populationWorkspace).click()
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'You are viewing CQL with no validation errors.')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.wait(2000)
 
-        cy.get(measureComposer.initialPopulation).click()
+    cy.get(measureComposer.populationWorkspace).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
-        cy.get(measureComposer.initialPopulationSaveBtn).click()
+    cy.get(measureComposer.initialPopulation).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'Changes to Initial Populations have been successfully saved.')
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.denominator).click()
+    cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
+    cy.get(measureComposer.initialPopulationSaveBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
 
-        cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
-        cy.get(measureComposer.denominatorSaveBtn).click()
+    cy.get(measureComposer.denominator).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'Changes to Denominators have been successfully saved.')
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.numerator).click()
+    cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+    cy.get(measureComposer.denominatorSaveBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
 
-        cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
-        cy.get(measureComposer.numeratorSaveBtn).click()
+    cy.get(measureComposer.numerator).click()
 
-        helper.visibleWithTimeout(measureComposer.warningMessage)
-        helper.waitToContainText(measureComposer.warningMessage,'Changes to Numerators have been successfully saved.')
+    helper.verifySpinnerAppearsAndDissappears()
 
-        //navigate to Measure Packager
-        cy.get(measureComposer.measurePackager).click()
+    cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+    cy.get(measureComposer.numeratorSaveBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
 
-        //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
-        cy.get(measureComposer.populationsListItems).its('length').should('equal', 3)
+    //navigate to Measure Packager
+    cy.get(measureComposer.measurePackager).click()
 
-        cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
-        cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Denominator 1')
-        cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Numerator 1')
+    helper.verifySpinnerAppearsAndDissappears()
 
-        //Package Grouping
-        cy.get(measureComposer.addAllItemsToGrouping).click()
-        cy.get(measureComposer.saveGrouping).click()
+    //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
+    cy.get(measureComposer.populationsListItems).its('length').should('equal', 3)
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
+    cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Denominator 1')
+    cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Numerator 1')
 
-        cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
+    //Package Grouping
+    cy.get(measureComposer.addAllItemsToGrouping).click()
+    cy.get(measureComposer.saveGrouping).click()
 
-        //Create Measure Package
-        cy.get(measureComposer.createMeasurePackageBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
 
-        //error message for expressions
-        helper.waitToContainText(measureComposer.packageWarningMessage,' Expressions must be used from two or more component measures.')
+    //Create Measure Package
+    cy.get(measureComposer.createMeasurePackageBtn).click()
 
-        cy.get(measurelibrary.measureLibraryTab).click()
-        
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+    //error message for expressions
+    helper.waitToContainText(measureComposer.packageWarningMessage, ' Expressions must be used from two or more component measures.')
+
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
 
 })
 
 describe('Validate FHIR model for Composite measure', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-    })
+  })
 
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
 
-    after('Log Out', () => {
-        helper.logout()
-    })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
-    it('Verify that the FHIR model is not accessible for Composite Measure', () => {
+  it('Verify that the FHIR model is not accessible for Composite Measure', () => {
 
-        cy.get(measurelibrary.newCompositeMeasureButton).click();
-        cy.get(createnewcompositemeasure.modelradioFHIR).should('be.disabled');
-        cy.get(createnewcompositemeasure.cancelBtn).click();
+    cy.get(measurelibrary.newCompositeMeasureButton).click()
+    cy.get(createnewcompositemeasure.modelradioFHIR).should('be.disabled')
+    cy.get(createnewcompositemeasure.cancelBtn).click()
 
-    })
+  })
 
-    it('Validate the FHIR buttons are grayed out for Composite measure', () => {
+  it('Validate the FHIR buttons are grayed out for Composite measure', () => {
 
-        cy.get(createnewcompositemeasure.measureLibraryBtn).click();
+    cy.get(createnewcompositemeasure.measureLibraryBtn).click()
 
-        cy.get(measurelibrary.searchInputBox).type('createCompositeMeasure', { delay: 50 })
-        cy.get(measurelibrary.searchBtn).click();
+    cy.get(measurelibrary.searchInputBox).type('createCompositeMeasure', { delay: 50 })
+    cy.get(measurelibrary.searchBtn).click()
 
-        cy.get(measurelibrary.row1MeasureSearchName).should('contain.text', 'createCompositeMeasure');
-        cy.get(measurelibrary.row1MeasureSearchCheckbox).check({ force: true });
+    cy.get(measurelibrary.row1MeasureSearchName).should('contain.text', 'createCompositeMeasure')
+    cy.get(measurelibrary.row1MeasureSearchCheckbox).check({ force: true })
 
-        cy.get(measurelibrary.runFhirValidationRecentActivityBtn).should('be.disabled');
-        cy.get(measurelibrary.convertToFhirRecentActivityBtn).should('be.disabled');
-    })
+    cy.get(measurelibrary.runFhirValidationRecentActivityBtn).should('be.disabled')
+    cy.get(measurelibrary.convertToFhirRecentActivityBtn).should('be.disabled')
+  })
 })

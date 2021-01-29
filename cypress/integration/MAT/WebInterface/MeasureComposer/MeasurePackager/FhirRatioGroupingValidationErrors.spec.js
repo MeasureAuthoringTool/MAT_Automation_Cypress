@@ -100,7 +100,6 @@ describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
     dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
     dataCreation.addDefinition('Numerator', '"Initial Population"')
 
-
     //Add Initial Population, Denominator, and Numerator in Population Workspace
     cy.get(measureComposer.populationWorkspace).click()
     helper.verifySpinnerAppearsAndDissappears()
@@ -111,7 +110,7 @@ describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
     cy.get(measureComposer.initialPopulationDefinitionListBox).select('Initial Population')
     cy.get(measureComposer.initialPopulationSaveBtn).click()
     helper.visibleWithTimeout(measureComposer.warningMessage)
-    helper.waitToContainText(measureComposer.warningMessage,'Changes to Initial Populations have been successfully saved.')
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
 
     //Add Denominator
     cy.get(measureComposer.denominator).click()
@@ -136,7 +135,7 @@ describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
     //before saving grouping, click the grouping button and validate error appears
     cy.get(measureComposer.saveGrouping).click()
     helper.waitToContainText(measureComposer.groupingErrorOne, 'For a Ratio measure, a grouping must contain exactly one of each of the following: Denominator and Numerator.')
-    helper.waitToContainText(measureComposer.groupingErrorTwo,'For a Ratio measure, a grouping must contain at least one Initial Population.')
+    helper.waitToContainText(measureComposer.groupingErrorTwo, 'For a Ratio measure, a grouping must contain at least one Initial Population.')
     helper.verifySpinnerAppearsAndDissappears()
 
     //Add proper items to the grouping and save, should get success message
@@ -152,10 +151,9 @@ describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
     cy.get(measureComposer.addClauseButton).click()
     helper.verifySpinnerAppearsAndDissappears()
 
-
     cy.get(measureComposer.saveGrouping).click()
     helper.verifySpinnerAppearsAndDissappears()
-    helper.waitToContainText(measureComposer.measureGroupingSuccessMessage,'Grouping has been saved.')
+    helper.waitToContainText(measureComposer.measureGroupingSuccessMessage, 'Grouping has been saved.')
 
   })
 })

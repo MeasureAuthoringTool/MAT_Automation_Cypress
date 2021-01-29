@@ -6,7 +6,6 @@ import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPa
 import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
-
 describe('Attribute UI: Value: DateTime', () => {
 
   const measureName = 'FHIRmeasureCMS347'
@@ -18,7 +17,7 @@ describe('Attribute UI: Value: DateTime', () => {
   before('Login', () => {
 
     bonnieLogin.login()
-    bonnieUpload.UploadMeasureToBonnie(measureFileToUpload,false)
+    bonnieUpload.UploadMeasureToBonnie(measureFileToUpload, false)
     measureDetailsPage.navigateToMeasureDetails(measureName)
 
   })

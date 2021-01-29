@@ -81,11 +81,11 @@ describe('Attribute UI: Range Widget', () => {
     cy.log('dragAndDropAttribute')
     cy.get(testPatientPage.criteriaElementsContainer).contains('clinical summary').click()
     cy.get('.draggable').eq(2)
-        .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-        .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-        .trigger('mouseup') 
+      .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
+      .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
+      .trigger('mouseup')
     cy.get(testPatientPage.criteriaSectionTitle)
-        .should('contain.text', 'Clinical Summary: AllergyIntolerance: Statin Allergen')
+      .should('contain.text', 'Clinical Summary: AllergyIntolerance: Statin Allergen')
     cy.log('DragAndDropAllergyIntolerance - done')
   }
 

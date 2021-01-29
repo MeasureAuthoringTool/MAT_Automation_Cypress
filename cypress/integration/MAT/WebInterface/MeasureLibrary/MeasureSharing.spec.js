@@ -8,73 +8,73 @@ let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Sharing Measure with other measure developer', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-        qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
-        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
+    qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
-    it('Sharing QDM Measure', () => {
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+  it('Sharing QDM Measure', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measurelibrary.shareMeasureSearchBtn).click()
+    cy.get(measurelibrary.shareMeasureSearchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get('h1').should('contain.text', 'My Measures > Measure Sharing')
+    cy.get('h1').should('contain.text', 'My Measures > Measure Sharing')
 
-        cy.get(measurelibrary.shareWithSecondUserCheckBox).check()
+    cy.get(measurelibrary.shareWithSecondUserCheckBox).check()
 
-        cy.get(measurelibrary.shareSaveAndContinueBtn).click()
+    cy.get(measurelibrary.shareSaveAndContinueBtn).click()
 
-        cy.get(measurelibrary.shareWarningMessage).should('contain.text', qdmMeasure + ' sharing status has been successfully updated')
-   
-    })
+    cy.get(measurelibrary.shareWarningMessage).should('contain.text', qdmMeasure + ' sharing status has been successfully updated')
 
-    it('Sharing FHIR Measure', () => {
+  })
 
-        helper.verifySpinnerAppearsAndDissappears()
+  it('Sharing FHIR Measure', () => {
 
-        helper.enabledWithTimeout(measurelibrary.searchInputBox)
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-        cy.get(measurelibrary.searchBtn).click();
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-        gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.shareMeasureSearchBtn).click()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.shareMeasureSearchBtn).click()
 
-        cy.get('h1').should('contain.text', 'My Measures > Measure Sharing')
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.shareWithSecondUserCheckBox).click()
+    cy.get('h1').should('contain.text', 'My Measures > Measure Sharing')
 
-        cy.get(measurelibrary.shareSaveAndContinueBtn).click()
+    cy.get(measurelibrary.shareWithSecondUserCheckBox).click()
 
-        cy.get(measurelibrary.shareWarningMessage).should('contain.text', fhirMeasure + ' sharing status has been successfully updated')
-    })
+    cy.get(measurelibrary.shareSaveAndContinueBtn).click()
+
+    cy.get(measurelibrary.shareWarningMessage).should('contain.text', fhirMeasure + ' sharing status has been successfully updated')
+  })
 })

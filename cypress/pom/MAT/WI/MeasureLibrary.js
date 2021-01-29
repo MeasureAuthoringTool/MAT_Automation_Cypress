@@ -35,7 +35,6 @@ export const row2MeasureSearchName = '#MeasureSearchCellTable [__gwt_row="1"] .p
 export const row1Models = '#MeasureSearchCellTable [__gwt_row="0"] > .GB-MJYKBGJ'
 export const row2Models = '#MeasureSearchCellTable [__gwt_row="1"] > .GB-MJYKBGJ'
 
-
 //Recent Activity Button Bar
 export const createVersionDraftRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to create version or draft"]'
 export const createVersionRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to create version"]'
@@ -49,7 +48,6 @@ export const cloneRecentActivityEnabledBtn = '#MostRecentActivityCellTable_gridT
 export const exportRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to export"]'
 export const runFhirValidationRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to Run FHIR Validation"]'
 export const convertToFhirRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to convert"]'
-
 
 //Measure Search Button Bar
 export const createVersionDraftMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to create version or draft"]'

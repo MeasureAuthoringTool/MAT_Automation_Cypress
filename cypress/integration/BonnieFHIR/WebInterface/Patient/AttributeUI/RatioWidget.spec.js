@@ -77,8 +77,6 @@ describe('Attribute UI: Ratio Widget', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-
-
   function ratioWidget () {
     cy.log('addRatioWidget')
     cy.get(testPatientPage.attributeNameSelect).select('dosageInstruction.doseAndRate.rate')
@@ -86,10 +84,8 @@ describe('Attribute UI: Ratio Widget', () => {
     cy.get(testPatientPage.ratioValueField).eq(0).type(13)
     cy.get(testPatientPage.ratioValueField).eq(1).type(25)
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains("dosageInstruction.doseAndRate.rate: 13 '' : 25 ''")
+    cy.get(testPatientPage.exsistingAttribute).contains('dosageInstruction.doseAndRate.rate: 13 \'\' : 25 \'\'')
     cy.log('AddRatioWidget - done')
   }
-
-
 
 })

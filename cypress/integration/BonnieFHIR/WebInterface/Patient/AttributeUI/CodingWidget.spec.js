@@ -74,8 +74,6 @@ describe('Attribute UI: Coding Widget', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-
-
   function codingWidget () {
     cy.log('addCodingWidget')
     cy.get(testPatientPage.attributeNameSelect).select('class')
@@ -85,9 +83,5 @@ describe('Attribute UI: Coding Widget', () => {
     cy.get(testPatientPage.exsistingAttribute).contains('class: ActCode: AMB')
     cy.log('AddCodingWidget - done')
   }
-
-
-
-
 
 })

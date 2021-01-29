@@ -1,13 +1,12 @@
-import * as helper from "../../../../../support/helpers";
+import * as helper from '../../../../../support/helpers'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer"
-import * as oktaLogin from "../../../../../support/oktaLogin"
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
+import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
-
 
 // describe('Measure Composer: Function Argument Lightbox', () => {
 //
@@ -150,110 +149,110 @@ let qdmMeasure = ''
 
 describe('Measure Composer: Function Insert Attribute Lightbox', () => {
 
-    before('Login', () => {
-        oktaLogin.login()
-        
-        qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure','QDM')
-        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure','FHIR')
+  before('Login', () => {
+    oktaLogin.login()
 
-        helper.verifySpinnerAppearsAndDissappears()
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
+    qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-    it('QDM Measure: Validate the classes on Function Insert Attribute Lightbox', () => {
+    helper.verifySpinnerAppearsAndDissappears()
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
-        helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
-        cy.get(measurelibrary.searchBtn).click()
+  it('QDM Measure: Validate the classes on Function Insert Attribute Lightbox', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
+    cy.get(measurelibrary.searchBtn).click()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measureComposer.cqlWorkspace).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        cy.get(measureComposer.functionMeasureComposer).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Function')
+    cy.get(measureComposer.functionMeasureComposer).click()
 
-        cy.get(measureComposer.insertBtn).click()
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Function')
 
-        cy.get(measureComposer.selectItemType).select('Attributes')
+    cy.get(measureComposer.insertBtn).click()
 
-        // Verify sub-classes display on Function Insert Attribute drop-down
-        cy.get(measureComposer.selectAttributesDataType).select( 'Immunization, Not Administered')
-        .invoke('val').should('deep.equal', 'Immunization, Not Administered')
+    cy.get(measureComposer.selectItemType).select('Attributes')
 
-        cy.get(measureComposer.selectAttributesDataType).select( 'Substance, Not Recommended')
-        .invoke('val').should('deep.equal', 'Substance, Not Recommended')
+    // Verify sub-classes display on Function Insert Attribute drop-down
+    cy.get(measureComposer.selectAttributesDataType).select('Immunization, Not Administered')
+      .invoke('val').should('deep.equal', 'Immunization, Not Administered')
 
-        cy.get(measureComposer.attributeCancelBtn).click()
-        cy.get(measureComposer.attributeCancelBtn).click()
-        
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.selectAttributesDataType).select('Substance, Not Recommended')
+      .invoke('val').should('deep.equal', 'Substance, Not Recommended')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measureComposer.attributeCancelBtn).click()
+    cy.get(measureComposer.attributeCancelBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-    it('FHIR Measure: Validate the classes on Function Insert Attribute Lightbox', () => {
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+  })
 
-        helper.verifySpinnerAppearsAndDissappears()
+  it('FHIR Measure: Validate the classes on Function Insert Attribute Lightbox', () => {
 
-        helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-        
-        cy.get(measurelibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.searchBtn).click()
 
-        cy.get(measureComposer.cqlWorkspace).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
-        cy.get(measureComposer.functionMeasureComposer).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Function')
+    cy.get(measureComposer.cqlWorkspace).click()
 
-        cy.get(measureComposer.insertBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measureComposer.selectItemType).select('Attributes')
+    cy.get(measureComposer.functionMeasureComposer).click()
 
-        // Verify sub-classes display on Function Insert Attribute drop-down
-        cy.get(measureComposer.selectAttributesDataType).select( 'AdverseEvent.SuspectEntity')
-        .invoke('val').should('deep.equal', 'AdverseEvent.SuspectEntity')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Function')
 
-        cy.get(measureComposer.selectAttributesDataType).select('CareTeam.Participant')
-        .invoke('val').should('deep.equal', 'CareTeam.Participant')
-        
-        cy.get(measureComposer.selectAttributesDataType).select( 'Encounter.Diagnosis')
-        .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
+    cy.get(measureComposer.insertBtn).click()
 
-        cy.get(measureComposer.attributeCancelBtn).click()
-        cy.get(measureComposer.attributeCancelBtn).click()
-        
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.selectItemType).select('Attributes')
 
-        cy.get(measurelibrary.measureLibraryTab).click()
+    // Verify sub-classes display on Function Insert Attribute drop-down
+    cy.get(measureComposer.selectAttributesDataType).select('AdverseEvent.SuspectEntity')
+      .invoke('val').should('deep.equal', 'AdverseEvent.SuspectEntity')
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.selectAttributesDataType).select('CareTeam.Participant')
+      .invoke('val').should('deep.equal', 'CareTeam.Participant')
 
-    })
+    cy.get(measureComposer.selectAttributesDataType).select('Encounter.Diagnosis')
+      .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
+
+    cy.get(measureComposer.attributeCancelBtn).click()
+    cy.get(measureComposer.attributeCancelBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
 })

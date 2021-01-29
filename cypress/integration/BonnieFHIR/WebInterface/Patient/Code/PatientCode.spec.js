@@ -76,8 +76,6 @@ describe('Test Patient: Adding Code', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-
-
   function addCode () {
     cy.log('addCodeSystem')
     cy.get(testPatientPage.primaryCodeSystem).select('RXNORM')
@@ -86,7 +84,5 @@ describe('Test Patient: Adding Code', () => {
     cy.get(testPatientPage.exsistingCode).contains('RXNORM: 1944264')
     cy.log('AddCode - done')
   }
-
-
 
 })

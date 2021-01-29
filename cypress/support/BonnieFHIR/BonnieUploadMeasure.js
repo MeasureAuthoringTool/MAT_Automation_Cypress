@@ -3,7 +3,6 @@ import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialo
 import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
 import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
-
 export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) => {
   cy.log('UploadMeasureToBonnie')
   cy.log('UploadMeasureToBonnie measure file ' + fileToUpload)
@@ -16,14 +15,13 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
   helper.enabledWithTimeout(dashboard.uploadBtn)
 
   //setup for grabbing the VSAC call profile_names
-  cy.server({ method: 'GET'})
+  cy.server({ method: 'GET' })
   cy.route('/vsac_util/profile_names').as('vsac')
 
   cy.get(dashboard.uploadBtn).click()
 
   //waiting for VSAC call return 200
   cy.wait('@vsac').its('status').should('eq', 200)
-
 
   if (calculation) {
     changeMeasureCalculation(calculation)
@@ -41,8 +39,7 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
 
     helper.visibleWithTimeout(importMeasureDialog.vsacLogOut)
 
-  }
-  else if (vsacLoggedIn === undefined) {
+  } else if (vsacLoggedIn === undefined) {
 
     //wait for VSAC api key field to display for the user, and enter api key
     helper.visibleWithTimeout(importMeasureDialog.vsacApiKeyTextBox)

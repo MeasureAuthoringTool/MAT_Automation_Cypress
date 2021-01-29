@@ -1,10 +1,9 @@
 /// <reference types="../support" />
 import * as matheader from '../pom/MAT/WI/MATheader'
-import * as cqlComposer from '../pom/MAT/WI/CQLComposer'
-import * as measurelibrary from '../pom/MAT/WI/MeasureLibrary'
+
 const os = Cypress.platform // values are aix, darwin, freebsd, linux, openbsd, sunos, win32, android
 
-let API_Key = Cypress.env('VSAC_API_KEY')
+const API_Key = Cypress.env('VSAC_API_KEY')
 
 // Cookie management
 export const preserveCookies = () => {
@@ -39,9 +38,7 @@ export const copyScreenshots = () => {
   }
 }
 
-
 export const loginUMLS = () => {
-
   cy.get(matheader.UMLS).click()
 
   visibleWithTimeout(matheader.API_Key)
@@ -58,11 +55,9 @@ export const loginUMLS = () => {
   visibleWithTimeout(matheader.UMLS_continue)
   enabledWithTimeout(matheader.UMLS_continue)
   cy.get(matheader.UMLS_continue).click()
-
 }
 
 export const logout = () => {
-
   visibleWithTimeout(matheader.userprofile)
 
   cy.get(matheader.userprofile).click()
@@ -81,7 +76,6 @@ export const logout = () => {
 }
 
 export const logoutUserwithMultipleMAT = () => {
-
   visibleWithTimeout(matheader.userprofile)
 
   cy.get(matheader.userprofile).click()
@@ -173,6 +167,9 @@ export const notExistsWithTimeout = (element, timeout) => {
 }
 export const visibleWithTimeout = (element, timeout) => {
   let time
+
+  cy.log('Element->' + element)
+
   if (timeout === undefined) {
     time = 60000
   } else {
@@ -189,6 +186,13 @@ export const notVisibleWithTimeout = (element, timeout) => {
   }
   cy.get(element, { timeout: time }).should('not.be.visible')
 }
+export const disabledWithTimeout = (element, timeout = 60000) => {
+  cy.get(element, { timeout: timeout }).should('be.disabled')
+}
+export const notDisabledWithTimeout = (element, timeout = 60000) => {
+  cy.get(element, { timeout: timeout }).should('not.be.disabled')
+}
+
 export const notNull = (element) => {
   cy.get(element).should('not.be.null')
 }
@@ -498,7 +502,7 @@ export const clickRowDirection = (element, row, direction) => {
   cy.get(element).eq(row).click(direction)
 }
 export const paginationLength = (element, length) => {
-  cy.get(element).should(`have.length.lte`, length)
+  cy.get(element).should('have.length.lte', length)
 }
 export const clickLastRow = (element) => {
   cy.get(element).last().click()
@@ -555,7 +559,6 @@ export const spinnerVisible = () => {
   visibleWithTimeout(matheader.spinner, 60000)
 }
 export const spinnerNotVisible = () => {
-
   // waitToHaveText(matheader.spinnerShadow,'Loading Please Wait...')
   // waitToHaveText(matheader.spinnerShadow,'...')
 
@@ -570,12 +573,11 @@ export const spinnerExists = () => {
 }
 export const spinnerNotExists = () => {
   notExistsWithTimeout(matheader.spinner, 60000)
-  //notExistsWithTimeout(matheader.spinnerWrapper, 60000)
+  // notExistsWithTimeout(matheader.spinnerWrapper, 60000)
   notExistsWithTimeout(matheader.spinnerShadow, 60000)
   notExistsWithTimeout(matheader.spinnerModal, 60000)
 }
 export const verifySpinnerAppearsAndDissappears = () => {
-
   spinnerNotVisible()
   cy.wait(1500)
 }
@@ -607,6 +609,7 @@ export const createVirusTestFile = (fileType) => {
 }
 let username
 let password
+
 function getLoginCreds () {
   if (env === 'dev') {
     username = un
@@ -619,11 +622,12 @@ function getLoginCreds () {
     password = pwProd1
   }
 }
+
 let user
 export const loginSilent = () => {
   getLoginCreds()
   cy.request({
-    url: `/api/auth/authn`,
+    url: '/api/auth/authn',
     method: 'POST',
     body: {
       username: username,
@@ -644,12 +648,12 @@ export const loginSilent = () => {
   sleep(1000)
 }
 
-Date.prototype.getMonthFormatted = function() {
-  var month = this.getMonth() + 1;
-  return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
+Date.prototype.getMonthFormatted = function () {
+  var month = this.getMonth() + 1
+  return month < 10 ? '0' + month : '' + month // ('' + month) for string result
 }
 
-Date.prototype.getDayFormatted = function() {
-  var day = this.getDate();
-  return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
+Date.prototype.getDayFormatted = function () {
+  var day = this.getDate()
+  return day < 10 ? '0' + day : '' + day // ('' + month) for string result
 }

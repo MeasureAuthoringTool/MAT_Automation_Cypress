@@ -1,140 +1,139 @@
-import * as helper from "../../../../../support/helpers"
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary"
-import * as cqlLibrary from "../../../../../pom/MAT/WI/CqlLibrary"
-import * as cqlComposer from "../../../../../pom/MAT/WI/CQLComposer"
-import * as oktaLogin from "../../../../../support/oktaLogin"
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
-import * as createNewMeasure from "../../../../../pom/MAT/WI/CreateNewMeasure"
-import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer"
+import * as helper from '../../../../../support/helpers'
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
+import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
+import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
-
 
 let fhircqlLibrary = ''
 
 describe('CQL Composer: Validate the components on General Information page', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        fhircqlLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary','FHIR')
+    fhircqlLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
 
-        helper.verifySpinnerAppearsAndDissappears()
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
-    it('FHIR: Verify the General Information components and required meta data', () => {
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+  it('FHIR: Verify the General Information components and required meta data', () => {
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-        helper.enterText(cqlLibrary.searchInputBox, fhircqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, fhircqlLibrary)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        // General Information
-        cy.get(cqlComposer.cqlLibraryNameField).should('contain.value', fhircqlLibrary)
-        cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '0.0.000')
-        cy.get(cqlComposer.cqlLibraryCommentsField).type('This is library comment text to validate')
-        cy.get(cqlComposer.cqlLibraryUsingModel).should('contain.value', 'FHIR / CQL')
-        cy.get(cqlComposer.cqlLibraryModelVersion).should('contain.value', '4.0.1')
+    // General Information
+    cy.get(cqlComposer.cqlLibraryNameField).should('contain.value', fhircqlLibrary)
+    cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '0.0.000')
+    cy.get(cqlComposer.cqlLibraryCommentsField).type('This is library comment text to validate')
+    cy.get(cqlComposer.cqlLibraryUsingModel).should('contain.value', 'FHIR / CQL')
+    cy.get(cqlComposer.cqlLibraryModelVersion).should('contain.value', '4.0.1')
 
-        cy.get(cqlComposer.saveBtn).click()
-        cy.get(cqlComposer.fieldLevelError).eq(0).should('contain.text', 'This field is required.')
-        cy.get(cqlComposer.fieldLevelError).eq(1).should('contain.text', 'This field is required.')
+    cy.get(cqlComposer.saveBtn).click()
+    cy.get(cqlComposer.fieldLevelError).eq(0).should('contain.text', 'This field is required.')
+    cy.get(cqlComposer.fieldLevelError).eq(1).should('contain.text', 'This field is required.')
 
-        cy.get(cqlComposer.cqlLibraryDescriptionField).type('This is library description text to validate')
-        cy.get(cqlComposer.cqlLibraryPublisherDropDown).select('Allscripts')
-        cy.get(cqlComposer.cqlLibraryExperimentalCheckbox).click()
+    cy.get(cqlComposer.cqlLibraryDescriptionField).type('This is library description text to validate')
+    cy.get(cqlComposer.cqlLibraryPublisherDropDown).select('Allscripts')
+    cy.get(cqlComposer.cqlLibraryExperimentalCheckbox).click()
 
-        cy.get(cqlComposer.saveBtn).click()
+    cy.get(cqlComposer.saveBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-        helper.enterText(cqlLibrary.searchInputBox, fhircqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, fhircqlLibrary)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-         // Versioning draft library
-         helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-         gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
-         cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
-         cy.get(cqlLibrary.majorVersionTypeRadio).click()
-         cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
+    // Versioning draft library
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+    cy.get(cqlLibrary.majorVersionTypeRadio).click()
+    cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
-         helper.verifySpinnerAppearsAndDissappears()
-         helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-         cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-         helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-         // Include library with new FHIR Measure
-         helper.visibleWithTimeout(measurelibrary.newMeasureButton)
-         cy.get(measurelibrary.newMeasureButton).click()
-         let measureName = 'CreateFHIRMeasure' + Date.now()
+    // Include library with new FHIR Measure
+    helper.visibleWithTimeout(measurelibrary.newMeasureButton)
+    cy.get(measurelibrary.newMeasureButton).click()
+    let measureName = 'CreateFHIRMeasure' + Date.now()
 
-         cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-         cy.get(createNewMeasure.modelradioFHIR).click()
-         cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
-         cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
-         cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
-         cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
+    cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
+    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
+    cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
+    cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
+    cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
-         cy.get(createNewMeasure.saveAndContinueBtn).click()
+    cy.get(createNewMeasure.saveAndContinueBtn).click()
 
-         cy.get(createNewMeasure.confirmationContinueBtn).click()
+    cy.get(createNewMeasure.confirmationContinueBtn).click()
 
-         helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-         cy.get(measureComposer.cqlWorkspace).click()
+    cy.get(measureComposer.cqlWorkspace).click()
 
-         helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-         helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-         //Includes
+    //Includes
 
-         cy.get(measureComposer.includes).click()
+    cy.get(measureComposer.includes).click()
 
-         cy.get(measureComposer.searchInputBox).type(fhircqlLibrary, { delay: 50 })
-         cy.get(measureComposer.searchBtn).click()
-         cy.get(measureComposer.availableLibrariesRow1checkbox).click()
-         cy.get(measureComposer.libraryAliasInputBox).type('Test', { delay: 50 })
-         cy.get(measureComposer.saveIncludes).click()
+    cy.get(measureComposer.searchInputBox).type(fhircqlLibrary, { delay: 50 })
+    cy.get(measureComposer.searchBtn).click()
+    cy.get(measureComposer.availableLibrariesRow1checkbox).click()
+    cy.get(measureComposer.libraryAliasInputBox).type('Test', { delay: 50 })
+    cy.get(measureComposer.saveIncludes).click()
 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.visibleWithTimeout(measureComposer.warningMessage)
 
-         //CQL Library Editor
+    //CQL Library Editor
 
-         cy.get(measureComposer.cqlLibraryEditor).click()
+    cy.get(measureComposer.cqlLibraryEditor).click()
 
-         helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor,'CQL Library Editor')
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleCQLLibraryEditor, 'CQL Library Editor')
 
-         helper.visibleWithTimeout(measureComposer.warningMessage)
-         helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    helper.waitToContainText(measureComposer.warningMessage, 'You are viewing CQL with no validation errors.')
 
-         cy.get(measurelibrary.measureLibraryTab).click()
+    cy.get(measurelibrary.measureLibraryTab).click()
 
-         helper.verifySpinnerAppearsAndDissappears()
-   })
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
 })
 
