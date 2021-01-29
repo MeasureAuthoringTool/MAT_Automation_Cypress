@@ -2,878 +2,830 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
-import * as cqlComposer from "../../../../pom/MAT/WI/CQLComposer"
+import * as cqlComposer from '../../../../pom/MAT/WI/CQLComposer'
 import * as oktaLogin from '../../../../support/oktaLogin'
-import * as dataCreation from "../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 
 let draftCqlLibraryNotowner = ''
 let draftCqlLibraryOwner = ''
 let versionedCQLLibary = ''
 
-
 describe('CQL Library Grid Selection', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+
+    dataCreation.createDraftCqlLibrary('qdmDraft')
+
+    dataCreation.createDraftCqlLibrary('FhirDraft', 'FHIR')
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+  it('Recent Activity', () => {
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    //populating recent activity grid
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row2CqlLibrarySearch)
+    gridRowActions.doubleClickRow(cqlLibrary.row2CqlLibrarySearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
+
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
         helper.verifySpinnerAppearsAndDissappears()
-
-        dataCreation.createDraftCqlLibrary('qdmDraft')
-
-        dataCreation.createDraftCqlLibrary('FhirDraft', 'FHIR')
-
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
         helper.verifySpinnerAppearsAndDissappears()
-
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
-    it('Recent Activity', () => {
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        //populating recent activity grid
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        helper.visibleWithTimeout(cqlLibrary.row2CqlLibrarySearch)
-        gridRowActions.doubleClickRow(cqlLibrary.row2CqlLibrarySearch)
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
-
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                helper.verifySpinnerAppearsAndDissappears()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                helper.verifySpinnerAppearsAndDissappears()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                //cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
-
-        cy.wait(1000)
-
-        helper.isChecked(cqlLibrary.row1RecentActivityCheckbox)
-
-        cy.get(cqlLibrary.row2RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row2RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row2RecentActivity).click()
-            }
-
-        })
-
-        helper.isChecked(cqlLibrary.row2RecentActivityCheckbox)
-        helper.isNotChecked(cqlLibrary.row1RecentActivityCheckbox)
-
-        cy.wait(1000)
-
-        cy.get(cqlLibrary.row2RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row2RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row2RecentActivity).click()
-            }
-
-        })
-
-        helper.isNotChecked(cqlLibrary.row2RecentActivityCheckbox)
-        helper.isNotChecked(cqlLibrary.row1RecentActivityCheckbox)
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        //cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
     })
 
-    it('CQL Library Search Table', () => {
+    cy.wait(1000)
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
+    helper.isChecked(cqlLibrary.row1RecentActivityCheckbox)
 
-        helper.isChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
+    cy.get(cqlLibrary.row2RecentActivity).then(elm => {
 
-        cy.get(cqlLibrary.row2CqlLibrarySearch).click()
-
-        helper.isChecked(cqlLibrary.row2CqlLibrarySearchCheckbox)
-        helper.isNotChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
-
-        cy.wait(1000)
-
-        cy.get(cqlLibrary.row2CqlLibrarySearch).click()
-
-        helper.isNotChecked(cqlLibrary.row2CqlLibrarySearchCheckbox)
-        helper.isNotChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row2RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row2RecentActivity).click()
+      }
 
     })
+
+    helper.isChecked(cqlLibrary.row2RecentActivityCheckbox)
+    helper.isNotChecked(cqlLibrary.row1RecentActivityCheckbox)
+
+    cy.wait(1000)
+
+    cy.get(cqlLibrary.row2RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row2RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row2RecentActivity).click()
+      }
+
+    })
+
+    helper.isNotChecked(cqlLibrary.row2RecentActivityCheckbox)
+    helper.isNotChecked(cqlLibrary.row1RecentActivityCheckbox)
+
+  })
+
+  it('CQL Library Search Table', () => {
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    cy.get(cqlLibrary.row1CqlLibrarySearch).click()
+
+    helper.isChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
+
+    cy.get(cqlLibrary.row2CqlLibrarySearch).click()
+
+    helper.isChecked(cqlLibrary.row2CqlLibrarySearchCheckbox)
+    helper.isNotChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
+
+    cy.wait(1000)
+
+    cy.get(cqlLibrary.row2CqlLibrarySearch).click()
+
+    helper.isNotChecked(cqlLibrary.row2CqlLibrarySearchCheckbox)
+    helper.isNotChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
+
+  })
 })
 
 describe('CQL Library Recent Activity Grid Button Bar', () => {
-    before('Login', () => {
+  before('Login', () => {
 
-        draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
+    draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
 
-        oktaLogin.login()
-        draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('qdmDraft')
+    oktaLogin.login()
+    draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('qdmDraft')
 
-        versionedCQLLibary = dataCreation.createDraftCqlLibrary('qdmVersioned')
+    versionedCQLLibary = dataCreation.createDraftCqlLibrary('qdmVersioned')
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
+    cy.get(cqlLibrary.searchBtn).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+
+    cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+
+    cy.get(cqlLibrary.majorVersionTypeRadio).click()
+
+    cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+
+  it('Enabled/Disabled Recent Activity Not The Owner', () => {
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    //populating recent activity grid
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryNotowner)
+    cy.get(cqlLibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
+
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
         helper.verifySpinnerAppearsAndDissappears()
-
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
-
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
-
-        cy.get(cqlLibrary.majorVersionTypeRadio).click()
-
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
-
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
         helper.verifySpinnerAppearsAndDissappears()
-
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
-
-    it('Enabled/Disabled Recent Activity Not The Owner', () => {
-
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.verifySpinnerAppearsAndDissappears()
-
-        //populating recent activity grid
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryNotowner)
-        cy.get(cqlLibrary.searchBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
-
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                helper.verifySpinnerAppearsAndDissappears()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                helper.verifySpinnerAppearsAndDissappears()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
-
-        helper.disabled(cqlLibrary.createVersionDraftRecentActivityBtn)
-        helper.enabled(cqlLibrary.historyRecentActivityBtn)
-        helper.enabled(cqlLibrary.viewRecentActivityBtn)
-        helper.disabled(cqlLibrary.shareRecentActivityBtn)
-        helper.disabled(cqlLibrary.deleteRecentActivityBtn)
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
     })
 
-    it('Enabled/Disabled Recent Activity The Owner', () => {
+    helper.disabled(cqlLibrary.createVersionDraftRecentActivityBtn)
+    helper.enabled(cqlLibrary.historyRecentActivityBtn)
+    helper.enabled(cqlLibrary.viewRecentActivityBtn)
+    helper.disabled(cqlLibrary.shareRecentActivityBtn)
+    helper.disabled(cqlLibrary.deleteRecentActivityBtn)
 
-            cy.get(cqlLibrary.newLibraryBtn).click()
+  })
 
-            let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+  it('Enabled/Disabled Recent Activity The Owner', () => {
 
-            cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+    cy.get(cqlLibrary.newLibraryBtn).click()
 
-            cy.get(createNewCqlLibrary.modelQDMRadio).click()
+    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
 
-            cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
 
-            cy.get(cqlComposer.confirmationContinueBtn).click()
+    cy.get(createNewCqlLibrary.modelQDMRadio).click()
 
-            helper.verifySpinnerAppearsAndDissappears()
+    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-            cy.get(measurelibrary.cqlLibraryTab).click()
+    cy.get(cqlComposer.confirmationContinueBtn).click()
 
-            helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-            cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
-                if (Cypress.$(elm).length === 2)
-                {
-                    helper.verifySpinnerAppearsAndDissappears()
-                    cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                    cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                }
-                else
-                {
-                    helper.verifySpinnerAppearsAndDissappears()
-                    cy.get(cqlLibrary.row1RecentActivity).click()
-                    cy.get(cqlLibrary.row1RecentActivity).click()
-                }
+    helper.verifySpinnerAppearsAndDissappears()
 
-            })
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
-            helper.enabled(cqlLibrary.createVersionRecentActivityBtn)
-            helper.enabled(cqlLibrary.historyRecentActivityBtn)
-            helper.enabled(cqlLibrary.editRecentActivityEnabledBtn)
-            helper.enabled(cqlLibrary.shareRecentActivityBtn)
-            helper.enabled(cqlLibrary.deleteRecentActivityBtn)
-
-            cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
-            cy.get(cqlLibrary.majorVersionTypeRadio).click()
-            cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
-
-            helper.verifySpinnerAppearsAndDissappears()
-
-            cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-                if (Cypress.$(elm).length === 2)
-                {
-                    helper.verifySpinnerAppearsAndDissappears()
-                    cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                    cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                }
-                else
-                {
-                    helper.verifySpinnerAppearsAndDissappears()
-                    cy.get(cqlLibrary.row1RecentActivity).click()
-                    cy.get(cqlLibrary.row1RecentActivity).click()
-                }
-
-            })
-
-            helper.enabled(cqlLibrary.createDraftRecentActivityBtn)
-            helper.enabled(cqlLibrary.historyRecentActivityBtn)
-            helper.enabled(cqlLibrary.viewRecentActivityBtn)
-            helper.enabled(cqlLibrary.shareRecentActivityBtn)
-            helper.disabled(cqlLibrary.deleteRecentActivityBtn)
-
-        })
-
-
-
-    it('Recent Activity Button Bar Create Version', () => {
-
-        cy.get(cqlLibrary.newLibraryBtn).click()
-
-        let cqlLibraryName = 'CQLLibraryTest' + Date.now()
-
-        cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
-
-        cy.get(createNewCqlLibrary.modelQDMRadio).click()
-
-        cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
-
-        cy.get(cqlComposer.confirmationContinueBtn).click()
-
+      if (Cypress.$(elm).length === 2) {
         helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
         helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                helper.verifySpinnerAppearsAndDissappears()
-                helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                helper.verifySpinnerAppearsAndDissappears()
-                helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
-
-        cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
-
-        cy.get(cqlLibrary.title).contains("My CQL Library > Create CQL Library Version of Draft")
-
-        cy.get(cqlLibrary.cancelBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
     })
-    it('Recent Activity Button Bar Create Draft', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabled(cqlLibrary.createVersionRecentActivityBtn)
+    helper.enabled(cqlLibrary.historyRecentActivityBtn)
+    helper.enabled(cqlLibrary.editRecentActivityEnabledBtn)
+    helper.enabled(cqlLibrary.shareRecentActivityBtn)
+    helper.enabled(cqlLibrary.deleteRecentActivityBtn)
 
+    cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
+    cy.get(cqlLibrary.majorVersionTypeRadio).click()
+    cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
         helper.verifySpinnerAppearsAndDissappears()
-
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
-
-        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
-
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
         helper.verifySpinnerAppearsAndDissappears()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
-
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
-
-        cy.get(cqlLibrary.createDraftRecentActivityBtn).click()
-
-        cy.get(cqlLibrary.title).contains("My CQL Library > Draft CQL Library")
-
-        cy.get(cqlLibrary.draftCancelBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
     })
 
-    it('Recent Activity Button Bar History', () => {
+    helper.enabled(cqlLibrary.createDraftRecentActivityBtn)
+    helper.enabled(cqlLibrary.historyRecentActivityBtn)
+    helper.enabled(cqlLibrary.viewRecentActivityBtn)
+    helper.enabled(cqlLibrary.shareRecentActivityBtn)
+    helper.disabled(cqlLibrary.deleteRecentActivityBtn)
+
+  })
+
+  it('Recent Activity Button Bar Create Version', () => {
+
+    cy.get(cqlLibrary.newLibraryBtn).click()
+
+    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+
+    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+
+    cy.get(createNewCqlLibrary.modelQDMRadio).click()
+
+    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+
+    cy.get(cqlComposer.confirmationContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-
-        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
-
-        cy.get(cqlLibrary.historyRecentActivityBtn).click()
-
-        cy.get(cqlLibrary.title).contains("My CQL Library > History")
-
-        cy.get(cqlLibrary.returnToCqlLibrary).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
     })
 
-    it('Recent Activity Button Bar View', () => {
+    cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
-        cy.get(cqlLibrary.searchBtn).click()
+    cy.get(cqlLibrary.title).contains('My CQL Library > Create CQL Library Version of Draft')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(cqlLibrary.cancelBtn).click()
 
-        gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+  })
+  it('Recent Activity Button Bar Create Draft', () => {
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
+    helper.verifySpinnerAppearsAndDissappears()
 
-        })
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
-        cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
-        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
-
-        cy.get(cqlLibrary.viewRecentActivityBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        helper.disabled(cqlComposer.saveBtn)
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
     })
 
-    it('Recent Activity Button Bar Edit', () => {
+    cy.get(cqlLibrary.createDraftRecentActivityBtn).click()
 
-        helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
-        cy.get(cqlLibrary.newLibraryBtn).click()
+    cy.get(cqlLibrary.title).contains('My CQL Library > Draft CQL Library')
 
-        let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+    cy.get(cqlLibrary.draftCancelBtn).click()
 
-        cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+    helper.verifySpinnerAppearsAndDissappears()
+  })
 
-        cy.get(createNewCqlLibrary.modelQDMRadio).click()
+  it('Recent Activity Button Bar History', () => {
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlComposer.confirmationContinueBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
-
-        cy.get(cqlLibrary.editRecentActivityEnabledBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        helper.enabled(cqlComposer.saveBtn)
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
     })
 
-    it('Recent Activity Button Bar Share', () => {
+    cy.get(cqlLibrary.historyRecentActivityBtn).click()
 
-        helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
-        cy.get(cqlLibrary.newLibraryBtn).click()
+    cy.get(cqlLibrary.title).contains('My CQL Library > History')
 
-        let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+    cy.get(cqlLibrary.returnToCqlLibrary).click()
 
-        cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(createNewCqlLibrary.modelQDMRadio).click()
+  })
 
-        cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+  it('Recent Activity Button Bar View', () => {
 
-        cy.get(cqlComposer.confirmationContinueBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
+    helper.verifySpinnerAppearsAndDissappears()
 
-        })
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.shareRecentActivityBtn).click()
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(cqlLibrary.title).contains("My CQL Libraries > CQL Library Sharing")
-
-        cy.get(cqlLibrary.shareCancelBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
     })
 
-    it('Recent Activity Button Bar Delete', () => {
+    cy.get(cqlLibrary.createVersionRecentActivityBtn).click()
 
-        helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
-        cy.get(cqlLibrary.newLibraryBtn).click()
+    cy.get(cqlLibrary.majorVersionTypeRadio).click()
 
-        let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+    cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
-        cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(createNewCqlLibrary.modelQDMRadio).click()
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
-        cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
-
-        cy.get(cqlComposer.confirmationContinueBtn).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-
-        cy.get(measurelibrary.cqlLibraryTab).click()
-
-        helper.verifySpinnerAppearsAndDissappears()
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row1RecentActivity).click()
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
-
-        cy.get(cqlLibrary.deleteRecentActivityBtn).click()
-
-        helper.visible(cqlLibrary.modal)
-
-        cy.get(cqlLibrary.modalCloseBtn).click()
-
-        cy.get(cqlLibrary.row1RecentActivity).then(elm => {
-
-            if (Cypress.$(elm).length === 2)
-            {
-                cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-            }
-            else
-            {
-                cy.get(cqlLibrary.row1RecentActivity).click()
-            }
-
-        })
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
 
     })
+
+    cy.get(cqlLibrary.viewRecentActivityBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.disabled(cqlComposer.saveBtn)
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
+
+  it('Recent Activity Button Bar Edit', () => {
+
+    helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
+    cy.get(cqlLibrary.newLibraryBtn).click()
+
+    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+
+    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+
+    cy.get(createNewCqlLibrary.modelQDMRadio).click()
+
+    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+
+    cy.get(cqlComposer.confirmationContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
+
+    })
+
+    cy.get(cqlLibrary.editRecentActivityEnabledBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabled(cqlComposer.saveBtn)
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
+
+  it('Recent Activity Button Bar Share', () => {
+
+    helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
+    cy.get(cqlLibrary.newLibraryBtn).click()
+
+    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+
+    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+
+    cy.get(createNewCqlLibrary.modelQDMRadio).click()
+
+    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+
+    cy.get(cqlComposer.confirmationContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
+
+    })
+
+    cy.get(cqlLibrary.shareRecentActivityBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(cqlLibrary.title).contains('My CQL Libraries > CQL Library Sharing')
+
+    cy.get(cqlLibrary.shareCancelBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
+
+  it('Recent Activity Button Bar Delete', () => {
+
+    helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
+    cy.get(cqlLibrary.newLibraryBtn).click()
+
+    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+
+    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+
+    cy.get(createNewCqlLibrary.modelQDMRadio).click()
+
+    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
+
+    cy.get(cqlComposer.confirmationContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
+
+    })
+
+    cy.get(cqlLibrary.deleteRecentActivityBtn).click()
+
+    helper.visible(cqlLibrary.modal)
+
+    cy.get(cqlLibrary.modalCloseBtn).click()
+
+    cy.get(cqlLibrary.row1RecentActivity).then(elm => {
+
+      if (Cypress.$(elm).length === 2) {
+        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+      } else {
+        cy.get(cqlLibrary.row1RecentActivity).click()
+      }
+
+    })
+
+  })
 
 })
 
 describe('CQL Library Search Grid Button Bar', () => {
-    before('Login', () => {
+  before('Login', () => {
 
-        draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
+    draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
 
-        oktaLogin.login()
+    oktaLogin.login()
 
-        draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('QDMOwner')
+    draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('QDMOwner')
 
-        versionedCQLLibary = dataCreation.createDraftCqlLibrary('versionedCQLLibary')
+    versionedCQLLibary = dataCreation.createDraftCqlLibrary('versionedCQLLibary')
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+    cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
 
-        cy.get(cqlLibrary.majorVersionTypeRadio).click()
+    cy.get(cqlLibrary.majorVersionTypeRadio).click()
 
-        cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
+    cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
-    beforeEach('Preserve Session', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
+  })
+  beforeEach('Preserve Session', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
 
-    it('Enabled/Disabled All CQL Libraries Not The Owner', () => {
+  it('Enabled/Disabled All CQL Libraries Not The Owner', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryNotowner)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryNotowner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        helper.disabled(cqlLibrary.createVersionDraftCqllibrariesBtn)
-        helper.enabled(cqlLibrary.historyCqllibrariesBtn)
-        helper.enabled(cqlLibrary.viewCqllibrariesBtn)
-        helper.disabled(cqlLibrary.shareCqllibrariesBtn)
-        helper.disabled(cqlLibrary.deleteCqllibrariesBtn)
+    helper.disabled(cqlLibrary.createVersionDraftCqllibrariesBtn)
+    helper.enabled(cqlLibrary.historyCqllibrariesBtn)
+    helper.enabled(cqlLibrary.viewCqllibrariesBtn)
+    helper.disabled(cqlLibrary.shareCqllibrariesBtn)
+    helper.disabled(cqlLibrary.deleteCqllibrariesBtn)
 
-    })
+  })
 
-    it('Enabled/Disabled All CQL Libraries The Owner', () => {
+  it('Enabled/Disabled All CQL Libraries The Owner', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        helper.enabled(cqlLibrary.createVersionCqllibrariesBtn)
-        helper.enabled(cqlLibrary.historyCqllibrariesBtn)
-        helper.enabled(cqlLibrary.editCqllibrariesEnabledBtn)
-        helper.enabled(cqlLibrary.shareCqllibrariesBtn)
-        helper.enabled(cqlLibrary.deleteCqllibrariesBtn)
+    helper.enabled(cqlLibrary.createVersionCqllibrariesBtn)
+    helper.enabled(cqlLibrary.historyCqllibrariesBtn)
+    helper.enabled(cqlLibrary.editCqllibrariesEnabledBtn)
+    helper.enabled(cqlLibrary.shareCqllibrariesBtn)
+    helper.enabled(cqlLibrary.deleteCqllibrariesBtn)
 
-        cy.get(cqlLibrary.searchInputBox).clear()
+    cy.get(cqlLibrary.searchInputBox).clear()
 
-    })
+  })
 
-    it('CQL Libraries Button Bar Create Version', () => {
+  it('CQL Libraries Button Bar Create Version', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+    cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
 
-        cy.get(cqlLibrary.title).contains("My CQL Library > Create CQL Library Version of Draft")
+    cy.get(cqlLibrary.title).contains('My CQL Library > Create CQL Library Version of Draft')
 
-        cy.get(cqlLibrary.cancelBtn).click()
+    cy.get(cqlLibrary.cancelBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
-    it('CQL Libraries Button Bar Create Draft', () => {
+  })
+  it('CQL Libraries Button Bar Create Draft', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.createDraftCqllibrariesBtn).click()
+    cy.get(cqlLibrary.createDraftCqllibrariesBtn).click()
 
-        cy.get(cqlLibrary.title).contains("My CQL Library > Draft CQL Library")
+    cy.get(cqlLibrary.title).contains('My CQL Library > Draft CQL Library')
 
-        cy.get(cqlLibrary.draftCancelBtn).click()
+    cy.get(cqlLibrary.draftCancelBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
-    })
-    it('CQL Libraries Button Bar History', () => {
+    helper.verifySpinnerAppearsAndDissappears()
+  })
+  it('CQL Libraries Button Bar History', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.historyCqllibrariesBtn).click()
+    cy.get(cqlLibrary.historyCqllibrariesBtn).click()
 
-        cy.get(cqlLibrary.title).contains("My CQL Library > History")
+    cy.get(cqlLibrary.title).contains('My CQL Library > History')
 
-        cy.get(cqlLibrary.returnToCqlLibrary).click()
+    cy.get(cqlLibrary.returnToCqlLibrary).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+  })
 
-    it('CQL Libraries Button Bar View', () => {
+  it('CQL Libraries Button Bar View', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.viewCqllibrariesBtn).click()
+    cy.get(cqlLibrary.viewCqllibrariesBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.disabled(cqlComposer.saveBtn)
+    helper.disabled(cqlComposer.saveBtn)
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+  })
 
-    it('CQL Libraries Button Bar Edit', () => {
+  it('CQL Libraries Button Bar Edit', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.editCqllibrariesEnabledBtn).click()
+    cy.get(cqlLibrary.editCqllibrariesEnabledBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabled(cqlComposer.saveBtn)
+    helper.enabled(cqlComposer.saveBtn)
 
-        cy.get(measurelibrary.cqlLibraryTab).click()
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+  })
 
-    it('CQL Libraries Button Bar Share', () => {
+  it('CQL Libraries Button Bar Share', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.shareCqllibrariesBtn).click()
+    cy.get(cqlLibrary.shareCqllibrariesBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.title).contains("My CQL Libraries > CQL Library Sharing")
+    cy.get(cqlLibrary.title).contains('My CQL Libraries > CQL Library Sharing')
 
-        cy.get(cqlLibrary.shareCancelBtn).click()
+    cy.get(cqlLibrary.shareCancelBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
+  })
 
-    it('CQL Libraries Button Bar Delete', () => {
+  it('CQL Libraries Button Bar Delete', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-        helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.deleteCqllibrariesBtn).click()
+    cy.get(cqlLibrary.deleteCqllibrariesBtn).click()
 
-        helper.visible(cqlLibrary.modal)
+    helper.visible(cqlLibrary.modal)
 
-        cy.get(cqlLibrary.modalCloseBtn).click()
+    cy.get(cqlLibrary.modalCloseBtn).click()
 
-        cy.get(cqlLibrary.row1CqlLibrarySearch).click()
-    })
+    cy.get(cqlLibrary.row1CqlLibrarySearch).click()
+  })
 })
 

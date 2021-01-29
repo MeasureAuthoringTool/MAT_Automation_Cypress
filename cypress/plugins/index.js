@@ -28,7 +28,7 @@ function getConfigurationByFile (file) {
 // }
 
 const browserify = require('@cypress/browserify-preprocessor')
-const getCompareSnapshotsPlugin = require('cypress-visual-regression/dist/plugin');
+const getCompareSnapshotsPlugin = require('cypress-visual-regression/dist/plugin')
 module.exports = (on, config) => {
   const file = config.env.configFile || 'qa'
   const options = {
@@ -49,17 +49,17 @@ module.exports = (on, config) => {
       getConfigurationByFile(file).then((envConfig) =>
         queryMongo(query, envConfig)
       )
-      return null;
+      return null
     }
-  });
+  })
   on('file:preprocessor', browserify(options))
-  getCompareSnapshotsPlugin(on);
+  getCompareSnapshotsPlugin(on)
   return getConfigurationByFile(file)
 }
 
 const mysql = require('mysql')
 
-function queryTestDb(query, config) {
+function queryTestDb (query, config) {
   // creates a new mysql connection using credentials from cypress.json env's
   const db = {
     host: config.env.db_host,
@@ -87,7 +87,7 @@ const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
 const tunnel = require('tunnel-ssh')
 
-function queryMongo(query, config) {
+function queryMongo (query, config) {
   //console.log(config.env.ssh_key)
   const sshTunnelConfig = {
     agent: process.env.SSH_AUTH_SOCK,
@@ -106,16 +106,16 @@ function queryMongo(query, config) {
       //console.log("SSH connection error: ", error)
     }
     // Connection URL
-    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort;
+    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
     // Database Name
-    const dbName = config.env.mongo_db;
+    const dbName = config.env.mongo_db
     // Use connect method to connect to the server
     MongoClient.connect(url, function (err, client) {
-      assert.equal(null, err);
+      assert.equal(null, err)
       //console.log("Connected successfully to server")
 
-      const db = client.db(dbName);
-      findDocuments(db, 'cqm_measures', query, function() {
+      const db = client.db(dbName)
+      findDocuments(db, 'cqm_measures', query, function () {
         client.close()
       })
     })

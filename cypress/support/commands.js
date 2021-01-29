@@ -71,39 +71,39 @@ Cypress.Commands.add('uploadMultipleFiles', (fileUrlOrUrls, selector, type = '')
 })
 
 Cypress.Commands.add('addOperationalTrackLoad', (user, file, modelId) => {
-    const testUsername = users.chooseUser(user).username
-    const testPassword = users.chooseUser(user).password
-    // Login and save token
-    cy.request({
-        url: 'api/v1/user/login',
+  const testUsername = users.chooseUser(user).username
+  const testPassword = users.chooseUser(user).password
+  // Login and save token
+  cy.request({
+    url: 'api/v1/user/login',
+    method: 'POST',
+    body: {
+      username: testUsername,
+      password: testPassword
+    },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).then((response) => {
+    // cy.log(response.body.data.user.token)
+    token = response.body.data.user.token
+    cy.fixture(file).then((ot) => {
+      cy.request({
+        url: `/api/v1/apm/model/${modelId}/operational_track`,
         method: 'POST',
-        body: {
-            username: testUsername,
-            password: testPassword
-        },
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        }
-    }).then((response) => {
-        // cy.log(response.body.data.user.token)
-        token = response.body.data.user.token
-        cy.fixture(file).then((ot) => {
-            cy.request({
-                url: `/api/v1/apm/model/${modelId}/operational_track`,
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                auth: {
-                    bearer: token
-                },
-                body: ot
-            }).then((response) => {
-                cy.log(response)
-                expect(response.status).to.eql(201)
-            })
-        })
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        auth: {
+          bearer: token
+        },
+        body: ot
+      }).then((response) => {
+        cy.log(response)
+        expect(response.status).to.eql(201)
+      })
     })
+  })
 })

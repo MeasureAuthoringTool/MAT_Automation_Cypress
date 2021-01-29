@@ -192,7 +192,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 
     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}valueset \"Annual Wellness Visit\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240'")
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}valueset "Annual Wellness Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240\'')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -235,9 +235,9 @@ describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS
     cy.get(cqlComposer.cqlLibraryEditor).click()
     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}{downarrow}{downarrow}codesystem \"LOINC\": 'http://loinc.org' version '2.67'{enter}")
-    cy.get(cqlComposer.cqlLibraryEditorBox).type("{downarrow}code \"Birth date\": '21112-8' from \"LOINC\" display 'Birth date'{enter}")
-    cy.get(cqlComposer.cqlLibraryEditorBox).type("valueset \"AAN - Encounter Codes Grouping\": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286'{enter}")
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('valueset "AAN - Encounter Codes Grouping": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286\'{enter}')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -282,14 +282,14 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
     helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2, 'Definition')
 
     dataCreation.addDefinition('Initial Population', '"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
-          '  with ["Patient Characteristic Birthdate": "Birth date"] BirthDate\n' +
-          '    such that Global."CalendarAgeInYearsAt" ( BirthDate.birthDatetime, start of EDVisitMP.relevantPeriod ) >= 18')
+      '  with ["Patient Characteristic Birthdate": "Birth date"] BirthDate\n' +
+      '    such that Global."CalendarAgeInYearsAt" ( BirthDate.birthDatetime, start of EDVisitMP.relevantPeriod ) >= 18')
 
     cy.get(cqlComposer.cqlLibraryEditor).click()
 
     helper.visibleWithTimeout(cqlComposer.warningMessage)
     cy.get(cqlComposer.warningMessage).should('contain.text', ' You are viewing the CQL file with validation errors. ' +
-          'Errors are marked with a red square on the line number.')
+      'Errors are marked with a red square on the line number.')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -304,9 +304,9 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
     helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2, 'Definition')
 
     dataCreation.addDefinition('syntax errors', 'asdfasdf\n' +
-          'asdfasdf\n' +
-          '\n' +
-          'asdfasdf')
+      'asdfasdf\n' +
+      '\n' +
+      'asdfasdf')
 
     cy.get(cqlComposer.cqlLibraryEditor).click()
 

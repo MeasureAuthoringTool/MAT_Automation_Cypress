@@ -30,20 +30,19 @@ export const patientInverseBtn = 'button.btn-danger-inverse:visible[data-call-me
 export const patientDeleteBtn = 'button.btn-danger:visible[data-call-method="deletePatient"]'
 export const measureUpdateBtn = 'button:visible[data-call-method="updateMeasure"]'
 
-
 export function navigateToHomeMeasurePage () {
   cy.log('navigateToHomeMeasurePage')
   cy.get(measurePageNavigationBtn).click()
   cy.log('navigateToHomeMeasurePage - done')
 }
 
-export function clickDeleteMeasure() {
+export function clickDeleteMeasure () {
   cy.get(measureSettingBtn).click()
   cy.get(measureInverseBtn).click()
   cy.get(measureDeleteBtn).click()
 }
 
-export function clickUpdateMeasure() {
+export function clickUpdateMeasure () {
   cy.get(measureSettingBtn).click()
   cy.get(measureUpdateBtn).click()
 }

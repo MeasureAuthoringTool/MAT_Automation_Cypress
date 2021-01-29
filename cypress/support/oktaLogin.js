@@ -1,5 +1,5 @@
 import * as helper from './helpers'
-import * as measurelibrary from "../pom/MAT/WI/MeasureLibrary";
+import * as measurelibrary from '../pom/MAT/WI/MeasureLibrary'
 
 const oktaUrl = Cypress.env('oktaUrl')
 const redirectUri = Cypress.env('redirectUri')
@@ -13,39 +13,50 @@ let email = ''
 let alt_username = ''
 let alt_name = ''
 let alt_email = ''
-let mul_username = ''
-let mul_name = ''
-let mul_email = ''
+let mul_username = undefined
+let mul_name = undefined
+let mul_email = undefined
 
-if (Cypress.env('environment') === 'dev') {
+const missingEnvironmentVariables = []
+let environment = ''
 
-  alt_username = Cypress.env('DEV_ALT_USERNAME')
-  username = Cypress.env('DEV_USERNAME')
-  password = Cypress.env('DEV_USERNAME_PASSWORD')
-  alt_password = Cypress.env('DEV_ALT_USERNAME_PASSWORD')
-  clientId = Cypress.env('DEV_CLIENTID')
-  name = Cypress.env('DEV_NAME')
-  email = Cypress.env('DEV_EMAIL')
-  alt_name = Cypress.env('DEV_NAME')
-  alt_email = Cypress.env('DEV_EMAIL')
-  mul_username = Cypress.env('DEV_MUL_USERNAME')
-  mul_name = Cypress.env('DEV_MUL_NAME')
-  mul_email = Cypress.env('DEV_MUL_EMAIL')
+if (!Cypress.env('environment')) {
+  throw new Error('Cannot find env variables: environment')
+} else {
+  environment = Cypress.env('environment').toUpperCase() + '_'
+  loadEnvironment()
+}
 
-} else if (Cypress.env('environment') === 'test') {
+function getEnv (nameIn, required = true) {
+  const name = environment + nameIn
+  const variable = Cypress.env(name)
 
-  alt_username = Cypress.env('TEST_ALT_USERNAME')
-  username = Cypress.env('TEST_USERNAME')
-  password = Cypress.env('TEST_PASSWORD')
-  alt_password = Cypress.env('TEST_PASSWORD')
-  clientId = Cypress.env('TEST_CLIENTID')
-  name = Cypress.env('TEST_NAME')
-  email = Cypress.env('TEST_EMAIL')
-  alt_name = Cypress.env('TEST_ALT_NAME')
-  alt_email = Cypress.env('TEST_ALT_EMAIL')
-  mul_username = Cypress.env('TEST_MUL_USERNAME')
-  mul_name = Cypress.env('TEST_MUL_NAME')
-  mul_email = Cypress.env('TEST_MUL_EMAIL')
+  if (required && !variable) {
+    missingEnvironmentVariables.push('CYPRESS_' + name)
+  }
+
+  return variable
+}
+
+function loadEnvironment () {
+  username = getEnv('USERNAME')
+  password = getEnv('PASSWORD')
+  clientId = getEnv('CLIENTID')
+  name = getEnv('NAME')
+  email = getEnv('EMAIL')
+
+  alt_username = getEnv('ALT_USERNAME')
+  alt_password = getEnv('ALT_PASSWORD')
+  alt_name = getEnv('ALT_NAME')
+  alt_email = getEnv('ALT_EMAIL')
+  mul_username = getEnv('MUL_USERNAME', false)
+  mul_name = getEnv('MUL_NAME', false)
+  mul_email = getEnv('MUL_EMAIL', false)
+
+  if (missingEnvironmentVariables.length > 0) {
+    const missing = missingEnvironmentVariables.join(', ')
+    throw new Error('Cannot find env variables: ' + missing)
+  }
 }
 
 export const login = (user) => {
@@ -61,8 +72,7 @@ export const login = (user) => {
     oktaLogin()
     helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
     helper.loginUMLS()
-  }
-  else if (user === 'alternative'){
+  } else if (user === 'alternative') {
     cy.clearCookies()
 
     cy.clearLocalStorage()
@@ -73,8 +83,7 @@ export const login = (user) => {
     oktaLogin(alt_username, alt_password, alt_name, alt_email)
     helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
     helper.loginUMLS()
-  }
-  else if (user === 'multiple'){
+  } else if (user === 'multiple') {
     cy.clearCookies()
 
     cy.clearLocalStorage()
@@ -116,7 +125,6 @@ export const oktaLogin = (un, pw, storage_name, storage_email) => {
     storage_email = email
   }
 
-
   // creating the authn request
   const request = {
     method: 'POST',
@@ -140,13 +148,13 @@ export const oktaLogin = (un, pw, storage_name, storage_email) => {
     cy.request({
       method: 'GET',
       url:
-          oktaUrl + '/oauth2/v1/authorize?client_id=' + clientId +
-          '&nonce=uxiJab6ycJdNkEZkwbtqnSC1MRuIFCXQATQZSWiBjWdSuuBdbIDCN9EafOYiPaHs' + 
-          '&redirect_uri=' + redirectUri +
-          '&response_type=token id_token' +
-          '&sessionToken=' + sessionToken + 
-          '&state=uQJCnnawAWj9QyaHkVMesAaVXEkWcZMpVfDrQJqdUUPLnuIUprrlN5kRicCI4gaR' +
-          '&scope=openid%20email%20profile',
+        oktaUrl + '/oauth2/v1/authorize?client_id=' + clientId +
+        '&nonce=uxiJab6ycJdNkEZkwbtqnSC1MRuIFCXQATQZSWiBjWdSuuBdbIDCN9EafOYiPaHs' +
+        '&redirect_uri=' + redirectUri +
+        '&response_type=token id_token' +
+        '&sessionToken=' + sessionToken +
+        '&state=uQJCnnawAWj9QyaHkVMesAaVXEkWcZMpVfDrQJqdUUPLnuIUprrlN5kRicCI4gaR' +
+        '&scope=openid%20email%20profile',
       form: true,
       followRedirect: false,
       failOnStatusCode: false

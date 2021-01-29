@@ -8,69 +8,69 @@ let fhirCqlLibrary = ''
 let qdmCqlLibrary = ''
 
 describe('Sharing Measure with other measure developer', () => {
-    before('Login', () => {
-        oktaLogin.login()
+  before('Login', () => {
+    oktaLogin.login()
 
-        qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmLibrary', 'QDM')
-        fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirLibrary', 'FHIR')
+    qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmLibrary', 'QDM')
+    fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirLibrary', 'FHIR')
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
-        helper.logout()
-    })
-    it('Share the QDM Library', () => {
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+  it('Share the QDM Library', () => {
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-        helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibrary)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        cy.get(cqlLibrary.shareCqllibrariesBtn).click()
+    cy.get(cqlLibrary.shareCqllibrariesBtn).click()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get('h1').should('contain.text', 'My CQL Libraries > CQL Library Sharing')
+    cy.get('h1').should('contain.text', 'My CQL Libraries > CQL Library Sharing')
 
-        cy.get(cqlLibrary.shareWithSecondUserCheckBox).check()
+    cy.get(cqlLibrary.shareWithSecondUserCheckBox).check()
 
-        cy.get(cqlLibrary.shareSaveAndContinueBtn).click()
+    cy.get(cqlLibrary.shareSaveAndContinueBtn).click()
 
-        cy.get(cqlLibrary.shareWarningMessage).should('contain.text', qdmCqlLibrary + ' sharing status has been successfully updated')
-   
-    })
+    cy.get(cqlLibrary.shareWarningMessage).should('contain.text', qdmCqlLibrary + ' sharing status has been successfully updated')
 
-    it('Share the FHIR Measure', () => {
+  })
 
-        helper.verifySpinnerAppearsAndDissappears()
+  it('Share the FHIR Measure', () => {
 
-        helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-        helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
-        cy.get(cqlLibrary.searchBtn).click()
+    helper.verifySpinnerAppearsAndDissappears()
 
-        helper.verifySpinnerAppearsAndDissappears()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
+    cy.get(cqlLibrary.searchBtn).click()
 
-        gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.shareCqllibrariesBtn).click()
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
-        helper.verifySpinnerAppearsAndDissappears()
+    cy.get(cqlLibrary.shareCqllibrariesBtn).click()
 
-        cy.get('h1').should('contain.text', 'My CQL Libraries > CQL Library Sharing')
+    helper.verifySpinnerAppearsAndDissappears()
 
-        cy.get(cqlLibrary.shareWithSecondUserCheckBox).click()
+    cy.get('h1').should('contain.text', 'My CQL Libraries > CQL Library Sharing')
 
-        cy.get(cqlLibrary.shareSaveAndContinueBtn).click()
+    cy.get(cqlLibrary.shareWithSecondUserCheckBox).click()
 
-        cy.get(cqlLibrary.shareWarningMessage).should('contain.text', fhirCqlLibrary + ' sharing status has been successfully updated')
-    })
+    cy.get(cqlLibrary.shareSaveAndContinueBtn).click()
+
+    cy.get(cqlLibrary.shareWarningMessage).should('contain.text', fhirCqlLibrary + ' sharing status has been successfully updated')
+  })
 })

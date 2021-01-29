@@ -75,8 +75,6 @@ describe('Attribute UI: Code Widget', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-
-
   function codeWidget () {
     cy.log('addCodeWidget')
     cy.get(testPatientPage.attributeNameSelect).select('status')
@@ -86,9 +84,5 @@ describe('Attribute UI: Code Widget', () => {
     cy.get(testPatientPage.exsistingAttribute).contains('status: "in-progress"')
     cy.log('AddCodeWidget - done')
   }
-
-
-
-
 
 })

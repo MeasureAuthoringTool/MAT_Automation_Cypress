@@ -26,20 +26,23 @@ require('cypress-commands')
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from
   // failing the test
-  return false;
-});
+  return false
+})
 Cypress.Server.defaults({
   delay: 500,
   force404: false,
   whitelist: (xhr) => {
-    return true;
+    return true
   }
-});
+})
 
-const addContext = require('mochawesome/addContext');
+const addContext = require('mochawesome/addContext')
 
 Cypress.on('test:after:run', (test, runnable) => {
   if (test.state === 'failed') {
-    addContext({test}, { title: "Screenshot", value:`assets/${Cypress.spec.name}/${runnable.parent.title} -- ${test.title} (failed).png` })
+    addContext({ test }, {
+      title: 'Screenshot',
+      value: `assets/${Cypress.spec.name}/${runnable.parent.title} -- ${test.title} (failed).png`
+    })
   }
 })

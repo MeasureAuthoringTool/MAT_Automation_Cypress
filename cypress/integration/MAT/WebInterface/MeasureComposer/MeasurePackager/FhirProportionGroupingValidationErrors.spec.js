@@ -1,8 +1,8 @@
-import * as helper from "../../../../../support/helpers";
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
-import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation";
+import * as helper from '../../../../../support/helpers'
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
@@ -182,7 +182,7 @@ describe('Test Proportion Grouping Validation Messages for FHIR Measure in Measu
 
     //before saving grouping, click the grouping button and validate error appears
     cy.get(measureComposer.saveGrouping).click()
-    helper.waitToContainText(measureComposer.packageWarningMessage,'For a Proportion measure, a grouping must contain exactly one of each of the following: Initial Population, Denominator and Numerator.')
+    helper.waitToContainText(measureComposer.packageWarningMessage, 'For a Proportion measure, a grouping must contain exactly one of each of the following: Initial Population, Denominator and Numerator.')
     helper.verifySpinnerAppearsAndDissappears()
 
     //Add proper items to the grouping and save, should get success message
@@ -198,10 +198,9 @@ describe('Test Proportion Grouping Validation Messages for FHIR Measure in Measu
     cy.get(measureComposer.addClauseButton).click()
     helper.verifySpinnerAppearsAndDissappears()
 
-
     cy.get(measureComposer.saveGrouping).click()
     helper.verifySpinnerAppearsAndDissappears()
-    helper.waitToContainText(measureComposer.measureGroupingSuccessMessage,'Grouping has been saved.')
+    helper.waitToContainText(measureComposer.measureGroupingSuccessMessage, 'Grouping has been saved.')
 
   })
 

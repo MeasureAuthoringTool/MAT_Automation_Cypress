@@ -19,7 +19,7 @@ describe('Test Patient: Extensions section', () => {
   })
 
   it.only('Validate the Extensions Components', () => {
-    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload,false)
+    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
 
     measureDetailsPage.navigateToMeasureDetails(measureName)
 
@@ -60,9 +60,9 @@ describe('Test Patient: Extensions section', () => {
     cy.get(testPatientPage.extensionModifierAddWidgetBtn).eq(0).click()
     cy.get(testPatientPage.exsistingModifierExtension).contains('https://google.com')
     cy.get(testPatientPage.exsistingModifierExtensionUrl).click()
-    .then(() => {
-    cy.get(testPatientPage.exsistingModifierExtension).contains('true')
-    })
+      .then(() => {
+        cy.get(testPatientPage.exsistingModifierExtension).contains('true')
+      })
     cy.log('BooleanExtensionValidation - done')
   }
 })

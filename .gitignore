@@ -1,2 +1,5 @@
 node_modules
 **/*.pem
+/.idea/**
+/Mike.sh
+/cypress/config/local.json

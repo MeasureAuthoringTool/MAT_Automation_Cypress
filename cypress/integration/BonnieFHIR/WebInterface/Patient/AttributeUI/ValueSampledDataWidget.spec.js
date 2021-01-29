@@ -17,7 +17,7 @@ describe('Attribute UI: Value: SampledData', () => {
   before('Login', () => {
 
     bonnieLogin.login()
-    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload,false)
+    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
     measureDetailsPage.navigateToMeasureDetails(measureName)
 
   })

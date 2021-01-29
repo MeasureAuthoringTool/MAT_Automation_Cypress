@@ -24,7 +24,7 @@ export const row2AppliedComponentMeasureAlias = '#mainPanel_SimplePanel [__gwt_r
 
 export const goBackComponent = '#BackButton_componentMeasures'
 export const saveAndContinueBtnComponent = '#SaveAndContinueButton_componentMeasures'
-export const cancelBtnComponent = "#CancelButton_componentMeasures"
+export const cancelBtnComponent = '#CancelButton_componentMeasures'
 
 // Dialog
 export const confirmationContinueBtn = '#yes_Button'

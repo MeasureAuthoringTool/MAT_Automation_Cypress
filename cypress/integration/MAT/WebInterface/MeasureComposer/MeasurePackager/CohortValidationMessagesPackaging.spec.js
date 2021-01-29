@@ -1,8 +1,8 @@
-import * as helper from "../../../../../support/helpers";
-import * as measurelibrary from "../../../../../pom/MAT/WI/MeasureLibrary";
-import * as measureComposer from "../../../../../pom/MAT/WI/MeasureComposer";
-import * as oktaLogin from "../../../../../support/oktaLogin";
-import * as dataCreation from "../../../../../support/MAT/MeasureAndCQLLibraryCreation"
+import * as helper from '../../../../../support/helpers'
+import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
+import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasureCohort = ''
