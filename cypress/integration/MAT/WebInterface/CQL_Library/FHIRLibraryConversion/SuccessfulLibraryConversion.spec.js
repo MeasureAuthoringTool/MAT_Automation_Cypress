@@ -4,8 +4,6 @@ import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as cqlLibraryHelper from '../../../../../support/MAT/CqlLibraryHelper'
-import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
-import { get } from '../../../../../support/helpers'
 
 let qdmCqlLibraryName = ''
 
