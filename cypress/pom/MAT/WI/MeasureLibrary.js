@@ -36,32 +36,32 @@ export const row1Models = '#MeasureSearchCellTable [__gwt_row="0"] > .GB-MJYKBGJ
 export const row2Models = '#MeasureSearchCellTable [__gwt_row="1"] > .GB-MJYKBGJ'
 
 //Recent Activity Button Bar
-export const createVersionDraftRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to create version or draft"]'
-export const createVersionRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to create version"]'
-export const createDraftRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to create draft"]'
-export const historyRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to view history"]'
+export const createVersionDraftRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
+export const createVersionRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
+export const createDraftRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
+export const historyRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity View History"]'
 export const viewRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Read-Only"]'
-export const editRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to edit"]'
-export const shareRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to share"]'
-export const cloneRecentActivityDisabledBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Measure not cloneable"]'
-export const cloneRecentActivityEnabledBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to clone"]'
-export const exportRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to export"]'
-export const runFhirValidationRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to Run FHIR Validation"]'
-export const convertToFhirRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [title="Click to convert"]'
+export const editRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Edit"]'
+export const shareRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Share"]'
+export const cloneRecentActivityDisabledBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Clone"]'
+export const cloneRecentActivityEnabledBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Clone"]'
+export const exportRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Click to export"]'
+export const runFhirValidationRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Run FHIR Validation"]'
+export const convertToFhirRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Convert"]'
 
 //Measure Search Button Bar
-export const createVersionDraftMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to create version or draft"]'
-export const createVersionMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to create version"]'
-export const createDraftMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to create draft"]'
-export const historyMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to view history"]'
+export const createVersionDraftMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Create version or draft"]'
+export const createVersionMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Create version or draft"]'
+export const createDraftMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Create version or draft"]'
+export const historyMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History View History"]'
 export const viewMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Read-Only"]'
-export const editMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to edit"]'
-export const shareMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to share"]'
-export const cloneMeasureSearchDisabledBtn = '#MeasureSearchCellTable_gridToolbar > [title="Measure not cloneable"]'
-export const cloneMeasureSearchEnabledBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to clone"]'
-export const exportMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to Export MAT v6.03"]'
-export const runFhirValidationMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to Run FHIR Validation"]'
-export const convertToFhirMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [title="Click to convert"]'
+export const editMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Edit"]'
+export const shareMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Share"]'
+export const cloneMeasureSearchDisabledBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Clone"]'
+export const cloneMeasureSearchEnabledBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Clone"]'
+export const exportMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Click to export"]'
+export const runFhirValidationMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Run FHIR Validation"]'
+export const convertToFhirMeasureSearchBtn = '#MeasureSearchCellTable_gridToolbar > [aria-label="Search History Convert"]'
 
 //Measure search columns 
 //Library search columns 
@@ -109,8 +109,9 @@ export const openExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title
 export const cancelExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Cancel"]'
 
 // History UI
-export const historyConvertToFHIRUserActionLogEntry = '#HistorySearchCellTable [title=" Converted from QDM/CQL to FHIR"]'
-export const historyMeasureCreatedUserActionLogEntry = '#HistorySearchCellTable [title=" Measure Created"]'
+export const historyGrid = '#HistorySearchCellTable'
+export const historyRow1 = '#HistorySearchCellTable [__gwt_row="0"]'
+export const historyRow2 = '#HistorySearchCellTable [__gwt_row="1"]'
 
 // Measure Sharing
 export const measureName = '#measureNamePanel_FlowPanel'

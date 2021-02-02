@@ -9,7 +9,7 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
-// const fhirCqlLibrarySecond = ''
+
 
 describe('CQL Composer: CQL Editor message', () => {
   before('Login', () => {
@@ -134,7 +134,10 @@ describe('CQL Composer: CQL Editor message', () => {
     cy.get(cqlComposer.cqlLibraryEditor).click()
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL does not conform to the ANTLR grammar: https://cql.hl7.org/grammar.html')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, ' +
+      'Parameters, Definitions, and Functions will be disabled.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Commenting out offending defines and functions is an easy temporary fix.')
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -192,7 +195,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
 
     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}valueset "Annual Wellness Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240\'')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "Annual Wellness Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240\'')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -225,6 +228,7 @@ describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -237,14 +241,15 @@ describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS
 
     cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
     cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('valueset "AAN - Encounter Codes Grouping": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('valueset "AAN - Encounter Codes Grouping": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307\'{enter}')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
-    cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')
-    cy.get(measurelibrary.cqlLibraryTab).click()
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL does not conform to the ANTLR grammar: https://cql.hl7.org/grammar.html')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, ' +
+      'Parameters, Definitions, and Functions will be disabled.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Commenting out offending defines and functions is an easy temporary fix.')
 
-    helper.verifySpinnerAppearsAndDissappears()
   })
 })
 
@@ -313,7 +318,10 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
     // checking message when loading the CQL editor with syntax error
     helper.visibleWithTimeout(cqlComposer.warningMessage)
 
-    cy.get(measureComposer.warningMessage).should('contain.text', ' You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number. Please correct the syntax errors so the CQL can be validated.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL does not conform to the ANTLR grammar: https://cql.hl7.org/grammar.html')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, ' +
+      'Parameters, Definitions, and Functions will be disabled.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Commenting out offending defines and functions is an easy temporary fix.')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -322,7 +330,10 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
     // assertion for being able to save with syntax error
     helper.visibleWithTimeout(cqlComposer.warningMessage)
 
-    cy.get(measureComposer.warningMessage).should('contain.text', ' The CQL file was saved with errors. Please correct the syntax errors so the CQL can be validated.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL does not conform to the ANTLR grammar: https://cql.hl7.org/grammar.html')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, ' +
+      'Parameters, Definitions, and Functions will be disabled.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Commenting out offending defines and functions is an easy temporary fix.')
 
     cy.get(measurelibrary.measureLibraryTab).click()
 

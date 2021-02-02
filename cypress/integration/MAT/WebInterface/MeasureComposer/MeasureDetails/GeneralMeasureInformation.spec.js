@@ -7,7 +7,7 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 
-describe('FHIR Measure: Validate the components on General Information page', () => {
+describe('Measure Composer: Measure Details: General Measure Information', () => {
   before('Login', () => {
     oktaLogin.login()
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
@@ -19,7 +19,7 @@ describe('FHIR Measure: Validate the components on General Information page', ()
     helper.logout()
   })
 
-  it('Validate the Population Basis field', () => {
+  it('FHIR Measure: Validate the Population Basis field', () => {
 
     helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
     cy.get(measurelibrary.searchBtn).click()

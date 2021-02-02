@@ -7,7 +7,7 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let qdmMeasure = ''
 
-describe('Measure CQL Editor', () => {
+describe('Measure Composer: CQL Workspace: New Measure', () => {
   before('Login', () => {
     oktaLogin.login()
 

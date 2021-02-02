@@ -371,7 +371,9 @@ export const createDraftMeasure = (measure, model) => {
   cy.get(createNewMeasure.saveAndContinueBtn).click()
 
   helper.verifySpinnerAppearsAndDissappears()
+  helper.verifySpinnerAppearsAndDissappears()
 
+  helper.visibleWithTimeout(createNewMeasure.confirmationContinueBtn)
   cy.get(createNewMeasure.confirmationContinueBtn).click()
 
   helper.verifySpinnerAppearsAndDissappears()
@@ -394,11 +396,13 @@ export const createDraftMeasure = (measure, model) => {
   cy.get(measureDetails.saveBtn).click()
 
   helper.verifySpinnerAppearsAndDissappears()
+  helper.verifySpinnerAppearsAndDissappears()
 
   helper.visibleWithTimeout(measureDetails.warningMessage)
 
   cy.get(measurelibrary.measureLibraryTab).click()
 
+  helper.verifySpinnerAppearsAndDissappears()
   helper.verifySpinnerAppearsAndDissappears()
 
   return name
@@ -484,13 +488,13 @@ export const createDraftCqlLibrary = (library, model) => {
   helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
   cy.get(cqlLibrary.newLibraryBtn).click()
 
+  cy.get(createNewCqlLibrary.cqlLibraryName).type(name, { delay: 50 })
+
   if (model === 'QDM' || model === undefined) {
     cy.get(createNewCqlLibrary.modelQDMRadio).click()
   } else {
     cy.get(createNewCqlLibrary.modelFHIRRadio).click()
   }
-
-  cy.get(createNewCqlLibrary.cqlLibraryName).type(name, { delay: 50 })
 
   cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
@@ -508,13 +512,20 @@ export const createDraftCqlLibrary = (library, model) => {
   return name
 }
 
-export const createMajorVersionMeasure = (measure) => {
+export const createMajorVersionMeasure = (measure, model) => {
   let name = ''
 
   if (measure === undefined) {
-    name = createDraftMeasure('MajorVersion')
+    name = draftMeasure + Date.now()
   } else {
-    name = measure
+    name = measure + Date.now()
+  }
+
+  if (model === undefined || 'QDM') {
+    name = createDraftMeasure(name, 'QDM')
+  }
+  else {
+    name = createDraftMeasure(name, 'FHIR')
   }
 
   cy.get(measurelibrary.searchInputBox).type(name, { delay: 50 })
@@ -537,6 +548,8 @@ export const createMajorVersionMeasure = (measure) => {
   helper.verifySpinnerAppearsAndDissappears()
 
   cy.get(measurelibrary.continueBtn).click()
+
+  helper.verifySpinnerAppearsAndDissappears()
 
   helper.verifySpinnerAppearsAndDissappears()
 

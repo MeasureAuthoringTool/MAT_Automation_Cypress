@@ -4,6 +4,7 @@ import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -64,7 +65,7 @@ describe('Measure: CQL Editor message', () => {
 
   })
 
-  it.skip('FHIR Measure: Validate the error message on CQL Editor', () => {
+  it('FHIR Measure: Validate the error message on CQL Editor', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(measurelibrary.searchInputBox)
@@ -92,7 +93,10 @@ describe('Measure: CQL Editor message', () => {
     cy.get(measureComposer.cqlLibraryEditor).click()
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL does not conform to the ANTLR grammar: https://cql.hl7.org/grammar.html')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, ' +
+      'Parameters, Definitions, and Functions will be disabled.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Commenting out offending defines and functions is an easy temporary fix.')
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -117,7 +121,7 @@ describe('FHIR Measure: Version error message', () => {
     helper.logout()
   })
 
-  it.skip('FHIR Measure: Invalid version error message on CQL Editor', () => {
+  it('FHIR Measure: Invalid version error message on CQL Editor', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(measurelibrary.searchInputBox)
@@ -137,12 +141,15 @@ describe('FHIR Measure: Version error message', () => {
     // CQL Library Editor
     cy.get(measureComposer.cqlLibraryEditor).click()
     helper.verifySpinnerAppearsAndDissappears()
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}include Hospice_FHIR4 version \'1.0\' called Hospice')
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}include Hospice_FHIR4 version \'1.0\' called Hospice{enter}')
     cy.get(measureComposer.cqlEditorSaveBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors. Please correct the syntax errors so the CQL can be validated.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL does not conform to the ANTLR grammar: https://cql.hl7.org/grammar.html')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, ' +
+      'Parameters, Definitions, and Functions will be disabled.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Commenting out offending defines and functions is an easy temporary fix.')
 
     cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -153,7 +160,6 @@ describe('FHIR Measure: Version error message', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-
 })
 
 describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
@@ -207,7 +213,6 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-
 })
 
 describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
@@ -223,7 +228,7 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
     helper.logout()
   })
 
-  it.skip('Validate the error message for adding codesystems and valuesets without UMLS', () => {
+  it('Validate the error message for adding codesystems and valuesets without UMLS', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -252,13 +257,16 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
 
     cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "AAN - Encounter Codes Grouping": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.2286\'')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('valueset "AAN - Encounter Codes Grouping": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307\'{enter}')
 
-    cy.get(measureComposer.cqlEditorSaveBtn).click()
+    cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
-    cy.get(measureComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors. Please correct the syntax errors so the CQL can be validated.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'The CQL does not conform to the ANTLR grammar: https://cql.hl7.org/grammar.html')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, ' +
+      'Parameters, Definitions, and Functions will be disabled.')
+    cy.get(cqlComposer.warningMessage).should('contain.text', 'Commenting out offending defines and functions is an easy temporary fix.')
 
     cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -266,111 +274,4 @@ describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
   })
 })
 
-describe('MAT: MeasureComposer: CQLWorkspace: CQL Library Editor: FHIR Errors, ability to save FHIR Measures with errors ' +
-  'and correct Error Messages are displayed', () => {
-  before('Login', () => {
-    oktaLogin.login()
 
-    qdmMeasure = dataCreation.createQDMProportionMeasure()
-
-    helper.enabledWithTimeout(measurelibrary.searchInputBox)
-    helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
-    cy.get(measurelibrary.searchBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-
-    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
-
-    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-
-    cy.get(measurelibrary.majorVersionTypeRadio).click()
-    cy.get(measurelibrary.packageAndVersion).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
-    helper.verifySpinnerAppearsAndDissappears()
-    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
-    cy.get(measurelibrary.convertToFhirRecentActivityBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
-
-    helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
-
-    cy.get(measurelibrary.row1RecentActivity).should('contain.text', 'FHIR / CQL')
-
-  })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
-    helper.logout()
-  })
-
-  it.skip('Ability to save with CQL error or syntax error', () => {
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    cy.get(measurelibrary.row1RecentActivity).dblclick()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    cy.get(measureComposer.cqlWorkspace).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    cy.get(measureComposer.cqlLibraryEditor).click()
-
-    helper.visibleWithTimeout(measureComposer.warningMessage)
-    cy.get(measureComposer.warningMessage).should('contain.text', ' You are viewing the CQL file with validation errors. ' +
-      'Errors are marked with a red square on the line number.')
-
-    cy.get(measureComposer.cqlEditorSaveBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    //assertion for being able to save with CQL errors
-    helper.visibleWithTimeout(measureComposer.warningMessage)
-    cy.get(measureComposer.warningMessage).should('contain.text', ' The CQL file was saved with errors.')
-
-    cy.get(measureComposer.definition).click()
-
-    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Definition')
-
-    dataCreation.addDefinition('syntax errors', 'asdfasdf\n' +
-      'asdfasdf\n' +
-      '\n' +
-      'asdfasdf')
-
-    cy.get(measureComposer.cqlLibraryEditor).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
-
-    //checking message when loading the CQL editor with syntax error
-    helper.visibleWithTimeout(measureComposer.warningMessage)
-    // cy.get(measureComposer.warningMessage).eq(0).should('contain.text', ' You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.')
-    // cy.get(measureComposer.warningMessage).eq(1).should('contain.text', ' Please correct the syntax errors so the CQL can be validated.')
-
-    cy.get(measureComposer.warningMessage).should('contain.text', ' You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number. Please correct the syntax errors so the CQL can be validated.')
-
-    cy.get(measureComposer.cqlEditorSaveBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    //assertion for being able to save with syntax error
-    helper.visibleWithTimeout(measureComposer.warningMessage)
-    // cy.get(measureComposer.warningMessage).eq(0).should('contain.text', ' The CQL file was saved with errors.')
-    // cy.get(measureComposer.warningMessage).eq(1).should('contain.text', ' Please correct the syntax errors so the CQL can be validated.')
-
-    cy.get(measureComposer.warningMessage).should('contain.text', ' The CQL file was saved with errors. Please correct the syntax errors so the CQL can be validated.')
-
-    cy.get(measurelibrary.measureLibraryTab).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-  })
-})
