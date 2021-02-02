@@ -10,7 +10,7 @@ let fhirVersionMeasure = ''
 let qdmMeasure = ''
 let qdmVersionMeasure = ''
 
-describe('FHIR Measure: Deletion', () => {
+describe('Measure Composer: Measure Details: FHIR Measure Deletion', () => {
   before('Login', () => {
     oktaLogin.login()
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
@@ -78,7 +78,7 @@ describe('FHIR Measure: Deletion', () => {
 
 })
 
-describe('QDM Measure: Deletion', () => {
+describe('Measure Composer: Measure Details: QDM Measure Deletion', () => {
   before('Login', () => {
     oktaLogin.login()
     qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')

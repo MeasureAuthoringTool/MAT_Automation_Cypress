@@ -7,7 +7,7 @@ import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 let fhirMeasure = ''
 let qdmMeasure = ''
 
-describe('Sharing Measure with other measure developer', () => {
+describe('Measure Library: Measure Sharing', () => {
   before('Login', () => {
     oktaLogin.login()
 

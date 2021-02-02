@@ -79,7 +79,7 @@ describe('Packaging: Proportion Measure', () => {
     cy.get(measureComposer.includesListItems).eq(1).should('contain.text', 'Global')
     cy.get(measureComposer.includesListItems).eq(2).should('contain.text', 'SDE')
 
-    cy.get(measureComposer.searchInputBox).type('tjc', { delay: 50 })
+    cy.get(measureComposer.searchInputBox).type('TJCOverallFHIR4', { delay: 50 })
     cy.get(measureComposer.searchBtn).click()
     cy.get(measureComposer.availableLibrariesRow1checkbox).click()
     cy.get(measureComposer.libraryAliasInputBox).type('TJC', { delay: 50 })

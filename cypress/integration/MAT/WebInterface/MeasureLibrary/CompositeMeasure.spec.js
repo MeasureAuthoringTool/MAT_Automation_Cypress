@@ -9,7 +9,7 @@ import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 let measureNameOne = ''
 let measureNameTwo = ''
 
-describe('Creating New Composite Measure', () => {
+describe('Measure Library: Composite Measure', () => {
   before('Login', () => {
     oktaLogin.login()
 
@@ -244,7 +244,7 @@ describe('Creating New Composite Measure', () => {
     helper.logout()
   })
 
-  it('Create Composite measure', () => {
+  it('Create Composite measure successfully', () => {
 
     helper.waitForElementEnabled(measurelibrary.newCompositeMeasureButton)
     cy.get(measurelibrary.newCompositeMeasureButton).click()
@@ -295,6 +295,8 @@ describe('Creating New Composite Measure', () => {
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
     //Includes
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(measureComposer.includes).click()
 

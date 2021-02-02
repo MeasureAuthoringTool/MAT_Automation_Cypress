@@ -27,10 +27,13 @@ export const editorErrorToolTip = '.ace_tooltip'
 export const editorLeftPanel = '#parameter_CQLEditor > .ace_gutter > .ace_layer'
 export const deleteConfirmationYes = '#Yes_DeleteConfirmationBox'
 export const modalHeader = '.modal-header'
+export const deleteMeasureBtn = '#MeasureDetailsView\\.deleteMeasureButton'
+export const deleteConfirmationInputBox = '#password_PasswordTextBox'
+export const deleteLibraryForeverBtn = '.modal-footer > :nth-child(2)'
 
 //Measure Details > General Measure Information
 export const measureNameInputBox = '#measureNameInput'
-export const cqlWorkspaceTitleGeneralInformation = ':nth-child(1) > .marginLeft15px > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
+export const cqlWorkspaceTitleGeneralInformation = 'h4 > b'
 export const saveBtnGeneralInfo = '#saveButton_GeneralInfo'
 
 //Includes

@@ -114,7 +114,7 @@ describe('Validate the Measure Period without Data changes', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row2MeasureSearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -141,7 +141,6 @@ describe('Validate the Measure Period without Data changes', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-
 })
 
 describe('Validate the Measure Period with date changes', () => {
@@ -210,7 +209,7 @@ describe('Validate the Measure Period with date changes', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row2MeasureSearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -237,5 +236,4 @@ describe('Validate the Measure Period with date changes', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-
 })

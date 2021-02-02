@@ -1,5 +1,5 @@
 export const userprofile = '#userprofile > .fa'
-export const signout = '.dropdown-menu > :nth-child(6) > a'
+export const signout = '.open > .dropdown-menu > :nth-child(6) > a'
 export const signoutMultipleMAT = '.dropdown-menu > :nth-child(10) > a'
 export const spinner = '.spinner-loading'
 export const spinnerShadow = '.spinner-loading .spinner-loading-shadow'
