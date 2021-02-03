@@ -19,7 +19,7 @@ describe('QDM Standalone Library: Version and include with measure', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    qdmLibraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+    qdmLibraryName = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
 
     helper.verifySpinnerAppearsAndDissappears()
 

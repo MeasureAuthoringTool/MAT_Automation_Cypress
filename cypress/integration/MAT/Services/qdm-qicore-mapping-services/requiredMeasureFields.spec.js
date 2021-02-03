@@ -2,7 +2,7 @@ const url = Cypress.env('qdmToQicoreMappinngsUrl')
 
 describe('qdmToQicoreMappinngs requiredMeasureFields', () => {
 
-  it('GET Success', () => {
+  it.skip('GET Success', () => {
     cy.request({
       url: url + '/requiredMeasureFields',
       method: 'GET'

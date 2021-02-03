@@ -13,8 +13,8 @@ describe('Measure Library: Composite Measure', () => {
   before('Login', () => {
     oktaLogin.login()
 
-    measureNameOne = dataCreation.createDraftMeasure('qdmCqlMeasureOne', 'QDM')
-    measureNameTwo = dataCreation.createDraftMeasure('qdmCqlMeasureTwo', 'QDM')
+    measureNameOne = dataCreation.createDraftMeasure('QdmCqlMeasureOne', 'QDM')
+    measureNameTwo = dataCreation.createDraftMeasure('QdmCqlMeasureTwo', 'QDM')
 
     helper.verifySpinnerAppearsAndDissappears()
 

@@ -2,7 +2,7 @@ const url = Cypress.env('qdmToQicoreMappinngsUrl')
 
 describe('qdmToQicoreMappinngs dataTypes', () => {
 
-  it('GET Success', () => {
+  it.skip('GET Success', () => {
     cy.request({
       url: url + '/dataTypes',
       method: 'GET'

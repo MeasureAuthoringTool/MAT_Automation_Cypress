@@ -176,6 +176,9 @@ describe('FHIR Measure: Export', () => {
     cy.get(measurelibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
 
     gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
 

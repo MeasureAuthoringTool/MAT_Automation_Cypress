@@ -110,7 +110,7 @@ describe('QDM Library: Deletion', () => {
   before('Login', () => {
     oktaLogin.login()
 
-    qdmCqlLibrary = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+    qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
 
     helper.verifySpinnerAppearsAndDissappears()
   })
@@ -142,7 +142,7 @@ describe('QDM Library: Deletion', () => {
 
   it('Validate the Delete button has disabled for Versioned QDM Library', () => {
 
-    qdmCQLVersionLibrary = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+    qdmCQLVersionLibrary = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
 
     helper.verifySpinnerAppearsAndDissappears()
 

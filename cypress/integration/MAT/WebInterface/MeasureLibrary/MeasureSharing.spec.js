@@ -11,7 +11,7 @@ describe('Measure Library: Measure Sharing', () => {
   before('Login', () => {
     oktaLogin.login()
 
-    qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
+    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()

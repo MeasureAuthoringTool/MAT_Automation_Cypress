@@ -123,8 +123,8 @@ describe('Measure Conversion with incorrect measure name format', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.visibleWithTimeout(measurelibrary.row2MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row2MeasureSearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -212,8 +212,8 @@ describe('Measure Conversion with incorrect measure name and CQL library name fo
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.visibleWithTimeout(measurelibrary.row2MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row2MeasureSearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 
