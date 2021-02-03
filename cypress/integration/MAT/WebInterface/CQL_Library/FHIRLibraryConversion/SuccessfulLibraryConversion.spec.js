@@ -20,7 +20,7 @@ describe('CQL Library: FHIR Library Conversion: Successful Conversion to FHIR', 
   })
 
   it('Convert QDM CQL Library to FHIR successfully', () => {
-    qdmCqlLibraryName = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+    qdmCqlLibraryName = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
     // Search for created draft QDM lib
     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
     helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibraryName)

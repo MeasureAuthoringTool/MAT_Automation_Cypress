@@ -28,14 +28,14 @@ export const row2Models = '#CQLLibrarySearchCellTable [__gwt_row="1"] > .GB-MJYK
 // Recent Activity Button Bar
 export const recentActivityButtonBar = '#recentActivitySummary_gridToolbar > [type="button"]'
 
-export const createVersionDraftRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to create version or draft"]'
-export const historyRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to view history"]'
-export const viewRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Read-Only"]'
-export const editRecentActivityEnabledBtn = '#recentActivitySummary_gridToolbar > [title="Click to edit"]'
-export const shareRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to share"]'
-export const deleteRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to delete library"]'
-export const createVersionRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to create version"]'
-export const createDraftRecentActivityBtn = '#recentActivitySummary_gridToolbar > [title="Click to create draft"]'
+export const createVersionDraftRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
+export const historyRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity View History"]'
+export const viewRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Edit"]'
+export const editRecentActivityEnabledBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Edit"]'
+export const shareRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Share"]'
+export const deleteRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Delete library"]'
+export const createVersionRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
+export const createDraftRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
 
 // Library search columns
 export const cqlLibrarySearchTable = '#cqlCellTablePanel_VerticalPanel > .cellTablePanel > :nth-child(1) > :nth-child(7) > [align="left"]'
@@ -44,7 +44,7 @@ export const row2CqlLibraryModelVersion = '#CQLLibrarySearchCellTable > :nth-chi
 export const row2CqlLibraryVersionColumn = '#CQLLibrarySearchCellTable > :nth-child(3) > :nth-child(2) > :nth-child(4)'
 
 // All CQL Libraries Button Bar
-export const createVersionDraftCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Click to create version or draft"]'
+export const createVersionDraftCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [aria-label="Search History Create version or draft"]'
 export const historyCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [aria-label="Search History View History"]'
 export const viewCqllibrariesBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Read-Only"]'
 export const editCqllibrariesEnabledBtn = '#cqlLibrarySearchCellTable_gridToolbar > [title="Edit"]'

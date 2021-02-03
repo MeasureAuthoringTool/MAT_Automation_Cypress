@@ -221,13 +221,19 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    helper.visibleWithTimeout(measurelibrary.row2MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row2MeasureSearch)
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(measureComposer.cqlWorkspaceTitleGeneralInformation)
 
     cy.get(measureComposer.cqlWorkspace).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(measureComposer.saveBtnGeneralInfo)
     cy.get(measureComposer.saveBtnGeneralInfo).click()
 
     helper.verifySpinnerAppearsAndDissappears()

@@ -19,7 +19,7 @@ describe('CQL Library Grid Selection', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    dataCreation.createDraftCqlLibrary('qdmDraft')
+    dataCreation.createDraftCqlLibrary('QdmDraft')
 
     dataCreation.createDraftCqlLibrary('FhirDraft', 'FHIR')
 
@@ -50,6 +50,9 @@ describe('CQL Library Grid Selection', () => {
     gridRowActions.doubleClickRow(cqlLibrary.row2CqlLibrarySearch)
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlComposer.generalInformation)
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -133,9 +136,9 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
     draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
 
     oktaLogin.login()
-    draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('qdmDraft')
+    draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('QdmDraft')
 
-    versionedCQLLibary = dataCreation.createDraftCqlLibrary('qdmVersioned')
+    versionedCQLLibary = dataCreation.createDraftCqlLibrary('QdmVersioned')
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
     helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
@@ -143,6 +146,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
     gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
     cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
@@ -612,7 +616,7 @@ describe('CQL Library Search Grid Button Bar', () => {
 
     draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('QDMOwner')
 
-    versionedCQLLibary = dataCreation.createDraftCqlLibrary('versionedCQLLibary')
+    versionedCQLLibary = dataCreation.createDraftCqlLibrary('VersionedCQLLibary')
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
     helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)

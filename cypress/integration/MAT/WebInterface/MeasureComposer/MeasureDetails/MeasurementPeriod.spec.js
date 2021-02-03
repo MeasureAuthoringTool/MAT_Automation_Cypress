@@ -13,7 +13,7 @@ describe('Validate the Measure Period without Data changes', () => {
     oktaLogin.login()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
-    qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
+    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
 
   })
   beforeEach('Preserve Cookies', () => {
@@ -147,7 +147,7 @@ describe('Validate the Measure Period with date changes', () => {
   before('Login', () => {
     oktaLogin.login()
 
-    qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
+    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
 
   })
   beforeEach('Preserve Cookies', () => {

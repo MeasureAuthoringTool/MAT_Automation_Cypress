@@ -13,7 +13,7 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
   before('Login', () => {
     oktaLogin.login()
 
-    qdmMeasure = dataCreation.createDraftMeasure('qdmDraftMeasure', 'QDM')
+    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()

@@ -17,7 +17,7 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    qdmLibrary = dataCreation.createDraftCqlLibrary('qdmDraftLibrary', 'QDM')
+    qdmLibrary = dataCreation.createDraftCqlLibrary('QdmDraftLibrary', 'QDM')
     fhirLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -158,116 +158,118 @@ describe('CQL Library: Function Argument Lightbox', () => {
   })
 })
 
-// describe('CQL Library: Function Insert Attribute Lightbox', () => {
-//
-//   before('Login', () => {
-//     oktaLogin.login()
-//     cy.get(measurelibrary.cqlLibraryTab).click()
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     qdmLibrary = dataCreation.createDraftCqlLibrary('qdmDraftLibrary', 'QDM')
-//     fhirLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//   })
-//   beforeEach('Preserve Cookies', () => {
-//     helper.preserveCookies()
-//   })
-//   after('Log Out', () => {
-//     helper.logout()
-//   })
-//
-//   it('QDM Library: Validate the classes on Function Insert Attribute Lightbox', () => {
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-//     helper.enterText(cqlLibrary.searchInputBox, qdmLibrary)
-//     cy.get(cqlLibrary.searchBtn).click()
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-//     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     cy.get(cqlComposer.functionCQLComposer).click()
-//
-//     helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2, 'Function')
-//
-//     cy.get(cqlComposer.insertBtn).click()
-//
-//     cy.get(cqlComposer.selectItemType).select('Attributes')
-//
-//     // Verify sub-classes display on Function Insert Attribute drop-down
-//     cy.get(cqlComposer.selectAttributesDataType).select('Immunization, Not Administered')
-//       .invoke('val').should('deep.equal', 'Immunization, Not Administered')
-//
-//     cy.get(cqlComposer.selectAttributesDataType).select('Substance, Not Recommended')
-//       .invoke('val').should('deep.equal', 'Substance, Not Recommended')
-//
-//     cy.get(cqlComposer.attributeCancelBtn).click()
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     cy.get(measurelibrary.cqlLibraryTab).click()
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//   })
-//
-//   it('FHIR Library: Validate the classes on Function Insert Attribute Lightbox', () => {
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
-//     helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)
-//     cy.get(cqlLibrary.searchBtn).click()
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-//     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     cy.get(cqlComposer.cqlLibraryDescription).type('CQL Library Description text')
-//
-//     cy.get(cqlComposer.publisher).select('SemanticBits')
-//
-//     cy.get(cqlComposer.saveBtn).click()
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     cy.get(cqlComposer.functionCQLComposer).click()
-//
-//     helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2, 'Function')
-//
-//     cy.get(cqlComposer.insertBtn).click()
-//
-//     cy.get(cqlComposer.selectItemType).select('Attributes')
-//
-//     // Verify sub-classes display on Function Insert Attribute drop-down
-//     cy.get(cqlComposer.selectAttributesDataType).select('AdverseEvent.SuspectEntity')
-//       .invoke('val').should('deep.equal', 'AdverseEvent.SuspectEntity')
-//
-//     cy.get(cqlComposer.selectAttributesDataType).select('CareTeam.Participant')
-//       .invoke('val').should('deep.equal', 'CareTeam.Participant')
-//
-//     cy.get(cqlComposer.selectAttributesDataType).select('Encounter.Diagnosis')
-//       .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
-//
-//     cy.get(cqlComposer.attributeCancelBtn).click()
-//     cy.get(cqlComposer.attributeCancelBtn).click()
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//     cy.get(measurelibrary.cqlLibraryTab).click()
-//
-//     helper.verifySpinnerAppearsAndDissappears()
-//
-//   })
-// })
+describe('CQL Library: Function Insert Attribute Lightbox', () => {
+
+  before('Login', () => {
+    oktaLogin.login()
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    qdmLibrary = dataCreation.createDraftCqlLibrary('QdmDraftLibrary', 'QDM')
+    fhirLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
+
+    helper.verifySpinnerAppearsAndDissappears()
+  })
+  beforeEach('Preserve Cookies', () => {
+    helper.preserveCookies()
+  })
+  after('Log Out', () => {
+    helper.logout()
+  })
+
+  it('QDM Library: Validate the classes on Function Insert Attribute Lightbox', () => {
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, qdmLibrary)
+    cy.get(cqlLibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(cqlComposer.functionCQLComposer).click()
+
+    helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2, 'Function')
+
+    cy.get(cqlComposer.insertBtn).click()
+
+    cy.get(cqlComposer.selectItemType).select('Attributes')
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    // Verify sub-classes display on Function Insert Attribute drop-down
+    cy.get(cqlComposer.selectAttributesDataType).select('Immunization, Not Administered')
+      .invoke('val').should('deep.equal', 'Immunization, Not Administered')
+
+    cy.get(cqlComposer.selectAttributesDataType).select('Substance, Not Recommended')
+      .invoke('val').should('deep.equal', 'Substance, Not Recommended')
+
+    cy.get(cqlComposer.attributeCancelBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
+
+  it('FHIR Library: Validate the classes on Function Insert Attribute Lightbox', () => {
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)
+    cy.get(cqlLibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(cqlComposer.cqlLibraryDescription).type('CQL Library Description text')
+
+    cy.get(cqlComposer.publisher).select('SemanticBits')
+
+    cy.get(cqlComposer.saveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(cqlComposer.functionCQLComposer).click()
+
+    helper.waitToContainText(cqlComposer.cqlWorkspaceTitleGlobal2, 'Function')
+
+    cy.get(cqlComposer.insertBtn).click()
+
+    cy.get(cqlComposer.selectItemType).select('Attributes')
+
+    // Verify sub-classes display on Function Insert Attribute drop-down
+    cy.get(cqlComposer.selectAttributesDataType).select('AdverseEvent.SuspectEntity')
+      .invoke('val').should('deep.equal', 'AdverseEvent.SuspectEntity')
+
+    cy.get(cqlComposer.selectAttributesDataType).select('CareTeam.Participant')
+      .invoke('val').should('deep.equal', 'CareTeam.Participant')
+
+    cy.get(cqlComposer.selectAttributesDataType).select('Encounter.Diagnosis')
+      .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
+
+    cy.get(cqlComposer.attributeCancelBtn).click()
+    cy.get(cqlComposer.attributeCancelBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
+})

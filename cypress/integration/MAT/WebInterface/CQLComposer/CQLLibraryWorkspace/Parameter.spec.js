@@ -17,7 +17,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    qdmcqlLibrary = dataCreation.createDraftCqlLibrary('qdmDraftLibrary', 'QDM')
+    qdmcqlLibrary = dataCreation.createDraftCqlLibrary('QdmDraftLibrary', 'QDM')
     fhircqlLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()

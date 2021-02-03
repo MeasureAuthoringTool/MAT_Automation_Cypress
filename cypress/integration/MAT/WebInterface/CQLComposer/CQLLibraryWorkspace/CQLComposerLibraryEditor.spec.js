@@ -15,7 +15,7 @@ describe('CQL Composer: CQL Editor message', () => {
   before('Login', () => {
     oktaLogin.login()
 
-    qdmCqlLibrary = dataCreation.createDraftCqlLibrary('qdmCqlLibrary', 'QDM')
+    qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -67,6 +67,8 @@ describe('CQL Composer: CQL Editor message', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(cqlComposer.cqlLibraryEditor).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 

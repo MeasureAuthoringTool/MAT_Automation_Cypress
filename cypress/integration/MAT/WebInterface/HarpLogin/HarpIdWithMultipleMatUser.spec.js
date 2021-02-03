@@ -14,7 +14,7 @@ describe('HARP ID: Multiple MAT Users', () => {
     helper.logoutUserwithMultipleMAT()
   })
 
-  it('Validate the user can see switch MAT users', () => {
+  it.skip('Validate the user can see switch MAT users', () => {
 
     cy.get(matheader.userprofile).click()
 
