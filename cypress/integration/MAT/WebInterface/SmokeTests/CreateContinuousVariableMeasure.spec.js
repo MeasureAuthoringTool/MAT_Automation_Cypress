@@ -6,11 +6,8 @@ import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../support/oktaLogin'
 
 describe('QDM Continuous Variable Measure', () => {
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
-  })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
   })
   after('Log Out', () => {
     helper.logout()

@@ -13,8 +13,8 @@ let versionMeasureNotOwner = ''
 let versionMeasure = ''
 let fhirMeasure = ''
 
-describe('Measure Library Row Selection', () => {
-  before('Login', () => {
+describe('Measure Library: Grid: Row Selection', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
 
     //creating new draft measure
@@ -24,10 +24,7 @@ describe('Measure Library Row Selection', () => {
     versionMeasure = dataCreation.createMajorVersionMeasure()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Recent Activity: Row Selection', () => {

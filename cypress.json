@@ -1,8 +1,5 @@
 {
-  "env":
-  {
-    "RETRIES": 0
-  },
+  "env": {},
   "chromeWebSecurity": false,
   "pageLoadTimeout": 100000,
   "defaultCommandTimeout": 10000,
@@ -21,6 +18,10 @@
     "timestamp": "mmddyyyy_HHMMss",
     "json": true,
     "inline": true
+  },
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
   },
   "screenshotsFolder": "mochawesome-report/assets"
 
