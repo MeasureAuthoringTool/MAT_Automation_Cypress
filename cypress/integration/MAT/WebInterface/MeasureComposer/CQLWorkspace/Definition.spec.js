@@ -9,20 +9,14 @@ let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Composer: CQL Workspace: Definition', () => {
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
-
-    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
-    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
-
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Enabled/Disabled QDM Measure Owner', () => {
+    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
 
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
     cy.get(measurelibrary.searchBtn).click()
@@ -55,6 +49,7 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
 
   })
   it('Enabled/Disabled FHIR Measure Owner', () => {
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
     cy.get(measurelibrary.searchBtn).click()
@@ -87,6 +82,7 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
 
   })
   it('QDM Insert Attribute Data population', () => {
+    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
 
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
     cy.get(measurelibrary.searchBtn).click()
@@ -120,6 +116,7 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
 
   })
   it('FHIR Insert Attribute Data population', () => {
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
     cy.get(measurelibrary.searchBtn).click()
@@ -154,6 +151,7 @@ describe('Measure Composer: CQL Workspace: Definition', () => {
   })
 
   it('FHIR Measure: Validate the Attribute drop down is disabled', () => {
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
 

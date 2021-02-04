@@ -10,22 +10,18 @@ let qdmMeasure = ''
 
 describe('Measure Composer: Function Argument Lightbox', () => {
 
-    before('Login', () => {
+    beforeEach('Login', () => {
         oktaLogin.login()
-
-        qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure','QDM')
-        fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure','FHIR')
-
-        helper.verifySpinnerAppearsAndDissappears()
     })
-    beforeEach('Preserve Cookies', () => {
-        helper.preserveCookies()
-    })
-    after('Log Out', () => {
+
+    afterEach('Log Out', () => {
         helper.logout()
     })
 
     it('QDM Measure: Validate the classes on Function Argument Lightbox', () => {
+      qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure','QDM')
+
+      helper.verifySpinnerAppearsAndDissappears()
 
         helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
         cy.get(measurelibrary.searchBtn).click()
@@ -84,6 +80,7 @@ describe('Measure Composer: Function Argument Lightbox', () => {
     })
 
     it('FHIR Measure: Validate the classes on Function Argument Lightbox', () => {
+      fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure','FHIR')
 
         helper.verifySpinnerAppearsAndDissappears()
 
@@ -149,22 +146,18 @@ describe('Measure Composer: Function Argument Lightbox', () => {
 
 describe('Measure Composer: Function Insert Attribute Lightbox', () => {
 
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
-
-    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
-    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
-
-    helper.verifySpinnerAppearsAndDissappears()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
   it('QDM Measure: Validate the classes on Function Insert Attribute Lightbox', () => {
+    qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
     cy.get(measurelibrary.searchBtn).click()
@@ -206,6 +199,7 @@ describe('Measure Composer: Function Insert Attribute Lightbox', () => {
   })
 
   it('FHIR Measure: Validate the classes on Function Insert Attribute Lightbox', () => {
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
 
