@@ -14,16 +14,21 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
 
     fhirLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
 
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
   it('FHIR Measure: Add correct version for code system', () => {
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.searchInputBox)
     helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)
     cy.get(cqlLibrary.searchBtn).click()
 
@@ -36,6 +41,8 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
 
     // CQL Library Editor
     cy.get(cqlComposer.cqlLibraryEditor).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
@@ -56,7 +63,11 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
   })
 
   it('FHIR Measure: Add incorrect version for code system', () => {
+    cy.get(measurelibrary.cqlLibraryTab).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.searchInputBox)
     helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)
     cy.get(cqlLibrary.searchBtn).click()
 
@@ -79,6 +90,8 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
 
     // CQL Library Editor
     cy.get(cqlComposer.cqlLibraryEditor).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 

@@ -12,7 +12,7 @@ let draftCqlLibraryOwner = ''
 let versionedCQLLibary = ''
 
 describe('CQL Library Grid Selection', () => {
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
@@ -26,10 +26,7 @@ describe('CQL Library Grid Selection', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Recent Activity', () => {
@@ -111,7 +108,8 @@ describe('CQL Library Grid Selection', () => {
   it('CQL Library Search Table', () => {
 
     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-    cy.get(cqlLibrary.row1CqlLibrarySearch).click()
+
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
 
     helper.isChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
 
@@ -158,10 +156,14 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
