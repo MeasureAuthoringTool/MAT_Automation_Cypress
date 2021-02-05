@@ -14,7 +14,7 @@ let versionMeasure = ''
 let fhirMeasure = ''
 
 describe('Measure Library: Grid: Row Selection', () => {
-  beforeEach('Login', () => {
+  before('Login', () => {
     oktaLogin.login()
 
     //creating new draft measure
@@ -23,6 +23,11 @@ describe('Measure Library: Grid: Row Selection', () => {
     //creating new versioned measure
     versionMeasure = dataCreation.createMajorVersionMeasure()
 
+    helper.logout()
+
+  })
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
   afterEach('Log Out', () => {
     helper.logout()
