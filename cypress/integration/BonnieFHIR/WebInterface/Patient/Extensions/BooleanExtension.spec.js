@@ -18,7 +18,7 @@ describe('Test Patient: Extensions section', () => {
     bonnieLogin.logout()
   })
 
-  it.only('Validate the Extensions Components', () => {
+  it('Validate the Extensions Components', () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
 
     measureDetailsPage.navigateToMeasureDetails(measureName)
