@@ -11,7 +11,7 @@ let qdmLibrary = ''
 
 describe('CQL Library: Function Argument Lightbox', () => {
 
-  before('Login', () => {
+  before('Login, data creation', () => {
     oktaLogin.login()
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -21,11 +21,19 @@ describe('CQL Library: Function Argument Lightbox', () => {
     fhirLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
+
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
@@ -160,7 +168,7 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
 describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
-  before('Login', () => {
+  before('Login, data Creation', () => {
     oktaLogin.login()
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -170,11 +178,19 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
     fhirLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
+
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 

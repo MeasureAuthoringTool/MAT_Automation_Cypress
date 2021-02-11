@@ -10,19 +10,15 @@ import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 let measureName = 'PrimaryCariesPreventionIntervention' + Date.now()
 
 describe('FHIR Measure: Export', () => {
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
-
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
-
   it('Regular User: Validate the Export UI for FHIR Measure', () => {
 
+    helper.visibleWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })

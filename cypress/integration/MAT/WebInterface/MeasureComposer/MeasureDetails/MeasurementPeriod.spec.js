@@ -9,22 +9,24 @@ let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Validate the Measure Period without Data changes', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
     oktaLogin.login()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
 
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
   it('FHIR Measure: Validate the default behavior and next calendar year', () => {
 
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
     helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
     cy.get(measurelibrary.searchBtn).click()
 
@@ -60,6 +62,7 @@ describe('Validate the Measure Period without Data changes', () => {
 
   it('QDM Measure: Validate the default behavior and next calendar year', () => {
 
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
     cy.get(measurelibrary.searchBtn).click()
 
@@ -89,6 +92,7 @@ describe('Validate the Measure Period without Data changes', () => {
 
   it('Convert measure without changing measurement period and validate the converted measure', () => {
 
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
     cy.get(measurelibrary.searchBtn).click()
 
@@ -144,21 +148,22 @@ describe('Validate the Measure Period without Data changes', () => {
 })
 
 describe('Validate the Measure Period with date changes', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
     oktaLogin.login()
 
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
   it('Convert measure with changing measurement period and validate the converted measure', () => {
 
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
     cy.get(measurelibrary.searchBtn).click()
 

@@ -9,13 +9,10 @@ import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 let measureName = ''
 
 describe('Packaging: Ratio Measure', () => {
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 

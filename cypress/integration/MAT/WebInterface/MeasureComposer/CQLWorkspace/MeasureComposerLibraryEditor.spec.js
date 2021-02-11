@@ -10,7 +10,8 @@ let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure: CQL Editor message', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
+
     oktaLogin.login()
 
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
@@ -18,11 +19,13 @@ describe('Measure: CQL Editor message', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.logout()
+
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
@@ -108,16 +111,17 @@ describe('Measure: CQL Editor message', () => {
 })
 
 describe('FHIR Measure: Version error message', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
     oktaLogin.login()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
+    helper.logout()
   })
   beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
@@ -163,16 +167,17 @@ describe('FHIR Measure: Version error message', () => {
 })
 
 describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
     oktaLogin.login()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
@@ -216,15 +221,17 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 })
 
 describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
-  before('Login', () => {
+  before('Login, Data Creation', () => {
     oktaLogin.loginWithoutUMLS()
     fhirMeasure = dataCreation.createDraftMeasure('FhirMeasure', 'FHIR')
     helper.verifySpinnerAppearsAndDissappears()
+
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.loginWithoutUMLS()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 

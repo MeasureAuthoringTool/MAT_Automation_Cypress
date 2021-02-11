@@ -10,7 +10,7 @@ let fhircqlLibrary = ''
 let qdmcqlLibrary = ''
 
 describe('CQL Composer: CQL Library Workspace: Parameter', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
     oktaLogin.login()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
@@ -21,11 +21,19 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
     fhircqlLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
+
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('QDM: Verify errors are coming from correct source', () => {

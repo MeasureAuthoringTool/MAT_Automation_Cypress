@@ -8,7 +8,7 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirLibrary = ''
 
-describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
+describe('CQLLibrary Workspace: Codes: Validate the system version', () => {
   before('Login', () => {
     oktaLogin.login()
 
@@ -18,15 +18,18 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
   })
   beforeEach('Login', () => {
     oktaLogin.login()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
   afterEach('Log Out', () => {
     helper.logout()
   })
 
   it('FHIR Measure: Add correct version for code system', () => {
-    cy.get(measurelibrary.cqlLibraryTab).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
 
     helper.visibleWithTimeout(cqlLibrary.searchInputBox)
     helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)
@@ -63,9 +66,6 @@ describe('CQLLibraryWorkspace: Codes: Validate the system version', () => {
   })
 
   it('FHIR Measure: Add incorrect version for code system', () => {
-    cy.get(measurelibrary.cqlLibraryTab).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
 
     helper.visibleWithTimeout(cqlLibrary.searchInputBox)
     helper.enterText(cqlLibrary.searchInputBox, fhirLibrary)

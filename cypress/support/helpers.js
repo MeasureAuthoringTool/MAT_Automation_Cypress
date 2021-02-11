@@ -39,8 +39,9 @@ export const copyScreenshots = () => {
 }
 
 export const loginUMLS = () => {
+  visibleWithTimeout(matheader.UMLS)
   cy.get(matheader.UMLS).click()
-
+  cy.wait(500)
   visibleWithTimeout(matheader.API_Key)
   enabledWithTimeout(matheader.API_Key)
 

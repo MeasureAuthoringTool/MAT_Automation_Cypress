@@ -20,7 +20,7 @@ describe('CQL Composer: CQL Editor message', () => {
     helper.logout()
   })
 
-  it('QDM Library: Validate the success message on CQL Library Editor', () => {
+  it('QDM CQL Composer: Validate the success message on CQL Library Editor', () => {
     qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -48,7 +48,7 @@ describe('CQL Composer: CQL Editor message', () => {
     helper.verifySpinnerAppearsAndDissappears()
   })
 
-  it('FHIR Library: Validate the success message on CQL Library Editor', () => {
+  it('FHIR CQL Composer: Validate the success message on CQL Library Editor', () => {
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -76,7 +76,7 @@ describe('CQL Composer: CQL Editor message', () => {
     helper.verifySpinnerAppearsAndDissappears()
   })
 
-  it('QDM Library: Validate the error message on CQL Library Editor', () => {
+  it('QDM CQL Composer: Validate the error message on CQL Library Editor', () => {
     qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -150,7 +150,7 @@ describe('CQL Composer: CQL Editor message', () => {
   })
 })
 
-describe('FHIR Library: Add code directly on CQL Library Editor', () => {
+describe('FHIR CQL Composer: Add code directly on CQL Library Editor', () => {
   beforeEach('Login', () => {
     oktaLogin.login()
 
@@ -162,7 +162,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
     helper.logout()
   })
 
-  it('FHIR Library: Validate the successful message when editing directly on CQL Library Editor', () => {
+  it('FHIR: Validate the successful message when editing directly on CQL Library Editor', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
@@ -207,7 +207,7 @@ describe('FHIR Library: Add code directly on CQL Library Editor', () => {
   })
 })
 
-describe('FHIR Library: Add codesystems and valuesets in CQL Editor without UMLS', () => {
+describe('FHIR CQL Composer: Add codesystems and valuesets in CQL Editor without UMLS', () => {
   beforeEach('Login', () => {
     oktaLogin.loginWithoutUMLS()
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')

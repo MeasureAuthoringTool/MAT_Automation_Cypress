@@ -9,13 +9,10 @@ import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 //let measureName = ''
 
 describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 

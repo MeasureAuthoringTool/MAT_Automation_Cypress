@@ -1,7 +1,6 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
-import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from '../../../../pom/MAT/WI/CQLComposer'
 import * as oktaLogin from '../../../../support/oktaLogin'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
@@ -12,7 +11,7 @@ let draftCqlLibraryOwner = ''
 let versionedCQLLibary = ''
 
 describe('CQL Library Grid Selection', () => {
-  beforeEach('Login', () => {
+  before('Login', () => {
     oktaLogin.login()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
@@ -25,6 +24,11 @@ describe('CQL Library Grid Selection', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.logout()
+
+  })
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
   afterEach('Log Out', () => {
     helper.logout()
@@ -33,27 +37,7 @@ describe('CQL Library Grid Selection', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    //populating recent activity grid
-    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
-    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
-
-    helper.verifySpinnerAppearsAndDissappears()
-
     cy.get(measurelibrary.cqlLibraryTab).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    helper.visibleWithTimeout(cqlLibrary.row2CqlLibrarySearch)
-    gridRowActions.doubleClickRow(cqlLibrary.row2CqlLibrarySearch)
-
-    helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
-
-    helper.visibleWithTimeout(cqlComposer.generalInformation)
-
-    cy.get(measurelibrary.cqlLibraryTab).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
 
     helper.visibleWithTimeout(cqlLibrary.row1RecentActivity)
 
@@ -107,9 +91,17 @@ describe('CQL Library Grid Selection', () => {
 
   it('CQL Library Search Table', () => {
 
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
-    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    cy.get(cqlLibrary.cqlLibrarySearchTable).click()
+    cy.wait(1000)
+    //gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+    cy.get(cqlLibrary.row1CqlLibrarySearch).click()
 
     helper.isChecked(cqlLibrary.row1CqlLibrarySearchCheckbox)
 
@@ -128,7 +120,7 @@ describe('CQL Library Grid Selection', () => {
   })
 })
 
-describe('CQL Library Recent Activity Grid Button Bar', () => {
+describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () => {
   before('Login', () => {
 
     draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
@@ -154,6 +146,8 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
     cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+
+    helper.logout()
 
   })
   beforeEach('Login', () => {
@@ -214,21 +208,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
   it('Enabled/Disabled Recent Activity The Owner', () => {
 
-    cy.get(cqlLibrary.newLibraryBtn).click()
-
-    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
-
-    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
-
-    cy.get(createNewCqlLibrary.modelQDMRadio).click()
-
-    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
-
-    cy.get(cqlComposer.confirmationContinueBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    cy.get(measurelibrary.cqlLibraryTab).click()
+    dataCreation.createDraftCqlLibrary('MYQdmDraft')
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -237,10 +217,8 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
       if (Cypress.$(elm).length === 2) {
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         helper.verifySpinnerAppearsAndDissappears()
-        cy.get(cqlLibrary.row1RecentActivity).click()
         cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
@@ -282,17 +260,15 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
   it('Recent Activity Button Bar Create Version', () => {
 
-    cy.get(cqlLibrary.newLibraryBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
-    cy.get(createNewCqlLibrary.modelQDMRadio).click()
-
-    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
-
-    cy.get(cqlComposer.confirmationContinueBtn).click()
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -306,11 +282,13 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        cy.wait(500)
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1RecentActivity).click()
+        cy.wait(500)
         cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
@@ -325,6 +303,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
+
   it('Recent Activity Button Bar Create Draft', () => {
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
@@ -382,9 +361,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
       if (Cypress.$(elm).length === 2) {
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
-        cy.get(cqlLibrary.row1RecentActivity).click()
         cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
@@ -402,18 +379,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
   it('Recent Activity Button Bar View', () => {
 
-    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-    cy.get(cqlLibrary.filterByMyLibrariesChkBox).eq(1).click()
-    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
-    cy.get(cqlLibrary.searchBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    cy.get(measurelibrary.cqlLibraryTab).click()
+    dataCreation.createDraftCqlLibrary('MYQdmDraft')
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -423,9 +389,7 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
       if (Cypress.$(elm).length === 2) {
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
-        cy.get(cqlLibrary.row1RecentActivity).click()
         cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
@@ -439,13 +403,13 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
     cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
       if (Cypress.$(elm).length === 2) {
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
-        cy.get(cqlLibrary.row1RecentActivity).click()
         cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
@@ -465,25 +429,22 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
   it('Recent Activity Button Bar Edit', () => {
 
-    helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
-    cy.get(cqlLibrary.newLibraryBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
-    cy.get(createNewCqlLibrary.modelQDMRadio).click()
-
-    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
-
-    cy.get(cqlComposer.confirmationContinueBtn).click()
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
     cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -511,25 +472,22 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
   it('Recent Activity Button Bar Share', () => {
 
-    helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
-    cy.get(cqlLibrary.newLibraryBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
-    cy.get(createNewCqlLibrary.modelQDMRadio).click()
-
-    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
-
-    cy.get(cqlComposer.confirmationContinueBtn).click()
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
     cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -557,25 +515,22 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
 
   it('Recent Activity Button Bar Delete', () => {
 
-    helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
-    cy.get(cqlLibrary.newLibraryBtn).click()
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
+    helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
+    cy.get(cqlLibrary.searchBtn).click()
 
-    let cqlLibraryName = 'CQLLibraryTest' + Date.now()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
-    cy.get(createNewCqlLibrary.modelQDMRadio).click()
-
-    cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
-
-    cy.get(cqlComposer.confirmationContinueBtn).click()
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
     cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
@@ -604,44 +559,6 @@ describe('CQL Library Recent Activity Grid Button Bar', () => {
       }
 
     })
-
-  })
-
-})
-
-describe('CQL Library Search Grid Button Bar', () => {
-  before('Login', () => {
-
-    draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
-
-    oktaLogin.login()
-
-    draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('QDMOwner')
-
-    versionedCQLLibary = dataCreation.createDraftCqlLibrary('VersionedCQLLibary')
-
-    helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
-    helper.enterText(cqlLibrary.searchInputBox, versionedCQLLibary)
-    cy.get(cqlLibrary.searchBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
-
-    cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
-
-    cy.get(cqlLibrary.majorVersionTypeRadio).click()
-
-    cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-  })
-  beforeEach('Preserve Session', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
-    helper.logout()
   })
 
   it('Enabled/Disabled All CQL Libraries Not The Owner', () => {
@@ -833,5 +750,8 @@ describe('CQL Library Search Grid Button Bar', () => {
 
     cy.get(cqlLibrary.row1CqlLibrarySearch).click()
   })
+
 })
+
+
 
