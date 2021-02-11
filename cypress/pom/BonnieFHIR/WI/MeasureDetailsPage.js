@@ -33,6 +33,7 @@ export const measureUpdateBtn = 'button:visible[data-call-method="updateMeasure"
 export function navigateToHomeMeasurePage () {
   cy.log('navigateToHomeMeasurePage')
   cy.get(measurePageNavigationBtn).click()
+  cy.wait(1000)
   cy.log('navigateToHomeMeasurePage - done')
 }
 

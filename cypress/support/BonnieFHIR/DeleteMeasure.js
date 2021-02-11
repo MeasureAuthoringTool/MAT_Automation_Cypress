@@ -11,5 +11,6 @@ export const DeleteMeasure = (measureName) => {
   cy.log('navigateToMeasureDetails - done')
 
   measureDetailsPage.clickDeleteMeasure()
+  cy.wait(1000)
   cy.log('deleteMeasure - done')
 }

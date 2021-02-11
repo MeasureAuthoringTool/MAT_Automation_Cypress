@@ -52,6 +52,7 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
   helper.enabled(importMeasureDialog.importLoadBtn)
   helper.click(importMeasureDialog.importLoadBtn)
 
+  cy.wait(2000)
   cy.log('UploadMeasureToBonnie - done')
 }
 
@@ -73,6 +74,7 @@ export const UpdateMeasure = (fileToUpload) => {
   helper.enabled(importMeasureDialog.importLoadBtn)
   helper.click(importMeasureDialog.importLoadBtn)
 
+  cy.wait(2000)
   cy.log('UpdateMeasure - done')
 }
 
