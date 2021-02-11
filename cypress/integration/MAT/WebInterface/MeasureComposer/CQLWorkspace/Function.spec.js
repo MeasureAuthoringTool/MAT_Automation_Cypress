@@ -188,6 +188,7 @@ describe('Measure Composer: Function Insert Attribute Lightbox', () => {
       .invoke('val').should('deep.equal', 'Substance, Not Recommended')
 
     cy.get(measureComposer.attributeCancelBtn).click()
+    cy.get(measureComposer.attributeCancelBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 

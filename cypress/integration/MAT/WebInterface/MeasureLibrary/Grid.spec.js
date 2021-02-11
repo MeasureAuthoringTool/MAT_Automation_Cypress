@@ -14,7 +14,7 @@ let versionMeasure = ''
 let fhirMeasure = ''
 
 describe('Measure Library: Grid: Row Selection', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
     oktaLogin.login()
 
     //creating new draft measure
@@ -37,7 +37,7 @@ describe('Measure Library: Grid: Row Selection', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.visibleWithTimeout(measurelibrary.row1RecentActivity)
-    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.row1RecentActivity).click()
 
     helper.isChecked(measurelibrary.row1RecentActivityCheckbox)
 

@@ -15,14 +15,11 @@ let name = ''
 
 describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
@@ -151,14 +148,11 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
 describe('Measure Conversion with incorrect CQL Library name format', () => {
 
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 

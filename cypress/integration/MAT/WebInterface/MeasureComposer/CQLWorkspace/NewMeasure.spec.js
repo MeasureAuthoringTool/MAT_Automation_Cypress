@@ -8,21 +8,23 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 let qdmMeasure = ''
 
 describe('Measure Composer: CQL Workspace: New Measure', () => {
-  before('Login', () => {
+  before('Login, data Creation', () => {
     oktaLogin.login()
 
     qdmMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'QDM')
 
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
   it('QDM Measure: Validate no errors are displayed on a new measure after clicking save', () => {
 
+    helper.visibleWithTimeout(measurelibrary.searchInputBox)
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
     cy.get(measurelibrary.searchBtn).click()
 

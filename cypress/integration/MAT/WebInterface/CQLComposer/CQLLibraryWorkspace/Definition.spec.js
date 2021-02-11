@@ -10,18 +10,26 @@ let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
 
 describe('CQL Composer: CQL Library Workspace: Definition', () => {
-  before('Login', () => {
+  before('Login, data creation', () => {
     oktaLogin.login()
 
     qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
+
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Enabled/Disabled QDM CQL Library Owner', () => {

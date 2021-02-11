@@ -9,21 +9,23 @@ let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Composer: CQL Workspace: Parameter', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
     oktaLogin.login()
 
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('QDM: Verify errors are coming from correct source', () => {
 
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
     cy.get(measurelibrary.searchBtn).click()
 
@@ -64,6 +66,7 @@ describe('Measure Composer: CQL Workspace: Parameter', () => {
   })
   it('FHIR: Verify errors are coming from correct source', () => {
 
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
     helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
     cy.get(measurelibrary.searchBtn).click()
 

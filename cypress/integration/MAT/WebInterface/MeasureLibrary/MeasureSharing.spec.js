@@ -8,7 +8,7 @@ let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Library: Measure Sharing', () => {
-  before('Login', () => {
+  before('Login, Data creation', () => {
     oktaLogin.login()
 
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
@@ -16,11 +16,12 @@ describe('Measure Library: Measure Sharing', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Sharing QDM Measure', () => {

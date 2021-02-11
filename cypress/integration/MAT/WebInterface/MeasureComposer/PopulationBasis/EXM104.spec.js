@@ -7,17 +7,15 @@ import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 
 describe('EXM104: Discharged on Antithrombotic Therapy', () => {
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Discharged on Antithrombotic Therapy, creation, grouping, and packaging', () => {
 
+    helper.visibleWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
     let measureName = 'Discharge' + Date.now()
 
