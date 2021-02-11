@@ -25,7 +25,8 @@ describe('Dashboard: Upload Dialog: Error handling', () => {
         //verify the error message
 
         cy.get(importMeasureDialog.errorDialog).invoke('text').then((text) => {
-            expect(text).to.include('The uploaded measure bundle does not contain the proper FHIR JSON file.' +
+            expect(text).to.include('The uploaded file is not a valid Measure Authoring Tool (MAT) export of a FHIR Based Measure.')
+            expect(text).to.include('Multiple measure bundles were found.' +
               'Please re-package and re-export your FHIR based measure from the MAT and try again.')
             expect(text).to.include('If the problem continues, please report the issue on the BONNIE Issue Tracker.')
         })
