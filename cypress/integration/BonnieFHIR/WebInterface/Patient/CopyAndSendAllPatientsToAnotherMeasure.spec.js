@@ -8,10 +8,10 @@ import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
 const measureName = 'FHIRmeasureCMS347'
-const measureFileToUpload = 'FHIRmeasureCMS347v603-Artifacts.zip'
+const measureFileToUpload = 'FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 
 const anotherMeasureName = "Cms111testingMeasure"
-const anotherFileToUpload = "Cms111testingMeasurev603-Artifacts.zip"
+const anotherFileToUpload = "Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
 
 
 const lastNameSuffix = new Date().getTime()

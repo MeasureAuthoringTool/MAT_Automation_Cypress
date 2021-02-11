@@ -10,7 +10,7 @@ import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUp
 describe('Attribute UI: Code Widget', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347v603-Artifacts.zip'
+  const measureFileToUpload = 'FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 
   before('Login', () => {
     bonnieLogin.login()
@@ -81,7 +81,7 @@ describe('Attribute UI: Code Widget', () => {
     cy.get(testPatientPage.attributeTypeSelect).should('contain.text', 'Code')
     cy.get(testPatientPage.valueSetDirectRefSelect).select('MedicationAdministration Status Codes')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains('status: "in-progress"')
+    cy.get(testPatientPage.exsistingAttribute).contains('status: "completed"')
     cy.log('AddCodeWidget - done')
   }
 
