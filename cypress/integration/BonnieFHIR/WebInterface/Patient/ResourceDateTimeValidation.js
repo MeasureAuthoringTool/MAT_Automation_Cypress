@@ -6,7 +6,7 @@ import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetail
 import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
-const fileToUpload = "FHIRmeasureCMS347v603-Artifacts.zip"
+const fileToUpload = "FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip"
 
 describe('Valiidate DateTime for Attributes from Patient', () => {
 
@@ -48,11 +48,11 @@ describe('Valiidate DateTime for Attributes from Patient', () => {
     cy.get(testPatientPage.elementsHeader).should('have.text', 'Elements')
 
     //Caclulate the expected date values to be used
-    var oneYearFromNow = new Date();
-    oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
-    var dd = String(oneYearFromNow.getDate()).padStart(2, '0');
-    var mm = String(oneYearFromNow.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = oneYearFromNow.getFullYear();
+    var date = new Date();
+    date.setFullYear(date.getFullYear());
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
 
     var expectedDate = mm + '/' + dd + '/' + yyyy;
     cy.log("expected date is " + expectedDate)

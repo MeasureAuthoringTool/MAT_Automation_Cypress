@@ -5,7 +5,7 @@ import * as measureDetails from '../../../../pom/BonnieFHIR/WI/MeasureDetails'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as helper from '../../../../support/helpers'
 
-let proportionMeasureWithPatients = 'FHIRmeasureCMS347v603-Artifacts.zip'
+let proportionMeasureWithPatients = 'FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 let proportionMeasureWithPatientsMeasureName = 'FHIRmeasureCMS347'
 
 describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Details', () => {

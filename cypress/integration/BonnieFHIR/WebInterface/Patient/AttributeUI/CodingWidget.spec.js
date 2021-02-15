@@ -10,7 +10,7 @@ import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUp
 describe('Attribute UI: Coding Widget', () => {
 
   const measureName = 'Cms111testingMeasure'
-  const measureFileToUpload = 'Cms111testingMeasurev603-Artifacts.zip'
+  const measureFileToUpload = 'Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip'
 
   before('Login', () => {
     bonnieLogin.login()
@@ -80,7 +80,7 @@ describe('Attribute UI: Coding Widget', () => {
     cy.get(testPatientPage.attributeTypeSelect).should('contain.text', 'Coding')
     cy.get(testPatientPage.valueSetDirectRefSelect).select('ActEncounterCode')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains('class: ActCode: AMB')
+    cy.get(testPatientPage.exsistingAttribute).contains('class: ActCode: ACUTE')
     cy.log('AddCodingWidget - done')
   }
 

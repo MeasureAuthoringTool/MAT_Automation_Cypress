@@ -9,7 +9,7 @@ import * as dashboard from "../../../../pom/BonnieFHIR/WI/Dashboard"
 
 // Can be any measure with Encounters
 const measureName = "Cms111testingMeasure"
-const measureFileName = "Cms111testingMeasurev603-Artifacts.zip"
+const measureFileName = "Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = "President" + lastNameSuffix

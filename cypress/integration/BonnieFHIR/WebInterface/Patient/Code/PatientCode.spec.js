@@ -10,7 +10,7 @@ import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUp
 describe('Test Patient: Adding Code', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347v603-Artifacts.zip'
+  const measureFileToUpload = 'FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 
   before('Login', () => {
     bonnieLogin.login()
@@ -34,7 +34,7 @@ describe('Test Patient: Adding Code', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      testPatientPage.dragAndDrop('medications', 'Medications: MedicationAdministration: Low Intensity Statin Therapy', 37)
+      testPatientPage.dragAndDrop('care provision', 'Care Provision: ServiceRequest: Hospice Care Ambulatory', 0)
       addCode()
       testPatientPage.clickSavePatient()
       testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
@@ -78,10 +78,10 @@ describe('Test Patient: Adding Code', () => {
 
   function addCode () {
     cy.log('addCodeSystem')
-    cy.get(testPatientPage.primaryCodeSystem).select('RXNORM')
-    cy.get(testPatientPage.chooseCodeSystem).select('1944264 (Simvastatin 8 MG/ML Oral Suspension)')
+    cy.get(testPatientPage.primaryCodeSystem).select('SNOMEDCT')
+    cy.get(testPatientPage.chooseCodeSystem).select('385763009 (Hospice care (regime/therapy))')
     cy.get(testPatientPage.addCodeBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingCode).contains('RXNORM: 1944264')
+    cy.get(testPatientPage.exsistingCode).contains('SNOMEDCT: 385763009')
     cy.log('AddCode - done')
   }
 

@@ -10,17 +10,17 @@ import * as homePage from "../../../../pom/BonnieFHIR/WI/Homepage"
 
 const continuousVariableMeasureName = "Cms111testingMeasure"
 const continuousVariableMeasureFileToUpload =
-  "Cms111testingMeasurev603-Artifacts.zip"
+  "Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
 
 const cohortMeasureName = "EXM529"
-const cohortMeasureFileToUpload = "EXM529v603-Artifacts.zip"
+const cohortMeasureFileToUpload = "EXM529-v0-0-004-FHIR-4-0-1.zip"
 
 const proportionMultiGroupMeasureName = "SBTESTCMS347"
 const proportionMultiGroupMeasureFileToUpload =
-  "SBTESTCMS347v603-Artifacts.zip"
+  "SBTESTCMS347-v0-0-008-FHIR-4-0-1 (1).zip"
 
 const measureWithStratificationsMeasureName = "CMS111Test"
-const measureWithStratificationsFileToUpload = "CMS111Test_v6_02_Artifacts.zip"
+const measureWithStratificationsFileToUpload = "CMS111Test-v0-0-016-FHIR-4-0-1.zip"
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = "President" + lastNameSuffix
