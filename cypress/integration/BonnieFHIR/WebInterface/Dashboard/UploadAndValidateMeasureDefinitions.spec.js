@@ -1,6 +1,5 @@
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as bonnieUploadMeasire from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as measureDetails from '../../../../pom/BonnieFHIR/WI/MeasureDetails'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as helper from '../../../../support/helpers'
@@ -121,9 +120,6 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
             expect(text).to.include(qualifyingEncountersExpected)
         })
 
-        //Delete Measure once validated
-        deleteMeasure.DeleteMeasure(proportionMeasureWithPatientsMeasureName)
-
     })
 
     /*
@@ -228,8 +224,6 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
             expect(text).to.include(qualifyingEncountersExpected)
         })
 
-        //Delete Measure once validated
-        deleteMeasure.DeleteMeasure(proportionMeasureWithPatientsMeasureName)
 
     })
 
@@ -333,9 +327,6 @@ describe('Upload Measures to Bonnie FHIR and validate Definitions on Measure Det
         cy.get(measureDetails.qualifyingEncountersCQL).invoke('text').then((text) => {
             expect(text).to.include(qualifyingEncountersExpected)
         })
-
-        //Delete Measure once validated
-        deleteMeasure.DeleteMeasure(proportionMeasureWithPatientsMeasureName)
 
     })
 */

@@ -1,7 +1,6 @@
 import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -27,8 +26,6 @@ describe('Patient: Elements', () => {
   })
   after('Log Out', () => {
 
-    deleteMeasure.DeleteMeasure(measureName)
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
     bonnieLogin.logout()
 
   })

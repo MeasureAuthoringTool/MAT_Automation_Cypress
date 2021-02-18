@@ -1,8 +1,6 @@
 import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -23,8 +21,6 @@ describe('Create and then Edit New Patient', () => {
   })
   after('Log Out', () => {
 
-    deleteMeasure.DeleteMeasure(measureName)
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
     bonnieLogin.logout()
 
   })
@@ -51,9 +47,6 @@ describe('Create and then Edit New Patient', () => {
       testPatientPage.clickSavePatient()
 
       testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
-
-      deletePatient.DeletePatient(distinctLastName)
-      deletePatient.VerifyPatientRemoved(initialPatientCount)
 
     })
 

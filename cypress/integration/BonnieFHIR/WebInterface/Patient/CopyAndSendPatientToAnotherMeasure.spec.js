@@ -3,7 +3,6 @@ import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as editPatient from '../../../../support/BonnieFHIR/EditPatient'
 import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -26,11 +25,6 @@ describe('Patient: Copy to another measure', () => {
   })
 
   afterEach('Log Out', () => {
-    deleteMeasure.DeleteMeasure(anotherMeasureName)
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
-    deleteMeasure.DeleteMeasure(measureName)
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
     bonnieLogin.logout()
   })
 

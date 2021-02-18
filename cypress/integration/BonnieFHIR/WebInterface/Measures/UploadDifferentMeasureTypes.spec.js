@@ -7,6 +7,7 @@ import * as testPatientPage from "../../../../pom/BonnieFHIR/WI/TestPatientPage"
 import * as bonnieUploadMeasure from "../../../../support/BonnieFHIR/BonnieUploadMeasure"
 import * as dashboard from "../../../../pom/BonnieFHIR/WI/Dashboard"
 import * as homePage from "../../../../pom/BonnieFHIR/WI/Homepage"
+import * as importMeasureDialog from '../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 
 const continuousVariableMeasureName = "Cms111testingMeasure"
 const continuousVariableMeasureFileToUpload =
@@ -67,6 +68,12 @@ describe("Measure Upload", () => {
     deleteMeasure.DeleteMeasure(duplicateMeasureName)
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+    helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
+
+    cy.get(importMeasureDialog.closeBtn).click()
+
+    helper.notVisibleWithTimeout(importMeasureDialog.importMeasureDialog)
   })
 
   it('can update an existing measure', () => {
@@ -89,6 +96,12 @@ describe("Measure Upload", () => {
     deleteMeasure.DeleteMeasure(measureName)
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+    helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
+
+    cy.get(importMeasureDialog.closeBtn).click()
+
+    helper.notVisibleWithTimeout(importMeasureDialog.importMeasureDialog)
   })  
 
   it("Continuous Variable Measure: Successful Upload", () => {
@@ -116,9 +129,6 @@ describe("Measure Upload", () => {
     })
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    deleteMeasure.DeleteMeasure(continuousVariableMeasureName)
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
 
@@ -138,14 +148,7 @@ describe("Measure Upload", () => {
 
       helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-      deletePatient.DeletePatient(distinctLastName)
-      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
-    deleteMeasure.DeleteMeasure(cohortMeasureName)
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
   it("Multi-Group Proportion Measure: Successful Upload", () => {
@@ -169,14 +172,7 @@ describe("Measure Upload", () => {
 
       helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-      deletePatient.DeletePatient(distinctLastName)
-      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
-    deleteMeasure.DeleteMeasure(proportionMultiGroupMeasureName)
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
   it("Uploads a measure with stratifications", () => {
@@ -235,14 +231,7 @@ describe("Measure Upload", () => {
 
       helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-      deletePatient.DeletePatient(distinctLastName)
-      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
-    deleteMeasure.DeleteMeasure(measureWithStratificationsMeasureName)
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
   function checkPopulations() {

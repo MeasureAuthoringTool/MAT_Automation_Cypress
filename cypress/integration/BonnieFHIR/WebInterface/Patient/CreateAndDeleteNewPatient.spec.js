@@ -1,9 +1,6 @@
-import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -36,16 +33,7 @@ describe('Patient: Create and then Delete New Patient', () => {
       testPatientPage.clickSavePatient()
       testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
-      navigateToMeasureDetails(measureName)
-      deletePatient.DeletePatient(distinctLastName)
-      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
-    deleteMeasure.DeleteMeasure(measureName)
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
   function uploadTestMeasure () {

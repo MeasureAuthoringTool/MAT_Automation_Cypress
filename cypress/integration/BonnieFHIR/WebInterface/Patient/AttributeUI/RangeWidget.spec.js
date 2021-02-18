@@ -3,7 +3,6 @@ import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogou
 import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -47,9 +46,6 @@ describe('Attribute UI: Range Widget', () => {
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    deleteMeasure.DeleteMeasure(measureName)
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
   function uploadTestMeasure () {
@@ -59,7 +55,6 @@ describe('Attribute UI: Range Widget', () => {
   function navigateToMeasureDetails (measureName) {
     cy.log('navigateToMeasureDetails')
     cy.get(homePage.measure).contains(measureName).click()
-    // cy.wait(1000)
     cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
     cy.log('navigateToMeasureDetails - done')
   }
@@ -99,24 +94,4 @@ describe('Attribute UI: Range Widget', () => {
     cy.get(testPatientPage.exsistingAttribute).contains('onset: 13 - 25')
     cy.log('AddRangeWidget - done')
   }
-
-  function getPatientRecord (lastName) {
-    return cy.get(measureDetailsPage.measureCalculationPanel).contains(lastName).parents(measureDetailsPage.patient)
-  }
-
-  function verifyPatientAdded (initialPatientCount, lastName) {
-    cy.log('verifyPatientAdded')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount + 1).toString())
-    getPatientRecord(lastName).find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
-    cy.log('verifyPatientAdded - done')
-  }
-
-  function verifyPatientRemoved (initialPatientCount) {
-    cy.log('verifyPatientRemoved')
-    cy.get(measureDetailsPage.newStatus).should('have.text', 'NEW')
-    cy.get(measureDetailsPage.patientListing).should('have.text', (initialPatientCount).toString())
-    cy.log('verifyPatientRemoved - done')
-  }
-
 })

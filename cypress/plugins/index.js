@@ -45,9 +45,10 @@ module.exports = (on, config) => {
     },
   })
   on('task', {
-    queryMongo: query => {
+    bonnieFHIRDeleteMeasuresAndPatients: sshTunnelandUserId => {
+      console.log(sshTunnelandUserId)
       getConfigurationByFile(file).then((envConfig) =>
-        queryMongo(query, envConfig)
+        bonnieFHIRDeleteMeasuresAndPatients(sshTunnelandUserId.sshTunnel, envConfig, sshTunnelandUserId.mongoUserId)
       )
       return null
     }
@@ -55,6 +56,100 @@ module.exports = (on, config) => {
   on('file:preprocessor', browserify(options))
   getCompareSnapshotsPlugin(on)
   return getConfigurationByFile(file)
+}
+
+const MongoClient = require('mongodb').MongoClient
+const assert = require('assert')
+const tunnel = require('tunnel-ssh')
+
+function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
+
+  const sshTunnelConfig = {
+    agent: process.env.SSH_AUTH_SOCK,
+    username: sshTunnel.username,
+    privateKey: require('fs').readFileSync(sshTunnel.privateKey),
+    host: sshTunnel.host,
+    port: sshTunnel.port,
+    dstHost: sshTunnel.dstHost,
+    dstPort: sshTunnel.dstPort,
+    localHost: sshTunnel.localHost,
+    localPort: sshTunnel.localPort
+  }
+  console.log(sshTunnelConfig)
+  // tunnel -- See https://github.com/agebrock/tunnel-ssh#readme
+  tunnel(sshTunnelConfig, (error, server) => {
+    if (error) {
+      console.log("SSH connection error: ", error)
+    }
+    // Connection URL
+    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
+    // Database Name
+    const dbName = config.env.mongo_db
+    // Use connect method to connect to the server
+    MongoClient.connect(url, { useUnifiedTopology: true},function (err, client) {
+      assert.equal(null, err)
+
+      console.log("Connected successfully to server")
+
+      const db = client.db(dbName)
+      const {ObjectId} = require('mongodb')
+
+      //Delete patients based on User ID
+      db.collection('cqm_patients').removeMany({user_id: ObjectId(userId)}, (err, item) => {
+        if (err) {
+          console.log(err)
+        }
+        console.log(item)
+      })
+
+      //Delete Measures based on User ID
+      db.collection('cqm_measures').removeMany({user_id: ObjectId(userId)}, (err, item) => {
+        if (err) {
+          console.log(err)
+        }
+        console.log(item)
+        client.close()
+      })
+    })
+
+  })
+}
+
+function queryMongo (query, config) {
+
+  const sshTunnelConfig = {
+    agent: process.env.SSH_AUTH_SOCK,
+    username: '',
+    privateKey: require('fs').readFileSync(''),
+    host: '',
+    port: 22,
+    dstHost: 'localhost',
+    dstPort: 27017,
+    localHost: '127.0.0.1',
+    localPort: 50001
+  }
+  // tunnel to dev -- See https://github.com/agebrock/tunnel-ssh#readme
+  tunnel(sshTunnelConfig, (error, server) => {
+    if (error) {
+      console.log("SSH connection error: ", error)
+    }
+    // Connection URL
+    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
+    // Database Name
+    const dbName = config.env.mongo_db
+    // Use connect method to connect to the server
+    MongoClient.connect(url, { useUnifiedTopology: true},function (err, client) {
+      assert.equal(null, err)
+      console.log("Connected successfully to server")
+
+      const db = client.db(dbName)
+
+      findDocuments(db, 'cqm_measures', query, function () {
+        client.close()
+      })
+
+    })
+  })
 }
 
 const mysql = require('mysql')
@@ -83,51 +178,13 @@ function queryTestDb (query, config) {
   })
 }
 
-const MongoClient = require('mongodb').MongoClient
-const assert = require('assert')
-const tunnel = require('tunnel-ssh')
-
-function queryMongo (query, config) {
-  //console.log(config.env.ssh_key)
-  const sshTunnelConfig = {
-    agent: process.env.SSH_AUTH_SOCK,
-    username: config.env.DEV_DB_MONGO_SSH_USERNAME,
-    privateKey: require('fs').readFileSync(config.env.ssh_key),
-    host: config.env.DEV_DB_MONGO_SSH_HOST,
-    port: 22,
-    dstHost: 'localhost',
-    dstPort: 27017,
-    localHost: '127.0.0.1',
-    localPort: 50001
-  }
-  // tunnel to dev -- See https://github.com/agebrock/tunnel-ssh#readme
-  tunnel(sshTunnelConfig, (error, server) => {
-    if (error) {
-      //console.log("SSH connection error: ", error)
-    }
-    // Connection URL
-    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
-    // Database Name
-    const dbName = config.env.mongo_db
-    // Use connect method to connect to the server
-    MongoClient.connect(url, function (err, client) {
-      assert.equal(null, err)
-      //console.log("Connected successfully to server")
-
-      const db = client.db(dbName)
-      findDocuments(db, 'cqm_measures', query, function () {
-        client.close()
-      })
-    })
-  })
-}
-
 const findDocuments = function (db, collection, query, callback) {
   // Find some documents
+
   db.collection(collection).find(query).toArray(function (err, docs) {
     assert.equal(err, null)
-    //console.log("Found the following records")
-    //console.log(docs)
+    console.log("Found the following records")
+    console.log(docs)
     callback(docs)
   })
 }
