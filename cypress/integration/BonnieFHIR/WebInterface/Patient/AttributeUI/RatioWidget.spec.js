@@ -26,7 +26,7 @@ describe('Attribute UI: Ratio Widget', () => {
     const distinctLastName = 'President' + lastNameSuffix
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
-      const initialPatientCount = parseInt(patientListing.text())
+      const initialPatientCount = parseInt(patientListing.text(), 10)
       cy.log('patient count was:' + initialPatientCount)
 
       measureDetailsPage.clickAddPatient()

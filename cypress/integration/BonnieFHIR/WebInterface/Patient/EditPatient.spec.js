@@ -28,7 +28,7 @@ describe('Create and then Edit New Patient', () => {
   it('Create and edit patient', () => {
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
-      const initialPatientCount = parseInt(patientListing.text())
+      const initialPatientCount = parseInt(patientListing.text(), 10)
       cy.log('patient count was:' + initialPatientCount)
 
       measureDetailsPage.clickAddPatient()
