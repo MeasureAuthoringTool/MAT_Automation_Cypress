@@ -3,7 +3,6 @@ import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as bonnieDelete from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 const fileToUpload = "FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip"
@@ -17,7 +16,7 @@ describe('Valiidate DateTime for Attributes from Patient', () => {
 
   })
   after('Log Out', () => {
-    bonnieDelete.DeleteMeasure("FHIRmeasureCMS347")
+
     bonnieLogin.logout()
 
   })

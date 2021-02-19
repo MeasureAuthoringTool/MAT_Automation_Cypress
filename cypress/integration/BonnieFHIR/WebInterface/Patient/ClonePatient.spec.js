@@ -1,8 +1,6 @@
 import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -23,8 +21,6 @@ describe('Patient: Clone Patient', () => {
   })
   after('Log Out', () => {
 
-    deleteMeasure.DeleteMeasure(measureName)
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
     bonnieLogin.logout()
 
   })
@@ -78,17 +74,6 @@ describe('Patient: Clone Patient', () => {
       testPatientPage.getPatientRecord('ClonedPatient').find(measureDetailsPage.patientStatus).should('contain.text', 'pass')
 
       helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
-      deletePatient.DeletePatient(distinctLastName)
-
-      helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
-      deletePatient.DeletePatient('ClonedPatient')
-
-      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
   })
 })

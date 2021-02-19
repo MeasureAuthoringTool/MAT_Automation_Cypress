@@ -37,5 +37,11 @@ describe('Dashboard: Upload Dialog: Error handling', () => {
 
         cy.get(importMeasureDialog.measureNameDiv).should('not.contain','CMS105_v5_8_Artifacts')
 
+        helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
+
+        cy.get(importMeasureDialog.closeBtn).click()
+
+        helper.notVisibleWithTimeout(importMeasureDialog.importMeasureDialog)
+
     })
 })

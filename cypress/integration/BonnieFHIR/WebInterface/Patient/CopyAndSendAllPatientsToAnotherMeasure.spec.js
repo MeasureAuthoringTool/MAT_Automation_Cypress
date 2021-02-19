@@ -1,9 +1,6 @@
 import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as editPatient from '../../../../support/BonnieFHIR/EditPatient'
-import * as deletePatient from '../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -22,21 +19,15 @@ describe('Patient: Copy all to another measure', () => {
   beforeEach('Login', () => {
     bonnieLogin.login()
     bonnieUploadMeasure.UploadMeasureToBonnie(anotherFileToUpload)
-    deletePatient.DeleteAllPatientsFromMeasure(anotherMeasureName)
 
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false, true)
-    deletePatient.DeleteAllPatientsFromMeasure(measureName)
   })
 
   afterEach('Log Out', () => {
-    deletePatient.DeleteAllPatientsFromMeasure(anotherMeasureName)
-    deleteMeasure.DeleteMeasure(anotherMeasureName)
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    deletePatient.DeleteAllPatientsFromMeasure(measureName)
-    deleteMeasure.DeleteMeasure(measureName)
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
     bonnieLogin.logout()
+
   })
 
   it('Can send all patients to another measure', () => {

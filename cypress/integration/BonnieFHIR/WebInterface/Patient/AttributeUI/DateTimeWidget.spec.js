@@ -1,9 +1,7 @@
 import * as helper from '../../../../../support/helpers'
 import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
 import * as bonnieUpload from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
-import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
 describe('Attribute UI: Value: DateTime', () => {
@@ -23,8 +21,6 @@ describe('Attribute UI: Value: DateTime', () => {
   })
   after('Log Out', () => {
 
-    deleteMeasure.DeleteMeasure(measureName)
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
     bonnieLogin.logout()
 
   })
@@ -32,7 +28,7 @@ describe('Attribute UI: Value: DateTime', () => {
   it('Verify the DateTime Widget is working and saving as expected', () => {
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
-      const initialPatientCount = parseInt(patientListing.text())
+      const initialPatientCount = parseInt(patientListing.text(), 10)
       cy.log('patient count was:' + initialPatientCount)
 
       measureDetailsPage.clickAddPatient()
@@ -64,11 +60,8 @@ describe('Attribute UI: Value: DateTime', () => {
 
       helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-      deletePatient.DeletePatient(distinctLastName)
-      deletePatient.VerifyPatientRemoved(initialPatientCount)
     })
 
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
   function verifyDateTimeWidget () {

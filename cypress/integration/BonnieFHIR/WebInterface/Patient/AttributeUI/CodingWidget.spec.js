@@ -3,7 +3,6 @@ import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogou
 import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as deletePatient from '../../../../../support/BonnieFHIR/DeletePatient'
-import * as deleteMeasure from '../../../../../support/BonnieFHIR/DeleteMeasure'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
 
@@ -28,7 +27,7 @@ describe('Attribute UI: Coding Widget', () => {
     const distinctLastName = 'President' + lastNameSuffix
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
-      const initialPatientCount = parseInt(patientListing.text())
+      const initialPatientCount = parseInt(patientListing.text(), 10)
       cy.log('patient count was:' + initialPatientCount)
 
       measureDetailsPage.clickAddPatient()
@@ -45,9 +44,6 @@ describe('Attribute UI: Coding Widget', () => {
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
-    deleteMeasure.DeleteMeasure(measureName)
-
-    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
   })
 
   function uploadTestMeasure () {
