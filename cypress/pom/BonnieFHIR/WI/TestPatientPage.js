@@ -66,6 +66,7 @@ export const endDate = 'input[name="end_date"]'
 export const endTime = 'input[name="end_time"]'
 export const attributeDeleteButton = '[data-call-method="removeCriteria"]:visible:last'
 export const dateCheckboxGeneric = 'input[name="date_is_defined"]'
+export const timeCheckboxGeneric = 'input[name="time_is_defined"]'
 
 // codeSystem
 export const primaryCodeSystem = '.col-md-3 > .form-control'
@@ -101,6 +102,20 @@ export const factorDecimalInputbox = '[data-view-name="factor"]'
 export const lowerLimitDecimalInputbox = '[data-view-name="lower limit"]'
 export const upperLimitDecimalInputbox = '[data-view-name="upper limit"]'
 export const dataStringInputBox = '[data-view-name="data"]'
+
+// Timing Widget
+export const boundsDropdown = 'select[name="type"]'
+export const unitsInputbox = 'input[name="unit"]'
+export const valuesetDirectRefCodeSelect = 'select[name="valueset"]'
+export const countInputbox = '[data-view-name="countView"] input[data-cy=positive-integer-input]'
+export const countmaxInputbox = '[data-view-name="countMaxView"] input[data-cy=positive-integer-input]'
+export const durationInputbox = '[data-view-name="durationView"] input[data-cy=decimal-input]'
+export const durationmaxInputbox = '[data-view-name="durationMaxView"] input[data-cy=decimal-input]'
+export const frequencyInputbox = '[data-view-name="frequencyView"] input[data-cy=positive-integer-input]'
+export const frequencymaxInputbox = '[data-view-name="frequencyMaxView"] input[data-cy=positive-integer-input]'
+export const periodInputbox = '[data-view-name="periodView"] input[data-cy=decimal-input]'
+export const periodmaxInputbox = '[data-view-name="periodMaxView"] input[data-cy=decimal-input]'
+export const offsetInputbox = 'input[data-cy=unsigned-integer-input]'
 
 // extensions section
 export const extensionsShow = '[data-cy="extensions-form-group"] > .collapsed > .control-label'
