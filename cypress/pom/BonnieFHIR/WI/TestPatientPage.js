@@ -66,6 +66,7 @@ export const endDate = 'input[name="end_date"]'
 export const endTime = 'input[name="end_time"]'
 export const attributeDeleteButton = '[data-call-method="removeCriteria"]:visible:last'
 export const dateCheckboxGeneric = 'input[name="date_is_defined"]'
+export const timeCheckboxGeneric = 'input[name="time_is_defined"]'
 
 // codeSystem
 export const primaryCodeSystem = '.col-md-3 > .form-control'
@@ -101,6 +102,23 @@ export const factorDecimalInputbox = '[data-view-name="factor"]'
 export const lowerLimitDecimalInputbox = '[data-view-name="lower limit"]'
 export const upperLimitDecimalInputbox = '[data-view-name="upper limit"]'
 export const dataStringInputBox = '[data-view-name="data"]'
+
+// Timing Widget
+export const boundsDropdown = '.timing-repeat-bounds-view select[name="type"]'
+export const unitsInputbox = 'input[data-cy=range-unit-input]'
+export const countInputbox = '.timing-repeat-count-view input[data-cy=positive-integer-input]'
+export const countmaxInputbox = '.timing-repeat-count-max-view input[data-cy=positive-integer-input]'
+export const durationInputbox = '.timing-repeat-duration-view input[data-cy=decimal-input]'
+export const durationmaxInputbox = '.timing-repeat-duration-max-view input[data-cy=decimal-input]'
+export const durationUnitSelect = '.timing-repeat-duration-unit-view select[name="valueset"]'
+export const frequencyInputbox = '.timing-repeat-frequency-view input[data-cy=positive-integer-input]'
+export const frequencymaxInputbox = '.timing-repeat-frequency-max-view input[data-cy=positive-integer-input]'
+export const periodInputbox = '.timing-repeat-period-view input[data-cy=decimal-input]'
+export const periodmaxInputbox = '.timing-repeat-period-max-view input[data-cy=decimal-input]'
+export const periodUnitSelect = '.timing-repeat-period-unit-view select[name="valueset"]'
+export const dayofweekSelect = '.timing-repeat-dayofweek-view select[name="valueset"]'
+export const whenSelect = '.timing-repeat-when-view select[name="valueset"]'
+export const offsetInputbox = '.timing-repeat-offset-view input[data-cy=unsigned-integer-input]'
 
 // extensions section
 export const extensionsShow = '[data-cy="extensions-form-group"] > .collapsed > .control-label'
