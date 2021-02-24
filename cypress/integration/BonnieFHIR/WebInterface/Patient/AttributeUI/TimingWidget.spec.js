@@ -87,7 +87,7 @@ describe('Attribute UI: timing: Timing', () => {
     cy.get(testPatientPage.durationInputbox).type('33.33')
     cy.get(testPatientPage.durationmaxInputbox).type('44.44')
 
-    cy.get(testPatientPage.valuesetDirectRefCodeSelect).eq(0).select('UnitsOfTime')
+    cy.get(testPatientPage.durationUnitSelect).select('UnitsOfTime')
     cy.get(testPatientPage.valueSetCodeSelect).select('wk - week')
 
     cy.get(testPatientPage.frequencyInputbox).type('55')
@@ -95,20 +95,20 @@ describe('Attribute UI: timing: Timing', () => {
     cy.get(testPatientPage.periodInputbox).type('77.77')
     cy.get(testPatientPage.periodmaxInputbox).type('88.88')
 
-    cy.get(testPatientPage.valuesetDirectRefCodeSelect).eq(1).select('UnitsOfTime')
+    cy.get(testPatientPage.periodUnitSelect).select('UnitsOfTime')
     cy.get(testPatientPage.valueSetCodeSelect).select('d - day')
 
-    cy.get(testPatientPage.valuesetDirectRefCodeSelect).eq(2).select('DaysOfWeek')
+    cy.get(testPatientPage.dayofweekSelect).select('DaysOfWeek')
     cy.get(testPatientPage.valueSetCodeSelect).select('wed - Wednesday')
 
     cy.get(testPatientPage.timeCheckboxGeneric).click()
 
-    cy.get(testPatientPage.valuesetDirectRefCodeSelect).eq(3).select('EventTiming')
+    cy.get(testPatientPage.whenSelect).select('EventTiming')
     cy.get(testPatientPage.valueSetCodeSelect).select('WAKE - WAKE')
 
     cy.get(testPatientPage.offsetInputbox).type('99')
 
-    cy.get(testPatientPage.valuesetDirectRefCodeSelect).eq(4).select('TimingAbbreviation')
+    cy.get(testPatientPage.valueSetDirectRefSelect).select('TimingAbbreviation')
     cy.get(testPatientPage.valueSetCodeSelect).select('WK - weekly')
 
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
