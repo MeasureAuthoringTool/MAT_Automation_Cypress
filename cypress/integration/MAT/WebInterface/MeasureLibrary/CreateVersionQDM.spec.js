@@ -36,8 +36,9 @@ describe('Measure Library: Create Version', () => {
     cy.get(measurelibrary.packageAndVersion).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
-    helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.')
+    helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.', 120000)
 
   })
 

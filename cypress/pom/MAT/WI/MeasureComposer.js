@@ -4,6 +4,8 @@ export const populationWorkspace = '#Population\\ Workspace'
 export const measurePackager = '#Measure\\ Packager'
 
 //CQL Workspace
+export const cqlLibraryNameInput = '#libraryNameValue_TextBox'
+//left menu
 export const includes = '#includesLabel_Label'
 export const valueSets = '#valueSetLabel_Label'
 export const codes = '#codesLabel_Label'

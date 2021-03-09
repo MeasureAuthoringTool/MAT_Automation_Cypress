@@ -34,6 +34,8 @@ describe('Packaging: Cohort Measure', () => {
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(createNewMeasure.confirmationContinueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()

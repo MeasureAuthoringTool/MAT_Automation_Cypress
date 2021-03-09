@@ -17,6 +17,8 @@ describe('CQL Composer: CQL Editor message', () => {
   })
 
   afterEach('Log Out', () => {
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
     helper.logout()
   })
 
@@ -30,6 +32,8 @@ describe('CQL Composer: CQL Editor message', () => {
     cy.get(cqlLibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
@@ -58,6 +62,8 @@ describe('CQL Composer: CQL Editor message', () => {
     cy.get(cqlLibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
@@ -86,10 +92,14 @@ describe('CQL Composer: CQL Editor message', () => {
     cy.get(cqlLibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlComposer.cqlWorkspaceTitleGeneralInformation)
 
     cy.get(cqlComposer.functionCQLComposer).click()
 
@@ -97,6 +107,7 @@ describe('CQL Composer: CQL Editor message', () => {
     cy.get(cqlComposer.functionCQLExpressionEditorInput).type('.fhlsdfi')
     cy.get(cqlComposer.functionSaveBtn).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(cqlComposer.cqlLibraryEditor).click()
@@ -121,6 +132,8 @@ describe('CQL Composer: CQL Editor message', () => {
     cy.get(cqlLibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
@@ -132,6 +145,7 @@ describe('CQL Composer: CQL Editor message', () => {
     cy.get(cqlComposer.functionCQLExpressionEditorInput).type('.fhlsdfi')
     cy.get(cqlComposer.functionSaveBtn).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(cqlComposer.cqlLibraryEditor).click()
@@ -170,6 +184,8 @@ describe('FHIR CQL Composer: Add code directly on CQL Library Editor', () => {
     cy.get(cqlLibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 
@@ -224,6 +240,8 @@ describe('FHIR CQL Composer: Add codesystems and valuesets in CQL Editor without
     cy.get(cqlLibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
@@ -271,6 +289,8 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
     cy.get(cqlLibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
     gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
 

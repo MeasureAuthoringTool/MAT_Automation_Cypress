@@ -137,6 +137,7 @@ describe('FHIR Standalone Library: Version and include with measure', () => {
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
 
     fhirLibraryName = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
@@ -207,12 +208,17 @@ describe('FHIR Standalone Library: Version and include with measure', () => {
     cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     // Navigate to Measure Library and create new qdm measure
     cy.get(measurelibrary.measureLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+
+    helper.enabledWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
     let measureName = 'CreateFHIRMeasure' + Date.now()
 

@@ -481,12 +481,17 @@ export const createDraftCqlLibrary = (library, model) => {
     if (value.toString() === 'gwt-TabBarItem') {
       cy.get(measurelibrary.cqlLibraryTab).click()
       helper.verifySpinnerAppearsAndDissappears()
+      helper.verifySpinnerAppearsAndDissappears()
+      helper.visibleWithTimeout(cqlLibrary.row1RecentActivity, 150000)
+      helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 150000)
     }
   })
   helper.verifySpinnerAppearsAndDissappears()
   helper.verifySpinnerAppearsAndDissappears()
   helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
   cy.get(cqlLibrary.newLibraryBtn).click()
+
+  helper.verifySpinnerAppearsAndDissappears()
 
   cy.get(createNewCqlLibrary.cqlLibraryName).type(name, { delay: 50 })
 
@@ -501,6 +506,7 @@ export const createDraftCqlLibrary = (library, model) => {
   helper.verifySpinnerAppearsAndDissappears()
   helper.verifySpinnerAppearsAndDissappears()
 
+  helper.visibleWithTimeout((cqlLibrary.confirmationContinue))
   cy.get(cqlComposer.confirmationContinueBtn).click()
 
   helper.verifySpinnerAppearsAndDissappears()
@@ -508,6 +514,10 @@ export const createDraftCqlLibrary = (library, model) => {
   cy.get(measurelibrary.cqlLibraryTab).click()
 
   helper.verifySpinnerAppearsAndDissappears()
+  helper.verifySpinnerAppearsAndDissappears()
+  helper.verifySpinnerAppearsAndDissappears()
+  helper.visibleWithTimeout(cqlLibrary.row1RecentActivity, 120000)
+  helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch, 120000)
 
   return name
 }

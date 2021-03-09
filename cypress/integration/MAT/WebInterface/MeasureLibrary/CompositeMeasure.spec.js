@@ -10,11 +10,16 @@ let measureNameOne = ''
 let measureNameTwo = ''
 
 describe('Measure Library: Composite Measure', () => {
-  before('Login', () => {
+  before('data creation', () => {
     oktaLogin.login()
 
     measureNameOne = dataCreation.createDraftMeasure('QdmCqlMeasureOne', 'QDM')
     measureNameTwo = dataCreation.createDraftMeasure('QdmCqlMeasureTwo', 'QDM')
+
+    helper.verifySpinnerAppearsAndDissappears()
+  })
+  beforeEach('Login', () => {
+    oktaLogin.login()
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -98,10 +103,11 @@ describe('Measure Library: Composite Measure', () => {
     cy.get(measureComposer.createMeasurePackageBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.wait(3000)
 
-    helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
+    helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.', 120000)
 
     cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -235,12 +241,7 @@ describe('Measure Library: Composite Measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
