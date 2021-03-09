@@ -563,11 +563,11 @@ export const spinnerNotVisible = () => {
   // waitToHaveText(matheader.spinnerShadow,'Loading Please Wait...')
   // waitToHaveText(matheader.spinnerShadow,'...')
 
-  notVisibleWithTimeout(matheader.spinner, 90000)
-  notVisibleWithTimeout(matheader.spinnerWrapper, 90000)
-  notVisibleWithTimeout(matheader.spinnerShadow, 90000)
-  notVisibleWithTimeout(matheader.spinnerModal, 90000)
-  notVisibleWithTimeout(matheader.spinner, 90000)
+  notVisibleWithTimeout(matheader.spinner, 120000)
+  notVisibleWithTimeout(matheader.spinnerWrapper, 120000)
+  notVisibleWithTimeout(matheader.spinnerShadow, 120000)
+  notVisibleWithTimeout(matheader.spinnerModal, 120000)
+  notVisibleWithTimeout(matheader.spinner, 120000)
 }
 export const spinnerExists = () => {
   existsWithTimeout(matheader.spinner, 60000)

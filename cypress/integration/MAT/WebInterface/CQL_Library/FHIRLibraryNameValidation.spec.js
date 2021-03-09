@@ -13,6 +13,8 @@ let nameWithSpaces = ''
 let nameWithUnderscore = ''
 let firstCharacterUpperCase = ''
 let firstCharacterUpperCaseFollowedAlphaNumeric = ''
+let fieldLevelError = ' Invalid Library Name. Library names must start with an upper case letter, followed by ' +
+  'alpha-numeric character(s) and must not contain spaces, \'_\' (underscores), or other special characters.'
 
 describe('FHIR Library: Validate the library naming rules', () => {
   beforeEach('Login', () => {
@@ -22,8 +24,11 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
   })
   afterEach('Log Out', () => {
+    helper.verifySpinnerAppearsAndDissappears()
     helper.logout()
   })
 
@@ -33,7 +38,6 @@ describe('FHIR Library: Validate the library naming rules', () => {
     firstCharacterUnderscore = '_newFhir' + Date.now()
     firstCharacterNumeric = '001New' + Date.now()
 
-    helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(cqlLibrary.newLibraryBtn)
     cy.get(cqlLibrary.newLibraryBtn).click()
@@ -44,7 +48,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-    cy.get(cqlComposer.fieldLevelError).should('contain.text', 'Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  \'_\' (underscores).')
+    cy.get(cqlComposer.fieldLevelError).should('contain.text', fieldLevelError)
 
     cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(firstCharacterUnderscore, { delay: 50 })
 
@@ -52,7 +56,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-    cy.get(cqlComposer.fieldLevelError).should('contain.text', 'Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  \'_\' (underscores).')
+    cy.get(cqlComposer.fieldLevelError).should('contain.text', fieldLevelError)
 
     cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(firstCharacterNumeric, { delay: 50 })
 
@@ -60,7 +64,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-    cy.get(cqlComposer.fieldLevelError).should('contain.text', 'Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  \'_\' (underscores).')
+    cy.get(cqlComposer.fieldLevelError).should('contain.text', fieldLevelError)
 
     cy.get(createNewCqlLibrary.cancelBtn).click()
 
@@ -86,7 +90,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-    cy.get(cqlComposer.fieldLevelError).should('contain.text', 'Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  \'_\' (underscores).')
+    cy.get(cqlComposer.fieldLevelError).should('contain.text', fieldLevelError)
 
     cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(nameWithSpaces, { delay: 50 })
 
@@ -94,7 +98,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-    cy.get(cqlComposer.fieldLevelError).should('contain.text', 'Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  \'_\' (underscores).')
+    cy.get(cqlComposer.fieldLevelError).should('contain.text', fieldLevelError)
 
     cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(nameWithUnderscore, { delay: 50 })
 
@@ -102,7 +106,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
-    cy.get(cqlComposer.fieldLevelError).should('contain.text', 'Invalid Library Name. Library names must start with an upper case letter, followed by an alpha-numeric character(s) and must not contain spaces or  \'_\' (underscores).')
+    cy.get(cqlComposer.fieldLevelError).should('contain.text', fieldLevelError)
 
     cy.get(createNewCqlLibrary.cancelBtn).click()
 

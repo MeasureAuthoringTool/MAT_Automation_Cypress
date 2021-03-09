@@ -13,6 +13,10 @@ describe('Library Deletion', () => {
   before('Login, create data', () => {
     oktaLogin.login()
 
+    cy.get(measurelibrary.cqlLibraryTab).click()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
@@ -41,6 +45,7 @@ describe('Library Deletion', () => {
     helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
     cy.get(cqlLibrary.searchBtn).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
     gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)

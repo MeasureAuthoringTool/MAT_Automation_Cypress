@@ -28,6 +28,10 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     cy.get(createNewMeasure.confirmationContinueBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -40,6 +44,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     //entering required meta data
     cy.get(measureDetails.measureStewardDeveloper).click()
+    helper.verifySpinnerAppearsAndDissappears()
     cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
     cy.get(measureDetails.row1CheckBox).click()
     cy.get(measureDetails.saveBtn).click()
@@ -58,8 +63,28 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     cy.get(measureComposer.cqlWorkspace).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
+
+    cy.get(measureComposer.cqlLibraryEditor).click()
+
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+    cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    //adding valueset that this measure requires but cannot retrieve anymore
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}' +
+      'valueset "Antithrombotic Therapy": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201\'{enter}{enter}')
+
+    cy.get(measureComposer.cqlEditorSaveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+
 
     //Includes
 
@@ -85,7 +110,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.201')
+    //dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.201')
     dataCreation.addValueSet('1.3.6.1.4.1.33895.1.3.0.45')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.207')
@@ -129,47 +154,47 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
       '\tunion TJC."Comfort Measures during Hospitalization"')
 
     dataCreation.addDefinition('Antithrombotic Not Given at Discharge', '["MedicationRequest": medication in "Antithrombotic Therapy"] NoAntithromboticDischarge\n' +
-      '\twhere NoAntithromboticDischarge.doNotPerform is true\n' +
-      '\tand ( NoAntithromboticDischarge.reasonCode in "Medical Reason"\n' +
-      '\tor NoAntithromboticDischarge.reasonCode in "Patient Refusal"\n' +
-      ')\n' +
-      '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-      'and exists ( NoAntithromboticDischarge.category C\n' +
-      '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-      '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-      ')\n' +
-      'and NoAntithromboticDischarge.status = \'completed\'\n' +
-      'and NoAntithromboticDischarge.intent = \'order\'\n')
+      '            where NoAntithromboticDischarge.doNotPerform is true\n' +
+      '              and ( NoAntithromboticDischarge.reasonCode in "Medical Reason"\n' +
+      '                  or NoAntithromboticDischarge.reasonCode in "Patient Refusal"\n' +
+      '              )\n' +
+      '                  //Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
+      '              and exists ( NoAntithromboticDischarge.category C\n' +
+      '                  where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
+      '                    or FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+      '              )\n' +
+      '              and NoAntithromboticDischarge.status = \'completed\'\n' +
+      '              and NoAntithromboticDischarge.intent = \'order\'')
 
     dataCreation.addDefinition('Numerator', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
       '\twith "Antithrombotic Therapy at Discharge" DischargeAntithrombotic\n' +
       '\tsuch that DischargeAntithrombotic.authoredOn during Global."Normalize Interval"( IschemicStrokeEncounter.period )')
 
-    dataCreation.addDefinition('Antithrombotic Therapy at Discharge', '["MedicationRequest": medication in "Antithrombotic Therapy"] Antithrombotic\n' +
-      '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-      'where exists ( Antithrombotic.category C\n' +
-      'where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-      '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-      ')\n' +
-      'and Antithrombotic.status in {{} \'active\', \'completed\' }\n' +
-      'and Antithrombotic.intent.value = \'order\'')
+    dataCreation.addDefinition('Antithrombotic Therapy at Discharge', '  ["MedicationRequest": medication in "Antithrombotic Therapy"] Antithrombotic\n' +
+      '              //Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
+      '            where exists ( Antithrombotic.category C\n' +
+      '                where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
+      '                  or FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+      '            )\n' +
+      '              and Antithrombotic.status in {{} \'active\', \'completed\' }\n' +
+      '              and Antithrombotic.intent.value = \'order\'')
 
     dataCreation.addDefinition('Encounter With No Antithrombotic At Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-      'with "Antithrombotic Not Given at Discharge" NoDischargeAntithrombotic\n' +
-      'such that NoDischargeAntithrombotic.authoredOn during IschemicStrokeEncounter.period')
+      '      with "Antithrombotic Not Given at Discharge" NoDischargeAntithrombotic\n' +
+      '        such that NoDischargeAntithrombotic.authoredOn during IschemicStrokeEncounter.period')
 
     dataCreation.addDefinition('Encounter With Ticagrelor at Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-      'with "Ticagrelor Therapy at Discharge" DischargeTicagrelor\n' +
-      '\tsuch that DischargeTicagrelor.authoredOn during IschemicStrokeEncounter.period')
+      '      with "Ticagrelor Therapy at Discharge" DischargeTicagrelor\n' +
+      '        such that DischargeTicagrelor.authoredOn during IschemicStrokeEncounter.period')
 
-    dataCreation.addDefinition('Ticagrelor Therapy at Discharge', '["MedicationRequest": medication in TJC."Ticagrelor Therapy"] Ticagrelor\n' +
-      '//Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-      'where exists ( Ticagrelor.category C\n' +
-      '\twhere FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-      '\tor FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-      ')\n' +
-      'and Ticagrelor.status in {{} \'active\', \'completed\' }\n' +
-      'and Ticagrelor.intent = \'order\'')
+    dataCreation.addDefinition('Ticagrelor Therapy at Discharge', '  ["MedicationRequest": medication in TJC."Ticagrelor Therapy"] Ticagrelor\n' +
+      '                //Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
+      '            where exists ( Ticagrelor.category C\n' +
+      '                where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
+      '                  or FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
+      '            )\n' +
+      '              and Ticagrelor.status in {{} \'active\', \'completed\' }\n' +
+      '              and Ticagrelor.intent = \'order\'')
 
     //CQL Library Editor
 

@@ -105,7 +105,7 @@ export const dataStringInputBox = '[data-view-name="data"]'
 
 // Timing Widget
 export const boundsDropdown = '.timing-repeat-bounds-view select[name="type"]'
-export const unitsInputbox = 'input[data-cy=range-unit-input]'
+export const unitsInputbox = '.timing-repeat-bounds-view input[data-cy=range-unit-input]'
 export const countInputbox = '.timing-repeat-count-view input[data-cy=positive-integer-input]'
 export const countmaxInputbox = '.timing-repeat-count-max-view input[data-cy=positive-integer-input]'
 export const durationInputbox = '.timing-repeat-duration-view input[data-cy=decimal-input]'

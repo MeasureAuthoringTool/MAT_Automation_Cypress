@@ -2,7 +2,7 @@
   "env": {},
   "chromeWebSecurity": false,
   "pageLoadTimeout": 100000,
-  "defaultCommandTimeout": 10000,
+  "defaultCommandTimeout": 50000,
   "video": false,
   "trashAssetsBeforeRuns": true,
   "videoUploadOnPasses": false,

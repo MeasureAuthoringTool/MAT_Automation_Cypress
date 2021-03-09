@@ -7,21 +7,22 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 let fhirMeasure = ''
 
-describe('CQLWorkspace: Codes: Validate the system version', () => {
-  before('Login', () => {
+describe('Measure Composer: CQLWorkspace: Codes: Validate the system version', () => {
+  before('Log Out', () => {
     oktaLogin.login()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
-  it.skip('FHIR Measure: Add correct version for code system', () => {
+  it('FHIR Measure: Add correct version for code system', () => {
 
     helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
     cy.get(measurelibrary.searchBtn).click()
@@ -45,9 +46,9 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}{enter}')
 
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'')
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'')
 
     cy.get(measureComposer.cqlEditorSaveBtn).click()
 
@@ -60,7 +61,7 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
 
   })
 
-  it.skip('FHIR Measure: Add incorrect version for code system', () => {
+  it('FHIR Measure: Add incorrect version for code system', () => {
 
     helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
     cy.get(measurelibrary.searchBtn).click()
@@ -92,9 +93,9 @@ describe('CQLWorkspace: Codes: Validate the system version', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'3.00\'{enter}')
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'3.00\'{enter}{enter}')
 
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'')
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'')
     cy.get(measureComposer.cqlEditorSaveBtn).click()
 
     cy.get(measureComposer.warningMessage).should('contain.text', 'The CQL file was saved with errors.')

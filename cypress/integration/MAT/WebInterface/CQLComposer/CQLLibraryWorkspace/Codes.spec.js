@@ -51,9 +51,9 @@ describe('CQLLibrary Workspace: Codes: Validate the system version', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}{enter}')
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -83,8 +83,10 @@ describe('CQLLibrary Workspace: Codes: Validate the system version', () => {
 
     cy.get(cqlComposer.codeDeleteBtn).click()
 
+    helper.visibleWithTimeout(cqlComposer.deleteConfirmationYes)
     cy.get(cqlComposer.deleteConfirmationYes).click()
 
+    helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -97,9 +99,9 @@ describe('CQLLibrary Workspace: Codes: Validate the system version', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'3.00\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'3.00\'{enter}{enter}')
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
