@@ -63,7 +63,6 @@ const assert = require('assert')
 const tunnel = require('tunnel-ssh')
 
 function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
-
   const sshTunnelConfig = {
     agent: process.env.SSH_AUTH_SOCK,
     username: sshTunnel.username,
@@ -108,10 +107,12 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
           console.log(err)
         }
         console.log(item)
+
         client.close()
+        server.close(client)
+        setImmediate(function(){server.emit('close')})
       })
     })
-
   })
 }
 
