@@ -150,6 +150,12 @@ export const extensionsModifierBooleanDropDown = '[data-cy="modifier-extensions-
 export const extensionsModifierDateCheckbox = '[data-cy="modifier-extensions-form-group"] .col-md-2 > input[type="checkbox"]'
 export const extensionsModifierDateField = '[data-cy="modifier-extensions-form-group"] .date-control-date > input[name="date"]'
 
+//CQL Calculation Results
+export const calcResultSDEEthnicity = '[data-define-name="SDE Ethnicity"] [data-ref-id="10"]'
+export const calcResultSDEPayer = '[data-define-name="SDE Payer"] [data-ref-id="13"]'
+export const calcResultSDERace = '[data-define-name="SDE Race"] [data-ref-id="16"]'
+export const calcResultSDESex = '[data-define-name="SDE Sex"] [data-ref-id="19"]'
+
 export const enterPatientCharacteristics = (lastName) => {
   cy.log('enterPatientCharacteristics')
   cy.get(lastNameTextField).type(lastName)

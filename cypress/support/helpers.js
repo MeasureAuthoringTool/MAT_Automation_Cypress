@@ -61,11 +61,11 @@ export const loginUMLS = () => {
 export const logout = () => {
   visibleWithTimeout(matheader.userprofile)
 
-  cy.get(matheader.userprofile).click()
+  cy.get(matheader.userprofile).click({ force: true })
 
   visibleWithTimeout(matheader.signout)
 
-  cy.get(matheader.signout).click()
+  cy.get(matheader.signout).click({ force: true })
 
   cy.clearCookies()
 
