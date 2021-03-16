@@ -8,6 +8,13 @@ export const measureTitle = '.full-title'
 export const measureSettingBtn = '.measure-title > .settings-container > .btn-settings > .fa'
 export const measureInverseBtn = '.settings-container button.btn-danger-inverse[data-call-method="showDelete"]'
 export const measureDeleteBtn = '.settings-container button.btn-danger[data-call-method="deleteMeasure"]'
+export const coverageNumber = '#coverage'
+
+//calculation results section
+export const coverageResultSDEEthnicity = '[data-define-name="SDE Ethnicity"] [data-ref-id="10"]'
+export const coverageResultSDEPayer = '[data-define-name="SDE Payer"] [data-ref-id="13"]'
+export const coverageResultSDERace = '[data-define-name="SDE Race"] [data-ref-id="16"]'
+export const coverageResultSDESex = '[data-define-name="SDE Sex"] [data-ref-id="19"]'
 
 //summary section
 export const newStatus = '.status-col > div > .status'

@@ -17,6 +17,7 @@ export const deleteMeasureButton = '.delete-measure'
 export const episodeOfCareCalculation = '#EC'
 export const patientCalculation = '#calculationTypeRadios'
 export const fileToUploadLabel = '.file-input-name'
+export const includeSDECheckbox = '#sdeCheckbox'
 
 //Error Modal
 export const errorDialog = '#errorDialog'

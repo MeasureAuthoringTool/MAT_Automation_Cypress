@@ -3,7 +3,7 @@ import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialo
 import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
 import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
-export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) => {
+export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn, includeSDE) => {
   cy.log('UploadMeasureToBonnie')
   cy.log('UploadMeasureToBonnie measure file ' + fileToUpload)
 
@@ -39,13 +39,19 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn) =
 
     helper.visibleWithTimeout(importMeasureDialog.vsacLogOut)
 
-  } else if (vsacLoggedIn === undefined) {
+  } else if (vsacLoggedIn === undefined || vsacLoggedIn === false) {
 
     //wait for VSAC api key field to display for the user, and enter api key
     helper.visibleWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
     helper.enabledWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
     helper.enterText(importMeasureDialog.vsacApiKeyTextBox, VsacApiKey)
   }
+
+  if (includeSDE === true) {
+    helper.click(importMeasureDialog.includeSDECheckbox)
+    cy.get(importMeasureDialog.includeSDECheckbox).should('be.checked')
+  }
+
 
   //click load button to import the measure
   helper.visibleWithTimeout(importMeasureDialog.importLoadBtn)

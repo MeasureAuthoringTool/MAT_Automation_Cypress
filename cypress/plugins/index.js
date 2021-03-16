@@ -85,7 +85,7 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
     // Database Name
     const dbName = config.env.mongo_db
     // Use connect method to connect to the server
-    MongoClient.connect(url, { useUnifiedTopology: true},function (err, client) {
+    MongoClient.connect(url, { autoReconnect: true},function (err, client) {
       assert.equal(null, err)
 
       console.log("Connected successfully to server")
@@ -107,8 +107,9 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
           console.log(err)
         }
         console.log(item)
-
-        client.close()
+        client.close(true, () => {
+          console.log('MongoDb connection closed.')
+        })
         server.close(client)
         setImmediate(function(){server.emit('close')})
       })
