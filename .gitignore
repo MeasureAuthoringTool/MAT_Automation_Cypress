@@ -1,4 +1,10 @@
 node_modules
+cypress/results
+cypress/snapshots
+mochawesome-report
+mochawesome-report/mochawesome.html
+mochawesome.json
+yarn.lock
 **/*.pem
 /.idea/**
 /Mike.sh

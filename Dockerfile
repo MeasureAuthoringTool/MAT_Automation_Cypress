@@ -3,8 +3,8 @@ FROM cypress/base:10
 WORKDIR /app
 
 # package
-COPY package.json .
-COPY package-lock.json .
+COPY package.json package.json
+COPY package-lock.json package-lock.json
 
 # npm install
 RUN npm install
@@ -18,5 +18,6 @@ RUN \
   apt-get install -y dbus-x11 google-chrome-stable && \
   rm -rf /var/lib/apt/lists/*
 
-COPY cypress cypress
-COPY cypress.json .
+COPY ./cypress ./cypress
+COPY ./cypress.json ./cypress.json
+COPY bonnie-mat-dev.pem .
