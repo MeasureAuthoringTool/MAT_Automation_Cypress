@@ -103,7 +103,7 @@ export const lowerLimitDecimalInputbox = '[data-view-name="lower limit"]'
 export const upperLimitDecimalInputbox = '[data-view-name="upper limit"]'
 export const dataStringInputBox = '[data-view-name="data"]'
 
-// Timing Widget
+// Timing Attribute
 export const boundsDropdown = '.timing-repeat-bounds-view select[name="type"]'
 export const unitsInputbox = '.timing-repeat-bounds-view input[data-cy=range-unit-input]'
 export const countInputbox = '.timing-repeat-count-view input[data-cy=positive-integer-input]'
@@ -119,6 +119,17 @@ export const periodUnitSelect = '.timing-repeat-period-unit-view select[name="va
 export const dayofweekSelect = '.timing-repeat-dayofweek-view select[name="valueset"]'
 export const whenSelect = '.timing-repeat-when-view select[name="valueset"]'
 export const offsetInputbox = '.timing-repeat-offset-view input[data-cy=unsigned-integer-input]'
+
+//Identifier Attribute
+export const identifierUseSelect = '[data-cy=identifier-use-view] select[name="valueset"]'
+export const identifierUseCodeSelect = '[data-cy=identifier-use-view] select[name="vs_code"]'
+export const identifierTypeSelect = '[data-cy=identifier-type-view] select[name="valueset"]'
+export const identifierTypeCodeSelect = '[data-cy=identifier-type-view] select[name="vs_code"]'
+export const identifierSystemInput = '[data-cy=identifier-system-view] [data-cy=string-input]'
+export const identifierValueInput = '[data-cy=identifier-value-view] [data-cy=string-input]'
+export const identifierPeriodStartCheckbox = '[data-cy=identifier-period-view] [name=start_date_is_defined]'
+export const identifierPeriodEndCheckbox = '[data-cy=identifier-period-view] [name=end_date_is_defined]'
+export const identifierAssignerInput = '[data-cy=identifier-assigner-view] [data-cy=string-input]'
 
 // extensions section
 export const extensionsShow = '[data-cy="extensions-form-group"] > .collapsed > .control-label'
