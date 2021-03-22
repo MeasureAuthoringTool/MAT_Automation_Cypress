@@ -120,6 +120,7 @@
         "mochawesome-merge": "^4.2.0",
         "mongodb": "3.6.0",
         "mysql": "^2.18.1",
+        "portscanner": "^2.2.0",
         "snazzy": "^8.0.0",
         "ts-loader": "^6.2.2",
         "tsify": "^4.0.2",
