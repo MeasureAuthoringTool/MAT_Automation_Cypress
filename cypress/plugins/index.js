@@ -64,7 +64,7 @@ const portScanner = require('portscanner')
 
 function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
   portScanner.findAPortNotInUse(50001, 60000, sshTunnel.localHost, function(error, port) {
-    console.log('AVAILABLE PORT AT: ' + port)
+    console.log('Found a port not in use')
 
     const sshTunnelConfig = {
       agent: process.env.SSH_AUTH_SOCK,
@@ -77,7 +77,7 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
       localHost: sshTunnel.localHost,
       localPort: port
     }
-    console.log(sshTunnelConfig)
+
     // tunnel -- See https://github.com/agebrock/tunnel-ssh#readme
     tunnel(sshTunnelConfig, (error, server) => {
       if (error) {
@@ -91,7 +91,7 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
       MongoClient.connect(url, { autoReconnect: true, reconnectTries: 60, reconnectInterval: 1000},function (err, client) {
         assert.equal(null, err)
 
-        console.log("Connected successfully to server")
+        console.log("Connected successfully to MongoDB")
 
         const db = client.db(dbName)
         const {ObjectId} = require('mongodb')
@@ -101,7 +101,7 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
           if (err) {
             console.log(err)
           }
-          console.log(item)
+          console.log('Patients deleted: ' + item.deletedCount)
         })
 
         //Delete Measures based on User ID
@@ -109,7 +109,7 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
           if (err) {
             console.log(err)
           }
-          console.log(item)
+          console.log('Measures deleted: ' + item.deletedCount)
           client.close(true, () => {
             console.log('MongoDb connection closed.')
           })
