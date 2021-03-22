@@ -46,7 +46,6 @@ module.exports = (on, config) => {
   })
   on('task', {
     bonnieFHIRDeleteMeasuresAndPatients: sshTunnelandUserId => {
-      console.log(sshTunnelandUserId)
       getConfigurationByFile(file).then((envConfig) =>
         bonnieFHIRDeleteMeasuresAndPatients(sshTunnelandUserId.sshTunnel, envConfig, sshTunnelandUserId.mongoUserId)
       )
@@ -61,57 +60,63 @@ module.exports = (on, config) => {
 const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
 const tunnel = require('tunnel-ssh')
+const portScanner = require('portscanner')
 
 function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
-  const sshTunnelConfig = {
-    agent: process.env.SSH_AUTH_SOCK,
-    username: sshTunnel.username,
-    privateKey: require('fs').readFileSync(sshTunnel.privateKey),
-    host: sshTunnel.host,
-    port: sshTunnel.port,
-    dstHost: sshTunnel.dstHost,
-    dstPort: sshTunnel.dstPort,
-    localHost: sshTunnel.localHost,
-    localPort: sshTunnel.localPort
-  }
-  console.log(sshTunnelConfig)
-  // tunnel -- See https://github.com/agebrock/tunnel-ssh#readme
-  tunnel(sshTunnelConfig, (error, server) => {
-    if (error) {
-      console.log("SSH connection error: ", error)
+  portScanner.findAPortNotInUse(50001, 60000, sshTunnel.localHost, function(error, port) {
+    console.log('AVAILABLE PORT AT: ' + port)
+
+    const sshTunnelConfig = {
+      agent: process.env.SSH_AUTH_SOCK,
+      username: sshTunnel.username,
+      privateKey: require('fs').readFileSync(sshTunnel.privateKey),
+      host: sshTunnel.host,
+      port: sshTunnel.port,
+      dstHost: sshTunnel.dstHost,
+      dstPort: sshTunnel.dstPort,
+      localHost: sshTunnel.localHost,
+      localPort: port
     }
-    // Connection URL
-    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
-    // Database Name
-    const dbName = config.env.mongo_db
-    // Use connect method to connect to the server
-    MongoClient.connect(url, { autoReconnect: true},function (err, client) {
-      assert.equal(null, err)
+    console.log(sshTunnelConfig)
+    // tunnel -- See https://github.com/agebrock/tunnel-ssh#readme
+    tunnel(sshTunnelConfig, (error, server) => {
+      if (error) {
+        console.log("SSH connection error: ", error)
+      }
+      // Connection URL
+      const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
+      // Database Name
+      const dbName = config.env.mongo_db
+      // Use connect method to connect to the server
+      MongoClient.connect(url, { autoReconnect: true, reconnectTries: 60, reconnectInterval: 1000},function (err, client) {
+        assert.equal(null, err)
 
-      console.log("Connected successfully to server")
+        console.log("Connected successfully to server")
 
-      const db = client.db(dbName)
-      const {ObjectId} = require('mongodb')
+        const db = client.db(dbName)
+        const {ObjectId} = require('mongodb')
 
-      //Delete patients based on User ID
-      db.collection('cqm_patients').removeMany({user_id: ObjectId(userId)}, (err, item) => {
-        if (err) {
-          console.log(err)
-        }
-        console.log(item)
-      })
-
-      //Delete Measures based on User ID
-      db.collection('cqm_measures').removeMany({user_id: ObjectId(userId)}, (err, item) => {
-        if (err) {
-          console.log(err)
-        }
-        console.log(item)
-        client.close(true, () => {
-          console.log('MongoDb connection closed.')
+        //Delete patients based on User ID
+        db.collection('cqm_patients').removeMany({user_id: ObjectId(userId)}, (err, item) => {
+          if (err) {
+            console.log(err)
+          }
+          console.log(item)
         })
-        server.close(client)
-        setImmediate(function(){server.emit('close')})
+
+        //Delete Measures based on User ID
+        db.collection('cqm_measures').removeMany({user_id: ObjectId(userId)}, (err, item) => {
+          if (err) {
+            console.log(err)
+          }
+          console.log(item)
+          client.close(true, () => {
+            console.log('MongoDb connection closed.')
+          })
+          server.close(client)
+          server.stop
+          setImmediate(function(){server.emit('close')})
+        })
       })
     })
   })
@@ -155,6 +160,7 @@ function queryMongo (query, config) {
 }
 
 const mysql = require('mysql')
+const { resolve } = require('@cypress/webpack-preprocessor/stubbable-require')
 
 function queryTestDb (query, config) {
   // creates a new mysql connection using credentials from cypress.json env's
@@ -190,6 +196,7 @@ const findDocuments = function (db, collection, query, callback) {
     callback(docs)
   })
 }
+
 
 //usage for cy.task queryDb, to use data returned outside of the .then you can write the data to file and then use it later
 //or just do what you need inside the chain
