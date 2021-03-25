@@ -377,6 +377,7 @@ export const createDraftMeasure = (measure, model) => {
   cy.get(createNewMeasure.confirmationContinueBtn).click()
 
   helper.verifySpinnerAppearsAndDissappears()
+  helper.verifySpinnerAppearsAndDissappears()
 
   cy.get(measureDetails.measureStewardDeveloper).click()
   cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
