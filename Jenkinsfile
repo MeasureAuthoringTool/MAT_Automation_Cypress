@@ -23,7 +23,7 @@ node {
 	    docker exec mat_ui bash -c "google-chrome --version"
             docker exec mat_ui bash -c "npm run lint:cypress"
             docker exec mat_ui bash -c "npm run lint:standard"
-            docker exec mat-ui bash -c "npm run ui:smoke"
+            docker exec mat_ui bash -c "npm run ui:smoke"
 	    '''
             slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - UI Smoke Tests Passed")
         }
