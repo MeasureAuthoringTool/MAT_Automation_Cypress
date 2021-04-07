@@ -20,4 +20,4 @@ RUN \
 
 COPY ./cypress ./cypress
 COPY ./cypress.json ./cypress.json
-COPY bonnie-mat-dev.pem .
+#COPY bonnie-mat-dev.pem .
