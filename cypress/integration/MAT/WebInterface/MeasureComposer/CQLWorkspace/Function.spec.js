@@ -188,7 +188,6 @@ describe('Measure Composer: Function Insert Attribute Lightbox', () => {
       .invoke('val').should('deep.equal', 'Substance, Not Recommended')
 
     cy.get(measureComposer.attributeCancelBtn).click()
-    cy.get(measureComposer.attributeCancelBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -238,7 +237,6 @@ describe('Measure Composer: Function Insert Attribute Lightbox', () => {
     cy.get(measureComposer.selectAttributesDataType).select('Encounter.Diagnosis')
       .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
 
-    cy.get(measureComposer.attributeCancelBtn).click()
     cy.get(measureComposer.attributeCancelBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()

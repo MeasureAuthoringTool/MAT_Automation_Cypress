@@ -31,7 +31,7 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
     helper.visibleWithTimeout(measureLibrary.row1MeasureSearch)
 
     // assert model version for QDM Library
-    cy.get(measureLibrary.row1MeasureModelVersion).should('contain.text', '5.5')
+    cy.get(measureLibrary.row1MeasureModelVersion).should('contain.text', '5.6')
 
     gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
     measureLibraryHelper.convertMeasureToFHIRAndVerify(measureName)
@@ -81,9 +81,11 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.notVisibleWithTimeout(measureLibrary.row1MeasureSearch)
+    cy.get(measureLibrary.WarningMessage).should('contain.text','No measures returned. Please change your ' +
+      'search criteria and search again.')
 
     helper.enabledWithTimeout(measureLibrary.searchInputBox)
+
     helper.enterText(measureLibrary.searchInputBox, measureName)
     cy.get(measureLibrary.searchBtn).click()
 

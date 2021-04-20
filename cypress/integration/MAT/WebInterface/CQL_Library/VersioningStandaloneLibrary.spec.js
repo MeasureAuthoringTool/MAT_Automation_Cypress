@@ -11,8 +11,8 @@ import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 let qdmLibraryName = ''
 let fhirLibraryName = ''
 
-describe('QDM Standalone Library: Version and include with measure', () => {
-  before('Login', () => {
+describe('QDM Stand alone Library: Version and include with measure', () => {
+  before('Data Setup', () => {
     oktaLogin.login()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
@@ -23,15 +23,21 @@ describe('QDM Standalone Library: Version and include with measure', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.logout()
+
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
-  it('QDM Standalone Library: Version and include with QDM measure', () => {
+  it('QDM Stand alone Library: Version and include with QDM measure', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -127,11 +133,10 @@ describe('QDM Standalone Library: Version and include with measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-
 })
 
-describe('FHIR Standalone Library: Version and include with measure', () => {
-  before('Login', () => {
+describe('CQL Library: Stand alone Versioning', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
@@ -142,16 +147,12 @@ describe('FHIR Standalone Library: Version and include with measure', () => {
     fhirLibraryName = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
-
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
-  it('FHIR Standalone Library: Version and include with FHIR measure', () => {
+  it('FHIR Stand alone Library: Version and include with FHIR measure', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -267,6 +268,91 @@ describe('FHIR Standalone Library: Version and include with measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
   })
 
+  it('FHIR Standalone Library: Unused Libraries', () => {
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.visibleWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, fhirLibraryName)
+    cy.get(cqlLibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    // General Information
+    cy.get(cqlComposer.cqlLibraryNameField).should('contain.value', fhirLibraryName)
+    cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '0.0.000')
+    cy.get(cqlComposer.cqlLibraryDescriptionField).type('This is library description text to validate')
+    cy.get(cqlComposer.cqlLibraryCommentsField).type('This is library comment text to validate')
+    cy.get(cqlComposer.cqlLibraryUsingModel).should('contain.value', 'FHIR / CQL')
+    cy.get(cqlComposer.cqlLibraryModelVersion).should('contain.value', '4.0.1')
+    cy.get(cqlComposer.cqlLibraryPublisherDropDown).select('Allscripts')
+    cy.get(cqlComposer.cqlLibraryExperimentalCheckbox).click()
+
+    cy.get(cqlComposer.saveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    //Includes
+    helper.verifySpinnerAppearsAndDissappears()
+    cy.get(measureComposer.includes).click()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleIncludes, 'Includes')
+
+    cy.get(measureComposer.libraryAliasInputBox).type('Global', { delay: 50 })
+    cy.get(measureComposer.searchInputBox).type('matglobal', { delay: 50 })
+    cy.get(measureComposer.searchBtn).click()
+    cy.get(measureComposer.availableLibrariesRow1checkbox).click()
+    cy.get(measureComposer.saveIncludes).click()
+
+    helper.visibleWithTimeout(measureComposer.warningMessage)
+
+    // Valuesets
+    cy.get(cqlComposer.valueSets).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    dataCreation.addValueSet('2.16.840.1.113883.3.666.5.307')
+    dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
+    dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
+
+    //Navigate to CQL Library
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, fhirLibraryName)
+    cy.get(cqlLibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+
+    cy.get(cqlLibrary.createVersionCqllibrariesBtn).click()
+    cy.get(cqlLibrary.majorVersionTypeRadio).click()
+    cy.get(cqlLibrary.versionSaveAndContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.waitToContainText(cqlLibrary.modal, 'You have included libraries that are unused. In ' +
+      'order to version ' + fhirLibraryName + ', these must be removed. Select Continue to have the MAT remove these included ' +
+      'libraries or Cancel to stop the version process.')
+
+    cy.get(cqlLibrary.modalContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.waitToHaveText(cqlLibrary.shareWarningMessage, ' ' + fhirLibraryName + ' v1.0 has been successfully created.')
+  })
+
 })
 
 describe('FHIR Standalone Library: Meta data requirement to version', () => {
@@ -311,5 +397,4 @@ describe('FHIR Standalone Library: Meta data requirement to version', () => {
     cy.get(cqlLibrary.cancelBtn).click()
 
   })
-
 })

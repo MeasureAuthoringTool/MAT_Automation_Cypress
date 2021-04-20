@@ -9,7 +9,7 @@ describe('QDM Continuous Variable Measure', () => {
   beforeEach('Login', () => {
     oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Continuous Variable QDM, creation, Population Workspace', () => {
@@ -27,7 +27,7 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
 
     cy.get(createNewMeasure.measureScoringListBox).select('Continuous Variable')
-    cy.get(createNewMeasure.patientBasedMeasureListBox).select('No')
+    cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
     cy.get(createNewMeasure.confirmationContinueBtn).click()

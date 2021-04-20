@@ -279,7 +279,6 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
       .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
 
     cy.get(cqlComposer.attributeCancelBtn).click()
-    cy.get(cqlComposer.attributeCancelBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 

@@ -75,10 +75,7 @@ export const returnToCqlLibrary = ':nth-child(6) > td > .gwt-Anchor'
 // modal dialog
 export const modal = '.modal-dialog'
 export const modalCloseBtn = '.close'
-
-// FHIR Converstion Warning dialog
-export const fhirConversionWarningMessage = '.modal-body'
-export const fhirConversionReturnBtn = '#Yes_ConfirmDialogBox'
+export const modalContinueBtn = '#Yes_ConfirmDialogBox'
 
 export const fhirConversionNoBtn = '#No_ConfirmDialogBox'
 

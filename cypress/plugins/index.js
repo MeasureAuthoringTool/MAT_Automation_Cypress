@@ -113,6 +113,7 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
           client.close(true, () => {
             console.log('MongoDb connection closed.')
           })
+
           server.close(client)
           server.stop
           setImmediate(function(){server.emit('close')})

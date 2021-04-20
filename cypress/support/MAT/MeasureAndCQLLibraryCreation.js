@@ -341,13 +341,16 @@ export const createQDMProportionMeasure = () => {
 
 // Create Draft Measure
 
-export const createDraftMeasure = (measure, model) => {
+export const createDraftMeasure = (measure, model, scoring) => {
   let name = ''
 
   if (measure === undefined) {
     name = draftMeasure + Date.now()
   } else {
     name = measure + Date.now()
+  }
+  if (scoring === undefined) {
+    scoring = 'Proportion'
   }
 
   // creating new measure
@@ -365,7 +368,7 @@ export const createDraftMeasure = (measure, model) => {
   cy.get(createNewMeasure.cqlLibraryName).type(name, { delay: 50 })
   cy.get(createNewMeasure.shortName).type(name, { delay: 50 })
 
-  cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
+  cy.get(createNewMeasure.measureScoringListBox).select(scoring)
   cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
   cy.get(createNewMeasure.saveAndContinueBtn).click()
