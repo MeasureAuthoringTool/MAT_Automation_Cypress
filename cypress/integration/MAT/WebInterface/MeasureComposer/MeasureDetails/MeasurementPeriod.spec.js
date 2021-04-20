@@ -8,7 +8,7 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 let fhirMeasure = ''
 let qdmMeasure = ''
 
-describe('Validate the Measure Period without Data changes', () => {
+describe('Measure Composer: Measure Details: Validate the Measure Period without Data changes', () => {
   before('Login, Data creation', () => {
     oktaLogin.login()
 
@@ -147,7 +147,7 @@ describe('Validate the Measure Period without Data changes', () => {
   })
 })
 
-describe('Validate the Measure Period with date changes', () => {
+describe('Measure Composer: Measure Details: Validate the Measure Period with date changes', () => {
   before('Login, Data creation', () => {
     oktaLogin.login()
 

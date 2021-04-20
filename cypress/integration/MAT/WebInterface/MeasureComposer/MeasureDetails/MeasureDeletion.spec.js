@@ -11,14 +11,15 @@ let qdmMeasure = ''
 let qdmVersionMeasure = ''
 
 describe('Measure Composer: Measure Details: FHIR Measure Deletion', () => {
-  before('Login', () => {
+  before('Prepare data', () => {
     oktaLogin.login()
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
@@ -79,12 +80,13 @@ describe('Measure Composer: Measure Details: FHIR Measure Deletion', () => {
 })
 
 describe('Measure Composer: Measure Details: QDM Measure Deletion', () => {
-  before('Login', () => {
+  before('Prepare Data', () => {
     oktaLogin.login()
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
   after('Log Out', () => {
     helper.logout()

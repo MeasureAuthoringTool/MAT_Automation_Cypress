@@ -11,13 +11,10 @@ let mm = today.getMonthFormatted()
 let yyyy = today.getFullYear()
 
 describe('Measure Composer: Measure Details: Save Data', () => {
-  before('Login', () => {
+  beforeEach('Login', () => {
     oktaLogin.login()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Verify all Measure Details data is saved correctly', () => {

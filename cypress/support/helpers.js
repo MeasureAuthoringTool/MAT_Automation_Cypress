@@ -1,5 +1,6 @@
 /// <reference types="../support" />
 import * as matheader from '../pom/MAT/WI/MATheader'
+import * as loginUI from '../pom/MAT/WI/Login'
 
 const os = Cypress.platform // values are aix, darwin, freebsd, linux, openbsd, sunos, win32, android
 
@@ -42,6 +43,8 @@ export const loginUMLS = () => {
   visibleWithTimeout(matheader.UMLS)
   cy.get(matheader.UMLS).click()
   cy.wait(500)
+
+  waitForElementEnabled(matheader.API_Key)
   visibleWithTimeout(matheader.API_Key)
   enabledWithTimeout(matheader.API_Key)
 
@@ -56,6 +59,7 @@ export const loginUMLS = () => {
   visibleWithTimeout(matheader.UMLS_continue)
   enabledWithTimeout(matheader.UMLS_continue)
   cy.get(matheader.UMLS_continue).click()
+
 }
 
 export const logout = () => {
@@ -564,9 +568,9 @@ export const spinnerNotVisible = () => {
   // waitToHaveText(matheader.spinnerShadow,'...')
 
   notVisibleWithTimeout(matheader.spinner, 120000)
-  notVisibleWithTimeout(matheader.spinnerWrapper, 120000)
-  notVisibleWithTimeout(matheader.spinnerShadow, 120000)
-  notVisibleWithTimeout(matheader.spinnerModal, 120000)
+  // notVisibleWithTimeout(matheader.spinnerWrapper, 120000)
+  // notVisibleWithTimeout(matheader.spinnerShadow, 120000)
+  // notVisibleWithTimeout(matheader.spinnerModal, 120000)
   notVisibleWithTimeout(matheader.spinner, 120000)
 }
 export const spinnerExists = () => {
@@ -575,8 +579,8 @@ export const spinnerExists = () => {
 export const spinnerNotExists = () => {
   notExistsWithTimeout(matheader.spinner, 60000)
   // notExistsWithTimeout(matheader.spinnerWrapper, 60000)
-  notExistsWithTimeout(matheader.spinnerShadow, 60000)
-  notExistsWithTimeout(matheader.spinnerModal, 60000)
+  //notExistsWithTimeout(matheader.spinnerShadow, 60000)
+  //notExistsWithTimeout(matheader.spinnerModal, 60000)
 }
 export const verifySpinnerAppearsAndDissappears = () => {
   spinnerNotVisible()

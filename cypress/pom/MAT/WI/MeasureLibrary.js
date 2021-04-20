@@ -89,15 +89,15 @@ export const warningModal = '.modal-content'
 //field level error
 export const fieldLevelError = '.MatEHError'
 
+//page level error
+export const WarningMessage = '#measureLibrary_MainPanel > [style="margin-top: 20px;"]'
+
 // Draft Measure
 export const saveAndContinueButtonDraft = '#SaveAndContinueButton_measureDetail'
 
 // Draft Confirmation dialog
 export const confirmationContinue = '#yes_Button'
 
-// FHIR Converstion Warning dialog
-export const fhirConversionWarningMessage = '.modal-body'
-export const fhirConversionReturnBtn = '#Yes_ConfirmDialogBox'
 
 export const fhirConversionNoBtn = '#No_ConfirmDialogBox'
 

@@ -95,7 +95,7 @@ describe('FHIR Continuous Variable Measure', () => {
 
     // Codes
 
-    cy.get(measureComposer.valueSets).click()
+    cy.get(measureComposer.codes).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 

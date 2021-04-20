@@ -1,6 +1,8 @@
 export const measureName = '#MeasureNameTextArea'
 export const modelradioFHIR = '#gwt-uid-3'
 export const modelradioQDM = '#gwt-uid-4'
+export const generateCMSIDcheckbox = '#generateCmsId_Input'
+export const matchCQLLibraryNameCheckbox = '#matchLibName_Input'
 export const cqlLibraryName = '#CqlLibraryNameTextArea'
 export const shortName = '#ShortNameTextBox'
 export const measureScoringListBox = '#measScoringInput_ListBoxMVP'

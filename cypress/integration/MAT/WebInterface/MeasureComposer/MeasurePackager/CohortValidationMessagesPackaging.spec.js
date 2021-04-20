@@ -11,17 +11,18 @@ let fhirMeasureRatio = ''
 let fhirMeasureProportion = ''
 describe('Test cohort Validation Messages for FHIR Measure in Package Manager', function () {
 
-  before('Login', () => {
+  before('Setup', () => {
     oktaLogin.login()
 
     //as a setup to the test, create these measures so that the test can check them
     fhirMeasureCohort = dataCreation.createFHIRMeasureByType('FhirDraftMeasureCohort', 'Cohort', 'Yes')
 
+    helper.logout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    oktaLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
 
