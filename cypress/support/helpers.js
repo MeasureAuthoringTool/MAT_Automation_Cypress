@@ -1,6 +1,5 @@
 /// <reference types="../support" />
 import * as matheader from '../pom/MAT/WI/MATheader'
-import * as loginUI from '../pom/MAT/WI/Login'
 
 const os = Cypress.platform // values are aix, darwin, freebsd, linux, openbsd, sunos, win32, android
 
