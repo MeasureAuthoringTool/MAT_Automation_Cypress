@@ -111,12 +111,6 @@ export const selectAttributes = '#Atrr_listBox'
 export const attributeInsertBtn = '#addButton_Button'
 export const attributeCancelBtn = '#Cancel_button'
 
-//Function Edit and Delete Arguments
-export const functionLeftListOptions = '#funcListBox > option'
-export const editFunction = 'div > table > tbody > tr > :nth-child(1) > .btn > .fa'
-export const deleteFunction = 'div > table > tbody > tr > :nth-child(2) > .btn > .fa'
-export const functionLeftList = '#funcListBox'
-
 //CQL Library Editor
 export const cqlWorkspaceTitleCQLLibraryEditor = '#cqlLibraryEditor_Id > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
 export const cqlLibraryEditorInput = '#cqlLibraryEditor_CQLEditor'
