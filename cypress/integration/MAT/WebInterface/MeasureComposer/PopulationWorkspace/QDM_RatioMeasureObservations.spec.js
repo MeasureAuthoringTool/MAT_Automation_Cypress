@@ -63,10 +63,8 @@ describe('MeasureComposer: QDM Ratio Measure Observation', () => {
 
         cy.get(measureComposer.measureObservationsAggregateFunctionListBox).select('Count')
 
-        cy.get(measureComposer.measureObservationsFunctionListBox).then((elem)=>{
-            const listingCount = Cypress.$(elem).length
-            assert.equal(listingCount, 1)
-        })
+        cy.get(measureComposer.measureObservationsFunctionListBox).find('option').should('have.length', 2)
+
         cy.get(measureComposer.measureObservationsFunctionListBox).select('No Arguments')
 
         cy.get(measureComposer.measureObservationsSaveBtn).click()
@@ -112,10 +110,7 @@ describe('MeasureComposer: QDM Ratio Measure Observation', () => {
 
         cy.get(measureComposer.measureObservationsAggregateFunctionListBox).select('Count')
 
-        cy.get(measureComposer.measureObservationsFunctionListBox).then((elem)=>{
-            const listingCount = Cypress.$(elem).length
-            assert.equal(listingCount, 1)
-        })
+        cy.get(measureComposer.measureObservationsFunctionListBox).find('option').should('have.length', 2)
         cy.get(measureComposer.measureObservationsFunctionListBox).select('One Argument')
 
         cy.get(measureComposer.measureObservationsSaveBtn).click()

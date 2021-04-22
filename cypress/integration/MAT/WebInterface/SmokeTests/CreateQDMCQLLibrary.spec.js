@@ -5,20 +5,18 @@ import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from '../../../../pom/MAT/WI/CQLComposer'
-import * as oktaLogin from '../../../../support/oktaLogin'
+import * as login from '../../../../support/MAT/Login'
+
+//Create QDM CQL Library with definitions and Functions
 
 describe('Create CQL Library', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  beforeEach('Login', () => {
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
     helper.verifySpinnerAppearsAndDissappears()
-
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Create CQL Library with definitions and functions', () => {

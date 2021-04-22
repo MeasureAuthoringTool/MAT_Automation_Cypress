@@ -168,7 +168,10 @@ export const stratificationSaveBtn = '#saveButton_Stratifications'
 //Population Workspace Measure Observations
 export const measureObservationsAggregateFunctionListBox = ':nth-child(2) > #definitionList_Measure\\ Observation\\ 1'
 export const measureObservationsFunctionListBox = ':nth-child(3) > #definitionList_Measure\\ Observation\\ 1'
+export const measureObservationsAggregateFunctionListBox2 = ':nth-child(2) > #definitionList_Measure\\ Observation\\ 2'
+export const measureObservationsFunctionListBox2 = ':nth-child(3) > #definitionList_Measure\\ Observation\\ 2'
 export const measureObservationsSaveBtn = '#saveButton_Measure\\ Observations'
+export const measureObservationsAddNew = '#addNewButton_Measure\\ Observations'
 
 //Measure Packager
 export const populationsListItems = '#LeftPackagePanel .GB-MJYKBEB > Div > [__idx]'
@@ -186,3 +189,5 @@ export const measureGroupingSuccessMessage = '.panel-body > .alert-success > .gw
 export const packageManagerPopulationsListInitialPopulationOnPackageManager = '#LeftPackagePanel > [style="position: relative; zoom: 1;"] > .GB-MJYKBEB > :nth-child(1) > .GB-MJYKBAB > div'
 export const addClauseButton = '#AddClauseToRight'
 export const addAllClausesButton = 'AddAllClauseToRight'
+export const associationMeasureObservation1 = 'select[title="Select association for Measure Observation 1"]'
+export const associationMeasureObservation2 = 'select[title="Select association for Measure Observation 2"]'
