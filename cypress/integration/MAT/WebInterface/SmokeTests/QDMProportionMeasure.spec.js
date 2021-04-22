@@ -1,15 +1,14 @@
 import * as helper from '../../../../support/helpers'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
-import * as oktaLogin from '../../../../support/oktaLogin'
+import * as login from '../../../../support/MAT/Login'
 
-describe('QDM Proportion Measure', () => {
-  before('Login', () => {
-    oktaLogin.login()
+//Smoke test for QDM Proportion Measure. Create Draft measure and Package
+
+describe('QDM Proportion Measure, create draft Measure and package', () => {
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
   it('Proportion QDM, creation, Population Workspace, Measure Packager', () => {

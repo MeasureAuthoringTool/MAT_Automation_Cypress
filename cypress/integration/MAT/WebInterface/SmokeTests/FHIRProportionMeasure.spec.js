@@ -3,30 +3,32 @@ import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreat
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
+import * as login from '../../../../support/MAT/Login'
 
-describe('FHIR Continuous Variable Measure', () => {
-  before('Login', () => {
-    oktaLogin.login()
+//Smoke test for FHIR Proportion Measure. Create Draft measure and Package
+
+describe('FHIR Proportion Measure', () => {
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     helper.logout()
   })
-  it('Continuous Variable FHIR, creation', () => {
+  it('Proportion FHIR, creation Draft measure and Package', () => {
 
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
-    let measureName = 'CreateFhirContinuousVariableMeasure' + Date.now()
+    let measureName = 'CreateFhirProportionMeasure' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.modelradioFHIR).click()
     cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
-    cy.get(createNewMeasure.measureScoringListBox).select('Continuous Variable')
-    cy.get(createNewMeasure.patientBasedMeasureListBox).select('No')
+    cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
+    cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
 
@@ -39,10 +41,8 @@ describe('FHIR Continuous Variable Measure', () => {
     cy.get(measureDetails.saveBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
 
     //entering required meta data
-    helper.visibleWithTimeout(measureDetails.measureStewardDeveloper)
     cy.get(measureDetails.measureStewardDeveloper).click()
     cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
     cy.get(measureDetails.row1CheckBox).click()
@@ -95,11 +95,11 @@ describe('FHIR Continuous Variable Measure', () => {
 
     // Codes
 
-    cy.get(measureComposer.codes).click()
+    cy.get(measureComposer.valueSets).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    dataCreation.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
+    dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2020-03/Code/420523002/Info')
     dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
     dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
 
@@ -110,25 +110,8 @@ describe('FHIR Continuous Variable Measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
-    dataCreation.addDefinition('Measure Population', '"Initial Population"')
-
-    // Function
-
-    cy.get(measureComposer.functionMeasureComposer).click()
-
-    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Function')
-
-    cy.get(measureComposer.addNewBtn).click()
-    cy.get(measureComposer.functionNameInput).type('Arrival and Departure Time', { delay: 50 })
-    cy.get(measureComposer.addArgument).click()
-    helper.enterText(measureComposer.argumentNameInput, 'Encounter')
-    cy.get(measureComposer.availableDatatypesListBox).select('FHIR Datatype')
-    cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter')
-    cy.get(measureComposer.addBtn).click()
-    cy.get(measureComposer.functionCQLExpressionEditorInput).type(23, { delay: 50 })
-    cy.get(measureComposer.functionSaveBtn).click()
-
-    helper.visibleWithTimeout(measureComposer.warningMessage)
+    dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
+    dataCreation.addDefinition('Numerator', '"Initial Population"')
 
     //CQL Library Editor
 
@@ -159,28 +142,27 @@ describe('FHIR Continuous Variable Measure', () => {
     helper.visibleWithTimeout(measureComposer.warningMessage)
     helper.waitToContainText(measureComposer.warningMessage, 'Changes to Initial Populations have been successfully saved.')
 
-    // Measure Population
-    cy.get(measureComposer.measurePopulations).click()
+    // Denominator
+    cy.get(measureComposer.denominator).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.measurePopulationsDefinitionListBox).select('Measure Population')
-    cy.get(measureComposer.measurePopulationsSaveBtn).click()
+    cy.get(measureComposer.denominatorDefinitionListBox).select('Denominator')
+    cy.get(measureComposer.denominatorSaveBtn).click()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
-    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Measure Populations have been successfully saved.')
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominators have been successfully saved.')
 
-    // Measure Observation
-    cy.get(measureComposer.measureObservations).click()
+    // Numerator
+    cy.get(measureComposer.numerator).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.measureObservationsAggregateFunctionListBox).select('Count')
-    cy.get(measureComposer.measureObservationsFunctionListBox).select('Arrival and Departure Time')
-    cy.get(measureComposer.measureObservationsSaveBtn).click()
+    cy.get(measureComposer.numeratorDefinitionListBox).select('Numerator')
+    cy.get(measureComposer.numeratorSaveBtn).click()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
-    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Measure Observations have been successfully saved.')
+    helper.waitToContainText(measureComposer.warningMessage, 'Changes to Numerators have been successfully saved.')
 
     //navigate to Measure Packager
     cy.get(measureComposer.measurePackager).click()
@@ -191,8 +173,8 @@ describe('FHIR Continuous Variable Measure', () => {
     cy.get(measureComposer.populationsListItems).its('length').should('equal', 3)
 
     cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
-    cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Measure Population')
-    cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Measure Observation')
+    cy.get(measureComposer.populationsListItems).eq(1).should('contain.text', 'Denominator')
+    cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Numerator')
 
     //Package Grouping
     cy.get(measureComposer.addAllItemsToGrouping).click()
@@ -207,11 +189,8 @@ describe('FHIR Continuous Variable Measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
+    helper.visibleWithTimeout(measureComposer.packageWarningMessage)
     helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
-
-    cy.get(measurelibrary.measureLibraryTab).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
 
   })
 })

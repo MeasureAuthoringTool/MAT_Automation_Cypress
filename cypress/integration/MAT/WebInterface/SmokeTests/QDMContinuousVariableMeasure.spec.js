@@ -3,16 +3,18 @@ import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreat
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../support/oktaLogin'
+import * as login from '../../../../support/MAT/Login'
+
+//Smoke test for QDM Continuous Variable Measure. Create Draft measure and Package
 
 describe('QDM Continuous Variable Measure', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
     helper.logout()
   })
-  it('Continuous Variable QDM, creation, Population Workspace', () => {
+  it('Continuous Variable QDM, create Draft measure and package', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
