@@ -56,14 +56,6 @@ describe('Measure: CQL Editor message', () => {
     cy.get(measureComposer.functionSaveBtn).click()
 
     cy.get(measureComposer.generalInformation).click()
-    // if('#libraryVersionValue_TextBox').shouldContainClick(0.0.000)
-    // {
-    //   cy.log('Showing correct Sql version number')
-    // }
-    // else
-    // {
-    //   cy.log('Showing incorrect Sql version number')
-    // }
 
     helper.verifySpinnerAppearsAndDissappears()
 
