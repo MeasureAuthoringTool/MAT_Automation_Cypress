@@ -8,7 +8,7 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 let fhirMeasure = ''
 let qdmMeasure = ''
 
-describe('Measure Composer: Edit Function Argument Lightbox', () => {
+describe('Measure Composer: Edit and Delete Function Argument Lightbox', () => {
 
   beforeEach('Login', () => {
     oktaLogin.login()
@@ -18,7 +18,7 @@ describe('Measure Composer: Edit Function Argument Lightbox', () => {
     helper.logout()
   })
 
-  it('QDM Measure: Edit the classes on Function Argument Lightbox', () => {
+  it('QDM Measure: Edit and Delete the classes on Function Argument Lightbox', () => {
     qdmMeasure = dataCreation.createDraftMeasure('EditandDeleteQdmMeasureFunction','QDM')
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -99,7 +99,7 @@ describe('Measure Composer: Edit Function Argument Lightbox', () => {
 
   })
 
-  it('FHIR Measure: Edit the classes on Function Argument Lightbox', () => {
+  it('FHIR Measure: Edit and Delete the classes on Function Argument Lightbox', () => {
     fhirMeasure = dataCreation.createDraftMeasure('EditandDeleteFhirMeasureFunction','FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()

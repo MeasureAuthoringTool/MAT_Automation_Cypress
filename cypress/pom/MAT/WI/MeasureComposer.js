@@ -5,6 +5,7 @@ export const measurePackager = '#Measure\\ Packager'
 
 //CQL Workspace
 export const cqlLibraryNameInput = '#libraryNameValue_TextBox'
+export const generalInformation = '#generatalInformation_Anchor > a'
 //left menu
 export const includes = '#includesLabel_Label'
 export const valueSets = '#valueSetLabel_Label'
