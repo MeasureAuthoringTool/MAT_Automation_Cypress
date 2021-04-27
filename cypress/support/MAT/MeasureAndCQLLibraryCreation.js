@@ -623,8 +623,42 @@ export const addDefinition = (definitionName, CQL) => {
 
   cy.wait(1500)
 
-  cy.get(measureComposer.definitionCQLExpressionEditorInput).type(CQL, { delay: 50 })
+  cy.get(measureComposer.definitionCQLExpressionEditorInput).type(CQL, { delay: 50, parseSpecialCharSequences: false })
   cy.get(measureComposer.definitionSaveBtn).click()
+
+  helper.visibleWithTimeout(measureComposer.warningMessage)
+}
+
+export const addFunction = (functionName, CQL) => {
+  cy.get(measureComposer.functionMeasureComposer).click()
+
+  helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Function')
+
+  cy.get(measureComposer.addNewBtn).click()
+  cy.get(measureComposer.functionNameInput).type(functionName, { delay: 50 })
+  cy.get(measureComposer.functionCQLExpressionEditorInput).type(CQL, { delay: 50, parseSpecialCharSequences: false })
+  cy.get(measureComposer.functionSaveBtn).click()
+
+  helper.visibleWithTimeout(measureComposer.warningMessage)
+}
+
+export const addSingleFunctionArgument = (argumentName, argumentDatatype, qdmDatatypeObject) => {
+//must be on the Function helper UI
+
+  cy.get(measureComposer.addArgument).click()
+  cy.get(measureComposer.argumentNameInput).click()
+  helper.enterText(measureComposer.argumentNameInput, argumentName)
+  cy.get(measureComposer.availableDatatypesListBox).select(argumentDatatype)
+
+  if (qdmDatatypeObject === undefined) {
+    //do nothing
+  }
+  else {
+    cy.get(measureComposer.selectQDMDatatypeObject).select(qdmDatatypeObject)
+  }
+  cy.get(measureComposer.addBtn).click()
+
+  cy.get(measureComposer.functionSaveBtn).click()
 
   helper.visibleWithTimeout(measureComposer.warningMessage)
 }
