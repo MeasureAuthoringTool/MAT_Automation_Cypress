@@ -135,7 +135,9 @@ export const measureObservations = '#Measure\\ Observations_Anchor'
 
 //Population Workspace Initial Population
 export const initialPopulationDefinitionListBox = '#definitionList_Initial\\ Population\\ 1'
+export const initialPopulationDefinitionListBox2 = '#definitionList_Initial\\ Population\\ 2'
 export const initialPopulationSaveBtn = '#saveButton_Initial\\ Population'
+export const initialPopulationAddNew = '#addNewButton_Initial\\ Population'
 
 //Population Workspace Denominator
 export const denominatorDefinitionListBox = '#definitionList_Denominator\\ 1'
@@ -191,3 +193,6 @@ export const addClauseButton = '#AddClauseToRight'
 export const addAllClausesButton = 'AddAllClauseToRight'
 export const associationMeasureObservation1 = 'select[title="Select association for Measure Observation 1"]'
 export const associationMeasureObservation2 = 'select[title="Select association for Measure Observation 2"]'
+export const scoreUnitUcumInputBox = '#ucum'
+export const groupingAssociationDenominatorSelect = 'select[title="Select association for Denominator 1"]'
+export const groupingAssociationNumeratorSelect = 'select[title="Select association for Numerator 1"]'

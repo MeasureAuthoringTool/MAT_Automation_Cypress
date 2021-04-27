@@ -1,4 +1,3 @@
-import * as helper from '../../../../support/helpers'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as login from '../../../../support/MAT/Login'
 
@@ -9,7 +8,7 @@ describe('QDM Proportion Measure, create draft Measure and package', () => {
     login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Proportion QDM, creation, Population Workspace, Measure Packager', () => {
 

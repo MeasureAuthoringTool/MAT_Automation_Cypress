@@ -5,16 +5,16 @@ import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as login from '../../../../support/MAT/Login'
 
-//Smoke test for QDM Continuous Variable Measure. Create Draft measure and Package
+//Smoke test for QDM Continuous Variable Measure NOT Patient Based. Create Draft measure and Package
 
-describe('QDM Continuous Variable Measure', () => {
+describe('QDM Continuous Variable Measure No Patient', () => {
   beforeEach('Login', () => {
     login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
-  it('Continuous Variable QDM, create Draft measure and package', () => {
+  it('Continuous Variable QDM No Patient, create Draft measure and package', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -29,7 +29,7 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
 
     cy.get(createNewMeasure.measureScoringListBox).select('Continuous Variable')
-    cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
+    cy.get(createNewMeasure.patientBasedMeasureListBox).select('No')
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
     cy.get(createNewMeasure.confirmationContinueBtn).click()
@@ -119,7 +119,7 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(measureComposer.addNewBtn).click()
     cy.get(measureComposer.functionNameInput).type('Arrival and Departure Time', { delay: 50 })
     cy.get(measureComposer.addArgument).click()
-    helper.enabledWithTimeout(measureComposer.argumentNameInput)
+    cy.get(measureComposer.argumentNameInput).click()
     helper.enterText(measureComposer.argumentNameInput, 'Encounter')
     cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
     cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
@@ -140,7 +140,7 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(measureComposer.addNewBtn).click()
     cy.get(measureComposer.functionNameInput).type('Arrival Time', { delay: 50 })
     cy.get(measureComposer.addArgument).click()
-    helper.enabledWithTimeout(measureComposer.argumentNameInput)
+    cy.get(measureComposer.argumentNameInput).click()
     helper.enterText(measureComposer.argumentNameInput, 'Encounter')
     cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
     cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
@@ -156,7 +156,7 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(measureComposer.addNewBtn).click()
     cy.get(measureComposer.functionNameInput).type('Arrival to Observation Order or Departure Time', { delay: 50 })
     cy.get(measureComposer.addArgument).click()
-    helper.enabledWithTimeout(measureComposer.argumentNameInput)
+    cy.get(measureComposer.argumentNameInput).click()
     helper.enterText(measureComposer.argumentNameInput, 'Encounter')
     cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
     cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
@@ -169,7 +169,7 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(measureComposer.addNewBtn).click()
     cy.get(measureComposer.functionNameInput).type('Departure Time', { delay: 50 })
     cy.get(measureComposer.addArgument).click()
-    helper.enabledWithTimeout(measureComposer.argumentNameInput)
+    cy.get(measureComposer.argumentNameInput).click()
     helper.enterText(measureComposer.argumentNameInput, 'Encounter')
     cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
     cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
@@ -186,7 +186,7 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(measureComposer.addNewBtn).click()
     cy.get(measureComposer.functionNameInput).type('Measure Observation', { delay: 50 })
     cy.get(measureComposer.addArgument).click()
-    helper.enabledWithTimeout(measureComposer.argumentNameInput)
+    cy.get(measureComposer.argumentNameInput).click()
     helper.enterText(measureComposer.argumentNameInput, 'Encounter')
     cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
     cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
@@ -201,7 +201,7 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(measureComposer.addNewBtn).click()
     cy.get(measureComposer.functionNameInput).type('Observation Services Order', { delay: 50 })
     cy.get(measureComposer.addArgument).click()
-    helper.enabledWithTimeout(measureComposer.argumentNameInput)
+    cy.get(measureComposer.argumentNameInput).click()
     helper.enterText(measureComposer.argumentNameInput, 'Encounter')
     cy.get(measureComposer.availableDatatypesListBox).select('QDM Datatype')
     cy.get(measureComposer.selectQDMDatatypeObject).select('Encounter, Performed')
@@ -294,6 +294,8 @@ describe('QDM Continuous Variable Measure', () => {
     cy.get(measureComposer.populationsListItems).eq(2).should('contain.text', 'Measure Population Exclusions 1')
     cy.get(measureComposer.populationsListItems).eq(3).should('contain.text', 'Measure Observation 1')
     cy.get(measureComposer.populationsListItems).eq(4).should('contain.text', 'Stratification 1')
+
+    //need to add MO associations and packaging actions
 
     cy.get(measurelibrary.measureLibraryTab).click()
 

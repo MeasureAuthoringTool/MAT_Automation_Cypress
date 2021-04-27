@@ -13,7 +13,7 @@ describe('FHIR Continuous Variable Measure', () => {
     login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Continuous Variable FHIR, create Draft and package', () => {
 

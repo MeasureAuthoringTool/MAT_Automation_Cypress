@@ -1,6 +1,7 @@
 import * as helper from './../helpers'
 import * as measurelibrary from '../../pom/MAT/WI/MeasureLibrary'
 import * as loginUI from '../../pom/MAT/WI/Login'
+import * as matheader from '../../pom/MAT/WI/MATheader'
 
 let username = ''
 let password = ''
@@ -105,6 +106,7 @@ export const login = (un, pw) => {
     pw = password
   }
 
+  helper.visibleWithTimeout(loginUI.usernameInput, 100000)
   cy.get(loginUI.usernameInput).type(un)
   cy.get(loginUI.passwordInput).type(pw)
 
@@ -112,4 +114,25 @@ export const login = (un, pw) => {
   cy.get(loginUI.signInButton).click()
 
   cy.log('Login Successful')
+}
+
+export const matLogout = () => {
+  helper.visibleWithTimeout(matheader.userprofile)
+
+  cy.get(matheader.userprofile).click({ force: true })
+
+  helper.visibleWithTimeout(matheader.signout)
+
+  cy.get(matheader.signout).click({ force: true })
+
+  //helper.visibleWithTimeout(loginUI.usernameInput, 100000)
+  cy.url().should('include', '/Login.html')
+
+  cy.clearCookies()
+
+  cy.clearLocalStorage()
+
+  cy.window().then((win) => {
+    win.sessionStorage.clear()
+  })
 }

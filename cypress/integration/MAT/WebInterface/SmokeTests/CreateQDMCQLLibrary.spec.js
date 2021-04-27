@@ -17,7 +17,7 @@ describe('Create CQL Library', () => {
     helper.verifySpinnerAppearsAndDissappears()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Create CQL Library with definitions and functions', () => {
     helper.verifySpinnerAppearsAndDissappears()

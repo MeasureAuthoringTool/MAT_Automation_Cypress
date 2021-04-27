@@ -9,7 +9,7 @@ let qdmCqlLibrary = ''
 let name = ''
 
 describe('Filter', () => {
-  before('Login', () => {
+  beforeEach('Login and data setup', () => {
 
     login.matLogin()
 
@@ -23,11 +23,8 @@ describe('Filter', () => {
     qdmCqlLibrary = dataCreation.createDraftCqlLibrary(name + 'QDM', 'QDM')
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
   it('QDM/CQL, FHIR/CQL or ALL', () => {
 

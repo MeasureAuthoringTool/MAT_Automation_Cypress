@@ -13,7 +13,7 @@ describe('FHIR Proportion Measure', () => {
     login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Proportion FHIR, creation Draft measure and Package', () => {
 

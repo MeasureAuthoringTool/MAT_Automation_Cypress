@@ -8,12 +8,12 @@ import * as login from '../../../../support/MAT/Login'
 
 //Smoke test for FHIR Ratio Measure. Create Draft measure and Package
 
-describe('FHIR Proportion Measure', () => {
+describe('FHIR Ratio Measure', () => {
   beforeEach('Login', () => {
     login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('FHIR Ratio, creation Draft measure and Package', () => {
 
