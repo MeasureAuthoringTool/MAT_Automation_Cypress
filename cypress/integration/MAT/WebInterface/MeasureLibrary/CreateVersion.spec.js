@@ -41,7 +41,7 @@ describe('Measure Library: Create Version', () => {
 
     helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.', 120000)
 
-    //Comparing CQL Library Version Number with Draft Version
+    //Comparing CQL Library Version Number with Draft Version for QDM Measure
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(measurelibrary.searchInputBox)
@@ -222,6 +222,20 @@ describe('Measure Library: Create Version', () => {
 
     helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.', 120000)
 
+    //Comparing CQL Library Version Number with Draft Version for FHIR Measure
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, name)
+    cy.get(measurelibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    cy.get(measureComposer.cqlWorkspace).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '1.0')
   })
 
   it('FHIR: Create Major Version with Successful Package, Proportion Measure, Unused Included CQL Library', () => {
