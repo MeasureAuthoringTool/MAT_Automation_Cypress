@@ -80,6 +80,7 @@ export const definitionEraseBtn = '#eraseButton_definition'
 export const definitionDeleteBtn = '#deleteButton_definition'
 export const definitionLeftListOptions = '#defineListBox > option'
 export const definitionLeftList = '#defineListBox'
+
 //Definition Insert
 export const itemTypeListBox = '#availableItemToInsert_ListBox'
 export const attributesDataTypeListBox = '#DataTypeBtAtrr_listBox'
@@ -181,6 +182,8 @@ export const populationsListItems = '#LeftPackagePanel .GB-MJYKBEB > Div > [__id
 export const populationListItemsSecondary = '#LeftPackagePanel > [style="position: relative; zoom: 1;"] > .GB-MJYKBEB > :nth-child(1) > .GB-MJYKBAB > div'
 export const addAllItemsToGrouping = '#AddAllClauseToRight'
 export const saveGrouping = '#Save_Grouping_button'
+export const measurePackagerWarning1 = '.alert-danger > :nth-child(1)'
+export const measurePackagerWarning2 = '.alert-danger > :nth-child(2)'
 export const measureGroupingTable = '#MeasureGroupingCellTable'
 export const createMeasurePackageBtn = '#Create_Measure_Package_button'
 export const createPackageExportBtn = '#Create_Package_and_Export_button'
