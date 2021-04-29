@@ -1,27 +1,27 @@
 import * as helper from '../../../../support/helpers'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let fhirCqlLibrary = ''
 let qdmCqlLibrary = ''
 
 describe('Sharing Measure with other measure developer', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  before('Data Setup', () => {
+    login.matLogin()
 
     qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmLibrary', 'QDM')
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
-
+    login.matLogout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
   it('Share the QDM Library', () => {
 

@@ -1,9 +1,9 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as cqlComposer from '../../../../pom/MAT/WI/CQLComposer'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
+import * as login from '../../../../support/MAT/Login'
 
 let firstCharacterLowerCase = ''
 let firstCharacterUnderscore = ''
@@ -18,7 +18,7 @@ let fieldLevelError = ' Invalid Library Name. Library names must start with an u
 
 describe('FHIR Library: Validate the library naming rules', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -29,7 +29,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
   })
   afterEach('Log Out', () => {
     helper.verifySpinnerAppearsAndDissappears()
-    helper.logout()
+    login.matLogout()
   })
 
   it('Validate the FHIR name requirement: Incorrect First character', () => {
@@ -166,5 +166,4 @@ describe('FHIR Library: Validate the library naming rules', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-
 })

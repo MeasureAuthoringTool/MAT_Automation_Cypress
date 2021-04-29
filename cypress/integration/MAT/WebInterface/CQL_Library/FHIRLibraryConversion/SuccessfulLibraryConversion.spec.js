@@ -1,22 +1,23 @@
 import * as helper from '../../../../../support/helpers'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as cqlLibraryHelper from '../../../../../support/MAT/CqlLibraryHelper'
+import * as login from '../../../../../support/MAT/Login'
 
 let qdmCqlLibraryName = ''
 
 describe('CQL Library: FHIR Library Conversion: Successful Conversion to FHIR', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
+  after('Clean Up', () => {
+    login.matLogin()
     cqlLibraryHelper.deleteCqlLibrary(qdmCqlLibraryName + 'FHIR')
-    helper.logout()
+    login.matLogout()
+  })
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('Convert QDM CQL Library to FHIR successfully', () => {

@@ -2,9 +2,9 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as cqlComposer from '../../../../pom/MAT/WI/CQLComposer'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let draftCqlLibraryNotowner = ''
 let draftCqlLibraryOwner = ''
@@ -12,7 +12,7 @@ let versionedCQLLibary = ''
 
 describe('CQL Library Grid Selection', () => {
   before('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -25,16 +25,16 @@ describe('CQL Library Grid Selection', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
 
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
-    helper.logout()
+    login.matLogout()
   })
   it('Recent Activity', () => {
 
@@ -131,7 +131,7 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
 
     draftCqlLibraryNotowner = dataCreation.loginCreateDraftCqlLibraryNotOwnerLogout()
 
-    oktaLogin.login()
+    login.matLogin()
     draftCqlLibraryOwner = dataCreation.createDraftCqlLibrary('QdmDraft')
 
     versionedCQLLibary = dataCreation.createDraftCqlLibrary('QdmVersioned')
@@ -161,7 +161,7 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
 
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
     helper.verifySpinnerAppearsAndDissappears()
@@ -170,7 +170,7 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
   afterEach('Log Out', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
-    helper.logout()
+    login.matLogout()
   })
 
   it('Enabled/Disabled Recent Activity Not The Owner', () => {
