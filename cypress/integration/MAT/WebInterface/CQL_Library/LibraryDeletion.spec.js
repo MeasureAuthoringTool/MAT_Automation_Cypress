@@ -1,9 +1,9 @@
 import * as helper from '../../../../support/helpers'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
+import * as login from '../../../../support/MAT/Login'
 
 let fhirCqlLibrary = ''
 let qdmCqlLibrary = ''
@@ -11,7 +11,7 @@ let qdmCqlLibrary = ''
 
 describe('Library Deletion', () => {
   before('Login, create data', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
     helper.verifySpinnerAppearsAndDissappears()
@@ -23,10 +23,10 @@ describe('Library Deletion', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
     helper.verifySpinnerAppearsAndDissappears()
@@ -34,7 +34,7 @@ describe('Library Deletion', () => {
     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Validate the Fhir draft library deletion', () => {

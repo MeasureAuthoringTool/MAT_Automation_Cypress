@@ -1,19 +1,19 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlComposer from '../../../../pom/MAT/WI/CQLComposer'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let qdmLibraryName = ''
 let fhirLibraryName = ''
 
 describe('QDM Stand alone Library: Version and include with measure', () => {
   before('Data Setup', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -27,7 +27,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
 
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -137,7 +137,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
 
 describe('CQL Library: Stand alone Versioning', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -149,7 +149,7 @@ describe('CQL Library: Stand alone Versioning', () => {
     helper.verifySpinnerAppearsAndDissappears()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('FHIR Stand alone Library: Version and include with FHIR measure', () => {
@@ -356,8 +356,8 @@ describe('CQL Library: Stand alone Versioning', () => {
 })
 
 describe('FHIR Standalone Library: Meta data requirement to version', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  before('Data Setup', () => {
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -366,13 +366,18 @@ describe('FHIR Standalone Library: Meta data requirement to version', () => {
     fhirLibraryName = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
+    login.matLogout()
+  })
+  beforeEach('Login', () => {
+    login.matLogin()
 
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('Validate error message for required meta data while versioning', () => {
