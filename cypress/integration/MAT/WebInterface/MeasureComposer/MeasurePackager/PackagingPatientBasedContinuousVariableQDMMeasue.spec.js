@@ -330,8 +330,8 @@ describe('Packaging: Continuous Variable Measure', () => {
     cy.get(measureComposer.addAllItemsToGrouping).click()
     cy.get(measureComposer.saveGrouping).click()
 
-    cy.get(measureComposer.measurePackagerWarning1).should('contain.text', 'Initial Population 1 : For Patient-based Measures, all definitions directly added to populations must return a Boolean.')
-    cy.get(measureComposer.measurePackagerWarning2).should('contain.text', 'Measure Population 1 : For Patient-based Measures, all definitions directly added to populations must return a Boolean.')
+    cy.get(measureComposer.groupingErrorOne).should('contain.text', 'Initial Population 1 : For Patient-based Measures, all definitions directly added to populations must return a Boolean.')
+    cy.get(measureComposer.groupingErrorTwo).should('contain.text', 'Measure Population 1 : For Patient-based Measures, all definitions directly added to populations must return a Boolean.')
     cy.get(measurelibrary.measureLibraryTab).click()
 
   })

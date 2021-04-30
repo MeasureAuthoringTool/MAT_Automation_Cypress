@@ -182,8 +182,6 @@ export const populationsListItems = '#LeftPackagePanel .GB-MJYKBEB > Div > [__id
 export const populationListItemsSecondary = '#LeftPackagePanel > [style="position: relative; zoom: 1;"] > .GB-MJYKBEB > :nth-child(1) > .GB-MJYKBAB > div'
 export const addAllItemsToGrouping = '#AddAllClauseToRight'
 export const saveGrouping = '#Save_Grouping_button'
-export const measurePackagerWarning1 = '.alert-danger > :nth-child(1)'
-export const measurePackagerWarning2 = '.alert-danger > :nth-child(2)'
 export const measureGroupingTable = '#MeasureGroupingCellTable'
 export const createMeasurePackageBtn = '#Create_Measure_Package_button'
 export const createPackageExportBtn = '#Create_Package_and_Export_button'
