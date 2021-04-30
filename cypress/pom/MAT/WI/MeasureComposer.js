@@ -80,6 +80,7 @@ export const definitionEraseBtn = '#eraseButton_definition'
 export const definitionDeleteBtn = '#deleteButton_definition'
 export const definitionLeftListOptions = '#defineListBox > option'
 export const definitionLeftList = '#defineListBox'
+
 //Definition Insert
 export const itemTypeListBox = '#availableItemToInsert_ListBox'
 export const attributesDataTypeListBox = '#DataTypeBtAtrr_listBox'
