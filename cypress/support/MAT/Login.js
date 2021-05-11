@@ -106,7 +106,7 @@ export const login = (un, pw) => {
     pw = password
   }
 
-  helper.visibleWithTimeout(loginUI.usernameInput, 100000)
+  helper.visibleWithTimeout(loginUI.usernameInput, 200000)
   cy.get(loginUI.usernameInput).type(un)
   cy.get(loginUI.passwordInput).type(pw)
 

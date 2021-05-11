@@ -3,13 +3,18 @@ import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreat
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 import * as login from '../../../../support/MAT/Login'
+import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 
 let fhirCqlLibrary = ''
 let qdmCqlLibrary = ''
 
-describe('Sharing Measure with other measure developer', () => {
+describe('Sharing CQL Library with other measure developer', () => {
   before('Data Setup', () => {
     login.matLogin()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     qdmCqlLibrary = dataCreation.createDraftCqlLibrary('QdmLibrary', 'QDM')
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirLibrary', 'FHIR')
@@ -19,6 +24,10 @@ describe('Sharing Measure with other measure developer', () => {
   })
   beforeEach('Login', () => {
     login.matLogin()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
   })
   afterEach('Log Out', () => {
     login.matLogout()
