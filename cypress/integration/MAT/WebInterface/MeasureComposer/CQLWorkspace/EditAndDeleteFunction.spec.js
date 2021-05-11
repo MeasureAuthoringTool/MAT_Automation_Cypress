@@ -82,7 +82,7 @@ describe('Measure Composer: Edit and Delete Function Argument Lightbox', () => {
     cy.get(measureComposer.functionMeasureComposer).click()
     cy.get(measureComposer.functionLeftList).select('Test')
     cy.get(measureComposer.functionLeftListOptions).eq(0).dblclick()
-    cy.get(measureComposer.deleteFunction).click()
+    cy.get(measureComposer.deleteFunctionArgument).click()
     cy.get(measureComposer.deleteConfirmationYes).click()
     cy.get(measureComposer.functionSaveBtn).click()
 
@@ -166,7 +166,7 @@ describe('Measure Composer: Edit and Delete Function Argument Lightbox', () => {
     cy.get(measureComposer.functionMeasureComposer).click()
     cy.get(measureComposer.functionLeftList ).select('Test')
     cy.get(measureComposer.functionLeftListOptions).eq(0).dblclick()
-    cy.get(measureComposer.deleteFunction).click()
+    cy.get(measureComposer.deleteFunctionArgument).click()
     cy.get(measureComposer.deleteConfirmationYes).click()
     cy.get(measureComposer.functionSaveBtn).click()
 

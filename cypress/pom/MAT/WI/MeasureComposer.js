@@ -96,6 +96,8 @@ export const addBtn = '#Yes_addFxnArgsBox'
 export const functionCQLExpressionEditorInput = '#function_CQLEditor'
 export const functionSaveBtn = '#saveButton_function'
 export const insertBtn = '#insertButton_function'
+export const deleteFunctionBtn = '#deleteButton_function'
+export const eraseFunctionBtn = '#eraseButton_function'
 
 //Function Add Argument
 export const argumentNameInputBox = '#inputArgumentName'
@@ -115,7 +117,7 @@ export const attributeCancelBtn = '#Cancel_button'
 //Function Edit and Delete Arguments
 export const functionLeftListOptions = '#funcListBox > option'
 export const editFunction = 'div > table > tbody > tr > :nth-child(1) > .btn > .fa'
-export const deleteFunction = 'div > table > tbody > tr > :nth-child(2) > .btn > .fa'
+export const deleteFunctionArgument = 'div > table > tbody > tr > :nth-child(2) > .btn > .fa'
 export const functionLeftList = '#funcListBox'
 
 //CQL Library Editor

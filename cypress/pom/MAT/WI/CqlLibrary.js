@@ -36,6 +36,7 @@ export const shareRecentActivityBtn = '#recentActivitySummary_gridToolbar > [ari
 export const deleteRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Delete library"]'
 export const createVersionRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
 export const createDraftRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
+export const convertToFHIRRecentActivityBtn = '#recentActivitySummary_gridToolbar > [aria-label="Recent Activity Convert"]'
 
 // Library search columns
 export const cqlLibrarySearchTable = '#cqlCellTablePanel_VerticalPanel > .cellTablePanel > :nth-child(1) > :nth-child(7) > [align="left"]'
