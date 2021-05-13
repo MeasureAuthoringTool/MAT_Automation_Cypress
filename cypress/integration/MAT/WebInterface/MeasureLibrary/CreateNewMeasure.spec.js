@@ -2,17 +2,17 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
+import * as login from '../../../../support/MAT/Login'
 
 let name = ''
 
 describe('Measure Library: Create New Measure: Generate CMS ID', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('QDM Measure: Generate CMS ID Only', () => {
 

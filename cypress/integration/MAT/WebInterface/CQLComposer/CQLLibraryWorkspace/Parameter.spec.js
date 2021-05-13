@@ -2,16 +2,16 @@ import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
 import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhircqlLibrary = ''
 let qdmcqlLibrary = ''
 
 describe('CQL Composer: CQL Library Workspace: Parameter', () => {
   before('Login, Data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -22,10 +22,10 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -34,7 +34,7 @@ describe('CQL Composer: CQL Library Workspace: Parameter', () => {
     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('QDM: Verify errors are coming from correct source', () => {
     helper.verifySpinnerAppearsAndDissappears()

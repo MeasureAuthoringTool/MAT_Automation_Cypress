@@ -55,7 +55,7 @@ export const matLogin = (user) => {
       win.sessionStorage.clear()
     })
     login()
-    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch, 100000)
     helper.loginUMLS()
   } else if (user === 'alternative') {
     cy.clearCookies()
@@ -106,7 +106,7 @@ export const login = (un, pw) => {
     pw = password
   }
 
-  helper.visibleWithTimeout(loginUI.usernameInput, 200000)
+  helper.visibleWithTimeout(loginUI.usernameInput, 400000)
   cy.get(loginUI.usernameInput).type(un)
   cy.get(loginUI.passwordInput).type(pw)
 

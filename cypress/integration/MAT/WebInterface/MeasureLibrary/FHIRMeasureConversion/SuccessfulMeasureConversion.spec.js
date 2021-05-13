@@ -1,22 +1,21 @@
 import * as helper from '../../../../../support/helpers'
 import * as measureLibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as measureLibraryHelper from '../../../../../support/MAT/MeasureLibraryHelper'
+import * as login from '../../../../../support/MAT/Login'
 
 let measureName = ''
 
+
+//these test cases are tied together and need to be run sequentialy
+
 describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHIR', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
-    measureLibraryHelper.deleteMeasure(measureName + 'FHIR')
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('Convert QDM Measure to FHIR successfully', () => {
@@ -37,8 +36,17 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
     measureLibraryHelper.convertMeasureToFHIRAndVerify(measureName)
   })
 
-  it('Verify FHIR reconversion and Measure history', () => {
-    gridRowActions.selectRow(measureLibrary.row2MeasureSearch)
+
+  it('Verify FHIR reconversion and Measure history, Delete converted FHIR Measure and reconvert', () => {
+
+    helper.enabledWithTimeout(measureLibrary.searchInputBox, 200000)
+    helper.enterText(measureLibrary.searchInputBox, measureName)
+    cy.get(measureLibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
+
     helper.disabledWithTimeout(measureLibrary.convertToFhirMeasureSearchBtn)
 
     cy.get(measureLibrary.editMeasureSearchBtn).should('be.visible')
@@ -57,9 +65,7 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
     cy.get(measureLibrary.returnToMeasureLibraryLink).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-  })
 
-  it('Verify QDM Measure reconversion and Measure history', () => {
     // Verify to see if reconversion is disabled
     gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
     helper.disabledWithTimeout(measureLibrary.convertToFhirMeasureSearchBtn)
@@ -73,9 +79,6 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
     cy.get(measureLibrary.returnToMeasureLibraryLink).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-  })
-
-  it('Delete converted FHIR Measure and reconvert', () => {
 
     measureLibraryHelper.deleteMeasure(measureName + 'FHIR')
 

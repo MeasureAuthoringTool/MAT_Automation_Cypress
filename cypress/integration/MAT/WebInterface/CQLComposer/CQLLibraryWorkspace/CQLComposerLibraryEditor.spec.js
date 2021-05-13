@@ -6,6 +6,7 @@ import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
@@ -13,13 +14,13 @@ let fhirCqlLibrary = ''
 
 describe('CQL Composer: CQL Editor message', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
 
   afterEach('Log Out', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
-    helper.logout()
+    login.matLogout()
   })
 
   it('QDM CQL Composer: Validate the success message on CQL Library Editor', () => {
@@ -166,14 +167,14 @@ describe('CQL Composer: CQL Editor message', () => {
 
 describe('FHIR CQL Composer: Add code directly on CQL Library Editor', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
   })
   after('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('FHIR: Validate the successful message when editing directly on CQL Library Editor', () => {
@@ -225,12 +226,12 @@ describe('FHIR CQL Composer: Add code directly on CQL Library Editor', () => {
 
 describe('FHIR CQL Composer: Add codesystems and valuesets in CQL Editor without UMLS', () => {
   beforeEach('Login', () => {
-    oktaLogin.loginWithoutUMLS()
+    login.loginWithoutUMLS()
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
     helper.verifySpinnerAppearsAndDissappears()
   })
   after('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Validate the error message for adding codesystems without UMLS', () => {
     helper.verifySpinnerAppearsAndDissappears()
@@ -271,14 +272,14 @@ describe('FHIR CQL Composer: Add codesystems and valuesets in CQL Editor without
 describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Errors, ability to save FHIR Libraries with errors ' +
   'and correct Error Messages are displayed', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
   })
   after('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Ability to save with CQL error or syntax error', () => {

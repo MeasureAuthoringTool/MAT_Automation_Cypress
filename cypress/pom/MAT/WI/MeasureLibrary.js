@@ -76,7 +76,9 @@ export const packageAndVersion = '#SaveAndContinueButton_measuVersion'
 export const cancelBtn = '#CancelButton_measuVersion'
 
 //warning dialog
-export const continueBtn = '#Yes_ConfirmDialogBox'
+export const continueBtn = '.btn-toolbar > [title="Continue"]'
+export const warningKeepBtn = '.btn-toolbar > [title="Yes"]'
+export const warningCancelBtn = '.btn-toolbar > [title="Cancel"]'
 
 //return to measure library
 export const returnToMeasureLibraryLink = ':nth-child(6) > td > .gwt-Anchor'
