@@ -1,7 +1,7 @@
 import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
+import * as login from '../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -10,7 +10,7 @@ let name = ''
 describe('Filter', () => {
   before('Login', () => {
 
-    oktaLogin.login()
+    login.matLogin()
 
     name = 'A' + Date.now()
 
@@ -20,11 +20,8 @@ describe('Filter', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
   after('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('QDM/CQL, FHIR/CQL or ALL', () => {
     helper.verifySpinnerAppearsAndDissappears()

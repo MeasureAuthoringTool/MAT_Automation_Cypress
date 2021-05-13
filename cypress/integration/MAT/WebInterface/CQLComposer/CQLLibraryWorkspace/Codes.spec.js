@@ -2,22 +2,22 @@ import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
 import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirLibrary = ''
 
 describe('CQLLibrary Workspace: Codes: Validate the system version', () => {
   before('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     fhirLibrary = dataCreation.createDraftCqlLibrary('FhirDraftLibrary', 'FHIR')
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -26,7 +26,7 @@ describe('CQLLibrary Workspace: Codes: Validate the system version', () => {
     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('FHIR Measure: Add correct version for code system', () => {

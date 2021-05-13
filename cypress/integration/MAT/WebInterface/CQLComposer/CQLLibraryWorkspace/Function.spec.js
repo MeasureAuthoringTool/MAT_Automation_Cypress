@@ -2,9 +2,9 @@ import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
 import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirLibrary = ''
 let qdmLibrary = ''
@@ -12,7 +12,7 @@ let qdmLibrary = ''
 describe('CQL Library: Function Argument Lightbox', () => {
 
   before('Login, data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -22,10 +22,10 @@ describe('CQL Library: Function Argument Lightbox', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -34,7 +34,7 @@ describe('CQL Library: Function Argument Lightbox', () => {
     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('QDM Library: Validate the classes on Function Argument Lightbox', () => {
@@ -169,7 +169,7 @@ describe('CQL Library: Function Argument Lightbox', () => {
 describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
   before('Login, data Creation', () => {
-    oktaLogin.login()
+    login.matLogin()
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -182,7 +182,7 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
     helper.logout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -191,7 +191,7 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
     helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('QDM Library: Validate the classes on Function Insert Attribute Lightbox', () => {
@@ -277,6 +277,8 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
     cy.get(cqlComposer.selectAttributesDataType).select('Encounter.Diagnosis')
       .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
+
+    cy.get(cqlComposer.selectAttributesDataType).select('Encounter.Diagnosis')
 
     cy.get(cqlComposer.attributeCancelBtn).click()
 

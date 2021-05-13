@@ -2,16 +2,16 @@ import * as helper from '../../../../support/helpers'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createnewcompositemeasure from '../../../../pom/MAT/WI/CreateNewCompositeMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let measureNameOne = ''
 let measureNameTwo = ''
 
 describe('Measure Library: Composite Measure', () => {
   before('data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     measureNameOne = dataCreation.createDraftMeasure('QdmCqlMeasureOne', 'QDM')
     measureNameTwo = dataCreation.createDraftMeasure('QdmCqlMeasureTwo', 'QDM')
@@ -19,7 +19,7 @@ describe('Measure Library: Composite Measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -242,7 +242,7 @@ describe('Measure Library: Composite Measure', () => {
 
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Create Composite measure successfully', () => {
@@ -452,17 +452,11 @@ describe('Measure Library: Composite Measure', () => {
 })
 
 describe('Validate FHIR model for Composite measure', () => {
-  before('Login', () => {
-    oktaLogin.login()
-
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('Verify that the FHIR model is not accessible for Composite Measure', () => {
@@ -479,6 +473,8 @@ describe('Validate FHIR model for Composite measure', () => {
 
     cy.get(measurelibrary.searchInputBox).type('createCompositeMeasure', { delay: 50 })
     cy.get(measurelibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(measurelibrary.row1MeasureSearchName).should('contain.text', 'createCompositeMeasure')
     cy.get(measurelibrary.row1MeasureSearchCheckbox).check({ force: true })

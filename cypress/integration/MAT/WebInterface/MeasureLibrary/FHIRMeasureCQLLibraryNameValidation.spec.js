@@ -1,9 +1,9 @@
 import * as helper from '../../../../support/helpers'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as createNewMeasure from '../../../../pom/MAT/WI/createNewMeasure'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let firstCharacterLowerCase = ''
 let firstCharacterUnderscore = ''
@@ -18,11 +18,11 @@ let fieldLevelError = ' Invalid Library Name. Library names must start with an u
 describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Validate the FHIR CQL Library name requirement: Incorrect First character', () => {
@@ -157,11 +157,11 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 describe('Measure Conversion with incorrect CQL Library name format', () => {
 
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('CQL Library name format: Validate the incorrect error message on CQL Workspace', () => {

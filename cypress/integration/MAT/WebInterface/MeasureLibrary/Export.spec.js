@@ -3,18 +3,18 @@ import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreat
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let measureName = 'PrimaryCariesPreventionIntervention' + Date.now()
 
 describe('FHIR Measure: Export', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Regular User: Validate the Export UI for FHIR Measure', () => {
 

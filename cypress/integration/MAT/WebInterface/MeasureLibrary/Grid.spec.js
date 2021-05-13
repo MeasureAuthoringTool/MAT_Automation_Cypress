@@ -4,8 +4,8 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let measureName = ''
 let draftMeasure = ''
@@ -15,7 +15,7 @@ let fhirMeasure = ''
 
 describe('Measure Library: Grid: Row Selection', () => {
   before('Login, Data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     //creating new draft measure
     draftMeasure = dataCreation.createDraftMeasure()
@@ -23,14 +23,14 @@ describe('Measure Library: Grid: Row Selection', () => {
     //creating new versioned measure
     versionMeasure = dataCreation.createMajorVersionMeasure()
 
-    helper.logout()
+    login.matLogout()
 
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Recent Activity: Row Selection', () => {
 
@@ -119,7 +119,7 @@ describe('Measure Library Recent Activity Grid', () => {
   before('Login', () => {
     versionMeasureNotOwner = dataCreation.loginCreateVersionedMeasureNotOwnerLogout()
 
-    oktaLogin.login()
+    login.matLogin()
 
     //creating new draft measure
     draftMeasure = dataCreation.createDraftMeasure()
@@ -128,12 +128,14 @@ describe('Measure Library Recent Activity Grid', () => {
     versionMeasure = dataCreation.createMajorVersionMeasure()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraft', 'FHIR')
+
+    login.matLogout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Log Out', () => {
+    login.matLogin()
   })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('Enabled/Disabled Recent Activity Not The Owner', () => {
@@ -169,8 +171,6 @@ describe('Measure Library Recent Activity Grid', () => {
     helper.enabled(measurelibrary.runFhirValidationRecentActivityBtn)
     helper.disabled(measurelibrary.convertToFhirRecentActivityBtn)
 
-    //need to figure out export, either have to package a measure or have ability to look up a packaged measure in DB
-    //cvasile 11/27/2019
 
     cy.get(measurelibrary.row1RecentActivity).click()
 
@@ -283,7 +283,8 @@ describe('Measure Library Recent Activity Grid', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    //gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.row1RecentActivity).click()
 
     cy.get(measurelibrary.createVersionRecentActivityBtn).click()
 
@@ -328,7 +329,8 @@ describe('Measure Library Recent Activity Grid', () => {
   })
   it('Recent Activity Button bar History', () => {
 
-    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.row1RecentActivity).click()
+    //gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
     cy.get(measurelibrary.historyRecentActivityBtn).click()
 
@@ -410,7 +412,8 @@ describe('Measure Library Recent Activity Grid', () => {
 
   it('Recent Activity Button bar Share', () => {
 
-    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.row1RecentActivity).click()
+    //gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
     cy.get(measurelibrary.shareRecentActivityBtn).click()
 
@@ -423,7 +426,8 @@ describe('Measure Library Recent Activity Grid', () => {
 
   it('Recent Activity Button bar Clone', () => {
 
-    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.row1RecentActivity).click()
+    //gridRowActions.selectRow(measurelibrary.row1RecentActivity)
 
     cy.get(measurelibrary.cloneRecentActivityEnabledBtn).click()
 
@@ -443,7 +447,7 @@ describe('Measure Library Grid Button Bar', () => {
 
     versionMeasureNotOwner = dataCreation.loginCreateVersionedMeasureNotOwnerLogout()
 
-    oktaLogin.login()
+    login.matLogin()
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -461,12 +465,14 @@ describe('Measure Library Grid Button Bar', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    login.matLogout()
+
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Log Out', () => {
+    login.matLogin()
   })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('Enabled/Disabled Measure Search Table Not The Owner', () => {

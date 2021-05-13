@@ -1,28 +1,28 @@
 import * as helper from '../../../../support/helpers'
 import * as dataCreation from '../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Library: Measure Sharing', () => {
   before('Login, Data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Sharing QDM Measure', () => {
 

@@ -2,17 +2,17 @@ import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
 import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhircqlLibrary = ''
 
 describe('CQL Composer: Validate the components on General Information page', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  beforeEach('Login', () => {
+    login.matLogin()
 
     cy.get(measurelibrary.cqlLibraryTab).click()
 
@@ -22,11 +22,8 @@ describe('CQL Composer: Validate the components on General Information page', ()
 
     helper.verifySpinnerAppearsAndDissappears()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
   it('FHIR: Verify the General Information components and required meta data', () => {
     helper.verifySpinnerAppearsAndDissappears()

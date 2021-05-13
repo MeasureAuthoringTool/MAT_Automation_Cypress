@@ -1,10 +1,10 @@
 import * as helper from '../../../../support/helpers'
-import * as oktaLogin from '../../../../support/oktaLogin'
 import * as createNewMeasure from '../../../../pom/MAT/WI/createNewMeasure'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
+import * as login from '../../../../support/MAT/Login'
 
 let name = ''
 let cqlLibraryName = ''
@@ -13,14 +13,12 @@ let nameWithUnderscore = ''
 describe('FHIR Measure: Validate the naming rules', () => {
 
   before('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
+
   after('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Validate the FHIR measure name requirement: Error message for underscore', () => {
@@ -57,14 +55,12 @@ describe('FHIR Measure: Validate the naming rules', () => {
 describe('Measure Conversion with incorrect measure name format', () => {
 
   before('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
+
   after('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Fhir measure name format: Validate the incorrect error message on measure details page', () => {
@@ -146,14 +142,11 @@ describe('Measure Conversion with incorrect measure name format', () => {
 describe('Measure Conversion with incorrect measure name and CQL library name format', () => {
 
   before('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
 
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
   after('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Fhir measure name format: Validate the incorrect error message on measure details page', () => {

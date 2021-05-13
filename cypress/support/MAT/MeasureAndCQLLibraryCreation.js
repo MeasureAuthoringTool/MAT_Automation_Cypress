@@ -8,25 +8,26 @@ import * as createNewCqlLibrary from '../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from '../../pom/MAT/WI/CQLComposer'
 import * as measureDetails from '../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from './GridRowActions'
+import * as login from './Login'
 
 const draftMeasure = 'DraftMeasure'
 
 export const loginCreateVersionedMeasureNotOwnerLogout = () => {
-  oktaLogin.login('alternative')
+  login.matLogin('alternative')
 
   const name = createMajorVersionMeasure()
 
-  helper.logout()
+  login.matLogout()
 
   return name
 }
 
 export const loginCreateDraftCqlLibraryNotOwnerLogout = () => {
-  oktaLogin.login('alternative')
+  login.matLogin('alternative')
 
   const name = createDraftCqlLibrary()
 
-  helper.logout()
+  login.matLogout()
 
   return name
 }
