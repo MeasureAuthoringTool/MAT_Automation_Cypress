@@ -5,7 +5,6 @@ import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
 import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
-import { codeDeleteBtn, deleteConfirmationYes, warningMessage } from '../../../../../pom/MAT/WI/MeasureComposer'
 
 let fhirMeasure = ''
 
