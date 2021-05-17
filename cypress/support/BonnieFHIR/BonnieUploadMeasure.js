@@ -29,10 +29,10 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn, i
 
   helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
   helper.visibleWithTimeout(importMeasureDialog.importLoadBtn)
-  helper.visibleWithTimeout(importMeasureDialog.fileImportInput)
+  //helper.visibleWithTimeout(importMeasureDialog.fileImportInput)
 
   //upload the file to the modal
-  helper.enabledWithTimeout(importMeasureDialog.fileImportInput)
+  //helper.enabledWithTimeout(importMeasureDialog.fileImportInput)
   cy.get(importMeasureDialog.fileImportInput).attachFile(fileToUpload)
 
   if (vsacLoggedIn === true) {
@@ -69,10 +69,10 @@ export const UpdateMeasure = (fileToUpload) => {
 
   helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
   helper.visibleWithTimeout(importMeasureDialog.importLoadBtn)
-  helper.visibleWithTimeout(importMeasureDialog.fileImportInput)
+  //helper.visibleWithTimeout(importMeasureDialog.fileImportInput)
 
   //upload the file to the modal
-  helper.enabledWithTimeout(importMeasureDialog.fileImportInput)
+  //helper.enabledWithTimeout(importMeasureDialog.fileImportInput)
   cy.get(importMeasureDialog.fileImportInput).attachFile(fileToUpload)
 
   //click load button to import the measure

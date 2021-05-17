@@ -191,7 +191,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.selectMeasureCheckbox)
 
     helper.verifySpinnerAppearsAndDissappears()
 
