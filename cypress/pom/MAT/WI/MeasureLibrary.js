@@ -22,8 +22,9 @@ export const row2RecentActivity = '#MostRecentActivityCellTable [__gwt_row="1"]'
 export const row2RecentActivityCheckbox = '#MostRecentActivityCellTable [__gwt_row="1"] input'
 
 //All Measures Grid
-//Measure Search Table
-export const row1MeasureSearch = '#MeasureSearchCellTable [__gwt_row="0"]'
+//Measure Search TableA
+//export const row1MeasureSearch = '#MeasureSearchCellTable [__gwt_row="0"]'
+export const row1MeasureSearch = 'td > .form-control'
 export const row2MeasureSearch = '#MeasureSearchCellTable [__gwt_row="1"]'
 export const row3MeasureSearch = '#MeasureSearchCellTable [__gwt_row="2"]'
 export const row1MeasureSearchCheckbox = '#MeasureSearchCellTable [__gwt_row="0"] input'
@@ -34,6 +35,8 @@ export const row1MeasureSearchName = '#MeasureSearchCellTable [__gwt_row="0"] .p
 export const row2MeasureSearchName = '#MeasureSearchCellTable [__gwt_row="1"] .pull-left'
 export const row1Models = '#MeasureSearchCellTable [__gwt_row="0"] > .GB-MJYKBGJ'
 export const row2Models = '#MeasureSearchCellTable [__gwt_row="1"] > .GB-MJYKBGJ'
+//export const selectMeasure = 'GB-MJYKBMI > div > input'
+export const selectMeasureCheckbox = '#MeasureSearchCellTable > tbody:nth-child(3) > tr > td.GB-MJYKBJI.GB-MJYKBLI.GB-MJYKBMI > div > input[type=checkbox]'
 
 //Recent Activity Button Bar
 export const createVersionDraftRecentActivityBtn = '#MostRecentActivityCellTable_gridToolbar > [aria-label="Recent Activity Create version or draft"]'
@@ -109,6 +112,7 @@ export const exportOptionList = '#exportTab > :nth-child(1) > :nth-child(6) > tb
 export const saveExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Save"]'
 export const openExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Open"]'
 export const cancelExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Cancel"]'
+export const hqmfExport = ':nth-child(3) > td > .gwt-RadioButton'
 
 // History UI
 export const historyGrid = '#HistorySearchCellTable'
