@@ -1,25 +1,26 @@
 import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('CQL Editor: Validate the Valueset Format', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  before('Data Setup', () => {
+    login.matLogin()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
+    login.matLogout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('FHIR Measure: Valueset Format', () => {
@@ -59,17 +60,18 @@ describe('CQL Editor: Validate the Valueset Format', () => {
 })
 
 describe('Measure Composer:CQLWorkspace: Add Value Sets', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  before('Data Setup', () => {
+    login.matLogin()
 
     qdmMeasure = dataCreation.createDraftMeasure('QDmDraftMeasure', 'QDM')
 
+    login.matLogout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('QDM Measure: Add Draft Value Set successfully', () => {

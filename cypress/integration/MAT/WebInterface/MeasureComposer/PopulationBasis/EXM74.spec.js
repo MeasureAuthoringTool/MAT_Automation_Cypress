@@ -6,16 +6,14 @@ import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Care Providers, including Dentists', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
   it('Primary Caries Prevention Intervention as Offered by Primary Care Providers, including Dentists, creation, grouping, and packaging', () => {
 
@@ -262,14 +260,15 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
     cy.get(measurelibrary.packageAndVersion).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.warningKeepBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
     // Create First Draft Measure
-    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
-    cy.get(measurelibrary.createDraftMeasureSearchBtn).click()
+    helper.visibleWithTimeout(measurelibrary.row1RecentActivity, 20000)
+    gridRowActions.selectRow(measurelibrary.row1RecentActivity)
+    cy.get(measurelibrary.createDraftRecentActivityBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 

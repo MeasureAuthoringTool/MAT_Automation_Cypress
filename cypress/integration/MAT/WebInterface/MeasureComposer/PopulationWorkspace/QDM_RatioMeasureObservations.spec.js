@@ -1,18 +1,17 @@
 import * as helper from '../../../../../support/helpers'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
-import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let measureName = ''
 
 describe('MeasureComposer: QDM Ratio Measure Observation', () => {
     before('Data Setup', () => {
 
-        oktaLogin.login()
+        login.matLogin()
 
         measureName = dataCreation.createDraftMeasure('QDMRatioFunctions', 'QDM', 'Ratio')
 
@@ -20,14 +19,14 @@ describe('MeasureComposer: QDM Ratio Measure Observation', () => {
 
         AddFunctions()
 
-        helper.logout()
+        login.matLogout()
 
     })
     beforeEach('Login', () => {
-        oktaLogin.login()
+        login.matLogin()
     })
     afterEach('Log Out', () => {
-        helper.logout()
+        login.matLogout()
     })
     it('Measure Observations: Patient Based: Verify the correct Functions appear in Function Dropdown based ' +
     'on Argument number', () => {

@@ -23,8 +23,7 @@ export const row2RecentActivityCheckbox = '#MostRecentActivityCellTable [__gwt_r
 
 //All Measures Grid
 //Measure Search TableA
-//export const row1MeasureSearch = '#MeasureSearchCellTable [__gwt_row="0"]'
-export const row1MeasureSearch = 'td > .form-control'
+export const row1MeasureSearch = '#MeasureSearchCellTable [__gwt_row="0"]'
 export const row2MeasureSearch = '#MeasureSearchCellTable [__gwt_row="1"]'
 export const row3MeasureSearch = '#MeasureSearchCellTable [__gwt_row="2"]'
 export const row1MeasureSearchCheckbox = '#MeasureSearchCellTable [__gwt_row="0"] input'
@@ -80,7 +79,7 @@ export const cancelBtn = '#CancelButton_measuVersion'
 
 //warning dialog
 export const continueBtn = '.btn-toolbar > [title="Continue"]'
-export const warningKeepBtn = '.btn-toolbar > [title="Yes"]'
+export const warningKeepBtn = '#Yes_ConfirmDialogBox'
 export const warningCancelBtn = '.btn-toolbar > [title="Cancel"]'
 
 //return to measure library

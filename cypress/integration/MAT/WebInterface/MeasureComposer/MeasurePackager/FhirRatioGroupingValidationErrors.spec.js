@@ -1,19 +1,18 @@
 import * as helper from '../../../../../support/helpers'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
+import * as login from '../../../../../support/MAT/Login'
 
-//let measureName = ''
 
 describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Validate the Grouping Error Messages for Ratio FHIR Measure', () => {

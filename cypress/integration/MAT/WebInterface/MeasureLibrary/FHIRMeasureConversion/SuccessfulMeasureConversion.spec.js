@@ -58,7 +58,7 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
     helper.visibleWithTimeout(measureLibrary.historyRow2)
 
     cy.get(measureLibrary.historyGrid).should('contain.text', 'Converted QDM/CQL to FHIR')
-    cy.get(measureLibrary.historyGrid).should('contain.text', measureName+'FHIR'+' measure was converted from '+measureName+ ' Version v1.0')
+    cy.get(measureLibrary.historyGrid).should('contain.text', 'Measure Versioned')
     cy.get(measureLibrary.historyGrid).should('contain.text', 'Measure Created')
 
 

@@ -3,24 +3,24 @@ import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 
 describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
   before('Login, Data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('FHIR Measure: Validate the successful when editing directly on CQL Library Editor', () => {

@@ -2,7 +2,7 @@ import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
-import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as login from '../../../../../support/MAT/Login'
 
 let measureName = ''
 let today = new Date()
@@ -12,10 +12,10 @@ let yyyy = today.getFullYear()
 
 describe('Measure Composer: Measure Details: Save Data', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Verify all Measure Details data is saved correctly', () => {
 
@@ -339,8 +339,8 @@ describe('Measure Composer: Measure Details: Save Data', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
-    oktaLogin.login()
+    login.matLogout()
+    login.matLogin()
 
     cy.get(measurelibrary.row1RecentActivity).dblclick()
 
