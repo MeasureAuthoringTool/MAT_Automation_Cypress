@@ -1,9 +1,9 @@
 import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let fhirVersionMeasure = ''
@@ -12,15 +12,15 @@ let qdmVersionMeasure = ''
 
 describe('Measure Composer: Measure Details: FHIR Measure Deletion', () => {
   before('Prepare data', () => {
-    oktaLogin.login()
+    login.matLogin()
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogin()
   })
 
   it('Validate the Fhir draft measure deletion', () => {
@@ -61,6 +61,10 @@ describe('Measure Composer: Measure Details: FHIR Measure Deletion', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    cy.get(measurelibrary.warningKeepBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
     helper.enterText(measurelibrary.searchInputBox, fhirVersionMeasure)
     cy.get(measurelibrary.searchBtn).click()
 
@@ -81,17 +85,16 @@ describe('Measure Composer: Measure Details: FHIR Measure Deletion', () => {
 
 describe('Measure Composer: Measure Details: QDM Measure Deletion', () => {
   before('Prepare Data', () => {
-    oktaLogin.login()
+    login.matLogin()
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
-
   it('Validate the QDM draft measure deletion', () => {
 
     helper.enterText(measurelibrary.searchInputBox, qdmMeasure)

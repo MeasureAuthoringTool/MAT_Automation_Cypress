@@ -2,19 +2,16 @@ import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
-import * as oktaLogin from '../../../../../support/oktaLogin'
+import * as login from '../../../../../support/MAT/Login'
 
 let measureName = ''
 
 describe('Measure Composer: Measure Details: References', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
-  })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
   it('Verify Reference Type', () => {
 

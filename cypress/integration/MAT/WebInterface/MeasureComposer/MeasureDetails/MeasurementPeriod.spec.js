@@ -4,24 +4,25 @@ import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Composer: Measure Details: Validate the Measure Period without Data changes', () => {
   before('Login, Data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('FHIR Measure: Validate the default behavior and next calendar year', () => {

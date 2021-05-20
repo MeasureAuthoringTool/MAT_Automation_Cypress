@@ -1,25 +1,25 @@
 import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 
 describe('Measure Composer: CQLWorkspace: Codes: Validate the system version', () => {
   before('Log Out', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('FHIR Measure: Add correct version for code system', () => {

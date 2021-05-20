@@ -2,8 +2,8 @@ import * as helper from '../../../../../support/helpers'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -11,11 +11,11 @@ let qdmMeasure = ''
 describe('Measure Composer: Function Argument Lightbox', () => {
 
     beforeEach('Login', () => {
-        oktaLogin.login()
+      login.matLogin()
     })
 
     afterEach('Log Out', () => {
-        helper.logout()
+      login.matLogout()
     })
 
     it('QDM Measure: Validate the classes on Function Argument Lightbox', () => {
@@ -147,11 +147,11 @@ describe('Measure Composer: Function Argument Lightbox', () => {
 describe('Measure Composer: Function Insert Attribute Lightbox', () => {
 
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
 
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('QDM Measure: Validate the classes on Function Insert Attribute Lightbox', () => {
@@ -187,6 +187,9 @@ describe('Measure Composer: Function Insert Attribute Lightbox', () => {
     cy.get(measureComposer.selectAttributesDataType).select('Substance, Not Recommended')
       .invoke('val').should('deep.equal', 'Substance, Not Recommended')
 
+    cy.get(measureComposer.selectAttributesDataType).select('Care Goal')
+
+    cy.get(measureComposer.attributeCancelBtn).click()
     cy.get(measureComposer.attributeCancelBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -236,6 +239,8 @@ describe('Measure Composer: Function Insert Attribute Lightbox', () => {
 
     cy.get(measureComposer.selectAttributesDataType).select('Encounter.Diagnosis')
       .invoke('val').should('deep.equal', 'Encounter.Diagnosis')
+
+    cy.get(measureComposer.selectAttributesDataType).select('Encounter.Diagnosis')
 
     cy.get(measureComposer.attributeCancelBtn).click()
 

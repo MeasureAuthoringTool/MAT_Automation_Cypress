@@ -1,25 +1,25 @@
 import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let qdmMeasure = ''
 
 describe('Measure Composer: CQL Workspace: New Measure', () => {
   before('Login, data Creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     qdmMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'QDM')
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('QDM Measure: Validate no errors are displayed on a new measure after clicking save', () => {

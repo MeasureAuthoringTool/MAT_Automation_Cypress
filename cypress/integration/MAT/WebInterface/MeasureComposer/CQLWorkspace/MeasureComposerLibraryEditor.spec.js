@@ -1,10 +1,10 @@
 import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -12,21 +12,21 @@ let qdmMeasure = ''
 describe('Measure: CQL Editor message', () => {
   before('Login, Data creation', () => {
 
-    oktaLogin.login()
+    login.matLogin()
 
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
 
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('QDM Measure: Validate the error message on CQL Editor', () => {
@@ -112,17 +112,17 @@ describe('Measure: CQL Editor message', () => {
 
 describe('FHIR Measure: Version error message', () => {
   before('Login, Data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-    helper.logout()
+    login.matLogout()
   })
-  beforeEach('Preserve Cookies', () => {
-    oktaLogin.login()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('FHIR Measure: Invalid version error message on CQL Editor', () => {
@@ -168,17 +168,17 @@ describe('FHIR Measure: Version error message', () => {
 
 describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
   before('Login, Data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('FHIR Measure: Validate the successful when editing directly on CQL Library Editor', () => {
@@ -222,17 +222,17 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
 describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
   before('Login, Data Creation', () => {
-    oktaLogin.loginWithoutUMLS()
+    login.loginWithoutUMLS()
     fhirMeasure = dataCreation.createDraftMeasure('FhirMeasure', 'FHIR')
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.loginWithoutUMLS()
+    login.loginWithoutUMLS()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('Validate the error message for adding codesystems and valuesets without UMLS', () => {

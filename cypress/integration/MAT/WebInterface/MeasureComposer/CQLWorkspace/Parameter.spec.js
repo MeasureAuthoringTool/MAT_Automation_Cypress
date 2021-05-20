@@ -1,27 +1,27 @@
 import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Composer: CQL Workspace: Parameter', () => {
   before('Login, Data creation', () => {
-    oktaLogin.login()
+    login.matLogin()
 
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('QDM: Verify errors are coming from correct source', () => {
 

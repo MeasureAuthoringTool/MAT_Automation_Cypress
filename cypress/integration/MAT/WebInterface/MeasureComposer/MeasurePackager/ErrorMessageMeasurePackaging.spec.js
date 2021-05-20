@@ -1,29 +1,30 @@
 import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCreation'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import * as login from '../../../../../support/MAT/Login'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
 
 describe('Measure Packager: Validate before packaging a FHIR measure', () => {
-  before('Login', () => {
-    oktaLogin.login()
+  before('Data Setup', () => {
+    login.matLogin()
 
     qdmMeasure = dataCreation.createDraftMeasure('QdmDraftMeasure', 'QDM')
     fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    login.matLogout()
   })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  beforeEach('Login', () => {
+    login.matLogin()
   })
-  after('Log Out', () => {
-    helper.logout()
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('QDM Measure: Validate cql error message on measure packager page', () => {
@@ -102,35 +103,50 @@ describe('Measure Packager: Validate before packaging a FHIR measure', () => {
 })
 
 describe('Measure Packager: Validate the error message for details requirement', () => {
-  before('Login', () => {
-    oktaLogin.login()
 
-  })
-  beforeEach('Preserve Cookies', () => {
-    helper.preserveCookies()
+  before('Data Setup', () => {
+
+    login.matLogin()
 
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
-    let measureName = 'CreateFhirCohortMeasure' + Date.now()
+    fhirMeasure = 'CreateFhirCohortMeasure' + Date.now()
 
-    cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
+    cy.get(createNewMeasure.measureName).type(fhirMeasure, { delay: 50 })
     cy.get(createNewMeasure.modelradioFHIR).click()
-    cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
-    cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
+    cy.get(createNewMeasure.cqlLibraryName).type(fhirMeasure, { delay: 50 })
+    cy.get(createNewMeasure.shortName).type(fhirMeasure, { delay: 50 })
     cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
     cy.get(createNewMeasure.patientBasedMeasureListBox).select('Yes')
 
     cy.get(createNewMeasure.saveAndContinueBtn).click()
 
     cy.get(createNewMeasure.confirmationContinueBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    login.matLogout()
   })
-  after('Log Out', () => {
-    helper.logout()
+  beforeEach('Login', () => {
+    login.matLogin()
+
+  })
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('FHIR Measure: Validate error message for missing meta data', () => {
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+    cy.get(measurelibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
 
     helper.verifySpinnerAppearsAndDissappears()
 

@@ -3,15 +3,15 @@ import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCr
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
+import * as login from '../../../../../support/MAT/Login'
 
 describe('EXM104: Discharged on Antithrombotic Therapy', () => {
   beforeEach('Login', () => {
-    oktaLogin.login()
+    login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
   it('Discharged on Antithrombotic Therapy, creation, grouping, and packaging', () => {
 
@@ -110,25 +110,21 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    //dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.201')
     dataCreation.addValueSet('1.3.6.1.4.1.33895.1.3.0.45')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.207')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.209')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.292')
-    dataCreation.addValueSet('2.16.840.1.114222.4.11.837')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.212')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.247')
+    dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.215')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.308')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.473')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.424')
-    dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.143')
-    dataCreation.addValueSet('2.16.840.1.113762.1.4.1')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.309')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.93')
-    dataCreation.addValueSet('2.16.840.1.114222.4.11.3591')
-    dataCreation.addValueSet('2.16.840.1.114222.4.11.836')
-    dataCreation.addValueSet('2.16.840.1.113762.1.4.1110.39')
+    dataCreation.addValueSet('2.16.840.1.113762.1.4.1110.42')
+    dataCreation.addValueSet('2.16.840.1.113762.1.4.1110.19')
 
     // Codes
 
@@ -144,57 +140,67 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+
     dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
 
-    dataCreation.addDefinition('Denominator Exception', '"Encounter With No Antithrombotic At Discharge"\n' +
-      '\tunion "Encounter With Ticagrelor at Discharge"')
+    dataCreation.addDefinition('Denominator Exceptions', '(\n' +
+      '      TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+      '      \twith "Statin Not Given at Discharge" NoDischargeStatin\n' +
+      '      \t\tsuch that NoDischargeStatin.authoredOn during day of IschemicStrokeEncounter.period\n' +
+      '  \t) union\n' +
+      '  \t (\n' +
+      '       TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+      '  \t\t   with "Statin Allergy" StatinAllergy\n' +
+      '  \t\t\t    such that Global."Normalize Interval"(StatinAllergy.onset) starts on or before end of IschemicStrokeEncounter.period\n' +
+      '      ) union\n' +
+      '        "Encounter with Max LDL less than 70 mg per dL"')
 
-    dataCreation.addDefinition('Denominator Exclusion', 'TJC."Ischemic Stroke Encounters with Discharge Disposition"\n' +
-      '\tunion TJC."Comfort Measures during Hospitalization"')
+    dataCreation.addDefinition('Denominator Exclusions', 'TJC."Ischemic Stroke Encounters with Discharge Disposition"\n' +
+      '  \t\tunion TJC."Comfort Measures during Hospitalization"')
 
-    dataCreation.addDefinition('Antithrombotic Not Given at Discharge', '["MedicationRequest": medication in "Antithrombotic Therapy"] NoAntithromboticDischarge\n' +
-      '            where NoAntithromboticDischarge.doNotPerform is true\n' +
-      '              and ( NoAntithromboticDischarge.reasonCode in "Medical Reason"\n' +
-      '                  or NoAntithromboticDischarge.reasonCode in "Patient Refusal"\n' +
-      '              )\n' +
-      '                  //Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-      '              and exists ( NoAntithromboticDischarge.category C\n' +
-      '                  where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-      '                    or FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-      '              )\n' +
-      '              and NoAntithromboticDischarge.status = \'completed\'\n' +
-      '              and NoAntithromboticDischarge.intent = \'order\'')
+    dataCreation.addDefinition('Encounter with Max LDL less than 70 mg per dL', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+      '  \t\twhere Max(\n' +
+      '          ["Observation": "LDL-c"] Ldl\n' +
+      '  \t\t\t\t    where Ldl.status in { \'final\', \'amended\' }\n' +
+      '                and Ldl.issued during Interval[IschemicStrokeEncounter.period.start - 30 days, IschemicStrokeEncounter.period.end]\n' +
+      '  \t\t\t\treturn Ldl.value as Quantity\n' +
+      '  \t\t) < 70 \'mg/dL\'')
+
+    dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+
+    dataCreation.addDefinition('Intervention Comfort Measures', '["ServiceRequest": "Comfort Measures"]\n' +
+      '      union ["Procedure": "Comfort Measures"]')
 
     dataCreation.addDefinition('Numerator', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-      '\twith "Antithrombotic Therapy at Discharge" DischargeAntithrombotic\n' +
-      '\tsuch that DischargeAntithrombotic.authoredOn during Global."Normalize Interval"( IschemicStrokeEncounter.period )')
+      '  \t\twith "Statin at Discharge" DischargeStatin\n' +
+      '  \t\t\tsuch that DischargeStatin.authoredOn during day of Global."Normalize Interval"(IschemicStrokeEncounter.period)')
 
-    dataCreation.addDefinition('Antithrombotic Therapy at Discharge', '  ["MedicationRequest": medication in "Antithrombotic Therapy"] Antithrombotic\n' +
-      '              //Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-      '            where exists ( Antithrombotic.category C\n' +
-      '                where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-      '                  or FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-      '            )\n' +
-      '              and Antithrombotic.status in {{} \'active\', \'completed\' }\n' +
-      '              and Antithrombotic.intent.value = \'order\'')
+    dataCreation.addDefinition('Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+      '      with "Pharmacological Contraindications for Antithrombotic Therapy at Discharge" DischargePharmacological\n' +
+      '        such that DischargePharmacological.authoredOn during IschemicStrokeEncounter.period')
 
-    dataCreation.addDefinition('Encounter With No Antithrombotic At Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-      '      with "Antithrombotic Not Given at Discharge" NoDischargeAntithrombotic\n' +
-      '        such that NoDischargeAntithrombotic.authoredOn during IschemicStrokeEncounter.period')
+    dataCreation.addDefinition('Numerator', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
+      '  \t\twith "Antithrombotic Therapy at Discharge" DischargeAntithrombotic\n' +
+      '  \t\t\tsuch that DischargeAntithrombotic.authoredOn during Global."Normalize Interval"(IschemicStrokeEncounter.period)')
 
-    dataCreation.addDefinition('Encounter With Ticagrelor at Discharge', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
-      '      with "Ticagrelor Therapy at Discharge" DischargeTicagrelor\n' +
-      '        such that DischargeTicagrelor.authoredOn during IschemicStrokeEncounter.period')
+    dataCreation.addDefinition('Statin Allergy', '["AllergyIntolerance": "Statin Allergen"] StatinAllergy\n' +
+      '      where (StatinAllergy.clinicalStatus is null or FHIRHelpers.ToConcept(StatinAllergy.clinicalStatus) ~ Global."allergy-active")\n' +
+      '        and FHIRHelpers.ToConcept(StatinAllergy.verificationStatus) in { Global."allergy-unconfirmed", Global."allergy-confirmed" }')
 
-    dataCreation.addDefinition('Ticagrelor Therapy at Discharge', '  ["MedicationRequest": medication in TJC."Ticagrelor Therapy"] Ticagrelor\n' +
-      '                //Note: expressed as an or with equivalence semantics pending resolution of potential CQL issue.\n' +
-      '            where exists ( Ticagrelor.category C\n' +
-      '                where FHIRHelpers.ToConcept ( C ) ~ Global."Community"\n' +
-      '                  or FHIRHelpers.ToConcept ( C ) ~ Global."Discharge"\n' +
-      '            )\n' +
-      '              and Ticagrelor.status in {{} \'active\', \'completed\' }\n' +
-      '              and Ticagrelor.intent = \'order\'')
+    dataCreation.addDefinition('Statin at Discharge', '["MedicationRequest": medication in "Statin Grouper"] Statin\n' +
+      '      where exists (Statin.category C where FHIRHelpers.ToConcept(C) ~ Global."Community" or FHIRHelpers.ToConcept (C) ~ Global."Discharge")\n' +
+      '      and Statin.status in { \'active\', \'completed\' }\n' +
+      '      and Statin.intent = \'order\'')
+
+    dataCreation.addDefinition('Statin Not Given at Discharge', '["MedicationRequest": medication in "Statin Grouper"] NoStatin\n' +
+      '      where NoStatin.doNotPerform is true\n' +
+      '        and (\n' +
+      '          NoStatin.reasonCode in "Medical Reason"\n' +
+      '            or NoStatin.reasonCode in "Patient Refusal"\n' +
+      '        )\n' +
+      '        and exists (NoStatin.category C where FHIRHelpers.ToConcept(C) ~ Global."Community" or FHIRHelpers.ToConcept(C) ~ Global."Discharge")\n' +
+      '        and NoStatin.status = \'completed\'\n' +
+      '        and NoStatin.intent = \'order\'')
 
     //CQL Library Editor
 
@@ -254,7 +260,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.denominatorExclusionsDefinitionListBox).select('Denominator Exclusion')
+    cy.get(measureComposer.denominatorExclusionsDefinitionListBox).select('Denominator Exclusions')
     cy.get(measureComposer.denominatorExclusionsSaveBtn).click()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
@@ -267,7 +273,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.denominatorExceptionsDefinitionListBox).select('Denominator Exception')
+    cy.get(measureComposer.denominatorExceptionsDefinitionListBox).select('Denominator Exceptions')
     cy.get(measureComposer.denominatorExceptionsSaveBtn).click()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
