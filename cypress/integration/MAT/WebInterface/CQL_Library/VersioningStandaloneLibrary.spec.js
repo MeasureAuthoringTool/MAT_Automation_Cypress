@@ -24,7 +24,6 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.logout()
-
   })
   beforeEach('Login', () => {
     login.matLogin()
@@ -38,7 +37,6 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
   })
 
   it('QDM Stand alone Library: Version and include with QDM measure', () => {
-
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
@@ -86,7 +84,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(measurelibrary.newMeasureButton).click()
-    let measureName = 'createQDMMeasure' + Date.now()
+    const measureName = 'createQDMMeasure' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.modelradioQDM).click()
@@ -107,7 +105,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
 
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-    //Includes
+    // Includes
 
     cy.get(measureComposer.includes).click()
 
@@ -119,7 +117,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 
-    //CQL Library Editor
+    // CQL Library Editor
 
     cy.get(measureComposer.cqlLibraryEditor).click()
 
@@ -131,7 +129,6 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-
   })
 })
 
@@ -153,7 +150,6 @@ describe('CQL Library: Stand alone Versioning', () => {
   })
 
   it('FHIR Stand alone Library: Version and include with FHIR measure', () => {
-
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
@@ -191,7 +187,7 @@ describe('CQL Library: Stand alone Versioning', () => {
     dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
     dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
 
-    //Navigate to CQL Library
+    // Navigate to CQL Library
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -221,7 +217,7 @@ describe('CQL Library: Stand alone Versioning', () => {
 
     helper.enabledWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
-    let measureName = 'CreateFHIRMeasure' + Date.now()
+    const measureName = 'CreateFHIRMeasure' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.modelradioFHIR).click()
@@ -242,7 +238,7 @@ describe('CQL Library: Stand alone Versioning', () => {
 
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-    //Includes
+    // Includes
 
     cy.get(measureComposer.includes).click()
 
@@ -254,7 +250,7 @@ describe('CQL Library: Stand alone Versioning', () => {
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 
-    //CQL Library Editor
+    // CQL Library Editor
 
     cy.get(measureComposer.cqlLibraryEditor).click()
 
@@ -269,7 +265,6 @@ describe('CQL Library: Stand alone Versioning', () => {
   })
 
   it('FHIR Standalone Library: Unused Libraries', () => {
-
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
@@ -298,7 +293,7 @@ describe('CQL Library: Stand alone Versioning', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    //Includes
+    // Includes
     helper.verifySpinnerAppearsAndDissappears()
     cy.get(measureComposer.includes).click()
     helper.verifySpinnerAppearsAndDissappears()
@@ -322,7 +317,7 @@ describe('CQL Library: Stand alone Versioning', () => {
     dataCreation.addValueSet('2.16.840.1.113762.1.4.1182.118')
     dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.161')
 
-    //Navigate to CQL Library
+    // Navigate to CQL Library
     cy.get(measurelibrary.cqlLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -342,9 +337,9 @@ describe('CQL Library: Stand alone Versioning', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.waitToContainText(cqlLibrary.modal, 'You have included libraries that are unused. In ' +
-      'order to version ' + fhirLibraryName + ', these must be removed. Select Continue to have the MAT remove these included ' +
-      'libraries or Cancel to stop the version process.')
+    helper.waitToContainText(cqlLibrary.modal, ' There are included libraries that are unused in library ' + fhirLibraryName + '.' +
+      'Select Continue to have the MAT remove these unused elements, Keep to retain the unused ' +
+      'elements or Cancel to stop the version process.')
 
     cy.get(cqlLibrary.modalContinueBtn).click()
 
@@ -352,7 +347,6 @@ describe('CQL Library: Stand alone Versioning', () => {
 
     helper.waitToHaveText(cqlLibrary.shareWarningMessage, ' ' + fhirLibraryName + ' v1.0 has been successfully created.')
   })
-
 })
 
 describe('FHIR Standalone Library: Meta data requirement to version', () => {
@@ -381,7 +375,6 @@ describe('FHIR Standalone Library: Meta data requirement to version', () => {
   })
 
   it('Validate error message for required meta data while versioning', () => {
-
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
@@ -400,6 +393,5 @@ describe('FHIR Standalone Library: Meta data requirement to version', () => {
     cy.get(cqlComposer.warningMessageVersionPage).should('have.text', ' Description is required for Standalone Libraries. Please populate it in General Information.')
 
     cy.get(cqlLibrary.cancelBtn).click()
-
   })
 })
