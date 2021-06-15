@@ -157,7 +157,7 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
 
   })
   beforeEach('Login', () => {
@@ -203,11 +203,11 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
       if (Cypress.$(elm).length === 2) {
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(cqlLibrary.row1RecentActivity).click()
-        cy.get(cqlLibrary.row1RecentActivity).click()
+        //cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
     })
@@ -259,11 +259,11 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
       if (Cypress.$(elm).length === 2) {
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         helper.verifySpinnerAppearsAndDissappears()
         cy.get(cqlLibrary.row1RecentActivity).click()
-        cy.get(cqlLibrary.row1RecentActivity).click()
+        //cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
     })
@@ -302,14 +302,14 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.wait(500)
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        // cy.wait(500)
+        // cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         helper.verifySpinnerAppearsAndDissappears()
         helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
         cy.get(cqlLibrary.row1RecentActivity).click()
-        cy.wait(500)
-        cy.get(cqlLibrary.row1RecentActivity).click()
+        // cy.wait(500)
+        // cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
     })
@@ -351,10 +351,10 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
 
       if (Cypress.$(elm).length === 2) {
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         cy.get(cqlLibrary.row1RecentActivity).click()
-        cy.get(cqlLibrary.row1RecentActivity).click()
+        //cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
     })
@@ -482,10 +482,10 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
 
       if (Cypress.$(elm).length === 2) {
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         cy.get(cqlLibrary.row1RecentActivity).click()
-        cy.get(cqlLibrary.row1RecentActivity).click()
+        //cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
     })
@@ -527,10 +527,10 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
 
       if (Cypress.$(elm).length === 2) {
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         cy.get(cqlLibrary.row1RecentActivity).click()
-        cy.get(cqlLibrary.row1RecentActivity).click()
+        //cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
     })
@@ -572,10 +572,10 @@ describe('CQL Library Recent Activity and My CQL Libraries Grid Button Bar', () 
 
       if (Cypress.$(elm).length === 2) {
         cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
-        cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
+        //cy.get(cqlLibrary.row1RecentActivity).eq(1).click()
       } else {
         cy.get(cqlLibrary.row1RecentActivity).click()
-        cy.get(cqlLibrary.row1RecentActivity).click()
+        //cy.get(cqlLibrary.row1RecentActivity).click()
       }
 
     })

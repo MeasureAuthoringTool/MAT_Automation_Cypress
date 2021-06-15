@@ -614,20 +614,26 @@ export const addCode = (codeUrl) => {
 
 export const addDefinition = (definitionName, CQL) => {
   cy.get(measureComposer.definition).click()
-
+  helper.verifySpinnerAppearsAndDissappears()
   helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2, 'Definition')
 
   cy.get(measureComposer.addNewBtn).click()
+  helper.verifySpinnerAppearsAndDissappears()
   cy.get(measureComposer.definitionNameInput).type(definitionName, { delay: 50 })
 
   helper.visibleWithTimeout(measureComposer.definitionCQLExpressionEditorInput)
 
   cy.wait(1500)
+  helper.verifySpinnerAppearsAndDissappears()
 
   cy.get(measureComposer.definitionCQLExpressionEditorInput).type(CQL, { delay: 50, parseSpecialCharSequences: false })
   cy.get(measureComposer.definitionSaveBtn).click()
 
+  helper.verifySpinnerAppearsAndDissappears()
+
   helper.visibleWithTimeout(measureComposer.warningMessage)
+
+  cy.get(measureComposer.warningMessage).contains('successfully saved')
 }
 
 export const addFunction = (functionName, CQL) => {

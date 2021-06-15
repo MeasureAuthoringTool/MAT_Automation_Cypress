@@ -79,7 +79,7 @@ export const cancelBtn = '#CancelButton_measuVersion'
 
 //warning dialog
 export const continueBtn = '.btn-toolbar > [title="Continue"]'
-export const warningKeepBtn = '#Yes_ConfirmDialogBox'
+export const warningKeepBtn = '.btn-info'
 export const warningCancelBtn = '.btn-toolbar > [title="Cancel"]'
 
 //return to measure library
