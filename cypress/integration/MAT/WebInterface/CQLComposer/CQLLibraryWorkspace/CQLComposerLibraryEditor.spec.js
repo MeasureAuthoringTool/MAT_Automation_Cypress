@@ -1,5 +1,4 @@
 import * as helper from '../../../../../support/helpers'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as cqlLibrary from '../../../../../pom/MAT/WI/CqlLibrary'
 import * as cqlComposer from '../../../../../pom/MAT/WI/CQLComposer'
@@ -173,7 +172,7 @@ describe('FHIR CQL Composer: Add code directly on CQL Library Editor', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     login.matLogout()
   })
 

@@ -190,7 +190,6 @@ describe('Measure Composer: Function Insert Attribute Lightbox', () => {
     cy.get(measureComposer.selectAttributesDataType).select('Care Goal')
 
     cy.get(measureComposer.attributeCancelBtn).click()
-    cy.get(measureComposer.attributeCancelBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 

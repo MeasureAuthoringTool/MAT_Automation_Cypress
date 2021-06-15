@@ -220,7 +220,7 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
   })
 })
 
-describe('FHIR Measure: Add codesystems and valusets without UMLS', () => {
+describe('Measure Composer: CQLWorkspace: FHIR Measure, Add codesystems and valusets without UMLS', () => {
   before('Login, Data Creation', () => {
     login.loginWithoutUMLS()
     fhirMeasure = dataCreation.createDraftMeasure('FhirMeasure', 'FHIR')

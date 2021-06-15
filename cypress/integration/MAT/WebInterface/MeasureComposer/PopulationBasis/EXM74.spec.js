@@ -3,7 +3,6 @@ import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCr
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
-import * as oktaLogin from '../../../../../support/oktaLogin'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as login from '../../../../../support/MAT/Login'
@@ -92,10 +91,12 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
     dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1003')
     dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.125.12.1002')
     dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1001')
+    dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1089')
     dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1024')
     dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1025')
     dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1023')
     dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1022')
+    dataCreation.addValueSet('2.16.840.1.113883.3.464.1003.101.12.1080')
 
     // Codes
 
@@ -111,40 +112,36 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    dataCreation.addDefinition('Initial Population', 'exists ( ["Patient"] BirthDate\n' +
-      '\twhere Global."CalendarAgeInMonthsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) >= 6\n' +
-      '\tand Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) < 20\n' +
-      ')\n' +
-      '\tand exists ( "Qualifying Encounters" )')
-
     dataCreation.addDefinition('Denominator', '"Initial Population"')
-    dataCreation.addDefinition('Denominator Exclusion', 'Hospice."Has Hospice"')
 
-    dataCreation.addDefinition('Numerator', 'exists ["Procedure": "Fluoride Varnish Application for Children"] FluorideApplication\n' +
-      '\twhere FluorideApplication.performed during "Measurement Period"\n' +
-      '\tand FluorideApplication.status = \'completed\'')
+    dataCreation.addDefinition('Denominator Exclusions', 'Hospice."Has Hospice"')
 
-    dataCreation.addDefinition('Qualifying Encounters', '( ["Encounter": "Office Visit"]\n' +
-      '\tunion ["Encounter": "Preventive Care, Established Office Visit, 0 to 17"]\n' +
-      'union ["Encounter": "Preventive Care Services, Initial Office Visit, 0 to 17"]\n' +
-      'union ["Encounter": "Preventive Care Services - Established Office Visit, 18 and Up"]\n' +
-      'union ["Encounter": "Preventive Care Services-Initial Office Visit, 18 and Up"]\n' +
-      'union ["Encounter": "Clinical Oral Evaluation"] ) ValidEncounter\n' +
-      'where Global."Normalize Interval" ( ValidEncounter.period ) during "Measurement Period"\n' +
-      '\tand ValidEncounter.status = \'finished\'')
+    dataCreation.addDefinition('Initial Population', 'AgeInMonthsAt(date from start of "Measurement Period" ) >= 6\n' +
+      '              and AgeInYearsAt(date from start of "Measurement Period" ) < 20\n' +
+      '        \n' +
+      '          and exists ( "Qualifying Encounters" )')
 
-    dataCreation.addDefinition('Stratification 1', 'exists ( ["Patient"] BirthDate\n' +
-      '\twhere Global."CalendarAgeInMonthsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) >= 6\n' +
-      '\tand Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate.birthDate ), start of "Measurement Period" ) <= 4\n' +
-      ')')
+    dataCreation.addDefinition('Numerator', 'exists  [Procedure: "Fluoride Varnish Application for Children"] FluorideApplication\n' +
+      '                where Global."Normalize Interval"(FluorideApplication.performed) during "Measurement Period"\n' +
+      '                  and FluorideApplication.status = \'completed\'')
 
-    dataCreation.addDefinition('Stratification 2', 'exists ["Patient"] BirthDate\n' +
-      '\twhere Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate\n' +
-      '.birthDate ), start of "Measurement Period" ) in Interval[5, 11]')
+    dataCreation.addDefinition('Qualifying Encounters', '( [Encounter: "Office Visit"]\n' +
+      '              union [Encounter: "Preventive Care, Established Office Visit, 0 to 17"]\n' +
+      '              union [Encounter: "Preventive Care Services, Initial Office Visit, 0 to 17"]\n' +
+      '              union [Encounter: "Preventive Care Services - Established Office Visit, 18 and Up"]\n' +
+      '              union [Encounter: "Preventive Care Services-Initial Office Visit, 18 and Up"]\n' +
+      '              union [Encounter: "Clinical Oral Evaluation"]\n' +
+      '              union [Encounter: "Telephone Visits"]\n' +
+      '              union [Encounter: "Online Assessments"]) ValidEncounter\n' +
+      '              where Global."Normalize Interval"(ValidEncounter.period) during "Measurement Period"\n' +
+      '                and ValidEncounter.status = \'finished\'')
 
-    dataCreation.addDefinition('Stratification 3', 'exists ["Patient"] BirthDate\n' +
-      '\twhere Global."CalendarAgeInYearsAt" ( FHIRHelpers.ToDate ( BirthDate\n' +
-      '.birthDate ), start of "Measurement Period" ) in Interval[12, 20]')
+    dataCreation.addDefinition('Stratification 1', 'AgeInMonthsAt( date from start of "Measurement Period" ) >= 6\n' +
+      '              and AgeInYearsAt(date from start of "Measurement Period" ) <= 4')
+
+    dataCreation.addDefinition('Stratification 2', 'AgeInYearsAt( date from start of "Measurement Period" ) in Interval[5, 11]')
+
+    dataCreation.addDefinition('Stratification 3', 'AgeInYearsAt(date from start of "Measurement Period" ) in Interval[12, 20 )')
 
     //CQL Library Editor
 
@@ -204,7 +201,7 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.denominatorExclusionsDefinitionListBox).select('Denominator Exclusion')
+    cy.get(measureComposer.denominatorExclusionsDefinitionListBox).select('Denominator Exclusions')
     cy.get(measureComposer.denominatorExclusionsSaveBtn).click()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
