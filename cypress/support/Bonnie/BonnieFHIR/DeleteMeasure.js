@@ -1,5 +1,5 @@
-import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as homePage from '../../pom/BonnieFHIR/WI/Homepage'
+import * as measureDetailsPage from '../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as homePage from '../../../pom/BonnieFHIR/WI/Homepage'
 
 export const DeleteMeasure = (measureName) => {
   cy.log('deleteMeasure')

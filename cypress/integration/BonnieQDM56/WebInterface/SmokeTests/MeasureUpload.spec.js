@@ -4,16 +4,8 @@ import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetail
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
 
-const measureName = 'FHIRmeasureCMS347'
-const measureFileToUpload = 'FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
-
-const lastNameSuffix = new Date().getTime()
-const distinctLastName = 'President' + lastNameSuffix
-
-const expectedStartDate = '01/01/2019'
-const expectedStartTime = '11:00 AM'
-const expectedEndDate = '01/01/2019'
-const expectedEndTime = '12:00 PM'
+const measureName = 'QDM 5.6 MEASURE'
+const measureFileToUpload = 'QDM56/QDM56Msr-v0-0-002-QDM-5-6.zip'
 
 describe('Patient: Elements', () => {
 

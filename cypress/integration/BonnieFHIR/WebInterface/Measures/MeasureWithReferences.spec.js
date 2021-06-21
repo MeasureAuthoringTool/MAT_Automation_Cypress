@@ -1,8 +1,8 @@
 import * as helper from "../../../../support/helpers"
-import * as bonnieLogin from "../../../../support/BonnieFHIR/BonnieLoginLogout"
+import * as bonnieLogin from "../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout"
 import * as measureDetailsPage from "../../../../pom/BonnieFHIR/WI/MeasureDetailsPage"
 import * as testPatientPage from "../../../../pom/BonnieFHIR/WI/TestPatientPage"
-import * as bonnieUploadMeasure from "../../../../support/BonnieFHIR/BonnieUploadMeasure"
+import * as bonnieUploadMeasure from "../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure"
 import * as dashboard from "../../../../pom/BonnieFHIR/WI/Dashboard"
 
 // Can be any measure with Encounters

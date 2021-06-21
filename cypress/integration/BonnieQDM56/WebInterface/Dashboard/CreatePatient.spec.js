@@ -1,5 +1,5 @@
 import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieQDM/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../support/Bonnie/BonnieQDM/BonnieLoginLogout'
 import * as CreatePatient from '../../../../pom/Bonnie/WI/CreatePatient'
 
 describe('Create Patient From Dashboard', () => {

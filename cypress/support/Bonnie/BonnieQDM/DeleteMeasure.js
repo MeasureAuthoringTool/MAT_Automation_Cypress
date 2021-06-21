@@ -1,6 +1,6 @@
-import * as helper from '../../support/helpers'
-import * as dashboard from '../../pom/BonnieQDM/WI/Dashboard'
-import * as measureDetails from '../../pom/BonnieQDM/WI/MeasureDetails'
+import * as helper from '../../helpers'
+import * as dashboard from '../../../pom/BonnieQDM/WI/Dashboard'
+import * as measureDetails from '../../../pom/BonnieQDM/WI/MeasureDetails'
 
 export const DeleteMeasureFromBonnie = (measureName) => {
 

@@ -1,8 +1,8 @@
-import * as helper from '../helpers'
-import * as signInpage from '../../pom/BonnieFHIR/WI/Sign_in'
-import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
-import * as sshTunnel from './SSHMongoDB'
-import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialog'
+import * as helper from '../../helpers'
+import * as signInpage from '../../../pom/BonnieFHIR/WI/Sign_in'
+import * as dashboard from '../../../pom/BonnieFHIR/WI/Dashboard'
+import * as sshTunnel from '../SSHMongoDB'
+import * as importMeasureDialog from '../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 
 let bonnieURL = Cypress.env('bonnieFhirBaseUrl')
 let username = ''

@@ -1,0 +1,11 @@
+{
+  "baseUrl": "https://dev-bonnie.hcqis.org/",
+  "screenshotsFolder": "mochawesome-report/assets",
+  "numTestsKeptInMemory": 5,
+  "env": {
+    "environment": "bonnieQDM56Dev",
+    "type": "base",
+    "mongo_db": "bonnie_production"
+  }
+}
+

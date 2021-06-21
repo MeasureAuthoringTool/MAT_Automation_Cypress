@@ -1,6 +1,6 @@
-import * as bonnieLogin from '../../../../support/BonnieQDM/BonnieLoginLogout'
-import * as bonnieUploadMeasire from '../../../../support/BonnieQDM/BonnieUploadMeasure'
-import * as deleteMeasure from '../../../../support/BonnieQDM/DeleteMeasure'
+import * as bonnieLogin from '../../../../support/Bonnie/BonnieQDM/BonnieLoginLogout'
+import * as bonnieUploadMeasire from '../../../../support/Bonnie/BonnieQDM/BonnieUploadMeasure'
+import * as deleteMeasure from '../../../../support/Bonnie/BonnieQDM/DeleteMeasure'
 
 const fileToUpload = 'MRP_v5_7_Artifacts.zip'
 
