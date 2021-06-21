@@ -1,7 +1,7 @@
 import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
-import * as bonnieUpload from '../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUpload from '../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 

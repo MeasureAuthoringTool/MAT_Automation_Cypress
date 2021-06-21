@@ -123,6 +123,69 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
   })
 }
 
+
+//new function that needs to work with new connection within documentDB on HQCIS
+function bonnieDeleteMeasuresAndPatients (sshTunnel, config, userId) {
+  portScanner.findAPortNotInUse(50001, 60000, sshTunnel.localHost, function(error, port) {
+    console.log('Found a port not in use')
+
+    const sshTunnelConfig = {
+      agent: process.env.SSH_AUTH_SOCK,
+      username: sshTunnel.username,
+      privateKey: require('fs').readFileSync(sshTunnel.privateKey),
+      host: sshTunnel.host,
+      port: sshTunnel.port,
+      dstHost: sshTunnel.dstHost,
+      dstPort: sshTunnel.dstPort,
+      localHost: sshTunnel.localHost,
+      localPort: port
+    }
+
+    // tunnel -- See https://github.com/agebrock/tunnel-ssh#readme
+    tunnel(sshTunnelConfig, (error, server) => {
+      if (error) {
+        console.log("SSH connection error: ", error)
+      }
+      // Connection URL
+      const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
+      // Database Name
+      const dbName = config.env.mongo_db
+      // Use connect method to connect to the server
+      MongoClient.connect(url, { autoReconnect: true, reconnectTries: 60, reconnectInterval: 1000},function (err, client) {
+        assert.equal(null, err)
+
+        console.log("Connected successfully to MongoDB")
+
+        const db = client.db(dbName)
+        const {ObjectId} = require('mongodb')
+
+        //Delete patients based on User ID
+        db.collection('cqm_patients').removeMany({user_id: ObjectId(userId)}, (err, item) => {
+          if (err) {
+            console.log(err)
+          }
+          console.log('Patients deleted: ' + item.deletedCount)
+        })
+
+        //Delete Measures based on User ID
+        db.collection('cqm_measures').removeMany({user_id: ObjectId(userId)}, (err, item) => {
+          if (err) {
+            console.log(err)
+          }
+          console.log('Measures deleted: ' + item.deletedCount)
+          client.close(true, () => {
+            console.log('MongoDb connection closed.')
+          })
+
+          server.close(client)
+          server.stop
+          setImmediate(function(){server.emit('close')})
+        })
+      })
+    })
+  })
+}
+
 function queryMongo (query, config) {
 
   const sshTunnelConfig = {

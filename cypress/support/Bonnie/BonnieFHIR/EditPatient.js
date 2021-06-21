@@ -1,4 +1,4 @@
-import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as measureDetailsPage from '../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
 export const EditPatient = (lastName) => {
   cy.log('editPatient')

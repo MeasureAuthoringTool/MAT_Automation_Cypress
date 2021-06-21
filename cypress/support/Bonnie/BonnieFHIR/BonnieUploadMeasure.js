@@ -1,7 +1,7 @@
-import * as helper from '../../support/helpers'
-import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialog'
-import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
-import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as helper from '../../helpers'
+import * as importMeasureDialog from '../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
+import * as dashboard from '../../../pom/BonnieFHIR/WI/Dashboard'
+import * as measureDetailsPage from '../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
 export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn, includeSDE) => {
   cy.log('UploadMeasureToBonnie')

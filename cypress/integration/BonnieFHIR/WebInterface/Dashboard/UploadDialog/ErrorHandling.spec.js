@@ -1,7 +1,7 @@
 import * as helper from '../../../../../support/helpers'
-import * as bonnieLogin from '../../../../../support/BonnieFHIR/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout'
 import * as importMeasureDialog from '../../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
-import * as bonnieUploadMeasure from '../../../../../support/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
 
 
 
@@ -18,7 +18,7 @@ describe('Dashboard: Upload Dialog: Error handling', () => {
     })
     it('QDM Measure Package: Verify unable to upload package', () => {
 
-        bonnieUploadMeasure.UploadMeasureToBonnie('CMS105_v5_8_Artifacts.zip',false)
+        bonnieUploadMeasure.UploadMeasureToBonnie('FHIR/CMS105_v5_8_Artifacts.zip',false)
 
         helper.visibleWithTimeout(importMeasureDialog.errorDialog)
 

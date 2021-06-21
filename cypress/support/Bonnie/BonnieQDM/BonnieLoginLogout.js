@@ -1,6 +1,6 @@
-import * as helper from '../helpers'
-import * as signInpage from '../../pom/BonnieQDM/WI/Sign_in'
-import * as dashboard from '../../pom/BonnieQDM/WI/Dashboard'
+import * as helper from '../../helpers'
+import * as signInpage from '../../../pom/BonnieQDM/WI/Sign_in'
+import * as dashboard from '../../../pom/BonnieQDM/WI/Dashboard'
 
 let bonnieURL = Cypress.env('bonnieQdmBaseUrl')
 let username = ''

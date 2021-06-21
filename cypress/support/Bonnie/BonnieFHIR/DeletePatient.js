@@ -1,5 +1,5 @@
-import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
-import * as testPatientPage from '../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as measureDetailsPage from '../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as testPatientPage from '../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 export const DeletePatient = (lastName) => {
 
