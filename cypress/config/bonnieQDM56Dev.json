@@ -5,7 +5,7 @@
   "env": {
     "environment": "bonnieQDM56Dev",
     "type": "base",
-    "mongo_db": "bonnie_production"
+    "mongo_db": "bonnie_dev"
   }
 }
 

@@ -1,39 +1,34 @@
 import * as helper from '../helpers'
 import * as signInpage from '../../pom/BonnieFHIR/WI/Sign_in'
 import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
-import * as sshTunnel from './SSHMongoDB'
 import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 
-let bonnieURL = Cypress.env('bonnieFhirBaseUrl')
-let username = ''
-let password = ''
-let mongoUserId = ''
+let mongoURL = ''
+let mongoGroupId = ''
+const sslCert = Cypress.env('MONGO_SSLCERT')
 
 switch (Cypress.env('environment')) {
   case 'bonnieQDM56Dev':
-    username = Cypress.env('BONNIE_QDM56_DEV_USERNAME')
-    password = Cypress.env('BONNIE_QDM56_DEV_PASSWORD')
-    mongoUserId = Cypress.env('DEV_DB_MONGO_USERID')
+    mongoURL = Cypress.env('DEVmongoURL')
+    mongoGroupId = Cypress.env('DEVQDM56_DB_MONGO_GROUPID')
     break
   case 'stag':
-    username = Cypress.env('BONNIE_FHIR_STAG_USERNAME')
-    password = Cypress.env('BONNIE_FHIR_STAG_PASSWORD')
 }
 
 export const login = () => {
 
   //remove measures and patients for user
-  cy.task('bonnieFHIRDeleteMeasuresAndPatients', {sshTunnel: sshTunnel.sshTunnelConfig, mongoUserId: mongoUserId})
+  cy.task('bonnieDeleteMeasuresAndPatients', {mongoGroupId: mongoGroupId, mongoURL: mongoURL, sslCert: sslCert})
     .then(results => {
-      cy.log('bonnieFHIRDeleteMeasuresAndPatients Task finished')
+      cy.log('bonnieDeleteMeasuresAndPatients Task finished')
     })
 
-  cy.visit(bonnieURL + '/users/sign_in')
+  cy.visit('/')
 
   helper.enabledWithTimeout(signInpage.passwordInputBox)
 
-  helper.enterText(signInpage.usernameInputBox, username)
-  helper.enterText(signInpage.passwordInputBox, password)
+  //helper.enterText(signInpage.usernameInputBox, username)
+  //helper.enterText(signInpage.passwordInputBox, password)
 
   cy.get(signInpage.loginBtn).click()
 

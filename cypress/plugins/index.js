@@ -17,16 +17,6 @@ function getConfigurationByFile (file) {
   const pathToConfigFile = path.resolve('./cypress/', 'config', `${file}.json`)
   return fs.readJson(pathToConfigFile)
 }
-
-// module.exports = (on, config) => {
-//   // `on` is used to hook into various events Cypress emits
-//   // `config` is the resolved Cypress config
-//   // accept a configFile value or use development by default
-//   const file = config.env.configFile || 'qa'
-
-//   return getConfigurationByFile(file)
-// }
-
 const browserify = require('@cypress/browserify-preprocessor')
 const getCompareSnapshotsPlugin = require('cypress-visual-regression/dist/plugin')
 module.exports = (on, config) => {
@@ -45,9 +35,10 @@ module.exports = (on, config) => {
     },
   })
   on('task', {
-    bonnieFHIRDeleteMeasuresAndPatients: sshTunnelandUserId => {
+    bonnieDeleteMeasuresAndPatients: MongoConfiguration => {
       getConfigurationByFile(file).then((envConfig) =>
-        bonnieFHIRDeleteMeasuresAndPatients(sshTunnelandUserId.sshTunnel, envConfig, sshTunnelandUserId.mongoUserId)
+        bonnieDeleteMeasuresAndPatients(envConfig, MongoConfiguration.mongoGroupId, MongoConfiguration.mongoURL,
+          MongoConfiguration.sslCert)
       )
       return null
     }
@@ -62,6 +53,7 @@ const assert = require('assert')
 const tunnel = require('tunnel-ssh')
 const portScanner = require('portscanner')
 
+//Old Delete patients and Measures, will be depricated soon
 function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
   portScanner.findAPortNotInUse(50001, 60000, sshTunnel.localHost, function(error, port) {
     console.log('Found a port not in use')
@@ -124,105 +116,51 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
 }
 
 
-//new function that needs to work with new connection within documentDB on HQCIS
-function bonnieDeleteMeasuresAndPatients (sshTunnel, config, userId) {
-  portScanner.findAPortNotInUse(50001, 60000, sshTunnel.localHost, function(error, port) {
-    console.log('Found a port not in use')
+//Delete measures and Patients for a given userID
+function bonnieDeleteMeasuresAndPatients (config, groupId, mongoURL, sslCert) {
+    const ca = [fs.readFileSync(sslCert)]
 
-    const sshTunnelConfig = {
-      agent: process.env.SSH_AUTH_SOCK,
-      username: sshTunnel.username,
-      privateKey: require('fs').readFileSync(sshTunnel.privateKey),
-      host: sshTunnel.host,
-      port: sshTunnel.port,
-      dstHost: sshTunnel.dstHost,
-      dstPort: sshTunnel.dstPort,
-      localHost: sshTunnel.localHost,
-      localPort: port
-    }
-
-    // tunnel -- See https://github.com/agebrock/tunnel-ssh#readme
-    tunnel(sshTunnelConfig, (error, server) => {
-      if (error) {
-        console.log("SSH connection error: ", error)
-      }
-      // Connection URL
-      const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
-      // Database Name
-      const dbName = config.env.mongo_db
-      // Use connect method to connect to the server
-      MongoClient.connect(url, { autoReconnect: true, reconnectTries: 60, reconnectInterval: 1000},function (err, client) {
-        assert.equal(null, err)
-
-        console.log("Connected successfully to MongoDB")
-
-        const db = client.db(dbName)
-        const {ObjectId} = require('mongodb')
-
-        //Delete patients based on User ID
-        db.collection('cqm_patients').removeMany({user_id: ObjectId(userId)}, (err, item) => {
-          if (err) {
-            console.log(err)
-          }
-          console.log('Patients deleted: ' + item.deletedCount)
-        })
-
-        //Delete Measures based on User ID
-        db.collection('cqm_measures').removeMany({user_id: ObjectId(userId)}, (err, item) => {
-          if (err) {
-            console.log(err)
-          }
-          console.log('Measures deleted: ' + item.deletedCount)
-          client.close(true, () => {
-            console.log('MongoDb connection closed.')
-          })
-
-          server.close(client)
-          server.stop
-          setImmediate(function(){server.emit('close')})
-        })
-      })
-    })
-  })
-}
-
-function queryMongo (query, config) {
-
-  const sshTunnelConfig = {
-    agent: process.env.SSH_AUTH_SOCK,
-    username: '',
-    privateKey: require('fs').readFileSync(''),
-    host: '',
-    port: 22,
-    dstHost: 'localhost',
-    dstPort: 27017,
-    localHost: '127.0.0.1',
-    localPort: 50001
-  }
-  // tunnel to dev -- See https://github.com/agebrock/tunnel-ssh#readme
-  tunnel(sshTunnelConfig, (error, server) => {
-    if (error) {
-      console.log("SSH connection error: ", error)
-    }
     // Connection URL
-    const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
+    const url = mongoURL
     // Database Name
     const dbName = config.env.mongo_db
-    // Use connect method to connect to the server
-    MongoClient.connect(url, { useUnifiedTopology: true},function (err, client) {
-      assert.equal(null, err)
-      console.log("Connected successfully to server")
 
-      const db = client.db(dbName)
+    MongoClient.connect(url, {sslCA: ca},(err, client) => {
+      if (err) {
+        console.log(`MONGO CONNECTION ERROR: ${err}`)
+        throw err
+      } else {
+          console.log('Connected successfully to MongoDB')
 
-      findDocuments(db, 'cqm_measures', query, function () {
-        client.close()
-      })
+          const db = client.db(dbName)
+          const { ObjectId } = require('mongodb')
 
+          //Delete patients based on group ID
+          db.collection('cqm_patients').removeMany( {group_id: ObjectId(userId) }, (err, item) => {
+            if (err) {
+              console.log(err)
+            }
+            console.log('Patients deleted: ' + item.deletedCount)
+          })
+
+          //Delete Measures based on group ID
+          db.collection('cqm_measures').removeMany( {group_id: ObjectId(userId) }, (err, item) => {
+            if (err) {
+              console.log(err)
+            }
+            console.log(item)
+            console.log('Measures deleted: ' + item.deletedCount)
+            client.close(true, () => {
+              console.log('MongoDb connection closed.')
+            })
+          })
+      }
     })
-  })
 }
 
+
+
+//MySQL connection stuff
 const mysql = require('mysql')
 const { resolve } = require('@cypress/webpack-preprocessor/stubbable-require')
 
