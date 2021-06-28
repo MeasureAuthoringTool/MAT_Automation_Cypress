@@ -12,6 +12,7 @@
         "cypress:open:test": "cypress open --env configFile=test",
         "cypress:open:local": "cypress open --env configFile=local",
         "cypress:open:dev": "cypress open --env configFile=dev",
+        "cypress:open:bonnieQDM56Dev": "cypress open --env configFile=bonnieQDM56Dev",
         "cypress:open:stag": "cypress open --env configFile=stag",
         "cypress:open:imp": "cypress open --env configFile=impl",
         "lint:cypress": "./node_modules/.bin/eslint ./cypress/integration/**/*spec.js",
