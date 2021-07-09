@@ -144,6 +144,81 @@ describe('Measure Composer: Function Argument Lightbox', () => {
     })
 })
 
+describe('Measure Composer: CQLWorkspace: Create Function', () => {
+
+  beforeEach('Login', () => {
+    login.matLogin()
+  })
+
+  afterEach('Log Out', () => {
+    login.matLogout()
+  })
+
+  it('FHIR Measure: Validate creation of Function without Argument', () => {
+    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure','FHIR')
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
+    cy.get(measurelibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.cqlWorkspace).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.functionMeasureComposer).click()
+
+    helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Function')
+
+    // cy.get(measureComposer.addArgument).click()
+    //
+    // cy.get(measureComposer.availableDatatypesListBox).select('FHIR Datatype')
+    //
+    // // Verify only main-classes display on Function Argument drop-down
+    // cy.get(measureComposer.datatypeObjectListBox).select( 'AdverseEvent')
+    //   .invoke('val').should('deep.equal', 'AdverseEvent')
+    //
+    // cy.get(measureComposer.datatypeObjectListBox).select( 'AllergyIntolerance')
+    //   .invoke('val').should('deep.equal', 'AllergyIntolerance')
+    //
+    // cy.get(measureComposer.datatypeObjectListBox).select( 'Task')
+    //   .invoke('val').should('deep.equal', 'Task')
+    //
+    // cy.get(measureComposer.argumentNameInput).type('Encounter')
+    //
+    // cy.get(measureComposer.addBtn).click()
+    //
+    // helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.functionNameInput).type('Test')
+    cy.get(measureComposer.functionCQLExpressionEditorInput).type('true')
+    cy.get(measureComposer.functionSaveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.waitToContainText(measureComposer.warningMessage,'Function Test successfully saved.')
+
+    cy.get(measureComposer.cqlLibraryEditor).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.waitToContainText(measureComposer.warningMessage,'You are viewing CQL with no validation errors.')
+
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
+})
+
 describe('Measure Composer: Function Insert Attribute Lightbox', () => {
 
   beforeEach('Login', () => {
