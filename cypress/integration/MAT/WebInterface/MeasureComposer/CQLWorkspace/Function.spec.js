@@ -176,26 +176,6 @@ describe('Measure Composer: CQLWorkspace: Create Function', () => {
 
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGlobal2,'Function')
 
-    // cy.get(measureComposer.addArgument).click()
-    //
-    // cy.get(measureComposer.availableDatatypesListBox).select('FHIR Datatype')
-    //
-    // // Verify only main-classes display on Function Argument drop-down
-    // cy.get(measureComposer.datatypeObjectListBox).select( 'AdverseEvent')
-    //   .invoke('val').should('deep.equal', 'AdverseEvent')
-    //
-    // cy.get(measureComposer.datatypeObjectListBox).select( 'AllergyIntolerance')
-    //   .invoke('val').should('deep.equal', 'AllergyIntolerance')
-    //
-    // cy.get(measureComposer.datatypeObjectListBox).select( 'Task')
-    //   .invoke('val').should('deep.equal', 'Task')
-    //
-    // cy.get(measureComposer.argumentNameInput).type('Encounter')
-    //
-    // cy.get(measureComposer.addBtn).click()
-    //
-    // helper.verifySpinnerAppearsAndDissappears()
-
     cy.get(measureComposer.functionNameInput).type('Test')
     cy.get(measureComposer.functionCQLExpressionEditorInput).type('true')
     cy.get(measureComposer.functionSaveBtn).click()
