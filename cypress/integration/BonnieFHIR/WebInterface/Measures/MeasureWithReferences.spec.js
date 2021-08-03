@@ -1,5 +1,5 @@
 import * as helper from "../../../../support/helpers"
-import * as bonnieLogin from "../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout"
+import * as bonnieLogin from "../../../../support/Bonnie/BonnieLoginLogout"
 import * as measureDetailsPage from "../../../../pom/BonnieFHIR/WI/MeasureDetailsPage"
 import * as testPatientPage from "../../../../pom/BonnieFHIR/WI/TestPatientPage"
 import * as bonnieUploadMeasure from "../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure"
@@ -7,7 +7,7 @@ import * as dashboard from "../../../../pom/BonnieFHIR/WI/Dashboard"
 
 // Can be any measure with Encounters
 const measureName = "Cms111testingMeasure"
-const measureFileName = "Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
+const measureFileName = "FHIR/Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = "President" + lastNameSuffix
@@ -34,7 +34,6 @@ describe("Measure with references", () => {
 
     // Drag and drop Encounter from the left data elements list
     testPatientPage.dragAndDrop('management', 'Management: Encounter: Emergency Department Visit', '3')
-    helper.verifySpinnerAppearsAndDissappears()
 
     // Add a reference to a condition
     cy.log('Reference')
@@ -49,8 +48,7 @@ describe("Measure with references", () => {
     cy.get('.patient-criteria .criteria-details').should('be.visible')
     cy.get('.patient-criteria .criteria-details').should('contain.text', 'Encounter: Emergency Department Visit')
 
-    // Verify the Condition's data element is expanded
-    cy.get('.patient-criteria criteria-details hide').should('not.be.visible')
+    // Verify the Condition's data element is added
     cy.get('.patient-criteria form').should('contain.text', 'Clinical Summary: Condition: Dead')
 
     // Enter something into condition

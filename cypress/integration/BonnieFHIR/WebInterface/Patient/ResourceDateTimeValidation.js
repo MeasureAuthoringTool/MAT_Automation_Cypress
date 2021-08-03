@@ -1,21 +1,21 @@
 import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as bonnieUpload from '../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
-const fileToUpload = "FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip"
+const fileToUpload = "FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip"
 
 describe('Valiidate DateTime for Attributes from Patient', () => {
 
 
-  before('Login', () => {
+  beforeEach('Login', () => {
 
     bonnieLogin.login()
 
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
 
     bonnieLogin.logout()
 

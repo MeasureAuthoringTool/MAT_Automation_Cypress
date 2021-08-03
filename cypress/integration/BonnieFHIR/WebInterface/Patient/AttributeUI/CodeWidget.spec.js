@@ -1,5 +1,5 @@
 import * as helper from '../../../../../support/helpers'
-import * as bonnieLogin from '../../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
 import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as deletePatient from '../../../../../support/Bonnie/BonnieFHIR/DeletePatient'
@@ -9,12 +9,12 @@ import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/B
 describe('Attribute UI: Code Widget', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+  const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 
-  before('Login', () => {
+  beforeEach('Login', () => {
     bonnieLogin.login()
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     bonnieLogin.logout()
   })
 

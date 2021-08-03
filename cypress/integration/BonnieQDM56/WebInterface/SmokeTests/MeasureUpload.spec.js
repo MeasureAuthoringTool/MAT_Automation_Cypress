@@ -1,5 +1,5 @@
 import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
@@ -11,7 +11,12 @@ describe('Patient: Elements', () => {
 
   before('Login', () => {
 
-    bonnieLogin.login()
+    cy.task(`getSession`, {username: `ChVasile5061`, password: `Semanticbits123MAT?`, url: `https://dev-bonnie.hcqis.org/`}).then(session => {
+      cy.restoreSession(session)
+    })
+
+    cy.visit(`/`)
+
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
     measureDetailsPage.navigateToMeasureDetails(measureName)
 
@@ -41,7 +46,7 @@ describe('Patient: Elements', () => {
       verifyStartAndEndDates()
 
       cy.get(testPatientPage.cancelBtn).click()
-
+cy.pause()
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)

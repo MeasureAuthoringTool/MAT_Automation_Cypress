@@ -1,11 +1,11 @@
 import * as helper from '../../../../../support/helpers'
-import * as bonnieLogin from '../../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
 
 const measureName = 'HEDISBCS2020'
-const measureFileToUpload = 'HEDISBCS2020-v0-0-010-FHIR-4-0-1.zip'
+const measureFileToUpload = 'FHIR/HEDISBCS2020-v0-0-010-FHIR-4-0-1.zip'
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = 'President' + lastNameSuffix
@@ -15,14 +15,14 @@ const date = new Date().getMonthFormatted().toString() + '/' + new Date().getDay
 
 describe('Attribute UI: identifier: Identifier', () => {
 
-  before('Login', () => {
+  beforeEach('Login', () => {
 
     bonnieLogin.login()
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
     measureDetailsPage.navigateToMeasureDetails(measureName)
 
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
 
     bonnieLogin.logout()
 

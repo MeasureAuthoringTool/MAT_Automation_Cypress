@@ -107,3 +107,28 @@ Cypress.Commands.add('addOperationalTrackLoad', (user, file, modelId) => {
     })
   })
 })
+
+Cypress.Commands.add(`restoreSession`, function ({cookies, lsd, ssd}) {
+  const wList = []
+  cy.clearCookies()
+  cookies.forEach(cookie => {
+    wList.push(cookie.name)
+    cy.setCookie(cookie.name, cookie.value, {
+      log: true,
+      domain: cookie.domain,
+      path: cookie.path,
+      expiry: cookie.expires,
+      httpOnly: cookie.httpOnly,
+      secure: cookie.secure
+    })
+  })
+
+  Cypress.Cookies.defaults({
+    preserve: wList
+  })
+
+  cy.window().then(window => {
+    Object.keys(ssd).forEach(key => window.sessionStorage.setItem(key, ssd[key]))
+    Object.keys(lsd).forEach(key => window.localStorage.setItem(key, lsd[key]))
+  })
+})
