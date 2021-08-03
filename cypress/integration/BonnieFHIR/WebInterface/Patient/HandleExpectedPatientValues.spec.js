@@ -1,5 +1,5 @@
 import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
 import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
@@ -8,7 +8,7 @@ import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieFHIR/Bonn
 describe('Patient: Handle Expected Patient Values', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+  const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 
   beforeEach('Login', () => {
     bonnieLogin.login()

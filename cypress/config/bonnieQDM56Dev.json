@@ -5,7 +5,9 @@
   "env": {
     "environment": "bonnieQDM56Dev",
     "type": "base",
-    "mongo_db": "bonnie_dev"
+    "mongo_db": "bonnie_dev",
+    "oktaUrl": "https://dev.idp.idm.cms.gov",
+    "redirectUri": "https://dev-emeasuretool.hcqis.org/MeasureAuthoringTool/Login.html"
   }
 }
 

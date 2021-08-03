@@ -1,8 +1,10 @@
 import * as helper from '../helpers'
-import * as signInpage from '../../pom/BonnieFHIR/WI/Sign_in'
 import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
 import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 
+const baseUrl = Cypress.config().baseUrl
+let username = ''
+let password = ''
 let mongoURL = ''
 let mongoGroupId = ''
 const sslCert = Cypress.env('MONGO_SSLCERT')
@@ -11,8 +13,20 @@ switch (Cypress.env('environment')) {
   case 'bonnieQDM56Dev':
     mongoURL = Cypress.env('DEVmongoURL')
     mongoGroupId = Cypress.env('DEVQDM56_DB_MONGO_GROUPID')
+
+    username = Cypress.env('DEV_USERNAME')
+    password = Cypress.env('DEV_PASSWORD')
+
+
     break
-  case 'stag':
+  case 'bonnieFHIRDev':
+    mongoURL = Cypress.env('DEVmongoURL')
+    mongoGroupId = Cypress.env('DEVFHIR_DB_MONGO_GROUPID')
+
+    username = Cypress.env('DEV_USERNAME')
+    password = Cypress.env('DEV_PASSWORD')
+
+    break
 }
 
 export const login = () => {
@@ -23,22 +37,21 @@ export const login = () => {
       cy.log('bonnieDeleteMeasuresAndPatients Task finished')
     })
 
+  cy.task(`getSession`, {username: username, password: password, url: baseUrl}).then(session => {
+    cy.restoreSession(session)
+  })
   cy.visit('/')
-
-  helper.enabledWithTimeout(signInpage.passwordInputBox)
-
-  //helper.enterText(signInpage.usernameInputBox, username)
-  //helper.enterText(signInpage.passwordInputBox, password)
-
-  cy.get(signInpage.loginBtn).click()
-
-  helper.visibleWithTimeout(dashboard.navigationBar)
 
   helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
 
+  cy.clearCookie('_bonnie_session')
+
+  helper.visibleWithTimeout(importMeasureDialog.closeBtn)
+
   cy.get(importMeasureDialog.closeBtn).click()
 
-  helper.notVisibleWithTimeout(importMeasureDialog.importMeasureDialog)
+  helper.visibleWithTimeout(dashboard.uploadBtn)
+  helper.enabledWithTimeout(dashboard.uploadBtn)
 
   cy.log('Login Successful')
 }
@@ -48,8 +61,6 @@ export const logout = () => {
   helper.visibleWithTimeout(dashboard.signOutBtn)
 
   cy.get(dashboard.signOutBtn).click({ force: true })
-
-  helper.visibleWithTimeout(signInpage.usernameInputBox)
 
   cy.log('Logout Successful')
 

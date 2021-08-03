@@ -1,5 +1,5 @@
 import * as helper from "../../../../support/helpers"
-import * as bonnieLogin from "../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout"
+import * as bonnieLogin from "../../../../support/Bonnie/BonnieLoginLogout"
 import * as measureDetailsPage from "../../../../pom/BonnieFHIR/WI/MeasureDetailsPage"
 import * as deletePatient from "../../../../support/Bonnie/BonnieFHIR/DeletePatient"
 import * as deleteMeasure from "../../../../support/Bonnie/BonnieFHIR/DeleteMeasure"
@@ -11,17 +11,17 @@ import * as importMeasureDialog from '../../../../pom/BonnieFHIR/WI/ImportMeasur
 
 const continuousVariableMeasureName = "Cms111testingMeasure"
 const continuousVariableMeasureFileToUpload =
-  "Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
+  "FHIR/Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
 
 const cohortMeasureName = "EXM529"
-const cohortMeasureFileToUpload = "EXM529-v0-0-004-FHIR-4-0-1.zip"
+const cohortMeasureFileToUpload = "FHIR/EXM529-v0-0-004-FHIR-4-0-1.zip"
 
 const proportionMultiGroupMeasureName = "SBTESTCMS347"
 const proportionMultiGroupMeasureFileToUpload =
-  "SBTESTCMS347-v0-0-008-FHIR-4-0-1 (1).zip"
+  "FHIR/SBTESTCMS347-v0-0-008-FHIR-4-0-1 (1).zip"
 
 const measureWithStratificationsMeasureName = "CMS111Test"
-const measureWithStratificationsFileToUpload = "CMS111Test-v0-0-016-FHIR-4-0-1.zip"
+const measureWithStratificationsFileToUpload = "FHIR/CMS111Test-v0-0-016-FHIR-4-0-1.zip"
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = "President" + lastNameSuffix

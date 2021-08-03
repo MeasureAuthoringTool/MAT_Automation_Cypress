@@ -1,0 +1,11 @@
+{
+  "baseUrl": "https://dev-bonnie-fhir.hcqis.org/",
+  "screenshotsFolder": "mochawesome-report/assets",
+  "numTestsKeptInMemory": 5,
+  "env": {
+    "environment": "bonnieFHIRDev",
+    "type": "base",
+    "mongo_db": "bonnie_fhir_dev"
+  }
+}
+

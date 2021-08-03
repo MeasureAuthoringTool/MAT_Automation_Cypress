@@ -8,6 +8,11 @@
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 
+/**
+ * @type {Cypress.PluginConfig}
+ */
+const {GetSession} = require(`../../session`)
+
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 const fs = require('fs-extra')
@@ -41,6 +46,13 @@ module.exports = (on, config) => {
           MongoConfiguration.sslCert)
       )
       return null
+    }
+  })
+  on(`task`, {
+    getSession({username, password, url}) {
+      return new Promise(async resolve => {
+        resolve(await GetSession(username, password, url))
+      })
     }
   })
   on('file:preprocessor', browserify(options))
@@ -136,7 +148,7 @@ function bonnieDeleteMeasuresAndPatients (config, groupId, mongoURL, sslCert) {
           const { ObjectId } = require('mongodb')
 
           //Delete patients based on group ID
-          db.collection('cqm_patients').removeMany( {group_id: ObjectId(userId) }, (err, item) => {
+          db.collection('cqm_patients').removeMany( {group_id: ObjectId(groupId) }, (err, item) => {
             if (err) {
               console.log(err)
             }
@@ -144,7 +156,7 @@ function bonnieDeleteMeasuresAndPatients (config, groupId, mongoURL, sslCert) {
           })
 
           //Delete Measures based on group ID
-          db.collection('cqm_measures').removeMany( {group_id: ObjectId(userId) }, (err, item) => {
+          db.collection('cqm_measures').removeMany( {group_id: ObjectId(groupId) }, (err, item) => {
             if (err) {
               console.log(err)
             }

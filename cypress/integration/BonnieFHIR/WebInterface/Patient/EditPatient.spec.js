@@ -1,5 +1,5 @@
 import * as helper from '../../../../support/helpers'
-import * as bonnieLogin from '../../../../support/Bonnie/BonnieFHIR/BonnieLoginLogout'
+import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
@@ -7,19 +7,19 @@ import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieFHIR/Bonn
 describe('Create and then Edit New Patient', () => {
 
   let measureName = 'FHIRmeasureCMS347'
-  let measureFileToUpload = 'FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+  let measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 
   let lastNameSuffix = new Date().getTime()
   let distinctLastName = 'President' + lastNameSuffix
 
-  before('Login', () => {
+  beforeEach('Login', () => {
 
     bonnieLogin.login()
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload,false)
     measureDetailsPage.navigateToMeasureDetails(measureName)
 
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
 
     bonnieLogin.logout()
 
