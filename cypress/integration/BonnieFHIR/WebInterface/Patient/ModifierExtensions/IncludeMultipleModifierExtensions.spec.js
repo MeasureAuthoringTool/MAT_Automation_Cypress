@@ -2,11 +2,6 @@ import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
-import {
-  modifierExtensionsShow,
-  modifierExtensionsUrlField,
-  modifierExtensionsValueDropDown
-} from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 describe('Test Patient: Extensions section', () => {
 
