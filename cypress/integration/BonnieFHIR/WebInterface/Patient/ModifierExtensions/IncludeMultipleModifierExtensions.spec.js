@@ -2,12 +2,17 @@ import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import {
+  modifierExtensionsShow,
+  modifierExtensionsUrlField,
+  modifierExtensionsValueDropDown
+} from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 describe('Test Patient: Extensions section', () => {
 
   const measureName = 'FHIRmeasureCMS347'
   const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
-  const year = new Date().getFullYear() -1
+  const year = new Date().getFullYear()
   const todaysDate = new Date().getMonthFormatted().toString() + '/' + new Date().getDayFormatted().toString() + '/'
     + year.toString()
 
@@ -45,9 +50,9 @@ describe('Test Patient: Extensions section', () => {
     cy.log('validateMultipleExtensions')
 
     // boolean type
-    cy.get(testPatientPage.extensionsShow).click()
-    cy.get(testPatientPage.extensionsUrlField).type('https://google.com')
-    cy.get(testPatientPage.extensionsValueDropDown).select('Boolean')
+    cy.get(testPatientPage.modifierExtensionsShow).click()
+    cy.get(testPatientPage.modifierExtensionsUrlField).type('https://google.com')
+    cy.get(testPatientPage.modifierExtensionsValueDropDown).select('Boolean')
     cy.get(testPatientPage.extensionsModifierBooleanDropDown).select('True')
     cy.get(testPatientPage.extensionModifierAddWidgetBtn).eq(0).click()
     cy.get(testPatientPage.exsistingModifierExtension).contains('https://google.com')
@@ -57,13 +62,13 @@ describe('Test Patient: Extensions section', () => {
       })
 
     // date type
-    cy.get(testPatientPage.extensionsUrlField).type('https://google.com')
-    cy.get(testPatientPage.extensionsValueDropDown).select('Date')
+    cy.get(testPatientPage.modifierExtensionsUrlField).type('https://google.com')
+    cy.get(testPatientPage.modifierExtensionsValueDropDown).select('Date')
     cy.get(testPatientPage.extensionsModifierDateCheckbox).click()
     cy.get(testPatientPage.extensionsModifierDateField).should('have.value', todaysDate)
     cy.get(testPatientPage.extensionModifierAddWidgetBtn).eq(0).click()
     cy.get(testPatientPage.exsistingModifierExtension).contains('https://google.com')
-    cy.get(testPatientPage.exsistingModifierExtensionUrl).eq(1).click()
+    cy.get(testPatientPage.exsistingModifierExtensionUrl).click()
       .then(() => {
         cy.get(testPatientPage.exsistingModifierExtension).contains(todaysDate)
       })
