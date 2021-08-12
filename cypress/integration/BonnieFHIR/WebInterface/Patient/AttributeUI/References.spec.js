@@ -4,7 +4,6 @@ import * as dashboard from '../../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as helper from '../../../../../support/helpers'
-import { dragAndDropMoreElements } from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 // Can be any measure with Encounters
 const measureNamewithEncounter = "Cms111testingMeasure"
