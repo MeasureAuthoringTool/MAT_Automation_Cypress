@@ -4,13 +4,17 @@ import * as dashboard from '../../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as helper from '../../../../../support/helpers'
+import { dragAndDropMoreElements } from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
 // Can be any measure with Encounters
-const measureName = "Cms111testingMeasure"
-const measureFileName = "FHIR/Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
+const measureNamewithEncounter = "Cms111testingMeasure"
+const measureFileNamewithEncounter = "FHIR/Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = "President" + lastNameSuffix
+
+const measureNameWithConditionandProcedure = "SBTESTCMS347"
+const measureFileNameWithConditionandProcedure = "FHIR/SBTESTCMS347-v0-0-008-FHIR-4-0-1 (1).zip"
 
 describe("Measure with references", () => {
   beforeEach("Login", () => {
@@ -21,13 +25,13 @@ describe("Measure with references", () => {
     bonnieLogin.logout()
   })
 
-  it("can add a condition Reference with  Resource to Encounter", () => {
+  it("can add Existing Resource with condition Reference to Encounter", () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(
-      measureFileName,
+      measureFileNamewithEncounter,
       false
     )
 
-    dashboard.navigateToMeasureDetails(measureName)
+    dashboard.navigateToMeasureDetails(measureNamewithEncounter)
 
     measureDetailsPage.clickAddPatient()
     testPatientPage.enterPatientCharacteristics(distinctLastName)
@@ -126,6 +130,65 @@ describe("Measure with references", () => {
 
     //Verify Procedure attribute is removed from Encounter
     cy.get(testPatientPage.exsistingAttribute).should('not.exist')
+
+    // Click cancel button for patient to proceed back to measure details
+    helper.click(testPatientPage.cancelBtn)
+
+    helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
+  })
+
+  it("can add Existing Resource with condition reference to Encounter by adding condition from Elements ", () => {
+    bonnieUploadMeasure.UploadMeasureToBonnie(
+      measureFileNameWithConditionandProcedure,
+      false
+    )
+
+    dashboard.navigateToMeasureDetails(measureNameWithConditionandProcedure)
+
+    measureDetailsPage.clickAddPatient()
+    testPatientPage.enterPatientCharacteristics(distinctLastName)
+
+    // Drag and drop Condition from the left data elements list
+     testPatientPage.dragAndDrop('clinical summary', 'Clinical Summary: Condition: Myocardial Infarction', '4')
+
+    // Drag and drop Encounter from the left data elements list
+    testPatientPage.dragAndDrop('management', 'Management: Encounter: Office Visit', '28')
+
+    //Add Existing Resources for Condition
+    cy.log('Reference')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
+    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
+    cy.get(testPatientPage.attributeReferenceTypeSelect).select('Existing Resources')
+    cy.get(testPatientPage.existingResourcesDropdown).eq(1).invoke('val').then((val)=>{
+      cy.get(testPatientPage.existingResorcesSelect).select(val)
+    })
+    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
+
+    // Verify there is a reference to the Procedure resource
+    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis.condition: Condition/")
+
+    // Drag and drop Procedure from the left data elements list
+    testPatientPage.dragAndDrop('clinical summary', 'Clinical Summary: Procedure: PCI', '9')
+
+    // Collapse Procedure
+    testPatientPage.toggleDataElement(2)
+
+    // Expand Encounter
+    testPatientPage.toggleDataElement(1)
+
+    //Add Existing Resources for Procedure
+    cy.log('Reference')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
+    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
+    cy.get(testPatientPage.attributeReferenceTypeSelect).select('Existing Resources')
+    cy.get(testPatientPage.existingResourcesDropdown).eq(2).invoke('val').then((val)=>{
+      cy.get(testPatientPage.existingResorcesSelect).select(val)
+    })
+    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
+
+    // Verify there is a reference to the Procedure resource
+    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis.condition: Procedure/")
 
     // Click cancel button for patient to proceed back to measure details
     helper.click(testPatientPage.cancelBtn)
