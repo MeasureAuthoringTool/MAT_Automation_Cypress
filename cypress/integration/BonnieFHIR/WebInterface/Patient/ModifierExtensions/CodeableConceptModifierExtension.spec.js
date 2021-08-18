@@ -1,0 +1,80 @@
+import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
+import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
+import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+
+describe('Test Patient: Modifier Extensions section', () => {
+
+  const measureName = 'FHIRmeasureCMS347'
+  const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+
+  beforeEach('Login', () => {
+    bonnieLogin.login()
+  })
+  afterEach('Log Out', () => {
+    bonnieLogin.logout()
+  })
+
+  it.only('Validate the Modifier Extensions Components', () => {
+    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload)
+
+    navigateToMeasureDetails(measureName)
+
+    const lastNameSuffix = new Date().getTime()
+    const distinctLastName = 'President' + lastNameSuffix
+
+    cy.get(measureDetailsPage.patientListing).then((patientListing) => {
+      const initialPatientCount = parseInt(patientListing.text(), 10)
+      cy.log('patient count was:' + initialPatientCount)
+
+      measureDetailsPage.clickAddPatient()
+      enterPatientCharacteristics(distinctLastName)
+
+      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
+
+      CodeableConceptModifierExtension()
+      testPatientPage.clickSavePatient()
+      testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
+      measureDetailsPage.navigateToHomeMeasurePage()
+    })
+
+  })
+
+  function navigateToMeasureDetails (measureName) {
+    cy.log('navigateToMeasureDetails')
+    cy.get(homePage.measure).contains(measureName).click()
+    // cy.wait(1000)
+    cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
+    cy.log('navigateToMeasureDetails - done')
+  }
+
+  function enterPatientCharacteristics (lastName) {
+    cy.log('enterPatientCharacteristics')
+    cy.get(testPatientPage.lastNameTextField).type(lastName)
+    cy.get(testPatientPage.firstNameTextField).type('Current')
+    cy.get(testPatientPage.patientDescriptionTextField).type('Patient is very special')
+    cy.get(testPatientPage.dateofBithField).type('01/01/1950')
+    cy.get(testPatientPage.patientDescriptionTextField).click()
+    cy.get(testPatientPage.raceDropdown).select('Asian')
+    cy.get(testPatientPage.genderDropdown).select('Male')
+    cy.get(testPatientPage.ethnicityDropdown).select('Not Hispanic or Latino')
+    cy.log('enterPatientCharacteristics - done')
+  }
+
+  function CodeableConceptModifierExtension () {
+    cy.log('validateCodeableConceptModifiereExtension')
+    cy.get(testPatientPage.modifierExtensionsShow).click()
+    cy.get(testPatientPage.modifierExtensionsUrlField).type('https://google.com')
+    cy.get(testPatientPage.modifierExtensionsValueDropDown).select('CodeableConcept')
+    cy.get(testPatientPage.valueSetDirectRefSelect).select('allergy-active')
+    cy.get(testPatientPage.extensionModifierAddWidgetBtn).eq(0).click()
+    cy.get(testPatientPage.exsistingModifierExtension).contains('https://google.com')
+    cy.get(testPatientPage.exsistingModifierExtensionUrl).click()
+      .then(() => {
+        cy.get(testPatientPage.exsistingModifierExtension).contains('[AllergyIntoleranceClinicalStatusCodes: active]')
+      })
+    cy.log('CodeableConceptModifierExtensionValidation - done')
+  }
+
+})
