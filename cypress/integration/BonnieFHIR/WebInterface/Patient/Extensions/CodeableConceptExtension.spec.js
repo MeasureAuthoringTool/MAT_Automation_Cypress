@@ -1,5 +1,6 @@
 import * as helper from '../../../../../support/helpers'
 import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
+import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
@@ -8,9 +9,6 @@ describe('Test Patient: Extensions section', () => {
 
   const measureName = 'FHIRmeasureCMS347'
   const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
-  const year = new Date().getFullYear()
-  const todaysDate = new Date().getMonthFormatted().toString() + '/' + new Date().getDayFormatted().toString() + '/'
-    + year.toString()
 
   beforeEach('Login', () => {
     bonnieLogin.login()
@@ -19,10 +17,10 @@ describe('Test Patient: Extensions section', () => {
     bonnieLogin.logout()
   })
 
-  it('Validate the Extensions Components', () => {
+  it.only('Validate the Extensions Components', () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload)
 
-    measureDetailsPage.navigateToMeasureDetails(measureName)
+    navigateToMeasureDetails(measureName)
 
     const lastNameSuffix = new Date().getTime()
     const distinctLastName = 'President' + lastNameSuffix
@@ -32,47 +30,56 @@ describe('Test Patient: Extensions section', () => {
       cy.log('patient count was:' + initialPatientCount)
 
       measureDetailsPage.clickAddPatient()
-      testPatientPage.enterPatientCharacteristics(distinctLastName)
+      enterPatientCharacteristics(distinctLastName)
+
       testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
 
-      multipleExtensions()
+      codeableConceptExtension()
       testPatientPage.clickSavePatient()
       testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
+      // verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
-      measureDetailsPage.navigateToMeasureDetails(measureName)
+      navigateToMeasureDetails(measureName)
     })
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
 
   })
 
-  function multipleExtensions () {
-    cy.log('validateMultipleExtensions')
+  function navigateToMeasureDetails (measureName) {
+    cy.log('navigateToMeasureDetails')
+    cy.get(homePage.measure).contains(measureName).click()
+    // cy.wait(1000)
+    cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
+    cy.log('navigateToMeasureDetails - done')
+  }
 
-    // boolean type
+  function enterPatientCharacteristics (lastName) {
+    cy.log('enterPatientCharacteristics')
+    cy.get(testPatientPage.lastNameTextField).type(lastName)
+    cy.get(testPatientPage.firstNameTextField).type('Current')
+    cy.get(testPatientPage.patientDescriptionTextField).type('Patient is very special')
+    cy.get(testPatientPage.dateofBithField).type('01/01/1950')
+    cy.get(testPatientPage.patientDescriptionTextField).click()
+    cy.get(testPatientPage.raceDropdown).select('Asian')
+    cy.get(testPatientPage.genderDropdown).select('Male')
+    cy.get(testPatientPage.ethnicityDropdown).select('Not Hispanic or Latino')
+    cy.log('enterPatientCharacteristics - done')
+  }
+
+  function codeableConceptExtension () {
+    cy.log('validateCodeableConceptExtension')
     cy.get(testPatientPage.extensionsShow).click()
     cy.get(testPatientPage.extensionsUrlField).type('https://google.com')
-    cy.get(testPatientPage.extensionsValueDropDown).select('Boolean')
-    cy.get(testPatientPage.extensionsBooleanDropDown).select('True')
+    cy.get(testPatientPage.extensionsValueDropDown).select('CodeableConcept')
+    cy.get(testPatientPage.valueSetDirectRefSelect).select('active')
     cy.get(testPatientPage.extensionAddWidgetBtn).eq(0).click()
     cy.get(testPatientPage.exsistingExtension).contains('https://google.com')
     cy.get(testPatientPage.exsistingExtensionUrl).click()
       .then(() => {
-        cy.get(testPatientPage.exsistingExtension).contains('true')
+        cy.get(testPatientPage.exsistingExtension).contains('[ConditionClinicalStatusCodes: active]')
       })
-
-    // date type
-    cy.get(testPatientPage.extensionsUrlField).type('https://google.com')
-    cy.get(testPatientPage.extensionsValueDropDown).select('Date')
-    cy.get(testPatientPage.extensionsDateCheckbox).click()
-    cy.get(testPatientPage.extensionsDateField).should('have.value', todaysDate)
-    cy.get(testPatientPage.extensionAddWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingExtension).contains('https://google.com')
-    cy.get(testPatientPage.exsistingExtensionUrl).click()
-      .then(() => {
-        cy.get(testPatientPage.exsistingExtension).contains(todaysDate)
-      })
-    cy.log('MultipleExtensionsValidation - done')
+    cy.log('CodeableConceptExtensionValidation - done')
   }
 
 })
