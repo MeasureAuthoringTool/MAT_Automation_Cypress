@@ -4,7 +4,7 @@ import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetail
 import * as editPatient from '../../../../support/Bonnie/BonnieFHIR/EditPatient'
 import * as deletePatient from '../../../../support/Bonnie/BonnieFHIR/DeletePatient'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMeasure'
 
 const measureName = 'FHIRmeasureCMS347'
 const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'

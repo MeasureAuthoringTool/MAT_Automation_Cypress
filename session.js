@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 
 async function launchChromium() {
   return await chromium.launch({
-    headless: false,
+    headless: true,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -16,21 +16,21 @@ async function launchChromium() {
 
 async function loginToBonnie (page) {
   if (!page) {
-    throw new Error('page is missing');
+    throw new Error('page is missing')
   }
-  await page.waitForSelector(`.btn-login`);
-  return await page.click(`.btn-login`);
+  await page.waitForSelector(`.btn-login`)
+  return await page.click(`.btn-login`)
 }
 
 async function loginToBonnieOkta (page, username, password) {
   if (!username || !password) {
-    throw new Error('Username or Password missing for login');
+    throw new Error('Username or Password missing for login')
   }
-  await page.waitForSelector(`#okta-signin-username`);
-  await page.fill(`#okta-signin-username`, username);
-  await page.fill(`#okta-signin-password`, password);
+  await page.waitForSelector(`#okta-signin-username`)
+  await page.fill(`#okta-signin-username`, username)
+  await page.fill(`#okta-signin-password`, password)
   await page.click('#tandc')
-  return await page.click(`#okta-signin-submit`);
+  return await page.click(`#okta-signin-submit`)
 }
 
 async function getLocalStorageData(page) {

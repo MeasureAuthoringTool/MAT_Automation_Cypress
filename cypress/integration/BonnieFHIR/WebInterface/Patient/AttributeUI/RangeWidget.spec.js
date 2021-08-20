@@ -4,7 +4,7 @@ import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as deletePatient from '../../../../../support/Bonnie/BonnieFHIR/DeletePatient'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 
 describe('Attribute UI: Range Widget', () => {
 
