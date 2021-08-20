@@ -2,7 +2,7 @@ import * as helper from '../../../../support/helpers'
 import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMeasure'
 
 describe('Create and then Edit New Patient', () => {
 

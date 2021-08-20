@@ -4,7 +4,7 @@ import * as measureDetailsPage from "../../../../pom/BonnieFHIR/WI/MeasureDetail
 import * as deletePatient from "../../../../support/Bonnie/BonnieFHIR/DeletePatient"
 import * as deleteMeasure from "../../../../support/Bonnie/BonnieFHIR/DeleteMeasure"
 import * as testPatientPage from "../../../../pom/BonnieFHIR/WI/TestPatientPage"
-import * as bonnieUploadMeasure from "../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure"
+import * as bonnieUploadMeasure from "../../../../support/Bonnie/BonnieUploadMeasure"
 import * as dashboard from "../../../../pom/BonnieFHIR/WI/Dashboard"
 import * as homePage from "../../../../pom/BonnieFHIR/WI/Homepage"
 import * as importMeasureDialog from '../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'

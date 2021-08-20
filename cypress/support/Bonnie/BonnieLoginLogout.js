@@ -27,6 +27,15 @@ switch (Cypress.env('environment')) {
     password = Cypress.env('DEV_PASSWORD')
 
     break
+
+  case 'bonnieQDM55Dev':
+    mongoURL = Cypress.env('DEVmongoURL')
+    mongoGroupId = Cypress.env('DEVQDM55_DB_MONGO_GROUPID')
+
+    username = Cypress.env('DEV_USERNAME')
+    password = Cypress.env('DEV_PASSWORD')
+
+    break
 }
 
 export const login = () => {

@@ -2,7 +2,7 @@ import * as helper from "../../../../support/helpers"
 import * as bonnieLogin from "../../../../support/Bonnie/BonnieLoginLogout"
 import * as measureDetailsPage from "../../../../pom/BonnieFHIR/WI/MeasureDetailsPage"
 import * as deleteMeasure from "../../../../support/Bonnie/BonnieFHIR/DeleteMeasure"
-import * as bonnieUploadMeasure from "../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure"
+import * as bonnieUploadMeasure from "../../../../support/Bonnie/BonnieUploadMeasure"
 import * as dashboard from "../../../../pom/BonnieFHIR/WI/Dashboard"
 import * as importMeasureDialog from '../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 

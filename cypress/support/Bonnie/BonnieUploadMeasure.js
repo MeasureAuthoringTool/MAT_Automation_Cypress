@@ -1,7 +1,7 @@
-import * as helper from '../../helpers'
-import * as importMeasureDialog from '../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
-import * as dashboard from '../../../pom/BonnieFHIR/WI/Dashboard'
-import * as measureDetailsPage from '../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as helper from '../helpers'
+import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialog'
+import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
+import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
 export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn, includeSDE) => {
   cy.log('UploadMeasureToBonnie')
@@ -23,8 +23,8 @@ export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn, i
   //waiting for VSAC call return 200
   cy.wait('@vsac').its('status').should('eq', 200)
 
-  if (calculation) {
-    changeMeasureCalculation(calculation)
+  if (calculation === 'episode') {
+    changeMeasureCalculation()
   }
 
   helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
@@ -84,7 +84,6 @@ export const UpdateMeasure = (fileToUpload) => {
   cy.log('UpdateMeasure - done')
 }
 
-function changeMeasureCalculation (calculation) {
-  const radio = calculation === 'episode' ? importMeasureDialog.episodeOfCareCalculation : importMeasureDialog.patientCalculation
-  cy.get(radio).check({ force: true })
+function changeMeasureCalculation () {
+  cy.get(importMeasureDialog.episodeOfCareCalculation).click({ force: true })
 }

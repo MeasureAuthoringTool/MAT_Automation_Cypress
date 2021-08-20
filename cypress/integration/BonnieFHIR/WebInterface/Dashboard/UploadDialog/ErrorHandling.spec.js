@@ -1,7 +1,7 @@
 import * as helper from '../../../../../support/helpers'
 import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
 import * as importMeasureDialog from '../../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
-import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 
 
 

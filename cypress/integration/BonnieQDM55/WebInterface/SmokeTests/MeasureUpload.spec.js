@@ -20,9 +20,8 @@ describe('Smoke Test: Measure Upload', () => {
 
   it('Verify successful upload Proportion Patient Based Measure', () => {
 
-    measureName = 'Risk-Standardized Inpatient Respiratory Depression Rate Following Elective ' +
-      'Primary Total Hip Arthroplasty (THA) And/Or Total Knee Arthroplasty (TKA) eCQM'
-    measureFileToUpload = 'QDM56/RSIRDR-eCQM-v1-1-QDM-5-6.zip'
+    measureName = 'Appropriate Treatment for Patients with Stage I (T1c) through III HER2 Positive Breast Cancer'
+    measureFileToUpload = 'QDM55/AppropriateTxHER2PositiveBrCa-v1-3-QDM-5-5.zip'
 
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
     measureDetailsPage.navigateToMeasureDetails(measureName)
@@ -31,8 +30,8 @@ describe('Smoke Test: Measure Upload', () => {
 
   it('Verify successful upload Proportion Episode of Care Measure', () => {
 
-    measureName = 'Elective Delivery'
-    measureFileToUpload = 'QDM56/ePC-01-Elective Delivery-v10-1-001-QDM-5-6.zip'
+    measureName = 'Venous Thromboembolism Prophylaxis'
+    measureFileToUpload = 'QDM55/CMS108-v10-2-QDM-5-5.zip'
 
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, 'episode')
     measureDetailsPage.navigateToMeasureDetails(measureName)

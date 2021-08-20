@@ -1,0 +1,11 @@
+{
+  "baseUrl": "https://dev-bonnie-prior.hcqis.org/",
+  "screenshotsFolder": "mochawesome-report/assets",
+  "numTestsKeptInMemory": 5,
+  "env": {
+    "environment": "bonnieQDM55Dev",
+    "type": "base",
+    "mongo_db": "bonnie_prior_dev"
+  }
+}
+

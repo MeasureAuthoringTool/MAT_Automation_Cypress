@@ -1,7 +1,7 @@
 import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMeasure'
 
 const measureName = 'TESTMEASURESDE001'
 const measureFileToUpload = 'FHIR/TESTMEASURESDE001-v0-0-001-FHIR-4-0-1.zip'
