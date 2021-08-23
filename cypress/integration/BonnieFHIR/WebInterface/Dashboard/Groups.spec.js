@@ -38,7 +38,7 @@ describe('Dashboard: Admin: Groups', () => {
     cy.get(testPatientPage.addUserBtn).click()
     cy.get(testPatientPage.saveGroupBtn).click()
     cy.get(testPatientPage.suucessDialogBox).click()
-    cy.log('User added to the group')
+    cy.log(' User added to the group ')
 
     // Switch to the new group
     cy.reload()
