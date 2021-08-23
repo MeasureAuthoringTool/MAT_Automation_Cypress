@@ -7,6 +7,7 @@ let username = ''
 let password = ''
 let mongoURL = ''
 let mongoGroupId = ''
+let mongoId = ''
 const sslCert = Cypress.env('MONGO_SSLCERT')
 
 switch (Cypress.env('environment')) {
@@ -22,6 +23,7 @@ switch (Cypress.env('environment')) {
   case 'bonnieFHIRDev':
     mongoURL = Cypress.env('DEVmongoURL')
     mongoGroupId = Cypress.env('DEVFHIR_DB_MONGO_GROUPID')
+    mongoId = Cypress.env('DEVFHIR_DB_MONGO_id')
 
     username = Cypress.env('DEV_USERNAME')
     password = Cypress.env('DEV_PASSWORD')
@@ -45,7 +47,11 @@ export const login = () => {
     .then(results => {
       cy.log('bonnieDeleteMeasuresAndPatients Task finished')
     })
-
+ // remove groups for user
+  cy.task('bonnieDeleteGroups', {mongoId: mongoId, mongoURL: mongoURL, sslCert: sslCert})
+    .then(results => {
+      cy.log('bonnieDeleteGroups Task finished')
+    })
   cy.task(`getSession`, {username: username, password: password, url: baseUrl}).then(session => {
     cy.restoreSession(session)
   })

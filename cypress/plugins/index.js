@@ -11,7 +11,7 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-const {GetSession} = require(`../../session`)
+const { GetSession } = require('../../session')
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
@@ -37,7 +37,7 @@ module.exports = (on, config) => {
   on('task', {
     queryDb: query => {
       return queryTestDb(query, config)
-    },
+    }
   })
   on('task', {
     bonnieDeleteMeasuresAndPatients: MongoConfiguration => {
@@ -48,8 +48,17 @@ module.exports = (on, config) => {
       return null
     }
   })
-  on(`task`, {
-    getSession({username, password, url}) {
+  on('task', {
+    bonnieDeleteGroups: MongoConfiguration => {
+      getConfigurationByFile(file).then((envConfig) =>
+        bonnieDeleteGroups(envConfig, MongoConfiguration.mongoId, MongoConfiguration.mongoURL,
+          MongoConfiguration.sslCert)
+      )
+      return null
+    }
+  })
+  on('task', {
+    getSession ({ username, password, url }) {
       return new Promise(async resolve => {
         resolve(await GetSession(username, password, url))
       })
@@ -65,9 +74,9 @@ const assert = require('assert')
 const tunnel = require('tunnel-ssh')
 const portScanner = require('portscanner')
 
-//Old Delete patients and Measures, will be depricated soon
+// Old Delete patients and Measures, will be depricated soon
 function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
-  portScanner.findAPortNotInUse(50001, 60000, sshTunnel.localHost, function(error, port) {
+  portScanner.findAPortNotInUse(50001, 60000, sshTunnel.localHost, function (error, port) {
     console.log('Found a port not in use')
 
     const sshTunnelConfig = {
@@ -85,31 +94,31 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
     // tunnel -- See https://github.com/agebrock/tunnel-ssh#readme
     tunnel(sshTunnelConfig, (error, server) => {
       if (error) {
-        console.log("SSH connection error: ", error)
+        console.log('SSH connection error: ', error)
       }
       // Connection URL
       const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
       // Database Name
       const dbName = config.env.mongo_db
       // Use connect method to connect to the server
-      MongoClient.connect(url, { autoReconnect: true, reconnectTries: 60, reconnectInterval: 1000},function (err, client) {
+      MongoClient.connect(url, { autoReconnect: true, reconnectTries: 60, reconnectInterval: 1000 }, function (err, client) {
         assert.equal(null, err)
 
-        console.log("Connected successfully to MongoDB")
+        console.log('Connected successfully to MongoDB')
 
         const db = client.db(dbName)
-        const {ObjectId} = require('mongodb')
+        const { ObjectId } = require('mongodb')
 
-        //Delete patients based on User ID
-        db.collection('cqm_patients').removeMany({user_id: ObjectId(userId)}, (err, item) => {
+        // Delete patients based on User ID
+        db.collection('cqm_patients').removeMany({ user_id: ObjectId(userId) }, (err, item) => {
           if (err) {
             console.log(err)
           }
           console.log('Patients deleted: ' + item.deletedCount)
         })
 
-        //Delete Measures based on User ID
-        db.collection('cqm_measures').removeMany({user_id: ObjectId(userId)}, (err, item) => {
+        // Delete Measures based on User ID
+        db.collection('cqm_measures').removeMany({ user_id: ObjectId(userId) }, (err, item) => {
           if (err) {
             console.log(err)
           }
@@ -120,61 +129,93 @@ function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
 
           server.close(client)
           server.stop
-          setImmediate(function(){server.emit('close')})
+          setImmediate(function () { server.emit('close') })
         })
       })
     })
   })
 }
 
-
-//Delete measures and Patients for a given userID
+// Delete measures and Patients for a given userID
 function bonnieDeleteMeasuresAndPatients (config, groupId, mongoURL, sslCert) {
-    const ca = [fs.readFileSync(sslCert)]
+  const ca = [fs.readFileSync(sslCert)]
 
-    // Connection URL
-    const url = mongoURL
-    // Database Name
-    const dbName = config.env.mongo_db
+  // Connection URL
+  const url = mongoURL
+  // Database Name
+  const dbName = config.env.mongo_db
 
-    MongoClient.connect(url, {sslCA: ca},(err, client) => {
-      if (err) {
-        console.log(`MONGO CONNECTION ERROR: ${err}`)
-        throw err
-      } else {
-          console.log('Connected successfully to MongoDB')
+  MongoClient.connect(url, { sslCA: ca }, (err, client) => {
+    if (err) {
+      console.log(`MONGO CONNECTION ERROR: ${err}`)
+      throw err
+    } else {
+      console.log('Connected successfully to MongoDB')
 
-          const db = client.db(dbName)
-          const { ObjectId } = require('mongodb')
+      const db = client.db(dbName)
+      const { ObjectId } = require('mongodb')
 
-          //Delete patients based on group ID
-          db.collection('cqm_patients').removeMany( {group_id: ObjectId(groupId) }, (err, item) => {
-            if (err) {
-              console.log(err)
-            }
-            console.log('Patients deleted: ' + item.deletedCount)
-          })
+      // Delete patients based on group ID
+      db.collection('cqm_patients').removeMany({ group_id: ObjectId(groupId) }, (err, item) => {
+        if (err) {
+          console.log(err)
+        }
+        console.log('Patients deleted: ' + item.deletedCount)
+      })
 
-          //Delete Measures based on group ID
-          db.collection('cqm_measures').removeMany( {group_id: ObjectId(groupId) }, (err, item) => {
-            if (err) {
-              console.log(err)
-            }
-            console.log(item)
-            console.log('Measures deleted: ' + item.deletedCount)
-            client.close(true, () => {
-              console.log('MongoDb connection closed.')
-            })
-          })
-      }
-    })
+      // Delete Measures based on group ID
+      db.collection('cqm_measures').removeMany({ group_id: ObjectId(groupId) }, (err, item) => {
+        if (err) {
+          console.log(err)
+        }
+        console.log(item)
+        console.log('Measures deleted: ' + item.deletedCount)
+        client.close(true, () => {
+          console.log('MongoDb connection closed.')
+        })
+      })
+    }
+  })
 }
 
+// Delete groups for a given userID
+function bonnieDeleteGroups (config, id, mongoURL, sslCert) {
+  const ca = [fs.readFileSync(sslCert)]
 
+  // Connection URL
+  const url = mongoURL
+  // Database Name
+  const dbName = config.env.mongo_db
 
-//MySQL connection stuff
+  MongoClient.connect(url, { sslCA: ca }, (err, client) => {
+    if (err) {
+      console.log(`MONGO CONNECTION ERROR: ${err}`)
+      throw err
+    } else {
+      console.log('Connected successfully to MongoDB')
+
+      const db = client.db(dbName)
+      const { ObjectId } = require('mongodb')
+
+      // Delete Groups based on ID
+      db.collection('groups').removeMany({ id: ObjectId(id) }, (err, item) => {
+        if (err) {
+          console.log(err)
+        }
+        console.log(item)
+        console.log('Groups deleted: ' + item.deletedCount)
+        client.close(true, () => {
+          console.log('MongoDb connection closed.')
+        })
+      })
+    }
+  })
+}
+
+// MySQL connection stuff
 const mysql = require('mysql')
 const { resolve } = require('@cypress/webpack-preprocessor/stubbable-require')
+const { ObjectId } = require('mongodb')
 
 function queryTestDb (query, config) {
   // creates a new mysql connection using credentials from cypress.json env's
@@ -205,15 +246,14 @@ const findDocuments = function (db, collection, query, callback) {
 
   db.collection(collection).find(query).toArray(function (err, docs) {
     assert.equal(err, null)
-    console.log("Found the following records")
+    console.log('Found the following records')
     console.log(docs)
     callback(docs)
   })
 }
 
-
-//usage for cy.task queryDb, to use data returned outside of the .then you can write the data to file and then use it later
-//or just do what you need inside the chain
+// usage for cy.task queryDb, to use data returned outside of the .then you can write the data to file and then use it later
+// or just do what you need inside the chain
 // let query = 'SELECT * FROM MAT_dev_sbx.MEASURE where DESCRIPTION = "QdmProportionMeasure1590606843360";'
 // let array = {}
 // cy.task('queryDb', query)

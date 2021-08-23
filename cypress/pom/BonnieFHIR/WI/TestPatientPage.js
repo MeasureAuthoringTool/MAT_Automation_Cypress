@@ -163,6 +163,22 @@ export const extensionsModifierBooleanDropDown = '[data-cy="modifier-extensions-
 export const extensionsModifierDateCheckbox = '[data-cy="modifier-extensions-form-group"] .col-md-2 > input[type="checkbox"]'
 export const extensionsModifierDateField = '[data-cy="modifier-extensions-form-group"] .date-control-date > input[name="date"]'
 
+//Groups Section
+export const adminTab = '.nav-admin > a'
+export const groupsTab = '[data-cy=admin-tabs] > .nav > :nth-child(2) > a'
+export const newGroupTab = 'h1 > .btn'
+export const nameDialogBox = '#name'
+export const saveNewGroup = '#save_new_group'
+export const closeDialogBox = '.modal-content > .modal-footer > .btn'
+export const editGroup = ':nth-child(4) > .btn'
+export const addUserEmailToGroup = '#email'
+export const addUserBtn = '#addUser'
+export const saveGroupBtn = '#save_group'
+export const suucessDialogBox= '#msgDialog > .modal-dialog > .modal-content > .modal-footer > .btn'
+export const dashboard = '.nav-dashboard > a'
+export const groupsDropdown = '.nav-account > .dropdown-toggle'
+export const switchGroup = ':nth-child(2) > .switch-group-link'
+
 //CQL Calculation Results
 export const calcResultSDEEthnicity = '[data-define-name="SDE Ethnicity"] [data-ref-id="10"]'
 export const calcResultSDEPayer = '[data-define-name="SDE Payer"] [data-ref-id="13"]'
