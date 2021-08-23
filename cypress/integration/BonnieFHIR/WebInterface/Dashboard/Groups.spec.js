@@ -19,19 +19,18 @@ describe('Dashboard: Admin: Groups', () => {
   })
 
   it('Switch Groups', () => {
-
-    //Create New Group
+    // Create New Group
     cy.get(testPatientPage.adminTab).click()
     cy.wait(1000)
     cy.get(testPatientPage.groupsTab).click()
-    cy.get(testPatientPage.newGroupTab).click({force: true})
-    cy.get(testPatientPage.nameDialogBox).type('Test_Group')
+    cy.get(testPatientPage.newGroupTab).click({ force: true })
+    cy.get(testPatientPage.nameDialogBox).type('TestGroup')
     cy.get(testPatientPage.saveNewGroup).click()
     cy.wait(1000)
     cy.get(testPatientPage.closeDialogBox).click()
     cy.log('New Group Created')
 
-    //Add test user to the group
+    // Add test user to the group
     cy.reload()
     cy.get(testPatientPage.editGroup).click()
     cy.wait(1000)
@@ -41,7 +40,7 @@ describe('Dashboard: Admin: Groups', () => {
     cy.get(testPatientPage.suucessDialogBox).click()
     cy.log('User added to the group')
 
-    //Switch to the new group
+    // Switch to the new group
     cy.reload()
     cy.get(testPatientPage.groupsDropdown).click()
     cy.get(testPatientPage.switchGroup).click()
@@ -56,14 +55,10 @@ describe('Dashboard: Admin: Groups', () => {
   })
 })
 
-  function navigateToMeasureDetails (measureName) {
+function navigateToMeasureDetails (measureName) {
   cy.log('navigateToMeasureDetails')
   cy.get(homePage.measure).contains(measureName).click()
   // cy.wait(1000)
   cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
   cy.log('navigateToMeasureDetails - done')
-  }
-
-
-
-
+}
