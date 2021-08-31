@@ -86,6 +86,9 @@ export const referenceValueSetDirectRefSelect = 'select[data-cy="valueset-select
 export const addWidgetBtn = 'button[data-call-method="addValue"]:visible:last'
 export const exsistingAttribute = '.form-group > .existing-values:visible'
 export const addedAttributeValue = '.form-group > .existing-values [title="value"]:visible'
+export const locationSelect = 'select[name="referenceType"]:visible:last'
+export const periodStartDate = '[name="start_date_is_defined"]:visible:last'
+export const periodEndDate = '[name="end_date_is_defined"]:visible:last'
 
 // this element is for rangeWidget
 export const lowValueField = '.col-md-6 > [name="low_value"]'
