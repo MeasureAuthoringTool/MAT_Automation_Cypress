@@ -89,6 +89,10 @@ export const addedAttributeValue = '.form-group > .existing-values [title="value
 export const locationSelect = 'select[name="referenceType"]:visible:last'
 export const periodStartDate = '[name="start_date_is_defined"]:visible:last'
 export const periodEndDate = '[name="end_date_is_defined"]:visible:last'
+export const diagnosisCondition = 'select[name="referenceType"]:visible:last'
+export const diagnosisRank = '[name="value"]'
+export const deleteAttribute = '.form-group > .existing-values > :nth-child(1) > .btn'
+export const useValueSetDirectRefSelect = 'select[name="valueset"]:visible:last'
 
 // this element is for rangeWidget
 export const lowValueField = '.col-md-6 > [name="low_value"]'
@@ -210,6 +214,7 @@ export const enterExpectedResults = (expected) => {
 export const clickSavePatient = () => {
   cy.log('clickSavePatient')
   cy.get(saveBtn).click({ force: true })
+  cy.wait(1000)
   cy.log('clickSavePatient - done')
 
 }
