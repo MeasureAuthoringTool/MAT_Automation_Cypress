@@ -93,7 +93,7 @@ describe('Test cohort Grouping Validation Messages for FHIR Measure in Measure P
     // Enter Definitions
     cy.get(measureComposer.definition).click()
     helper.verifySpinnerAppearsAndDissappears()
-    dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+    dataCreation.addDefinition('Initial Population', 'TJC."Non Elective Inpatient Encounter"')
 
     //Proceed to Population Workspace and add Initial Populations
     cy.get(measureComposer.populationWorkspace).click()

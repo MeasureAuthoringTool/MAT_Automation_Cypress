@@ -110,7 +110,7 @@ describe('Packaging: Cohort Measure', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+    dataCreation.addDefinition('Initial Population', 'TJC."Non Elective Inpatient Encounter"')
 
     //CQL Library Editor
 

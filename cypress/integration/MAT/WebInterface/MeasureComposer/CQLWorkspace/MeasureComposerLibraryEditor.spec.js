@@ -29,44 +29,44 @@ describe('Measure: CQL Editor message', () => {
     login.matLogout()
   })
 
-  // it('QDM Measure: Validate the error message on CQL Editor', () => {
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //
-  //   helper.enabledWithTimeout(measurelibrary.searchInputBox)
-  //   helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
-  //   cy.get(measurelibrary.searchBtn).click()
-  //
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //   helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
-  //   gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
-  //
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //
-  //   cy.get(measureComposer.cqlWorkspace).click()
-  //
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //
-  //   cy.get(measureComposer.functionMeasureComposer).click()
-  //
-  //   cy.get(measureComposer.functionNameInput).type('FunctionNameQDM')
-  //   cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi')
-  //   cy.get(measureComposer.functionSaveBtn).click()
-  //
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //
-  //   cy.get(measureComposer.cqlLibraryEditor).click()
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //
-  //   cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.')
-  //
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //
-  //   cy.get(measurelibrary.measureLibraryTab).click()
-  //
-  //   helper.verifySpinnerAppearsAndDissappears()
-  //
-  // })
+  it('QDM Measure: Validate the error message on CQL Editor', () => {
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, qdmMeasure)
+    cy.get(measurelibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.cqlWorkspace).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.functionMeasureComposer).click()
+
+    cy.get(measureComposer.functionNameInput).type('FunctionNameQDM')
+    cy.get(measureComposer.functionCQLExpressionEditorInput).type('.fhlsdfi')
+    cy.get(measureComposer.functionSaveBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.cqlLibraryEditor).click()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing the CQL file with validation errors. Errors are marked with a red square on the line number.')
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+  })
 
   it('FHIR Measure: Validate the error message on CQL Editor', () => {
     helper.verifySpinnerAppearsAndDissappears()

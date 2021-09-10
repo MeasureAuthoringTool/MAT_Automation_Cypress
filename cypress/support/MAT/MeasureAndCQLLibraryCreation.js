@@ -101,7 +101,7 @@ export const createFhirCohortMeasure = () => {
 
   helper.verifySpinnerAppearsAndDissappears()
 
-  addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+  addDefinition('Initial Population', 'TJC."Non Elective Inpatient Encounter"')
 
   // CQL Library Editor
 

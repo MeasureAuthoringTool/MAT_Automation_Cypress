@@ -136,7 +136,7 @@ describe('Measure Library: Create Version', () => {
     dataCreation.addDefinition('Initial Population', 'AgeInYearsAt(start of "Measurement Period")> 12')
     dataCreation.addDefinition('Denominator', 'true')
     dataCreation.addDefinition('Numerator', 'true')
-    dataCreation.addDefinition('ED Visit', 'Global."ED Encounter"')
+    dataCreation.addDefinition('Inpatient Visit', 'Global."Inpatient Encounter"')
     dataCreation.addDefinition('Birthday', 'FHIRHelpers.ToDate(Patient.birthDate)')
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -510,7 +510,7 @@ function createFHIRProportionMeasureUnusedValueSetPackageGroupVersion () {
   dataCreation.addDefinition('Initial Population', 'AgeInYearsAt(start of "Measurement Period")> 12')
   dataCreation.addDefinition('Denominator', 'true')
   dataCreation.addDefinition('Numerator', 'true')
-  dataCreation.addDefinition('ED Visit', 'Global."ED Encounter"')
+  dataCreation.addDefinition('Inpatient Visit', 'Global."Inpatient Encounter"')
   dataCreation.addDefinition('Birthday', 'FHIRHelpers.ToDate(Patient.birthDate)')
 
   helper.verifySpinnerAppearsAndDissappears()
@@ -627,7 +627,7 @@ function createFHIRProportionMeasureUnusedCodePackageGroupVersion () {
   dataCreation.addDefinition('Initial Population', 'AgeInYearsAt(start of "Measurement Period")> 12')
   dataCreation.addDefinition('Denominator', 'true')
   dataCreation.addDefinition('Numerator', 'true')
-  dataCreation.addDefinition('ED Visit', 'Global."ED Encounter"')
+  dataCreation.addDefinition('Inpatient Visit', 'Global."Inpatient Encounter"')
   dataCreation.addDefinition('Birthday', 'FHIRHelpers.ToDate(Patient.birthDate)')
 
   helper.verifySpinnerAppearsAndDissappears()

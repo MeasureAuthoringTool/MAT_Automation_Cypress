@@ -223,7 +223,7 @@ describe('FHIR CQL Composer: Add code directly on CQL Library Editor', () => {
   })
 })
 
-describe('FHIR CQL Composer: Add codesystems and valuesets in CQL Editor without UMLS', () => {
+describe('CQLComposer: CQLLibraryWorkspace: CQLComposerLibraryEditor: Add codesystems and valuesets in CQL Editor without UMLS', () => {
   beforeEach('Login', () => {
     login.loginWithoutUMLS()
     fhirCqlLibrary = dataCreation.createDraftCqlLibrary('FhirCqlLibrary', 'FHIR')

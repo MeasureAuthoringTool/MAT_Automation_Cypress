@@ -220,6 +220,5 @@ describe('QDM Ratio Measure Patient Based', () => {
 
     helper.visibleWithTimeout(measureComposer.packageWarningMessage)
     helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
-cy.pause()
   })
 })
