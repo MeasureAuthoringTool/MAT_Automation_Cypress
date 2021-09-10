@@ -119,8 +119,7 @@ describe('FHIR Ratio Measure', () => {
     helper.enterText(measureComposer.argumentNameInput, 'test')
     cy.get(measureComposer.availableDatatypesListBox).select('Boolean')
     cy.get(measureComposer.addBtn).click()
-    cy.get(measureComposer.functionCQLExpressionEditorInput).type('([Medication: "Diastolic blood ' +
-      'pressure"])', { delay: 50 })
+    cy.get(measureComposer.functionCQLExpressionEditorInput).type('([Medication: "test"])', { delay: 50 })
     cy.get(measureComposer.functionSaveBtn).click()
 
     helper.visibleWithTimeout(measureComposer.warningMessage)

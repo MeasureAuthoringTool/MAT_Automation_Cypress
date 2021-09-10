@@ -12,12 +12,12 @@ let nameWithUnderscore = ''
 
 describe('FHIR Measure: Validate the naming rules', () => {
 
-  before('Login', () => {
+  beforeEach('Login', () => {
     login.matLogin()
 
   })
 
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     login.matLogout()
   })
 
@@ -54,12 +54,12 @@ describe('FHIR Measure: Validate the naming rules', () => {
 
 describe('Measure Conversion with incorrect measure name format', () => {
 
-  before('Login', () => {
+  beforeEach('Login', () => {
     login.matLogin()
 
   })
 
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     login.matLogout()
   })
 
@@ -141,11 +141,11 @@ describe('Measure Conversion with incorrect measure name format', () => {
 
 describe('Measure Conversion with incorrect measure name and CQL library name format', () => {
 
-  before('Login', () => {
+  beforeEach('Login', () => {
     login.matLogin()
 
   })
-  after('Log Out', () => {
+  afterEach('Log Out', () => {
     login.matLogout()
   })
 

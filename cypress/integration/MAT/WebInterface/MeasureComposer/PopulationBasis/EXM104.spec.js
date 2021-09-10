@@ -160,7 +160,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
       '      with "Pharmacological Contraindications for Antithrombotic Therapy at Discharge" DischargePharmacological\n' +
       '        such that DischargePharmacological.authoredOn during IschemicStrokeEncounter.period')
 
-    dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+    dataCreation.addDefinition('Initial Population', 'TJC."Non Elective Inpatient Encounter"')
 
     dataCreation.addDefinition('Numerator', 'TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter\n' +
       '  \t\twith "Antithrombotic Therapy at Discharge" DischargeAntithrombotic\n' +

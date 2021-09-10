@@ -118,7 +118,7 @@ describe('Test Proportion Grouping Validation Messages for FHIR Measure in Measu
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    dataCreation.addDefinition('Initial Population', 'TJC."Encounter with Principal Diagnosis and Age"')
+    dataCreation.addDefinition('Initial Population', 'TJC."Non Elective Inpatient Encounter"')
     dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
     dataCreation.addDefinition('Numerator', '"Initial Population"')
 
