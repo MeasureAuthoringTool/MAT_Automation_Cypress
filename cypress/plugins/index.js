@@ -64,6 +64,18 @@ module.exports = (on, config) => {
       })
     }
   })
+  on('task', {
+    log(message) {
+      console.log(message)
+
+      return null
+    },
+    table(message) {
+      console.table(message)
+
+      return null
+    }
+  })
   on('file:preprocessor', browserify(options))
   getCompareSnapshotsPlugin(on)
   return getConfigurationByFile(file)
@@ -251,6 +263,8 @@ const findDocuments = function (db, collection, query, callback) {
     callback(docs)
   })
 }
+
+
 
 // usage for cy.task queryDb, to use data returned outside of the .then you can write the data to file and then use it later
 // or just do what you need inside the chain
