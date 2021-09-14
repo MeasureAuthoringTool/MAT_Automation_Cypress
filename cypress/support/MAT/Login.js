@@ -115,6 +115,13 @@ export const login = (un, pw) => {
 
   cy.log('Login Successful')
 }
+export const login508 = () => {
+
+  cy.visit('/MeasureAuthoringTool/Login.html', { onBeforeLoad: (win) => { win.sessionStorage.clear() } })
+
+  helper.visibleWithTimeout(loginUI.usernameInput, 400000)
+
+}
 
 export const matLogout = () => {
   helper.visibleWithTimeout(matheader.userprofile)
