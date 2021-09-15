@@ -94,6 +94,11 @@ export const diagnosisRank = '[name="value"]'
 export const deleteAttribute = '.form-group > .existing-values > :nth-child(1) > .btn'
 export const useValueSetDirectRefSelect = 'select[name="valueset"]:visible:last'
 
+//Device Requested Code Attribute
+export const deviceRequestCodeSelect = '[data-cy=attribute-name-select]'
+export const deviceRequestCodeTypeSelect = '[data-cy=attribute-type-select]'
+export const deviceRequestReferenceTypeSelect = '[data-cy=referenceType-select]'
+
 // this element is for rangeWidget
 export const lowValueField = '.col-md-6 > [name="low_value"]'
 export const highValueField = '.col-md-6 > [name="high_value"]'
