@@ -67,6 +67,10 @@ export const endTime = 'input[name="end_time"]'
 export const attributeDeleteButton = '[data-call-method="removeCriteria"]:visible:last'
 export const dateCheckboxGeneric = 'input[name="date_is_defined"]'
 export const timeCheckboxGeneric = 'input[name="time_is_defined"]'
+export const booleanSelect = '[data-cy=boolean_select]'
+export const rangeLowValueInputbox = '[data-cy=range-low-value-input]'
+export const rangeHighValueInputbox = '[data-cy=range-high-value-input]'
+export const rangeUnitsInputbox = '[data-cy=range-unit-input]'
 
 // codeSystem
 export const primaryCodeSystem = '.col-md-3 > .form-control'
@@ -79,6 +83,7 @@ export const attributeNameSelect = 'select[name="attribute_name"]:visible:last'
 export const attributeTypeSelect = 'select[name="attribute_type"]:visible:last'
 export const attributeReferenceTypeSelect = 'select[data-cy="referenceType-select"]:visible:last'
 export const valueSetDirectRefSelect = 'select[name="valueset"]:visible:last'
+export const valueSetDirectRefSelectGlobal = 'select[name="valueset"]'
 export const valueSetCodeSelect = 'select[name=vs_code]:visible:last'
 export const existingResourcesDropdown = 'select[name="valueset"] option'
 export const existingResorcesSelect = 'select[name="valueset"]'
@@ -93,6 +98,7 @@ export const diagnosisCondition = 'select[name="referenceType"]:visible:last'
 export const diagnosisRank = '[name="value"]'
 export const deleteAttribute = '.form-group > .existing-values > :nth-child(1) > .btn'
 export const useValueSetDirectRefSelect = 'select[name="valueset"]:visible:last'
+
 
 //Device Requested Code Attribute
 export const deviceRequestCodeSelect = '[data-cy=attribute-name-select]'
@@ -133,6 +139,26 @@ export const periodUnitSelect = '.timing-repeat-period-unit-view select[name="va
 export const dayofweekSelect = '.timing-repeat-dayofweek-view select[name="valueset"]'
 export const whenSelect = '.timing-repeat-when-view select[name="valueset"]'
 export const offsetInputbox = '.timing-repeat-offset-view input[data-cy=unsigned-integer-input]'
+
+//dosageInstruction Dosage
+export const sequenceInputbox = '[data-cy=integer-input]'
+export const textInputbox = '[data-view-name="text"] > .row > .string-control-value > [data-cy=string-input]'
+export const additionalInstructionSelect = '[data-cy=additional-instruction-view] select'
+export const patientInstructionInputbox = '[data-view-name="patientInstruction"] > .row > .string-control-value > [data-cy=string-input]'
+export const asNeededSelect = '[data-cy=as-needed-view] Select'
+export const siteSelect = '[data-cy=site-view] select'
+export const routeSelect = '[data-cy=route-view] select'
+export const methodSelect = '[data-cy=method-view] select'
+export const typeSelect = '[data-cy=type-view] select'
+export const doseSelect = '[data-cy=dose-view] Select'
+export const rateSelect = '[data-cy=rate-view] Select'
+export const rateInputBox = '[data-cy=rate-view] input'
+export const maxDosePerPeriodValueInputBox = '[data-view-name="maxDosePerPeriod"] [name="value_value"]'
+export const maxDosePerPeriodUnitInputBox = '[data-view-name="maxDosePerPeriod"] [name="value_unit"]'
+export const maxDosePerAdministrationValueInputBox = '[data-view-name="maxDosePerAdministration"] [name="value_value"]'
+export const maxDosePerAdministrationUnitInputBox = '[data-view-name="maxDosePerAdministration"] [name="value_unit"]'
+export const maxDosePerLifetimeValueInputBox = '[data-view-name="maxDosePerLifetime"] [name="value_value"]'
+export const maxDosePerLifetimeUnitInputBox = '[data-view-name="maxDosePerLifetime"] [name="value_unit"]'
 
 //Identifier Attribute
 export const identifierUseSelect = '[data-cy=identifier-use-view] select[name="valueset"]'

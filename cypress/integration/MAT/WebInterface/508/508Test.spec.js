@@ -1,7 +1,7 @@
 import * as login from '../../../../support/MAT/Login'
 import * as loginUI from '../../../../pom/MAT/WI/Login'
 
-//Smoke test for FHIR Proportion Measure. Create Draft measure and Package
+//508 TEST examples using axe plugin
 
 describe('508', () => {
   beforeEach('Login', () => {
