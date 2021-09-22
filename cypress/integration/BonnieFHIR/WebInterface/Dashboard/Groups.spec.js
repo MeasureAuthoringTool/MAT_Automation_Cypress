@@ -4,11 +4,16 @@ import * as helper from '../../../../support/helpers'
 import * as importMeasureDialog from '../../../../pom/BonnieFHIR/WI/ImportMeasureDialog'
 import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMeasure'
-import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
+import * as homePage from '../../../../pom/Bonnie/WI/Homepage'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+
 
 const measureName = 'FHIRmeasureCMS347'
 const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+const groupName = 'TestGroup'
+const mongoURL = Cypress.env('DEVmongoURL')
+const sslCert = Cypress.env('MONGO_SSLCERT')
+const userEmail = Cypress.env('DEV_EMAIL')
 
 describe('Dashboard: Admin: Groups', () => {
   beforeEach('Login', () => {
@@ -16,25 +21,35 @@ describe('Dashboard: Admin: Groups', () => {
   })
   afterEach('Log Out', () => {
     bonnieLogin.logout()
-  })
 
-  it('Switch Groups', () => {
-    // Create New Group
+    // remove Test Group
+    cy.task('bonnieDeleteGroups', {groupName: groupName, mongoURL: mongoURL, sslCert: sslCert})
+      .then(results => {
+        cy.log('bonnieDeleteGroups Task finished')
+      })
+  })
+  it('Create New Group, Add user to Group, switch to that Group', () => {
+
+    //Create Group
     cy.get(testPatientPage.adminTab).click()
-    cy.wait(1000)
+
+    helper.visibleWithTimeout(testPatientPage.groupsTab)
     cy.get(testPatientPage.groupsTab).click()
     cy.get(testPatientPage.newGroupTab).click({ force: true })
-    cy.get(testPatientPage.nameDialogBox).type('TestGroup')
+    cy.get(testPatientPage.nameDialogBox).type(groupName)
     cy.get(testPatientPage.saveNewGroup).click()
-    cy.wait(1000)
+
+    helper.visibleWithTimeout(testPatientPage.groupsTab)
     cy.get(testPatientPage.closeDialogBox).click()
-    cy.log('New Group Created')
+    cy.log('New Group Created sucessfully')
 
     // Add test user to the group
     cy.reload()
-    cy.get(testPatientPage.editGroup).click()
-    cy.wait(1000)
-    cy.get(testPatientPage.addUserEmailToGroup).type('matdevuser1@protonmail.com')
+
+    clickEditForGroup(groupName)
+
+    helper.visibleWithTimeout(testPatientPage.addUserEmailToGroup)
+    helper.enterText(testPatientPage.addUserEmailToGroup, userEmail)
     cy.get(testPatientPage.addUserBtn).click()
     cy.get(testPatientPage.saveGroupBtn).click()
     cy.get(testPatientPage.suucessDialogBox).click()
@@ -42,23 +57,26 @@ describe('Dashboard: Admin: Groups', () => {
 
     // Switch to the new group
     cy.reload()
+
+    helper.visibleWithTimeout(testPatientPage.groupsDropdown)
     cy.get(testPatientPage.groupsDropdown).click()
     cy.get(testPatientPage.switchGroup).click()
     helper.visibleWithTimeout(importMeasureDialog.importMeasureDialog)
-    cy.clearCookie('_bonnie_session')
     helper.visibleWithTimeout(importMeasureDialog.closeBtn)
     cy.get(importMeasureDialog.closeBtn).click()
+
+    cy.get(homePage.accountText).contains(groupName)
+
+    //Upload Measure to Group
     helper.visibleWithTimeout(dashboard.uploadBtn)
     helper.enabledWithTimeout(dashboard.uploadBtn)
+
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload)
-    navigateToMeasureDetails(measureName)
+    measureDetailsPage.navigateToMeasureDetails(measureName)
+
   })
 })
 
-function navigateToMeasureDetails (measureName) {
-  cy.log('navigateToMeasureDetails')
-  cy.get(homePage.measure).contains(measureName).click()
-  // cy.wait(1000)
-  cy.get(measureDetailsPage.measureDetailsTitle).should('contain.text', 'Measure details')
-  cy.log('navigateToMeasureDetails - done')
+function clickEditForGroup(groupName) {
+  cy.get('.group-name').contains(groupName).siblings().eq(2).click()
 }
