@@ -151,11 +151,10 @@ function createMeasureAndGrouping() {
 
   dataCreation.addDefinition('Numerator', '"Encounters With Falls with Major Injury"')
 
-  dataCreation.addDefinition('Qualifying Encounters', '["Encounter, Performed": "Encounter ' +
-    'Inpatient"] InpatientEncounter\n' +
+  dataCreation.addDefinition('Qualifying Encounters', '["Encounter, Performed": ' +
+    '"Encounter Inpatient"] InpatientEncounter\n' +
     '  with ["Patient Characteristic Birthdate": "Birth date"] BirthDate\n' +
-    '    such that Global."CalendarAgeInYearsAt" ( BirthDate.birthDatetime, start of Global.' +
-    '"HospitalizationWithObservation" ( InpatientEncounter ) ) >= 18\n' +
+    '    such that 34 >= 18\n' +
     '  where InpatientEncounter.relevantPeriod ends during "Measurement Period"')
 
   //Function

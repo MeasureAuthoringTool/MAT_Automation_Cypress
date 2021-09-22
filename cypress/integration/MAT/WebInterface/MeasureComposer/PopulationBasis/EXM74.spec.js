@@ -128,8 +128,8 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
     dataCreation.addDefinition('Qualifying Encounters', '( [Encounter: "Office Visit"]\n' +
       '              union [Encounter: "Preventive Care, Established Office Visit, 0 to 17"]\n' +
       '              union [Encounter: "Preventive Care Services, Initial Office Visit, 0 to 17"]\n' +
-      '              union [Encounter: "Preventive Care Services - Established Office Visit, 18 and Up"]\n' +
-      '              union [Encounter: "Preventive Care Services-Initial Office Visit, 18 and Up"]\n' +
+      '              union [Encounter: "Preventive Care Services Established Office Visit, 18 and Up"]\n' +
+      '              union [Encounter: "Preventive Care Services Initial Office Visit, 18 and Up"]\n' +
       '              union [Encounter: "Clinical Oral Evaluation"]\n' +
       '              union [Encounter: "Telephone Visits"]\n' +
       '              union [Encounter: "Online Assessments"]) ValidEncounter\n' +
