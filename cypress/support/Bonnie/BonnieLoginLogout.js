@@ -47,11 +47,7 @@ export const login = () => {
     .then(results => {
       cy.log('bonnieDeleteMeasuresAndPatients Task finished')
     })
- // remove groups for user
-  cy.task('bonnieDeleteGroups', {mongoId: mongoId, mongoURL: mongoURL, sslCert: sslCert})
-    .then(results => {
-      cy.log('bonnieDeleteGroups Task finished')
-    })
+  //Get Session
   cy.task(`getSession`, {username: username, password: password, url: baseUrl}).then(session => {
     cy.restoreSession(session)
   })

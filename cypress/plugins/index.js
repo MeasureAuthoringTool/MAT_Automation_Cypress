@@ -51,7 +51,7 @@ module.exports = (on, config) => {
   on('task', {
     bonnieDeleteGroups: MongoConfiguration => {
       getConfigurationByFile(file).then((envConfig) =>
-        bonnieDeleteGroups(envConfig, MongoConfiguration.mongoId, MongoConfiguration.mongoURL,
+        bonnieDeleteGroups(envConfig, MongoConfiguration.groupName, MongoConfiguration.mongoURL,
           MongoConfiguration.sslCert)
       )
       return null
@@ -86,69 +86,7 @@ const assert = require('assert')
 const tunnel = require('tunnel-ssh')
 const portScanner = require('portscanner')
 
-// Old Delete patients and Measures, will be depricated soon
-function bonnieFHIRDeleteMeasuresAndPatients (sshTunnel, config, userId) {
-  portScanner.findAPortNotInUse(50001, 60000, sshTunnel.localHost, function (error, port) {
-    console.log('Found a port not in use')
-
-    const sshTunnelConfig = {
-      agent: process.env.SSH_AUTH_SOCK,
-      username: sshTunnel.username,
-      privateKey: require('fs').readFileSync(sshTunnel.privateKey),
-      host: sshTunnel.host,
-      port: sshTunnel.port,
-      dstHost: sshTunnel.dstHost,
-      dstPort: sshTunnel.dstPort,
-      localHost: sshTunnel.localHost,
-      localPort: port
-    }
-
-    // tunnel -- See https://github.com/agebrock/tunnel-ssh#readme
-    tunnel(sshTunnelConfig, (error, server) => {
-      if (error) {
-        console.log('SSH connection error: ', error)
-      }
-      // Connection URL
-      const url = 'mongodb://' + sshTunnelConfig.localHost + ':' + sshTunnelConfig.localPort
-      // Database Name
-      const dbName = config.env.mongo_db
-      // Use connect method to connect to the server
-      MongoClient.connect(url, { autoReconnect: true, reconnectTries: 60, reconnectInterval: 1000 }, function (err, client) {
-        assert.equal(null, err)
-
-        console.log('Connected successfully to MongoDB')
-
-        const db = client.db(dbName)
-        const { ObjectId } = require('mongodb')
-
-        // Delete patients based on User ID
-        db.collection('cqm_patients').removeMany({ user_id: ObjectId(userId) }, (err, item) => {
-          if (err) {
-            console.log(err)
-          }
-          console.log('Patients deleted: ' + item.deletedCount)
-        })
-
-        // Delete Measures based on User ID
-        db.collection('cqm_measures').removeMany({ user_id: ObjectId(userId) }, (err, item) => {
-          if (err) {
-            console.log(err)
-          }
-          console.log('Measures deleted: ' + item.deletedCount)
-          client.close(true, () => {
-            console.log('MongoDb connection closed.')
-          })
-
-          server.close(client)
-          server.stop
-          setImmediate(function () { server.emit('close') })
-        })
-      })
-    })
-  })
-}
-
-// Delete measures and Patients for a given userID
+// Delete measures and Patients for a given groupId
 function bonnieDeleteMeasuresAndPatients (config, groupId, mongoURL, sslCert) {
   const ca = [fs.readFileSync(sslCert)]
 
@@ -191,7 +129,7 @@ function bonnieDeleteMeasuresAndPatients (config, groupId, mongoURL, sslCert) {
 }
 
 // Delete groups for a given userID
-function bonnieDeleteGroups (config, id, mongoURL, sslCert) {
+function bonnieDeleteGroups (config, groupName, mongoURL, sslCert) {
   const ca = [fs.readFileSync(sslCert)]
 
   // Connection URL
@@ -209,8 +147,8 @@ function bonnieDeleteGroups (config, id, mongoURL, sslCert) {
       const db = client.db(dbName)
       const { ObjectId } = require('mongodb')
 
-      // Delete Groups based on ID
-      db.collection('groups').removeMany({ id: ObjectId(id) }, (err, item) => {
+      // Delete Groups based on name
+      db.collection('groups').removeMany({name: groupName}, (err, item) => {
         if (err) {
           console.log(err)
         }
