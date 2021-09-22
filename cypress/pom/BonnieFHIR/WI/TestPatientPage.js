@@ -228,7 +228,7 @@ export const enterPatientCharacteristics = (lastName) => {
   cy.get(lastNameTextField).type(lastName)
   cy.get(firstNameTextField).type('Current')
   cy.get(patientDescriptionTextField).type('Patient is very special')
-  cy.get(dateofBithField).type('01/01/1950')
+  cy.get(dateofBithField).type('01/01/1945')
   cy.get(patientDescriptionTextField).click()
   cy.get(raceDropdown).select('Asian')
   cy.get(genderDropdown).select('Male')
