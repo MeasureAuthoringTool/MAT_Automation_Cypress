@@ -77,7 +77,7 @@ describe('Attribute UI: Code Widget', () => {
     cy.get(testPatientPage.attributeTypeSelect).should('contain.text', 'Code')
     cy.get(testPatientPage.valueSetDirectRefSelect).select('MedicationAdministration Status Codes')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains('status: "completed"')
+    cy.get(testPatientPage.exsistingAttribute).contains('status: completed')
     cy.log('AddCodeWidget - done')
   }
 

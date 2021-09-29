@@ -96,7 +96,7 @@ describe('Patient: Copy to another measure', () => {
     cy.get(testPatientPage.patientDescriptionTextField).should('have.value', 'Patient is very special')
 
     // Validate Date of Birth
-    cy.get(testPatientPage.dateofBithField).should('have.value', '01/01/1950')
+    cy.get(testPatientPage.dateofBithField).should('have.value', '01/01/1945')
 
     // Validate Race Dropdown Option
     cy.get(testPatientPage.raceDropdown).find(':selected').contains('Asian')

@@ -1,5 +1,5 @@
 import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
-import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 import * as dashboard from '../../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'

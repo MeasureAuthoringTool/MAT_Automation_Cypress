@@ -37,11 +37,15 @@ describe("Measure with references", () => {
 
     // Add a reference to a condition
     cy.log('Reference')
-    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
-    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
-    cy.get(testPatientPage.attributeReferenceTypeSelect).select('Condition')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis')
+    cy.get(testPatientPage.diagnosisCondition).select('Condition')
     cy.get(testPatientPage.referenceValueSetDirectRefSelect).select('Dead')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
+    // Collapse condition
+    testPatientPage.toggleDataElement(1)
+
+    // Expand Encounter
+    testPatientPage.toggleDataElement(0)
     cy.log('Reference - done')
 
     // Verify the Encounter's data element is collapsed
@@ -49,14 +53,19 @@ describe("Measure with references", () => {
     cy.get('.patient-criteria .criteria-details').should('contain.text', 'Encounter: Emergency Department Visit')
 
     // Verify the Condition's data element is added
-    cy.get('.patient-criteria form').should('contain.text', 'Clinical Summary: Condition: Dead')
+    cy.get('.patient-criteria form').should('contain.text', 'diagnosis: condition: Condition/dead')
 
     // Enter something into condition
+    // Collapse Encounter
+    testPatientPage.toggleDataElement(0)
+    // Expand condition
+    testPatientPage.toggleDataElement(1)
+
     cy.get(testPatientPage.attributeNameSelect).select('verificationStatus')
     cy.get(testPatientPage.valueSetDirectRefSelect).select('ConditionVerificationStatus')
     cy.get(testPatientPage.valueSetCodeSelect).select('unconfirmed')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains("verificationStatus: ConditionVerificationStatus: unconfirmed")
+    cy.get(testPatientPage.exsistingAttribute).contains("verificationStatus: [ConditionVerificationStatus: unconfirmed]")
 
     // Collapse condition
     testPatientPage.toggleDataElement(1) 
@@ -65,10 +74,10 @@ describe("Measure with references", () => {
     testPatientPage.toggleDataElement(0)
 
     // Verify there is a reference to the Condition resource
-    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis.condition: Condition/")
+    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis: condition: Condition")
 
     // Click to drop the reference but the referenced Condition should still exist
-    cy.get('button[data-attribute-name="diagnosis.condition"][data-call-method="removeValue"]').click()
+    cy.get('[data-call-method="removeValue"]').eq(0).click()
 
     // Drop Encounter
     helper.click(testPatientPage.patientinverseDangerButton)
