@@ -89,13 +89,9 @@ describe('Create CQL Library', () => {
       '\t\tand EDVisit.dischargeDisposition is not null\n' +
       '\t\tand EDVisit.lengthOfStay > 0 \'minutes\'')
 
-    dataCreation.addDefinition('Initial Population', '"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
-      '  with ["Patient Characteristic Birthdate": "Birth date"] BirthDate\n' +
-      '    such that Global."CalendarAgeInYearsAt" ( BirthDate.birthDatetime, start of EDVisitMP.relevantPeriod ) >= 18')
-
-    dataCreation.addDefinition('Measure Exclusions', '"Patient Expired During Emergency Department Visit"\n' +
-      '\tunion "Patient Has Psychiatric or Mental Health Diagnosis"\n' +
-      '\tunion "Patient Transferred to Acute Care Hospital or Admitted to Observation"')
+    dataCreation.addDefinition('Initial Population', '/*Emergency Department visit during the measurement period*/\n' +
+      '["Encounter, Performed": "Emergency Department Visit"] EDVisit\n' +
+      '  where EDVisit.relevantPeriod during "Measurement Period"')
 
     dataCreation.addDefinition('Measure Population', '"Initial Population"')
 
@@ -105,13 +101,12 @@ describe('Create CQL Library', () => {
       '  )')
 
     dataCreation.addDefinition('Patient Has Psychiatric or Mental Health Diagnosis', '"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
-      '\twith ["Diagnosis": "Psychiatric/Mental Health Diagnosis"] PsychDiagnosis\n' +
-      '\t\tsuch that PsychDiagnosis.prevalencePeriod overlaps after EDVisitMP.relevantPeriod')
+      'with ["Diagnosis": "Psychiatric/Mental Health Diagnosis"] PsychDiagnosis\n' +
+      'such that PsychDiagnosis.prevalencePeriod overlaps after EDVisitMP.relevantPeriod')
 
     dataCreation.addDefinition('Patient Transferred to Acute Care Hospital or Admitted to Observation', '"Emergency Department Visit During Measurement Period" EDVisitMP\n' +
-      '\twhere ( EDVisitMP.dischargeDisposition in "Acute Care or Inpatient Facility"\n' +
-      '\t\t\tor EDVisitMP.dischargeDisposition ~ "Admission to observation unit (procedure)"\n' +
-      '\t)')
+      'where ( EDVisitMP.dischargeDisposition in "Acute Care or Inpatient Facility"\n' +
+      'or EDVisitMP.dischargeDisposition ~ "Admission to observation unit (procedure)")')
 
     //Function
 
