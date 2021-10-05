@@ -71,6 +71,7 @@ export const booleanSelect = '[data-cy=boolean_select]'
 export const rangeLowValueInputbox = '[data-cy=range-low-value-input]'
 export const rangeHighValueInputbox = '[data-cy=range-high-value-input]'
 export const rangeUnitsInputbox = '[data-cy=range-unit-input]'
+export const status = 'select[name="vs_code"]'
 
 // codeSystem
 export const primaryCodeSystem = '.col-md-3 > .form-control'
@@ -98,7 +99,12 @@ export const diagnosisCondition = 'select[name="referenceType"]:visible:last'
 export const diagnosisRank = '[name="value"]'
 export const deleteAttribute = '.form-group > .existing-values > :nth-child(1) > .btn'
 export const useValueSetDirectRefSelect = 'select[name="valueset"]:visible:last'
-
+export const dateTimeCheckbox = 'input[name="date_is_defined"]:visible:last'
+export const repeatBounds = 'select[name="type"]'
+export const repeatBoundsPeriodStartDate = 'input[name="start_date_is_defined"]:visible:first'
+export const repeatBoundsPeriodEndDate = 'input[name="end_date_is_defined"]:visible:first'
+export const medicationCustomCodeSelect = 'select[name="custom_codesystem_select"]'
+export const medicationCustomCode = 'input[name="custom_code"]'
 
 //Device Requested Code Attribute
 export const deviceRequestCodeSelect = '[data-cy=attribute-name-select]'
