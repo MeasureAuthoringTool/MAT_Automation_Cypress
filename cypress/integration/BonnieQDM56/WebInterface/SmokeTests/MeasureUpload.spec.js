@@ -1,9 +1,9 @@
 import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
-import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as measureDetailsPage from '../../../../pom/BonnieQDM/WI/MeasureDetailsPage'
 import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMeasure'
-import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as deletePatient from '../../../../support/Bonnie/BonnieFHIR/DeletePatient'
-import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
+import * as testPatientPage from '../../../../pom/BonnieQDM/WI/TestPatientPage'
+import * as deletePatient from '../../../../support/Bonnie/BonnieQDM/DeletePatient'
+import * as homePage from '../../../../pom/BonnieQDM/WI/Homepage'
 
 let measureName = ''
 let measureFileToUpload = ''
@@ -24,7 +24,7 @@ describe('Smoke Test: Measure Upload', () => {
 
   })
 
-  it.only('Verify successful upload Proportion Patient Based Measure and add patient', () => {
+  it('Verify successful upload Proportion Patient Based Measure and add patient', () => {
 
     measureName = 'Risk-Standardized Inpatient Respiratory Depression Rate Following Elective ' +
       'Primary Total Hip Arthroplasty (THA) And/Or Total Knee Arthroplasty (TKA) eCQM'

@@ -5,7 +5,7 @@ import * as testPatientPage from '../../../../pom/BonnieQDM/WI/TestPatientPage'
 import * as deletePatient from '../../../../support/Bonnie/BonnieQDM/DeletePatient'
 import * as homePage from '../../../../pom/BonnieQDM/WI/Homepage'
 
-describe('Patient Coverage Calculation', () => {
+describe('Export Patients', () => {
 
   const measureName = 'Core Clinical Data Elements for the Hybrid Hospital-Wide Readmission (HWR) Measure with Claims and Electronic Health Record Data'
   const measureFileToUpload = 'QDM56/CCDE - Lookback-v2-0-004-QDM-5-6.zip'
@@ -17,7 +17,7 @@ describe('Patient Coverage Calculation', () => {
     bonnieLogin.logout()
   })
 
-  it.only('Verify Coverage Calculation for Patient', () => {
+  it('Verify Patients Exported', () => {
 
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
     measureDetailsPage.navigateToMeasureDetails(measureName)
@@ -40,11 +40,13 @@ describe('Patient Coverage Calculation', () => {
       testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
       measureDetailsPage.navigateToHomeMeasurePage()
       navigateToMeasureDetails(measureName)
-      cy.get(measureDetailsPage.coverageNumber).invoke('val')
-        .then(value => {
-          expect(value).to.eql('100')
-          cy.log('coverageCalculation - done')
-        })
+      //Export Patients
+      cy.get(measureDetailsPage.measureSettingsBtn).click()
+      cy.get(measureDetailsPage.exportPatientBtn).click()
+      //Verify patient exported
+      cy.get(measureDetailsPage.exportPatientPopup).should('contain.text', 'QDM Patient Export Completed')
+      cy.get(measureDetailsPage.exportPatientPopupCloseBtn).click()
+      cy.log('Patient Export - done')
       deletePatient.DeletePatient(distinctLastName)
       deletePatient.VerifyPatientRemoved(initialPatientCount)
 
@@ -58,4 +60,3 @@ describe('Patient Coverage Calculation', () => {
     cy.log('navigateToMeasureDetails - done')
   }
 })
-
