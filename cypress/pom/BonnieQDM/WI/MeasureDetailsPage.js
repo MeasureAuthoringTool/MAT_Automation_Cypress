@@ -9,9 +9,18 @@ export const measureInverseBtn = '.settings-container button.btn-danger-inverse[
 export const measureDeleteBtn = '.settings-container button.btn-danger[data-call-method="deleteMeasure"]'
 export const coverageNumber = '#coverage'
 
-//Export Patient
+// Import Patient
+export const importPatientBtn = '[data-call-method="importJsonPatients"]'
+export const chooseInputFile = '#patientFileInput'
+export const importFileSubmitBtn = '#importPatientsSubmit'
+export const importPatientSuccessmsg = '#modalTitle'
+export const successMsgCloseBtn = '#msgDialog > .modal-dialog > .modal-content > .modal-footer > .btn'
+export const importPatientErrormsg = '.modal-body > :nth-child(2)'
+export const errorMsgCloseBtn = '#errorDialog > .modal-dialog > .modal-content > .modal-footer > .btn'
+
+// Export Patient
 export const measureSettingsBtn = '.patients-title > .settings-container > .btn-settings > .fa'
-export const exportPatientBtn= '[data-call-method="exportJsonPatients"]'
+export const exportPatientBtn = '[data-call-method="exportJsonPatients"]'
 export const exportPatientPopup = '#exportJsonSucceededDialog > .modal-dialog > .modal-content > .modal-header'
 export const exportPatientPopupCloseBtn = '#exportJsonSucceededDialog > .modal-dialog > .modal-content > .modal-footer > .btn'
 // Number of passed patients
@@ -20,7 +29,7 @@ export const patientListing = '.patient-listing'
 export const patientFraction = '.fraction'
 export const patientStatus = '.patient-status'
 
-//summary section
+// summary section
 export const newStatus = '.status-col > div > .status'
 export const measureYearDiv = '.actions-container > .btn'
 // Section with calculation results and patients
@@ -58,4 +67,3 @@ export function navigateToMeasureDetails (measureName) {
   cy.get(measureDetailsTitle).should('contain.text', 'Measure details')
   cy.log('navigateToMeasureDetails - done')
 }
-
