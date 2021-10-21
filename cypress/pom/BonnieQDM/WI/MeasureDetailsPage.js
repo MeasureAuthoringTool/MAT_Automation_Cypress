@@ -23,6 +23,20 @@ export const measureSettingsBtn = '.patients-title > .settings-container > .btn-
 export const exportPatientBtn = '[data-call-method="exportJsonPatients"]'
 export const exportPatientPopup = '#exportJsonSucceededDialog > .modal-dialog > .modal-content > .modal-header'
 export const exportPatientPopupCloseBtn = '#exportJsonSucceededDialog > .modal-dialog > .modal-content > .modal-footer > .btn'
+
+// Delete All Patients
+export const deleteAllPatientsBtn = '[data-call-method="deleteAllPatients"]'
+export const deleteConfirmCheckBox = '#delete_confirm'
+export const deletePatientsConfirmBtn = '#delete_all_button'
+export const deletePatientsSuccessMsg = '#modalTitle'
+export const deletePatientsSuccessMsgConfirmBtn = '#msgDialog > .modal-dialog > .modal-content > .modal-footer > .btn'
+export const deleteAllPatientsErrorMsg = '#errorDialog > .modal-dialog > .modal-content > .modal-body > :nth-child(1)'
+export const deleteAllPatientsErrorMsgCloseBtn = '#errorDialog > .modal-dialog > .modal-content > .modal-footer > .btn'
+
+// Share Patients
+export const sharePatientsBtn = '[data-call-method="sharePatients"]'
+export const sharePatientsConfirmationBtn = '#sharePatientsSubmit'
+
 // Number of passed patients
 export const patientListing = '.patient-listing'
 // Total number of patients (fraction)
