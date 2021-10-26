@@ -1,0 +1,17 @@
+version: '3.3'
+services: 
+  ui-e2e-dev:
+    image: test
+    tty: true
+    build: .
+    container_name: cydev
+    environment:
+      - CYPRESS_DEV_DB_MONGO_SSH_HOST=${CYPRESS_DEV_DB_MONGO_SSH_HOST}
+      - CYPRESS_DEV_DB_MONGO_SSH_USERNAME=${CYPRESS_DEV_DB_MONGO_SSH_USERNAME}
+      - CYPRESS_DEV_DB_MONGO_SSH_PEMFILE=bonnie-mat-dev.pem
+      - CYPRESS_BONNIE_FHIR_DEV_USERNAME=${CYPRESS_BONNIE_FHIR_DEV_USERNAME}
+      - CYPRESS_BONNIE_FHIR_DEV_PASSWORD=${CYPRESS_BONNIE_FHIR_DEV_PASSWORD}
+      - CYPRESS_DEV_DB_MONGO_USERID=${CYPRESS_DEV_DB_MONGO_USERID}
+      - CYPRESS_VSAC_API_KEY=${CYPRESS_VSAC_API_KEY}
+    volumes:
+      - ./mochawesome-report:/app/mochawesome-report
