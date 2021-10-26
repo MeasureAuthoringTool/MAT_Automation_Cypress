@@ -2,13 +2,6 @@ node {
     parameters {
         choice(choices: ['DEV'], description: 'test environment to run tests', name: 'CYPRESS_ENV')
     }
-    environment {
-            CYPRESS_DEV_USERNAME     = credentials('CYPRESS_DEV_USERNAME')
-            CYPRESS_DEV_PASSWORD     = credentials('CYPRESS_DEV_PASSWORD')
-            CYPRESS_DEV_ALT_USERNAME     = credentials('CYPRESS_DEV_ALT_USERNAME')
-            CYPRESS_DEV_ALT_PASSWORD     = credentials('CYPRESS_DEV_ALT_PASSWORD')
-            CYPRESS_VSAC_API_KEY     = credentials('CYPRESS_VSAC_API_KEY')
-        }
     stage('Clean Workspace') {
         slackSend(color: "#cccccc", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - UI Smoke Tests Build Started")
         cleanWs()
@@ -18,6 +11,7 @@ node {
         sh 'docker rm cydev || true'
     }
     stage('Start Containers') {
+	withCredentials([string(credentialsId: 'CYPRESS_DEV_USERNAME', variable: 'CYPRESS_DEV_USERNAME'), string(credentialsId: 'CYPRESS_DEV_PASSWORD', variable: 'CYPRESS_DEV_PASSWORD'), string(credentialsId: 'CYPRESS_DEV_ALT_USERNAME', variable: 'CYPRESS_DEV_ALT_USERNAME'), string(credentialsId: 'CYPRESS_DEV_ALT_PASSWORD', variable: 'CYPRESS_DEV_ALT_PASSWORD'), string(credentialsId: 'CYPRESS_VSAC_API_KEY', variable: 'CYPRESS_VSAC_API_KEY'),]) {
         sh 'docker run --name=cydev \
         -v $WORKSPACE:/usr/src/app/reports \
         -e "CYPRESS_ENV=${CYPRESS_ENV}" \
@@ -27,6 +21,7 @@ node {
         -e "CYPRESS_DEV_ALT_PASSWORD=${CYPRESS_DEV_ALT_PASSWORD}" \
         -e "CYPRESS_VSAC_API_KEY=${CYPRESS_VSAC_API_KEY}" \
         -td cydev'
+	}
     }
     stage('Run UI Tests') {
         try {
