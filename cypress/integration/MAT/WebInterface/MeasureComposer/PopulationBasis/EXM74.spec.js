@@ -262,6 +262,11 @@ describe('EXM74: Primary Caries Prevention Intervention as Offered by Primary Ca
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    cy.get(measurelibrary.measureLibraryTab).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
     // Create First Draft Measure
     helper.visibleWithTimeout(measurelibrary.row1RecentActivity, 20000)
     gridRowActions.selectRow(measurelibrary.row1RecentActivity)

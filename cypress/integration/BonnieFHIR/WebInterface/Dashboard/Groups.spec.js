@@ -7,7 +7,6 @@ import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMea
 import * as homePage from '../../../../pom/Bonnie/WI/Homepage'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
-
 const measureName = 'FHIRmeasureCMS347'
 const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 const groupName = 'TestGroup'
@@ -49,7 +48,7 @@ describe('Dashboard: Admin: Groups', () => {
     clickEditForGroup(groupName)
 
     helper.visibleWithTimeout(testPatientPage.addUserEmailToGroup)
-    helper.enterText(testPatientPage.addUserEmailToGroup, userEmail)
+    helper.enterText(testPatientPage.addUserEmailToGroup, userEmail, { delay: 50 })
     cy.get(testPatientPage.addUserBtn).click()
     cy.get(testPatientPage.saveGroupBtn).click()
     cy.get(testPatientPage.suucessDialogBox).click()

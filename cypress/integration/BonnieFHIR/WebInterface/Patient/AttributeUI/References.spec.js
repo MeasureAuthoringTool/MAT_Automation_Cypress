@@ -1,5 +1,5 @@
 import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
-import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 import * as dashboard from '../../../../../pom/BonnieFHIR/WI/Dashboard'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
@@ -39,78 +39,74 @@ describe("Measure with references", () => {
     testPatientPage.dragAndDrop('management', 'Management: Encounter: Emergency Department Visit', '3')
 
     // Add Condition
-    cy.log('Reference')
-    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
-    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
-    cy.get(testPatientPage.attributeReferenceTypeSelect).select('Condition')
+    cy.log('Add Condition')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis')
+    cy.get(testPatientPage.diagnosisCondition).select('Condition')
     cy.get(testPatientPage.referenceValueSetDirectRefSelect).select('Dead')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.log('Reference - done')
-
-    // Verify the Encounter's data element is collapsed
-    cy.get('.patient-criteria .criteria-details').should('be.visible')
-    cy.get('.patient-criteria .criteria-details').should('contain.text', 'Encounter: Emergency Department Visit')
-
-    // Verify the Condition's data element is added
-    cy.get('.patient-criteria form').should('contain.text', 'Clinical Summary: Condition: Dead')
-
     // Collapse condition
     testPatientPage.toggleDataElement(1)
 
     // Expand Encounter
     testPatientPage.toggleDataElement(0)
-
-    //Add Existing Resources
-    cy.log('Reference')
-    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
-    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
-    cy.get(testPatientPage.attributeReferenceTypeSelect).select('Existing Resources')
-    cy.get(testPatientPage.existingResourcesDropdown).eq(1).invoke('val').then((val)=>{
-      cy.get(testPatientPage.existingResorcesSelect).select(val)
-    })
-    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-
-    // Add Procedure
-    cy.log('Reference')
-    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
-    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
-    cy.get(testPatientPage.attributeReferenceTypeSelect).select('Procedure')
-    cy.get(testPatientPage.referenceValueSetDirectRefSelect).select('Admit Inpatient')
-    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.log('Reference - done')
+    cy.log('Condition added successfully')
 
     // Verify the Encounter's data element is collapsed
     cy.get('.patient-criteria .criteria-details').should('be.visible')
     cy.get('.patient-criteria .criteria-details').should('contain.text', 'Encounter: Emergency Department Visit')
 
     // Verify the Condition's data element is added
-    cy.get('.patient-criteria form').should('contain.text', 'Clinical Summary: Procedure: Admit Inpatient')
+    cy.get('.patient-criteria form').should('contain.text', 'diagnosis: condition: Condition/dead')
 
-    // Collapse condition
+    //Add Existing Resources to Condition
+    cy.log('Add Existing Resource to condition')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis')
+    cy.get(testPatientPage.attributeReferenceTypeSelect).select('Existing Resources')
+    cy.get(testPatientPage.existingResourcesDropdown).eq(1).invoke('val').then((val)=>{
+      cy.get(testPatientPage.existingResorcesSelect).eq(0).select(val)
+    })
+    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
+    cy.log('Existing Resource added to condition successfully')
+
+    // Add Procedure
+    cy.log('Add procedure')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis')
+    cy.get(testPatientPage.diagnosisCondition).select('Procedure')
+    cy.get(testPatientPage.referenceValueSetDirectRefSelect).select('Admit Inpatient')
+    cy.get(testPatientPage.addWidgetBtn).eq(0).click()
+    cy.log('Procedure added successfully')
+
+    // Collapse Procedure
     testPatientPage.toggleDataElement(2)
 
     // Expand Encounter
     testPatientPage.toggleDataElement(0)
 
-    //Add Existing Resources
-    cy.log('Reference')
-    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
-    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
+    // Verify the Encounter's data element is collapsed
+    cy.get('.patient-criteria .criteria-details').should('be.visible')
+    cy.get('.patient-criteria .criteria-details').should('contain.text', 'Encounter: Emergency Department Visit')
+
+    // Verify the Procedure's data element is added
+    cy.get('.existing-values > :nth-child(3)').should('contain.text', 'diagnosis: condition: Procedure/admit-inpatient')
+
+    //Add Existing Resources to Procedure
+    cy.log('Add Existing resource to Procedure')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis')
     cy.get(testPatientPage.attributeReferenceTypeSelect).select('Existing Resources')
     cy.get(testPatientPage.existingResourcesDropdown).eq(2).invoke('val').then((val)=>{
-      cy.get(testPatientPage.existingResorcesSelect).select(val)
+      cy.get(testPatientPage.existingResorcesSelect).eq(0).select(val)
     })
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
+    cy.log('Existing Resource added to Procedure successfully')
 
     //Update Procedure
 
-    cy.log('Reference')
-    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
-    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
+    cy.log('Update Procedure')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis')
     cy.get(testPatientPage.attributeReferenceTypeSelect).select('Procedure')
     cy.get(testPatientPage.referenceValueSetDirectRefSelect).select('active')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.log('Reference - done')
+    cy.log('Procedure Updated Successfully')
 
     // Verify the Encounter's data element is collapsed
     cy.get('.patient-criteria .criteria-details').should('be.visible')
@@ -126,9 +122,7 @@ describe("Measure with references", () => {
     testPatientPage.toggleDataElement(3)
     helper.click(testPatientPage.patientinverseDangerButton)
     helper.click(testPatientPage.attributeDeleteButton)
-
-    //Verify Procedure attribute is removed from Encounter
-    cy.get(testPatientPage.exsistingAttribute).should('not.exist')
+    cy.log('Procedure deleted successfully')
 
     // Click cancel button for patient to proceed back to measure details
     helper.click(testPatientPage.cancelBtn)
@@ -155,17 +149,17 @@ describe("Measure with references", () => {
     testPatientPage.dragAndDrop('management', 'Management: Encounter: Office Visit', '28')
 
     //Add Existing Resources for Condition
-    cy.log('Reference')
-    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
-    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
+    cy.log('Add Existing resource to Condition')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis')
     cy.get(testPatientPage.attributeReferenceTypeSelect).select('Existing Resources')
     cy.get(testPatientPage.existingResourcesDropdown).eq(1).invoke('val').then((val)=>{
-      cy.get(testPatientPage.existingResorcesSelect).select(val)
+      cy.get(testPatientPage.existingResorcesSelect).eq(0).select(val)
     })
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
 
     // Verify there is a reference to the Procedure resource
-    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis.condition: Condition/")
+    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis: condition: Condition/myocardial-infarction")
+    cy.log('Existing Resource added to Condition successfully')
 
     // Drag and drop Procedure from the left data elements list
     testPatientPage.dragAndDrop('clinical summary', 'Clinical Summary: Procedure: PCI', '9')
@@ -177,18 +171,18 @@ describe("Measure with references", () => {
     testPatientPage.toggleDataElement(1)
 
     //Add Existing Resources for Procedure
-    cy.log('Reference')
-    cy.get(testPatientPage.attributeNameSelect).select('diagnosis.condition')
-    cy.get(testPatientPage.attributeTypeSelect).select('Reference')
+    cy.log('Add Existing resource to Procedure')
+    cy.get(testPatientPage.attributeNameSelect).select('diagnosis')
+    //cy.get(testPatientPage.attributeTypeSelect).select('Reference')
     cy.get(testPatientPage.attributeReferenceTypeSelect).select('Existing Resources')
     cy.get(testPatientPage.existingResourcesDropdown).eq(2).invoke('val').then((val)=>{
-      cy.get(testPatientPage.existingResorcesSelect).select(val)
+      cy.get(testPatientPage.existingResorcesSelect).eq(0).select(val)
     })
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
 
     // Verify there is a reference to the Procedure resource
-    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis.condition: Procedure/")
-
+    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis: condition: Procedure/")
+    cy.log('Existing Resource added to Procedure successfully')
     // Click cancel button for patient to proceed back to measure details
     helper.click(testPatientPage.cancelBtn)
 

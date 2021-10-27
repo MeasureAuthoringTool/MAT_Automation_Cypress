@@ -1,14 +1,14 @@
 import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
 import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMeasure'
-import * as measureDetailsPage from '../../../../pom/BonnieQDM/WI/MeasureDetailsPage'
-import * as testPatientPage from '../../../../pom/BonnieQDM/WI/TestPatientPage'
-import * as deletePatient from '../../../../support/Bonnie/BonnieQDM/DeletePatient'
-import * as homePage from '../../../../pom/BonnieQDM/WI/Homepage'
+import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as deletePatient from '../../../../support/Bonnie/BonnieFHIR/DeletePatient'
+import * as homePage from '../../../../pom/BonnieFHIR/WI/Homepage'
 
 describe('Patient Coverage Calculation', () => {
 
   const measureName = 'Core Clinical Data Elements for the Hybrid Hospital-Wide Readmission (HWR) Measure with Claims and Electronic Health Record Data'
-  const measureFileToUpload = 'QDM56/CCDE - Lookback-v2-0-004-QDM-5-6.zip'
+  const measureFileToUpload = 'QDM55/CCDE - Lookback-v2-0-QDM-5-5.zip'
 
   beforeEach('Login', () => {
     bonnieLogin.login()
@@ -43,7 +43,6 @@ describe('Patient Coverage Calculation', () => {
       cy.get(measureDetailsPage.coverageNumber).invoke('val')
         .then(value => {
           expect(value).to.eql('100')
-          cy.log('coverageCalculation - done')
         })
       deletePatient.DeletePatient(distinctLastName)
       deletePatient.VerifyPatientRemoved(initialPatientCount)
@@ -58,4 +57,3 @@ describe('Patient Coverage Calculation', () => {
     cy.log('navigateToMeasureDetails - done')
   }
 })
-

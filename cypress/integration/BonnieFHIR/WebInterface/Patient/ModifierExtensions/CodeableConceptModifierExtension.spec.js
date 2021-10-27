@@ -2,7 +2,7 @@ import * as bonnieLogin from '../../../../../support/Bonnie/BonnieLoginLogout'
 import * as homePage from '../../../../../pom/BonnieFHIR/WI/Homepage'
 import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
-import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieFHIR/BonnieUploadMeasure'
+import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 
 describe('Test Patient: Modifier Extensions section', () => {
 
