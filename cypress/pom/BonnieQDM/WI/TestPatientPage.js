@@ -35,6 +35,22 @@ export const criteriaSectionData = '.criteria-data'
 export const criteriaSectionTitle = '.pull-left > p'
 export const criteriaSectionDeleteBtn = '.btn-danger-inverse'
 
+//Groups Section
+export const adminTab = '.nav-admin > a'
+export const groupsTab = '[data-cy=admin-tabs] > .nav > :nth-child(2) > a'
+export const newGroupTab = 'h1 > .btn'
+export const nameDialogBox = '#name'
+export const saveNewGroup = '#save_new_group'
+export const closeDialogBox = '.modal-content > .modal-footer > .btn'
+export const editGroup = ':nth-child(4) > .btn'
+export const addUserEmailToGroup = '#email'
+export const addUserBtn = ':nth-child(3) > :nth-child(3) > .btn'
+export const saveGroupBtn = '#save_group'
+export const suucessDialogBox= '#msgDialog > .modal-dialog > .modal-content > .modal-footer > .btn'
+export const dashboard = '.nav-dashboard > a'
+export const groupsDropdown = '.nav-account > .dropdown-toggle'
+export const switchGroup = ':nth-child(2) > .switch-group-link'
+
 //criteria elements container
 export const criteriaElementsContainer = '#criteriaElements'
 
