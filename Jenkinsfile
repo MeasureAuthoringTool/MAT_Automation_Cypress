@@ -66,7 +66,8 @@ pipeline{
         slackUploadFile filePath: "mochawesome-report.tar.gz", initialComment:  "Report"
       }
       failure{
-        slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Failed to Run or complete successfully")
+	sh 'echo fail'
+        // slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Failed to Run or complete successfully")
       }
   }
 }
