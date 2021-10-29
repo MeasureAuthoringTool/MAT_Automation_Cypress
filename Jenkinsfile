@@ -42,18 +42,18 @@ pipeline{
         agent {
             docker { 
                 image '${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/mat-dev-cypress-ecr:latest'
-		args '-v $HOME/.npm:/.npm'
-                args "-v ${WORKSPACE}/mochawesome-report:/app/mochawesome-report"
-                args "-e CYPRESS_DEV_USERNAME=${CYPRESS_DEV_USERNAME}"
-                args "-e CYPRESS_DEV_PASSWORD=${CYPRESS_DEV_PASSWORD}"
-                args "-e CYPRESS_DEV_ALT_USERNAME=${CYPRESS_DEV_ALT_USERNAME}"
-                args "-e CYPRESS_DEV_ALT_PASSWORD=${CYPRESS_DEV_ALT_PASSWORD}"
-                args "-e CYPRESS_VSAC_API_KEY=${CYPRESS_VSAC_API_KEY}"
+		args '-v $HOME/.npm:/.npm \
+                -v ${WORKSPACE}/mochawesome-report:/app/mochawesome-report \
+                -e CYPRESS_DEV_USERNAME=${CYPRESS_DEV_USERNAME} \
+                -e CYPRESS_DEV_PASSWORD=${CYPRESS_DEV_PASSWORD} \
+                -e CYPRESS_DEV_ALT_USERNAME=${CYPRESS_DEV_ALT_USERNAME} \
+                -e CYPRESS_DEV_ALT_PASSWORD=${CYPRESS_DEV_ALT_PASSWORD} \
+                -e CYPRESS_VSAC_API_KEY=${CYPRESS_VSAC_API_KEY}'
                 reuseNode true
             }
         }
             steps {
-                slackSend(color: "#ffff00", message: "#${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Started")
+                // slackSend(color: "#ffff00", message: "#${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Started")
                 sh 'npm run ${TEST_SCRIPT}'
             }
         }
