@@ -42,13 +42,7 @@ pipeline{
         agent {
             docker { 
                 image '${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/mat-dev-cypress-ecr:latest'
-		args '-v $HOME/.npm:/.npm \
-                -v ${WORKSPACE}/mochawesome-report:/app/mochawesome-report \
-                -e CYPRESS_DEV_USERNAME=${CYPRESS_DEV_USERNAME} \
-                -e CYPRESS_DEV_PASSWORD=${CYPRESS_DEV_PASSWORD} \
-                -e CYPRESS_DEV_ALT_USERNAME=${CYPRESS_DEV_ALT_USERNAME} \
-                -e CYPRESS_DEV_ALT_PASSWORD=${CYPRESS_DEV_ALT_PASSWORD} \
-                -e CYPRESS_VSAC_API_KEY=${CYPRESS_VSAC_API_KEY}'
+		args '-v ${HOME}/.npm:/.npm'
                 reuseNode true
             }
         }
