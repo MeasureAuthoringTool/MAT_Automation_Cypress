@@ -37,23 +37,31 @@ pipeline{
           '''
       }
     }
-    
+
     stage('Run Tests') {
         agent {
-            docker { 
+            docker {
                 image '${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/mat-dev-cypress-ecr:latest'
-		args '-v ${HOME}/.npm:/.npm'
+		args '-u 0 -v $HOME/.npm:/.npm'
                 reuseNode true
             }
         }
             steps {
-                // slackSend(color: "#ffff00", message: "#${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Started")
-                sh 'npm run ${TEST_SCRIPT}'
+                slackSend(color: "#ffff00", message: "#${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Started")
+                sh '''
+                cd /app/cypress
+                npm run ${TEST_SCRIPT}
+                tar -czf /app/mochawesome-report.tar.gz /app/mochawesome-report/
+                cp /app/mochawesome-report.tar.gz ${WORKSPACE}/
+                '''
             }
         }
    }
- 
+
   post {
+      always{
+        archiveArtifacts artifacts: 'mochawesome-report.tar.gz'
+      }
       success{
         sh 'tar -czf mochawesome-report.tar.gz mochawesome-report/'
         slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Finished, Review console in Jenkins for Results")
@@ -61,7 +69,7 @@ pipeline{
       }
       failure{
 	sh 'echo fail'
-        // slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Failed to Run or complete successfully")
+        slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Failed to Run or complete successfully")
       }
   }
 }
