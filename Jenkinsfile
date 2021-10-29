@@ -60,7 +60,7 @@ pipeline{
 
   post {
       always{
-        archiveArtifacts artifacts: 'mochawesome-report-${BUILD_NUMBER}.tar.gz'
+        archiveArtifacts artifacts: "mochawesome-report-${BUILD_NUMBER}.tar.gz"
       }
       success{
         slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Finished, Review console in Jenkins for Results")
