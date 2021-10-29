@@ -51,7 +51,7 @@ pipeline{
                 sh '''
                 cd /app/cypress
                 npm run ${TEST_SCRIPT}
-                tar -czf /app/mochawesome-report-${BUILD_NUMBER}.tar.gz -C /app/mochawesome-report/ mochawesome-report
+                tar -czf /app/mochawesome-report-${BUILD_NUMBER}.tar.gz -C /app/mochawesome-report/ . 
                 cp /app/mochawesome-report-${BUILD_NUMBER}.tar.gz ${WORKSPACE}/
                 '''
             }
