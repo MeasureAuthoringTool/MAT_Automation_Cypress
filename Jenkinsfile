@@ -51,7 +51,7 @@ pipeline{
                 sh '''
                 cd /app/cypress
                 npm run ${TEST_SCRIPT}
-                tar -czf /app/mochawesome-report-${BUILD_NUMBER}.tar.gz /app/mochawesome-report/
+                tar -czf /app/mochawesome-report-${BUILD_NUMBER}.tar.gz -C /app/mochawesome-report/ mochawesome-report
                 cp /app/mochawesome-report-${BUILD_NUMBER}.tar.gz ${WORKSPACE}/
                 '''
             }
@@ -64,7 +64,6 @@ pipeline{
       }
       success{
         slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Finished, Review console in Jenkins for Results")
-        slackUploadFile filePath: "mochawesome-report.tar.gz", initialComment:  "Report"
       }
       failure{
 	sh 'echo fail'
