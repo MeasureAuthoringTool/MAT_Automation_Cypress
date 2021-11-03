@@ -76,7 +76,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     //adding valueset that this measure requires but cannot retrieve anymore
     cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}' +
-      'valueset "Antithrombotic Therapy": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201\'{enter}{enter}')
+      '{uparrow}{enter}valueset "Antithrombotic Therapy": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201\'{enter}{enter}')
 
     cy.get(measureComposer.cqlEditorSaveBtn).click()
 

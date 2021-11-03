@@ -166,60 +166,6 @@ describe('FHIR Measure: Version error message', () => {
   })
 })
 
-describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
-  before('Login, Data creation', () => {
-    login.matLogin()
-
-    fhirMeasure = dataCreation.createDraftMeasure('FhirDraftMeasure', 'FHIR')
-
-    login.matLogout()
-  })
-  beforeEach('Login', () => {
-    login.matLogin()
-  })
-  afterEach('Log Out', () => {
-    login.matLogout()
-  })
-
-  it('FHIR Measure: Validate the successful when editing directly on CQL Library Editor', () => {
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    helper.enabledWithTimeout(measurelibrary.searchInputBox)
-    helper.enterText(measurelibrary.searchInputBox, fhirMeasure)
-    cy.get(measurelibrary.searchBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    gridRowActions.doubleClickRow(measurelibrary.selectMeasureCheckbox)
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    cy.get(measureComposer.cqlWorkspace).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    //CQL Library Editor
-
-    cy.get(measureComposer.cqlLibraryEditor).click()
-
-    cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "Annual Wellness Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240\'{enter}')
-
-    cy.get(measureComposer.cqlEditorSaveBtn).click()
-
-    cy.get(measureComposer.warningMessage).should('contain.text', ' Changes to the CQL File have been successfully saved.')
-
-    cy.get(measurelibrary.measureLibraryTab).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-  })
-})
-
 describe('Measure Composer: CQLWorkspace: FHIR Measure, Add codesystems and valusets without UMLS', () => {
   before('Login, Data Creation', () => {
     login.loginWithoutUMLS()
@@ -264,8 +210,8 @@ describe('Measure Composer: CQLWorkspace: FHIR Measure, Add codesystems and valu
 
     cy.get(measureComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
     cy.get(cqlComposer.cqlLibraryEditorBox).type('valueset "AAN - Encounter Codes Grouping": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307\'{enter}')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()

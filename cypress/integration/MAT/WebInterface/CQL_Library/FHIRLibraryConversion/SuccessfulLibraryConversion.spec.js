@@ -20,7 +20,7 @@ describe('CQL Library: FHIR Library Conversion: Successful Conversion to FHIR', 
     login.matLogout()
   })
 
-  it('Convert QDM CQL Library to FHIR successfully', () => {
+  it('Convert QDM CQL Library to FHIR successfully and reconversion', () => {
     qdmCqlLibraryName = dataCreation.createDraftCqlLibrary('QdmCqlLibrary', 'QDM')
     // Search for created draft QDM lib
     helper.enabledWithTimeout(cqlLibrary.searchInputBox)
@@ -36,14 +36,12 @@ describe('CQL Library: FHIR Library Conversion: Successful Conversion to FHIR', 
     cy.get(cqlLibrary.row1CqlLibraryModelVersion).should('contain.text', '5.6')
 
     // Select the Qdm Cql library created and version it
+
     gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
     cqlLibraryHelper.createCqlLibraryVersionAndVerify()
     cqlLibraryHelper.convertCqlLibraryToFHIRAndVerify(qdmCqlLibraryName)
-  })
 
-
-  it('Verify FHIR reconversion and cql library history', () => {
-
+    //Verify FHIR reconversion and cql library history
     cy.get(cqlLibrary.row1RecentActivity).then(elm => {
 
       if (Cypress.$(elm).length === 2) {
