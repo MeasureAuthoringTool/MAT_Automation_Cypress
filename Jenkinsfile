@@ -63,13 +63,11 @@ pipeline{
         archiveArtifacts artifacts: "mochawesome-report-${BUILD_NUMBER}.tar.gz"
       }
       success{
-        slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) -
-        ${TEST_SCRIPT} Tests Finished, Review console/artifacts in Jenkins for Results and Report")
+        slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) ${TEST_SCRIPT} Tests Finished, Review console/artifacts in Jenkins for Results and Report")
       }
       failure{
 	sh 'echo fail'
-        slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) -
-        ${TEST_SCRIPT} Tests Failed to Run or complete successfully")
+        slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) ${TEST_SCRIPT} Tests Failed to Run or complete successfully")
       }
   }
 }
