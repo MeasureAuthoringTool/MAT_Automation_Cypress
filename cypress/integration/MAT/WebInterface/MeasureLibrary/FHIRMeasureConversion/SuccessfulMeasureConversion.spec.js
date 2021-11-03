@@ -7,9 +7,6 @@ import * as login from '../../../../../support/MAT/Login'
 
 let measureName = ''
 
-
-//these test cases are tied together and need to be run sequentialy
-
 describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHIR', () => {
   beforeEach('Login', () => {
     login.matLogin()
@@ -18,7 +15,7 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
     login.matLogout()
   })
 
-  it('Convert QDM Measure to FHIR successfully', () => {
+  it('Convert QDM Measure to FHIR successfully, verify reconversion', () => {
     measureName = dataCreation.createMajorVersionMeasure( 'QDM')
     // Search for created draft QDM measure
     helper.enabledWithTimeout(measureLibrary.searchInputBox)
@@ -34,11 +31,12 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
 
     gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
     measureLibraryHelper.convertMeasureToFHIRAndVerify(measureName)
-  })
 
+    helper.verifySpinnerAppearsAndDissappears()
 
-  it('Verify FHIR reconversion and Measure history, Delete converted FHIR Measure and reconvert', () => {
+    //Verify FHIR reconversion and Measure history, Delete converted FHIR Measure and reconvert
 
+    helper.visibleWithTimeout(measureLibrary.searchInputBox)
     helper.enabledWithTimeout(measureLibrary.searchInputBox, 200000)
     helper.enterText(measureLibrary.searchInputBox, measureName)
     cy.get(measureLibrary.searchBtn).click()
@@ -98,5 +96,6 @@ describe('Measure Library: FHIR Measure Conversion: Successful Conversion to FHI
     gridRowActions.selectRow(measureLibrary.row1MeasureSearch)
 
     measureLibraryHelper.convertMeasureToFHIRAndVerify(measureName)
+
   })
 })
