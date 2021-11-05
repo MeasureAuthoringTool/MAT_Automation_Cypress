@@ -24,7 +24,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
 
   })
   beforeEach('Login', () => {
@@ -35,7 +35,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('QDM Stand alone Library: Version and include with QDM measure', () => {
@@ -148,7 +148,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
     login.matLogin()
@@ -158,7 +158,7 @@ describe('QDM Stand alone Library: Version and include with measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
   it('QDM Stand alone Library: Version and include with QDM measure', () => {

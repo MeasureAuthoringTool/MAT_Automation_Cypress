@@ -211,7 +211,7 @@ describe('FHIR CQL Composer: Add code directly on CQL Library Editor', () => {
 
     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "Annual Wellness Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240\'')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}valueset "Annual Wellness Visit": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240\'')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
 
@@ -254,8 +254,8 @@ describe('CQLComposer: CQLLibraryWorkspace: CQLComposerLibraryEditor: Add codesy
     cy.get(cqlComposer.cqlLibraryEditor).click()
     cy.get(cqlComposer.warningMessage).should('contain.text', 'You are viewing CQL with no validation errors.')
 
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}{downarrow}{downarrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}')
-    cy.get(cqlComposer.cqlLibraryEditorBox).type('{downarrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "LOINC": \'http://loinc.org\' version \'2.67\'{enter}{enter}')
+    cy.get(cqlComposer.cqlLibraryEditorBox).type('{uparrow}{uparrow}{uparrow}{uparrow}code "Birth date": \'21112-8\' from "LOINC" display \'Birth date\'{enter}')
     cy.get(cqlComposer.cqlLibraryEditorBox).type('valueset "AAN - Encounter Codes Grouping": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307\'{enter}')
 
     cy.get(cqlComposer.cqlEditorSaveBtn).click()
