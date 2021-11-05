@@ -6,7 +6,7 @@ pipeline{
     }
 
     parameters {
-        choice(choices: ['dev:mat:cqllibrary:search:tests:report','dev:all:mat:tests:report','dev:mat:smoke:tests:report'], description:'Choose the Test script to run', name: 'TEST_SCRIPT')
+        choice(choices: ['dev:mat:cqllibrary:search:tests:report','dev:all:mat:tests:report','dev:mat:smoke:tests:report','test:all:mat:tests:report'], description:'Choose the Test script to run', name: 'TEST_SCRIPT')
         choice(name:'BUILD_CONTAINER', description:'Rebuild Cypress Container?', choices:['no','yes'])
     }
 
@@ -16,6 +16,10 @@ pipeline{
         CYPRESS_DEV_PASSWORD=credentials('CYPRESS_DEV_PASSWORD')
         CYPRESS_DEV_ALT_USERNAME=credentials('CYPRESS_DEV_ALT_USERNAME')
         CYPRESS_DEV_ALT_PASSWORD=credentials('CYPRESS_DEV_ALT_PASSWORD')
+        CYPRESS_TEST_USERNAME=credentials('CYPRESS_TEST_USERNAME')
+        CYPRESS_TEST_PASSWORD=credentials('CYPRESS_TEST_PASSWORD')
+        CYPRESS_TEST_ALT_USERNAME=credentials('CYPRESS_TEST_ALT_USERNAME')
+        CYPRESS_TEST_ALT_PASSWORD=credentials('CYPRESS_TEST_ALT_PASSWORD')
         CYPRESS_VSAC_API_KEY=credentials('CYPRESS_VSAC_API_KEY')
     }
 

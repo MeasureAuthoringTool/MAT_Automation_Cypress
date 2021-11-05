@@ -11,7 +11,7 @@ describe('Packaging: Continuous Variable Measure', () => {
     login.matLogin()
   })
   afterEach('Log Out', () => {
-    helper.logout()
+    login.matLogout()
   })
 
 // Successful Patient based Continuous Variable QDM Measure Packaging

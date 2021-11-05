@@ -40,7 +40,7 @@ describe('508', () => {
     cy.checkA11y(loginUI.signInButton)
     cy.checkA11y('.auth-footer')
   })
-  it('Logs violations to the terminal', () => {
+  it.skip('Logs violations to the terminal', () => {
     cy.checkA11y(null, null, terminalLog)
   })
 

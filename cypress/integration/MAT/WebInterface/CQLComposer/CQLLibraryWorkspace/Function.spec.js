@@ -179,7 +179,7 @@ describe('CQL Library: Function Insert Attribute Lightbox', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.logout()
+    login.matLogout()
   })
   beforeEach('Login', () => {
     login.matLogin()

@@ -48,9 +48,9 @@ describe('FHIR Measure: Add code directly on CQL Library Editor', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "SNOMEDCT": \'http://snomed.info/sct\'{enter}')
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}codesystem "SNOMEDCT": \'http://snomed.info/sct\'{enter}{enter}')
 
-    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}code "Dead (finding)": \'419099009\' from "SNOMEDCT" display \'Dead (finding)\'{enter}')
+    cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}code "Dead (finding)": \'419099009\' from "SNOMEDCT" display \'Dead (finding)\'')
     cy.get(measureComposer.cqlEditorSaveBtn).click()
 
     cy.get(measureComposer.warningMessage).should('contain.text', 'Changes to the CQL File have been successfully saved.')
