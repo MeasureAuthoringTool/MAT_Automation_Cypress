@@ -51,6 +51,54 @@ export const dashboard = '.nav-dashboard > a'
 export const groupsDropdown = '.nav-account > .dropdown-toggle'
 export const switchGroup = ':nth-child(2) > .switch-group-link'
 
+// codeSystem
+export const primaryCodeSystem = '.col-md-3 > .form-control'
+export const chooseCodeSystem = '.col-md-8 > .form-control'
+export const addCodeBtn = '.col-md-1'
+export const exsistingCode = '.existing-values'
+
+// attributeWidgets
+export const attributeNameSelect = 'select[name="attribute_name"]:visible:last'
+export const attributeTypeSelect = 'select[name="attribute_type"]:visible:last'
+export const attributeReferenceTypeSelect = 'select[data-cy="referenceType-select"]:visible:last'
+export const codeValueSetDirectRefSelect = 'select[name="valueset"]:visible:first'
+export const valueSetDirectRefSelect = 'select[name="valueset"]:visible:last'
+export const valueSetDirectRefSelectGlobal = 'select[name="valueset"]'
+export const valueSetCodeSelect = 'select[name=vs_code]:visible:last'
+export const rankInputField = 'input[name="value"]'
+export const existingValues = '.form-group > .existing-values > :nth-child(1)'
+export const existingResourcesDropdown = 'select[name="valueset"] option'
+export const existingResorcesSelect = 'select[name="valueset"]'
+export const referenceValueSetDirectRefSelect = 'select[data-cy="valueset-select"]:visible:last'
+export const addWidgetBtn = 'button[data-call-method="addValue"]:visible:last'
+export const exsistingAttribute = '.form-group > .existing-values:visible'
+export const addedAttributeValue = '.form-group > .existing-values [title="value"]:visible'
+export const locationSelect = 'select[name="referenceType"]:visible:last'
+export const periodStartDate = '[name="start_date_is_defined"]:visible:last'
+export const periodEndDate = '[name="end_date_is_defined"]:visible:last'
+export const diagnosisCondition = 'select[name="referenceType"]:visible:last'
+export const diagnosisRank = '[name="value"]'
+export const deleteAttribute = '.form-group > .existing-values > :nth-child(1) > .btn'
+export const useValueSetDirectRefSelect = 'select[name="valueset"]:visible:last'
+export const dateTimeCheckbox = 'input[name="date_is_defined"]:visible:last'
+export const repeatBounds = 'select[name="type"]'
+export const repeatBoundsPeriodStartDate = 'input[name="start_date_is_defined"]:visible:first'
+export const repeatBoundsPeriodEndDate = 'input[name="end_date_is_defined"]:visible:first'
+export const medicationCustomCodeSelect = 'select[name="custom_codesystem_select"]'
+export const medicationCustomCode = 'input[name="custom_code"]'
+export const identifierNamingSystemField = 'input[name="value"]:visible:first'
+export const identifierValueField = 'input[placeholder="value"]'
+export const idField = 'input[name="value"]:visible:last'
+export const dosageValue = 'input[name="value_value"]'
+export const dosageUnit = 'input[name="value_unit"]'
+export const relatedToDropdown = 'select[name="related_to"] option'
+export const relatedToSelect = 'select[name="related_to"]'
+export const componentsResult = 'select[name="type"]'
+export const componentsResultValue1 = 'input[name="value_value"]:visible:first'
+export const componentsResultUnit1 = 'input[name="value_unit"]:visible:first'
+export const componentsResultValue2 = 'input[name="value_value"]:visible:last'
+export const componentsResultUnit2 = 'input[name="value_unit"]:visible:last'
+
 //criteria elements container
 export const criteriaElementsContainer = '#criteriaElements'
 
@@ -101,7 +149,7 @@ export const enterPatientCharacteristics = (lastName) => {
   cy.get(lastNameTextField).type(lastName)
   cy.get(firstNameTextField).type('Current')
   cy.get(patientDescriptionTextField).type('Patient is very special')
-  cy.get(dateofBithField).type('01/01/1945')
+  cy.get(dateofBithField).type('10/10/1945')
   cy.get(patientDescriptionTextField).click()
   cy.get(raceDropdown).select('Asian')
   cy.get(genderDropdown).select('Male')
