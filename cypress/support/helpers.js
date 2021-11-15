@@ -600,17 +600,7 @@ export const changeTargetToSelf = (element) => {
   // cy.get(element).invoke('attr', 'target', '_self').should('have.attr', 'target', '_self')
   cy.get(element).invoke('removeAttr', 'target')
 }
-export const createVirusTestFile = (fileType) => {
-  const fixture = 'tmp'
-  const eicar = 'X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'
-  if (fileType === 'text') {
-    cy.writeFile(`${fixture}/file_virus.txt`, eicar, 'ascii')
-    copyFileGeneric(`${fixture}/file_virus.txt`, 'tmp')
-  } else if (fileType === 'comtext') {
-    cy.writeFile(`${fixture}/file_virus.com.txt`, eicar, 'ascii')
-    copyFileGeneric(`${fixture}/file_virus.com.txt`, 'tmp')
-  }
-}
+
 let username
 let password
 
