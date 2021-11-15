@@ -1,17 +1,8 @@
 import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
-import * as measureDetailsPage from '../../../../pom/BonnieQDM/WI/MeasureDetailsPage'
 import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMeasure'
-import * as testPatientPage from '../../../../pom/BonnieQDM/WI/TestPatientPage'
-import * as deletePatient from '../../../../support/Bonnie/BonnieQDM/DeletePatient'
 import * as homePage from '../../../../pom/BonnieQDM/WI/Homepage'
 import * as importMeasureDialog from '../../../../pom/BonnieQDM/WI/ImportMeasureDialog'
 import * as helper from '../../../../support/helpers'
-
-let measureName = ''
-let measureFileToUpload = ''
-
-const lastNameSuffix = new Date().getTime()
-const distinctLastName = "President" + lastNameSuffix
 
 describe('Smoke Test: Virus Scan', () => {
 
@@ -28,7 +19,7 @@ describe('Smoke Test: Virus Scan', () => {
 
   it('Verify successful error message when uploading simulated virus', () => {
 
-    bonnieUploadMeasure.VirusScanUpload('X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*', false)
+    bonnieUploadMeasure.VirusScanUpload()
 
     // Verify error message
     cy.get(homePage.errorDialog).should('be.visible')

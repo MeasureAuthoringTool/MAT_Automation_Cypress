@@ -3,11 +3,13 @@ import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialo
 import * as dashboard from '../../pom/BonnieFHIR/WI/Dashboard'
 import * as measureDetailsPage from '../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 
+
+const VsacApiKey = Cypress.env('VSAC_API_KEY')
+
 export const UploadMeasureToBonnie = (fileToUpload, calculation, vsacLoggedIn, includeSDE) => {
   cy.log('UploadMeasureToBonnie')
   cy.log('UploadMeasureToBonnie measure file ' + fileToUpload)
 
-  let VsacApiKey = Cypress.env('VSAC_API_KEY')
   cy.log(VsacApiKey)
 
   cy.wait(1500)
@@ -84,9 +86,10 @@ export const UpdateMeasure = (fileToUpload) => {
   cy.log('UpdateMeasure - done')
 }
 
-export const VirusScanUpload = (virusString) => {
+export const VirusScanUpload = () => {
 
-  let VsacApiKey = Cypress.env('VSAC_API_KEY')
+  const virusString = 'X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'
+
   cy.log(VsacApiKey)
 
   cy.wait(1500)
