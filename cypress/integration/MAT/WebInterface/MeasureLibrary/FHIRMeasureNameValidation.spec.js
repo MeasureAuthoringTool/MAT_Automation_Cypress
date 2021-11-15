@@ -1,5 +1,5 @@
 import * as helper from '../../../../support/helpers'
-import * as createNewMeasure from '../../../../pom/MAT/WI/createNewMeasure'
+import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
