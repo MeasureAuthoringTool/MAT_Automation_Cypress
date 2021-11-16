@@ -6,7 +6,7 @@ pipeline{
     }
 
     parameters {
-        choice(choices: ['dev:mat:cqllibrary:search:tests:report','dev:all:mat:tests:report','dev:mat:smoke:tests:report','test:all:mat:tests:report'], description:'Choose the Test script to run', name: 'TEST_SCRIPT')
+        choice(choices: ['dev:mat:cqllibrary:search:tests:report','dev:all:mat:tests:report','dev:mat:smoke:tests:report','test:all:mat:tests:report', 'dev:all:bonnieFHIR:tests:report', 'dev:all:bonnieQDM56:tests:report', 'dev:all:bonnieQDM55:tests:report', 'test:all:bonnieFHIR:tests:report', 'test:all:bonnieQDM56:tests:report'], description:'Choose the Test script to run', name: 'TEST_SCRIPT')
         choice(name:'BUILD_CONTAINER', description:'Rebuild Cypress Container?', choices:['no','yes'])
     }
 
@@ -21,6 +21,11 @@ pipeline{
         CYPRESS_TEST_ALT_USERNAME=credentials('CYPRESS_TEST_ALT_USERNAME')
         CYPRESS_TEST_ALT_PASSWORD=credentials('CYPRESS_TEST_ALT_PASSWORD')
         CYPRESS_VSAC_API_KEY=credentials('CYPRESS_VSAC_API_KEY')
+        CYPRESS_DEVQDM56_DB_MONGO_GROUPID=credentials('CYPRESS_DEVQDM56_DB_MONGO_GROUPID')
+        CYPRESS_DEVQDM55_DB_MONGO_GROUPID=credentials('CYPRESS_DEVQDM55_DB_MONGO_GROUPID')
+        CYPRESS_DEVFHIR_DB_MONGO_GROUPID=credentials('CYPRESS_DEVFHIR_DB_MONGO_GROUPID')
+        CYPRESS_MONGO_URL=credentials('CYPRESS_MONGO_URL')
+        CYPRESS_MONGO_SSLCERT=credentials('CYPRESS_MONGO_SSLCERT')
     }
 
  stages {
