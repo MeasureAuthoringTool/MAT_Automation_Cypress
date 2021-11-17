@@ -10,7 +10,7 @@ import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetail
 const measureName = 'FHIRmeasureCMS347'
 const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
 const groupName = 'TestGroup'
-const mongoURL = Cypress.env('DEVmongoURL')
+const mongoURL = Cypress.env('MONGO_URL')
 const sslCert = Cypress.env('MONGO_SSLCERT')
 const userEmail = Cypress.env('DEV_EMAIL')
 
