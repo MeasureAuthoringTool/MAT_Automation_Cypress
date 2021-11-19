@@ -111,7 +111,9 @@ export const exportOptionList = '#exportTab > :nth-child(1) > :nth-child(6) > tb
 export const saveExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Save"]'
 export const openExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Open"]'
 export const cancelExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Cancel"]'
-export const hqmfExport = ':nth-child(3) > td > .gwt-RadioButton'
+export const hqmfExport = ':nth-child(2) > td > .gwt-RadioButton > label'
+export const exportQDMPackageRadioBtn = ':nth-child(6) > td > .gwt-RadioButton > label'
+export const exportFHIRPackageRadioBtn = ':nth-child(4) > td > .gwt-RadioButton > label'
 
 // History UI
 export const historyGrid = '#HistorySearchCellTable'
