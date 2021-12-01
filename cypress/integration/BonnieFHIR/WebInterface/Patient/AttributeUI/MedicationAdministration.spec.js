@@ -27,6 +27,7 @@ describe('Medication Administration Attribute', () => {
   })
 
   it('Add Medication Administration Attribute and verify it saves in Patient History successfully', () => {
+
     testPatientPage.dragAndDrop('medications', 'Medications: MedicationAdministration: Low Dose Unfractionated Heparin for VTE Prophylaxis', 23)
 
     MedicationAdministrationWithDosageroute()
