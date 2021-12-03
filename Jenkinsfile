@@ -27,6 +27,7 @@ pipeline{
         CYPRESS_TESTQDM56_DB_MONGO_GROUPID=credentials('CYPRESS_TESTQDM56_DB_MONGO_GROUPID')
         CYPRESS_MONGO_URL=credentials('CYPRESS_MONGO_URL')
         CYPRESS_MONGO_SSLCERT=credentials('CYPRESS_MONGO_SSLCERT')
+        CYPRESS_REPORT_BUCKET=credentials('CYPRESS_REPORT_BUCKET')
     }
 
  stages {
@@ -61,6 +62,7 @@ pipeline{
                 sh '''
                 cd /app/cypress
                 npm run ${TEST_SCRIPT}
+		aws s3 sync --acl public-read /app/mochawesome-report/ ${CYPRESS_REPORT_BUCKET}/mochawesome-report-${BUILD_NUMBER}/
                 tar -czf /app/mochawesome-report-${BUILD_NUMBER}.tar.gz -C /app/mochawesome-report/ . 
                 cp /app/mochawesome-report-${BUILD_NUMBER}.tar.gz ${WORKSPACE}/
                 '''
