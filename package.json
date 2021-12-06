@@ -13,6 +13,7 @@
         "cypress:open:local": "cypress open --env configFile=local",
         "cypress:open:dev": "cypress open --env configFile=dev",
         "cypress:open:bonnieQDM56Dev": "cypress open --env configFile=bonnieQDM56Dev",
+        "cypress:open:bonnieQDM56Test": "cypress open --env configFile=bonnieQDM56Test",
         "cypress:open:bonnieFHIRDev": "cypress open --env configFile=bonnieFHIRDev",
         "cypress:open:bonnieQDM55Dev": "cypress open --env configFile=bonnieQDM55Dev",
         "cypress:open:bonnieFHIRTest": "cypress open --env configFile=bonnieFHIRTest",
@@ -130,7 +131,8 @@
     "devDependencies": {
         "@cypress/browserify-preprocessor": "^2.2.4",
         "axe-core": "^4.3.3",
-        "cypress": "^7.0.0",
+        "cy-verify-downloads": "^0.0.5",
+        "cypress": "^9.1.1",
         "cypress-axe": "^0.13.0",
         "cypress-file-upload": "^4.1.1",
         "data-driven": "^1.4.0",
