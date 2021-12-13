@@ -19,6 +19,7 @@ describe('Exporting: QDM Measure', () => {
   // Packaging QDM Measure
 
   it('Validate the zip file export for QDM Measure', () => {
+
     cy.get(measurelibrary.newMeasureButton).click()
     const measureName = 'CreateQDMContinuousVariableMeasure' + Date.now()
 
@@ -193,13 +194,37 @@ describe('Exporting: QDM Measure', () => {
     cy.get(measurelibrary.openExportBtn).click()
 
     // Verify all file types available in exported zip file
-    cy.readFile(path.join(downloadsFolder, 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.zip')).should('contain', 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6-eCQM.xml', 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.cql', 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.html', 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.json', 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.xml')
+    cy.readFile(path.join(downloadsFolder, 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.zip')).should
+    ('contain', 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6-eCQM.xml',
+      'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.cql', 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.html'
+      , 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.json', 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.xml')
     cy.log('Successfully verified zip file export')
 
-    helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
-    cy.get(measurelibrary.measureLibraryTab).click()
 
-    helper.verifySpinnerAppearsAndDissappears()
+    // unzipping the Export
+    cy.task('unzipFile', {zipFile: 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6.zip', path: downloadsFolder})
+      .then(results => {
+        cy.log('unzipFile Task finished')
+      })
+
+    //Getting the diffs from the expected eCQM.xml file and the eCQM.xml created during this tests
+    //if we don't get the expected amount then we know something in the file has changed and needs to be looked at
+      cy.task('getDiffs', {file1: 'CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6-eCQM.xml',
+        file2: 'ecqmExpected.xml', path1: downloadsFolder + '/CreateQDMContinuousVariableMeasu-v0-0-001-QDM-5-6/',
+        path2: 'fixtures/MAT/QDMZipFileExport'}).then(diffs => {
+
+          let expectedDiffs = 472
+          let actualDiffs = diffs.length
+
+          assert.equal(actualDiffs, expectedDiffs)
+
+          cy.log('getDiffs Task Finished')
+      })
+
+      helper.verifySpinnerAppearsAndDissappears()
+      helper.verifySpinnerAppearsAndDissappears()
+      cy.get(measurelibrary.measureLibraryTab).click()
+
+      helper.verifySpinnerAppearsAndDissappears()
   })
 })

@@ -17,6 +17,8 @@ const { GetSession } = require('../../session')
 // the project's config changing)
 const fs = require('fs-extra')
 const path = require('path')
+const unzipper = require('unzipper')
+const Diff = require('diff')
 
 function getConfigurationByFile (file) {
   const pathToConfigFile = path.resolve('./cypress/', 'config', `${file}.json`)
@@ -31,9 +33,21 @@ module.exports = (on, config) => {
       extensions: ['.js', '.ts'],
       plugin: [
         ['tsify']
-      ]
+      ],
+      downloadDirectory: ['/downloads']
     }
   }
+  on('task', {
+    unzipFile: zipFileAndPath => {
+      unzipFile(zipFileAndPath.zipFile, zipFileAndPath.path)
+      return null
+    }
+  })
+  on('task', {
+    getDiffs: filesAndPaths => {
+      return getDiffs(filesAndPaths.file1, filesAndPaths.file2, filesAndPaths.path1, filesAndPaths.path2)
+    }
+  })
   on('task', {
     queryDb: query => {
       return queryTestDb(query, config)
@@ -127,6 +141,40 @@ function bonnieDeleteMeasuresAndPatients (config, groupId, mongoURL, sslCert) {
     }
   })
 }
+
+//unzip file
+function unzipFile (zipFile, path) {
+
+  const zipPath = path + '/' + zipFile
+  const readStream = fs.createReadStream(zipPath)
+
+  readStream.pipe(unzipper.Extract({path: `${path}`}))
+
+}
+
+//covert file to string value
+function getDiffs (file1, file2, path1, path2) {
+
+  let filePath = path1 + '/' + file1
+
+  let buffer = fs.readFileSync(filePath)
+
+  const fileContent1 = buffer.toString()
+
+  filePath = path2 + '/' + file2
+
+  let filepath2 = path.join(__dirname, '../'+ filePath);
+
+  buffer = fs.readFileSync(filepath2)
+
+  const fileContent2 = buffer.toString()
+
+  const diffs = Diff.diffWords(fileContent1, fileContent2)
+
+  return diffs
+}
+
+
 
 // Delete groups for a given userID
 function bonnieDeleteGroups (config, groupName, mongoURL, sslCert) {

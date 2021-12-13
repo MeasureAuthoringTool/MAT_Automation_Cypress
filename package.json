@@ -44,7 +44,7 @@
         "dev:mat:measurelibary:fhirmeasureconversion:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/MeasureLibrary/FHIRMeasureConversion/**/*.spec.js' --browser chrome;",
         "dev:mat:measurelibary:grids:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/MAT/WebInterface/MeasureLibrary/Grids/**/*.spec.js' --browser chrome;",
         "dev:all:bonnieFHIR:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=bonnieFHIRDev --spec 'cypress/integration/BonnieFHIR/**/*.spec.js' --browser chrome;",
-        "dev:bonnieFHIR::measures:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=bonnieFHIRDev --spec 'cypress/integration/BonnieFHIR/WebInterface/Measures/**/*.spec.js' --browser chrome;",
+        "dev:bonnieFHIR:measures:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=bonnieFHIRDev --spec 'cypress/integration/BonnieFHIR/WebInterface/Measures/**/*.spec.js' --browser chrome;",
         "test:all:bonnieFHIR:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=bonnieFHIRTest --spec 'cypress/integration/BonnieFHIR/**/*.spec.js' --browser chrome;",
         "dev:bonnieFHIR:execution:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=dev --spec 'cypress/integration/BonnieFHIR/WebInterface/Execution/**/*.spec.js' --browser chrome;",
         "test:bonnieFHIR:execution:tests": "NO_COLOR=1 $(npm bin)/cypress run --env configFile=test --spec 'cypress/integration/BonnieFHIR/WebInterface/Execution/**/*.spec.js' --browser chrome;",
