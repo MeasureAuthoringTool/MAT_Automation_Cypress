@@ -182,8 +182,8 @@ describe('FHIR Proportion Measure', () => {
 
     cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
 
-    //Create Measure Package
-    cy.get(measureComposer.createMeasurePackageBtn).click()
+    //Create Measure Package and export
+    cy.get(measureComposer.createPackageExportBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
@@ -191,6 +191,13 @@ describe('FHIR Proportion Measure', () => {
 
     helper.visibleWithTimeout(measureComposer.packageWarningMessage)
     helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
+
+    cy.pause()
+
+
+    cy.readFile
+
+    //cy.task(isExistZIP, 'test.zip')
 
   })
 })

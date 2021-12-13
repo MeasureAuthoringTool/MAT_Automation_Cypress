@@ -1,4 +1,3 @@
-import * as oktaLogin from '../oktaLogin'
 import * as helper from '../helpers'
 import * as measurelibrary from '../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../pom/MAT/WI/CreateNewMeasure'
