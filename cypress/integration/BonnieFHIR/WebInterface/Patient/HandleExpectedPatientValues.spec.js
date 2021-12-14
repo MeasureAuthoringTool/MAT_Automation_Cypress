@@ -7,7 +7,7 @@ import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMea
 
 describe('Patient: Handle Expected Patient Values', () => {
 
-  const measureName = 'FHIRmeasureCMS347'
+  const measureName = 'SBTESTCMS347'
   const measureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
 
   beforeEach('Login', () => {

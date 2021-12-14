@@ -31,7 +31,7 @@ describe('Valiidate DateTime for Attributes from Patient', () => {
 
     //Click into the measure that was just uploaded
     cy.get(dashboard.measureNameDiv).each(function($el) {
-      if ($el.text().includes("FHIRmeasureCMS347")) {
+      if ($el.text().includes("SBTESTCMS347")) {
         cy.wrap($el).click()
       }
     })
