@@ -18,7 +18,7 @@ const cohortMeasureFileToUpload = "FHIR/EXM529-v0-0-004-FHIR-4-0-1.zip"
 
 const proportionMultiGroupMeasureName = "SBTESTCMS347"
 const proportionMultiGroupMeasureFileToUpload =
-  "FHIR/SBTESTCMS347-v0-0-008-FHIR-4-0-1 (1).zip"
+  "FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip"
 
 const measureWithStratificationsMeasureName = "CMS111Test"
 const measureWithStratificationsFileToUpload = "FHIR/CMS111Test-v0-0-016-FHIR-4-0-1.zip"

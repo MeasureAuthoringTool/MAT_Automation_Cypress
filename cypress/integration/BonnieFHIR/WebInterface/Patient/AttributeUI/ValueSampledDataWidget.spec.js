@@ -5,7 +5,7 @@ import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPa
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 
 const measureName = 'FHIRmeasureCMS347'
-const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+const measureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = 'President' + lastNameSuffix

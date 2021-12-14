@@ -8,7 +8,7 @@ import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUpload
 describe('Test Patient: Extensions section', () => {
 
   const measureName = 'FHIRmeasureCMS347'
-  const measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+  const measureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
 
   beforeEach('Login', () => {
     bonnieLogin.login()

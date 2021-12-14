@@ -9,7 +9,7 @@ import * as importMeasureDialog from '../../../../pom/BonnieQDM/WI/ImportMeasure
 const measureName = 'Risk-Standardized Inpatient Respiratory Depression Rate Following Elective ' +
   'Primary Total Hip Arthroplasty (THA) And/Or Total Knee Arthroplasty (TKA) eCQM'
 const measureFileToUpload = 'QDM56/RSIRDR-eCQM-v1-1-QDM-5-6.zip'
-const fhirMeasureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+const fhirMeasureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
 const artifactsFileToUpload = 'QDM56/Export-Artifacts.zip'
 
 describe('Measure Upload Errors', () => {
