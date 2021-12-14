@@ -16,7 +16,7 @@ describe('Test Patient: Extensions section', () => {
     bonnieLogin.logout()
   })
 
-  it('Validate the Extensions Components', () => {
+  it('Validate the Extensions Components, Boolean', () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
 
     measureDetailsPage.navigateToMeasureDetails(measureName)
@@ -31,7 +31,7 @@ describe('Test Patient: Extensions section', () => {
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
 
-      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
+      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 25)
 
       booleanExtension()
       testPatientPage.clickSavePatient()

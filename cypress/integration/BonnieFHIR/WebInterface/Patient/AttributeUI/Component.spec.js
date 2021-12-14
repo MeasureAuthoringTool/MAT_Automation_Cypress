@@ -33,7 +33,7 @@ describe("Measure with component", () => {
     testPatientPage.enterPatientCharacteristics(distinctLastName)
 
     // Drag and drop Diagnostics from the left data elements list
-    testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', '24')
+    testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 25)
 
     // Add a code to component
     cy.log('Component.code')

@@ -3,7 +3,7 @@ import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDet
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 
-describe('Test Patient: Extensions section', () => {
+describe('Test Patient: Modifier Extensions section', () => {
 
   const measureName = 'SBTESTCMS347'
   const measureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
@@ -15,7 +15,7 @@ describe('Test Patient: Extensions section', () => {
     bonnieLogin.logout()
   })
 
-  it.only('Validate the Extensions Components', () => {
+  it.only('Validate the Extensions Components boolean', () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
 
     measureDetailsPage.navigateToMeasureDetails(measureName)
@@ -30,7 +30,7 @@ describe('Test Patient: Extensions section', () => {
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
 
-      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
+      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 25)
 
       booleanExtension()
       testPatientPage.clickSavePatient()

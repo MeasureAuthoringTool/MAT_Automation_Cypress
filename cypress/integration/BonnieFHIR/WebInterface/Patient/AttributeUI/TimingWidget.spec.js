@@ -4,8 +4,8 @@ import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDet
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 
-const measureName = 'HEDISBCS2020'
-const measureFileToUpload = 'FHIR/HEDISBCS2020-v0-0-010-FHIR-4-0-1.zip'
+const measureName = ''
+const measureFileToUpload = 'FHIR/'
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = 'President' + lastNameSuffix
@@ -28,7 +28,7 @@ describe('Attribute UI: timing: Timing', () => {
 
   })
 
-  it('Verify the Timing Widget', () => {
+  it.skip('Verify the Timing Widget', () => {
 
     cy.get(measureDetailsPage.patientListing).then((patientListing) => {
       const initialPatientCount = parseInt(patientListing.text(), 10)

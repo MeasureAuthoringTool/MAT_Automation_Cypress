@@ -16,7 +16,7 @@ describe('Test Patient: Modifier Extensions section', () => {
     bonnieLogin.logout()
   })
 
-  it.only('Validate the Modifier Extensions Components', () => {
+  it.only('Validate the Modifier Extensions Components, codeable concept', () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload)
 
     navigateToMeasureDetails(measureName)
@@ -31,7 +31,7 @@ describe('Test Patient: Modifier Extensions section', () => {
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
 
-      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
+      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 25)
 
       CodeableConceptModifierExtension()
       testPatientPage.clickSavePatient()

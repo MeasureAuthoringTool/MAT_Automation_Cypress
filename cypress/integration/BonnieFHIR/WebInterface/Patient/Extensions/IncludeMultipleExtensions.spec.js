@@ -8,7 +8,7 @@ describe('Test Patient: Extensions section', () => {
 
   const measureName = 'SBTESTCMS347'
   const measureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear() + 1
   const todaysDate = new Date().getMonthFormatted().toString() + '/' + new Date().getDayFormatted().toString() + '/'
     + year.toString()
 
@@ -19,7 +19,7 @@ describe('Test Patient: Extensions section', () => {
     bonnieLogin.logout()
   })
 
-  it('Validate the Extensions Components', () => {
+  it('Validate the Extensions Components, Mutiple Extensions', () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload)
 
     measureDetailsPage.navigateToMeasureDetails(measureName)
@@ -33,7 +33,7 @@ describe('Test Patient: Extensions section', () => {
 
       measureDetailsPage.clickAddPatient()
       testPatientPage.enterPatientCharacteristics(distinctLastName)
-      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
+      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 25)
 
       multipleExtensions()
       testPatientPage.clickSavePatient()
