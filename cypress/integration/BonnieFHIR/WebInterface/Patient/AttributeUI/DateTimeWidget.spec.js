@@ -35,7 +35,7 @@ describe('Attribute UI: Value: DateTime', () => {
       testPatientPage.enterPatientCharacteristics(distinctLastName)
 
       //add Observation Element
-      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 23)
+      testPatientPage.dragAndDrop('diagnostics', 'Diagnostics: Observation: LDL Cholesterol', 25)
 
       //verify DateTime Widget
       verifyDateTimeWidget()

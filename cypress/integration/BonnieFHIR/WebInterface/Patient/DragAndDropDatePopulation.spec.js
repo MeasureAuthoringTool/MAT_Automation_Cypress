@@ -40,11 +40,11 @@ describe('Patient: Elements', () => {
       testPatientPage.enterPatientCharacteristics(distinctLastName)
 
 
-      testPatientPage.dragAndDrop('financial support', 'Financial Support: Coverage: Payer', 24)
+      testPatientPage.dragAndDrop('financial support', 'Financial Support: Coverage: Payer', 26)
 
       populateStartEndDates()
 
-      testPatientPage.dragAndDrop('management', 'Encounter: Annual Wellness Visit', 25)
+      testPatientPage.dragAndDrop('management', 'Encounter: Annual Wellness Visit', 27)
 
       verifyStartAndEndDates()
 

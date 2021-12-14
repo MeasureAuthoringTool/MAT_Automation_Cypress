@@ -4,8 +4,8 @@ import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDet
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 
-const measureName = 'HEDISBCS2020'
-const measureFileToUpload = 'FHIR/HEDISBCS2020-v0-0-010-FHIR-4-0-1.zip'
+const measureName = ''
+const measureFileToUpload = 'FHIR/'
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = 'President' + lastNameSuffix
@@ -28,7 +28,7 @@ describe('Attribute UI: identifier: Identifier', () => {
 
   })
 
-  it('Verify the Identifier Attribute can be added to patient history successfully', () => {
+  it.skip('Verify the Identifier Attribute can be added to patient history successfully', () => {
 
     measureDetailsPage.clickAddPatient()
     testPatientPage.enterPatientCharacteristics(distinctLastName)
