@@ -5,7 +5,7 @@ import * as bonnieUpload from '../../../../support/Bonnie/BonnieUploadMeasure'
 import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
 import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
 
-const fileToUpload = "FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip"
+const fileToUpload = "FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip"
 
 describe('Valiidate DateTime for Attributes from Patient', () => {
 

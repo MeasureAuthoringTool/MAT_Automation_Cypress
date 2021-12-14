@@ -13,7 +13,7 @@ const lastNameSuffix = new Date().getTime()
 const distinctLastName = "President" + lastNameSuffix
 
 const measureNameWithConditionandProcedure = "SBTESTCMS347"
-const measureFileNameWithConditionandProcedure = "FHIR/SBTESTCMS347-v0-0-008-FHIR-4-0-1 (1).zip"
+const measureFileNameWithConditionandProcedure = "FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip"
 
 describe("Measure with references", () => {
   beforeEach("Login", () => {

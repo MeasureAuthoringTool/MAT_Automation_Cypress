@@ -7,7 +7,7 @@ import * as helper from '../../../../../support/helpers'
 
 // Can be any measure with Components
 const measureName = "SBTESTCMS347"
-const measureFileName = "FHIR/SBTESTCMS347-v0-0-008-FHIR-4-0-1 (1).zip"
+const measureFileName = "FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip"
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = "President" + lastNameSuffix

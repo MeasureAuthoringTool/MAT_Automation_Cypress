@@ -7,7 +7,7 @@ import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMea
 describe('Create and then Edit New Patient', () => {
 
   let measureName = 'FHIRmeasureCMS347'
-  let measureFileToUpload = 'FHIR/FHIRmeasureCMS347-v0-0-003-FHIR-4-0-1.zip'
+  let measureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
 
   let lastNameSuffix = new Date().getTime()
   let distinctLastName = 'President' + lastNameSuffix
