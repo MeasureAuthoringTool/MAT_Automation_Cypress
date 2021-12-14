@@ -6,7 +6,7 @@ import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDet
 
 describe('Attribute UI: Value: DateTime', () => {
 
-  const measureName = 'FHIRmeasureCMS347'
+  const measureName = 'SBTESTCMS347'
   const measureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
 
   const lastNameSuffix = new Date().getTime()
