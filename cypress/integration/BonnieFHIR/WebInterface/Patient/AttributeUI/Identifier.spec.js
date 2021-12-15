@@ -28,7 +28,7 @@ describe('Attribute UI: identifier: Identifier', () => {
 
   })
 
-  it.skip('Verify the Identifier Attribute can be added to patient history successfully', () => {
+  it('Verify the Identifier Attribute can be added to patient history successfully', () => {
 
     measureDetailsPage.clickAddPatient()
     testPatientPage.enterPatientCharacteristics(distinctLastName)
