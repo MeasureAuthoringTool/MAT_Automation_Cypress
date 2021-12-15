@@ -32,7 +32,7 @@ describe('Attribute UI: Ratio Widget', () => {
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
 
-      testPatientPage.dragAndDrop('medications', 'Medications: MedicationRequest: Low Intensity Statin Therapy', 40)
+      testPatientPage.dragAndDrop('medications', 'Medications: MedicationRequest: Low Intensity Statin Therapy', 39)
 
       ratioWidget()
       testPatientPage.clickSavePatient()
