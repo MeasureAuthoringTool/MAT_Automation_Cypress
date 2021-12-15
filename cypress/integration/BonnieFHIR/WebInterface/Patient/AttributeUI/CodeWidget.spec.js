@@ -32,8 +32,7 @@ describe('Attribute UI: Code Widget', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      testPatientPage.dragAndDrop('medications', 'Medications: MedicationAdministration: ' +
-        'Low Intensity Statin Therapy', 40)
+      testPatientPage.dragAndDrop('medications', 'Medications: MedicationRequest: Low Intensity Statin Therapy', 39)
       codeWidget()
       testPatientPage.clickSavePatient()
       testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
@@ -76,9 +75,9 @@ describe('Attribute UI: Code Widget', () => {
     cy.log('addCodeWidget')
     cy.get(testPatientPage.attributeNameSelect).select('status')
     cy.get(testPatientPage.attributeTypeSelect).should('contain.text', 'Code')
-    cy.get(testPatientPage.valueSetDirectRefSelect).select('MedicationAdministration Status Codes')
+    cy.get(testPatientPage.valueSetDirectRefSelect).select('MedicationrequestStatus')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains('status: completed')
+    cy.get(testPatientPage.exsistingAttribute).contains('status: active')
     cy.log('AddCodeWidget - done')
   }
 

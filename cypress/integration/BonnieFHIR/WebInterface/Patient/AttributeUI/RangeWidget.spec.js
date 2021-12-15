@@ -33,7 +33,7 @@ describe('Attribute UI: Range Widget', () => {
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
 
-      testPatientPage.dragAndDrop('clinical summary', 'Clinical Summary: AllergyIntolerance: Statin Allergen', 2)
+      testPatientPage.dragAndDrop('clinical summary', 'Clinical Summary: AllergyIntolerance: Statin Allergen', 15)
 
       rangeWidget()
       testPatientPage.clickSavePatient()
