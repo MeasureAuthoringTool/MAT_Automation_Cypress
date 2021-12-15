@@ -17,11 +17,11 @@ describe('Patient: Handle Expected Patient Values', () => {
     bonnieLogin.logout()
   })
 
-  it.skip('Expected values for a measure as "episode"', () => {
+  it('Expected values for a measure as "episode"', () => {
     runScriptFor('episode', enterExpectedValuesForEpisodeOfCareBasedMeasure, verifyExpectedPatientsForEpisodeOfCareBasedMeasure)
   })
 
-  it.skip('Expected values for a measure as "patient"', () => {
+  it('Expected values for a measure as "patient"', () => {
     runScriptFor('patient', enterExpectedValuesForPatientBasedMeasure, verifyExpectedPatientsForPatientBasedMeasure)
   })
 
