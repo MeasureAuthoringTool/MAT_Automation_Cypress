@@ -6,7 +6,7 @@ import * as deletePatient from '../../../../../support/Bonnie/BonnieFHIR/DeleteP
 
 describe('Medication Administration Attribute', () => {
   const measureName = 'EXM108CV'
-  const measureFileToUpload = 'FHIR/EXM108CV-v0-2-002-FHIR-4-0-1.zip'
+  const measureFileToUpload = 'FHIR/EXM108CV-v0-2-003-FHIR-4-0-1.zip'
 
   const lastNameSuffix = new Date().getTime()
   const distinctLastName = 'President' + lastNameSuffix

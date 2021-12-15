@@ -32,7 +32,8 @@ describe('Attribute UI: Code Widget', () => {
 
       measureDetailsPage.clickAddPatient()
       enterPatientCharacteristics(distinctLastName)
-      testPatientPage.dragAndDrop('medications', 'Medications: MedicationAdministration: Low Intensity Statin Therapy', 37)
+      testPatientPage.dragAndDrop('medications', 'Medications: MedicationAdministration: ' +
+        'Low Intensity Statin Therapy', 40)
       codeWidget()
       testPatientPage.clickSavePatient()
       testPatientPage.verifyPatientAdded(initialPatientCount, distinctLastName)
