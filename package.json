@@ -135,7 +135,7 @@
         "@cypress/browserify-preprocessor": "^2.2.4",
         "axe-core": "^4.3.3",
         "cy-verify-downloads": "^0.0.5",
-        "cypress": "^9.1.1",
+        "cypress": "^7.4.0",
         "cypress-axe": "^0.13.0",
         "cypress-file-upload": "^4.1.1",
         "data-driven": "^1.4.0",
