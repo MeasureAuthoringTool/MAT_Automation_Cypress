@@ -19,7 +19,8 @@ describe('Location Attribute', () => {
     measureDetailsPage.clickAddPatient()
     testPatientPage.enterPatientCharacteristics(distinctLastName)
 
-    testPatientPage.dragAndDrop('management', 'Management: Encounter: Emergency Department Visit', 36)
+    testPatientPage.dragAndDrop('management', 'Management: Encounter: Emergency Department ' +
+      'Visit', 37)
   })
 
   afterEach('Log Out', () => {

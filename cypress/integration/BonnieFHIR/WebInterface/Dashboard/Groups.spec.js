@@ -27,7 +27,7 @@ describe('Dashboard: Admin: Groups', () => {
         cy.log('bonnieDeleteGroups Task finished')
       })
   })
-  it('Create New Group, Add user to Group, switch to that Group', () => {
+  it.skip('Create New Group, Add user to Group, switch to that Group', () => {
 
     //Create Group
     cy.get(testPatientPage.adminTab).click()
