@@ -1,27 +1,27 @@
-import * as helper from "../../../../support/helpers"
-import * as bonnieLogin from "../../../../support/Bonnie/BonnieLoginLogout"
-import * as measureDetailsPage from "../../../../pom/BonnieFHIR/WI/MeasureDetailsPage"
-import * as testPatientPage from "../../../../pom/BonnieFHIR/WI/TestPatientPage"
-import * as bonnieUploadMeasure from "../../../../support/Bonnie/BonnieUploadMeasure"
-import * as dashboard from "../../../../pom/BonnieFHIR/WI/Dashboard"
+import * as helper from '../../../../support/helpers'
+import * as bonnieLogin from '../../../../support/Bonnie/BonnieLoginLogout'
+import * as measureDetailsPage from '../../../../pom/BonnieFHIR/WI/MeasureDetailsPage'
+import * as testPatientPage from '../../../../pom/BonnieFHIR/WI/TestPatientPage'
+import * as bonnieUploadMeasure from '../../../../support/Bonnie/BonnieUploadMeasure'
+import * as dashboard from '../../../../pom/BonnieFHIR/WI/Dashboard'
 
 // Can be any measure with Encounters
-const measureName = "Cms111testingMeasure"
-const measureFileName = "FHIR/Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip"
+const measureName = 'Cms111testingMeasure'
+const measureFileName = 'FHIR/Cms111testingMeasure-v0-0-004-FHIR-4-0-1.zip'
 
 const lastNameSuffix = new Date().getTime()
-const distinctLastName = "President" + lastNameSuffix
+const distinctLastName = 'President' + lastNameSuffix
 
-describe("Measure with references", () => {
-  beforeEach("Login", () => {
+describe('Measure with references', () => {
+  beforeEach('Login', () => {
     bonnieLogin.login()
   })
 
-  afterEach("Log Out", () => {
+  afterEach('Log Out', () => {
     bonnieLogin.logout()
   })
 
-  it("can add a condition Reference with  Resource to Encounter", () => {
+  it('can add a condition Reference with  Resource to Encounter', () => {
     bonnieUploadMeasure.UploadMeasureToBonnie(
       measureFileName,
       false
@@ -65,16 +65,16 @@ describe("Measure with references", () => {
     cy.get(testPatientPage.valueSetDirectRefSelect).select('ConditionVerificationStatus')
     cy.get(testPatientPage.valueSetCodeSelect).select('unconfirmed')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains("verificationStatus: [ConditionVerificationStatus: unconfirmed]")
+    cy.get(testPatientPage.exsistingAttribute).contains('verificationStatus: [ConditionVerificationStatus: unconfirmed]')
 
     // Collapse condition
-    testPatientPage.toggleDataElement(1) 
+    testPatientPage.toggleDataElement(1)
 
     // Expand Encounter
     testPatientPage.toggleDataElement(0)
 
     // Verify there is a reference to the Condition resource
-    cy.get(testPatientPage.exsistingAttribute).contains("diagnosis: condition: Condition")
+    cy.get(testPatientPage.exsistingAttribute).contains('diagnosis: condition: Condition')
 
     // Click to drop the reference but the referenced Condition should still exist
     cy.get('[data-call-method="removeValue"]').eq(0).click()
@@ -92,6 +92,5 @@ describe("Measure with references", () => {
     helper.click(testPatientPage.cancelBtn)
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
-
   })
 })
