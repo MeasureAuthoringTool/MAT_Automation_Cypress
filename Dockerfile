@@ -18,6 +18,12 @@ RUN \
   apt-get install -y dbus-x11 google-chrome-stable && \
   rm -rf /var/lib/apt/lists/*
 
+# install aws cli
+RUN \
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+  unzip awscliv2.zip && \
+  ./aws/install
+
 COPY ./cypress ./cypress
 COPY ./cypress.json ./cypress.json
 COPY ./session.js ./session.js
