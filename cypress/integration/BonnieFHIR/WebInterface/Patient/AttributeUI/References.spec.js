@@ -186,5 +186,6 @@ describe('Measure with references', () => {
     helper.click(testPatientPage.cancelBtn)
 
     helper.visibleWithTimeout(measureDetailsPage.measurePageNavigationBtn)
+
   })
 })
