@@ -5,12 +5,13 @@ import * as importMeasureDialog from '../../pom/BonnieFHIR/WI/ImportMeasureDialo
 const baseUrl = Cypress.config().baseUrl
 let username = ''
 let password = ''
-const mongoURL = Cypress.env('MONGO_URL')
+let mongoURL = ''
 let mongoGroupId = ''
 const sslCert = Cypress.env('MONGO_SSLCERT')
 
 switch (Cypress.env('environment')) {
   case 'bonnieQDM56Dev':
+    mongoURL = Cypress.env('MONGO_URL')
     mongoGroupId = Cypress.env('DEVQDM56_DB_MONGO_GROUPID')
 
     username = Cypress.env('DEV_USERNAME')
@@ -19,6 +20,7 @@ switch (Cypress.env('environment')) {
     break
 
   case 'bonnieQDM56Test':
+    mongoURL = Cypress.env('TESTmongoURL')
     mongoGroupId = Cypress.env('TESTQDM56_DB_MONGO_GROUPID')
 
     username = Cypress.env('TEST_USERNAME')
@@ -27,14 +29,25 @@ switch (Cypress.env('environment')) {
     break
 
   case 'bonnieFHIRDev':
+    mongoURL = Cypress.env('MONGO_URL')
     mongoGroupId = Cypress.env('DEVFHIR_DB_MONGO_GROUPID')
 
     username = Cypress.env('DEV_USERNAME')
     password = Cypress.env('DEV_PASSWORD')
 
     break
+  case 'bonnieFHIRTest':
+    mongoURL = Cypress.env('TESTmongoURL')
+
+    mongoGroupId = Cypress.env('TESTFHIR_DB_MONGO_GROUPID')
+
+    username = Cypress.env('TEST_USERNAME')
+    password = Cypress.env('TEST_PASSWORD')
+
+    break
 
   case 'bonnieQDM55Dev':
+    mongoURL = Cypress.env('MONGO_URL')
     mongoGroupId = Cypress.env('DEVQDM55_DB_MONGO_GROUPID')
 
     username = Cypress.env('DEV_USERNAME')
@@ -79,4 +92,3 @@ export const logout = () => {
   cy.log('Logout Successful')
 
 }
-
