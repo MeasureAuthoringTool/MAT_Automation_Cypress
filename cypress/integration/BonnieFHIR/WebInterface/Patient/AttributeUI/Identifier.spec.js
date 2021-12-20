@@ -4,8 +4,8 @@ import * as measureDetailsPage from '../../../../../pom/BonnieFHIR/WI/MeasureDet
 import * as testPatientPage from '../../../../../pom/BonnieFHIR/WI/TestPatientPage'
 import * as bonnieUploadMeasure from '../../../../../support/Bonnie/BonnieUploadMeasure'
 
-const measureName = ''
-const measureFileToUpload = 'FHIR/'
+const measureName = 'SBTESTCMS347'
+const measureFileToUpload = 'FHIR/SBTESTCMS347-v0-0-016-FHIR-4-0-1.zip'
 
 const lastNameSuffix = new Date().getTime()
 const distinctLastName = 'President' + lastNameSuffix
@@ -34,7 +34,7 @@ describe('Attribute UI: identifier: Identifier', () => {
     testPatientPage.enterPatientCharacteristics(distinctLastName)
 
     //add Encounter Element
-    testPatientPage.dragAndDrop('management', 'Management: Encounter: Encounter Inpatient', 7)
+    testPatientPage.dragAndDrop('management', 'Management: Encounter: Encounter Inpatient', 36)
 
     identifierAttribute()
 
