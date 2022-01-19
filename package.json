@@ -17,7 +17,6 @@
         "cypress:open:bonnieFHIRDev": "cypress open --env configFile=bonnieFHIRDev",
         "cypress:open:bonnieQDM55Dev": "cypress open --env configFile=bonnieQDM55Dev",
         "cypress:open:bonnieFHIRTest": "cypress open --env configFile=bonnieFHIRTest",
-        "cypress:open:bonnieQDM56Test": "cypress open --env configFile=bonnieQDM56Test",
         "cypress:open:stag": "cypress open --env configFile=stag",
         "cypress:open:imp": "cypress open --env configFile=impl",
         "lint:cypress": "./node_modules/.bin/eslint ./cypress/integration/**/*spec.js",

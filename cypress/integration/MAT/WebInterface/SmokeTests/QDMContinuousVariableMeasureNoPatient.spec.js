@@ -295,7 +295,19 @@ describe('QDM Continuous Variable Measure No Patient', () => {
     cy.get(measureComposer.populationsListItems).eq(3).should('contain.text', 'Measure Observation 1')
     cy.get(measureComposer.populationsListItems).eq(4).should('contain.text', 'Stratification 1')
 
-    //need to add MO associations and packaging actions
+    // Package Grouping
+    cy.get(measureComposer.addAllItemsToGrouping).click()
+    cy.get(measureComposer.saveGrouping).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.createMeasurePackageBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
     cy.get(measurelibrary.measureLibraryTab).click()
 

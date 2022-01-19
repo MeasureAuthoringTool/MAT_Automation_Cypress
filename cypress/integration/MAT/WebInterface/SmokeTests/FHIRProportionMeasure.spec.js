@@ -6,6 +6,9 @@ import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 import * as login from '../../../../support/MAT/Login'
 
+const path = require('path')
+const downloadsFolder = Cypress.config('downloadsFolder')
+
 //Smoke test for FHIR Proportion Measure. Create Draft measure and Package
 
 describe('FHIR Proportion Measure', () => {
@@ -13,7 +16,10 @@ describe('FHIR Proportion Measure', () => {
     login.matLogin()
   })
   afterEach('Log Out', () => {
-    login.matLogout()
+    //after the package and export action, the MAT within cypress has a constant page load, basically it is in a bad State
+    //until we can figure our way around that blocker, will need to end the test right after the create package and export
+    //action. This is why we are commenting out the log out
+    //login.matLogout()
   })
   it('Proportion FHIR, creation Draft measure and Package', () => {
 
@@ -21,7 +27,7 @@ describe('FHIR Proportion Measure', () => {
 
     helper.enabledWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
-    let measureName = 'CreateFhirProportionMeasure' + Date.now()
+    let measureName = 'CreateFhirProportionMeasureSmokeTest' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.modelradioFHIR).click()
@@ -186,18 +192,11 @@ describe('FHIR Proportion Measure', () => {
     cy.get(measureComposer.createPackageExportBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
 
-    helper.visibleWithTimeout(measureComposer.packageWarningMessage)
-    helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
-
-    cy.pause()
-
-
-    cy.readFile
-
-    //cy.task(isExistZIP, 'test.zip')
+    cy.readFile(path.join(downloadsFolder, 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.zip')).should
+    ('contain', 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.html', 'CreateFhirProportionMeasureSmoke-v0-0-001' +
+      '-FHIR-4-0-1.json', 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.xml')
+    cy.log('Successfully verified zip file export')
 
   })
 })

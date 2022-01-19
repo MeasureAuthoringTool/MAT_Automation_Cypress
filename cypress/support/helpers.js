@@ -575,11 +575,9 @@ export const spinnerNotVisible = () => {
 export const spinnerExists = () => {
   existsWithTimeout(matheader.spinner, 60000)
 }
-export const spinnerNotExists = () => {
-  notExistsWithTimeout(matheader.spinner, 60000)
-  // notExistsWithTimeout(matheader.spinnerWrapper, 60000)
-  //notExistsWithTimeout(matheader.spinnerShadow, 60000)
-  //notExistsWithTimeout(matheader.spinnerModal, 60000)
+export const spinnerWrapperNotVisible = () => {
+
+  notVisibleWithTimeout(matheader.spinnerWrapper, 120000)
 }
 export const verifySpinnerAppearsAndDissappears = () => {
   spinnerNotVisible()
@@ -590,7 +588,6 @@ export const verifySpinnerExists = () => {
   spinnerVisible()
 }
 export const verifySpinnerNotExists = () => {
-  spinnerNotExists()
   spinnerNotVisible()
 }
 export const containClick = (text) => {
