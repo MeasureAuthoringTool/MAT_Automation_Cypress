@@ -18,7 +18,7 @@ describe('Attribute UI: Range Widget', () => {
     bonnieLogin.logout()
   })
 
-  it.only('Verify the Range Widget', () => {
+  it('Verify the Range Widget', () => {
     uploadTestMeasure()
 
     navigateToMeasureDetails(measureName)
@@ -72,26 +72,15 @@ describe('Attribute UI: Range Widget', () => {
     cy.log('enterPatientCharacteristics - done')
   }
 
-  function dragAndDrop () {
-    cy.log('dragAndDropAttribute')
-    cy.get(testPatientPage.criteriaElementsContainer).contains('clinical summary').click()
-    cy.get('.draggable').eq(2)
-      .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
-      .trigger('mousemove', { which: 1, pageX: 1000, pageY: 100 })
-      .trigger('mouseup')
-    cy.get(testPatientPage.criteriaSectionTitle)
-      .should('contain.text', 'Clinical Summary: AllergyIntolerance: Statin Allergen')
-    cy.log('DragAndDropAllergyIntolerance - done')
-  }
-
   function rangeWidget () {
     cy.log('addRangeWidget')
     cy.get(testPatientPage.attributeNameSelect).select('onset')
     cy.get(testPatientPage.attributeTypeSelect).select('Range')
     cy.get(testPatientPage.lowValueField).type(13)
     cy.get(testPatientPage.highValueField).type(25)
+    cy.get(testPatientPage.rangeUnitsInputbox).type('min')
     cy.get(testPatientPage.addWidgetBtn).eq(0).click()
-    cy.get(testPatientPage.exsistingAttribute).contains('onset: 13 - 25')
+    cy.get(testPatientPage.exsistingAttribute).contains('onset: 13 - 25 min')
     cy.log('AddRangeWidget - done')
   }
 })
