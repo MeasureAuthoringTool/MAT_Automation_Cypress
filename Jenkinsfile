@@ -52,8 +52,8 @@ pipeline{
     stage('Run Tests') {
         agent {
             docker {
-                image '${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/mat-dev-cypress-ecr:latest'
-		args '-u 0 -v $HOME/.npm:/.npm'
+                image "${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/mat-dev-cypress-ecr:latest"
+		args "-u 0 -v $HOME/.npm:/.npm"
                 reuseNode true
             }
         }
