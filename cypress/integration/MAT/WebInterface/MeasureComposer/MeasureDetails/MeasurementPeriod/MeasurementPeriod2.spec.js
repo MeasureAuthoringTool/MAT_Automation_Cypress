@@ -92,8 +92,8 @@ describe('Measure Composer: Measure Details: Validate the Measure Period with da
     // check default measure period
     cy.get(measureDetails.measurementPeriodCheckbox).check()
 
-    cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value', '01/01/2022')
-    cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2022')
+    cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value', '01/01/2023')
+    cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2023')
 
     cy.get(measureDetails.saveBtn).click()
 

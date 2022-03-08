@@ -5,6 +5,7 @@ import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as cqlLibraryHelper from '../../../../../support/MAT/CqlLibraryHelper'
 import * as login from '../../../../../support/MAT/Login'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
+import * as measureLibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 
 let qdmCqlLibraryName = ''
 
@@ -73,7 +74,7 @@ describe('CQL Library: FHIR Library Conversion: Successful Conversion to FHIR', 
     //Delete and reconvert
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox, 200000)
-    helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibraryName)
+    helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibraryName + 'FHIR')
     cy.get(cqlLibrary.searchBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -81,7 +82,19 @@ describe('CQL Library: FHIR Library Conversion: Successful Conversion to FHIR', 
 
     helper.verifySpinnerAppearsAndDissappears()
 
+    cy.get(cqlLibrary.WarningMessage).should('contain.text','No libraries returned. Please change your ' +
+      'search criteria and search again.')
+
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+
+    helper.enterText(cqlLibrary.searchInputBox, qdmCqlLibraryName)
+    cy.get(cqlLibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
     gridRowActions.selectRow(cqlLibrary.row1CqlLibrarySearch)
+
     cqlLibraryHelper.convertCqlLibraryToFHIRAndVerify(qdmCqlLibraryName)
 
   })
