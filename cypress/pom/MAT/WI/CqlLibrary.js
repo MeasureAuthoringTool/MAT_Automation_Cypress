@@ -7,6 +7,9 @@ export const searchBtn = '#SearchWidgetButton_forCqlLibrary'
 export const searchInputBox = '#SearchFilterWidget_SearchInputHPanel_forCqlLibrary > tbody > tr > td > .form-control'
 export const modelTypeListBox = '#SearchFilterWidget_verticalPanel_forCqlLibrary #modelType'
 
+//page level error
+export const WarningMessage = '#CQLLibrary_MainPanel > .alert-danger'
+
 // Recent Activity Table
 export const row1RecentActivity = '#searchPanel_VerticalPanel [__gwt_row="0"]'
 

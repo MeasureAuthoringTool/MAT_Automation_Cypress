@@ -91,21 +91,21 @@ describe('Measure Composer:CQLWorkspace: Add Value Sets', () => {
 
     cy.get(measureComposer.valueSets).click()
     helper.verifySpinnerAppearsAndDissappears()
-    cy.get(measureComposer.OIDInput).type('2.16.840.1.113762.1.4.1217.1')
+    cy.get(measureComposer.OIDInput).type('2.16.840.1.113883.3.117.1.7.1.35')
     cy.get(measureComposer.retrieveOIDBtn).click()
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.get(measureComposer.warningMessage).should('contain.text', 'Value set TestTelehealth successfully retrieved from VSAC.')
+    cy.get(measureComposer.warningMessage).should('contain.text', 'Value set Galactosemia successfully retrieved from VSAC.')
     cy.get(measureComposer.applyBtn).click()
-    cy.get(measureComposer.warningMessage).should('contain.text', 'Value set TestTelehealth has been successfully applied.')
+    cy.get(measureComposer.warningMessage).should('contain.text', 'Value set Galactosemia has been successfully applied.')
 
     cy.get(measureComposer.cqlLibraryEditor).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.waitToContainText(measureComposer.warningMessage, 'You are viewing CQL with no validation errors.')
-    cy.get(measureComposer.cqlLibraryEditorInput).should('contain.text', 'TestTelehealth')
-    cy.get(measureComposer.cqlLibraryEditorInput).should('contain.text', '2.16.840.1.113762.1.4.1217.1')
+    cy.get(measureComposer.cqlLibraryEditorInput).should('contain.text', 'Galactosemia')
+    cy.get(measureComposer.cqlLibraryEditorInput).should('contain.text', '2.16.840.1.113883.3.117.1.7.1.35')
     cy.get(measurelibrary.measureLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()

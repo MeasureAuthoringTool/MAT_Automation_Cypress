@@ -15,8 +15,6 @@ export function deleteCqlLibrary (cqlLibraryName) {
 
   cy.get(cqlLibrary.confirmDeleteText).type('DELETE', { force: true })
   cy.get(cqlLibrary.confirmDeleteBtn).click()
-
-  cy.get(cqlLibrary.shareWarningMessage).should('contain.text', 'CQL Library successfully deleted.')
 }
 
 export function createCqlLibraryVersionAndVerify () {

@@ -49,8 +49,8 @@ describe('Measure Composer: Measure Details: Validate the Measure Period without
     // Uncheck default measure period
     cy.get(measureDetails.measurementPeriodCheckbox).uncheck()
 
-    cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value', '01/01/2022')
-    cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2022')
+    cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value', '01/01/2023')
+    cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2023')
 
     cy.get(measureDetails.saveBtn).click()
 
@@ -131,8 +131,8 @@ describe('Measure Composer: Measure Details: Validate the Measure Period without
 
     cy.get(measureDetails.checkboxLabel).should('contain.text', 'Next Calendar Year')
 
-    cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value', '01/01/2022')
-    cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2022')
+    cy.get(measureDetails.measurementPeriodFromInputBox).should('contain.value', '01/01/2023')
+    cy.get(measureDetails.measurementPeriodToInputBox).should('contain.value', '12/31/2023')
 
     // uncheck default measure period
     cy.get(measureDetails.measurementPeriodCheckbox).uncheck()
