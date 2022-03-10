@@ -264,7 +264,7 @@ describe('CQL Library: CQL Library Search Grid', () => {
 
   })
 
-  it('Button Bar Delete', () => {
+  it.skip('Button Bar Delete', () => {
 
     helper.enabledWithTimeout(cqlLibrary.searchInputBox, 120000)
     helper.enterText(cqlLibrary.searchInputBox, draftCqlLibraryOwner)
