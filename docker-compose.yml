@@ -4,6 +4,8 @@ services:
     image: mat
     tty: true
     build: .
+    ipc: host
+    shm_size: '2gb'
     container_name: cydev
     environment:
       - CYPRESS_DEV_USERNAME=${CYPRESS_DEV_USERNAME}
