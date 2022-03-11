@@ -9,7 +9,7 @@
   "viewportWidth": 1300,
   "viewportHeight": 800,
   "watchForFileChanges": false,
-  "numTestsKeptInMemory": 5,
+  "numTestsKeptInMemory": 0,
   "reporter": "mochawesome",
   "reporterOptions": {
     "reportDir": "cypress/results",
