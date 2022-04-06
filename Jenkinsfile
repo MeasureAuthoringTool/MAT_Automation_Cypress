@@ -1,12 +1,14 @@
 pipeline{
-    agent any
+        agent {
+            label 'dev-mat'
+        }
 
     options {
         buildDiscarder(logRotator(numToKeepStr:'20'))
     }
 
     parameters {
-        choice(choices: ['dev:mat:cqllibrary:search:tests:report','dev:mat:cql:library:report','dev:mat:cql:composer:report','dev:mat:measure:composer:report','dev:mat:measure:library:report','dev:all:mat:tests:report','dev:mat:smoke:tests:report','dev:mat:cqllibrary:grids:tests:report','test:all:mat:tests:report', 'dev:bonnieFHIR:measures:tests:report', 'dev:all:bonnieFHIR:tests:report', 'dev:all:bonnieQDM56:tests:report', 'dev:all:bonnieQDM55:tests:report', 'test:all:bonnieFHIR:tests:report', 'test:all:bonnieQDM56:tests:report'], description:'Choose the Test script to run', name: 'TEST_SCRIPT')
+        choice(choices: 'dev:mat:cqllibrary:search:tests','dev:mat:cql:library','dev:mat:cql:composer','dev:mat:measure:composer','dev:mat:measure:library','dev:all:mat:tests','dev:mat:smoke:tests','dev:mat:cqllibrary:grids:tests','test:all:mat:tests', 'dev:bonnieFHIR:measures:tests', 'dev:all:bonnieFHIR:tests', 'dev:all:bonnieQDM56:tests', 'dev:all:bonnieQDM55:tests', 'test:all:bonnieFHIR:tests', 'test:all:bonnieQDM56:tests'], description:'Choose the Test script to run', name: 'TEST_SCRIPT')
         choice(name:'BUILD_CONTAINER', description:'Rebuild Cypress Container?', choices:['no','yes'])
     }
 
@@ -28,6 +30,7 @@ pipeline{
         CYPRESS_MONGO_URL=credentials('CYPRESS_MONGO_URL')
         CYPRESS_MONGO_SSLCERT=credentials('CYPRESS_MONGO_SSLCERT')
         CYPRESS_REPORT_BUCKET=credentials('CYPRESS_REPORT_BUCKET')
+        NODE_OPTIONS=credentials('NODE_OPTIONS')
     }
 
  stages {
@@ -49,38 +52,58 @@ pipeline{
       }
     }
 
-    stage('Run Tests') {
-        agent {
-            docker {
-                image "${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/mat-dev-cypress-ecr:latest"
-		args "-u 0 -v $HOME/.npm:/.npm"
-                reuseNode true
-            }
-        }
-            steps {
-                slackSend(color: "#ffff00", message: "#${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Started")
-                sh '''
-                cd /app/cypress
-                npm run ${TEST_SCRIPT}
-		aws s3 sync --acl public-read /app/mochawesome-report/ ${CYPRESS_REPORT_BUCKET}/mochawesome-report-${BUILD_NUMBER}/
-		echo "find reports at https://mat-reports.s3.amazonaws.com/mochawesome-report-${BUILD_NUMBER}/mochawesome.html"
-                tar -czf /app/mochawesome-report-${BUILD_NUMBER}.tar.gz -C /app/mochawesome-report/ . 
-                cp /app/mochawesome-report-${BUILD_NUMBER}.tar.gz ${WORKSPACE}/
-                '''
-            }
-        }
-   }
+  stage('Run Tests') {
+      agent {
+          docker {
+              image "${AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/mat-dev-cypress-ecr:latest"
+	      args "-u 0 -v $HOME/.npm:/.npm"
+              reuseNode true
+          }
+      }
+
+                      steps {
+                          slackSend(color: "#ffff00", message: "#${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) - ${TEST_SCRIPT} Tests Started")
+                          catchError(buildResult: 'FAILURE') {
+                              sh '''
+                              cd /app/cypress
+                              npm run delete:reports
+                              npm run ${TEST_SCRIPT}
+                              echo $?
+                              '''
+                          }
+                      }
+                    post {
+                        always{
+                             sh '''
+                             cd /app/cypress
+                             npm run combine:reports
+                             npm run generateOne:report
+                             tar -czf /app/mochawesome-report-${BUILD_NUMBER}.tar.gz -C /app/mochawesome-report/ .
+                             cp /app/mochawesome-report-${BUILD_NUMBER}.tar.gz ${WORKSPACE}/
+                             '''
+                             archiveArtifacts artifacts: "mochawesome-report-${BUILD_NUMBER}.tar.gz"
+                        }
+                    }
+
+      }
+ }
+
+
+
+
 
   post {
-      always{
-        archiveArtifacts artifacts: "mochawesome-report-${BUILD_NUMBER}.tar.gz"
-      }
       success{
-        slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) ${TEST_SCRIPT} Tests Finished, Review report at https://mat-reports.s3.amazonaws.com/mochawesome-report-${BUILD_NUMBER}/mochawesome.html")
+        slackSend(color: "#00ff00", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) ${TEST_SCRIPT} Tests Finished")
       }
+
       failure{
 	sh 'echo fail'
-        slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) ${TEST_SCRIPT} Tests Failed to Run or complete successfully")
+        slackSend(color: "#ff0000", message: "${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>) ${TEST_SCRIPT} You have Test failures or a bad build, please review report attached to jenkins build")
+      }
+      // Clean after build
+      always {
+          cleanWs()
       }
   }
 }

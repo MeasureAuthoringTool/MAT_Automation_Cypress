@@ -4,8 +4,6 @@ services:
     image: mat
     tty: true
     build: .
-    ipc: host
-    shm_size: '2gb'
     container_name: cydev
     environment:
       - CYPRESS_DEV_USERNAME=${CYPRESS_DEV_USERNAME}
@@ -22,5 +20,6 @@ services:
       - CYPRESS_DEVFHIR_DB_MONGO_GROUPID=${CYPRESS_DEVFHIR_DB_MONGO_GROUPID}
       - CYPRESS_MONGO_URL=${CYPRESS_MONGO_URL}
       - CYPRESS_MONGO_SSLCERT=${CYPRESS_MONGO_SSLCERT}
+      - NODE_OPTIONS=${NODE_OPTIONS}
     volumes:
       - ./mochawesome-report:/app/mochawesome-report
