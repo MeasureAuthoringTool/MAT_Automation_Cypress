@@ -8,7 +8,7 @@ pipeline{
     }
 
     parameters {
-        choice(choices: 'dev:mat:cqllibrary:search:tests','dev:mat:cql:library','dev:mat:cql:composer','dev:mat:measure:composer','dev:mat:measure:library','dev:all:mat:tests','dev:mat:smoke:tests','dev:mat:cqllibrary:grids:tests','test:all:mat:tests', 'dev:bonnieFHIR:measures:tests', 'dev:all:bonnieFHIR:tests', 'dev:all:bonnieQDM56:tests', 'dev:all:bonnieQDM55:tests', 'test:all:bonnieFHIR:tests', 'test:all:bonnieQDM56:tests'], description:'Choose the Test script to run', name: 'TEST_SCRIPT')
+        choice(choices: ['dev:mat:cqllibrary:search:tests','dev:mat:cql:library','dev:mat:cql:composer','dev:mat:measure:composer','dev:mat:measure:library','dev:all:mat:tests','dev:mat:smoke:tests','dev:mat:cqllibrary:grids:tests','test:all:mat:tests', 'dev:bonnieFHIR:measures:tests', 'dev:all:bonnieFHIR:tests', 'dev:all:bonnieQDM56:tests', 'dev:all:bonnieQDM55:tests', 'test:all:bonnieFHIR:tests', 'test:all:bonnieQDM56:tests'], description:'Choose the Test script to run', name: 'TEST_SCRIPT')
         choice(name:'BUILD_CONTAINER', description:'Rebuild Cypress Container?', choices:['no','yes'])
     }
 
