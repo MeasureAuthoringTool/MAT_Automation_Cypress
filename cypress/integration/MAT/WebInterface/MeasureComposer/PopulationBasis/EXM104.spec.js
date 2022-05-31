@@ -5,6 +5,7 @@ import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as login from '../../../../../support/MAT/Login'
+import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 
 describe('EXM104: Discharged on Antithrombotic Therapy', () => {
   beforeEach('Login', () => {
@@ -14,10 +15,9 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     login.matLogout()
   })
   it('Discharged on Antithrombotic Therapy, creation, grouping, and packaging', () => {
-
     helper.visibleWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
-    let measureName = 'Discharge' + Date.now()
+    const measureName = 'Discharge' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.modelradioFHIR).click()
@@ -36,13 +36,13 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    //select population basis
+    // select population basis
     cy.get(measureDetails.populationBasisListbox).select('Encounter')
     cy.get(measureDetails.saveBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    //entering required meta data
+    // entering required meta data
     cy.get(measureDetails.measureStewardDeveloper).click()
     helper.verifySpinnerAppearsAndDissappears()
     cy.get(measureDetails.measureStewardListBox).select('SemanticBits')
@@ -74,7 +74,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    //adding valueset that this measure requires but cannot retrieve anymore
+    // adding valueset that this measure requires but cannot retrieve anymore
     cy.get(measureComposer.cqlLibraryEditorInput).type('{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}{uparrow}' +
       '{uparrow}{enter}valueset "Antithrombotic Therapy": \'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201\'{enter}{enter}')
 
@@ -85,8 +85,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 
-
-    //Includes
+    // Includes
 
     cy.get(measureComposer.includes).click()
 
@@ -104,7 +103,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 
-    //Value Sets
+    // Value Sets
 
     cy.get(measureComposer.valueSets).click()
 
@@ -129,7 +128,6 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     cy.get(measureComposer.definition).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-
 
     dataCreation.addDefinition('Antithrombotic Not Given at Discharge', '["MedicationRequest": medication in "Antithrombotic Therapy"] NoAntithromboticDischarge\n' +
       '      where NoAntithromboticDischarge.doNotPerform is true\n' +
@@ -171,7 +169,23 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
       '        and Pharmacological.status in { \'active\', \'completed\' }\n' +
       '        and Pharmacological.intent = \'order\'')
 
-    //CQL Library Editor
+    cy.reload()
+
+    helper.enabledWithTimeout(measurelibrary.searchBtn)
+    helper.enterText(measurelibrary.searchInputBox, measureName)
+    cy.get(measurelibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(measurelibrary.row1MeasureSearch)
+
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(measureComposer.cqlWorkspace).click()
+
+    // CQL Library Editor
 
     cy.get(measureComposer.cqlLibraryEditor).click()
 
@@ -248,14 +262,14 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     helper.visibleWithTimeout(measureComposer.warningMessage)
     helper.waitToContainText(measureComposer.warningMessage, 'Changes to Denominator Exceptions have been successfully saved.')
 
-    //navigate to Measure Packager
+    // navigate to Measure Packager
     helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(measureComposer.measurePackager).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
+    // verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
     cy.get(measureComposer.populationsListItems).its('length').should('equal', 5)
 
     cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
@@ -264,14 +278,14 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     cy.get(measureComposer.populationsListItems).eq(3).should('contain.text', 'Denominator Exceptions 1')
     cy.get(measureComposer.populationsListItems).eq(4).should('contain.text', 'Numerator 1')
 
-    //Package Grouping
+    // Package Grouping
 
     cy.get(measureComposer.addAllItemsToGrouping).click()
     cy.get(measureComposer.saveGrouping).click()
 
     cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
 
-    //Create Measure Package
+    // Create Measure Package
     cy.get(measureComposer.createMeasurePackageBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
@@ -283,6 +297,5 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     cy.get(measurelibrary.measureLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-
   })
 })

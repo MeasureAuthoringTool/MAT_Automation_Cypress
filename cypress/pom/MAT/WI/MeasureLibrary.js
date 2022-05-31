@@ -107,7 +107,7 @@ export const fhirConversionNoBtn = '#No_ConfirmDialogBox'
 
 // Export UI
 export const measureLink = '#measureNameLabel'
-export const exportOptionList = '#exportTab > :nth-child(1) > :nth-child(8) > tbody'
+export const exportOptionList = '#exportTab > :nth-child(1)'
 export const saveExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Save"]'
 export const openExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Open"]'
 export const cancelExportBtn = '#exportTab > :nth-child(1) > .btn-toolbar > [title="Cancel"]'

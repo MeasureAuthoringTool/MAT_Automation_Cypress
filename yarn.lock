@@ -2391,10 +2391,10 @@
     "pixelmatch" "^5.1.0"
     "pngjs" "^3.4.0"
 
-"cypress@^3 || ^4 || ^5 || ^6 || ^7 || ^8", "cypress@^9.5.1":
-  "integrity" "sha512-H7lUWB3Svr44gz1rNnj941xmdsCljXoJa2cDneAltjI9leKLMQLm30x6jLlpQ730tiVtIbW5HdUmBzPzwzfUQg=="
-  "resolved" "https://registry.npmjs.org/cypress/-/cypress-9.5.1.tgz"
-  "version" "9.5.1"
+"cypress@^3 || ^4 || ^5 || ^6 || ^7 || ^8", "cypress@^9.7.0":
+  "integrity" "sha512-+1EE1nuuuwIt/N1KXRR2iWHU+OiIt7H28jJDyyI4tiUftId/DrXYEwoDa5+kH2pki1zxnA0r6HrUGHV5eLbF5Q=="
+  "resolved" "https://registry.npmjs.org/cypress/-/cypress-9.7.0.tgz"
+  "version" "9.7.0"
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -2428,7 +2428,7 @@
     "listr2" "^3.8.3"
     "lodash" "^4.17.21"
     "log-symbols" "^4.0.0"
-    "minimist" "^1.2.5"
+    "minimist" "^1.2.6"
     "ospath" "^1.2.2"
     "pretty-bytes" "^5.6.0"
     "proxy-from-env" "1.0.0"
@@ -4855,10 +4855,10 @@
   dependencies:
     "brace-expansion" "^1.1.7"
 
-"minimist@^1.1.0", "minimist@^1.1.1", "minimist@^1.2.0", "minimist@^1.2.5":
-  "integrity" "sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw=="
-  "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz"
-  "version" "1.2.5"
+"minimist@^1.1.0", "minimist@^1.1.1", "minimist@^1.2.0", "minimist@^1.2.5", "minimist@^1.2.6":
+  "integrity" "sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q=="
+  "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.6.tgz"
+  "version" "1.2.6"
 
 "mississippi@^3.0.0":
   "integrity" "sha512-x471SsVjUtBRtcvd4BzKE9kFC+/2TeWgKCgw0bZcw1b9l2X3QX5vCWgF+KaZaYm87Ss//rHnWryupDrgLvmSkA=="

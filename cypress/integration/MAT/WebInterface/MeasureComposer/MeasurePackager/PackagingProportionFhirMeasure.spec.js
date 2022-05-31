@@ -110,8 +110,8 @@ describe('Packaging: Proportion Measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     dataCreation.addDefinition('Initial Population', 'TJC."Non Elective Inpatient Encounter"')
-    dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
     dataCreation.addDefinition('Numerator', '"Initial Population"')
+    dataCreation.addDefinition('Denominator', '"Numerator"')
 
     //CQL Library Editor
 

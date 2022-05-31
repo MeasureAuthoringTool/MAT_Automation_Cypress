@@ -16,7 +16,7 @@ export const codesNumber = '#codesBadge_Badge'
 export const parameter = '#paramLabel_Label'
 export const definition = '#defineLabel_Label'
 export const functionMeasureComposer = '#functionLibLabel_label'
-export const cqlLibraryEditor = '#cqlLibraryEditor_Anchor'
+export const cqlLibraryEditor = '#cqlLibraryEditor_Anchor > a'
 
 //Global
 export const cqlWorkspaceTitleGlobal = '#vPanel_VerticalPanel > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .gwt-HTML > h4 > b'
