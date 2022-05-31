@@ -10,7 +10,6 @@ import * as login from '../../../../../support/MAT/Login'
 let qdmCqlLibrary = ''
 let fhirCqlLibrary = ''
 
-
 describe('CQL Composer: CQL Editor message', () => {
   beforeEach('Login', () => {
     login.matLogin()
@@ -264,7 +263,6 @@ describe('CQLComposer: CQLLibraryWorkspace: CQLComposerLibraryEditor: Add codesy
     cy.get(cqlComposer.warningMessage).should('contain.text', 'Until the CQL conforms, the tabs on the left for Includes, ValueSets, Codes, ' +
       'Parameters, Definitions, and Functions will be disabled.')
     cy.get(cqlComposer.warningMessage).should('contain.text', 'Commenting out offending defines and functions is an easy temporary fix.')
-
   })
 })
 
@@ -326,6 +324,22 @@ describe('MAT: CQL Composer: CQLLibraryWorkspace: CQL Library Editor: FHIR Error
       'asdfasdf\n' +
       '\n' +
       'asdfasdf')
+
+    cy.reload()
+
+    cy.get(measurelibrary.cqlLibraryTab).click()
+
+    helper.enabledWithTimeout(cqlLibrary.searchInputBox)
+    helper.enterText(cqlLibrary.searchInputBox, fhirCqlLibrary)
+    cy.get(cqlLibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.visibleWithTimeout(cqlLibrary.row1CqlLibrarySearch)
+
+    gridRowActions.doubleClickRow(cqlLibrary.row1CqlLibrarySearch)
+
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(cqlComposer.cqlLibraryEditor).click()
 

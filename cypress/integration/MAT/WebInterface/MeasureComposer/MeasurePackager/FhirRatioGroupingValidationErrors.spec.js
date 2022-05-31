@@ -93,8 +93,8 @@ describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
     cy.get(measureComposer.definition).click()
     helper.verifySpinnerAppearsAndDissappears()
     dataCreation.addDefinition('Initial Population', 'TJC."Non Elective Inpatient Encounter"')
-    dataCreation.addDefinition('Denominator', 'TJC."Ischemic Stroke Encounter"')
     dataCreation.addDefinition('Numerator', '"Initial Population"')
+    dataCreation.addDefinition('Denominator', '"Numerator"')
 
     //Add Initial Population, Denominator, and Numerator in Population Workspace
     cy.get(measureComposer.populationWorkspace).click()

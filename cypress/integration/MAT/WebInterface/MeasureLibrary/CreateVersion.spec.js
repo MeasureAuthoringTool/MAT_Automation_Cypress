@@ -9,52 +9,12 @@ import * as login from '../../../../support/MAT/Login'
 let name = ''
 let name2 = ''
 
-describe('Measure Library: Create Version', () => {
+describe('QDM Measure Library: Create Version with Unused Included CQL Library', () => {
   beforeEach('Login', () => {
     login.matLogin()
   })
   afterEach('Log Out', () => {
     login.matLogout()
-  })
-  it('QDM: Create Major Version with Successful Package, Proportion Measure', () => {
-
-    name = dataCreation.createQDMProportionMeasure()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    helper.enabledWithTimeout(measurelibrary.searchInputBox)
-    helper.enterText(measurelibrary.searchInputBox, name)
-    cy.get(measurelibrary.searchBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
-
-    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
-
-    cy.get(measurelibrary.majorVersionTypeRadio).click()
-    cy.get(measurelibrary.packageAndVersion).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-    helper.verifySpinnerAppearsAndDissappears()
-
-    helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.', 120000)
-
-    //Comparing CQL Library Version Number with Draft Version for QDM Measure
-    helper.verifySpinnerAppearsAndDissappears()
-
-    helper.enabledWithTimeout(measurelibrary.searchInputBox)
-    helper.enterText(measurelibrary.searchInputBox, name)
-    cy.get(measurelibrary.searchBtn).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
-    cy.get(measureComposer.cqlWorkspace).click()
-
-    helper.verifySpinnerAppearsAndDissappears()
-
-    cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '1.0')
-
   })
 
   it('QDM: Create Major Version with Successful Package, Proportion Measure, Unused Included CQL Library', () => {
@@ -110,12 +70,69 @@ describe('Measure Library: Create Version', () => {
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name2 + ' has been successfully packaged and v1.0.000 has been successfully created.')
+  })
+})
 
+describe('QDM Measure Library: Create Version', () => {
+  beforeEach('Login', () => {
+    login.matLogin()
+  })
+  afterEach('Log Out', () => {
+    login.matLogout()
+  })
+  it('QDM: Create Major Version with Successful Package, Proportion Measure', () => {
+
+    name = dataCreation.createQDMProportionMeasure()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, name)
+    cy.get(measurelibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    gridRowActions.selectRow(measurelibrary.row1MeasureSearch)
+
+    cy.get(measurelibrary.createVersionMeasureSearchBtn).click()
+
+    cy.get(measurelibrary.majorVersionTypeRadio).click()
+    cy.get(measurelibrary.packageAndVersion).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.waitToHaveText(measurelibrary.warningMessage, ' ' + name + ' has been successfully packaged and v1.0.000 has been successfully created.', 120000)
+
+    //Comparing CQL Library Version Number with Draft Version for QDM Measure
+    helper.verifySpinnerAppearsAndDissappears()
+
+    helper.enabledWithTimeout(measurelibrary.searchInputBox)
+    helper.enterText(measurelibrary.searchInputBox, name)
+    cy.get(measurelibrary.searchBtn).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+    gridRowActions.doubleClickRow(measurelibrary.row1MeasureSearch)
+    cy.get(measureComposer.cqlWorkspace).click()
+
+    helper.verifySpinnerAppearsAndDissappears()
+
+    cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '1.0')
+
+  })
+})
+
+describe('FHIR Measure Library: Create Version', () => {
+  beforeEach('Login', () => {
+    login.matLogin()
+  })
+  afterEach('Log Out', () => {
+    login.matLogout()
   })
 
   it('FHIR: Create Major Version with Successful Package, Proportion Measure', () => {
 
-    name = dataCreation.createDraftMeasure('FHIRMeasure','FHIR')
+    name = dataCreation.createDraftMeasure('FHIRMeasure', 'FHIR')
 
     helper.verifySpinnerAppearsAndDissappears()
 
@@ -149,7 +166,6 @@ describe('Measure Library: Create Version', () => {
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
     helper.waitToContainText(measureComposer.warningMessage, 'You are viewing CQL with no validation errors.')
-
 
     cy.get(measureComposer.populationWorkspace).click()
 
@@ -238,7 +254,7 @@ describe('Measure Library: Create Version', () => {
     cy.get(cqlComposer.cqlLibraryVersionField).should('contain.value', '1.0')
   })
 
-  it('FHIR: Create Major Version with Successful Package, Proportion Measure, Unused Included CQL Library', () => {
+    it('FHIR: Create Major Version with Successful Package, Proportion Measure, Unused Included CQL Library', () => {
 
     createFHIRProportionMeasureUnusedLibraryPackageGroupVersion()
 
