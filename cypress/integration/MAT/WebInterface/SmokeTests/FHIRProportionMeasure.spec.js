@@ -192,6 +192,7 @@ describe('FHIR Proportion Measure', () => {
     cy.get(measureComposer.createPackageExportBtn).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.readFile(path.join(downloadsFolder, 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.zip')).should
     ('contain', 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.html', 'CreateFhirProportionMeasureSmoke-v0-0-001' +

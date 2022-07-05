@@ -256,7 +256,7 @@ describe('FHIR Ratio Measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.visibleWithTimeout(measureComposer.packageWarningMessage)
+    helper.visibleWithTimeout(measureComposer.packageWarningMessage, 220000)
     helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
 
   })
