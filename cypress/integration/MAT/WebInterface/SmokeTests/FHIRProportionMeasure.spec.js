@@ -194,7 +194,7 @@ describe('FHIR Proportion Measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.readFile(path.join(downloadsFolder, 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.zip')).should
+    cy.readFile(path.join(downloadsFolder, 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.zip'), { timeout: 260000 }).should
     ('contain', 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.html', 'CreateFhirProportionMeasureSmoke-v0-0-001' +
       '-FHIR-4-0-1.json', 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.xml')
     cy.log('Successfully verified zip file export')
