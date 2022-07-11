@@ -67,7 +67,8 @@ module.exports = {
     await loginToBonnie(page)
     await loginToBonnieOkta(page, username, password)
     await page.waitForNavigation({
-      waitUntil: `networkidle`
+      waitUntil: `networkidle`,
+      timeout: 200000
     })
     const cookies = await context.cookies()
     const lsd = await getLocalStorageData(page)

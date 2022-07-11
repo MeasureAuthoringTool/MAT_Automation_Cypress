@@ -42,6 +42,8 @@ describe('Measure Composer: Measure Packager: Score Unit UCUM Control', () => {
     cy.get(measureComposer.measurePackager).click()
 
     helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
+    helper.verifySpinnerAppearsAndDissappears()
 
     cy.get(measureComposer.scoreUnitUcumInputBox).type('light')
 

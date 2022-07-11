@@ -17,7 +17,7 @@ describe('Measure Upload Errors', () => {
     bonnieLogin.login()
   })
 
-  afterEach('Log Out', () => {
+  after('Log Out', () => {
     bonnieLogin.logout()
   })
 

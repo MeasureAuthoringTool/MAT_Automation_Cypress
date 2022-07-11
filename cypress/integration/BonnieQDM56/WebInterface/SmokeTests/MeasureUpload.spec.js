@@ -18,7 +18,7 @@ describe('Smoke Test: Measure Upload', () => {
     bonnieLogin.login()
 
   })
-  afterEach('Log Out', () => {
+  after('Log Out', () => {
 
     bonnieLogin.logout()
 

@@ -187,14 +187,14 @@ describe('FHIR Proportion Measure', () => {
     cy.get(measureComposer.saveGrouping).click()
 
     cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
-
+cy.pause()
     //Create Measure Package and export
     cy.get(measureComposer.createPackageExportBtn).click()
-
+cy.pause()
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    cy.readFile(path.join(downloadsFolder, 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.zip'), { timeout: 260000 }).should
+    cy.readFile(path.join(downloadsFolder, 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.zip'), { timeout: 100000 }).should
     ('contain', 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.html', 'CreateFhirProportionMeasureSmoke-v0-0-001' +
       '-FHIR-4-0-1.json', 'CreateFhirProportionMeasureSmoke-v0-0-001-FHIR-4-0-1.xml')
     cy.log('Successfully verified zip file export')
