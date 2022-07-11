@@ -114,7 +114,7 @@ export const VirusScanUpload = () => {
     encoding: 'utf-8',
     lastModified: new Date().getTime()
   })
-
+cy.pause()
   //wait for VSAC api key field to display for the user, and enter api key
   helper.visibleWithTimeout(importMeasureDialog.vsacApiKeyTextBox)
   helper.enabledWithTimeout(importMeasureDialog.vsacApiKeyTextBox)

@@ -206,7 +206,7 @@ describe('Exporting: FHIR Measure', () => {
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
-    helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.')
+    helper.waitToContainText(measureComposer.packageWarningMessage, 'Measure packaged successfully. Please access the Measure Library to export the measure.',220000)
 
     cy.get(measurelibrary.measureLibraryTab).click()
 
@@ -227,7 +227,7 @@ describe('Exporting: FHIR Measure', () => {
     cy.get(measurelibrary.openExportBtn).click()
 
     // Verify all file types available in exported zip file
-    cy.readFile(path.join(downloadsFolder, 'CreateFhirContinuousVariableMeas-v0-0-001-FHIR-4-0-1.zip')).should('contain', 'CreateFhirContinuousVariableMeas-v0-0-001-FHIR-4-0-1.html', 'CreateFhirContinuousVariableMeas-v0-0-001-FHIR-4-0-1.json', 'CreateFhirContinuousVariableMeas-v0-0-001-FHIR-4-0-1.xml')
+    cy.readFile(path.join(downloadsFolder, 'CreateFhirContinuousVariableMeas-v0-0-001-FHIR-4-0-1.zip'),{timeout: 100000}).should('contain', 'CreateFhirContinuousVariableMeas-v0-0-001-FHIR-4-0-1.html', 'CreateFhirContinuousVariableMeas-v0-0-001-FHIR-4-0-1.json', 'CreateFhirContinuousVariableMeas-v0-0-001-FHIR-4-0-1.xml')
     cy.log('Successfully verified zip file export')
 
     helper.verifySpinnerAppearsAndDissappears()
