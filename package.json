@@ -164,11 +164,11 @@
         "mysql": "^2.18.1",
         "portscanner": "^2.2.0",
         "snazzy": "^8.0.0",
-        "ts-loader": "^6.2.2",
+        "ts-loader": "^9.4.2",
         "tsify": "^4.0.2",
         "tunnel-ssh": "4.1.4",
         "unzipper": "^0.10.11",
-        "webpack": "^4.44.2"
+        "webpack": "^5.75.0"
     },
     "standard": {
         "env": [
