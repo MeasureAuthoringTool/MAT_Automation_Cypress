@@ -4,6 +4,7 @@ import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as login from '../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../pom/MAT/WI/CreateNewMeasure'
 
 let name = ''
 
@@ -24,7 +25,7 @@ describe('Measure Library: Create New Measure: Generate CMS ID', () => {
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
 
     cy.get(createNewMeasure.generateCMSIDcheckbox).click()
 
@@ -72,7 +73,7 @@ describe('Measure Library: Create New Measure: Generate CMS ID', () => {
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
 
     cy.get(createNewMeasure.generateCMSIDcheckbox).click()
 
@@ -121,7 +122,7 @@ describe('Measure Library: Create New Measure: Generate CMS ID', () => {
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
 
     helper.disabledWithTimeout(createNewMeasure.matchCQLLibraryNameCheckbox)
 
@@ -178,7 +179,7 @@ describe('Measure Library: Create New Measure: Generate CMS ID', () => {
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
 
     helper.disabledWithTimeout(createNewMeasure.matchCQLLibraryNameCheckbox)
 

@@ -5,6 +5,7 @@ import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 import * as login from '../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../pom/MAT/WI/CreateNewMeasure'
 
 let name = ''
 let cqlLibraryName = ''
@@ -32,7 +33,7 @@ describe('FHIR Measure: Validate the naming rules', () => {
 
     cy.get(createNewMeasure.measureName).type(nameWithUnderscore, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
 
     cy.get(createNewMeasure.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(cqlLibraryName, { delay: 50 })
@@ -71,7 +72,7 @@ describe('Measure Conversion with incorrect measure name format', () => {
     //qdm measure with incorrect cql library name format
     helper.enabledWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
     cy.get(createNewMeasure.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
@@ -157,7 +158,7 @@ describe('Measure Conversion with incorrect measure name and CQL library name fo
     //qdm measure with incorrect cql library name format
     helper.enabledWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
     cy.get(createNewMeasure.cqlLibraryName).type(cqlLibraryName, { delay: 50 })

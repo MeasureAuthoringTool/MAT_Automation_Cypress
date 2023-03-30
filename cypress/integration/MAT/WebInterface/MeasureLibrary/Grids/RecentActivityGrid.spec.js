@@ -5,6 +5,7 @@ import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as login from '../../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
 let measureName = ''
 let draftMeasure = ''
@@ -189,7 +190,7 @@ describe('Measure Library: Recent Activity Grid', () => {
     let localmeasure = 'createProportionMeasure' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(localmeasure, { delay: 50 })
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
     cy.get(createNewMeasure.cqlLibraryName).type(localmeasure, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(localmeasure, { delay: 50 })
 

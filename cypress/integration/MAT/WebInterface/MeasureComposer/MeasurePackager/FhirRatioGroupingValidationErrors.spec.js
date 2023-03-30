@@ -5,6 +5,7 @@ import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as login from '../../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
 
 describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
@@ -24,7 +25,7 @@ describe('Grouping Validate error Messages for FHIR Ratio Measure', () => {
     cy.get(measurelibrary.newMeasureButton).click()
     let measureName = 'CreateFhirRatioMeasure' + Date.now()
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
     cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.measureScoringListBox).select('Ratio')

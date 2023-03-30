@@ -4,6 +4,7 @@ import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as login from '../../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
 const path = require('path')
 const downloadsFolder = Cypress.config('downloadsFolder')
@@ -23,7 +24,7 @@ describe('Exporting: QDM Measure', () => {
     const measureName = 'CreateQDMContinuousVariableMeasure' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
     cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.measureScoringListBox).select('Continuous Variable')

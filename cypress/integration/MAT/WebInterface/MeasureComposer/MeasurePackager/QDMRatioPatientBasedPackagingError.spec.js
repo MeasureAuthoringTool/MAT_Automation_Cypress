@@ -4,6 +4,7 @@ import * as helper from '../../../../../support/helpers'
 import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
+import { selectModelRadioBtn } from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
 /*
 Validate the packaging error when including functions with parameters in the Measure Observations,
@@ -84,7 +85,7 @@ function createMeasureAndGrouping() {
   let measureName = 'QDMRatioNoPatient' + Date.now()
 
   cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-  cy.get(createNewMeasure.modelradioQDM).click()
+  cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
   cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
   cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
 

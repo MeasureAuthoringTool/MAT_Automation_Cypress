@@ -6,6 +6,7 @@ import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 import * as login from '../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../pom/MAT/WI/CreateNewMeasure'
 
 let measureName = 'PrimaryCariesPreventionIntervention' + Date.now()
 
@@ -22,7 +23,7 @@ describe('FHIR Measure: Export', () => {
     cy.get(measurelibrary.newMeasureButton).click()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
     cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
