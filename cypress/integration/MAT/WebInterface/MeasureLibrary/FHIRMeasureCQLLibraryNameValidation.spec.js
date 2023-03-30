@@ -4,6 +4,7 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as gridRowActions from '../../../../support/MAT/GridRowActions'
 import * as login from '../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../pom/MAT/WI/createNewMeasure'
 
 let firstCharacterLowerCase = ''
 let firstCharacterUnderscore = ''
@@ -40,7 +41,7 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
 
     cy.get(createNewMeasure.cqlLibraryName).type(firstCharacterLowerCase, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(name, { delay: 50 })
@@ -89,7 +90,7 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
 
     cy.get(createNewMeasure.cqlLibraryName).type(nameWithSpecialSymbols, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(name, { delay: 50 })
@@ -133,7 +134,7 @@ describe('FHIR Measure: Validate the CQL library naming rules', () => {
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
 
     cy.get(createNewMeasure.cqlLibraryName).type(name, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(name, { delay: 50 })
@@ -177,7 +178,7 @@ describe('Measure Conversion with incorrect CQL Library name format', () => {
 
     cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
 
     cy.get(createNewMeasure.cqlLibraryName).type(firstCharacterLowerCase, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(name, { delay: 50 })

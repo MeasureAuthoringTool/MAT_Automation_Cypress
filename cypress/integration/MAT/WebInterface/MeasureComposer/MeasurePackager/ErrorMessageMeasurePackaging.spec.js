@@ -5,6 +5,7 @@ import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCr
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
 import * as login from '../../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
 let fhirMeasure = ''
 let qdmMeasure = ''
@@ -115,7 +116,7 @@ describe('Measure Packager: Validate the error message for details requirement',
     fhirMeasure = 'CreateFhirCohortMeasure' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(fhirMeasure, { delay: 50 })
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
     cy.get(createNewMeasure.cqlLibraryName).type(fhirMeasure, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(fhirMeasure, { delay: 50 })
     cy.get(createNewMeasure.measureScoringListBox).select('Cohort')

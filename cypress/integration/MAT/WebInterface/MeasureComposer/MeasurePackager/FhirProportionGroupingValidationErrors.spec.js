@@ -5,6 +5,7 @@ import * as dataCreation from '../../../../../support/MAT/MeasureAndCQLLibraryCr
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as login from '../../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
 describe('Test Proportion Grouping Validation Messages for FHIR Measure in Measure Packager', function () {
 
@@ -28,7 +29,7 @@ describe('Test Proportion Grouping Validation Messages for FHIR Measure in Measu
 
     //Enter metadata
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
     cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.measureScoringListBox).select('Proportion')

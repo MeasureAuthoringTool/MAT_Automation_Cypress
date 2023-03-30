@@ -3,6 +3,7 @@ import * as measurelibrary from '../../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as login from '../../../../../support/MAT/Login'
+import { selectModelRadioBtn } from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
 let measureName = ''
 
@@ -20,7 +21,7 @@ describe('Measure Composer: Measure Details: References', () => {
     measureName = 'createProportionMeasure' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
     cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
 

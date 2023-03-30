@@ -8,6 +8,7 @@ import * as cqlComposer from '../../pom/MAT/WI/CQLComposer'
 import * as measureDetails from '../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from './GridRowActions'
 import * as login from './Login'
+import { selectModelRadioBtn } from '../../pom/MAT/WI/CreateNewMeasure'
 
 const draftMeasure = 'DraftMeasure'
 
@@ -38,7 +39,7 @@ export const createFhirCohortMeasure = () => {
   const measureName = 'CreateFhirCohortMeasure' + Date.now()
 
   cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-  cy.get(createNewMeasure.modelradioFHIR).click()
+  cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
   cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
   cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
   cy.get(createNewMeasure.measureScoringListBox).select('Cohort')
@@ -168,7 +169,7 @@ export const createQDMProportionMeasure = () => {
   const measureName = 'QdmProportionMeasure' + Date.now()
 
   cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-  cy.get(createNewMeasure.modelradioQDM).click()
+  cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
   cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
   cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
   cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
@@ -360,9 +361,9 @@ export const createDraftMeasure = (measure, model, scoring) => {
   cy.get(createNewMeasure.measureName).type(name, { delay: 50 })
 
   if (model === 'QDM' || model === undefined) {
-    cy.get(createNewMeasure.modelradioQDM).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
   } else {
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
   }
 
   cy.get(createNewMeasure.cqlLibraryName).type(name, { delay: 50 })

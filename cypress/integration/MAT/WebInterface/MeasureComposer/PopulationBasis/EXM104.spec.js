@@ -6,6 +6,7 @@ import * as measureComposer from '../../../../../pom/MAT/WI/MeasureComposer'
 import * as measureDetails from '../../../../../pom/MAT/WI/MeasureDetails'
 import * as login from '../../../../../support/MAT/Login'
 import * as gridRowActions from '../../../../../support/MAT/GridRowActions'
+import { selectModelRadioBtn } from '../../../../../pom/MAT/WI/CreateNewMeasure'
 
 describe('EXM104: Discharged on Antithrombotic Therapy', () => {
   beforeEach('Login', () => {
@@ -20,7 +21,7 @@ describe('EXM104: Discharged on Antithrombotic Therapy', () => {
     const measureName = 'Discharge' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
-    cy.get(createNewMeasure.modelradioFHIR).click()
+    cy.get(createNewMeasure.selectModelRadioBtn).eq(0).click()
     cy.get(createNewMeasure.cqlLibraryName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.shortName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.measureScoringListBox).select('Proportion')
