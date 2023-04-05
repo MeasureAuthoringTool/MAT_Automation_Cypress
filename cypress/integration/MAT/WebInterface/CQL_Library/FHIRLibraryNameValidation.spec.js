@@ -44,7 +44,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).type(firstCharacterLowerCase, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
@@ -52,7 +52,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(firstCharacterUnderscore, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
@@ -60,7 +60,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(firstCharacterNumeric, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
@@ -86,7 +86,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).type(nameWithSpecialSymbols, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
@@ -94,7 +94,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(nameWithSpaces, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
@@ -102,7 +102,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).clear().type(nameWithUnderscore, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
@@ -126,7 +126,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).type(firstCharacterUpperCase, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 
@@ -152,7 +152,7 @@ describe('FHIR Library: Validate the library naming rules', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).type(firstCharacterUpperCaseFollowedAlphaNumeric, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 

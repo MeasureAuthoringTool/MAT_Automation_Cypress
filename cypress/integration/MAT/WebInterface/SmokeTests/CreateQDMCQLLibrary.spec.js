@@ -6,6 +6,7 @@ import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as cqlComposer from '../../../../pom/MAT/WI/CQLComposer'
 import * as login from '../../../../support/MAT/Login'
+import { selectLibraryModelRadioBtn } from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 
 //Create QDM CQL Library with definitions and Functions
 
@@ -29,7 +30,7 @@ describe('Create CQL Library', () => {
 
     cy.get(createNewCqlLibrary.cqlLibraryName).type(cqlLibraryName, { delay: 50 })
 
-    cy.get(createNewCqlLibrary.modelQDMRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(1).click()
 
     cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
 

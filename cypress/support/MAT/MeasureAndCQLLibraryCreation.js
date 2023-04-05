@@ -9,6 +9,7 @@ import * as measureDetails from '../../pom/MAT/WI/MeasureDetails'
 import * as gridRowActions from './GridRowActions'
 import * as login from './Login'
 import { selectModelRadioBtn } from '../../pom/MAT/WI/CreateNewMeasure'
+import { selectLibraryModelRadioBtn } from '../../pom/MAT/WI/CreateNewCQLLibrary'
 
 const draftMeasure = 'DraftMeasure'
 
@@ -501,9 +502,9 @@ export const createDraftCqlLibrary = (library, model) => {
   cy.get(createNewCqlLibrary.cqlLibraryName).type(name, { delay: 50 })
 
   if (model === 'QDM' || model === undefined) {
-    cy.get(createNewCqlLibrary.modelQDMRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(1).click()
   } else {
-    cy.get(createNewCqlLibrary.modelFHIRRadio).click()
+    cy.get(createNewCqlLibrary.selectLibraryModelRadioBtn).eq(0).click()
   }
 
   cy.get(createNewCqlLibrary.saveAndContinueBtn).click()
