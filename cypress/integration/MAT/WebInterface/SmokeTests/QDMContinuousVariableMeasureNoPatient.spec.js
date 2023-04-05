@@ -4,9 +4,8 @@ import * as measurelibrary from '../../../../pom/MAT/WI/MeasureLibrary'
 import * as createNewMeasure from '../../../../pom/MAT/WI/CreateNewMeasure'
 import * as measureComposer from '../../../../pom/MAT/WI/MeasureComposer'
 import * as login from '../../../../support/MAT/Login'
-import { selectModelRadioBtn } from '../../../../pom/MAT/WI/CreateNewMeasure'
 
-//Smoke test for QDM Continuous Variable Measure NOT Patient Based. Create Draft measure and Package
+// Smoke test for QDM Continuous Variable Measure NOT Patient Based. Create Draft measure and Package
 
 describe('QDM Continuous Variable Measure No Patient', () => {
   beforeEach('Login', () => {
@@ -16,13 +15,12 @@ describe('QDM Continuous Variable Measure No Patient', () => {
     login.matLogout()
   })
   it('Continuous Variable QDM No Patient, create Draft measure and package', () => {
-
     helper.verifySpinnerAppearsAndDissappears()
 
     helper.enabledWithTimeout(measurelibrary.newMeasureButton)
     cy.get(measurelibrary.newMeasureButton).click()
 
-    let measureName = 'ContVariableMeasureCMS32v8' + Date.now()
+    const measureName = 'ContVariableMeasureCMS32v8' + Date.now()
 
     cy.get(createNewMeasure.measureName).type(measureName, { delay: 50 })
     cy.get(createNewMeasure.selectModelRadioBtn).eq(1).click()
@@ -43,7 +41,7 @@ describe('QDM Continuous Variable Measure No Patient', () => {
 
     helper.waitToContainText(measureComposer.cqlWorkspaceTitleGeneralInformation, 'General Information')
 
-    //Includes
+    // Includes
 
     cy.get(measureComposer.includes).click()
 
@@ -57,7 +55,7 @@ describe('QDM Continuous Variable Measure No Patient', () => {
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 
-    //Value Sets
+    // Value Sets
 
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.87')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.292')
@@ -65,13 +63,13 @@ describe('QDM Continuous Variable Measure No Patient', () => {
     dataCreation.addValueSet('2.16.840.1.113762.1.4.1111.143')
     dataCreation.addValueSet('2.16.840.1.113883.3.117.1.7.1.299')
 
-    //codes
+    // codes
 
     dataCreation.addCode('CODE:/CodeSystem/LOINC/Version/2.46/Code/21112-8/Info')
     dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2016-03/Code/419099009/Info')
     dataCreation.addCode('CODE:/CodeSystem/SNOMEDCT/Version/2017-09/Code/371828006/Info')
 
-    //Parameter
+    // Parameter
 
     cy.get(measureComposer.parameter).click()
 
@@ -84,7 +82,7 @@ describe('QDM Continuous Variable Measure No Patient', () => {
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 
-    //Definition
+    // Definition
 
     dataCreation.addDefinition('Emergency Department ED Visit', '/*Emergency Department visit during the measurement period*/\n' +
       '["Encounter, Performed": "Emergency Department Visit"] EDVisit\n' +
@@ -111,7 +109,7 @@ describe('QDM Continuous Variable Measure No Patient', () => {
       '"Emergency Department ED Visit" EDVisit\n' +
       '  where EDVisit.dischargeDisposition in "Discharge To Acute Care Facility"')
 
-    //Function
+    // Function
 
     cy.get(measureComposer.functionMeasureComposer).click()
 
@@ -216,7 +214,7 @@ describe('QDM Continuous Variable Measure No Patient', () => {
 
     helper.visibleWithTimeout(measureComposer.warningMessage)
 
-    //CQL Library Editor
+    // CQL Library Editor
 
     cy.get(measureComposer.cqlLibraryEditor).click()
 
@@ -282,12 +280,12 @@ describe('QDM Continuous Variable Measure No Patient', () => {
     helper.visibleWithTimeout(measureComposer.warningMessage)
     helper.waitToContainText(measureComposer.warningMessage, 'Changes to Measure Observations have been successfully saved.')
 
-    //navigate to Measure Packager
+    // navigate to Measure Packager
     cy.get(measureComposer.measurePackager).click()
 
     helper.verifySpinnerAppearsAndDissappears()
 
-    //verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
+    // verifying the the Population Workspace data is viewable in the Populations list in Measure Packager
     cy.get(measureComposer.populationsListItems).its('length').should('equal', 5)
 
     cy.get(measureComposer.populationsListItems).eq(0).should('contain.text', 'Initial Population 1')
@@ -313,6 +311,5 @@ describe('QDM Continuous Variable Measure No Patient', () => {
     cy.get(measurelibrary.measureLibraryTab).click()
 
     helper.verifySpinnerAppearsAndDissappears()
-
   })
 })
