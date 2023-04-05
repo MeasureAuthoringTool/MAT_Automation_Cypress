@@ -4,7 +4,6 @@ import * as cqlLibrary from '../../../../pom/MAT/WI/CqlLibrary'
 import * as cqlComposer from '../../../../pom/MAT/WI/CQLComposer'
 import * as createNewCqlLibrary from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 import * as login from '../../../../support/MAT/Login'
-import { selectLibraryModelRadioBtn } from '../../../../pom/MAT/WI/CreateNewCQLLibrary'
 
 let firstCharacterLowerCase = ''
 let firstCharacterUnderscore = ''
