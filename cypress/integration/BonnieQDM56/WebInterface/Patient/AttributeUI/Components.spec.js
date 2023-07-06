@@ -48,7 +48,7 @@ describe('Components Attribute', () => {
     testPatientPage.toggleDataElement(0)
 
     // Verify the Components data element is added
-    cy.get(testPatientPage.existingValues).should('contain.text', 'Components: [Component] Code: RXNORM: 1116635, Result: 4 \'kg\' : 50 \'ml\'')
+    cy.get(testPatientPage.existingValues).should('contain.text', 'Components: [Component] Code: RXNORM: 855812, Result: 4 \'kg\' : 50 \'ml\'')
     cy.log('Components Attribute added successfully')
   })
 })
