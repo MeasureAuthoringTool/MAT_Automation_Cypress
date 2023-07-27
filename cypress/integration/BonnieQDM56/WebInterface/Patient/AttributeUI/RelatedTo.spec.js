@@ -78,7 +78,7 @@ describe('Related To Attribute', () => {
     // Expand Encounter
     testPatientPage.toggleDataElement(2)
     // Verify the Encounter's data element is added
-    cy.get(testPatientPage.existingValues).should('contain.text', 'Related To: Medication, Administered: Tamoxifen or Aromatase Inhibitor Therapy Ingredient 11/12/2012 8:00 AM - 11/12/2012 8:15 AM')
+    cy.get(testPatientPage.existingValues).should('contain.text', 'Related To: Medication, Administered: Tamoxifen or Aromatase Inhibitor Therapy Ingredient 07/27/2012 8:00 AM - 07/27/2012 8:15 AM')
     cy.log('Related To attribute with Medication added successfully')
   })
 })
