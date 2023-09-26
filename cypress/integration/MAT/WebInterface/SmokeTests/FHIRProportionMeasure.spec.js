@@ -188,10 +188,10 @@ describe('FHIR Proportion Measure', () => {
     cy.get(measureComposer.saveGrouping).click()
 
     cy.get(measureComposer.measureGroupingTable).should('contain.text', 'Measure Grouping 1')
-cy.pause()
+
     //Create Measure Package and export
     cy.get(measureComposer.createPackageExportBtn).click()
-cy.pause()
+
     helper.verifySpinnerAppearsAndDissappears()
     helper.verifySpinnerAppearsAndDissappears()
 
