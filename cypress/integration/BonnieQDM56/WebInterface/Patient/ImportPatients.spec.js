@@ -10,10 +10,10 @@ describe('Import Patients', () => {
   const measureFileToUpload = 'QDM56/CCDE - Lookback-v2-0-004-QDM-5-6.zip'
   const patientJsonFile = 'QDM56/patients_4C668D33-C469-485E-90E3-F34164D0E62D_QDM_56_1633979173.json'
 
-  beforeEach('Login', () => {
+  before('Login', () => {
     bonnieLogin.login()
   })
-  afterEach('Log Out', () => {
+  after('Log Out', () => {
     bonnieLogin.logout()
   })
 
@@ -36,7 +36,6 @@ describe('Import Patients', () => {
 
   // Verify error message on Importing zip file other than patient file
   it('Verify error message on importing non patient file', () => {
-    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
     navigateToMeasureDetails(measureName)
 
     // Import non patient file to a measure
@@ -51,7 +50,7 @@ describe('Import Patients', () => {
 
   // Verify error message on Importing patient json file
   it('Verify error message on importing json patient file', () => {
-    bonnieUploadMeasure.UploadMeasureToBonnie(measureFileToUpload, false)
+    cy.get('[class="nav-dashboard active"]').click()
     navigateToMeasureDetails(measureName)
 
     // import patient json file to a measure
