@@ -1,6 +1,6 @@
-const { chromium } = require('playwright');
+const { chromium } = require('playwright')
 
-async function launchChromium() {
+async function launchChromium () {
   return await chromium.launch({
     headless: true,
     args: [
@@ -18,22 +18,22 @@ async function loginToBonnie (page) {
   if (!page) {
     throw new Error('page is missing')
   }
-  await page.waitForSelector(`.btn-login`)
-  return await page.click(`.btn-login`)
+  await page.waitForSelector('.btn-login')
+  return await page.click('.btn-login')
 }
 
 async function loginToBonnieOkta (page, username, password) {
   if (!username || !password) {
     throw new Error('Username or Password missing for login')
   }
-  await page.waitForSelector(`#okta-signin-username`)
-  await page.fill(`#okta-signin-username`, username)
-  await page.fill(`#okta-signin-password`, password)
-  await page.click('#tandc')
-  return await page.click(`#okta-signin-submit`)
+  await page.waitForSelector('#input28')
+  await page.fill('#input28', username)
+  await page.fill('#input36', password)
+  //await page.click('#tandc')
+  return await page.click('[class="button button-primary"]')
 }
 
-async function getLocalStorageData(page) {
+async function getLocalStorageData (page) {
   return await page.evaluate(() => {
     return Object.keys(localStorage).reduce(
       (items, curr) => ({
@@ -42,10 +42,10 @@ async function getLocalStorageData(page) {
       }),
       {}
     )
-  });
+  })
 }
 
-async function getSessionStorageData(page) {
+async function getSessionStorageData (page) {
   return page.evaluate(() => {
     return Object.keys(sessionStorage).reduce(
       (items, curr) => ({
@@ -57,7 +57,6 @@ async function getSessionStorageData(page) {
   })
 }
 
-
 module.exports = {
   GetSession: async function (username, password, url) {
     const browser = await launchChromium()
@@ -67,7 +66,7 @@ module.exports = {
     await loginToBonnie(page)
     await loginToBonnieOkta(page, username, password)
     await page.waitForNavigation({
-      waitUntil: `networkidle`,
+      waitUntil: 'networkidle',
       timeout: 200000
     })
     const cookies = await context.cookies()
@@ -79,4 +78,3 @@ module.exports = {
     }
   }
 }
-
