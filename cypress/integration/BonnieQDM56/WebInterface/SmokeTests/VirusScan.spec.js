@@ -4,21 +4,16 @@ import * as homePage from '../../../../pom/BonnieQDM/WI/Homepage'
 import * as importMeasureDialog from '../../../../pom/BonnieQDM/WI/ImportMeasureDialog'
 import * as helper from '../../../../support/helpers'
 
-describe('Smoke Test: Virus Scan', () => {
-
+// WAF Issue
+describe.skip('Smoke Test: Virus Scan', () => {
   beforeEach('Login', () => {
-
     bonnieLogin.login()
-
   })
   afterEach('Log Out', () => {
-
     bonnieLogin.logout()
-
   })
 
   it('Verify successful error message when uploading simulated virus', () => {
-
     bonnieUploadMeasure.VirusScanUpload()
 
     // Verify error message
@@ -33,6 +28,5 @@ describe('Smoke Test: Virus Scan', () => {
     cy.get(importMeasureDialog.closeBtn).click()
 
     helper.notVisibleWithTimeout(importMeasureDialog.importMeasureDialog)
-
   })
 })
