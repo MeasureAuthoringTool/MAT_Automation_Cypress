@@ -33,6 +33,7 @@ async function loginToBonnieOkta (page, username, password) {
   return await page.click('[class="button button-primary"]')
 }
 
+
 async function getLocalStorageData (page) {
   return await page.evaluate(() => {
     return Object.keys(localStorage).reduce(
