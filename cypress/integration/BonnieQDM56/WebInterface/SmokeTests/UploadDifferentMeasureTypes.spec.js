@@ -31,8 +31,7 @@ describe('Different Measure Types Upload', () => {
   beforeEach('Login', () => {
     bonnieLogin.login()
   })
-
-  afterEach('Log Out', () => {
+  after('Log Out', () => {
     bonnieLogin.logout()
   })
 
