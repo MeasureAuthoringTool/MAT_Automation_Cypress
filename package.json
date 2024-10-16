@@ -168,7 +168,7 @@
         "tsify": "^4.0.2",
         "tunnel-ssh": "4.1.4",
         "unzipper": "^0.10.11",
-        "webpack": "^4.44.2"
+        "webpack": "^5.0.0"
     },
     "standard": {
         "env": [
