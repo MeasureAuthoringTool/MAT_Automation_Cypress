@@ -158,7 +158,7 @@
         "diff": "^4.0.1",
         "mocha": "^8.2.1",
         "mochawesome": "^4.1.0",
-        "mochawesome-merge": "^4.2.0",
+        "mochawesome-merge": "^4.4.0",
         "mongodb": "3.6.0",
         "mongodb-client-encryption": "^2.1.0",
         "mysql": "^2.18.1",
