@@ -156,9 +156,9 @@
         "cypress-commands": "^1.1.0",
         "cypress-visual-regression": "^1.5.2",
         "diff": "^4.0.1",
-        "mocha": "^8.2.1",
+        "mocha": "^11.0.1",
         "mochawesome": "^4.1.0",
-        "mochawesome-merge": "^4.2.0",
+        "mochawesome-merge": "^4.4.0",
         "mongodb": "3.6.0",
         "mongodb-client-encryption": "^2.1.0",
         "mysql": "^2.18.1",
@@ -167,8 +167,8 @@
         "ts-loader": "^6.2.2",
         "tsify": "^4.0.2",
         "tunnel-ssh": "4.1.4",
-        "unzipper": "^0.10.11",
-        "webpack": "^4.44.2"
+        "unzipper": "^0.12.1",
+        "webpack": "^5.1.1"
     },
     "standard": {
         "env": [
