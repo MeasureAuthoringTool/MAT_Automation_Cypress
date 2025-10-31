@@ -157,7 +157,7 @@
         "cypress-visual-regression": "^1.5.2",
         "diff": "^4.0.1",
         "mocha": "^8.2.1",
-        "mochawesome": "^4.1.0",
+        "mochawesome": "^7.0.0",
         "mochawesome-merge": "^4.2.0",
         "mongodb": "3.6.0",
         "mongodb-client-encryption": "^2.1.0",
